@@ -1,0 +1,25 @@
+QMAKE_CXX.INCDIRS = \
+    /usr/include/c++/7 \
+    /usr/include/c++/7/x86_64-suse-linux \
+    /usr/include/c++/7/backward \
+    /usr/lib64/gcc/x86_64-suse-linux/7/include \
+    /usr/local/include \
+    /usr/lib64/gcc/x86_64-suse-linux/7/include-fixed \
+    /usr/x86_64-suse-linux/include \
+    /usr/include
+QMAKE_CXX.LIBDIRS = \
+    /usr/lib64/gcc/x86_64-suse-linux/7 \
+    /usr/lib64 \
+    /lib64 \
+    /usr/x86_64-suse-linux/lib \
+    /lib \
+    /usr/lib
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 1
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION

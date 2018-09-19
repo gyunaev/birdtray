@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/thunderbird.png</file>
+    </qresource>
+</RCC>
