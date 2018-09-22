@@ -20,6 +20,11 @@ void Settings::save()
     settings.setValue("common/defaultcolor", mTextColor.name() );
     settings.setValue("common/profilepath", mThunderbirdFolderPath );
     settings.setValue("common/blinkspeed", mBlinkSpeed );
+    settings.setValue("common/showhidethunderbird", mShowHideThunderbird );
+    settings.setValue("common/launchthunderbird", mLaunchThunderbird );
+
+    settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
+    settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
 
     // Convert the map into settings
     settings.setValue("accounts/count", mFolderNotificationColors.size() );
@@ -45,6 +50,12 @@ void Settings::load()
     mTextColor = QColor( settings.value( "common/defaultcolor", "#00FF00" ).toString() );
     mThunderbirdFolderPath = settings.value( "common/profilepath", "" ).toString();
     mBlinkSpeed = settings.value("common/blinkspeed", 0 ).toInt();
+
+    mShowHideThunderbird = settings.value("common/showhidethunderbird", false ).toBool();
+    mLaunchThunderbird = settings.value("common/launchthunderbird", false ).toBool();
+
+    mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
+    mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
 
     mFolderNotificationColors.clear();
 

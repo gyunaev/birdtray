@@ -18,6 +18,9 @@ DialogSettings::DialogSettings( QWidget *parent)
     setupUi(this);
     mProgressFixer = 0;
 
+    // Show the first tab
+    tabWidget->setCurrentIndex( 0 );
+
     connect( buttonBox, &QDialogButtonBox::accepted, this, &DialogSettings::accept );
     connect( buttonBox, &QDialogButtonBox::rejected, this, &DialogSettings::reject );
     connect( btnBrowse, &QPushButton::clicked, this, &DialogSettings::browsePath );
@@ -32,7 +35,12 @@ DialogSettings::DialogSettings( QWidget *parent)
     btnNotificationColor->setColor( pSettings->mTextColor );
     notificationFont->setCurrentFont( pSettings->mTextFont );
     sliderBlinkingSpeed->setValue( pSettings->mBlinkSpeed );
+    boxLaunchThunderbirdAtStart->setChecked( pSettings->mLaunchThunderbird );
+    boxShowHideThunderbird->setChecked( pSettings->mShowHideThunderbird );
+    leThunderbirdBinary->setText( pSettings->mThunderbirdCmdLine  );
+    leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
 
+    // Prepare the error palette
     mPaletteErrror = mPaletteOk = leProfilePath->palette();
     mPaletteErrror.setColor( QPalette::Text, Qt::red );
 
@@ -69,6 +77,10 @@ void DialogSettings::accept()
     pSettings->mTextColor = btnNotificationColor->color();
     pSettings->mTextFont = notificationFont->currentFont();
     pSettings->mBlinkSpeed = sliderBlinkingSpeed->value();
+    pSettings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
+    pSettings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
+    pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
+    pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
 
     mAccountModel->applySettings();
 
@@ -186,6 +198,7 @@ void DialogSettings::accountRemove()
 
 void DialogSettings::activateTab(int tab)
 {
+    // #1 is the Accounts tab
     if ( tab == 1 )
     {
         // Get the account list

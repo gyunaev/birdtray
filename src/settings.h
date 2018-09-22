@@ -21,8 +21,22 @@ class Settings
         // Path to Thunderbird folder
         QString mThunderbirdFolderPath;
 
+        // Thunderbird binary and command line
+        QString mThunderbirdCmdLine;
+
+        // Thunderbird window match
+        QString mThunderbirdWindowMatch;
+
+        // Whether to show/hide Thunderbird on button click
+        bool    mShowHideThunderbird;
+
+        // Whether to launch Thunderbird when the app starts
+        bool    mLaunchThunderbird;
+
         // Maps the folder URI to the notification color
         QMap< QString, QColor >   mFolderNotificationColors;
+
+
 
         // Load and save them
         void    save();
