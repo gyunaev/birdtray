@@ -61,12 +61,31 @@ void TrayIcon::updateIcon()
         }
     }
 
-    // Are we blinking, and if not, should we be?
-    if ( mUnreadCounter > 0 && pSettings->mBlinkSpeed > 0 && mBlinkingDelta == 0.0 )
-        setBlinking( 100, pSettings->mBlinkSpeed );
+    // How many unread messages are here?
+    unsigned int unread = mUnreadCounter;
 
-    if ( mUnreadCounter == 0 && mBlinkingDelta > 0.0 )
-        setBlinking( 0, 0 );
+    // If we are snoozed, ignore the unread messages
+    if ( !mSnoozedUntil.isNull() )
+    {
+        if ( mSnoozedUntil < QDateTime::currentDateTimeUtc() )
+        {
+            // We are unsnoozed now
+            actionUnsnooze(); // this will call updateIcon again, but with empty mSnoozedUntil
+            return;
+        }
+
+        // Hide the unreads
+        unread = 0;
+    }
+    else
+    {
+        // Are we blinking, and if not, should we be?
+        if ( unread > 0 && pSettings->mBlinkSpeed > 0 && mBlinkingDelta == 0.0 )
+            setBlinking( 100, pSettings->mBlinkSpeed );
+
+        if ( unread == 0 && mBlinkingDelta > 0.0 )
+            setBlinking( 0, 0 );
+    }
 
     // Apply blinking, if needed
     if ( mBlinkingTimeout )
@@ -99,10 +118,10 @@ void TrayIcon::updateIcon()
 
 
     // Do we need to draw the unread counter?
-    if ( mUnreadCounter > 0 )
+    if ( unread > 0 )
     {
         // Find the suitable font size, starting from 4
-        QString countvalue = QString::number( mUnreadCounter );
+        QString countvalue = QString::number( unread );
         int size = 4;
 
         for ( ; size < 256; size++ )
@@ -175,12 +194,33 @@ void TrayIcon::actionActivate()
 
 void TrayIcon::actionSnoozeFor()
 {
+    // Snoozing time is added as QAction's userdata
+    QAction * action = (QAction *) sender();
+    mSnoozedUntil = QDateTime::currentDateTimeUtc().addSecs( action->data().toInt() );
 
+    qDebug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
+
+    // Unhide the unsnoozer
+    mMenuUnsnooze->setVisible( true );
+
+    // Reset the blinker
+    setBlinking( 0, 0 );
+
+    // Keep the update timer on, but on 1sec interval
+    mBlinkingTimer.setInterval( 1000 );
+    mBlinkingTimer.start();
+
+    updateIcon();
 }
 
 void TrayIcon::actionUnsnooze()
 {
+    mSnoozedUntil = QDateTime();
 
+    // Hide the snooze menu
+    mMenuUnsnooze->setVisible( false );
+
+    updateIcon();
 }
 
 void TrayIcon::createMenu()

@@ -2,6 +2,7 @@
 #define TRAYICON_H
 
 #include <QTimer>
+#include <QDateTime>
 #include <QWidget>
 #include <QSystemTrayIcon>
 
@@ -58,6 +59,7 @@ class TrayIcon : public QSystemTrayIcon
 
         // Unsnooze menu item
         QAction *       mMenuUnsnooze;
+        QDateTime       mSnoozedUntil;
 
         // Unread counter thread
         UnreadMonitor * mUnreadMonitor;
