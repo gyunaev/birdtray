@@ -97,6 +97,9 @@ void DialogSettings::browsePath()
     if ( e.isEmpty() )
         return;
 
+    if ( !e.endsWith( QDir::separator() ) )
+        e.append( QDir::separator() );
+
     if ( !QFile::exists( e + "global-messages-db.sqlite" ) )
     {
         QMessageBox::critical( 0, "Invalid Thunderbird directory", tr("Valid Thunderbird directory must contain the file global-messages-db.sqlite") );
