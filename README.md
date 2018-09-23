@@ -28,8 +28,8 @@ This is the alpha version, so please report any issues.
 
 Currently the only way to test Birdtray is to build it from source, which should be easy on Linux, but may be cumbersome on other OSes. You would need the following libraries:
 
-- Qt 5.5 or higher;
-- sqlite3
+- Qt 5.5 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
+- sqlite3 (i.e. libsqlite3-dev or libsqlite3-devel)
 
 
 To build, please do the following:
