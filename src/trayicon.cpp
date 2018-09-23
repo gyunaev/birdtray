@@ -194,9 +194,9 @@ void TrayIcon::updateState()
         actionUnsnooze(); // this will call updateIcon again, but with empty mSnoozedUntil
     }
 
-    if ( mMenuShowHideThunderbird && !mMenuShowHideThunderbird->isEnabled() )
+    if ( !mMenuShowHideThunderbird->isEnabled() )
     {
-        if ( mWinTools->lookup() )
+        if ( mWinTools && mWinTools->lookup() )
             mMenuShowHideThunderbird->setEnabled( true );
     }
 }
@@ -285,16 +285,11 @@ void TrayIcon::createMenu()
     QMenu * menu = new QMenu();
 
     // Show and hide action
-    if ( mWinTools && pSettings->mShowHideThunderbird )
-    {
-        mMenuShowHideThunderbird = new QAction( tr("Hide Thunderbird"), this );
-        connect( mMenuShowHideThunderbird, &QAction::triggered, this, &TrayIcon::actionActivate );
+    mMenuShowHideThunderbird = new QAction( tr("Hide Thunderbird"), this );
+    connect( mMenuShowHideThunderbird, &QAction::triggered, this, &TrayIcon::actionActivate );
 
-        // We start with disabled action, and enable it once the window is detected
-        mMenuShowHideThunderbird->setEnabled( false );
-    }
-    else
-        mMenuShowHideThunderbird = 0;
+    // We start with disabled action, and enable it once the window is detected
+    mMenuShowHideThunderbird->setEnabled( false );
 
     // Snoozer times map, for easy editing. The first parameter is in seconds
     QMap< unsigned int, QString > snoozingTimes;
