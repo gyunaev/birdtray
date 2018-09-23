@@ -43,7 +43,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
          sudo add-apt-repository "$QT_REPO" -y;
          sudo apt-get update -qq;
-         sudo apt-get install -qq ${QT_VERSION}base ${QT_VERSION}translations ${QT_VERSION}tools;
+         sudo apt-get install -qq ${QT_VERSION}base ${QT_VERSION}translations ${QT_VERSION}tools ${QT_VERSION}x11extras;
          sudo apt-get install -qq libsqlite3-dev libx11-dev;
     fi
 
