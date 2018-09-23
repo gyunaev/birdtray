@@ -272,7 +272,8 @@ void TrayIcon::createMenu()
     // Show and hide action
     if ( mWinTools && pSettings->mShowHideThunderbird )
     {
-        mMenuShowHideThunderbird = new QAction( tr("Hide Thunderbird") );
+        mMenuShowHideThunderbird = new QAction();
+        mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
         connect( mMenuShowHideThunderbird, &QAction::triggered, this, &TrayIcon::actionActivate );
 
         // We start with disabled action, and enable it once the window is detected
@@ -310,7 +311,8 @@ void TrayIcon::createMenu()
     menu->addMenu( snooze );
 
     // Unsnooze menu item is unvisible by default
-    mMenuUnsnooze = new QAction( tr("Unsnooze") );
+    mMenuUnsnooze = new QAction();
+    mMenuUnsnooze->setText( tr("Unsnooze") );
     connect( mMenuUnsnooze, &QAction::triggered, this, &TrayIcon::actionUnsnooze );
 
     menu->addAction( mMenuUnsnooze );
