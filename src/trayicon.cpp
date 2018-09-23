@@ -192,6 +192,9 @@ void TrayIcon::updateState()
 
 void TrayIcon::actionQuit()
 {
+    if ( mWinTools && mWinTools->isHidden() )
+        mWinTools->show();
+
     exit( 0 );
 }
 
