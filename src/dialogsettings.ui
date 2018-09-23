@@ -228,6 +228,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="boxStopThunderbirdOnExit">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Terminate Thunderbird when quitting Birdtray </string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="boxShowHideThunderbird">
             <property name="text">
              <string>Hide/show Thunderbird window when clicking on tray icon</string>
@@ -341,5 +351,22 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>boxLaunchThunderbirdAtStart</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>boxStopThunderbirdOnExit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>93</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

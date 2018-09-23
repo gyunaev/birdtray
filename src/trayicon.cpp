@@ -207,6 +207,9 @@ void TrayIcon::actionQuit()
     if ( mWinTools && mWinTools->isHidden() )
         mWinTools->show();
 
+    if ( pSettings->mExitThunderbirdWhenQuit )
+        mThunderbirdProcess.terminate();
+
     exit( 0 );
 }
 

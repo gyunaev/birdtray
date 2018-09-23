@@ -41,6 +41,9 @@ DialogSettings::DialogSettings( QWidget *parent)
     leThunderbirdBinary->setText( pSettings->mThunderbirdCmdLine  );
     leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
 
+    if ( pSettings->mLaunchThunderbird )
+        boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
+
     // Prepare the error palette
     mPaletteErrror = mPaletteOk = leProfilePath->palette();
     mPaletteErrror.setColor( QPalette::Text, Qt::red );
@@ -83,6 +86,7 @@ void DialogSettings::accept()
     pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
     pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
+    pSettings->mExitThunderbirdWhenQuit = pSettings->mLaunchThunderbird ? boxStopThunderbirdOnExit->isChecked() : false;
 
     mAccountModel->applySettings();
 

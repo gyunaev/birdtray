@@ -36,6 +36,9 @@ class Settings
         // Whether to launch Thunderbird when the app starts
         bool    mLaunchThunderbird;
 
+        // Whether to quit Thunderbird when the app quits
+        bool    mExitThunderbirdWhenQuit;
+
         // Maps the folder URI to the notification color
         QMap< QString, QColor >   mFolderNotificationColors;
 

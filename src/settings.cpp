@@ -22,6 +22,7 @@ void Settings::save()
     settings.setValue("common/showhidethunderbird", mShowHideThunderbird );
     settings.setValue("common/launchthunderbird", mLaunchThunderbird );
     settings.setValue("common/hidewhenminimized", mHideWhenMinimized );
+    settings.setValue("common/exitthunderbirdonquit", mExitThunderbirdWhenQuit );
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
@@ -53,6 +54,7 @@ void Settings::load()
     mShowHideThunderbird = settings.value("common/showhidethunderbird", false ).toBool();
     mLaunchThunderbird = settings.value("common/launchthunderbird", false ).toBool();
     mHideWhenMinimized = settings.value("common/hidewhenminimized", false ).toBool();
+    mExitThunderbirdWhenQuit = settings.value("common/exitthunderbirdonquit", false ).toBool();
 
     mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
