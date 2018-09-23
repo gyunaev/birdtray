@@ -295,7 +295,7 @@ void TrayIcon::createMenu()
 
     for ( unsigned int snoozingseconds : snoozingTimes.keys() )
     {
-        QAction * a = new QAction( snoozingTimes[snoozingseconds] );
+        QAction * a = new QAction( snoozingTimes[snoozingseconds], this );
         connect( a, &QAction::triggered, this, &TrayIcon::actionSnoozeFor );
 
         // Remember the delay in the action itself
