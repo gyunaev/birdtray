@@ -34,6 +34,9 @@ class WindowTools_X11 : public WindowTools
         // Whether window is hidden or not
         virtual bool    isHidden();
 
+        // Closes the application via WM_CLOSE or similar
+        virtual bool    closeWindow();
+
     private slots:
         void    doHide();
         void    timerWindowState();

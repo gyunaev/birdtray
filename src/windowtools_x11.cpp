@@ -422,6 +422,19 @@ bool WindowTools_X11::isHidden()
     return mHiddenStateCounter == 2 && mWinId != activeWindow( QX11Info::display() );
 }
 
+bool WindowTools_X11::closeWindow()
+{
+    if ( !checkWindow() )
+        return false;
+
+    show();
+
+    // send _NET_CLOSE_WINDOW
+    long l[5] = {0, 0, 0, 0, 0};
+    sendMessage( QX11Info::display(), QX11Info::appRootWindow(), mWinId, "_NET_CLOSE_WINDOW", 32, SubstructureNotifyMask | SubstructureRedirectMask, l, sizeof (l));
+    return true;
+}
+
 void WindowTools_X11::doHide()
 {
     Display *display = QX11Info::display();

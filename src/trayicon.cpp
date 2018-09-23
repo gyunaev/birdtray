@@ -208,7 +208,12 @@ void TrayIcon::actionQuit()
         mWinTools->show();
 
     if ( pSettings->mExitThunderbirdWhenQuit )
-        mThunderbirdProcess.terminate();
+    {
+        if ( mWinTools )
+            mWinTools->closeWindow();
+        else
+            mThunderbirdProcess.terminate();
+    }
 
     exit( 0 );
 }

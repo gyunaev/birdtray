@@ -23,6 +23,9 @@ class WindowTools : public QObject
         // Is window hidden? true if yes
         virtual bool    isHidden() = 0;
 
+        // Closes the application via WM_CLOSE or similar
+        virtual bool    closeWindow() = 0;
+
     protected:
         WindowTools();
         virtual ~WindowTools();
