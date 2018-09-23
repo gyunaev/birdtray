@@ -4,9 +4,11 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QWidget>
+#include <QProcess>
 #include <QSystemTrayIcon>
 
 class UnreadMonitor;
+class WindowTools;
 
 class TrayIcon : public QSystemTrayIcon
 {
@@ -30,6 +32,9 @@ class TrayIcon : public QSystemTrayIcon
         // For example, for on-off every 500ms call it with (500, 100)
         void    setBlinking( int timeoutms, int percentagechange );
 
+        // Checks the application current state
+        void    updateState();
+
         // Context menu actions
         void    actionQuit();
         void    actionSettings();
@@ -37,7 +42,10 @@ class TrayIcon : public QSystemTrayIcon
         void    actionSnoozeFor();
         void    actionUnsnooze();
 
+        void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
+
     private:
+        void    applySettings();
         void    createMenu();
         void    createUnreadCounterThread();
 
@@ -64,8 +72,17 @@ class TrayIcon : public QSystemTrayIcon
         // Unread counter thread
         UnreadMonitor * mUnreadMonitor;
 
+        // State checking timer (once a second)
+        QTimer          mStateTimer;
+
         // Current status
         QString         mCurrentStatus;
+
+        // Thunderbird process
+        QProcess        mThunderbirdProcess;
+
+        // Window tools (show/hide)
+        WindowTools *   mWinTools;
 };
 
 #endif // TRAYICON_H

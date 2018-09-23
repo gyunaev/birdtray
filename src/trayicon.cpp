@@ -8,7 +8,7 @@
 #include "trayicon.h"
 #include "unreadcounter.h"
 #include "dialogsettings.h"
-
+#include "windowtools.h"
 
 TrayIcon::TrayIcon()
 {
@@ -20,12 +20,29 @@ TrayIcon::TrayIcon()
 
     mUnreadCounter = 0;
     mUnreadMonitor = 0;
+    mMenuShowHideThunderbird = 0;
+
+    mWinTools = WindowTools::create();
 
     createMenu();
     createUnreadCounterThread();
     updateIcon();
 
     connect( &mBlinkingTimer, &QTimer::timeout, this, &TrayIcon::updateIcon );
+
+    connect( this, &TrayIcon::activated, this, &TrayIcon::actionSystrayIconActivated );
+
+    // State timer
+    connect( &mStateTimer, &QTimer::timeout, this, &TrayIcon::updateState );
+    mStateTimer.setInterval( 1000 );
+    mStateTimer.start();
+
+    // Start Thunderbird
+    if ( pSettings->mLaunchThunderbird )
+    {
+        //TODO: error handling and status check
+        mThunderbirdProcess.start( pSettings->mThunderbirdCmdLine );
+    }
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -67,13 +84,6 @@ void TrayIcon::updateIcon()
     // If we are snoozed, ignore the unread messages
     if ( !mSnoozedUntil.isNull() )
     {
-        if ( mSnoozedUntil < QDateTime::currentDateTimeUtc() )
-        {
-            // We are unsnoozed now
-            actionUnsnooze(); // this will call updateIcon again, but with empty mSnoozedUntil
-            return;
-        }
-
         // Hide the unreads
         unread = 0;
     }
@@ -164,6 +174,22 @@ void TrayIcon::setBlinking(int timeoutms, int percentagechange)
     }
 }
 
+void TrayIcon::updateState()
+{
+    if ( !mSnoozedUntil.isNull() && mSnoozedUntil < QDateTime::currentDateTimeUtc() )
+    {
+        // We are unsnoozed now
+        actionUnsnooze(); // this will call updateIcon again, but with empty mSnoozedUntil
+    }
+
+    if ( mMenuShowHideThunderbird && !mMenuShowHideThunderbird->isEnabled() )
+    {
+        if ( mWinTools->lookup() )
+            mMenuShowHideThunderbird->setEnabled( true );
+    }
+}
+
+
 void TrayIcon::actionQuit()
 {
     exit( 0 );
@@ -190,6 +216,20 @@ void TrayIcon::actionSettings()
 void TrayIcon::actionActivate()
 {
     qDebug("activate");
+
+    if ( !mWinTools )
+        return;
+
+    if ( mWinTools->isHidden() )
+    {
+        mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
+        mWinTools->show();
+    }
+    else
+    {
+        mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
+        mWinTools->hide();
+    }
 }
 
 void TrayIcon::actionSnoozeFor()
@@ -206,10 +246,6 @@ void TrayIcon::actionSnoozeFor()
     // Reset the blinker
     setBlinking( 0, 0 );
 
-    // Keep the update timer on, but on 1sec interval
-    mBlinkingTimer.setInterval( 1000 );
-    mBlinkingTimer.start();
-
     updateIcon();
 }
 
@@ -223,13 +259,27 @@ void TrayIcon::actionUnsnooze()
     updateIcon();
 }
 
+void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    if ( reason == QSystemTrayIcon::Trigger )
+        actionActivate();
+}
+
 void TrayIcon::createMenu()
 {
     QMenu * menu = new QMenu();
 
     // Show and hide action
-    mMenuShowHideThunderbird = new QAction( tr("Show Thunderbird") );
-    connect( mMenuShowHideThunderbird, &QAction::triggered, this, &TrayIcon::actionActivate );
+    if ( mWinTools && pSettings->mShowHideThunderbird )
+    {
+        mMenuShowHideThunderbird = new QAction( tr("Hide Thunderbird") );
+        connect( mMenuShowHideThunderbird, &QAction::triggered, this, &TrayIcon::actionActivate );
+
+        // We start with disabled action, and enable it once the window is detected
+        mMenuShowHideThunderbird->setEnabled( false );
+    }
+    else
+        mMenuShowHideThunderbird = 0;
 
     // Snoozer times map, for easy editing. The first parameter is in seconds
     QMap< unsigned int, QString > snoozingTimes;
@@ -254,6 +304,7 @@ void TrayIcon::createMenu()
     }
 
     menu->addAction( mMenuShowHideThunderbird );
+    menu->addSeparator();
 
     // And add snoozing menu itself
     menu->addMenu( snooze );
