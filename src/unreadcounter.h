@@ -2,9 +2,9 @@
 #define FOLDERWATCHER_H
 
 #include <QThread>
-#include <QList>
 #include <QString>
 #include <QColor>
+#include <QMap>
 #include <QStringList>
 #include <QFileSystemWatcher>
 
