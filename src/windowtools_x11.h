@@ -4,6 +4,7 @@
 #include "windowtools.h"
 #include "settings.h"
 
+#include <QTimer>
 #include <QX11Info>
 #include <QRegExp>
 #include <QList>
@@ -35,6 +36,7 @@ class WindowTools_X11 : public WindowTools
 
     private slots:
         void    doHide();
+        void    timerWindowState();
 
     private:
         // Makes sure our window ID is still valid, or reinitializes it
@@ -48,6 +50,9 @@ class WindowTools_X11 : public WindowTools
 
         // State counter
         int         mHiddenStateCounter;
+
+        // State check timer
+        QTimer      mWindowStateTimer;
 };
 
 #endif // WINDOWTOOLS_X11_H

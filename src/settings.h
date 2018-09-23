@@ -30,6 +30,9 @@ class Settings
         // Whether to show/hide Thunderbird on button click
         bool    mShowHideThunderbird;
 
+        // Whether to hide Thunderbird when its window is minimized
+        bool    mHideWhenMinimized;
+
         // Whether to launch Thunderbird when the app starts
         bool    mLaunchThunderbird;
 

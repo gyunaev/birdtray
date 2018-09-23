@@ -240,6 +240,64 @@ static Window activeWindow(Display * display) {
     return w;
 }
 
+/*
+ GY:  Unfortunately this doesn't work at least on KWin - the state changes, but close button is not disabled.
+static bool disableCloseButton( Display * display, Window w )
+{
+    // see https://specifications.freedesktop.org/wm-spec/wm-spec-1.3.html#idm140130317577760
+    static Atom windowState  = XInternAtom( display, "_NET_WM_ALLOWED_ACTIONS", false );
+    static Atom atomClose = XInternAtom( display, "_NET_WM_ACTION_CLOSE", false );
+    Atom type = None;
+    int format;
+    unsigned long nitems, after;
+    Atom *data = NULL;
+    QVector<Atom> newdata;
+
+    int r = XGetWindowProperty(display, w, windowState, 0, 10, false, AnyPropertyType, &type, &format, &nitems, &after, (unsigned char**) &data);
+
+    if ( r != Success)
+        return false;
+
+    for (unsigned int i = 0; i < nitems; i++)
+        if ( data[i] != atomClose )
+            newdata.push_back( data[i] );
+
+    XFree(data);
+
+    XChangeProperty( display, w, windowState, type, format, PropModeReplace, (unsigned char *) newdata.data(), newdata.size() );
+    XSync(display, False);
+    return true;
+}
+*/
+
+static bool checkWindowState( Display * display, Window w, const char * state )
+{
+    static Atom windowState  = XInternAtom( display, "_NET_WM_STATE", false );
+    static Atom atomstate = XInternAtom( display, state, false );
+    Atom type = None;
+    int format;
+    unsigned long nitems, after;
+    Atom *data = NULL;
+
+    int r = XGetWindowProperty(display, w, windowState, 0, 10, false, AnyPropertyType, &type, &format, &nitems, &after, (unsigned char**) &data);
+
+    if (r == Success)
+    {
+        unsigned int i;
+
+        for (i = 0; i < nitems; i++)
+            if ( data[i] == atomstate )
+                break;
+
+        XFree(data);
+
+        if (i < nitems)
+            return true;
+    }
+
+    return false;
+}
+
 #if 0
 /*
  * Have events associated with mask for the window set in the X11 Event loop
@@ -286,6 +344,10 @@ WindowTools_X11::WindowTools_X11()
 {  
     mWinId = None;
     mHiddenStateCounter = 0;
+
+    connect( &mWindowStateTimer, &QTimer::timeout, this, &WindowTools_X11::timerWindowState );
+    mWindowStateTimer.setInterval( 250 );
+    mWindowStateTimer.start();
 }
 
 WindowTools_X11::~WindowTools_X11()
@@ -379,6 +441,19 @@ void WindowTools_X11::doHide()
 
     if ( mHiddenStateCounter == 2 )
         qDebug("Window removed from taskbar");
+}
+
+void WindowTools_X11::timerWindowState()
+{
+    if ( mWinId == None || !pSettings->mHideWhenMinimized )
+        return;
+
+    // _NET_WM_STATE_HIDDEN is set for minimized windows, so if we see it, this means it was minimized by the user
+    if ( checkWindowState( QX11Info::display(), mWinId, "_NET_WM_STATE_HIDDEN" ) && mHiddenStateCounter == 0 )
+    {
+        mHiddenStateCounter = 1;
+        QTimer::singleShot( 0, this, &WindowTools_X11::doHide );
+    }
 }
 
 bool WindowTools_X11::checkWindow()

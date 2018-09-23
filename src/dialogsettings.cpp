@@ -37,6 +37,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     sliderBlinkingSpeed->setValue( pSettings->mBlinkSpeed );
     boxLaunchThunderbirdAtStart->setChecked( pSettings->mLaunchThunderbird );
     boxShowHideThunderbird->setChecked( pSettings->mShowHideThunderbird );
+    boxHideWhenMinimized->setChecked( pSettings->mHideWhenMinimized );
     leThunderbirdBinary->setText( pSettings->mThunderbirdCmdLine  );
     leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
 
@@ -81,6 +82,7 @@ void DialogSettings::accept()
     pSettings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
     pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
     pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
+    pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
 
     mAccountModel->applySettings();
 

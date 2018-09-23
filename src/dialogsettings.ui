@@ -234,6 +234,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="boxHideWhenMinimized">
+            <property name="text">
+             <string>Hide Thunderbird window when it is minimized</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
