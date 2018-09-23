@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QPainter>
+#include <QMessageBox>
 #include <QFontMetrics>
 
 #include "settings.h"
@@ -23,6 +24,17 @@ TrayIcon::TrayIcon()
     mMenuShowHideThunderbird = 0;
 
     mWinTools = WindowTools::create();
+
+    // If the settings are not yet configure, pop up the message
+    if ( pSettings->mThunderbirdFolderPath.isEmpty() )
+    {
+        if ( QMessageBox::question( 0,
+            tr( "Would you like to set up Birdtray?" ),
+            tr( "You have not yet configured the Thunderbird profile path. Would you like to do it now?") ) == QMessageBox::Yes )
+        {
+            actionSettings();
+        }
+    }
 
     createMenu();
     createUnreadCounterThread();
