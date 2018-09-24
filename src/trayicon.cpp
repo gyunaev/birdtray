@@ -132,7 +132,7 @@ void TrayIcon::updateIcon()
     else if ( mBlinkingTimeout == 0 )
         p.setOpacity( 0.75 );
     else
-        p.setOpacity( mBlinkingTimeout );
+        p.setOpacity( mBlinkingIconOpacity );
 
     p.drawPixmap( mIconPixmap.rect(), mIconPixmap );
     p.setFont( pSettings->mTextFont );
