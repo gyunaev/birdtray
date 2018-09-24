@@ -83,8 +83,20 @@ void AccountTreeModel::addAccount(const QString &uri, const QColor &color)
     mColors.push_back( color );
 
     endInsertRows();
+}
 
-    // For edit: dataChanged( createIndex( 0, 0 ),  createIndex( mColors.size(), 1 ) );
+void AccountTreeModel::editAccount(const QModelIndex &idx, const QString &uri, const QColor &color)
+{
+    mAccounts[ idx.row() ] = uri;
+    mColors[ idx.row() ] = color;
+
+    emit dataChanged( createIndex( idx.row(), 0 ),  createIndex( idx.row(), 1 ) );
+}
+
+void AccountTreeModel::getAccount(const QModelIndex &idx, QString &uri, QColor &color)
+{
+    uri = mAccounts[ idx.row() ];
+    color = mColors[ idx.row() ];
 }
 
 void AccountTreeModel::removeAccount(const QModelIndex &idx)

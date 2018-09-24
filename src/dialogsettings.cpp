@@ -27,7 +27,10 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
+
+    connect( treeAccounts, &QTreeView::activated, this, &DialogSettings::accountEditIndex  );
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
+    connect( btnAccountEdit, &QPushButton::clicked, this, &DialogSettings::accountEdit );
     connect( btnAccountRemove, &QPushButton::clicked, this, &DialogSettings::accountRemove );
 
     // Setup parameters
@@ -193,6 +196,28 @@ void DialogSettings::accountAdd()
 
     if ( dlg.exec() == QDialog::Accepted )
         mAccountModel->addAccount( dlg.account(), dlg.color() );
+}
+
+void DialogSettings::accountEdit()
+{
+    accountEditIndex( treeAccounts->currentIndex() );
+}
+
+void DialogSettings::accountEditIndex(const QModelIndex &index)
+{
+    if ( !index.isValid() )
+        return;
+
+    QString uri;
+    QColor color;
+
+    mAccountModel->getAccount( index, uri, color );
+
+    DialogAddEditAccount dlg;
+    dlg.setCurrent( mAccounts, uri, color );
+
+    if ( dlg.exec() == QDialog::Accepted )
+        mAccountModel->editAccount( index, dlg.account(), dlg.color() );
 }
 
 void DialogSettings::accountRemove()

@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -182,6 +182,13 @@
           <widget class="QPushButton" name="btnAccountAdd">
            <property name="text">
             <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnAccountEdit">
+           <property name="text">
+            <string>Edit</string>
            </property>
           </widget>
          </item>

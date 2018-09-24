@@ -21,6 +21,8 @@ class AccountTreeModel : public QAbstractItemModel
         virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
         void    addAccount( const QString& uri, const QColor& color );
+        void    editAccount( const QModelIndex& idx, const QString& uri, const QColor& color );
+        void    getAccount( const QModelIndex& idx, QString& uri, QColor& color );
         void    removeAccount( const QModelIndex& idx );
 
         // Moves the current accounts/colors to settings
