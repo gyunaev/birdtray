@@ -123,7 +123,17 @@ void TrayIcon::updateIcon()
 
     temp.fill( Qt::transparent );
     p.begin( &temp );
-    p.setOpacity( mBlinkingTimeout ? mBlinkingIconOpacity : 0.75 );
+
+    // We use 0.75 opacity if we have unread count and non-blinking.
+    // We use blinking opacity if we have unread count and blinking.
+    // And we use 1.0 if we have zero unread count
+    if ( unread == 0 )
+        p.setOpacity( 1.0 );
+    else if ( mBlinkingTimeout == 0 )
+        p.setOpacity( 0.75 );
+    else
+        p.setOpacity( mBlinkingTimeout );
+
     p.drawPixmap( mIconPixmap.rect(), mIconPixmap );
     p.setFont( pSettings->mTextFont );
 
