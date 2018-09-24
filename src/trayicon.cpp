@@ -123,7 +123,7 @@ void TrayIcon::updateIcon()
 
     temp.fill( Qt::transparent );
     p.begin( &temp );
-    p.setOpacity( mBlinkingIconOpacity );
+    p.setOpacity( mBlinkingTimeout ? mBlinkingIconOpacity : 0.75 );
     p.drawPixmap( mIconPixmap.rect(), mIconPixmap );
     p.setFont( pSettings->mTextFont );
 
@@ -157,7 +157,7 @@ void TrayIcon::updateIcon()
 
         pSettings->mTextFont.setPointSize( size - 1 );
         QFontMetrics fm( pSettings->mTextFont );
-        p.setOpacity( 1.0 - mBlinkingIconOpacity );
+        p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
         p.setPen( mUnreadColor );
         p.drawText( (temp.width() - fm.width( countvalue )) / 2, (temp.height() - fm.height()) / 2 + fm.ascent(), countvalue );
     }
