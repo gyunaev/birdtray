@@ -28,7 +28,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
 
-    connect( treeAccounts, &QTreeView::activated, this, &DialogSettings::accountEditIndex  );
+    connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
     connect( btnAccountEdit, &QPushButton::clicked, this, &DialogSettings::accountEdit );
     connect( btnAccountRemove, &QPushButton::clicked, this, &DialogSettings::accountRemove );
