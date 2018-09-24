@@ -5,6 +5,7 @@
 #include <QFont>
 #include <QColor>
 #include <QMap>
+#include <QPixmap>
 #include <QJsonObject>
 
 class Settings
@@ -12,10 +13,22 @@ class Settings
     public:
         Settings();
 
-        // Parameters
+        // Desired icon size
         QSize   mIconSize;
-        QFont   mTextFont;
-        QColor  mTextColor;
+
+        // Notification icon
+        QPixmap mNotificationIcon;
+
+        // Font for use in notifications
+        QFont   mNotificationFont;
+
+        // Notification font weight
+        unsigned int mNotificationFontWeight;
+
+        // Default notification color
+        QColor  mNotificationDefaultColor;
+
+        // Blinking speed
         unsigned int    mBlinkSpeed;
 
         // Path to Thunderbird folder
@@ -41,8 +54,6 @@ class Settings
 
         // Maps the folder URI to the notification color
         QMap< QString, QColor >   mFolderNotificationColors;
-
-
 
         // Load and save them
         void    save();

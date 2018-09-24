@@ -143,7 +143,7 @@ void UnreadMonitor::updateUnread()
             if ( chosencolor.isValid() )
             {
                 if ( chosencolor != mFolderColorMap[ folderId ] )
-                    chosencolor = pSettings->mTextColor;
+                    chosencolor = pSettings->mNotificationDefaultColor;
             }
             else
                 chosencolor = mFolderColorMap[ folderId ];

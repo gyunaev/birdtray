@@ -27,6 +27,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
+    connect( notificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
@@ -35,8 +36,9 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     // Setup parameters
     leProfilePath->setText( pSettings->mThunderbirdFolderPath );
-    btnNotificationColor->setColor( pSettings->mTextColor );
-    notificationFont->setCurrentFont( pSettings->mTextFont );
+    btnNotificationColor->setColor( pSettings->mNotificationDefaultColor );
+    notificationFont->setCurrentFont( pSettings->mNotificationFont );
+    notificationFontWeight->setValue( pSettings->mNotificationFontWeight * 2 );
     sliderBlinkingSpeed->setValue( pSettings->mBlinkSpeed );
     boxLaunchThunderbirdAtStart->setChecked( pSettings->mLaunchThunderbird );
     boxShowHideThunderbird->setChecked( pSettings->mShowHideThunderbird );
@@ -56,6 +58,9 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     // Create the "About" box
     browserAbout->setText( tr("<html>This is Birdtray version %1.%2<br>Copyright (C) George Yunaev, gyunaev@ulduzsoft.com 2018<br>Licensed under GPLv3 or higher</html>") .arg( VERSION_MAJOR ) .arg( VERSION_MINOR) );
+
+    // Icon
+    notificationIcon->setIcon( pSettings->mNotificationIcon );
 
     profilePathChanged();
 }
@@ -81,15 +86,17 @@ void DialogSettings::accept()
     }
 
     pSettings->mThunderbirdFolderPath = leProfilePath->text();
-    pSettings->mTextColor = btnNotificationColor->color();
-    pSettings->mTextFont = notificationFont->currentFont();
+    pSettings->mNotificationDefaultColor = btnNotificationColor->color();
+    pSettings->mNotificationFont = notificationFont->currentFont();
     pSettings->mBlinkSpeed = sliderBlinkingSpeed->value();
     pSettings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
     pSettings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
     pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
     pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
+    pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
     pSettings->mExitThunderbirdWhenQuit = pSettings->mLaunchThunderbird ? boxStopThunderbirdOnExit->isChecked() : false;
+    pSettings->mNotificationIcon = notificationIcon->icon().pixmap( pSettings->mIconSize );
 
     mAccountModel->applySettings();
 
@@ -228,6 +235,27 @@ void DialogSettings::accountRemove()
         return;
 
     mAccountModel->removeAccount( index );
+}
+
+void DialogSettings::buttonChangeIcon()
+{
+    QString e = QFileDialog::getOpenFileName( 0,
+                                              "Choose the new icon",
+                                              "",
+                                              "Images(*.png)" );
+
+    if ( e.isEmpty() )
+        return;
+
+    QPixmap test;
+
+    if ( !test.load( e ) )
+    {
+        QMessageBox::critical( 0, "Invalid icon", tr("Could not load the icon from this file") );
+        return;
+    }
+
+    notificationIcon->setIcon( test.scaled( pSettings->mIconSize ) );
 }
 
 void DialogSettings::activateTab(int tab)

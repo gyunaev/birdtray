@@ -49,9 +49,6 @@ class TrayIcon : public QSystemTrayIcon
         void    createMenu();
         void    createUnreadCounterThread();
 
-        // The system tray icon
-        QPixmap         mIconPixmap;
-
         // State variables for blinking; mBlinkingTimeout=0 means we are not blinking
         double          mBlinkingIconOpacity;
         double          mBlinkingDelta;

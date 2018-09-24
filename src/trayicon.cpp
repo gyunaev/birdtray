@@ -80,16 +80,6 @@ void TrayIcon::unreadCounterError(QString message)
 
 void TrayIcon::updateIcon()
 {
-    if ( mIconPixmap.isNull() )
-    {
-        mIconPixmap = QPixmap( pSettings->mIconSize );
-
-        if ( !mIconPixmap.load( ":res/thunderbird.png" ) )
-        {
-            qFatal("cannot load icon");
-        }
-    }
-
     // How many unread messages are here?
     unsigned int unread = mUnreadCounter;
 
@@ -118,7 +108,7 @@ void TrayIcon::updateIcon()
         mBlinkingIconOpacity += mBlinkingDelta;
     }
 
-    QPixmap temp( mIconPixmap.size() );
+    QPixmap temp( pSettings->mNotificationIcon.size() );
     QPainter p;
 
     temp.fill( Qt::transparent );
@@ -134,8 +124,8 @@ void TrayIcon::updateIcon()
     else
         p.setOpacity( mBlinkingIconOpacity );
 
-    p.drawPixmap( mIconPixmap.rect(), mIconPixmap );
-    p.setFont( pSettings->mTextFont );
+    p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
+    p.setFont( pSettings->mNotificationFont );
 
     // Do we need to draw error sign?
     if ( mUnreadMonitor == 0 )
@@ -158,15 +148,16 @@ void TrayIcon::updateIcon()
 
         for ( ; size < 256; size++ )
         {
-            pSettings->mTextFont.setPointSize( size );
-            QFontMetrics fm( pSettings->mTextFont );
+            pSettings->mNotificationFont.setPointSize( size );
+            pSettings->mNotificationFont.setWeight( pSettings->mNotificationFontWeight );
+            QFontMetrics fm( pSettings->mNotificationFont );
 
             if ( fm.width( countvalue ) > temp.width() - 2 || fm.height() > temp.height() - 2 )
                 break;
         }
 
-        pSettings->mTextFont.setPointSize( size - 1 );
-        QFontMetrics fm( pSettings->mTextFont );
+        pSettings->mNotificationFont.setPointSize( size - 1 );
+        QFontMetrics fm( pSettings->mNotificationFont );
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
         p.setPen( mUnreadColor );
         p.drawText( (temp.width() - fm.width( countvalue )) / 2, (temp.height() - fm.height()) / 2 + fm.ascent(), countvalue );

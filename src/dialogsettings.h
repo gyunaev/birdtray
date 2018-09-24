@@ -41,6 +41,9 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    accountEditIndex( const QModelIndex& index );
         void    accountRemove();
 
+        // Icon change
+        void    buttonChangeIcon();
+
     private:
         bool    isProfilePathValid();
 

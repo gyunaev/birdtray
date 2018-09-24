@@ -1,5 +1,6 @@
 #include <QStandardPaths>
 #include <QSettings>
+#include <QBuffer>
 #include <QDir>
 
 #include "settings.h"
@@ -15,14 +16,15 @@ void Settings::save()
 {
     QSettings settings;
 
-    settings.setValue("common/notificationfont", mTextFont.toString() );
-    settings.setValue("common/defaultcolor", mTextColor.name() );
+    settings.setValue("common/notificationfont", mNotificationFont.toString() );
+    settings.setValue("common/defaultcolor", mNotificationDefaultColor.name() );
     settings.setValue("common/profilepath", mThunderbirdFolderPath );
     settings.setValue("common/blinkspeed", mBlinkSpeed );
     settings.setValue("common/showhidethunderbird", mShowHideThunderbird );
     settings.setValue("common/launchthunderbird", mLaunchThunderbird );
     settings.setValue("common/hidewhenminimized", mHideWhenMinimized );
     settings.setValue("common/exitthunderbirdonquit", mExitThunderbirdWhenQuit );
+    settings.setValue("common/notificationfontweight", mNotificationFontWeight );
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
@@ -39,6 +41,15 @@ void Settings::save()
 
         index++;
     }
+
+    // Store the notification icon
+    QByteArray icondata;
+    QBuffer buffer(&icondata);
+    buffer.open(QIODevice::WriteOnly);
+    mNotificationIcon.save(&buffer, "PNG");
+    buffer.close();
+
+    settings.setValue("common/notificationicon", icondata.toBase64( QByteArray::Base64Encoding ) );
 }
 
 void Settings::load()
@@ -46,15 +57,28 @@ void Settings::load()
     QSettings settings;
 
     if ( settings.contains( "common/notificationfont" ) )
-        mTextFont.fromString( settings.value( "common/notificationfont", "" ).toString() );
+        mNotificationFont.fromString( settings.value( "common/notificationfont", "" ).toString() );
 
-    mTextColor = QColor( settings.value( "common/defaultcolor", "#00FF00" ).toString() );
+    if ( settings.contains( "common/notificationicon" ) )
+    {
+        mNotificationIcon = QPixmap( mIconSize );
+        mNotificationIcon.load( QByteArray::fromBase64( settings.value("common/notificationicon", "" ).toByteArray() ) );
+    }
+
+    if ( mNotificationIcon.isNull() )
+    {
+        if ( !mNotificationIcon.load( ":res/thunderbird.png" ) )
+            qFatal("cannot load icon");
+    }
+
+    mNotificationDefaultColor = QColor( settings.value( "common/defaultcolor", "#00FF00" ).toString() );
     mThunderbirdFolderPath = settings.value( "common/profilepath", "" ).toString();
     mBlinkSpeed = settings.value("common/blinkspeed", 0 ).toInt();
     mShowHideThunderbird = settings.value("common/showhidethunderbird", false ).toBool();
     mLaunchThunderbird = settings.value("common/launchthunderbird", false ).toBool();
     mHideWhenMinimized = settings.value("common/hidewhenminimized", false ).toBool();
     mExitThunderbirdWhenQuit = settings.value("common/exitthunderbirdonquit", false ).toBool();
+    mNotificationFontWeight = settings.value("common/notificationfontweight", 50 ).toInt();
 
     mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
