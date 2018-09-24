@@ -119,37 +119,49 @@ Window XLibUtil::pidToWid(Display *display, Window window, bool checkNormality, 
 }
 */
 
+static QString getWindowName( Display *display, Window w )
+{
+    // Credits: https://stackoverflow.com/questions/8925377/why-is-xgetwindowproperty-returning-null
+    Atom nameAtom = XInternAtom( display, "_NET_WM_NAME", false );
+    Atom utf8Atom = XInternAtom( display, "UTF8_STRING", false );
+    Atom type;
+    int format;
+    unsigned long nitems, after;
+    unsigned char *data = 0;
+    QString out;
+
+    if ( Success == XGetWindowProperty( display, w, nameAtom, 0, 65536, false, utf8Atom, &type, &format, &nitems, &after, &data))
+    {
+        out = QString::fromUtf8( (const char*) data );
+        XFree(data);
+    }
+
+    return out;
+}
+
 /*
  * The Grand Window Analyzer. Checks if window w has a expected pid of epid
  * or a expected name of ename.
  */
-static bool analyzeWindow(Display *display, Window w, const QString &ename)
+static bool analyzeWindow(Display *display, Window w, const QString &ename )
 {
     XClassHint ch;
 
-    // no plans to analyze windows without a name
-    char *window_name = NULL;
-    if (!XFetchName(display, w, &window_name)) {
-        return false;
-    }
-    if (window_name) {
-        XFree(window_name);
-    } else {
-        return false;
-    }
-
     bool this_is_our_man = false;
+
+    // Find the window name
+
+
     // lets try the program name
-    if (XGetClassHint(display, w, &ch)) {
+    if (XGetClassHint(display, w, &ch))
+    {
         if (QString(ch.res_name).endsWith(ename)) {
             this_is_our_man = true;
         } else if (QString(ch.res_class).endsWith(ename)) {
             this_is_our_man = true;
         } else {
             // sheer desperation
-            char *wm_name = NULL;
-            XFetchName(display, w, &wm_name);
-            if (wm_name && QString(wm_name).endsWith(ename)) {
+            if ( getWindowName( display, w ).endsWith(ename) ) {
                 this_is_our_man = true;
             }
         }
@@ -358,7 +370,7 @@ bool WindowTools_X11::lookup()
 {
     mWinId = findWindow( QX11Info::display(), QX11Info::appRootWindow(), true, pSettings->mThunderbirdWindowMatch );
 
-    qDebug("Window ID found: %lu", mWinId );
+    qDebug("Window ID found: %lX", mWinId );
 
     return mWinId != None;
 }
