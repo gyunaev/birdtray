@@ -55,6 +55,10 @@ TrayIcon::TrayIcon()
         //TODO: error handling and status check
         mThunderbirdProcess.start( pSettings->mThunderbirdCmdLine );
     }
+    
+    // Update the icon again in 150ms when everything is settled
+    QTimer::singleShot( 150, this, &TrayIcon::updateIcon );
+    
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -239,8 +243,6 @@ void TrayIcon::actionSettings()
 
 void TrayIcon::actionActivate()
 {
-    qDebug("activate");
-
     if ( !mWinTools )
         return;
 
