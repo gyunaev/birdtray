@@ -12,6 +12,9 @@ int main(int argc, char *argv[])
     if ( !QSystemTrayIcon::isSystemTrayAvailable() )
         qFatal( "Sorry, system tray cannot be controlled through this addon on your operating system");
 
+    // This prevents exiting the application when the dialogs are closed on Gnome/XFCE
+    a.setQuitOnLastWindowClosed( false );
+
     // Set data for QSettings
     QCoreApplication::setOrganizationName("ulduzsoft");
     QCoreApplication::setOrganizationDomain("ulduzsoft.com");
