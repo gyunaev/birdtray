@@ -27,7 +27,9 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
-    connect( notificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
+
+    connect( btnNotificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
+    connect( btnDefaultIcon, &QPushButton::clicked, this, &DialogSettings::buttonDefaultIcon );
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
@@ -60,7 +62,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     browserAbout->setText( tr("<html>This is Birdtray version %1.%2<br>Copyright (C) George Yunaev, gyunaev@ulduzsoft.com 2018<br>Licensed under GPLv3 or higher</html>") .arg( VERSION_MAJOR ) .arg( VERSION_MINOR) );
 
     // Icon
-    notificationIcon->setIcon( pSettings->mNotificationIcon );
+    btnNotificationIcon->setIcon( pSettings->mNotificationIcon );
 
     profilePathChanged();
 }
@@ -96,7 +98,7 @@ void DialogSettings::accept()
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
     pSettings->mExitThunderbirdWhenQuit = pSettings->mLaunchThunderbird ? boxStopThunderbirdOnExit->isChecked() : false;
-    pSettings->mNotificationIcon = notificationIcon->icon().pixmap( pSettings->mIconSize );
+    pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
 
     mAccountModel->applySettings();
 
@@ -255,7 +257,15 @@ void DialogSettings::buttonChangeIcon()
         return;
     }
 
-    notificationIcon->setIcon( test.scaled( pSettings->mIconSize ) );
+    btnNotificationIcon->setIcon( test.scaled( pSettings->mIconSize ) );
+}
+
+void DialogSettings::buttonDefaultIcon()
+{
+    QPixmap temp;
+
+    if ( temp.load( ":res/thunderbird.png" ) )
+        btnNotificationIcon->setIcon( temp.scaled( pSettings->mIconSize ) );
 }
 
 void DialogSettings::activateTab(int tab)

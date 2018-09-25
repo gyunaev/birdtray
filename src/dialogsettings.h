@@ -43,6 +43,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Icon change
         void    buttonChangeIcon();
+        void    buttonDefaultIcon();
 
     private:
         bool    isProfilePathValid();

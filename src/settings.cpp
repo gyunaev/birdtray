@@ -42,14 +42,14 @@ void Settings::save()
         index++;
     }
 
-    // Store the notification icon
+    // Store the notification icon in the icondata buffer
     QByteArray icondata;
     QBuffer buffer(&icondata);
     buffer.open(QIODevice::WriteOnly);
     mNotificationIcon.save(&buffer, "PNG");
     buffer.close();
 
-    settings.setValue("common/notificationicon", icondata.toBase64( QByteArray::Base64Encoding ) );
+    settings.setValue("common/notificationicon", icondata );
 }
 
 void Settings::load()
@@ -62,7 +62,7 @@ void Settings::load()
     if ( settings.contains( "common/notificationicon" ) )
     {
         mNotificationIcon = QPixmap( mIconSize );
-        mNotificationIcon.load( QByteArray::fromBase64( settings.value("common/notificationicon", "" ).toByteArray() ) );
+        mNotificationIcon.loadFromData( settings.value("common/notificationicon", "" ).toByteArray(), "PNG" );
     }
 
     if ( mNotificationIcon.isNull() )
