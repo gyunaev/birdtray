@@ -231,7 +231,7 @@ void TrayIcon::actionSettings()
             createUnreadCounterThread();
 
         // Recalculate the delta
-        mBlinkingDelta = 0.0;
+        setBlinking( 0, 0 );
 
         updateIcon();
     }
