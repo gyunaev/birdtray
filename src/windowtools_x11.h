@@ -37,6 +37,9 @@ class WindowTools_X11 : public WindowTools
         // Closes the application via WM_CLOSE or similar
         virtual bool    closeWindow();
 
+        // Return true if Thunderbird window is valid (hidden or shown)
+        virtual bool    isValid();
+
     private slots:
         void    doHide();
         void    timerWindowState();

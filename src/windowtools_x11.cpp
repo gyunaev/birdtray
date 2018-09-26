@@ -447,6 +447,11 @@ bool WindowTools_X11::closeWindow()
     return true;
 }
 
+bool WindowTools_X11::isValid()
+{
+    return mWinId != None && isValidWindowId( QX11Info::display(), mWinId );
+}
+
 void WindowTools_X11::doHide()
 {
     Display *display = QX11Info::display();

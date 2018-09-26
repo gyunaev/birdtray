@@ -20,6 +20,7 @@ TrayIcon::TrayIcon()
     mUnreadCounter = 0;
     mUnreadMonitor = 0;
     mMenuShowHideThunderbird = 0;
+    mThunderbirdWindowValid = false;
 
     mWinTools = WindowTools::create();
 
@@ -128,17 +129,8 @@ void TrayIcon::updateIcon()
     p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
     p.setFont( pSettings->mNotificationFont );
 
-    // Monitor Thunderbird window
-    bool windowNotFound = false;
-
-    if ( pSettings->mMonitorThunderbirdWindow && !mMenuShowHideThunderbird->isEnabled() )
-    {
-        windowNotFound = true;
-        unread = 0;
-    }
-
     // Do we need to draw error sign?
-    if ( mUnreadMonitor == 0 || windowNotFound )
+    if ( mUnreadMonitor == 0 || (pSettings->mMonitorThunderbirdWindow && !mThunderbirdWindowValid ) )
     {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
@@ -146,6 +138,7 @@ void TrayIcon::updateIcon()
         p.setPen( pen );
         p.drawLine( 2, 2, temp.width() - 3, temp.height() - 3 );
         p.drawLine( temp.width() - 3, 2, 2, temp.height() - 3 );
+        unread = 0;
     }
 
 
@@ -205,10 +198,19 @@ void TrayIcon::updateState()
         actionUnsnooze(); // this will call updateIcon again, but with empty mSnoozedUntil
     }
 
-    if ( !mMenuShowHideThunderbird->isEnabled() || pSettings->mMonitorThunderbirdWindow )
+    if ( mWinTools )
     {
-        if ( mWinTools )
-            mMenuShowHideThunderbird->setEnabled( mWinTools->lookup() );
+        if ( !mMenuShowHideThunderbird->isEnabled() )
+        {
+            if ( mWinTools->lookup() )
+                mMenuShowHideThunderbird->setEnabled( true );
+        }
+
+        if ( mThunderbirdWindowValid != mWinTools->isValid() && pSettings->mMonitorThunderbirdWindow )
+        {
+            mThunderbirdWindowValid = mWinTools->isValid();
+            updateIcon();
+        }
     }
 }
 

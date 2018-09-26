@@ -26,6 +26,9 @@ class WindowTools : public QObject
         // Closes the application via WM_CLOSE or similar
         virtual bool    closeWindow() = 0;
 
+        // Return true if Thunderbird window is valid (hidden or shown)
+        virtual bool    isValid() = 0;
+
     protected:
         WindowTools();
         virtual ~WindowTools();

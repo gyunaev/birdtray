@@ -78,6 +78,9 @@ class TrayIcon : public QSystemTrayIcon
         // Thunderbird process
         QProcess        mThunderbirdProcess;
 
+        // Whether Thunderbird window is valid
+        bool            mThunderbirdWindowValid;
+
         // Window tools (show/hide)
         WindowTools *   mWinTools;
 };
