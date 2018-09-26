@@ -45,6 +45,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxLaunchThunderbirdAtStart->setChecked( pSettings->mLaunchThunderbird );
     boxShowHideThunderbird->setChecked( pSettings->mShowHideThunderbird );
     boxHideWhenMinimized->setChecked( pSettings->mHideWhenMinimized );
+    boxMonitorThunderbirdWindow->setChecked( pSettings->mMonitorThunderbirdWindow );
     leThunderbirdBinary->setText( pSettings->mThunderbirdCmdLine  );
     leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
 
@@ -98,6 +99,7 @@ void DialogSettings::accept()
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
     pSettings->mExitThunderbirdWhenQuit = pSettings->mLaunchThunderbird ? boxStopThunderbirdOnExit->isChecked() : false;
+    pSettings->mMonitorThunderbirdWindow = boxShowHideThunderbird->isChecked() ? boxMonitorThunderbirdWindow->isChecked() : false;
     pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
 
     mAccountModel->applySettings();

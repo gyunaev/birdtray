@@ -13,8 +13,6 @@
 
 TrayIcon::TrayIcon()
 {
-    updateIcon();
-
     mBlinkingIconOpacity = 1.0;
     mBlinkingDelta = 0.0;
     mBlinkingTimeout = 0;
@@ -38,10 +36,8 @@ TrayIcon::TrayIcon()
 
     createMenu();
     createUnreadCounterThread();
-    updateIcon();
 
     connect( &mBlinkingTimer, &QTimer::timeout, this, &TrayIcon::updateIcon );
-
     connect( this, &TrayIcon::activated, this, &TrayIcon::actionSystrayIconActivated );
 
     // State timer
@@ -56,8 +52,9 @@ TrayIcon::TrayIcon()
         mThunderbirdProcess.start( pSettings->mThunderbirdCmdLine );
     }
     
-    // Update the icon again in 150ms when everything is settled
-    QTimer::singleShot( 150, this, &TrayIcon::updateIcon );
+    // Update the state and icon when everything is settled
+    QTimer::singleShot( 0, this, &TrayIcon::updateState );
+    QTimer::singleShot( 0, this, &TrayIcon::updateIcon );
     
 }
 
@@ -131,8 +128,17 @@ void TrayIcon::updateIcon()
     p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
     p.setFont( pSettings->mNotificationFont );
 
+    // Monitor Thunderbird window
+    bool windowNotFound = false;
+
+    if ( pSettings->mMonitorThunderbirdWindow && !mMenuShowHideThunderbird->isEnabled() )
+    {
+        windowNotFound = true;
+        unread = 0;
+    }
+
     // Do we need to draw error sign?
-    if ( mUnreadMonitor == 0 )
+    if ( mUnreadMonitor == 0 || windowNotFound )
     {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
@@ -199,10 +205,10 @@ void TrayIcon::updateState()
         actionUnsnooze(); // this will call updateIcon again, but with empty mSnoozedUntil
     }
 
-    if ( !mMenuShowHideThunderbird->isEnabled() )
+    if ( !mMenuShowHideThunderbird->isEnabled() || pSettings->mMonitorThunderbirdWindow )
     {
-        if ( mWinTools && mWinTools->lookup() )
-            mMenuShowHideThunderbird->setEnabled( true );
+        if ( mWinTools )
+            mMenuShowHideThunderbird->setEnabled( mWinTools->lookup() );
     }
 }
 

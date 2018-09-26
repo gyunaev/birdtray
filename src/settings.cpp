@@ -25,6 +25,7 @@ void Settings::save()
     settings.setValue("common/hidewhenminimized", mHideWhenMinimized );
     settings.setValue("common/exitthunderbirdonquit", mExitThunderbirdWhenQuit );
     settings.setValue("common/notificationfontweight", mNotificationFontWeight );
+    settings.setValue("common/monitorthunderbirdwindow", mMonitorThunderbirdWindow );
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
@@ -79,6 +80,7 @@ void Settings::load()
     mHideWhenMinimized = settings.value("common/hidewhenminimized", false ).toBool();
     mExitThunderbirdWhenQuit = settings.value("common/exitthunderbirdonquit", false ).toBool();
     mNotificationFontWeight = settings.value("common/notificationfontweight", 50 ).toInt();
+    mMonitorThunderbirdWindow = settings.value("common/monitorthunderbirdwindow", false ).toBool();
 
     mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
