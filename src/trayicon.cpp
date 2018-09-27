@@ -83,7 +83,7 @@ void TrayIcon::unreadCounterError(QString message)
 // Shamelessly stolen from Spivak Karaoke Player: github.com/gyunaev/spivak
 static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxfontsize, const QString &text, const QSize& rectsize )
 {
-    int cursize;
+    int cursize = minfontsize;
     QFont testfont( font );
 
     // We are trying to find the maximum font size which fits by doing the binary search
