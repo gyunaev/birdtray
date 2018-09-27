@@ -2,7 +2,7 @@
 
 Birdtray is a free, cross-platform (Linux/Windows/OS X) system tray notification for new mail for Thunderbird. 
 
-The latest release is 0.3 at Sep 23, 2018.
+The latest release is 1.0 at Sep 26, 2018.
 
 This is the alpha version, so please report any issues.
 
@@ -23,6 +23,10 @@ This is the alpha version, so please report any issues.
 - You can choose different font colors for different email accounts. This allows you, for example, to have blue unread count for personal emails, red unread count for work emails, and green unread count if both folders have unread mail.
 
 - Can launch Thunderbird when Birdtray starts, and terminate it when Birdtray quits (configurable).
+
+- You can choose the tray icon, or use Thunderbird original icon;
+
+- Can monitor that Thunderbird is running, and indicate it if you accidentally closed it;
 
 
 ## Compiling
