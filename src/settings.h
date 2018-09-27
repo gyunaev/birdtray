@@ -55,6 +55,10 @@ class Settings
         // Whether to monitor Thunderbird running
         bool    mMonitorThunderbirdWindow;
 
+        // The smallest and the largest allowed font in notification
+        unsigned int mNotificationMinimumFontSize;
+        unsigned int mNotificationMaximumFontSize;
+
         // Maps the folder URI to the notification color
         QMap< QString, QColor >   mFolderNotificationColors;
 

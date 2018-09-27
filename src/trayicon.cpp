@@ -80,6 +80,28 @@ void TrayIcon::unreadCounterError(QString message)
     updateIcon();
 }
 
+// Shamelessly stolen from Spivak Karaoke Player: github.com/gyunaev/spivak
+static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxfontsize, const QString &text, const QSize& rectsize )
+{
+    int cursize;
+    QFont testfont( font );
+
+    // We are trying to find the maximum font size which fits by doing the binary search
+    while ( maxfontsize - minfontsize > 1 )
+    {
+        cursize = minfontsize + (maxfontsize - minfontsize) / 2;
+        testfont.setPointSize( cursize );
+        QSize size = QFontMetrics( testfont ).size( Qt::TextSingleLine, text );
+
+        if ( size.width() < rectsize.width() && size.height() <= rectsize.height() )
+            minfontsize = cursize;
+        else
+            maxfontsize = cursize;
+    }
+
+    return cursize;
+}
+
 void TrayIcon::updateIcon()
 {
     // How many unread messages are here?
@@ -141,25 +163,19 @@ void TrayIcon::updateIcon()
         unread = 0;
     }
 
-
     // Do we need to draw the unread counter?
     if ( unread > 0 )
     {
         // Find the suitable font size, starting from 4
         QString countvalue = QString::number( unread );
-        int size = 4;
 
-        for ( ; size < 256; size++ )
-        {
-            pSettings->mNotificationFont.setPointSize( size );
-            pSettings->mNotificationFont.setWeight( pSettings->mNotificationFontWeight );
-            QFontMetrics fm( pSettings->mNotificationFont );
+        int fontsize = largestFontSize( pSettings->mNotificationFont,
+                                        pSettings->mNotificationMinimumFontSize,
+                                        pSettings->mNotificationMaximumFontSize,
+                                        countvalue,
+                                        temp.size() - QSize( 2, 2 ) );
 
-            if ( fm.width( countvalue ) > temp.width() - 2 || fm.height() > temp.height() - 2 )
-                break;
-        }
-
-        pSettings->mNotificationFont.setPointSize( size - 1 );
+        pSettings->mNotificationFont.setPointSize( fontsize );
         QFontMetrics fm( pSettings->mNotificationFont );
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
         p.setPen( mUnreadColor );

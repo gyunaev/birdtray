@@ -29,6 +29,8 @@ void Settings::save()
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
+    settings.setValue("advanced/notificationfontminsize", mNotificationMinimumFontSize );
+    settings.setValue("advanced/notificationfontmaxsize", mNotificationMaximumFontSize );
 
     // Convert the map into settings
     settings.setValue("accounts/count", mFolderNotificationColors.size() );
@@ -84,6 +86,8 @@ void Settings::load()
 
     mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
+    mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize", 4 ).toInt();
+    mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize", 512 ).toInt();
 
     mFolderNotificationColors.clear();
 
