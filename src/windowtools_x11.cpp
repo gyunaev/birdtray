@@ -368,6 +368,9 @@ WindowTools_X11::~WindowTools_X11()
 
 bool WindowTools_X11::lookup()
 {
+    if ( isValid() )
+        return mWinId;
+
     mWinId = findWindow( QX11Info::display(), QX11Info::appRootWindow(), true, pSettings->mThunderbirdWindowMatch );
 
     qDebug("Window ID found: %lX", mWinId );

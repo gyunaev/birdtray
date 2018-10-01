@@ -46,6 +46,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxShowHideThunderbird->setChecked( pSettings->mShowHideThunderbird );
     boxHideWhenMinimized->setChecked( pSettings->mHideWhenMinimized );
     boxMonitorThunderbirdWindow->setChecked( pSettings->mMonitorThunderbirdWindow );
+    boxRestartThunderbird->setChecked( pSettings->mRestartThunderbird );
     leThunderbirdBinary->setText( pSettings->mThunderbirdCmdLine  );
     leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( pSettings->mNotificationMinimumFontSize );
@@ -104,6 +105,7 @@ void DialogSettings::accept()
     pSettings->mMonitorThunderbirdWindow = boxShowHideThunderbird->isChecked() ? boxMonitorThunderbirdWindow->isChecked() : false;
     pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
     pSettings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
+    pSettings->mRestartThunderbird = boxRestartThunderbird->isChecked();
 
     mAccountModel->applySettings();
 

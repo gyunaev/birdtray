@@ -44,6 +44,11 @@ class TrayIcon : public QSystemTrayIcon
 
         void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
 
+        void    thunderbirdExited(int code);
+        void    thunderbirdStartFailed();
+
+        void    startThunderbird();
+
     private:
         void    applySettings();
         void    createMenu();
@@ -76,10 +81,10 @@ class TrayIcon : public QSystemTrayIcon
         QString         mCurrentStatus;
 
         // Thunderbird process
-        QProcess        mThunderbirdProcess;
+        QProcess  *     mThunderbirdProcess;
 
-        // Whether Thunderbird window is valid
-        bool            mThunderbirdWindowValid;
+        // If true, it will hide Thunderbird window as soon as its shown
+        bool            mThunderbirdWindowHide;
 
         // Window tools (show/hide)
         WindowTools *   mWinTools;

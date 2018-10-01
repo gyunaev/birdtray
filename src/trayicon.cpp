@@ -20,7 +20,8 @@ TrayIcon::TrayIcon()
     mUnreadCounter = 0;
     mUnreadMonitor = 0;
     mMenuShowHideThunderbird = 0;
-    mThunderbirdWindowValid = false;
+    mThunderbirdProcess = 0;
+    mThunderbirdWindowHide = false;
 
     mWinTools = WindowTools::create();
 
@@ -48,15 +49,13 @@ TrayIcon::TrayIcon()
 
     // Start Thunderbird
     if ( pSettings->mLaunchThunderbird )
-    {
-        //TODO: error handling and status check
-        mThunderbirdProcess.start( pSettings->mThunderbirdCmdLine );
-    }
+        startThunderbird();
     
     // Update the state and icon when everything is settled
     QTimer::singleShot( 0, this, &TrayIcon::updateState );
+
+    // We need to update the state twice to avoid the "icon too small" bug
     QTimer::singleShot( 0, this, &TrayIcon::updateIcon );
-    
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -152,7 +151,7 @@ void TrayIcon::updateIcon()
     p.setFont( pSettings->mNotificationFont );
 
     // Do we need to draw error sign?
-    if ( mUnreadMonitor == 0 || (pSettings->mMonitorThunderbirdWindow && !mThunderbirdWindowValid ) )
+    if ( mUnreadMonitor == 0 || (pSettings->mMonitorThunderbirdWindow && !mThunderbirdProcess ) )
     {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
@@ -216,15 +215,21 @@ void TrayIcon::updateState()
 
     if ( mWinTools )
     {
-        if ( !mMenuShowHideThunderbird->isEnabled() )
+        bool found = mWinTools->lookup();
+
+        if ( found && mThunderbirdWindowHide )
         {
-            if ( mWinTools->lookup() )
-                mMenuShowHideThunderbird->setEnabled( true );
+            mThunderbirdWindowHide = false;
+            // FIXMe: later. Currenyly buggy
+            //QTimer::singleShot( 500, this, &TrayIcon::actionActivate );
+            //mWinTools->hide();
         }
 
-        if ( mThunderbirdWindowValid != mWinTools->isValid() && pSettings->mMonitorThunderbirdWindow )
+        if ( !mMenuShowHideThunderbird->isEnabled() && found )
+            mMenuShowHideThunderbird->setEnabled( true );
+
+        if ( pSettings->mMonitorThunderbirdWindow )
         {
-            mThunderbirdWindowValid = mWinTools->isValid();
             updateIcon();
         }
     }
@@ -240,8 +245,8 @@ void TrayIcon::actionQuit()
     {
         if ( mWinTools )
             mWinTools->closeWindow();
-        else
-            mThunderbirdProcess.terminate();
+        else if ( mThunderbirdProcess )
+            mThunderbirdProcess->terminate();
     }
 
     exit( 0 );
@@ -315,6 +320,34 @@ void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reas
         actionActivate();
 }
 
+void TrayIcon::thunderbirdExited(int )
+{
+    // Ignore signals from previous process instances
+    if ( sender() != mThunderbirdProcess )
+        return;
+
+    if ( pSettings->mRestartThunderbird )
+    {
+        qDebug( "Thunderbird exited, restarting");
+        mThunderbirdWindowHide = true;
+
+        // We cannot restart it right here, screws up Qt process mgmt. So wait 250ms
+        QTimer::singleShot( 250, this, &TrayIcon::startThunderbird );
+    }
+}
+
+void TrayIcon::thunderbirdStartFailed()
+{
+    QMessageBox::critical( 0,
+                           tr("Failed to start Thunderbird"),
+                           tr("Failed to start Thunderbird executable %1:\n%2")
+                           .arg( pSettings->mThunderbirdCmdLine )
+                           .arg( mThunderbirdProcess->errorString() ) );
+
+    mThunderbirdProcess->deleteLater();
+    mThunderbirdProcess = 0;
+}
+
 void TrayIcon::createMenu()
 {
     QMenu * menu = new QMenu();
@@ -382,4 +415,20 @@ void TrayIcon::createUnreadCounterThread()
     connect( mUnreadMonitor, &UnreadMonitor::error, this, &TrayIcon::unreadCounterError );
 
     mUnreadMonitor->start();
+}
+
+void TrayIcon::startThunderbird()
+{
+    // If the object already exist, delete it later. DO not delete it here, it may be in the slot
+    if ( mThunderbirdProcess )
+        mThunderbirdProcess->deleteLater();
+
+    mThunderbirdProcess = new QProcess();
+
+    connect( mThunderbirdProcess, static_cast<void(QProcess::*)(int)>(&QProcess::finished),
+             this, &TrayIcon::thunderbirdExited );
+
+    connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::thunderbirdStartFailed );
+
+    mThunderbirdProcess->start( pSettings->mThunderbirdCmdLine );
 }

@@ -52,6 +52,9 @@ class Settings
         // Whether to quit Thunderbird when the app quits
         bool    mExitThunderbirdWhenQuit;
 
+        // Whether to launch Thunderbird when the app starts
+        bool    mRestartThunderbird;
+
         // Whether to monitor Thunderbird running
         bool    mMonitorThunderbirdWindow;
 
