@@ -4,7 +4,6 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QWidget>
-#include <QProcess>
 #include <QSystemTrayIcon>
 
 class UnreadMonitor;
@@ -44,9 +43,6 @@ class TrayIcon : public QSystemTrayIcon
 
         void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
 
-        void    thunderbirdExited(int code);
-        void    thunderbirdStartFailed();
-
         void    startThunderbird();
 
     private:
@@ -77,11 +73,18 @@ class TrayIcon : public QSystemTrayIcon
         // State checking timer (once a second)
         QTimer          mStateTimer;
 
+        // Thunderbird restart timestamp (to avoid restarting too often)
+        QDateTime       mThunderbirdRestartTime;
+
         // Current status
         QString         mCurrentStatus;
 
-        // Thunderbird process
-        QProcess  *     mThunderbirdProcess;
+        // If true, Thunderbird window existed anytime before, but not necessarily now
+        // (we use this to distinguish between start and restart)
+        bool            mThunderbirdWindowExisted;
+
+        // If true, Thunderbird window exists right now
+        bool            mThunderbirdWindowExists;
 
         // If true, it will hide Thunderbird window as soon as its shown
         bool            mThunderbirdWindowHide;

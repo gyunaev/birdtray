@@ -2,6 +2,7 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QPainter>
+#include <QProcess>
 #include <QMessageBox>
 #include <QFontMetrics>
 
@@ -20,7 +21,8 @@ TrayIcon::TrayIcon()
     mUnreadCounter = 0;
     mUnreadMonitor = 0;
     mMenuShowHideThunderbird = 0;
-    mThunderbirdProcess = 0;
+    mThunderbirdWindowExists = false;
+    mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
 
     mWinTools = WindowTools::create();
@@ -151,7 +153,7 @@ void TrayIcon::updateIcon()
     p.setFont( pSettings->mNotificationFont );
 
     // Do we need to draw error sign?
-    if ( mUnreadMonitor == 0 || (pSettings->mMonitorThunderbirdWindow && !mThunderbirdProcess ) )
+    if ( mUnreadMonitor == 0 || (pSettings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists ) )
     {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
@@ -215,23 +217,34 @@ void TrayIcon::updateState()
 
     if ( mWinTools )
     {
-        bool found = mWinTools->lookup();
+        mThunderbirdWindowExists = mWinTools->lookup();
 
-        if ( found && mThunderbirdWindowHide )
+        // If the window is found, we remember it
+        if ( mThunderbirdWindowExists && !mThunderbirdWindowExisted )
+            mThunderbirdWindowExisted = true;
+
+        // Hide the window if requested
+        if ( mThunderbirdWindowExists && mThunderbirdWindowHide )
         {
             mThunderbirdWindowHide = false;
-            // FIXMe: later. Currenyly buggy
-            //QTimer::singleShot( 500, this, &TrayIcon::actionActivate );
-            //mWinTools->hide();
+            mWinTools->hide();
         }
 
-        if ( !mMenuShowHideThunderbird->isEnabled() && found )
+        if ( !mMenuShowHideThunderbird->isEnabled() && mThunderbirdWindowExists )
             mMenuShowHideThunderbird->setEnabled( true );
 
-        if ( pSettings->mMonitorThunderbirdWindow )
+        // We only restart it if the window does not exist now, but existed before
+        if ( !mThunderbirdWindowExists
+             && mThunderbirdWindowExisted
+             && pSettings->mRestartThunderbird
+             && (mThunderbirdRestartTime.isNull() || mThunderbirdRestartTime < QDateTime::currentDateTimeUtc() ) )
         {
-            updateIcon();
+            mThunderbirdRestartTime = QDateTime::currentDateTimeUtc().addSecs( 5 );
+            mThunderbirdWindowHide = true;
+            startThunderbird();
         }
+
+        updateIcon();
     }
 }
 
@@ -245,8 +258,6 @@ void TrayIcon::actionQuit()
     {
         if ( mWinTools )
             mWinTools->closeWindow();
-        else if ( mThunderbirdProcess )
-            mThunderbirdProcess->terminate();
     }
 
     exit( 0 );
@@ -320,34 +331,6 @@ void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reas
         actionActivate();
 }
 
-void TrayIcon::thunderbirdExited(int )
-{
-    // Ignore signals from previous process instances
-    if ( sender() != mThunderbirdProcess )
-        return;
-
-    if ( pSettings->mRestartThunderbird )
-    {
-        qDebug( "Thunderbird exited, restarting");
-        mThunderbirdWindowHide = true;
-
-        // We cannot restart it right here, screws up Qt process mgmt. So wait 250ms
-        QTimer::singleShot( 250, this, &TrayIcon::startThunderbird );
-    }
-}
-
-void TrayIcon::thunderbirdStartFailed()
-{
-    QMessageBox::critical( 0,
-                           tr("Failed to start Thunderbird"),
-                           tr("Failed to start Thunderbird executable %1:\n%2")
-                           .arg( pSettings->mThunderbirdCmdLine )
-                           .arg( mThunderbirdProcess->errorString() ) );
-
-    mThunderbirdProcess->deleteLater();
-    mThunderbirdProcess = 0;
-}
-
 void TrayIcon::createMenu()
 {
     QMenu * menu = new QMenu();
@@ -419,16 +402,17 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
+    qDebug("Starting Thunderbird as '%s'", qPrintable( pSettings->mThunderbirdCmdLine ) );
+
+    QProcess::startDetached( pSettings->mThunderbirdCmdLine );
+/*
     // If the object already exist, delete it later. DO not delete it here, it may be in the slot
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();
 
     mThunderbirdProcess = new QProcess();
 
-    connect( mThunderbirdProcess, static_cast<void(QProcess::*)(int)>(&QProcess::finished),
-             this, &TrayIcon::thunderbirdExited );
-
     connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::thunderbirdStartFailed );
 
-    mThunderbirdProcess->start( pSettings->mThunderbirdCmdLine );
+    mThunderbirdProcess->start( pSettings->mThunderbirdCmdLine );*/
 }
