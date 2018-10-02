@@ -8,7 +8,8 @@
 #include "databaseaccounts.h"
 #include "ui_dialogsettings.h"
 
-class AccountTreeModel;
+class ModelAccountTree;
+class ModelNewEmails;
 
 class DialogSettings : public QDialog, public Ui::DialogSettings
 {
@@ -41,6 +42,12 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    accountEditIndex( const QModelIndex& index );
         void    accountRemove();
 
+        // New Email buttons
+        void    newEmailAdd();
+        void    newEmailEdit();
+        void    newEmailEditIndex( const QModelIndex& index );
+        void    newEmailRemove();
+
         // Icon change
         void    buttonChangeIcon();
         void    buttonDefaultIcon();
@@ -58,7 +65,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         QList<DatabaseAccounts::Account>    mAccounts;
 
         // Model to show the accounts
-        AccountTreeModel    *   mAccountModel;
+        ModelAccountTree    *   mAccountModel;
+
+        // Model to show new emails
+        ModelNewEmails      *   mModelNewEmails;
+
 };
 
 #endif // SETTINGSDIALOG_H

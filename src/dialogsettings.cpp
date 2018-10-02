@@ -6,7 +6,8 @@
 #include "version.h"
 #include "settings.h"
 #include "dialogsettings.h"
-#include "accounttreemodel.h"
+#include "modelaccounttree.h"
+#include "modelnewemails.h"
 #include "databaseaccounts.h"
 #include "dialogaddeditaccount.h"
 #include "databaseunreadfixer.h"
@@ -36,6 +37,11 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnAccountEdit, &QPushButton::clicked, this, &DialogSettings::accountEdit );
     connect( btnAccountRemove, &QPushButton::clicked, this, &DialogSettings::accountRemove );
 
+    connect( treeNewEmails, &QTreeView::doubleClicked, this, &DialogSettings::newEmailEditIndex  );
+    connect( btnNewEmailAdd, &QPushButton::clicked, this, &DialogSettings::newEmailAdd );
+    connect( btnNewEmailEdit, &QPushButton::clicked, this, &DialogSettings::newEmailEdit );
+    connect( btnNewEmailDelete, &QPushButton::clicked, this, &DialogSettings::newEmailRemove );
+
     // Setup parameters
     leProfilePath->setText( pSettings->mThunderbirdFolderPath );
     btnNotificationColor->setColor( pSettings->mNotificationDefaultColor );
@@ -53,6 +59,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     spinMinimumFontSize->setMaximum( pSettings->mNotificationMaximumFontSize - 1 );
     boxHideWindowAtStart->setChecked( pSettings->mHideWhenStarted );
     boxHideWindowAtRestart->setChecked( pSettings->mHideWhenRestarted );
+    boxEnableNewEmail->setChecked( pSettings->mNewEmailMenuEnabled );
 
     if ( pSettings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
@@ -61,8 +68,13 @@ DialogSettings::DialogSettings( QWidget *parent)
     mPaletteErrror = mPaletteOk = leProfilePath->palette();
     mPaletteErrror.setColor( QPalette::Text, Qt::red );
 
-    mAccountModel = new AccountTreeModel( this );
+    // Accounts tab
+    mAccountModel = new ModelAccountTree( this );
     treeAccounts->setModel( mAccountModel );
+
+    // New emails tab
+    mModelNewEmails = new ModelNewEmails( this );
+    treeNewEmails->setModel( mModelNewEmails );
 
     // Create the "About" box
     browserAbout->setText( tr("<html>This is Birdtray version %1.%2<br>Copyright (C) George Yunaev, gyunaev@ulduzsoft.com 2018<br>Licensed under GPLv3 or higher</html>") .arg( VERSION_MAJOR ) .arg( VERSION_MINOR) );
@@ -81,6 +93,14 @@ void DialogSettings::accept()
     if ( profilePath.isEmpty() )
     {
         QMessageBox::critical( 0, "Empty Thunderbird directory", tr("You must specify Thunderbird directory") );
+        return;
+    }
+
+    if ( boxEnableNewEmail->isChecked() && leThunderbirdBinary->text().isEmpty() )
+    {
+        QMessageBox::critical( 0, "Empty Thunderbird path", tr("You have enabled New Email menu, but you did not specify Thunderbird path") );
+        tabWidget->setCurrentIndex( 0 );
+        leThunderbirdBinary->setFocus();
         return;
     }
 
@@ -111,8 +131,10 @@ void DialogSettings::accept()
     pSettings->mRestartThunderbird = boxRestartThunderbird->isChecked();
     pSettings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
     pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
+    pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
 
     mAccountModel->applySettings();
+    mModelNewEmails->applySettings();
 
     QDialog::accept();
 }
@@ -249,6 +271,26 @@ void DialogSettings::accountRemove()
         return;
 
     mAccountModel->removeAccount( index );
+}
+
+void DialogSettings::newEmailAdd()
+{
+    mModelNewEmails->add();
+}
+
+void DialogSettings::newEmailEdit()
+{
+    newEmailEditIndex( treeNewEmails->currentIndex() );
+}
+
+void DialogSettings::newEmailEditIndex(const QModelIndex &index)
+{
+    mModelNewEmails->edit( index );
+}
+
+void DialogSettings::newEmailRemove()
+{
+    mModelNewEmails->remove( treeNewEmails->currentIndex() );
 }
 
 void DialogSettings::buttonChangeIcon()

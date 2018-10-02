@@ -343,6 +343,25 @@ void TrayIcon::actionUnsnooze()
     updateIcon();
 }
 
+void TrayIcon::actionNewEmail()
+{
+    QStringList args;
+    args << "-compose";
+
+    if ( !pSettings->mNewEmailData.isEmpty() )
+    {
+        QAction * action = (QAction *) sender();
+        int index = ( action->data().toInt() );
+
+        if ( index <  0 || index > pSettings->mNewEmailData.size() - 1 )
+            return;
+
+        args << pSettings->mNewEmailData[index].asArgs();
+    }
+
+    QProcess::startDetached( pSettings->mThunderbirdCmdLine, args );
+}
+
 void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if ( reason == QSystemTrayIcon::Trigger )
@@ -359,6 +378,38 @@ void TrayIcon::createMenu()
 
     // We start with disabled action, and enable it once the window is detected
     mMenuShowHideThunderbird->setEnabled( false );
+
+    menu->addAction( mMenuShowHideThunderbird );
+    menu->addSeparator();
+
+    // New email could be either a single action, or menu depending on settings
+    if ( pSettings->mNewEmailMenuEnabled )
+    {
+        if ( !pSettings->mNewEmailData.isEmpty() )
+        {
+            // A submenu
+            QMenu * newemails = new QMenu( tr("New Email") );
+
+            for ( int index = 0; index < pSettings->mNewEmailData.size(); index++ )
+            {
+                QAction * a = new QAction( pSettings->mNewEmailData[index].menuentry(), this );
+                connect( a, &QAction::triggered, this, &TrayIcon::actionNewEmail );
+
+                // Remember the delay in the action itself
+                a->setData( index );
+                newemails->addAction( a );
+            }
+
+            menu->addMenu( newemails );
+        }
+        else
+        {
+            // A single action
+            menu->addAction( tr("New Email Message"), this, &TrayIcon::actionNewEmail );
+        }
+
+        menu->addSeparator();
+    }
 
     // Snoozer times map, for easy editing. The first parameter is in seconds
     QMap< unsigned int, QString > snoozingTimes;
@@ -381,9 +432,6 @@ void TrayIcon::createMenu()
         a->setData( snoozingseconds );
         snooze->addAction( a );
     }
-
-    menu->addAction( mMenuShowHideThunderbird );
-    menu->addSeparator();
 
     // And add snoozing menu itself
     menu->addMenu( snooze );

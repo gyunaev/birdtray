@@ -34,11 +34,14 @@ SOURCES += \
     colorbutton.cpp \
     databaseaccounts.cpp \
     databaseunreadfixer.cpp \
-    accounttreemodel.cpp \
     dialogaddeditaccount.cpp \
     dialogsettings.cpp \
     windowtools.cpp \
-    windowtools_x11.cpp
+    windowtools_x11.cpp \
+    dialogaddeditnewemail.cpp \
+    setting_newemail.cpp \
+    modelnewemails.cpp \
+    modelaccounttree.cpp
 
 HEADERS += \
     trayicon.h \
@@ -48,16 +51,20 @@ HEADERS += \
     colorbutton.h \
     databaseaccounts.h \
     databaseunreadfixer.h \
-    accounttreemodel.h \
     dialogaddeditaccount.h \
     dialogsettings.h \
     version.h \
     windowtools.h \
-    windowtools_x11.h
+    windowtools_x11.h \
+    dialogaddeditnewemail.h \
+    setting_newemail.h \
+    modelnewemails.h \
+    modelaccounttree.h
 
 FORMS += \
     dialogaddeditaccount.ui \
-    dialogsettings.ui
+    dialogsettings.ui \
+    dialogaddeditnewemail.ui
 
 RESOURCES += \
     resources.qrc

@@ -48,6 +48,16 @@ void Settings::save()
         index++;
     }
 
+    // Convert new email data into settings
+    settings.setValue("newemail/enabled", mNewEmailMenuEnabled );
+    settings.setValue("newemail/count", mNewEmailData.size() );
+
+    for ( index = 0; index < mNewEmailData.size(); index++ )
+    {
+        QString entry = "newemail/id" + QString::number( index );
+        settings.setValue( entry, mNewEmailData[index].toByteArray() );
+    }
+
     // Store the notification icon in the icondata buffer
     QByteArray icondata;
     QBuffer buffer(&icondata);
@@ -104,5 +114,17 @@ void Settings::load()
     {
         QString entry = "accounts/account" + QString::number( index );
         mFolderNotificationColors[ settings.value( entry + "URI", "" ).toString() ] = QColor( settings.value( entry + "Color", "" ).toString() );
+    }
+
+    // Load new email data from settings
+    mNewEmailMenuEnabled = settings.value("newemail/enabled", false ).toBool();
+
+    mNewEmailData.clear();
+    total = settings.value("newemail/count", 0 ).toInt();
+
+    for ( int index = 0; index < total; index++ )
+    {
+        QString entry = "newemail/id" + QString::number( index );
+        mNewEmailData.push_back( Setting_NewEmail::fromByteArray( settings.value( entry, "" ).toByteArray() ) );
     }
 }

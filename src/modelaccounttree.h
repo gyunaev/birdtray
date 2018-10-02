@@ -7,10 +7,10 @@
 
 #include "databaseaccounts.h"
 
-class AccountTreeModel : public QAbstractItemModel
+class ModelAccountTree : public QAbstractItemModel
 {
     public:
-        AccountTreeModel( QObject *parent = 0 );
+        ModelAccountTree( QObject *parent = 0 );
 
         virtual int columnCount(const QModelIndex &parent = QModelIndex()) const override;
         virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

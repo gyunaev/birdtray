@@ -1,9 +1,9 @@
 #include <QBrush>
 
 #include "settings.h"
-#include "accounttreemodel.h"
+#include "modelaccounttree.h"
 
-AccountTreeModel::AccountTreeModel( QObject *parent )
+ModelAccountTree::ModelAccountTree( QObject *parent )
     : QAbstractItemModel( parent )
 {
     // Get the current settings
@@ -11,13 +11,13 @@ AccountTreeModel::AccountTreeModel( QObject *parent )
     mColors = pSettings->mFolderNotificationColors.values();
 }
 
-int AccountTreeModel::columnCount(const QModelIndex &) const
+int ModelAccountTree::columnCount(const QModelIndex &) const
 {
     // We have two columns
     return 2;
 }
 
-QVariant AccountTreeModel::data(const QModelIndex &index, int role) const
+QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
 {
     if ( index.row() >= 0 && index.row() < mAccounts.size() && index.column() < 2 )
     {
@@ -36,7 +36,7 @@ QVariant AccountTreeModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QModelIndex AccountTreeModel::index(int row, int column, const QModelIndex &) const
+QModelIndex ModelAccountTree::index(int row, int column, const QModelIndex &) const
 {
     if ( row < 0 || row >= mAccounts.size() || column > 2 )
         return QModelIndex();
@@ -44,24 +44,24 @@ QModelIndex AccountTreeModel::index(int row, int column, const QModelIndex &) co
     return createIndex( row, column );
 }
 
-QModelIndex AccountTreeModel::parent(const QModelIndex &) const
+QModelIndex ModelAccountTree::parent(const QModelIndex &) const
 {
     // No item has parent
     return QModelIndex();
 }
 
-int AccountTreeModel::rowCount(const QModelIndex &) const
+int ModelAccountTree::rowCount(const QModelIndex &) const
 {
     return mAccounts.size();
 }
 
-Qt::ItemFlags AccountTreeModel::flags(const QModelIndex &) const
+Qt::ItemFlags ModelAccountTree::flags(const QModelIndex &) const
 {
     // Same for all items
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-QVariant AccountTreeModel::headerData(int section, Qt::Orientation , int role) const
+QVariant ModelAccountTree::headerData(int section, Qt::Orientation , int role) const
 {
     if ( role == Qt::DisplayRole )
     {
@@ -74,7 +74,7 @@ QVariant AccountTreeModel::headerData(int section, Qt::Orientation , int role) c
     return QVariant();
 }
 
-void AccountTreeModel::addAccount(const QString &uri, const QColor &color)
+void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
 {
     // Only this line changed
     beginInsertRows( QModelIndex(), mColors.size(), mColors.size() + 1 );
@@ -85,7 +85,7 @@ void AccountTreeModel::addAccount(const QString &uri, const QColor &color)
     endInsertRows();
 }
 
-void AccountTreeModel::editAccount(const QModelIndex &idx, const QString &uri, const QColor &color)
+void ModelAccountTree::editAccount(const QModelIndex &idx, const QString &uri, const QColor &color)
 {
     mAccounts[ idx.row() ] = uri;
     mColors[ idx.row() ] = color;
@@ -93,13 +93,13 @@ void AccountTreeModel::editAccount(const QModelIndex &idx, const QString &uri, c
     emit dataChanged( createIndex( idx.row(), 0 ),  createIndex( idx.row(), 1 ) );
 }
 
-void AccountTreeModel::getAccount(const QModelIndex &idx, QString &uri, QColor &color)
+void ModelAccountTree::getAccount(const QModelIndex &idx, QString &uri, QColor &color)
 {
     uri = mAccounts[ idx.row() ];
     color = mColors[ idx.row() ];
 }
 
-void AccountTreeModel::removeAccount(const QModelIndex &idx)
+void ModelAccountTree::removeAccount(const QModelIndex &idx)
 {
     beginRemoveRows( QModelIndex(), idx.row(), idx.row() );
     mAccounts.removeAt( idx.row() );
@@ -107,7 +107,7 @@ void AccountTreeModel::removeAccount(const QModelIndex &idx)
     endRemoveRows();
 }
 
-void AccountTreeModel::applySettings()
+void ModelAccountTree::applySettings()
 {
     pSettings->mFolderNotificationColors.clear();
 

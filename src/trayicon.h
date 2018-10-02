@@ -40,6 +40,7 @@ class TrayIcon : public QSystemTrayIcon
         void    actionActivate();
         void    actionSnoozeFor();
         void    actionUnsnooze();
+        void    actionNewEmail();
 
         void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
 

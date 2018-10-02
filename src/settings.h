@@ -8,6 +8,8 @@
 #include <QPixmap>
 #include <QJsonObject>
 
+#include "setting_newemail.h"
+
 class Settings
 {
     public:
@@ -67,6 +69,10 @@ class Settings
         // The smallest and the largest allowed font in notification
         unsigned int mNotificationMinimumFontSize;
         unsigned int mNotificationMaximumFontSize;
+
+        // New email data
+        bool    mNewEmailMenuEnabled;
+        QList< Setting_NewEmail >   mNewEmailData;
 
         // Maps the folder URI to the notification color
         QMap< QString, QColor >   mFolderNotificationColors;
