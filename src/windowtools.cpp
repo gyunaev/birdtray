@@ -15,11 +15,18 @@ WindowTools::~WindowTools()
 
 WindowTools *WindowTools::create()
 {
+    static WindowTools * tools;
+
+    if ( !tools )
+    {
 #if defined (Q_OS_WIN)
-    return 0;
+    tools = 0;
 #elif defined (Q_OS_MAC)
-    return 0;
+    tools = 0;
 #else
-    return new WindowTools_X11();
+    tools = new WindowTools_X11();
 #endif
+    }
+
+    return tools;
 }
