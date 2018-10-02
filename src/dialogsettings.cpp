@@ -51,6 +51,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( pSettings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( pSettings->mNotificationMaximumFontSize - 1 );
+    boxHideWindowAtStart->setChecked( pSettings->mHideWhenStarted );
+    boxHideWindowAtRestart->setChecked( pSettings->mHideWhenRestarted );
 
     if ( pSettings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
@@ -101,11 +103,14 @@ void DialogSettings::accept()
     pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
-    pSettings->mExitThunderbirdWhenQuit = pSettings->mLaunchThunderbird ? boxStopThunderbirdOnExit->isChecked() : false;
-    pSettings->mMonitorThunderbirdWindow = boxShowHideThunderbird->isChecked() ? boxMonitorThunderbirdWindow->isChecked() : false;
+    pSettings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
+
+    pSettings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();
     pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
     pSettings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
     pSettings->mRestartThunderbird = boxRestartThunderbird->isChecked();
+    pSettings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
+    pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
 
     mAccountModel->applySettings();
 

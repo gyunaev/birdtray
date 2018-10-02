@@ -48,10 +48,6 @@ TrayIcon::TrayIcon()
     connect( &mStateTimer, &QTimer::timeout, this, &TrayIcon::updateState );
     mStateTimer.setInterval( 1000 );
     mStateTimer.start();
-
-    // Start Thunderbird
-    if ( pSettings->mLaunchThunderbird )
-        startThunderbird();
     
     // Update the state and icon when everything is settled
     QTimer::singleShot( 0, this, &TrayIcon::updateState );
@@ -219,29 +215,52 @@ void TrayIcon::updateState()
     {
         mThunderbirdWindowExists = mWinTools->lookup();
 
-        // If the window is found, we remember it
-        if ( mThunderbirdWindowExists && !mThunderbirdWindowExisted )
-            mThunderbirdWindowExisted = true;
-
-        // Hide the window if requested
-        if ( mThunderbirdWindowExists && mThunderbirdWindowHide )
+        // Is Thunderbird running?
+        if ( mThunderbirdWindowExists )
         {
-            mThunderbirdWindowHide = false;
-            mWinTools->hide();
+            // If the window is found, we remember it
+            if ( !mThunderbirdWindowExisted )
+            {
+                mThunderbirdWindowExisted = true;
+
+                if ( !mMenuShowHideThunderbird->isEnabled() )
+                    mMenuShowHideThunderbird->setEnabled( true );
+            }
+
+            // Hide the window if requested
+            if ( mThunderbirdWindowHide )
+            {
+                mThunderbirdWindowHide = false;
+                mWinTools->hide();
+            }
         }
-
-        if ( !mMenuShowHideThunderbird->isEnabled() && mThunderbirdWindowExists )
-            mMenuShowHideThunderbird->setEnabled( true );
-
-        // We only restart it if the window does not exist now, but existed before
-        if ( !mThunderbirdWindowExists
-             && mThunderbirdWindowExisted
-             && pSettings->mRestartThunderbird
-             && (mThunderbirdRestartTime.isNull() || mThunderbirdRestartTime < QDateTime::currentDateTimeUtc() ) )
+        else
         {
-            mThunderbirdRestartTime = QDateTime::currentDateTimeUtc().addSecs( 5 );
-            mThunderbirdWindowHide = true;
-            startThunderbird();
+            // Thunderbird is not running. Has it run before?
+            if ( !mThunderbirdWindowExisted )
+            {
+                // No. Shall we start it?
+                if ( pSettings->mLaunchThunderbird && !hasThunderbirdRecentlyStarted() )
+                {
+                    startThunderbird();
+
+                    // Hide after?
+                    if ( pSettings->mHideWhenStarted )
+                        mThunderbirdWindowHide = true;
+                }
+            }
+            else
+            {
+                // It has run before, but not running now. Should we restart?
+                if ( pSettings->mRestartThunderbird && !hasThunderbirdRecentlyStarted() )
+                {
+                    startThunderbird();
+
+                    // Hide after?
+                    if ( pSettings->mHideWhenRestarted )
+                        mThunderbirdWindowHide = true;
+                }
+            }
         }
 
         updateIcon();
@@ -404,15 +423,11 @@ void TrayIcon::startThunderbird()
 {
     qDebug("Starting Thunderbird as '%s'", qPrintable( pSettings->mThunderbirdCmdLine ) );
 
+    mThunderbirdRestartTime = QDateTime::currentDateTimeUtc().addSecs( 5 );
     QProcess::startDetached( pSettings->mThunderbirdCmdLine );
-/*
-    // If the object already exist, delete it later. DO not delete it here, it may be in the slot
-    if ( mThunderbirdProcess )
-        mThunderbirdProcess->deleteLater();
+}
 
-    mThunderbirdProcess = new QProcess();
-
-    connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::thunderbirdStartFailed );
-
-    mThunderbirdProcess->start( pSettings->mThunderbirdCmdLine );*/
+bool TrayIcon::hasThunderbirdRecentlyStarted() const
+{
+    return !mThunderbirdRestartTime.isNull() && mThunderbirdRestartTime > QDateTime::currentDateTimeUtc();
 }

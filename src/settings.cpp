@@ -27,6 +27,8 @@ void Settings::save()
     settings.setValue("common/restartthunderbird", mRestartThunderbird );
     settings.setValue("common/notificationfontweight", mNotificationFontWeight );
     settings.setValue("common/monitorthunderbirdwindow", mMonitorThunderbirdWindow );
+    settings.setValue("common/hidewhenstarted", mHideWhenStarted );
+    settings.setValue("common/hidewhenrestarted", mHideWhenRestarted );
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
@@ -85,6 +87,8 @@ void Settings::load()
     mNotificationFontWeight = settings.value("common/notificationfontweight", 50 ).toInt();
     mMonitorThunderbirdWindow = settings.value("common/monitorthunderbirdwindow", false ).toBool();
     mRestartThunderbird = settings.value("common/restartthunderbird", false ).toBool();
+    mHideWhenStarted = settings.value("common/hidewhenstarted", false ).toBool();
+    mHideWhenRestarted = settings.value("common/hidewhenrestarted", false ).toBool();
 
     mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();

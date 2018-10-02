@@ -304,34 +304,45 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QCheckBox" name="boxLaunchThunderbirdAtStart">
-            <property name="text">
-             <string>Start Thunderbird when Birdtray starts</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
-             <spacer name="horizontalSpacer_4">
+             <widget class="QCheckBox" name="boxLaunchThunderbirdAtStart">
+              <property name="text">
+               <string>Start Thunderbird when Birdtray starts</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="boxHideWindowAtStart">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>and hide it</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>20</width>
+                <width>40</width>
                 <height>20</height>
                </size>
               </property>
              </spacer>
             </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
              <widget class="QCheckBox" name="boxStopThunderbirdOnExit">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>Terminate Thunderbird when quitting Birdtray </string>
@@ -368,7 +379,7 @@
             <item>
              <widget class="QCheckBox" name="boxHideWhenMinimized">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>Hide Thunderbird window when it is minimized</string>
@@ -388,14 +399,41 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="boxRestartThunderbird">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>Restart Thunderbird minimized if it was closed</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="boxRestartThunderbird">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Restart Thunderbird if it was closed</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="boxHideWindowAtRestart">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>and hide it</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -548,32 +586,32 @@
   <connection>
    <sender>boxLaunchThunderbirdAtStart</sender>
    <signal>toggled(bool)</signal>
-   <receiver>boxStopThunderbirdOnExit</receiver>
+   <receiver>boxHideWindowAtStart</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>188</x>
-     <y>106</y>
+     <x>320</x>
+     <y>101</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>133</y>
+     <x>448</x>
+     <y>115</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>boxShowHideThunderbird</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>boxHideWhenMinimized</receiver>
+   <sender>boxRestartThunderbird</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>boxHideWindowAtRestart</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>373</x>
-     <y>176</y>
+     <x>150</x>
+     <y>302</y>
     </hint>
     <hint type="destinationlabel">
-     <x>378</x>
-     <y>202</y>
+     <x>384</x>
+     <y>294</y>
     </hint>
    </hints>
   </connection>
