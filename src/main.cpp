@@ -25,7 +25,5 @@ int main(int argc, char *argv[])
     pSettings->load();
 
     TrayIcon trayicon;
-    trayicon.show();
-
     return a.exec();
 }

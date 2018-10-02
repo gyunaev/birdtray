@@ -50,10 +50,9 @@ TrayIcon::TrayIcon()
     mStateTimer.start();
     
     // Update the state and icon when everything is settled
-    QTimer::singleShot( 0, this, &TrayIcon::updateState );
-
-    // We need to update the state twice to avoid the "icon too small" bug
-    QTimer::singleShot( 0, this, &TrayIcon::updateIcon );
+    updateState();
+    updateIcon();
+    show();
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
