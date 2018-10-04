@@ -5,10 +5,12 @@
 
 #include "unreadcounter.h"
 #include "sqlite_statement.h"
+#include "morkparser.h"
 #include "settings.h"
+#include "trayicon.h"
 
 
-UnreadMonitor::UnreadMonitor()
+UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     : QThread( 0 )
 {
     mSqlitedb = 0;
@@ -17,8 +19,11 @@ UnreadMonitor::UnreadMonitor()
     // Everything should be owned by our thread
     moveToThread( this );
 
-    // We get notification once sqlite file has been modified. This way we don't need to pull the db often
+    // We get notification once either sqlite file or Mork files have been modified.
+    // This way we don't need to pull the db often
     connect( &mDBWatcher, &QFileSystemWatcher::fileChanged, this, &UnreadMonitor::updateUnread );
+
+    connect( parent, &TrayIcon::settingsChanged, this, &UnreadMonitor::slotSettingsChanged );
 }
 
 UnreadMonitor::~UnreadMonitor()
@@ -32,10 +37,24 @@ void UnreadMonitor::run()
     mSqliteDbFile = pSettings->mThunderbirdFolderPath + QDir::separator() + "global-messages-db.sqlite";
 
     // Start it as soon as thread starts its event loop
-    QTimer::singleShot( 0, this, &UnreadMonitor::updateUnread );
+    QTimer::singleShot( 0, [=](){ updateUnread(); } );
 
     // Start the event loop
     exec();
+}
+
+void UnreadMonitor::slotSettingsChanged()
+{
+    // We reinitialize everything because the settings changed
+    if ( mSqlitedb )
+    {
+        sqlite3_close_v2( mSqlitedb );
+        mSqlitedb = 0;
+    }
+
+    mMorkUnreadCounts.clear();
+
+    updateUnread();
 }
 
 bool UnreadMonitor::openDatabase()
@@ -101,7 +120,25 @@ bool UnreadMonitor::openDatabase()
     return true;
 }
 
-void UnreadMonitor::updateUnread()
+void UnreadMonitor::updateUnread( const QString& filechanged )
+{
+    // We execute a single statement and then parse the groups and decide on colors.
+    QColor chosencolor;
+    int total = 0;
+
+    if ( pSettings->mUseMorkParser )
+        getUnreadCount_Mork( filechanged, total, chosencolor );
+    else
+        getUnreadCount_SQLite( total, chosencolor);
+
+    if ( total != mLastReportedUnread )
+    {
+        emit unreadUpdated( total, chosencolor );
+        mLastReportedUnread = total;
+    }
+}
+
+void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
 {
     if ( !mSqlitedb && !openDatabase() )
     {
@@ -113,10 +150,6 @@ void UnreadMonitor::updateUnread()
     // Let Thunderbird commit it
     this->msleep( 200 );
 
-    // We execute a single statement and then parse the groups and decide on colors.
-    QColor chosencolor;
-    unsigned int total = 0;
-
     SQLiteStatement stmt;
 
     // This returns the number of unread messages (JSON attribute "59": false)
@@ -127,11 +160,12 @@ void UnreadMonitor::updateUnread()
     }
 
     int res;
+    QColor chosencolor;
 
     while ( (res = stmt.step()) == SQLITE_ROW )
     {
         // Here we go through all unread messages
-        total++;
+        count++;
 
         // Get the folder id
         qint64 folderId = stmt.columnInt64( 0 );
@@ -140,21 +174,100 @@ void UnreadMonitor::updateUnread()
         if ( mFolderColorMap.contains( folderId ) )
         {
             // IF we have more than one color, bump to default color
-            if ( chosencolor.isValid() )
+            if ( color.isValid() )
             {
                 if ( chosencolor != mFolderColorMap[ folderId ] )
-                    chosencolor = pSettings->mNotificationDefaultColor;
+                    color = pSettings->mNotificationDefaultColor;
             }
             else
-                chosencolor = mFolderColorMap[ folderId ];
+                color = mFolderColorMap[ folderId ];
         }
     }
+}
 
-    if ( total != mLastReportedUnread )
+void UnreadMonitor::getUnreadCount_Mork(const QString &path, int &count, QColor &color)
+{
+    // We rebuild and rescan the whole map if there is no such path in there, or map is empty (first run)
+    if ( mMorkUnreadCounts.isEmpty() || !mMorkUnreadCounts.contains( path ) )
     {
-        emit unreadUpdated( total, chosencolor );
-        mLastReportedUnread = total;
+        mMorkUnreadCounts.clear();
+
+        for ( const QString& tpath : pSettings->mFolderNotificationColors.keys() )
+        {
+            mMorkUnreadCounts[ tpath ] = getMorkUnreadCount( tpath );
+            mDBWatcher.addPath( tpath );
+        }
+    }
+    else
+        mMorkUnreadCounts[ path ] = getMorkUnreadCount( path );
+
+    // Find the total, and set the color
+    for ( const QString& tpath : mMorkUnreadCounts.keys() )
+    {
+        if ( mMorkUnreadCounts[ tpath ] > 0 )
+        {
+            count += mMorkUnreadCounts[ tpath ];
+
+            if ( color.isValid() )
+                color = pSettings->mNotificationDefaultColor;
+            else
+                color = pSettings->mFolderNotificationColors[ tpath ];
+        }
+    }
+}
+
+int UnreadMonitor::getMorkUnreadCount(const QString &path)
+{
+    MorkParser parser;
+
+    if ( !parser.open( path ) )
+        return -1;
+
+    // 0x80 is the default namespace
+    MorkTableMap * map = parser.getTables( 0x80 );
+
+    if ( !map )
+        return -1;
+
+    int unread = 0;
+
+    MorkTableMap::iterator mit = map->find( 0 );
+    if ( mit != map->end() )
+    //for ( MorkTableMap::iterator mit = map->begin(); mit != map->end(); ++mit )
+    {
+        //printf("table id %d\n", mit.key() );
+
+        MorkRowMap * rows = parser.getRows( 0x80, &mit.value() );
+
+        if ( !rows )
+            return -1;
+
+        for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
+        {
+            //printf("  row id %d\n", rit.key() );
+            MorkCells cells = rit.value();
+
+            for ( int colid : cells.keys() )
+            {
+                //printf("      cell %s, value %s\n", qPrintable(p.getColumn(colid)), qPrintable(p.getValue(cells[colid ])) );
+
+                QString columnName = parser.getColumn( colid );
+
+                if ( columnName == "unreadChildren" )
+                {
+                    //unsigned int value = p.getValue(cells[colid ]).toInt( nullptr, 16 );
+                    unsigned int value = parser.getValue(cells[colid ]).toInt( nullptr, 16 );
+
+                    //printf("      cell %s, value %s\n", qPrintable(p.getColumn(colid)), qPrintable(p.getValue(cells[colid ])) );
+                    //if ( (value & 1) == 0 )
+                    unread += value;
+                }
+            }
+        }
+
+        //printf("\n\n" );
     }
 
-    //QTimer::singleShot( 1000, this, &UnreadMonitor::updateUnread );
+    qDebug("Unread counter for %s: %d", qPrintable( path ), unread );
+    return unread;
 }

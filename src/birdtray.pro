@@ -41,7 +41,8 @@ SOURCES += \
     dialogaddeditnewemail.cpp \
     setting_newemail.cpp \
     modelnewemails.cpp \
-    modelaccounttree.cpp
+    modelaccounttree.cpp \
+    morkparser.cpp
 
 HEADERS += \
     trayicon.h \
@@ -59,7 +60,8 @@ HEADERS += \
     dialogaddeditnewemail.h \
     setting_newemail.h \
     modelnewemails.h \
-    modelaccounttree.h
+    modelaccounttree.h \
+    morkparser.h
 
 FORMS += \
     dialogaddeditaccount.ui \

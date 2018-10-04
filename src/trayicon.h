@@ -16,6 +16,9 @@ class TrayIcon : public QSystemTrayIcon
     public:
         TrayIcon();
 
+    signals:
+        void    settingsChanged();
+
     public slots:
         void    unreadCounterUpdate(unsigned int total, QColor color );
 
@@ -47,7 +50,6 @@ class TrayIcon : public QSystemTrayIcon
         void    startThunderbird();
 
     private:
-        void    applySettings();
         void    createMenu();
         void    createUnreadCounterThread();
         bool    hasThunderbirdRecentlyStarted() const;

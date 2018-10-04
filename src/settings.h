@@ -66,6 +66,9 @@ class Settings
         // Whether to monitor Thunderbird running
         bool    mMonitorThunderbirdWindow;
 
+        // Whether to use Mork parser for new mail scanning; if false, sqlite is used
+        bool    mUseMorkParser;
+
         // The smallest and the largest allowed font in notification
         unsigned int mNotificationMinimumFontSize;
         unsigned int mNotificationMaximumFontSize;
@@ -74,7 +77,7 @@ class Settings
         bool    mNewEmailMenuEnabled;
         QList< Setting_NewEmail >   mNewEmailData;
 
-        // Maps the folder URI to the notification color
+        // Maps the folder URI or full path (for Mork) to the notification color
         QMap< QString, QColor >   mFolderNotificationColors;
 
         // Load and save them

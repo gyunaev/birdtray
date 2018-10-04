@@ -21,6 +21,10 @@ class DialogAddEditAccount : public QDialog, public Ui::DialogAddEditAccount
         // Returns the dialog selection
         QString account() const;
         QColor color() const;
+
+    public slots:
+        void    browse();
+        void    accept();
 };
 
 #endif // DIALOGADDEDITACCOUNT_H

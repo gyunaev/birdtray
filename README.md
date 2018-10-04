@@ -28,6 +28,8 @@ This is the alpha version, so please report any issues.
 
 - Can monitor that Thunderbird is running, and indicate it if you accidentally closed it;
 
+- Has configurable "New Email" functionality, allowing pre-configured email templates.
+
 
 ## Compiling
 

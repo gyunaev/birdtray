@@ -82,6 +82,15 @@ DialogSettings::DialogSettings( QWidget *parent)
     // Icon
     btnNotificationIcon->setIcon( pSettings->mNotificationIcon );
 
+    // Parsers
+    boxParserSelection->addItem( tr("sqlite (default)"), false );
+    boxParserSelection->addItem( tr("mork parser (experimental)"), true );
+
+    if ( pSettings->mUseMorkParser )
+        boxParserSelection->setCurrentIndex( 1 );
+    else
+        boxParserSelection->setCurrentIndex( 0 );
+
     profilePathChanged();
 }
 
@@ -113,6 +122,21 @@ void DialogSettings::accept()
         return;
     }
 
+    bool use_mork = boxParserSelection->currentIndex() == 1;
+    bool delete_accounts = false;
+
+    if (  use_mork != pSettings->mUseMorkParser )
+    {
+        if ( QMessageBox::question( 0,
+                               tr("WARNING: PARSER CHANGED"),
+                               tr("You have changed the parser. This will delete all accounts in the Accounts tab, and you must restart Birdtray and rea-add them.\n\nReally change the parser?") )
+                != QMessageBox::Yes )
+                return;
+
+        pSettings->mUseMorkParser = use_mork;
+        delete_accounts = true;
+    }
+
     pSettings->mThunderbirdFolderPath = leProfilePath->text();
     pSettings->mNotificationDefaultColor = btnNotificationColor->color();
     pSettings->mNotificationFont = notificationFont->currentFont();
@@ -133,8 +157,15 @@ void DialogSettings::accept()
     pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
     pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
 
-    mAccountModel->applySettings();
     mModelNewEmails->applySettings();
+
+    if ( delete_accounts )
+    {
+        pSettings->mFolderNotificationColors.clear();
+        QApplication::quit();
+    }
+    else
+        mAccountModel->applySettings();
 
     QDialog::accept();
 }

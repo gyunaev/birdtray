@@ -296,6 +296,8 @@ void TrayIcon::actionSettings()
         setBlinking( 0, 0 );
 
         updateIcon();
+
+        emit settingsChanged();
     }
 }
 
@@ -458,7 +460,7 @@ void TrayIcon::createMenu()
 
 void TrayIcon::createUnreadCounterThread()
 {
-    mUnreadMonitor = new UnreadMonitor();
+    mUnreadMonitor = new UnreadMonitor( this );
 
     connect( mUnreadMonitor, &UnreadMonitor::unreadUpdated, this, &TrayIcon::unreadCounterUpdate );
     connect( mUnreadMonitor, &UnreadMonitor::error, this, &TrayIcon::unreadCounterError );

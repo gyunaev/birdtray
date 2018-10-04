@@ -9,13 +9,14 @@
 #include <QFileSystemWatcher>
 
 struct sqlite3;
+class TrayIcon;
 
 class UnreadMonitor : public QThread
 {
     Q_OBJECT
 
     public:
-        UnreadMonitor();
+        UnreadMonitor( TrayIcon * parent );
         virtual ~UnreadMonitor();
 
         // Thread run function
@@ -28,9 +29,16 @@ class UnreadMonitor : public QThread
         // An error happened
         void    error( QString message );
 
+    public slots:
+        void    slotSettingsChanged();
+
     private:
         bool    openDatabase();
-        void    updateUnread();
+        void    updateUnread( const QString& filechanged = "" );
+
+        void    getUnreadCount_SQLite( int & count, QColor& color );
+        void    getUnreadCount_Mork( const QString& path, int & count, QColor& color );
+        int     getMorkUnreadCount( const QString& path );
 
     private:
         QString         mSqliteDbFile;
@@ -42,11 +50,14 @@ class UnreadMonitor : public QThread
         // Maps the database folder ID to the notification color
         QMap< qint64, QColor > mFolderColorMap;
 
-        // Watches the sqlite database for changes
+        // Maps the Mork files to unread counts
+        QMap< QString, quint32 >  mMorkUnreadCounts;
+
+        // Watches the files for changes
         QFileSystemWatcher  mDBWatcher;
 
         // Last reported unread
-        unsigned int    mLastReportedUnread;
+        int    mLastReportedUnread;
 };
 
 #endif // FOLDERWATCHER_H

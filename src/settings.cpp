@@ -32,6 +32,7 @@ void Settings::save()
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
+    settings.setValue("advanced/unreadmorkparser", mUseMorkParser );
     settings.setValue("advanced/notificationfontminsize", mNotificationMinimumFontSize );
     settings.setValue("advanced/notificationfontmaxsize", mNotificationMaximumFontSize );
 
@@ -104,6 +105,7 @@ void Settings::load()
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize", 4 ).toInt();
     mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize", 512 ).toInt();
+    mUseMorkParser = settings.value("advanced/unreadmorkparser", false ).toBool();
 
     mFolderNotificationColors.clear();
 
