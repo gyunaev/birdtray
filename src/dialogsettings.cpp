@@ -87,7 +87,12 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxParserSelection->addItem( tr("mork parser (experimental)"), true );
 
     if ( pSettings->mUseMorkParser )
+    {
         boxParserSelection->setCurrentIndex( 1 );
+
+        // Fix Unread is useless in this mode
+        btnFixUnreadCount->setEnabled( false );
+    }
     else
         boxParserSelection->setCurrentIndex( 0 );
 
