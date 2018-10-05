@@ -674,7 +674,25 @@ MorkRowMap *MorkParser::getRows( int RowScope, RowScopeMap *table )
 		return 0;
 	}
 
-	return &iter.value();
+    return &iter.value();
+}
+
+const MorkRowMap * MorkParser::rows(int tablescope, int tableid, int rowscope )
+{
+    // Find the tables for this table scope
+    if ( !mork_.contains( tablescope ) )
+        return 0;
+
+    // Find the table
+    if ( !mork_[ tablescope ].contains( tableid ) )
+        return 0;
+
+    // Find the row scope
+    if ( !mork_[ tablescope ][ tableid ].contains( rowscope ) )
+        return 0;
+
+    // We got it
+    return &mork_[ tablescope ][ tableid ][rowscope];
 }
 
 //	=============================================================
@@ -705,4 +723,49 @@ QString MorkParser::getColumn( int oid )
 	}
 
 	return *foundIter;
+}
+
+int MorkParser::dumpMorkFile( const QString& filename )
+{
+    MorkParser p;
+
+    if ( !p.open( filename ) )
+        qFatal("error opening mork file");
+
+    for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
+    {
+        printf("Table scope %02X\n", tit.key() );
+        const MorkTableMap& map = tit.value();
+
+        for ( MorkTableMap::const_iterator mit = map.begin(); mit != map.end(); ++mit )
+        {
+            printf("  Table ID %d\n", mit.key() );
+
+            const RowScopeMap& rowscopemap = mit.value();
+
+            for ( RowScopeMap::const_iterator rsit = rowscopemap.begin(); rsit != rowscopemap.end(); ++rsit )
+            {
+                printf("    Row scope %02X\n", rsit.key() );
+
+                const MorkRowMap& rows = rsit.value();
+
+                for ( MorkRowMap::const_iterator rit = rows.begin(); rit != rows.cend(); rit++ )
+                {
+                    printf("      Row id %d\n", rit.key() );
+                    MorkCells cells = rit.value();
+
+                    for ( int colid : cells.keys() )
+                    {
+                        printf("          cell %s, value %s\n", qPrintable(p.getColumn(colid)), qPrintable(p.getValue(cells[colid ])) );
+                    }
+                }
+
+                printf("\n\n" );
+            }
+        }
+
+        printf("\n\n" );
+    }
+
+    return 0;
 }

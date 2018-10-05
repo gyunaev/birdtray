@@ -3,11 +3,17 @@
 #include "dialogsettings.h"
 #include "trayicon.h"
 #include "settings.h"
-
+#include "morkparser.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    if ( argc == 3 && !strcmp( argv[1], "--dumpmork" ) )
+    {
+        MorkParser::dumpMorkFile( argv[2] );
+        return 1;
+    }
 
     if ( !QSystemTrayIcon::isSystemTrayAvailable() )
         qFatal( "Sorry, system tray cannot be controlled through this addon on your operating system");

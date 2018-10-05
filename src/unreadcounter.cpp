@@ -223,49 +223,52 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
     if ( !parser.open( path ) )
         return -1;
 
-    // 0x80 is the default namespace
-    MorkTableMap * map = parser.getTables( 0x80 );
-
-    if ( !map )
-        return -1;
-
     int unread = 0;
 
-    MorkTableMap::iterator mit = map->find( 0 );
-    if ( mit != map->end() )
-    //for ( MorkTableMap::iterator mit = map->begin(); mit != map->end(); ++mit )
+    // First we parse the unreadChildren column (generic view)
+    const MorkRowMap * rows = parser.rows( 0x80, 0, 0x80 );
+
+    if ( rows )
     {
-        //printf("table id %d\n", mit.key() );
-
-        MorkRowMap * rows = parser.getRows( 0x80, &mit.value() );
-
-        if ( !rows )
-            return -1;
-
         for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
         {
-            //printf("  row id %d\n", rit.key() );
             MorkCells cells = rit.value();
 
             for ( int colid : cells.keys() )
             {
-                //printf("      cell %s, value %s\n", qPrintable(p.getColumn(colid)), qPrintable(p.getValue(cells[colid ])) );
-
                 QString columnName = parser.getColumn( colid );
 
                 if ( columnName == "unreadChildren" )
                 {
-                    //unsigned int value = p.getValue(cells[colid ]).toInt( nullptr, 16 );
                     unsigned int value = parser.getValue(cells[colid ]).toInt( nullptr, 16 );
-
-                    //printf("      cell %s, value %s\n", qPrintable(p.getColumn(colid)), qPrintable(p.getValue(cells[colid ])) );
-                    //if ( (value & 1) == 0 )
                     unread += value;
                 }
             }
         }
+    }
+    else
+    {
+        // Now parse the smart inbox
+        rows = parser.rows( 0x80, 0, 0x9F );
 
-        //printf("\n\n" );
+        if ( rows )
+        {
+            for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
+            {
+                MorkCells cells = rit.value();
+
+                for ( int colid : cells.keys() )
+                {
+                    QString columnName = parser.getColumn( colid );
+
+                    if ( columnName == "numNewMsgs" )
+                    {
+                        unsigned int value = parser.getValue(cells[colid ]).toInt( nullptr, 16 );
+                        unread += value;
+                    }
+                }
+            }
+        }
     }
 
     qDebug("Unread counter for %s: %d", qPrintable( path ), unread );

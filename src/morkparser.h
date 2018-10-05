@@ -105,6 +105,10 @@ public:
 
 	MorkRowMap *getRows( int rowScope, RowScopeMap *table );
 
+    // Returns all rows for a specific table scope, table ID and row scope.
+    // Return an empty map if not found
+    const MorkRowMap * rows(int tablescope, int tableid, int rowscope );
+
 	///
 	/// Return value of specified value oid
 
@@ -114,6 +118,8 @@ public:
 	/// Return value of specified column oid
 
     QString getColumn( int oid );
+
+    static int dumpMorkFile( const QString& filename );
 
 protected: // Members
     void    initVars();
@@ -145,7 +151,6 @@ protected: // Members
     void    parseMeta( char c );
     void    parseRow( int TableId, int TableScope );
     void    parseGroup();
-    void    parseTransaction();
 
 protected: // Data
 
