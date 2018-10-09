@@ -5,6 +5,7 @@
 #include <QString>
 #include <QColor>
 #include <QMap>
+#include <QTimer>
 #include <QStringList>
 #include <QFileSystemWatcher>
 
@@ -31,13 +32,14 @@ class UnreadMonitor : public QThread
 
     public slots:
         void    slotSettingsChanged();
+        void    watchedFileChanges( const QString& filechanged );
+        void    updateUnread();
 
     private:
         bool    openDatabase();
-        void    updateUnread( const QString& filechanged = "" );
 
         void    getUnreadCount_SQLite( int & count, QColor& color );
-        void    getUnreadCount_Mork( const QString& path, int & count, QColor& color );
+        void    getUnreadCount_Mork( int & count, QColor& color );
         int     getMorkUnreadCount( const QString& path );
 
     private:
@@ -55,6 +57,16 @@ class UnreadMonitor : public QThread
 
         // Watches the files for changes
         QFileSystemWatcher  mDBWatcher;
+
+        // Thunderbird tends to do lots of modifications to the MSF file
+        // each time a new email arrives. This results in lots of notifications,
+        // and thus lots of unread calls. To avoid this, we set up the timer each
+        // time a new notification is issued, and reset it for each further notification.
+        // We only read the file(s) if the timer expires.
+        QTimer              mChangedMSFtimer;
+
+        // List of changed files (for MSF monitoring)
+        QList<QString>      mChangedMSFfiles;
 
         // Last reported unread
         int    mLastReportedUnread;

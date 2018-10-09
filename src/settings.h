@@ -69,6 +69,9 @@ class Settings
         // Whether to use Mork parser for new mail scanning; if false, sqlite is used
         bool    mUseMorkParser;
 
+        // Watching file timeout (ms)
+        unsigned int mWatchFileTimeout;
+
         // The smallest and the largest allowed font in notification
         unsigned int mNotificationMinimumFontSize;
         unsigned int mNotificationMaximumFontSize;

@@ -35,6 +35,7 @@ void Settings::save()
     settings.setValue("advanced/unreadmorkparser", mUseMorkParser );
     settings.setValue("advanced/notificationfontminsize", mNotificationMinimumFontSize );
     settings.setValue("advanced/notificationfontmaxsize", mNotificationMaximumFontSize );
+    settings.setValue("advanced/watchfiletimeout", mWatchFileTimeout );
 
     // Convert the map into settings
     settings.setValue("accounts/count", mFolderNotificationColors.size() );
@@ -106,6 +107,7 @@ void Settings::load()
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize", 4 ).toInt();
     mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize", 512 ).toInt();
     mUseMorkParser = settings.value("advanced/unreadmorkparser", false ).toBool();
+    mWatchFileTimeout = settings.value("advanced/watchfiletimeout", 150 ).toUInt();
 
     mFolderNotificationColors.clear();
 

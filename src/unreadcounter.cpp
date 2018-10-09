@@ -11,7 +11,7 @@
 
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
-    : QThread( 0 )
+    : QThread( 0 ), mChangedMSFtimer(this)
 {
     mSqlitedb = 0;
     mLastReportedUnread = 0;
@@ -21,9 +21,14 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
 
     // We get notification once either sqlite file or Mork files have been modified.
     // This way we don't need to pull the db often
-    connect( &mDBWatcher, &QFileSystemWatcher::fileChanged, this, &UnreadMonitor::updateUnread );
+    connect( &mDBWatcher, &QFileSystemWatcher::fileChanged, this, &UnreadMonitor::watchedFileChanges );
 
+    // Settings changed
     connect( parent, &TrayIcon::settingsChanged, this, &UnreadMonitor::slotSettingsChanged );
+
+    // Set up the watched file timer
+    mChangedMSFtimer.setInterval( pSettings->mWatchFileTimeout );
+    connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
 }
 
 UnreadMonitor::~UnreadMonitor()
@@ -55,6 +60,14 @@ void UnreadMonitor::slotSettingsChanged()
     mMorkUnreadCounts.clear();
 
     updateUnread();
+}
+
+void UnreadMonitor::watchedFileChanges(const QString &filechanged)
+{
+    if ( !mChangedMSFfiles.contains( filechanged ) )
+        mChangedMSFfiles.push_back( filechanged );
+
+    mChangedMSFtimer.start();
 }
 
 bool UnreadMonitor::openDatabase()
@@ -120,14 +133,14 @@ bool UnreadMonitor::openDatabase()
     return true;
 }
 
-void UnreadMonitor::updateUnread( const QString& filechanged )
+void UnreadMonitor::updateUnread()
 {
     // We execute a single statement and then parse the groups and decide on colors.
     QColor chosencolor;
     int total = 0;
 
     if ( pSettings->mUseMorkParser )
-        getUnreadCount_Mork( filechanged, total, chosencolor );
+        getUnreadCount_Mork( total, chosencolor );
     else
         getUnreadCount_SQLite( total, chosencolor);
 
@@ -185,10 +198,21 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
     }
 }
 
-void UnreadMonitor::getUnreadCount_Mork(const QString &path, int &count, QColor &color)
+void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 {
+    bool rescanall = false;
+
     // We rebuild and rescan the whole map if there is no such path in there, or map is empty (first run)
-    if ( mMorkUnreadCounts.isEmpty() || !mMorkUnreadCounts.contains( path ) )
+    if ( mMorkUnreadCounts.isEmpty() )
+        rescanall = true;
+    else
+    {
+        for ( QString path : mChangedMSFfiles )
+            if ( !mMorkUnreadCounts.contains( path ) )
+                rescanall = false;
+    }
+
+    if ( rescanall )
     {
         mMorkUnreadCounts.clear();
 
@@ -199,7 +223,10 @@ void UnreadMonitor::getUnreadCount_Mork(const QString &path, int &count, QColor 
         }
     }
     else
-        mMorkUnreadCounts[ path ] = getMorkUnreadCount( path );
+    {
+        for ( QString path : mChangedMSFfiles )
+            mMorkUnreadCounts[ path ] = getMorkUnreadCount( path );
+    }
 
     // Find the total, and set the color
     for ( const QString& tpath : mMorkUnreadCounts.keys() )
@@ -214,6 +241,8 @@ void UnreadMonitor::getUnreadCount_Mork(const QString &path, int &count, QColor 
                 color = pSettings->mFolderNotificationColors[ tpath ];
         }
     }
+
+    mChangedMSFfiles.clear();
 }
 
 int UnreadMonitor::getMorkUnreadCount(const QString &path)
