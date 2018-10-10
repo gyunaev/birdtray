@@ -1,6 +1,6 @@
 # Birdtray is a system tray new mail notification for Thunderbird 60+ which does not require extensions. [![Build Status](https://travis-ci.org/gyunaev/birdtray.svg?branch=master)](https://travis-ci.org/gyunaev/birdtray)
 
-Birdtray is a free, cross-platform (Linux/Windows/OS X) system tray notification for new mail for Thunderbird. 
+Birdtray is a free system tray notification for new mail for Thunderbird. Its primary platform is Linux/X Windows. Patches to support other platforms are welcome.
 
 The latest release is 1.0 at Sep 26, 2018.
 
