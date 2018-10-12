@@ -28,6 +28,8 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
 
     // Set up the watched file timer
     mChangedMSFtimer.setInterval( pSettings->mWatchFileTimeout );
+    mChangedMSFtimer.setSingleShot( true );
+
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
 }
 
@@ -135,6 +137,8 @@ bool UnreadMonitor::openDatabase()
 
 void UnreadMonitor::updateUnread()
 {
+    qDebug("Triggering the unread counter update");
+
     // We execute a single statement and then parse the groups and decide on colors.
     QColor chosencolor;
     int total = 0;
