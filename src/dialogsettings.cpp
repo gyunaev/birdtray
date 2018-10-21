@@ -60,6 +60,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWindowAtStart->setChecked( pSettings->mHideWhenStarted );
     boxHideWindowAtRestart->setChecked( pSettings->mHideWhenRestarted );
     boxEnableNewEmail->setChecked( pSettings->mNewEmailMenuEnabled );
+    boxBlinkingUsesAlpha->setChecked( pSettings->mBlinkingUseAlphaTransition );
 
     if ( pSettings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
@@ -161,6 +162,7 @@ void DialogSettings::accept()
     pSettings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
     pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
     pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
+    pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
 
     mModelNewEmails->applySettings();
 

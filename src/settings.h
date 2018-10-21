@@ -69,6 +69,9 @@ class Settings
         // Whether to use Mork parser for new mail scanning; if false, sqlite is used
         bool    mUseMorkParser;
 
+        // Whether to use alpha transition when blinking
+        bool    mBlinkingUseAlphaTransition;
+
         // Watching file timeout (ms)
         unsigned int mWatchFileTimeout;
 

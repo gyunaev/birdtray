@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QWidget>
+#include <QImage>
 #include <QSystemTrayIcon>
 
 class UnreadMonitor;
@@ -32,10 +33,13 @@ class TrayIcon : public QSystemTrayIcon
 
         // Set or reset blinking. Each timeoutms the opacity changes by percentagechange
         // For example, for on-off every 500ms call it with (500, 100)
-        void    setBlinking( int timeoutms, int percentagechange );
+        void    enableBlinking( bool enabled );
 
         // Checks the application current state
         void    updateState();
+
+        // Blinking timer
+        void    blinkTimeout();
 
         // Context menu actions
         void    actionQuit();
@@ -59,6 +63,9 @@ class TrayIcon : public QSystemTrayIcon
         double          mBlinkingDelta;
         unsigned int    mBlinkingTimeout;
         QTimer          mBlinkingTimer;
+
+        // To distinguish whe
+        bool            mBlinkTick;
 
         // Current unread messages count and color
         unsigned int    mUnreadCounter;
@@ -95,6 +102,9 @@ class TrayIcon : public QSystemTrayIcon
 
         // Window tools (show/hide)
         WindowTools *   mWinTools;
+
+        // Cached last drawn icon
+        QImage          mLastDrawnIcon;
 };
 
 #endif // TRAYICON_H

@@ -41,7 +41,7 @@ TrayIcon::TrayIcon()
     createMenu();
     createUnreadCounterThread();
 
-    connect( &mBlinkingTimer, &QTimer::timeout, this, &TrayIcon::updateIcon );
+    connect( &mBlinkingTimer, &QTimer::timeout, this, &TrayIcon::blinkTimeout );
     connect( this, &TrayIcon::activated, this, &TrayIcon::actionSystrayIconActivated );
 
     // State timer
@@ -112,20 +112,11 @@ void TrayIcon::updateIcon()
     else
     {
         // Are we blinking, and if not, should we be?
-        if ( unread > 0 && pSettings->mBlinkSpeed > 0 && mBlinkingDelta == 0.0 )
-            setBlinking( 100, pSettings->mBlinkSpeed );
+        if ( unread > 0 && pSettings->mBlinkSpeed > 0 && mBlinkingTimeout == 0 )
+            enableBlinking( true );
 
-        if ( unread == 0 && mBlinkingDelta > 0.0 )
-            setBlinking( 0, 0 );
-    }
-
-    // Apply blinking, if needed
-    if ( mBlinkingTimeout )
-    {
-        if ( mBlinkingIconOpacity + mBlinkingDelta > 1.0 || mBlinkingIconOpacity + mBlinkingDelta < 0.0 )
-            mBlinkingDelta = -mBlinkingDelta;
-
-        mBlinkingIconOpacity += mBlinkingDelta;
+        if ( unread == 0 && mBlinkingTimeout != 0 )
+            enableBlinking( false );
     }
 
     QPixmap temp( pSettings->mNotificationIcon.size() );
@@ -139,8 +130,6 @@ void TrayIcon::updateIcon()
     // And we use 1.0 if we have zero unread count
     if ( unread == 0 )
         p.setOpacity( 1.0 );
-    else if ( mBlinkingTimeout == 0 )
-        p.setOpacity( 0.75 );
     else
         p.setOpacity( mBlinkingIconOpacity );
 
@@ -180,16 +169,33 @@ void TrayIcon::updateIcon()
 
     p.end();
 
-    setIcon( temp );
+    // FIXME: this is not very efficient, although at our icon sizes (128x128) is probably ok.
+    if ( mLastDrawnIcon != temp.toImage() )
+    {
+        mLastDrawnIcon = temp.toImage();
+        setIcon( temp );
+    }
 }
 
-void TrayIcon::setBlinking(int timeoutms, int percentagechange)
+void TrayIcon::enableBlinking(bool enabled)
 {
-    if ( timeoutms > 0 )
+    if ( enabled )
     {
         mBlinkingIconOpacity = 1.0;
-        mBlinkingDelta = percentagechange / 100.0;
-        mBlinkingTimeout = timeoutms;
+
+        // If we are using the alpha transition, we have to update icon more often
+        if ( pSettings->mBlinkingUseAlphaTransition )
+        {
+            mBlinkingDelta = pSettings->mBlinkSpeed / 100.0;
+            mBlinkingTimeout = 100;
+        }
+        else
+        {
+            // The blinking speed slider is a value from 0 to 30, so we make it 50x
+            mBlinkingDelta = 0;
+            mBlinkingTimeout = pSettings->mBlinkSpeed * 50;
+        }
+
         mBlinkingTimer.setInterval( mBlinkingTimeout );
         mBlinkingTimer.start();
     }
@@ -266,6 +272,35 @@ void TrayIcon::updateState()
     }
 }
 
+void TrayIcon::blinkTimeout()
+{
+    // Apply blinking fade-in/fade-out, if needed
+    if ( mBlinkingDelta != 0.0 )
+    {
+        if ( mBlinkingIconOpacity + mBlinkingDelta > 1.0 || mBlinkingIconOpacity + mBlinkingDelta < 0.0 )
+            mBlinkingDelta = -mBlinkingDelta;
+
+        mBlinkingIconOpacity += mBlinkingDelta;
+    }
+    else
+    {
+        // We are either not blinking at all, or doing no transition
+        // this depends on nonzero pSettings->mBlinkSpeed
+        if ( pSettings->mBlinkSpeed != 0 )
+        {
+            // Flip the opacity
+            if ( mBlinkingIconOpacity == 0.75 )
+                mBlinkingIconOpacity = 0.15;
+            else
+                mBlinkingIconOpacity = 0.75;
+        }
+        else
+            mBlinkingIconOpacity = 0.75;
+    }
+
+    updateIcon();
+}
+
 
 void TrayIcon::actionQuit()
 {
@@ -293,7 +328,7 @@ void TrayIcon::actionSettings()
             createUnreadCounterThread();
 
         // Recalculate the delta
-        setBlinking( 0, 0 );
+        enableBlinking( false );
 
         updateIcon();
 
@@ -330,7 +365,7 @@ void TrayIcon::actionSnoozeFor()
     mMenuUnsnooze->setVisible( true );
 
     // Reset the blinker
-    setBlinking( 0, 0 );
+    enableBlinking( false );
 
     updateIcon();
 }
