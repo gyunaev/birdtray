@@ -52,6 +52,9 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    buttonChangeIcon();
         void    buttonDefaultIcon();
 
+        // Parser changed
+        void    unreadParserChanged( int curr );
+
     private:
         bool    isProfilePathValid();
 

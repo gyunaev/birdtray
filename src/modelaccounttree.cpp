@@ -107,6 +107,14 @@ void ModelAccountTree::removeAccount(const QModelIndex &idx)
     endRemoveRows();
 }
 
+void ModelAccountTree::clear()
+{
+    beginRemoveRows( QModelIndex(), 0, mColors.size() - 1 );
+    mAccounts.clear();
+    mColors.clear();
+    endRemoveRows();
+}
+
 void ModelAccountTree::applySettings()
 {
     pSettings->mFolderNotificationColors.clear();

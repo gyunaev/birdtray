@@ -84,16 +84,13 @@ DialogSettings::DialogSettings( QWidget *parent)
     btnNotificationIcon->setIcon( pSettings->mNotificationIcon );
 
     // Parsers
-    boxParserSelection->addItem( tr("sqlite (default)"), false );
-    boxParserSelection->addItem( tr("mork parser (experimental)"), true );
+    boxParserSelection->addItem( tr("using global search database"), false );
+    boxParserSelection->addItem( tr("using Mork index files (recommended)"), true );
+
+    connect( boxParserSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(unreadParserChanged(int)) );
 
     if ( pSettings->mUseMorkParser )
-    {
         boxParserSelection->setCurrentIndex( 1 );
-
-        // Fix Unread is useless in this mode
-        btnFixUnreadCount->setEnabled( false );
-    }
     else
         boxParserSelection->setCurrentIndex( 0 );
 
@@ -102,13 +99,27 @@ DialogSettings::DialogSettings( QWidget *parent)
 
 void DialogSettings::accept()
 {
-    // Validate the profile path
-    QString profilePath = leProfilePath->text();
+    bool use_mork = boxParserSelection->currentIndex() == 1;
 
-    if ( profilePath.isEmpty() )
+    // Validate the profile path if we use database parser
+    if ( !use_mork )
     {
-        QMessageBox::critical( 0, "Empty Thunderbird directory", tr("You must specify Thunderbird directory") );
-        return;
+        QString profilePath = leProfilePath->text();
+
+        if ( profilePath.isEmpty() )
+        {
+            QMessageBox::critical( 0, "Empty Thunderbird directory", tr("You must specify Thunderbird directory") );
+            return;
+        }
+
+        if ( !profilePath.endsWith( QDir::separator() ) )
+            profilePath.append( QDir::separator() );
+
+        if ( !QFile::exists( profilePath + "global-messages-db.sqlite" ) )
+        {
+            QMessageBox::critical( 0, "Invalid Thunderbird directory", tr("Valid Thunderbird directory must contain the file global-messages-db.sqlite") );
+            return;
+        }
     }
 
     if ( boxEnableNewEmail->isChecked() && leThunderbirdBinary->text().isEmpty() )
@@ -117,30 +128,6 @@ void DialogSettings::accept()
         tabWidget->setCurrentIndex( 0 );
         leThunderbirdBinary->setFocus();
         return;
-    }
-
-    if ( !profilePath.endsWith( QDir::separator() ) )
-        profilePath.append( QDir::separator() );
-
-    if ( !QFile::exists( profilePath + "global-messages-db.sqlite" ) )
-    {
-        QMessageBox::critical( 0, "Invalid Thunderbird directory", tr("Valid Thunderbird directory must contain the file global-messages-db.sqlite") );
-        return;
-    }
-
-    bool use_mork = boxParserSelection->currentIndex() == 1;
-    bool delete_accounts = false;
-
-    if (  use_mork != pSettings->mUseMorkParser )
-    {
-        if ( QMessageBox::question( 0,
-                               tr("WARNING: PARSER CHANGED"),
-                               tr("You have changed the parser. This will delete all accounts in the Accounts tab, and you must restart Birdtray and rea-add them.\n\nReally change the parser?") )
-                != QMessageBox::Yes )
-                return;
-
-        pSettings->mUseMorkParser = use_mork;
-        delete_accounts = true;
     }
 
     pSettings->mThunderbirdFolderPath = leProfilePath->text();
@@ -165,14 +152,7 @@ void DialogSettings::accept()
     pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
 
     mModelNewEmails->applySettings();
-
-    if ( delete_accounts )
-    {
-        pSettings->mFolderNotificationColors.clear();
-        QApplication::quit();
-    }
-    else
-        mAccountModel->applySettings();
+    mAccountModel->applySettings();
 
     QDialog::accept();
 }
@@ -358,6 +338,42 @@ void DialogSettings::buttonDefaultIcon()
 
     if ( temp.load( ":res/thunderbird.png" ) )
         btnNotificationIcon->setIcon( temp.scaled( pSettings->mIconSize ) );
+}
+
+void DialogSettings::unreadParserChanged(int curr)
+{
+    if ( curr == 1 )
+    {
+        // Mork parser
+
+        // Fix Unread is useless in this mode
+        btnFixUnreadCount->setEnabled( false );
+
+        // Hide the thunderbird path as well
+        groupThunderbirdProfilePath->hide();
+    }
+    else
+    {
+        btnFixUnreadCount->setEnabled( true );
+
+        // Hide the thunderbird path as well
+        groupThunderbirdProfilePath->show();
+    }
+
+    // Did we change comparing to settings?
+    bool use_mork = boxParserSelection->currentIndex() == 1;
+
+    if (  use_mork != pSettings->mUseMorkParser )
+    {
+        if ( QMessageBox::question( 0,
+                               tr("WARNING: Parser changed"),
+                               tr("You have changed the parser, but the account format is not compatible "
+                                  "between parsers, and you need to re-set them up.\n\nDo you want to clear the accounts?") )
+                == QMessageBox::Yes )
+        {
+            mAccountModel->clear();
+        }
+    }
 }
 
 void DialogSettings::activateTab(int tab)
