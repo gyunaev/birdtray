@@ -107,7 +107,7 @@ void Settings::load()
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize", 4 ).toInt();
     mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize", 512 ).toInt();
-    mUseMorkParser = settings.value("advanced/unreadmorkparser", false ).toBool();
+    mUseMorkParser = settings.value("advanced/unreadmorkparser", true ).toBool();
     mWatchFileTimeout = settings.value("advanced/watchfiletimeout", 150 ).toUInt();
     mBlinkingUseAlphaTransition = settings.value("advanced/blinkingusealpha", false ).toBool();
 
