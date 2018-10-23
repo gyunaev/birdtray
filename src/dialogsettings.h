@@ -57,6 +57,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
     private:
         bool    isProfilePathValid();
+        bool    isMorkParserSelected() const;
 
         QPalette mPaletteOk;
         QPalette mPaletteErrror;

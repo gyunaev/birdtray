@@ -12,7 +12,7 @@ class DialogAddEditAccount : public QDialog, public Ui::DialogAddEditAccount
     Q_OBJECT
 
     public:
-        explicit DialogAddEditAccount( QWidget *parent = 0 );
+        explicit DialogAddEditAccount( bool usemork, QWidget *parent = 0 );
         ~DialogAddEditAccount();
 
         // Sets the list of accounts (fills up combobox), sets the current account (if not empty) and color
@@ -25,6 +25,9 @@ class DialogAddEditAccount : public QDialog, public Ui::DialogAddEditAccount
     public slots:
         void    browse();
         void    accept();
+
+    private:
+        bool    mMorkParser;
 };
 
 #endif // DIALOGADDEDITACCOUNT_H
