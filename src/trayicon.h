@@ -57,6 +57,8 @@ class TrayIcon : public QSystemTrayIcon
         void    createMenu();
         void    createUnreadCounterThread();
         bool    hasThunderbirdRecentlyStarted() const;
+        void    hideThunderbird();
+        void    showThunderbird();
 
         // State variables for blinking; mBlinkingTimeout=0 means we are not blinking
         double          mBlinkingIconOpacity;

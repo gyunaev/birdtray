@@ -135,10 +135,7 @@ void TrayIcon::updateIcon()
         p.setOpacity( mBlinkingIconOpacity );
 
     if ( unread != 0 && !pSettings->mNotificationIconUnread.isNull() )
-    {
         p.drawPixmap( pSettings->mNotificationIconUnread.rect(), pSettings->mNotificationIconUnread );
-        qDebug("notif %d", pSettings->mNotificationIconUnread.isNull() );
-    }
     else
         p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
 
@@ -245,7 +242,7 @@ void TrayIcon::updateState()
             if ( mThunderbirdWindowHide )
             {
                 mThunderbirdWindowHide = false;
-                mWinTools->hide();
+                hideThunderbird();
             }
         }
         else
@@ -276,6 +273,12 @@ void TrayIcon::updateState()
                 }
             }
         }
+
+        // Update the menu text as the window can be hidden in wintools
+        if ( mWinTools->isHidden() )
+            mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
+        else
+            mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
 
         updateIcon();
     }
@@ -351,15 +354,9 @@ void TrayIcon::actionActivate()
         return;
 
     if ( mWinTools->isHidden() )
-    {
-        mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
-        mWinTools->show();
-    }
+        showThunderbird();
     else
-    {
-        mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
-        mWinTools->hide();
-    }
+        hideThunderbird();
 }
 
 void TrayIcon::actionSnoozeFor()
@@ -523,4 +520,16 @@ void TrayIcon::startThunderbird()
 bool TrayIcon::hasThunderbirdRecentlyStarted() const
 {
     return !mThunderbirdRestartTime.isNull() && mThunderbirdRestartTime > QDateTime::currentDateTimeUtc();
+}
+
+void TrayIcon::hideThunderbird()
+{
+    mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
+    mWinTools->hide();
+}
+
+void TrayIcon::showThunderbird()
+{
+    mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
+    mWinTools->show();
 }
