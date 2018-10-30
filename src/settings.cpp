@@ -62,6 +62,8 @@ void Settings::save()
 
     if ( !mNotificationIconUnread.isNull() )
         savePixmap( settings, "common/notificationiconunread", mNotificationIconUnread );
+    else
+        settings.remove( "common/notificationiconunread" );
 
     savePixmap( settings, "common/notificationicon", mNotificationIcon );
 }
