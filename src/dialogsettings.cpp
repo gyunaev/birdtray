@@ -30,7 +30,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
 
     connect( btnNotificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
-    connect( btnDefaultIcon, &QPushButton::clicked, this, &DialogSettings::buttonDefaultIcon );
+    connect( btnNotificationIconUnread, &QPushButton::clicked, this, &DialogSettings::buttonChangeUnreadIcon );
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
@@ -82,6 +82,14 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     // Icon
     btnNotificationIcon->setIcon( pSettings->mNotificationIcon );
+
+    if ( !pSettings->mNotificationIconUnread.isNull() )
+    {
+        boxNotificationIconUnread->setChecked( true );
+        btnNotificationIconUnread->setIcon( pSettings->mNotificationIconUnread );
+    }
+    else
+        boxNotificationIconUnread->setChecked( false );
 
     // Parsers
     boxParserSelection->addItem( tr("using global search database"), false );
@@ -140,8 +148,7 @@ void DialogSettings::accept()
     pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
     pSettings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
 
-    pSettings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();
-    pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
+    pSettings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
     pSettings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
     pSettings->mRestartThunderbird = boxRestartThunderbird->isChecked();
     pSettings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
@@ -149,6 +156,13 @@ void DialogSettings::accept()
     pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
     pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
     pSettings->mUseMorkParser = isMorkParserSelected();
+
+    pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
+
+    if ( boxNotificationIconUnread->isChecked() )
+        pSettings->mNotificationIconUnread = btnNotificationIconUnread->icon().pixmap( pSettings->mIconSize );
+    else
+        pSettings->mNotificationIconUnread = QPixmap();
 
     mModelNewEmails->applySettings();
     mAccountModel->applySettings();
@@ -315,31 +329,23 @@ void DialogSettings::newEmailRemove()
 
 void DialogSettings::buttonChangeIcon()
 {
-    QString e = QFileDialog::getOpenFileName( 0,
-                                              "Choose the new icon",
-                                              "",
-                                              "Images(*.png)" );
-
-    if ( e.isEmpty() )
-        return;
-
-    QPixmap test;
-
-    if ( !test.load( e ) )
+    if ( (QApplication::keyboardModifiers() & Qt::CTRL) != 0 )
     {
-        QMessageBox::critical( 0, "Invalid icon", tr("Could not load the icon from this file") );
+        // Reset default icon
+        QPixmap temp;
+
+        if ( temp.load( ":res/thunderbird.png" ) )
+            btnNotificationIcon->setIcon( temp );
+
         return;
     }
 
-    btnNotificationIcon->setIcon( test.scaled( pSettings->mIconSize ) );
+    changeIcon( btnNotificationIcon );
 }
 
-void DialogSettings::buttonDefaultIcon()
+void DialogSettings::buttonChangeUnreadIcon()
 {
-    QPixmap temp;
-
-    if ( temp.load( ":res/thunderbird.png" ) )
-        btnNotificationIcon->setIcon( temp.scaled( pSettings->mIconSize ) );
+    changeIcon( btnNotificationIconUnread );
 }
 
 void DialogSettings::unreadParserChanged(int curr)
@@ -380,6 +386,27 @@ void DialogSettings::unreadParserChanged(int curr)
             mAccountModel->clear();
         }
     }
+}
+
+void DialogSettings::changeIcon(QToolButton *button)
+{
+    QString e = QFileDialog::getOpenFileName( 0,
+                                              "Choose the new icon",
+                                              "",
+                                              "Images(*.png)" );
+
+    if ( e.isEmpty() )
+        return;
+
+    QPixmap test;
+
+    if ( !test.load( e ) )
+    {
+        QMessageBox::critical( 0, "Invalid icon", tr("Could not load the icon from this file") );
+        return;
+    }
+
+    button->setIcon( test );
 }
 
 void DialogSettings::activateTab(int tab)

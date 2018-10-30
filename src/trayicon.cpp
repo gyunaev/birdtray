@@ -134,7 +134,14 @@ void TrayIcon::updateIcon()
     else
         p.setOpacity( mBlinkingIconOpacity );
 
-    p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
+    if ( unread != 0 && !pSettings->mNotificationIconUnread.isNull() )
+    {
+        p.drawPixmap( pSettings->mNotificationIconUnread.rect(), pSettings->mNotificationIconUnread );
+        qDebug("notif %d", pSettings->mNotificationIconUnread.isNull() );
+    }
+    else
+        p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
+
     p.setFont( pSettings->mNotificationFont );
 
     // Do we need to draw error sign?

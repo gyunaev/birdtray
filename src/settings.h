@@ -6,7 +6,7 @@
 #include <QColor>
 #include <QMap>
 #include <QPixmap>
-#include <QJsonObject>
+#include <QSettings>
 
 #include "setting_newemail.h"
 
@@ -20,6 +20,10 @@ class Settings
 
         // Notification icon
         QPixmap mNotificationIcon;
+
+        // Notification icon for unread emails.
+        // If null, the mNotificationIcon is used
+        QPixmap mNotificationIconUnread;
 
         // Font for use in notifications
         QFont   mNotificationFont;
@@ -91,6 +95,8 @@ class Settings
         void    load();
 
     private:
+        void    savePixmap( QSettings& settings, const QString& key, const QPixmap& pixmap );
+        QPixmap loadPixmap( QSettings& settings, const QString& key );
 };
 
 extern Settings * pSettings;

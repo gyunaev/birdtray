@@ -1,5 +1,4 @@
 #include <QStandardPaths>
-#include <QSettings>
 #include <QBuffer>
 #include <QDir>
 
@@ -61,14 +60,10 @@ void Settings::save()
         settings.setValue( entry, mNewEmailData[index].toByteArray() );
     }
 
-    // Store the notification icon in the icondata buffer
-    QByteArray icondata;
-    QBuffer buffer(&icondata);
-    buffer.open(QIODevice::WriteOnly);
-    mNotificationIcon.save(&buffer, "PNG");
-    buffer.close();
+    if ( !mNotificationIconUnread.isNull() )
+        savePixmap( settings, "common/notificationiconunread", mNotificationIconUnread );
 
-    settings.setValue("common/notificationicon", icondata );
+    savePixmap( settings, "common/notificationicon", mNotificationIcon );
 }
 
 void Settings::load()
@@ -78,11 +73,8 @@ void Settings::load()
     if ( settings.contains( "common/notificationfont" ) )
         mNotificationFont.fromString( settings.value( "common/notificationfont", "" ).toString() );
 
-    if ( settings.contains( "common/notificationicon" ) )
-    {
-        mNotificationIcon = QPixmap( mIconSize );
-        mNotificationIcon.loadFromData( settings.value("common/notificationicon", "" ).toByteArray(), "PNG" );
-    }
+    mNotificationIcon = loadPixmap( settings, "common/notificationicon" );
+    mNotificationIconUnread = loadPixmap( settings, "common/notificationiconunread" );
 
     if ( mNotificationIcon.isNull() )
     {
@@ -133,4 +125,30 @@ void Settings::load()
         QString entry = "newemail/id" + QString::number( index );
         mNewEmailData.push_back( Setting_NewEmail::fromByteArray( settings.value( entry, "" ).toByteArray() ) );
     }
+}
+
+void Settings::savePixmap(QSettings &settings, const QString &key, const QPixmap &pixmap)
+{
+    // Store the notification icon in the icondata buffer
+    QByteArray icondata;
+    QBuffer buffer(&icondata);
+    buffer.open(QIODevice::WriteOnly);
+    pixmap.save(&buffer, "PNG");
+    buffer.close();
+
+    settings.setValue( key, icondata );
+}
+
+QPixmap Settings::loadPixmap(QSettings &settings, const QString &key)
+{
+    QPixmap pix;
+
+    if ( settings.contains( key ) )
+    {
+        pix = QPixmap( mIconSize );
+        pix.loadFromData( settings.value( key, "" ).toByteArray(), "PNG" );
+        pix.detach();
+    }
+
+    return pix;
 }

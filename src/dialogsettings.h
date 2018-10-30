@@ -50,12 +50,13 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Icon change
         void    buttonChangeIcon();
-        void    buttonDefaultIcon();
+        void    buttonChangeUnreadIcon();
 
         // Parser changed
         void    unreadParserChanged( int curr );
 
     private:
+        void    changeIcon(QToolButton * button );
         bool    isProfilePathValid();
         bool    isMorkParserSelected() const;
 
