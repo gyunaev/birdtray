@@ -183,8 +183,11 @@ void DialogSettings::profilePathChanged()
 {
     bool valid = isProfilePathValid();
 
-    tabAccounts->setEnabled( valid );
-    btnFixUnreadCount->setEnabled( valid );
+    if ( !isMorkParserSelected() )
+    {
+        groupAccounts->setEnabled( valid );
+        btnFixUnreadCount->setEnabled( valid );
+    }
 
     if ( valid )
         leProfilePath->setPalette( mPaletteOk );
@@ -348,6 +351,9 @@ void DialogSettings::unreadParserChanged(int curr)
         // Fix Unread is useless in this mode
         btnFixUnreadCount->setEnabled( false );
 
+        // Enable account group
+        groupAccounts->setEnabled( true );
+
         // Hide the thunderbird path as well
         groupThunderbirdProfilePath->hide();
     }
@@ -355,8 +361,11 @@ void DialogSettings::unreadParserChanged(int curr)
     {
         btnFixUnreadCount->setEnabled( true );
 
-        // Hide the thunderbird path as well
+        // Show the thunderbird path
         groupThunderbirdProfilePath->show();
+
+        // Trigger hiding/showing the account group
+        profilePathChanged();
     }
 
     // Did we change comparing to settings?
@@ -376,7 +385,7 @@ void DialogSettings::unreadParserChanged(int curr)
 void DialogSettings::activateTab(int tab)
 {
     // #1 is the Accounts tab
-    if ( tab == 1 )
+    if ( tab == 1 && !isMorkParserSelected() )
     {
         // Get the account list
         DatabaseAccounts * dba = new DatabaseAccounts( leProfilePath->text() );

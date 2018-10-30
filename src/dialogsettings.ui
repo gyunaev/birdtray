@@ -257,7 +257,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="groupAccounts">
          <property name="title">
           <string>Accounts to monitor</string>
          </property>

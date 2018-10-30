@@ -28,11 +28,11 @@ TrayIcon::TrayIcon()
     mWinTools = WindowTools::create();
 
     // If the settings are not yet configure, pop up the message
-    if ( pSettings->mThunderbirdFolderPath.isEmpty() )
+    if ( pSettings->mFolderNotificationColors.isEmpty() )
     {
         if ( QMessageBox::question( 0,
             tr( "Would you like to set up Birdtray?" ),
-            tr( "You have not yet configured the Thunderbird profile path. Would you like to do it now?") ) == QMessageBox::Yes )
+            tr( "You have not yet configured any email folders to monitor. Would you like to do it now?") ) == QMessageBox::Yes )
         {
             actionSettings();
         }
