@@ -99,10 +99,8 @@ DialogSettings::DialogSettings( QWidget *parent)
 
 void DialogSettings::accept()
 {
-    bool use_mork = boxParserSelection->currentIndex() == 1;
-
     // Validate the profile path if we use database parser
-    if ( !use_mork )
+    if ( !isMorkParserSelected() )
     {
         QString profilePath = leProfilePath->text();
 
@@ -150,6 +148,7 @@ void DialogSettings::accept()
     pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
     pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
     pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
+    pSettings->mUseMorkParser = isMorkParserSelected();
 
     mModelNewEmails->applySettings();
     mAccountModel->applySettings();
@@ -252,7 +251,7 @@ void DialogSettings::accountsAvailable( QString errorMsg )
 
 void DialogSettings::accountAdd()
 {
-    DialogAddEditAccount dlg;
+    DialogAddEditAccount dlg( isMorkParserSelected() );
     dlg.setCurrent( mAccounts, "", btnNotificationColor->color() );
 
     if ( dlg.exec() == QDialog::Accepted )
@@ -274,7 +273,7 @@ void DialogSettings::accountEditIndex(const QModelIndex &index)
 
     mAccountModel->getAccount( index, uri, color );
 
-    DialogAddEditAccount dlg;
+    DialogAddEditAccount dlg( isMorkParserSelected() );
     dlg.setCurrent( mAccounts, uri, color );
 
     if ( dlg.exec() == QDialog::Accepted )
@@ -361,9 +360,7 @@ void DialogSettings::unreadParserChanged(int curr)
     }
 
     // Did we change comparing to settings?
-    bool use_mork = boxParserSelection->currentIndex() == 1;
-
-    if (  use_mork != pSettings->mUseMorkParser )
+    if (  isMorkParserSelected() != pSettings->mUseMorkParser )
     {
         if ( QMessageBox::question( 0,
                                tr("WARNING: Parser changed"),
@@ -400,4 +397,9 @@ bool DialogSettings::isProfilePathValid()
         profilePath.append( QDir::separator() );
 
     return QFile::exists( profilePath + "global-messages-db.sqlite" );
+}
+
+bool DialogSettings::isMorkParserSelected() const
+{
+    return boxParserSelection->currentIndex() == 1;
 }

@@ -4,12 +4,13 @@
 #include "settings.h"
 #include "dialogaddeditaccount.h"
 
-DialogAddEditAccount::DialogAddEditAccount( QWidget *parent )
+DialogAddEditAccount::DialogAddEditAccount(bool usemork, QWidget *parent )
     : QDialog(parent), Ui::DialogAddEditAccount()
 {
+    mMorkParser = usemork;
     setupUi(this);
 
-    if ( !pSettings->mUseMorkParser )
+    if ( !mMorkParser )
     {
         leFolderPath->hide();
         btnBrowse->hide();
@@ -27,7 +28,7 @@ DialogAddEditAccount::~DialogAddEditAccount()
 
 void DialogAddEditAccount::setCurrent(const QList<DatabaseAccounts::Account> &accounts, const QString &account, const QColor &color)
 {
-    if ( !pSettings->mUseMorkParser )
+    if ( !mMorkParser )
     {
         for ( int i = 0; i < accounts.size(); i++ )
             boxAccounts->addItem( accounts[i].uri );
@@ -43,7 +44,7 @@ void DialogAddEditAccount::setCurrent(const QList<DatabaseAccounts::Account> &ac
 
 QString DialogAddEditAccount::account() const
 {
-    if ( pSettings->mUseMorkParser )
+    if ( mMorkParser )
         return leFolderPath->text();
     else
         return boxAccounts->currentText();
@@ -69,7 +70,7 @@ void DialogAddEditAccount::browse()
 
 void DialogAddEditAccount::accept()
 {
-    if ( pSettings->mUseMorkParser )
+    if ( mMorkParser )
     {
         if ( leFolderPath->text().isEmpty() || !QFile::exists( leFolderPath->text() ) )
         {
