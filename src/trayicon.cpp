@@ -87,6 +87,7 @@ static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxf
     {
         cursize = minfontsize + (maxfontsize - minfontsize) / 2;
         testfont.setPointSize( cursize );
+        testfont.setWeight( pSettings->mNotificationFontWeight );
         QSize size = QFontMetrics( testfont ).size( Qt::TextSingleLine, text );
 
         if ( size.width() < rectsize.width() && size.height() <= rectsize.height() )
@@ -161,6 +162,7 @@ void TrayIcon::updateIcon()
                                         temp.size() - QSize( 2, 2 ) );
 
         pSettings->mNotificationFont.setPointSize( fontsize );
+        pSettings->mNotificationFont.setWeight( pSettings->mNotificationFontWeight );
         QFontMetrics fm( pSettings->mNotificationFont );
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
         p.setPen( mUnreadColor );
