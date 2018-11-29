@@ -448,7 +448,7 @@ void TrayIcon::createMenu()
         else
         {
             // A single action
-            menu->addAction( tr("New Email Message"), this, &TrayIcon::actionNewEmail );
+            menu->addAction( tr("New Email Message"), this, SLOT( actionNewEmail()) );
         }
 
         menu->addSeparator();
@@ -489,12 +489,12 @@ void TrayIcon::createMenu()
     menu->addSeparator();
 
     // Some generic actions
-    menu->addAction( tr("Settings..."), this, &TrayIcon::actionSettings );
+    menu->addAction( tr("Settings..."), this, SLOT(actionSettings()) );
 
     menu->addSeparator();
 
     // And exit
-    menu->addAction( tr("Quit"), this, &TrayIcon::actionQuit );
+    menu->addAction( tr("Quit"), this, SLOT(actionQuit()) );
 
     setContextMenu( menu );
 }
