@@ -2,10 +2,6 @@
 
 Birdtray is a free system tray notification for new mail for Thunderbird. Its primary platform is Linux/X Windows. Patches to support other platforms are welcome.
 
-The latest release is 1.0 at Sep 26, 2018.
-
-This is the alpha version, so please report any issues.
-
 ## Features
 
 - Shows the unread email counter in the Thunderbird system tray icon;
@@ -35,8 +31,9 @@ This is the alpha version, so please report any issues.
 
 Currently the only way to test Birdtray is to build it from source, which should be easy on Linux, but may be cumbersome on other OSes. You would need the following libraries:
 
-- Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
+- Qt 5.5 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
 - sqlite3 (i.e. libsqlite3-dev or libsqlite3-devel)
+- On Debian you need to install the following packages: qt5-defaults libsqlite3-dev libqt5x11extras-dev
 
 
 To build, please do the following:
