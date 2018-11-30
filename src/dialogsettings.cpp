@@ -79,7 +79,10 @@ DialogSettings::DialogSettings( QWidget *parent)
     treeNewEmails->setModel( mModelNewEmails );
 
     // Create the "About" box
-    browserAbout->setText( tr("<html>This is Birdtray version %1.%2<br>Copyright (C) George Yunaev, gyunaev@ulduzsoft.com 2018<br>Licensed under GPLv3 or higher</html>") .arg( VERSION_MAJOR ) .arg( VERSION_MINOR) );
+    QString origabout = browserAbout->toHtml();
+    origabout.replace( "[VERSION]", QString("%1.%2").arg(VERSION_MAJOR) .arg(VERSION_MINOR) );
+    origabout.replace( "[DATE]", QString("%1 %2").arg(__DATE__) .arg(__TIME__) );
+    browserAbout->setText( origabout );
 
     // Icon
     btnNotificationIcon->setIcon( pSettings->mNotificationIcon );
