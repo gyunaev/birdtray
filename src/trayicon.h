@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QWidget>
 #include <QImage>
+#include <QProcess>
 #include <QSystemTrayIcon>
 
 class UnreadMonitor;
@@ -53,11 +54,12 @@ class TrayIcon : public QSystemTrayIcon
         void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
 
         void    startThunderbird();
+        void    tbProcessError( QProcess::ProcessError error);
+        void    tbProcessFinished( int exitCode, QProcess::ExitStatus exitStatus );
 
     private:
         void    createMenu();
         void    createUnreadCounterThread();
-        bool    hasThunderbirdRecentlyStarted() const;
         void    hideThunderbird();
         void    showThunderbird();
         void    updateIgnoredUnreads();
@@ -91,9 +93,6 @@ class TrayIcon : public QSystemTrayIcon
         // State checking timer (once a second)
         QTimer          mStateTimer;
 
-        // Thunderbird restart timestamp (to avoid restarting too often)
-        QDateTime       mThunderbirdRestartTime;
-
         // Current status
         QString         mCurrentStatus;
 
@@ -115,6 +114,11 @@ class TrayIcon : public QSystemTrayIcon
 
         // Cached last drawn icon
         QImage          mLastDrawnIcon;
+
+        // Thunderbird process which we have started. This can be nullptr if Thunderbird
+        // was started before Birdtray (thus our process would just activate it and exit)
+        // Thus checking this pointer for null doesn't mean TB is not started.
+        QProcess    *   mThunderbirdProcess;
 };
 
 #endif // TRAYICON_H
