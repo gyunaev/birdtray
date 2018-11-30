@@ -18,9 +18,13 @@ TrayIcon::TrayIcon()
     mBlinkingDelta = 0.0;
     mBlinkingTimeout = 0;
 
+    mIgnoredUnreadEmails = 0;
     mUnreadCounter = 0;
     mUnreadMonitor = 0;
+
     mMenuShowHideThunderbird = 0;
+    mMenuIgnoreUnreads = 0;
+
     mThunderbirdWindowExists = false;
     mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
@@ -112,6 +116,16 @@ void TrayIcon::updateIcon()
     }
     else
     {
+        // If we have less unread than current count, reset the unread
+        if ( unread < mIgnoredUnreadEmails )
+        {
+            mIgnoredUnreadEmails = 0;
+            updateIgnoredUnreads();
+        }
+
+        // Apply the ignore
+        unread -= mIgnoredUnreadEmails;
+
         // Are we blinking, and if not, should we be?
         if ( unread > 0 && pSettings->mBlinkSpeed > 0 && mBlinkingTimeout == 0 )
             enableBlinking( true );
@@ -339,6 +353,9 @@ void TrayIcon::actionSettings()
         if ( !mUnreadMonitor )
             createUnreadCounterThread();
 
+        // Recreate menu
+        createMenu();
+
         // Recalculate the delta
         enableBlinking( false );
 
@@ -403,6 +420,12 @@ void TrayIcon::actionNewEmail()
     }
 
     QProcess::startDetached( pSettings->mThunderbirdCmdLine, args );
+}
+
+void TrayIcon::actionIgnoreEmails()
+{
+    mIgnoredUnreadEmails = mUnreadCounter;
+    updateIgnoredUnreads();
 }
 
 void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason)
@@ -486,6 +509,17 @@ void TrayIcon::createMenu()
     menu->addAction( mMenuUnsnooze );
     mMenuUnsnooze->setVisible( false );
 
+    // Add the ignore action
+    if ( pSettings->mAllowSuppressingUnreads )
+    {
+        mMenuIgnoreUnreads = new QAction( tr("Ignore unread emails"), this );
+        connect( mMenuIgnoreUnreads, &QAction::triggered, this, &TrayIcon::actionIgnoreEmails );
+
+        menu->addAction( mMenuIgnoreUnreads );
+    }
+    else
+        mMenuIgnoreUnreads = 0;
+
     menu->addSeparator();
 
     // Some generic actions
@@ -532,4 +566,15 @@ void TrayIcon::showThunderbird()
 {
     mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
     mWinTools->show();
+}
+
+void TrayIcon::updateIgnoredUnreads()
+{
+    if ( mMenuIgnoreUnreads )
+    {
+        if ( mIgnoredUnreadEmails > 0 )
+            mMenuIgnoreUnreads->setText( tr("Ignore unread emails (now %1)") .arg( mIgnoredUnreadEmails ) );
+        else
+            mMenuIgnoreUnreads->setText( tr("Ignore unread emails") );
+    }
 }

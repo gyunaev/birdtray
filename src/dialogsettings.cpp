@@ -61,6 +61,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWindowAtRestart->setChecked( pSettings->mHideWhenRestarted );
     boxEnableNewEmail->setChecked( pSettings->mNewEmailMenuEnabled );
     boxBlinkingUsesAlpha->setChecked( pSettings->mBlinkingUseAlphaTransition );
+    boxAllowSuppression->setChecked( pSettings->mAllowSuppressingUnreads );
 
     if ( pSettings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
@@ -147,6 +148,7 @@ void DialogSettings::accept()
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
     pSettings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
+    pSettings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
 
     pSettings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
     pSettings->mNotificationMinimumFontSize = spinMinimumFontSize->value();

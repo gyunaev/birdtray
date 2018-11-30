@@ -48,6 +48,7 @@ class TrayIcon : public QSystemTrayIcon
         void    actionSnoozeFor();
         void    actionUnsnooze();
         void    actionNewEmail();
+        void    actionIgnoreEmails();
 
         void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
 
@@ -59,6 +60,7 @@ class TrayIcon : public QSystemTrayIcon
         bool    hasThunderbirdRecentlyStarted() const;
         void    hideThunderbird();
         void    showThunderbird();
+        void    updateIgnoredUnreads();
 
         // State variables for blinking; mBlinkingTimeout=0 means we are not blinking
         double          mBlinkingIconOpacity;
@@ -75,6 +77,9 @@ class TrayIcon : public QSystemTrayIcon
 
         // Show/hide Thunderbird menu item (we modify its text)
         QAction *       mMenuShowHideThunderbird;
+
+        // Ignore unread emails item (we modify its text) - only if we have this functionality
+        QAction *       mMenuIgnoreUnreads;
 
         // Unsnooze menu item
         QAction *       mMenuUnsnooze;
@@ -101,6 +106,9 @@ class TrayIcon : public QSystemTrayIcon
 
         // If true, it will hide Thunderbird window as soon as its shown
         bool            mThunderbirdWindowHide;
+
+        // Number of suppressed unread emails, if nonzero
+        unsigned int    mIgnoredUnreadEmails;
 
         // Window tools (show/hide)
         WindowTools *   mWinTools;

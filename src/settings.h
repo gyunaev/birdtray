@@ -76,6 +76,9 @@ class Settings
         // Whether to use alpha transition when blinking
         bool    mBlinkingUseAlphaTransition;
 
+        // Whether to allow suppression of unread emails
+        bool    mAllowSuppressingUnreads;
+
         // Watching file timeout (ms)
         unsigned int mWatchFileTimeout;
 
