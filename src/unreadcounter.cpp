@@ -254,9 +254,9 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
     MorkParser parser;
 
     if ( !parser.open( path ) )
-        return -1;
+        return 0;
 
-    int unread = 0;
+    unsigned int unread = 0;
 
     // First we parse the unreadChildren column (generic view)
     const MorkRowMap * rows = parser.rows( 0x80, 0, 0x80 );
@@ -273,9 +273,13 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
 
                 if ( columnName == "unreadChildren" )
                 {
-                    unsigned int value = parser.getValue(cells[colid ]).toInt( nullptr, 16 );
-                    unread += value;
-                }
+                    bool correct;
+                    unsigned int value = parser.getValue(cells[colid ]).toUInt( &correct, 16 );
+
+                    if ( correct )
+                        unread += value;
+                    else
+                        qDebug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));                }
             }
         }
     }
@@ -296,8 +300,13 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
 
                     if ( columnName == "numNewMsgs" )
                     {
-                        unsigned int value = parser.getValue(cells[colid ]).toInt( nullptr, 16 );
-                        unread += value;
+                        bool correct;
+                        unsigned int value = parser.getValue(cells[colid ]).toInt( &correct, 16 );
+
+                        if ( correct )
+                            unread += value;
+                        else
+                            qDebug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));
                     }
                 }
             }
