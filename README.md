@@ -55,6 +55,10 @@ You can also enable birdtray to start Thunderbird when you start Birdtray, or en
 
 Once you change settings, often you need to restart birdtray for the new settings to take effect.
 
+## Troubleshooting
+
+If you have lots of unread messages shown, and you are using global search database to look for unread messages, it may be because the database is corrupt or too old. You may delete the file global-messages-db.sqlite and restart Thunderbird which would rebuild this file. This will also help if "search" function in Thunderbird finds emails which no longer exist.
+
 ## Submitting bugs and feature requests
 
 Please use Github issue tracker.
