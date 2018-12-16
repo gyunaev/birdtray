@@ -6,9 +6,12 @@
 ModelAccountTree::ModelAccountTree( QObject *parent )
     : QAbstractItemModel( parent )
 {
-    // Get the current settings
-    mAccounts = pSettings->mFolderNotificationColors.keys();
-    mColors = pSettings->mFolderNotificationColors.values();
+    // Get the current settings in proper(stored) order
+    for ( QString uri : pSettings->mFolderNotificationList )
+    {
+        mAccounts.push_back( uri );
+        mColors.push_back( pSettings->mFolderNotificationColors[uri] );
+    }
 }
 
 int ModelAccountTree::columnCount(const QModelIndex &) const
@@ -118,9 +121,11 @@ void ModelAccountTree::clear()
 void ModelAccountTree::applySettings()
 {
     pSettings->mFolderNotificationColors.clear();
+    pSettings->mFolderNotificationList.clear();
 
     for ( int i = 0; i < mAccounts.size(); i++ )
     {
+        pSettings->mFolderNotificationList.push_back( mAccounts[i] );
         pSettings->mFolderNotificationColors[ mAccounts[i] ] = mColors[i];
     }
 }

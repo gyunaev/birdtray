@@ -43,7 +43,7 @@ void Settings::save()
     settings.setValue("accounts/count", mFolderNotificationColors.size() );
     int index = 0;
 
-    for ( QString uri : mFolderNotificationColors.keys() )
+    for ( QString uri : mFolderNotificationList )
     {
         QString entry = "accounts/account" + QString::number( index );
         settings.setValue( entry + "Color", mFolderNotificationColors[uri].name() );
@@ -117,7 +117,9 @@ void Settings::load()
     for ( int index = 0; index < total; index++ )
     {
         QString entry = "accounts/account" + QString::number( index );
-        mFolderNotificationColors[ settings.value( entry + "URI", "" ).toString() ] = QColor( settings.value( entry + "Color", "" ).toString() );
+        QString key = settings.value( entry + "URI", "" ).toString();
+        mFolderNotificationColors[ key ] = QColor( settings.value( entry + "Color", "" ).toString() );
+        mFolderNotificationList.push_back( key );
     }
 
     // Load new email data from settings
