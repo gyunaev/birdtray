@@ -62,6 +62,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxEnableNewEmail->setChecked( pSettings->mNewEmailMenuEnabled );
     boxBlinkingUsesAlpha->setChecked( pSettings->mBlinkingUseAlphaTransition );
     boxAllowSuppression->setChecked( pSettings->mAllowSuppressingUnreads );
+    spinUnreadOpacityLevel->setValue( pSettings->mUnreadOpacityLevel * 100 );
 
     if ( pSettings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
@@ -161,6 +162,7 @@ void DialogSettings::accept()
     pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
     pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
     pSettings->mUseMorkParser = isMorkParserSelected();
+    pSettings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
 
     pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
 

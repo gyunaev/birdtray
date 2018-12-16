@@ -37,6 +37,7 @@ void Settings::save()
     settings.setValue("advanced/notificationfontmaxsize", mNotificationMaximumFontSize );
     settings.setValue("advanced/watchfiletimeout", mWatchFileTimeout );
     settings.setValue("advanced/blinkingusealpha", mBlinkingUseAlphaTransition );
+    settings.setValue("advanced/unreadopacitylevel", mUnreadOpacityLevel );
 
     // Convert the map into settings
     settings.setValue("accounts/count", mFolderNotificationColors.size() );
@@ -106,6 +107,7 @@ void Settings::load()
     mUseMorkParser = settings.value("advanced/unreadmorkparser", true ).toBool();
     mWatchFileTimeout = settings.value("advanced/watchfiletimeout", 150 ).toUInt();
     mBlinkingUseAlphaTransition = settings.value("advanced/blinkingusealpha", false ).toBool();
+    mUnreadOpacityLevel = settings.value("advanced/unreadopacitylevel", 0.75 ).toDouble();
 
     mFolderNotificationColors.clear();
 

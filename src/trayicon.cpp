@@ -316,13 +316,13 @@ void TrayIcon::blinkTimeout()
         if ( pSettings->mBlinkSpeed != 0 )
         {
             // Flip the opacity
-            if ( mBlinkingIconOpacity == 0.75 )
-                mBlinkingIconOpacity = 0.15;
+            if ( mBlinkingIconOpacity == pSettings->mUnreadOpacityLevel )
+                mBlinkingIconOpacity = 1.0 - pSettings->mUnreadOpacityLevel;
             else
-                mBlinkingIconOpacity = 0.75;
+                mBlinkingIconOpacity = pSettings->mUnreadOpacityLevel;
         }
         else
-            mBlinkingIconOpacity = 0.75;
+            mBlinkingIconOpacity = pSettings->mUnreadOpacityLevel;
     }
 
     updateIcon();

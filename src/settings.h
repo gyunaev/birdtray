@@ -37,6 +37,9 @@ class Settings
         // Blinking speed
         unsigned int    mBlinkSpeed;
 
+        // Opacity level for the tray icon when unread email is present (0.0-1.0)
+        double          mUnreadOpacityLevel;
+
         // Path to Thunderbird folder
         QString mThunderbirdFolderPath;
 
