@@ -432,7 +432,10 @@ void TrayIcon::actionIgnoreEmails()
 void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if ( reason == QSystemTrayIcon::Trigger )
-        actionActivate();
+    {
+        if ( pSettings->mShowHideThunderbird )
+            actionActivate();
+    }
 }
 
 void TrayIcon::createMenu()
