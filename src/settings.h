@@ -58,6 +58,9 @@ class Settings
         // Whether to launch Thunderbird when the app starts
         bool    mLaunchThunderbird;
 
+        // The delay in seconds to launch Thunderbird
+        int     mLaunchThunderbirdDelay;
+
         // Whether to hide Thunderbird window after starting
         bool    mHideWhenStarted;
 
@@ -81,6 +84,9 @@ class Settings
 
         // Whether to allow suppression of unread emails
         bool    mAllowSuppressingUnreads;
+
+        // Whether to show the unread email count
+        bool    mShowUnreadEmailCount;
 
         // Watching file timeout (ms)
         unsigned int mWatchFileTimeout;

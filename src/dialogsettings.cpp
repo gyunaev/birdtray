@@ -63,6 +63,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxBlinkingUsesAlpha->setChecked( pSettings->mBlinkingUseAlphaTransition );
     boxAllowSuppression->setChecked( pSettings->mAllowSuppressingUnreads );
     spinUnreadOpacityLevel->setValue( pSettings->mUnreadOpacityLevel * 100 );
+    spinThunderbirdStartDelay->setValue( pSettings->mLaunchThunderbirdDelay );
+    boxShowUnreadCount->setChecked( pSettings->mShowUnreadEmailCount );
 
     if ( pSettings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
@@ -163,6 +165,8 @@ void DialogSettings::accept()
     pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
     pSettings->mUseMorkParser = isMorkParserSelected();
     pSettings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
+    pSettings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
+    pSettings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
 
     pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
 

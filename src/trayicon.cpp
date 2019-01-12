@@ -30,6 +30,8 @@ TrayIcon::TrayIcon()
     mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
 
+    mThunderbirdStartTime = QDateTime::currentDateTime().addSecs( pSettings->mLaunchThunderbirdDelay );
+
     mWinTools = WindowTools::create();
 
     // If the settings are not yet configure, pop up the message
@@ -169,7 +171,7 @@ void TrayIcon::updateIcon()
     }
 
     // Do we need to draw the unread counter?
-    if ( unread > 0 )
+    if ( unread > 0 && pSettings->mShowUnreadEmailCount )
     {
         // Find the suitable font size, starting from 4
         QString countvalue = QString::number( unread );
@@ -266,7 +268,7 @@ void TrayIcon::updateState()
             if ( !mThunderbirdWindowExisted )
             {
                 // No. Shall we start it?
-                if ( pSettings->mLaunchThunderbird && !mThunderbirdProcess )
+                if ( pSettings->mLaunchThunderbird && !mThunderbirdProcess && mThunderbirdStartTime < QDateTime::currentDateTime() )
                 {
                     startThunderbird();
 

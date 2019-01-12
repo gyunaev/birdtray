@@ -154,6 +154,16 @@
              </spacer>
             </item>
             <item>
+             <widget class="QCheckBox" name="boxShowUnreadCount">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of blinking (or different, if changed) icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Show unread count</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="boxNotificationIconUnread">
               <property name="text">
                <string>Different icon when unread:</string>
@@ -379,6 +389,22 @@
              <widget class="QCheckBox" name="boxLaunchThunderbirdAtStart">
               <property name="text">
                <string>Start Thunderbird when Birdtray starts</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinThunderbirdStartDelay">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="suffix">
+               <string> second delay</string>
+              </property>
+              <property name="prefix">
+               <string>with a </string>
+              </property>
+              <property name="maximum">
+               <number>60</number>
               </property>
              </widget>
             </item>

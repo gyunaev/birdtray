@@ -29,6 +29,8 @@ void Settings::save()
     settings.setValue("common/hidewhenstarted", mHideWhenStarted );
     settings.setValue("common/hidewhenrestarted", mHideWhenRestarted );
     settings.setValue("common/allowsuppressingunread", mAllowSuppressingUnreads );
+    settings.setValue("common/launchthunderbirddelay", mLaunchThunderbirdDelay );
+    settings.setValue("common/showunreademailcount", mShowUnreadEmailCount );
 
     settings.setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     settings.setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
@@ -99,6 +101,8 @@ void Settings::load()
     mHideWhenStarted = settings.value("common/hidewhenstarted", false ).toBool();
     mHideWhenRestarted = settings.value("common/hidewhenrestarted", false ).toBool();
     mAllowSuppressingUnreads = settings.value("common/allowsuppressingunread", false ).toBool();
+    mLaunchThunderbirdDelay = settings.value("common/launchthunderbirddelay", 0 ).toInt();
+    mShowUnreadEmailCount = settings.value("common/showunreademailcount", true ).toBool();
 
     mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();

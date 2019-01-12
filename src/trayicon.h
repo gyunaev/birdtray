@@ -96,6 +96,9 @@ class TrayIcon : public QSystemTrayIcon
         // Current status
         QString         mCurrentStatus;
 
+        // Time when Thunderbird could be started
+        QDateTime       mThunderbirdStartTime;
+
         // If true, Thunderbird window existed anytime before, but not necessarily now
         // (we use this to distinguish between start and restart)
         bool            mThunderbirdWindowExisted;
