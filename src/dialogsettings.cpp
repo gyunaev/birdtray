@@ -288,7 +288,8 @@ void DialogSettings::accountAdd()
 
 void DialogSettings::accountEdit()
 {
-    accountEditIndex( treeAccounts->currentIndex() );
+    if ( treeAccounts->currentIndex().isValid() )
+        accountEditIndex( treeAccounts->currentIndex() );
 }
 
 void DialogSettings::accountEditIndex(const QModelIndex &index)

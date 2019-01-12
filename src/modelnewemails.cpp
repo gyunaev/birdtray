@@ -74,12 +74,15 @@ void ModelNewEmails::add()
 
 void ModelNewEmails::edit(const QModelIndex &idx)
 {
-    if ( mNewEmailData[ idx.row() ].edit() )
+    if ( idx.isValid() && mNewEmailData[ idx.row() ].edit() )
         emit dataChanged( createIndex( idx.row(), 0 ),  createIndex( idx.row(), 1 ) );
 }
 
 void ModelNewEmails::remove(const QModelIndex &idx)
 {
+    if ( !idx.isValid() )
+        return;
+
     beginRemoveRows( QModelIndex(), idx.row(), idx.row() );
     mNewEmailData.removeAt( idx.row() );
     endRemoveRows();
