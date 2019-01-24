@@ -4,6 +4,7 @@
 #include "trayicon.h"
 #include "settings.h"
 #include "morkparser.h"
+#include "utils.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,12 @@ int main(int argc, char *argv[])
     if ( argc == 3 && !strcmp( argv[1], "--dumpmork" ) )
     {
         MorkParser::dumpMorkFile( argv[2] );
+        return 1;
+    }
+
+    if ( argc == 3 && !strcmp( argv[1], "--decode" ) )
+    {
+        printf( "Decoded: %s\n", qPrintable( Utils::decodeIMAPutf7( argv[2] )));
         return 1;
     }
 

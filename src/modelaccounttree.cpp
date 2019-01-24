@@ -2,6 +2,7 @@
 
 #include "settings.h"
 #include "modelaccounttree.h"
+#include "utils.h"
 
 ModelAccountTree::ModelAccountTree( QObject *parent )
     : QAbstractItemModel( parent )
@@ -27,7 +28,7 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
         if ( role == Qt::DisplayRole )
         {
             if ( index.column() == 0 )
-                return mAccounts[index.row()];
+                return Utils::decodeIMAPutf7( mAccounts[index.row()] );
             else
                 return "uses this color";
         }
