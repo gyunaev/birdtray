@@ -32,9 +32,10 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
             else
                 return "uses this color";
         }
-
-        if ( role == Qt::BackgroundRole && index.column() == 1 )
+        else if ( role == Qt::BackgroundRole && index.column() == 1 )
             return QBrush( mColors[index.row()] );
+        else if ( role == Qt::ToolTipRole && index.column() == 0 )
+            return mAccounts[index.row()];
     }
 
     return QVariant();
