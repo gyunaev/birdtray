@@ -38,6 +38,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Account buttons
         void    accountAdd();
+        void    accountAddMultiple();
         void    accountEdit();
         void    accountEditIndex( const QModelIndex& index );
         void    accountRemove();

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>576</width>
-    <height>394</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>1</number>
      </property>
      <property name="tabBarAutoHide">
       <bool>false</bool>
@@ -307,19 +307,6 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <spacer name="verticalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QPushButton" name="btnAccountAdd">
                 <property name="text">
                  <string>Add</string>
@@ -341,7 +328,14 @@
                </widget>
               </item>
               <item>
-               <spacer name="verticalSpacer_3">
+               <widget class="QPushButton" name="btnAccountAddMultiple">
+                <property name="text">
+                 <string>Add multiple...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_10">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
