@@ -1,4 +1,6 @@
 #include "utils.h"
+#include "settings.h"
+
 #include <QTextCodec>
 
 
@@ -109,4 +111,19 @@ QString Utils::decodeIMAPutf7(const QString &param)
         qWarning("Invalid IMAP UTF7 sequence: '%s' may be decoded incorrectly", qPrintable(param) );
 
     return out;
+}
+
+void Utils::debug(const char *fmt, ...)
+{
+    va_list vl;
+    char buf[8192];
+
+    if ( !pSettings->mVerboseOutput )
+        return;
+
+    va_start( vl, fmt );
+    vsnprintf( buf, sizeof(buf) - 1, fmt, vl );
+    va_end( vl );
+
+    qDebug( "%s", buf );
 }

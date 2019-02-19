@@ -37,6 +37,9 @@ int main(int argc, char *argv[])
     pSettings = new Settings();
     pSettings->load();
 
+    if ( argc == 2 && !strcmp( argv[1], "--debug" ) )
+        pSettings->mVerboseOutput = true;
+
     TrayIcon trayicon;
     return a.exec();
 }

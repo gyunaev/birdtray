@@ -104,6 +104,9 @@ class Settings
         QMap< QString, QColor >   mFolderNotificationColors;
         QStringList               mFolderNotificationList;
 
+        // Whether to spam debugging stuff
+        bool    mVerboseOutput;
+
         // Load and save them
         void    save();
         void    load();

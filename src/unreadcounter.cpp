@@ -8,7 +8,7 @@
 #include "morkparser.h"
 #include "settings.h"
 #include "trayicon.h"
-
+#include "utils.h"
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     : QThread( 0 ), mChangedMSFtimer(this)
@@ -125,9 +125,9 @@ bool UnreadMonitor::openDatabase()
     }
 
     for ( int id : mFolderColorMap.keys() )
-        qDebug("Color for ID %d: %s", id, qPrintable( mFolderColorMap[id].name() ) );
+        Utils::debug("Color for ID %d: %s", id, qPrintable( mFolderColorMap[id].name() ) );
 
-    qDebug("List of all IDs: %s", qPrintable( mAllFolderIDs ) );
+    Utils::debug("List of all IDs: %s", qPrintable( mAllFolderIDs ) );
 
     mDBWatcher.addPath( mSqliteDbFile );
 
@@ -137,7 +137,7 @@ bool UnreadMonitor::openDatabase()
 
 void UnreadMonitor::updateUnread()
 {
-    qDebug("Triggering the unread counter update");
+    Utils::debug("Triggering the unread counter update");
 
     // We execute a single statement and then parse the groups and decide on colors.
     QColor chosencolor;
@@ -279,7 +279,7 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
                     if ( correct )
                         unread += value;
                     else
-                        qDebug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));                }
+                        Utils::debug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));                }
             }
         }
     }
@@ -306,13 +306,13 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
                         if ( correct )
                             unread += value;
                         else
-                            qDebug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));
+                            Utils::debug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));
                     }
                 }
             }
         }
     }
 
-    qDebug("Unread counter for %s: %d", qPrintable( path ), unread );
+    Utils::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
 }

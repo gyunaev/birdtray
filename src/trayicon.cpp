@@ -11,6 +11,7 @@
 #include "unreadcounter.h"
 #include "dialogsettings.h"
 #include "windowtools.h"
+#include "utils.h"
 
 TrayIcon::TrayIcon()
 {
@@ -64,7 +65,7 @@ TrayIcon::TrayIcon()
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 {
-    qDebug("unreadCounterUpdate %d", total );
+    Utils::debug("unreadCounterUpdate %d", total );
     mUnreadCounter = total;
     mUnreadColor = color;
 
@@ -385,7 +386,7 @@ void TrayIcon::actionSnoozeFor()
     QAction * action = (QAction *) sender();
     mSnoozedUntil = QDateTime::currentDateTimeUtc().addSecs( action->data().toInt() );
 
-    qDebug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
+    Utils::debug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
 
     // Unhide the unsnoozer
     mMenuUnsnooze->setVisible( true );
@@ -551,7 +552,7 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    qDebug("Starting Thunderbird as '%s'", qPrintable( pSettings->mThunderbirdCmdLine ) );
+    Utils::debug("Starting Thunderbird as '%s'", qPrintable( pSettings->mThunderbirdCmdLine ) );
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();

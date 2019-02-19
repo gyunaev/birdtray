@@ -9,6 +9,7 @@ Settings * pSettings;
 Settings::Settings()
 {
     mIconSize = QSize( 128, 128 );
+    mVerboseOutput = false;
 }
 
 void Settings::save()

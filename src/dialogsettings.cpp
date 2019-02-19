@@ -11,7 +11,7 @@
 #include "databaseaccounts.h"
 #include "dialogaddeditaccount.h"
 #include "databaseunreadfixer.h"
-
+#include "utils.h"
 
 DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
@@ -254,7 +254,7 @@ void DialogSettings::databaseUnreadsUpdate(int progresspercentage)
 
 void DialogSettings::databaseUnreadsFixed( QString errorMsg )
 {
-    qDebug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
+    Utils::debug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
 
     mProgressFixer->close();
     delete mProgressFixer;
