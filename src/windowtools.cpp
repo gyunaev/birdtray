@@ -1,7 +1,14 @@
 #include <QtCore>
 
 #include "windowtools.h"
-#include "windowtools_x11.h"
+#if defined (Q_OS_WIN)
+#  include "windowtools_win.h"
+#elif defined (Q_OS_MAC)
+// TODO
+#else
+#  include "windowtools_x11.h"
+#endif
+
 
 WindowTools::WindowTools()
     : QObject()
@@ -20,7 +27,7 @@ WindowTools *WindowTools::create()
     if ( !tools )
     {
 #if defined (Q_OS_WIN)
-    tools = 0;
+    tools = new WindowTools_Win();
 #elif defined (Q_OS_MAC)
     tools = 0;
 #else

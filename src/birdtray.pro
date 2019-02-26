@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui x11extras
+QT       += core gui
 CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-LIBS += -lsqlite3 -lX11
+LIBS += -lsqlite3
 #-lXpm -lXmu
 
 SOURCES += \
@@ -37,7 +37,6 @@ SOURCES += \
     dialogaddeditaccount.cpp \
     dialogsettings.cpp \
     windowtools.cpp \
-    windowtools_x11.cpp \
     dialogaddeditnewemail.cpp \
     setting_newemail.cpp \
     modelnewemails.cpp \
@@ -57,7 +56,6 @@ HEADERS += \
     dialogsettings.h \
     version.h \
     windowtools.h \
-    windowtools_x11.h \
     dialogaddeditnewemail.h \
     setting_newemail.h \
     modelnewemails.h \
@@ -72,3 +70,14 @@ FORMS += \
 
 RESOURCES += \
     resources.qrc
+
+unix {
+     SOURCES += windowtools_x11.cpp
+     HEADERS += windowtools_x11.h
+     LIBS += -lX11
+     QT += x11extras
+}
+win32 {
+     SOURCES += windowtools_win.cpp
+     HEADERS += windowtools_win.h
+}
