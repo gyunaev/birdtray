@@ -1,0 +1,7 @@
+build*/
+cmake-build-*/
+src/birdtray.pro.user
+
+.idea/*
+!.idea/codeStyles
+!.idea/runConfigurations
