@@ -1,6 +1,10 @@
 build*/
 cmake-build-*/
 src/birdtray.pro.user
+installer/birdTray-*
+installer/**/*.xml
+installer/packages/com.ulduzsoft.birdtray.main/data/**
+installer/packages/com.ulduzsoft.birdtray.main/meta/LICENSE
 
 .idea/*
 !.idea/codeStyles

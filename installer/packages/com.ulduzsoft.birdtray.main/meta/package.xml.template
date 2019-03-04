@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>BirdTray application</DisplayName>
+    <Description>The BirdTray application.</Description>
+    <Version>{version}</Version>
+    <ReleaseDate>{date}</ReleaseDate>
+    <Licenses>
+        <License name="GNU General Public License v3.0" file="LICENSE" />
+    </Licenses>
+    <ForcedInstallation>true</ForcedInstallation>
+    <RequiresAdminRights>true</RequiresAdminRights>
+    <Checkable>false</Checkable>
+</Package>

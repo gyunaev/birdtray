@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Autorun entry</DisplayName>
+    <Description>Automatically start BirdTray on logon.</Description>
+    <Version>1.0.0</Version>
+    <ReleaseDate>{date}</ReleaseDate>
+    <RequiresAdminRights>true</RequiresAdminRights>
+    <Dependencies>com.ulduzsoft.birdtray.main</Dependencies>
+    <Script>installScript.qs</Script>
+    <Default>false</Default>
+</Package>

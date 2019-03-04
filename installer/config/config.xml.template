@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>BirdTray</Name>
+    <Version>{version}</Version>
+    <Title>BirdTray</Title>
+    <Publisher>Ulduzsoft</Publisher>
+    <ProductUrl>ulduzsoft.com</ProductUrl>
+    <StartMenuDir>BirdTray</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/BirdTray</TargetDir>
+    <RemoveTargetDir>true</RemoveTargetDir>
+    <RunProgram>@ApplicationsDir@/BirdTray/birdtray.exe</RunProgram>
+    <RunProgramDescription>Run BirdTray</RunProgramDescription>
+</Installer>
