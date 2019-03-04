@@ -423,7 +423,7 @@ void TrayIcon::actionNewEmail()
         args << pSettings->mNewEmailData[index].asArgs();
     }
 
-    QProcess::startDetached( pSettings->mThunderbirdCmdLine, args );
+    QProcess::startDetached( pSettings->getThunderbirdExecutablePath(), args );
 }
 
 void TrayIcon::actionIgnoreEmails()
@@ -552,7 +552,8 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    Utils::debug("Starting Thunderbird as '%s'", qPrintable( pSettings->mThunderbirdCmdLine ) );
+    QString thunderbirdExePath = pSettings->getThunderbirdExecutablePath();
+    Utils::debug("Starting Thunderbird as '%s'", qPrintable( thunderbirdExePath ) );
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();
@@ -564,7 +565,7 @@ void TrayIcon::startThunderbird()
     connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::tbProcessError );
 #endif
 
-    mThunderbirdProcess->start( pSettings->mThunderbirdCmdLine );
+    mThunderbirdProcess->start( thunderbirdExePath );
 }
 
 void TrayIcon::tbProcessError(QProcess::ProcessError )
@@ -572,7 +573,7 @@ void TrayIcon::tbProcessError(QProcess::ProcessError )
     QMessageBox::critical( 0,
                            tr("Cannot start Thunderbird"),
                            tr("Error starting Thunderbird as %1:\n\n%2")
-                                .arg( pSettings->mThunderbirdCmdLine )
+                                .arg( pSettings->getThunderbirdExecutablePath() )
                                 .arg( mThunderbirdProcess->errorString() ) );
 
     // We keep the mThunderbirdProcess pointer, so the process is not restarted again

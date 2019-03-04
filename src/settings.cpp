@@ -3,6 +3,13 @@
 #include <QDir>
 
 #include "settings.h"
+#include "utils.h"
+
+#ifdef Q_OS_WIN
+#  define THUNDERBIRD_EXE_PATH "\"%ProgramFiles(x86)%\\Mozilla Thunderbird\\thunderbird.exe\""
+#else
+#  define THUNDERBIRD_EXE_PATH "/usr/bin/thunderbird"
+#endif
 
 Settings * pSettings;
 
@@ -105,7 +112,7 @@ void Settings::load()
     mLaunchThunderbirdDelay = settings.value("common/launchthunderbirddelay", 0 ).toInt();
     mShowUnreadEmailCount = settings.value("common/showunreademailcount", true ).toBool();
 
-    mThunderbirdCmdLine = settings.value("advanced/tbcmdline", "/usr/bin/thunderbird" ).toString();
+    mThunderbirdCmdLine = settings.value("advanced/tbcmdline", THUNDERBIRD_EXE_PATH).toString();
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize", 4 ).toInt();
     mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize", 512 ).toInt();
@@ -138,6 +145,15 @@ void Settings::load()
         QString entry = "newemail/id" + QString::number( index );
         mNewEmailData.push_back( Setting_NewEmail::fromByteArray( settings.value( entry, "" ).toByteArray() ) );
     }
+}
+
+QString Settings::getThunderbirdExecutablePath() {
+    QString path = mThunderbirdCmdLine;
+    if (path.startsWith('"')) {
+        path = path.section('"', 1, 1);
+    }
+    path = Utils::expandPath(path);
+    return '"' + QFileInfo(path).absoluteFilePath() + '"';
 }
 
 void Settings::savePixmap(QSettings &settings, const QString &key, const QPixmap &pixmap)
