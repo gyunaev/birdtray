@@ -343,7 +343,7 @@ void TrayIcon::actionQuit()
             mWinTools->closeWindow();
     }
 
-    exit( 0 );
+    QApplication::quit();
 }
 
 void TrayIcon::actionSettings()
