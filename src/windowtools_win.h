@@ -4,7 +4,6 @@
 #include "windowtools.h"
 
 #include <windows.h>
-#include <QTimer>
 
 /**
  * Windows implementation of the window tools.
@@ -56,34 +55,43 @@ public:
      */
     bool isValid() override;
 
-private slots:
-    /**
-     * Timer callback to check if the Thunderbird window is minimized.
-     */
-    void timerWindowState();
-
 private:
     /**
-     * Ensure that the Thunderbid window is still valid or refresh it otherwise.
+     * Ensure that the Thunderbird window is still valid or refresh it otherwise.
      *
      * @return true, if we have a valid Thunderbird window.
      */
     bool checkWindow();
     
     /**
-     * Cool-down for the hide timer to not hide the window when we un-hide it.
+     * Callback when the thunderbird window was minimized.
+     *
+     * @param eventHook The handle of this event hook.
+     * @param event The minimize event.
+     * @param window The window that was minimized.
+     * @param idObject The object that was changed.
+     * @param idChild Identifies if the cause of the event was a child of the object.
+     * @param idEventThread The thread that belongs to the event.
+     * @param eventTime The time of the event.
      */
-    int hideCoolDown;
+    static void CALLBACK minimizeCallback(
+            HWINEVENTHOOK eventHook, DWORD event, HWND window, LONG idObject,
+            LONG idChild, DWORD idEventThread, DWORD eventTime);
+    
+    /**
+     * A static instance for the minimize callback.
+     */
+    static WindowTools_Win* singleton;
+    
+    /**
+     * The handle to the minimize hook.
+     */
+    HWINEVENTHOOK thunderbirdMinimizeHook;
     
     /**
      * The handle to the Thunderbird window.
      */
     HWND thunderbirdWindow;
-    
-    /**
-     * Timer for the minimized window check.
-     */
-    QTimer windowStateTimer;
 };
 
 #endif // WINDOW_TOOLS_WIN_H
