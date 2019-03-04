@@ -82,5 +82,4 @@ set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
 add_executable(birdtray
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${HEADERS} ${PLATFORM_HEADERS})
-message(REQUIRED_MODULES: ${REQUIRED_MODULES})
 target_link_libraries(birdtray ${REQUIRED_MODULES})
