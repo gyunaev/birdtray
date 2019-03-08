@@ -1,15 +1,29 @@
 #include "windowtools_win.h"
 #include <tlhelp32.h>
 #include "settings.h"
-#include "utils.h"
+
+#ifndef __unused
+#  ifdef __GNUC__
+#    define __unused __attribute__((unused))
+#  elif defined(__LCLINT__)
+#    define __unused /*@unused@*/
+#  else
+#    define __unused
+#  endif
+#endif /* !defined(__unused) */
 
 /**
  * Helper data structure for the findMainWindow function.
  */
 struct _WindowFindData {
-    DWORD processId;
     HWND windowHandle;
+    DWORD processId;
 };
+
+/**
+ * A static instance for the minimize callback.
+ */
+WindowTools_Win* WindowTools_Win::singleton = nullptr;
 
 /**
  * Determine whether a window handle is the main window of the corresponding process.
@@ -79,16 +93,17 @@ static DWORD getProcessId(LPCWCH processName) {
 
 
 WindowTools_Win::WindowTools_Win() : WindowTools() {
+    singleton = this;
     thunderbirdWindow = nullptr;
-    hideCoolDown = 0;
-    connect(&windowStateTimer, &QTimer::timeout, this, &WindowTools_Win::timerWindowState);
-    windowStateTimer.setInterval(250);
-    windowStateTimer.start();
+    thunderbirdMinimizeHook = nullptr;
 }
 
 WindowTools_Win::~WindowTools_Win() {
-    windowStateTimer.stop();
     thunderbirdWindow = nullptr;
+    if (thunderbirdMinimizeHook != nullptr) {
+        UnhookWinEvent(thunderbirdMinimizeHook);
+        thunderbirdMinimizeHook = nullptr;
+    }
 }
 
 bool WindowTools_Win::lookup() {
@@ -102,14 +117,23 @@ bool WindowTools_Win::lookup() {
     }
     
     thunderbirdWindow = findMainWindow(thunderbirdProcessId);
-    return thunderbirdWindow != nullptr;
+    if (thunderbirdWindow == nullptr) {
+        return false;
+    }
+    DWORD thunderbirdThreadId = GetWindowThreadProcessId(thunderbirdWindow, &thunderbirdProcessId);
+    if (thunderbirdThreadId) {
+        thunderbirdMinimizeHook = SetWinEventHook(
+                EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MINIMIZESTART, nullptr,
+                &WindowTools_Win::minimizeCallback, thunderbirdProcessId,
+                thunderbirdThreadId, WINEVENT_OUTOFCONTEXT);
+    }
+    return true;
 }
 
 bool WindowTools_Win::show() {
     if (!checkWindow()) {
         return false;
     }
-    hideCoolDown = 2;
     ShowWindow(this->thunderbirdWindow, SW_SHOW);
     if (IsIconic(this->thunderbirdWindow)) {
         ShowWindow(this->thunderbirdWindow, SW_RESTORE);
@@ -140,16 +164,18 @@ bool WindowTools_Win::isValid() {
     return thunderbirdWindow != nullptr && IsWindow(thunderbirdWindow);
 }
 
-void WindowTools_Win::timerWindowState() {
-    if (!pSettings->mHideWhenMinimized || hideCoolDown-- > 0 || !isValid()) {
-        return;
-    }
-    hideCoolDown = 0;
-    if (IsIconic(this->thunderbirdWindow) && IsWindowVisible(this->thunderbirdWindow)) {
-        this->hide();
-    }
-}
-
 bool WindowTools_Win::checkWindow() {
     return isValid() || lookup();
+}
+
+void CALLBACK WindowTools_Win::minimizeCallback(
+        HWINEVENTHOOK __unused eventHook, DWORD event, HWND window, LONG idObject,
+        LONG idChild, DWORD __unused idEventThread, DWORD __unused eventTime) {
+    if (event == EVENT_SYSTEM_MINIMIZESTART &&
+        window == singleton->thunderbirdWindow &&
+        idObject == OBJID_WINDOW && idChild == INDEXID_CONTAINER &&
+        pSettings->mHideWhenMinimized && singleton->isValid() &&
+        IsIconic(singleton->thunderbirdWindow) && IsWindowVisible(singleton->thunderbirdWindow)) {
+        singleton->hide();
+    }
 }
