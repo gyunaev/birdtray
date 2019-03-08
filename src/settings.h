@@ -110,6 +110,11 @@ class Settings
         // Load and save them
         void    save();
         void    load();
+        
+        /**
+         * @return The absolute path to the thunderbird executable.
+         */
+        QString getThunderbirdExecutablePath();
 
     private:
         void    savePixmap( QSettings& settings, const QString& key, const QPixmap& pixmap );

@@ -3,6 +3,13 @@
 
 #include <QTextCodec>
 
+#if defined (Q_OS_WIN)
+#  include <windows.h>
+#elif defined (Q_OS_MAC)
+#else
+#  include <wordexp.h>
+#endif
+
 
 QString Utils::decodeIMAPutf7(const QString &param)
 {
@@ -111,6 +118,39 @@ QString Utils::decodeIMAPutf7(const QString &param)
         qWarning("Invalid IMAP UTF7 sequence: '%s' may be decoded incorrectly", qPrintable(param) );
 
     return out;
+}
+
+QString Utils::expandPath(const QString &path) {
+#if defined (Q_OS_WIN)
+    TCHAR buffer[PATH_MAX];
+#if defined(UNICODE)
+    std::wstring originalPath = path.toStdWString();
+#else
+    std::string originalPath = path.toStdWString();
+#endif /* defined(UNICODE) */
+    DWORD resultSize = ExpandEnvironmentStrings(
+            originalPath.data(), buffer, sizeof(buffer) / sizeof(buffer[0]));
+    if (resultSize == 0 || resultSize > sizeof(buffer) / sizeof(buffer[0])) {
+        return path;
+    }
+#if defined(UNICODE)
+    return QString::fromWCharArray(buffer, static_cast<int>(resultSize - 1));
+#else
+    return QString(buffer);
+#endif /* defined(UNICODE) */
+
+#elif defined (Q_OS_MAC)
+    return path;
+    
+#else
+    wordexp_t result;
+    if (wordexp(path.toStdString().data(), &result, WRDE_NOCMD) != 0) {
+        return path;
+    }
+    QString expandedPath(result.we_wordv[0]);
+    wordfree(&result);
+    return expandedPath;
+#endif
 }
 
 void Utils::debug(const char *fmt, ...)
