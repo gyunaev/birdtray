@@ -1,0 +1,42 @@
+#include <windows.h>
+
+#define VERSION     1,5,1,0
+#define VERSION_STR "1.5.1\0"
+#define IDI_ICON_1 102
+#ifndef DEBUG
+#define VER_DEBUG 0
+#else
+#define VER_DEBUG VS_FF_DEBUG
+#endif
+#define US_ENGLISH 0x409
+#define MULTILINGUAL 1252
+
+IDI_ICON_1 ICON "birdtray.ico"
+VS_VERSION_INFO VERSIONINFO
+    FILEVERSION    VERSION
+    PRODUCTVERSION VERSION
+    FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+    FILEFLAGS VER_DEBUG
+    FILEOS VOS__WINDOWS32
+    FILETYPE VFT_APP
+    FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "UlduzSoft\0"
+            VALUE "FileDescription", "A free system tray notification for new mail for Thunderbird\0"
+            VALUE "FileVersion", VERSION_STR
+            VALUE "InternalName", "BirdTray\0"
+            VALUE "LegalCopyright", L"Copyright \x00A9 2019 UlduzSoft\0"
+            VALUE "OriginalFilename", "birdtray.exe\0"
+            VALUE "ProductName", "BirdTray\0"
+            VALUE "ProductVersion", VERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", US_ENGLISH, MULTILINGUAL
+    END
+END
