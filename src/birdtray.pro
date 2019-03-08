@@ -71,6 +71,8 @@ FORMS += \
 RESOURCES += \
     resources.qrc
 
+RC_FILE = res\birdtray.rc
+
 unix {
      SOURCES += windowtools_x11.cpp
      HEADERS += windowtools_x11.h
