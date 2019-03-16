@@ -122,7 +122,6 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_LANGDLL_REGISTRY_ROOT SHCTX
 !define MUI_LANGDLL_REGISTRY_KEY "${UNINSTALL_REG_PATH}"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "Language"
-!define MUI_FINISHPAGE_NOAUTOCLOSE
 !ifdef UNINSTALL_BUILDER
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP ${SIDEBAR_IMG_FILE}
 !define MUI_UNICON ${MUI_ICON} # Same icon for installer and un-installer.
