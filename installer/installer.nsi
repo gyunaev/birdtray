@@ -23,7 +23,6 @@ SetCompressor /SOLID lzma
 
 # Included files
 !include NsisMultiUser.nsh
-!include StdUtils.nsh
 !include Sections.nsh
 !include MUI2.nsh
 !include x64.nsh
@@ -342,11 +341,6 @@ Section "Desktop Entry" SectionDesktopEntry
 SectionEnd
 
 Section /o "Start Menu Entry" SectionStartMenuEntry
-	${if} ${AtLeastWin7}
-	    DetailPrint "Creating start menu entry..."
-		${StdUtils.InvokeShellVerb} $0 "$INSTDIR" "${EXE_NAME}" \
-		    ${StdUtils.Const.ShellVerb.PinToStart}
-	${endif}
     CreateShortCut "$STARTMENU\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 SectionEnd
 
@@ -378,14 +372,6 @@ SectionEnd
 Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     SectionIn RO # Can't deselect this section
 
-    # Clean up "Start Menu Icon" and "Quick Launch Icon"
-    # InvokeShellVerb only works on existing files, so we call it before deleting the EXE
-    ${if} ${AtLeastWin7}
-        ${StdUtils.InvokeShellVerb} $1 "$INSTDIR" "${EXE_NAME}" \
-            ${StdUtils.Const.ShellVerb.UnpinFromStart}
-    ${endif}
-    !insertmacro DeleteRetryAbort "$STARTMENU\${PRODUCT_NAME}.lnk"
-
     # TODO: Automate this part, so that new files don't have to be added manually here
     # Try to delete the EXE as the first step - if it's in use, don't remove anything else
     !insertmacro DeleteRetryAbort "$INSTDIR\${EXE_NAME}"
@@ -403,6 +389,8 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     ${if} "$StartMenuFolder" != ""
         RMDir /r "$SMPROGRAMS\$StartMenuFolder"
     ${endif}
+    # Clean up "Start Menu Icon"
+    !insertmacro DeleteRetryAbort "$STARTMENU\${PRODUCT_NAME}.lnk"
 
     # Clean up "Dektop Icon"
     !insertmacro DeleteRetryAbort "$DESKTOP\${PRODUCT_NAME}.lnk"
