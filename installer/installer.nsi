@@ -39,6 +39,7 @@ ${UnStrRep}
 # Variables
 Var skipLicense # If 1, skip the license (we saw it already)
 Var startMenuFolder # The name of the start menu folder the user chose.
+Var currentUserString # Is "" for if the installation is for all users, else " (current user)"
 !ifdef UNINSTALL_BUILDER
 Var SemiSilentMode # Installer started uninstaller in semi-silent mode using /SS parameter
 Var RunningFromInstaller # Installer started uninstaller using /uninstall parameter
@@ -73,7 +74,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define LICENSE_FILE "LICENSE"
 !define LICENSE_PATH "..\${LICENSE_FILE}"
 !define DIST_DIR "winDeploy"
-!define UNINSTALL_REG_PATH "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
+!define UNINSTALL_REG_PATH \
+        "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}$currentUserString"
 !define USER_REG_PATH "Software\ulduzsoft"
 !define USER_SETTINGS_REG_PATH "${USER_REG_PATH}\${PRODUCT_NAME}"
 !define DEFAULT_INSTALL_PATH "$PROGRAMFILES\${PRODUCT_NAME}"
@@ -289,6 +291,14 @@ Section "${PRODUCT_NAME}" SectionBirdTray
     # so that the user has the option to run the uninstaller if sth. goes wrong.
     File "uninstaller\${UNINSTALL_FILENAME}"
     !insertmacro MULTIUSER_RegistryAddInstallInfo
+
+    ReadRegStr $0 SHCTX "${UNINSTALL_REG_PATH}" "UninstallString"
+    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "QuietUninstallString" "$0 /S"
+    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "HelpLink" "${HELP_URL}"
+    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "URLUpdateInfo" "${UPDATE_URL}"
+    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "URLInfoAbout" "${ABOUT_URL}"
+    WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMajor" ${VERSION_MAJOR}
+    WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMinor" ${VERSION_MINOR}
     ${if} ${silent} # MUI doesn't write language in silent mode
         WriteRegStr "${MUI_LANGDLL_REGISTRY_ROOT}" "${MUI_LANGDLL_REGISTRY_KEY}" \
             "${MUI_LANGDLL_REGISTRY_VALUENAME}" $LANGUAGE
@@ -429,6 +439,8 @@ SectionEnd
 # Called when we switch from single user to multi-user installation or vice versa.
 Function InstallModePageChangeMode
 	!insertmacro MUI_STARTMENU_GETFOLDER "" $startMenuFolder
+    !insertmacro MULTIUSER_GetCurrentUserString $0
+    StrCpy $currentUserString "$0"
 FunctionEnd
 
 # === Installer functions === #
