@@ -96,20 +96,20 @@
 	Pop $0
 !macroend
 
-!insertmacro DeleteRetryAbortFunc ""
 !insertmacro CheckSingleInstanceFunc ""
 !ifdef UNINSTALL_BUILDER
     !insertmacro DeleteRetryAbortFunc "un."
     !insertmacro CheckSingleInstanceFunc "un."
 !else
+    !insertmacro DeleteRetryAbortFunc ""
 
-# Run the uninstaller of a previous installation.
-# $1 - UNINSTALLER_PATH: The quoted path to the uninstaller.
-Function RunUninstaller
-	StrCpy $0 0
-	# The _? param stops the uninstaller from copying itself to the temporary directory,
-	# which is the only way for ExecWait to work
-	ExecWait '$1 /SS $2 _?=$3' $0
+    # Run the uninstaller of a previous installation.
+    # $1 - UNINSTALLER_PATH: The quoted path to the uninstaller.
+    Function RunUninstaller
+        StrCpy $0 0
+        # The _? param stops the uninstaller from copying itself to the temporary directory,
+        # which is the only way for ExecWait to work
+        ExecWait '$1 /SS $2 _?=$3' $0
 FunctionEnd
 !endif # UNINSTALL_BUILDER
 

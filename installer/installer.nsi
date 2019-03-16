@@ -110,7 +110,6 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP ${HEADER_IMG_FILE}
 !define MUI_WELCOMEFINISHPAGE_BITMAP ${SIDEBAR_IMG_FILE}
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP ${SIDEBAR_IMG_FILE}
 !define MUI_STARTMENUPAGE_NODISABLE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT SHCTX
 !define MUI_STARTMENUPAGE_REGISTRY_KEY "${UNINSTALL_REG_PATH}"
@@ -125,6 +124,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_LANGDLL_REGISTRY_VALUENAME "Language"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !ifdef UNINSTALL_BUILDER
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP ${SIDEBAR_IMG_FILE}
 !define MUI_UNICON ${MUI_ICON} # Same icon for installer and un-installer.
 !define MUI_UNABORTWARNING
 !define MUI_UNCONFIRMPAGE_TEXT_TOP "Click uninstall to begin the process."
@@ -152,12 +152,14 @@ Name "${PRODUCT_NAME}"
 
     # Sign the uninstaller
     # !system "SIGNCODE <signing options> uninstaller\${UNINSTALL_FILENAME}" = 0
-!endif
+!endif # UNINSTALL_BUILDER
 CRCCheck on
 XPStyle on
 BrandingText " " # Branding footer disabled
 ShowInstDetails show
+!ifdef UNINSTALL_BUILDER
 ShowUninstDetails show
+!endif # UNINSTALL_BUILDER
 AllowSkipFiles off
 SetOverwrite on
 RequestExecutionLevel user # Admin escalation is done during install
@@ -444,7 +446,7 @@ Function .onInit
     !insertmacro CheckMinWinVer ${MIN_WINDOWS_VER}
     ${ifNot} ${UAC_IsInnerInstance}
         !insertmacro CheckPlatform ${Arch}
-        !insertmacro CheckSingleInstance "The Setup of ${PRODUCT_NAME} is already running.$\r$\n \
+        !insertmacro CheckSingleInstance "The setup of ${PRODUCT_NAME} is already running.$\r$\n \
             Please, close all instances of it and click Retry to continue, or Cancel to exit." \
             "Global" "${SETUP_MUTEX}"
     ${endif}
@@ -606,7 +608,9 @@ Function un.onInit
 
     ${ifNot} ${UAC_IsInnerInstance}
     ${andIf} $RunningFromInstaller == 0
-        !insertmacro CheckSingleInstance "Setup" "Global" "${SETUP_MUTEX}"
+        !insertmacro CheckSingleInstance "The uninstall of ${PRODUCT_NAME} is already running.$\r\
+            $\n Please, close all instances of it and click Retry to continue, or Cancel to exit." \
+            "Global" "${SETUP_MUTEX}"
     ${endif}
 
     !insertmacro MULTIUSER_UNINIT
