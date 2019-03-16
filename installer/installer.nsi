@@ -332,11 +332,11 @@ SectionEnd
 
 Section /o "Start Menu Entry" SectionStartMenuEntry
 	${if} ${AtLeastWin7}
+	    DetailPrint "Creating start menu entry..."
 		${StdUtils.InvokeShellVerb} $0 "$INSTDIR" "${EXE_NAME}" \
 		    ${StdUtils.Const.ShellVerb.PinToStart}
-	${else}
-		CreateShortCut "$STARTMENU\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 	${endif}
+    CreateShortCut "$STARTMENU\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 SectionEnd
 
 Section /o "AutoRun" SectionAutoRun
@@ -372,12 +372,8 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     ${if} ${AtLeastWin7}
         ${StdUtils.InvokeShellVerb} $1 "$INSTDIR" "${EXE_NAME}" \
             ${StdUtils.Const.ShellVerb.UnpinFromStart}
-        ${StdUtils.InvokeShellVerb} $1 "$INSTDIR" "${EXE_NAME}" \
-            ${StdUtils.Const.ShellVerb.UnpinFromTaskbar}
-    ${else}
-        !insertmacro DeleteRetryAbort "$STARTMENU\${PRODUCT_NAME}.lnk"
-        !insertmacro DeleteRetryAbort "$QUICKLAUNCH\${PRODUCT_NAME}.lnk"
     ${endif}
+    !insertmacro DeleteRetryAbort "$STARTMENU\${PRODUCT_NAME}.lnk"
 
     # TODO: Automate this part, so that new files don't have to be added manually here
     # Try to delete the EXE as the first step - if it's in use, don't remove anything else
