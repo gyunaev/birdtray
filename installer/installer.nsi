@@ -63,7 +63,6 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
         "Create a ${PRODUCT_NAME} program group under Start Menu > Programs."
 !define DESKTOP_ENTRY_DESCRIPTION "Create a ${PRODUCT_NAME} icon on the Desktop."
 !define START_MENU_DESCRIPTION "Create a ${PRODUCT_NAME} icon in the Start Menu."
-!define QUICK_LAUNCH_DESCRIPTION "Create a ${PRODUCT_NAME} icon in Quick Launch."
 !define USER_SETTINGS_DESCRIPTION "Your settings and configuration made within ${PRODUCT_NAME}."
 
 # Paths
@@ -124,6 +123,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_LANGDLL_REGISTRY_ROOT SHCTX
 !define MUI_LANGDLL_REGISTRY_KEY "${UNINSTALL_REG_PATH}"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "Language"
+!define MUI_FINISHPAGE_NOAUTOCLOSE
 !ifdef UNINSTALL_BUILDER
 !define MUI_UNICON ${MUI_ICON} # Same icon for installer and un-installer.
 !define MUI_UNABORTWARNING
@@ -339,16 +339,6 @@ Section /o "Start Menu Entry" SectionStartMenuEntry
 	${endif}
 SectionEnd
 
-Section /o "Quick Launch Entry" SectionQuickLaunchEntry
-	${if} ${AtLeastWin7}
-		${StdUtils.InvokeShellVerb} $0 "$INSTDIR" "${EXE_NAME}" \
-		    ${StdUtils.Const.ShellVerb.PinToTaskbar}
-	${else}
-		# The $QUICKLAUNCH folder is always only for the current user
-		CreateShortCut "$QUICKLAUNCH\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
-	${endif}
-SectionEnd
-
 Section /o "AutoRun" SectionAutoRun
     WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" \
         "${PRODUCT_NAME}" "$\"$INSTDIR\${EXE_NAME}$\""
@@ -368,7 +358,6 @@ SectionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "${PROGRAM_GROUP_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionDesktopEntry} "${DESKTOP_ENTRY_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionStartMenuEntry} "${START_MENU_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionQuickLaunchEntry} "${QUICK_LAUNCH_DESCRIPTION}"
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 !endif # UNINSTALL_BUILDER
@@ -551,8 +540,6 @@ Function ComponentsPagePre
 			SectionGetText ${SectionStartMenuEntry} $0
 			SectionSetText ${SectionStartMenuEntry} "$0 (current user only)"
 		${endif}
-		SectionGetText ${SectionQuickLaunchEntry} $0
-		SectionSetText ${SectionQuickLaunchEntry} "$0 (current user only)"
 	${endif}
     !endif # UNINSTALL_BUILDER
 FunctionEnd
