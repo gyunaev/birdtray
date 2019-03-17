@@ -352,10 +352,13 @@ FunctionEnd
             ${if} $R0 == 0 # Successfully killed the process
                 Sleep 100
                 ${nsProcess::FindProcess} ${EXE_NAME} $R0 # Check to be sure
+            ${else}
+                StrCpy $R0 0
             ${endif}
             ${if} $R0 == 0
                 MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "${DIALOG_KILL_FAILED}" \
                     /SD IDCANCEL IDRETRY 0 IDCANCEL stopFailed
+                ${nsProcess::FindProcess} ${EXE_NAME} $R0 # Check again
             ${endif}
         ${loop}
     ${endif}
