@@ -13,8 +13,10 @@ set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets)
 
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
+set(EXECUTABLE_OPTIONS)
 
 if (WIN32)
+    set(EXECUTABLE_OPTIONS WIN32)
     ENABLE_LANGUAGE(RC)
     add_definitions(-DUNICODE)
     find_library(USER32 user32)
@@ -81,6 +83,6 @@ source_group("Resources" FILES ${RESOURCES})
 qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
-add_executable(birdtray
+add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${HEADERS} ${PLATFORM_HEADERS})
 target_link_libraries(birdtray ${REQUIRED_MODULES})
