@@ -266,6 +266,8 @@ Section "${PRODUCT_NAME}" SectionBirdTray
             ${Switch} $0
                 ${case} 0 # Uninstaller completed successfully - continue with installation
                     BringToFront
+                    Sleep 1000 # Wait for the cmd.exe
+                    BringToFront
                     ${break}
                 ${case} 1 # Installation aborted by user (cancel button)
                 ${case} 2 # Installation aborted by script
@@ -414,6 +416,12 @@ Section -un.Post UNSectionSystem
     # Remove the uninstaller from registry as the very last step.
     # If sth. goes wrong, let the user run it again.
     !insertmacro MULTIUSER_RegistryRemoveInstallInfo
+
+    # If the uninstaller still exists, use cmd.exe on exit to remove it (along with $INSTDIR
+    # if it's empty). This is always the case when started with the _? parameter.
+    ${if} ${FileExists} "$INSTDIR\${UNINSTALL_FILENAME}"
+        Exec 'cmd.exe /c (del /f /q "$INSTDIR\${UNINSTALL_FILENAME}") && (rmdir "$INSTDIR")'
+    ${endif}
 SectionEnd
 
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
