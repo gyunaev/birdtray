@@ -18,7 +18,6 @@
 Unicode true
 !ifndef UNINSTALL_BUILDER
 SetCompressor /SOLID lzma
-!define MULTIUSER_NOUNINSTALL
 !endif # UNINSTALL_BUILDER
 
 # Included files
@@ -29,11 +28,12 @@ SetCompressor /SOLID lzma
 !include LogicLib.nsh
 !include WinVer.nsh
 !include StrFunc.nsh
-!include FileFunc.nsh
 !Include Utils.nsh
 # StrFunc.nsh requires priming the commands which actually get used later
 ${StrRep}
+!ifdef UNINSTALL_BUILDER
 ${UnStrRep}
+!endif # UNINSTALL_BUILDER
 
 # Variables
 Var skipLicense # If 1, skip the license (we saw it already)
