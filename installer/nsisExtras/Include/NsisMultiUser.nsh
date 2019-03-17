@@ -527,11 +527,16 @@ RequestExecutionLevel user ; will ask elevation only if necessary
 
 				; NOTES:
 				; - the _? param stops the uninstaller from copying itself to the temporary directory, which is the only way for waiting to work
-				; - $R0 passes the original parameters from the installer to the uninstaller (together with /uninstall so that uninstaller knows installer is running and skips opitional single instance checks)
+				; - $R0 passes the original parameters from the installer to the uninstaller (together with /uninstall so that uninstaller knows installer is running and skips optional single instance checks)
 				; - using ExecWait fails if the new process requires elevation, see http://forums.winamp.com/showthread.php?p=3080202&posted=1#post3080202, so we use ShellExecuteEx
-				System::Call '*(i 60, i 0x140, i 0, t "open", t "$0\${UNINSTALL_FILENAME}", t "$R0 _?=$0", t, i ${SW_SHOW}, i, i, t, i, i, i, i) p .r2' ; allocate and fill values for SHELLEXECUTEINFO structure, returned in $2 (0x140 = SEE_MASK_NOCLOSEPROCESS|SEE_MASK_NOASYNC)
+				StrCpy $1 '"$0\${UNINSTALL_FILENAME}"'
+				System::Call '*(i 60, i 0x140, i $HWNDPARENT, t "open", t r1, t "$R0 _?=$0", t, i ${SW_SHOW}, i, i, t, i, i, i, i) p .r2' ; allocate and fill values for SHELLEXECUTEINFO structure, returned in $2 (0x140 = SEE_MASK_NOCLOSEPROCESS|SEE_MASK_NOASYNC)
 
+                !ifdef NSIS_UNICODE
+				System::Call 'shell32::ShellExecuteExW(i r2) i .r0 ?e'
+				!else
 				System::Call 'shell32::ShellExecuteEx(i r2) i .r0 ?e'
+				!endif # NSIS_UNICODE
 				Pop $1
 				${if} $0 = 0
 					SetErrorLevel $1
