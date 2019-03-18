@@ -1,4 +1,4 @@
-# This script relies on NSIS 3.0, with the UAC, FindProc and NsisMultiUser.
+# This script relies on NSIS 3.0, with the nsProcess and NsisMultiUser plugin.
 
 # If uncommented, this script will build an intermediate uninstall_builder.exe
 # which generates an uninstaller when run. This extra step allows us to sign the
@@ -7,7 +7,7 @@
 # there is no need to uncomment this to generate the uninstaller.
 #!define UNINSTALL_BUILDER
 
-# If uncommented, installs the licence in the directory with the exe.
+# If uncommented, installs the licence in the installation directory.
 !define INSTALL_LICENSE
 
 !addplugindir /x86-ansi nsisExtras\Plugins\x86-ansi
@@ -36,12 +36,12 @@ ${UnStrRep}
 !endif # UNINSTALL_BUILDER
 
 # Variables
-Var skipLicense # If 1, skip the license (we saw it already)
+Var skipLicense # If 1, skip the license (we saw it already).
 Var startMenuFolder # The name of the start menu folder the user chose.
-Var currentUserString # Is "" for if the installation is for all users, else " (current user)"
+Var currentUserString # Is "" for if the installation is for all users, else " (current user)".
 !ifdef UNINSTALL_BUILDER
-Var SemiSilentMode # Installer started uninstaller in semi-silent mode using /SS parameter
-Var RunningFromInstaller # Installer started uninstaller using /uninstall parameter
+Var SemiSilentMode # Installer started uninstaller in semi-silent mode using /SS parameter.
+Var RunningFromInstaller # Installer started uninstaller using /uninstall parameter.
 !endif # UNINSTALL_BUILDER
 
 
