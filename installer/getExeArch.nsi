@@ -25,9 +25,9 @@ Function TrimQuotes
     Exch $R0
 FunctionEnd
 !macro _TrimQuotes Input Output
-  Push `${Input}`
-  Call TrimQuotes
-  Pop ${Output}
+    Push `${Input}`
+    Call TrimQuotes
+    Pop ${Output}
 !macroend
 !define TrimQuotes `!insertmacro _TrimQuotes`
 

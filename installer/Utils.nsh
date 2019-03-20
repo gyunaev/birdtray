@@ -11,89 +11,89 @@
 # Create a function with the given prefix to check for another running installer instance.
 # PREFIX: The prefix of the function.
 !macro CheckSingleInstanceFunc PREFIX
-	# Check if there is another running instance of the installer.
-	# $0 - ERR_DIALOG: The message of the dialog to display when another instance is running.
-	# $1 - SCOPE: "Global" or "Local" (default if empty).
-	# $2 - MUTEX_NAME: unique mutex name.
-	Function ${PREFIX}CheckSingleInstance
-		Push $3
-		Push $4
+    # Check if there is another running instance of the installer.
+    # $0 - ERR_DIALOG: The message of the dialog to display when another instance is running.
+    # $1 - SCOPE: "Global" or "Local" (default if empty).
+    # $2 - MUTEX_NAME: unique mutex name.
+    Function ${PREFIX}CheckSingleInstance
+        Push $3
+        Push $4
 
-		!if $1 == ""
-			StrCpy $1 "Local"
-		!endif
+        !if $1 == ""
+            StrCpy $1 "Local"
+        !endif
 
-		try:
-		System::Call 'kernel32::CreateMutex(i 0, i 0, t "$1\$2") i .r3 ?e'
-		Pop $4 # The stack contains the result of GetLastError
+        try:
+        System::Call 'kernel32::CreateMutex(i 0, i 0, t "$1\$2") i .r3 ?e'
+        Pop $4 # The stack contains the result of GetLastError
 
-		${if} $4 = ${ERROR_ALREADY_EXISTS}
+        ${if} $4 = ${ERROR_ALREADY_EXISTS}
         ${orIf} $4 = ${ERROR_ACCESS_DENIED}
             # ERROR_ACCESS_DENIED means the mutex was created by another user
             # and we don't have access to open it, so application is running.
-			MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "$0" /SD IDCANCEL IDCANCEL cancel
-			System::Call 'kernel32::CloseHandle(i $3)' # For next CreateMutex call to succeed
-			Goto try
+            MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "$0" /SD IDCANCEL IDCANCEL cancel
+            System::Call 'kernel32::CloseHandle(i $3)' # For next CreateMutex call to succeed
+            Goto try
 
-			cancel:
-			Quit
-		${endif}
+            cancel:
+            Quit
+        ${endif}
 
-		Pop $4
-		Pop $3
-	FunctionEnd
+        Pop $4
+        Pop $3
+    FunctionEnd
 !macroend
 
 # Create a function with the given prefix to try to delete a file or abort if not successful.
 # PREFIX: The prefix of the function.
 !macro DeleteRetryAbortFunc PREFIX
-	# Delete a file and allow the user to choose to retry or abort in case of a failure.
-	# $0 - FILE_PATH: The file to delete.
-	Function ${PREFIX}DeleteRetryAbort
-		# Unlike the File instruction, Delete doesn't abort (un)installation on error,
-		# it just sets the error flag and skips the file as if nothing happened.
-		try:
-		ClearErrors
-		Delete $0
-		${if} ${errors}
-			MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION \
-			    "Error deleting file:$\r$\n$\r$\n$0$\r$\n$\r$\nClick Retry to try again, or$\r$\n\
-			    Cancel to stop the uninstall." /SD IDCANCEL IDRETRY try
-			Abort "Error deleting file $0"
-		${endif}
-	FunctionEnd
+    # Delete a file and allow the user to choose to retry or abort in case of a failure.
+    # $0 - FILE_PATH: The file to delete.
+    Function ${PREFIX}DeleteRetryAbort
+        # Unlike the File instruction, Delete doesn't abort (un)installation on error,
+        # it just sets the error flag and skips the file as if nothing happened.
+        try:
+        ClearErrors
+        Delete $0
+        ${if} ${errors}
+            MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION \
+                "Error deleting file:$\r$\n$\r$\n$0$\r$\n$\r$\nClick Retry to try again, or$\r$\n\
+                Cancel to stop the uninstall." /SD IDCANCEL IDRETRY try
+            Abort "Error deleting file $0"
+        ${endif}
+    FunctionEnd
 !macroend
 
 # See [un.]DeleteRetryAbort.
 !macro DeleteRetryAbort FILE_PATH
-	Push $0
-	StrCpy $0 "${FILE_PATH}"
-	!ifdef __UNINSTALL__
-	    Call un.DeleteRetryAbort
-	!else
-		Call DeleteRetryAbort
-	!endif
-	Pop $0
+    Push $0
+    StrCpy $0 "${FILE_PATH}"
+    !ifdef __UNINSTALL__
+        Call un.DeleteRetryAbort
+    !else
+        Call DeleteRetryAbort
+    !endif
+    Pop $0
 !macroend
 
 # See [un.]CheckSingleInstance.
 !macro CheckSingleInstance TYPE SCOPE MUTEX_NAME
-	Push $0
-	Push $1
-	Push $2
+    Push $0
+    Push $1
+    Push $2
 
-	StrCpy $0 "${TYPE}"
-	StrCpy $1 "${SCOPE}"
-	StrCpy $2 "${MUTEX_NAME}"
-	!ifdef __UNINSTALL__
-		Call un.CheckSingleInstance
-	!else
-		Call CheckSingleInstance
-	!endif
+    StrCpy $0 "${TYPE}"
+    StrCpy $1 "${SCOPE}"
+    StrCpy $2 "${MUTEX_NAME}"
+    !ifdef __UNINSTALL__
+        Call un.CheckSingleInstance
+    !else
+        Call CheckSingleInstance
+    !endif
 
-	Pop $2
-	Pop $1
-	Pop $0
+    Pop $2
+    Pop $1
+    Pop $0
 !macroend
 
 !insertmacro CheckSingleInstanceFunc ""
@@ -186,10 +186,10 @@ Function StrContainsAnyOf
     Push $STR_CAO_RETURN_VAR
 FunctionEnd
 !macro _StrContainsAnyOfConstructor OUT STRING CHARACTERS
-  Push `${CHARACTERS}`
-  Push `${STRING}`
-  Call StrContainsAnyOf
-  Pop `${OUT}`
+    Push `${CHARACTERS}`
+    Push `${STRING}`
+    Call StrContainsAnyOf
+    Pop `${OUT}`
 !macroend
 !define StrContainsAnyOf '!insertmacro "_StrContainsAnyOfConstructor"'
 
@@ -261,31 +261,31 @@ FunctionEnd
 # Check that the program is suitable for the platform.
 # PLATFORM: The target platform of the installed executable.
 !macro CheckPlatform PLATFORM
-	${if} ${RunningX64}
-		!if ${PLATFORM} == x86
-			MessageBox MB_OKCANCEL|MB_ICONINFORMATION "You are about to install the 32-bit version \
-			    of ${PRODUCT_NAME} on your 64-bit Windows. There is a 64-bit version of \
-			    ${PRODUCT_NAME} available for download." /SD IDOK IDOK Continue
-			Quit
-			Continue:
-		!endif
-	${else}
-		!if ${PLATFORM} == x64
-			MessageBox MB_ICONSTOP "This installer contains the 64-bit version of ${PRODUCT_NAME}. \
-			    Your computer is running a 32-bit version of Windows, which can not execute 64-bit \
-			    programs. Please download the 32-bit installer of ${PRODUCT_NAME}." /SD IDOK
-			Quit
-		!endif
-	${endif}
+    ${if} ${RunningX64}
+        !if ${PLATFORM} == x86
+            MessageBox MB_OKCANCEL|MB_ICONINFORMATION "You are about to install the 32-bit version \
+                of ${PRODUCT_NAME} on your 64-bit Windows. There is a 64-bit version of \
+                ${PRODUCT_NAME} available for download." /SD IDOK IDOK Continue
+            Quit
+            Continue:
+        !endif
+    ${else}
+        !if ${PLATFORM} == x64
+            MessageBox MB_ICONSTOP "This installer contains the 64-bit version of ${PRODUCT_NAME}. \
+                Your computer is running a 32-bit version of Windows, which can not execute 64-bit \
+                programs. Please download the 32-bit installer of ${PRODUCT_NAME}." /SD IDOK
+            Quit
+        !endif
+    ${endif}
 !macroend
 
 # Check that the minimum windows version requirement is met.
 # MIN_WIN_VER: The minimal windows version.
 !macro CheckMinWinVer MIN_WIN_VER
-	${ifNot} ${AtLeastWin${MIN_WIN_VER}}
-		MessageBox MB_ICONSTOP "This program requires at least Windows ${MIN_WIN_VER}." /SD IDOK
-		Quit
-	${endif}
+    ${ifNot} ${AtLeastWin${MIN_WIN_VER}}
+        MessageBox MB_ICONSTOP "This program requires at least Windows ${MIN_WIN_VER}." /SD IDOK
+        Quit
+    ${endif}
 !macroend
 
 # Confirm the uninstall from a given path.
@@ -293,12 +293,12 @@ FunctionEnd
 # OUT_VAR: The variable to store the result in: 1 if the user agreed, 0 otherwise.
 !macro ConfirmUninstallPath PATH OUT_VAR
     MessageBox MB_YESNO|MB_ICONEXCLAMATION \
-    "This will remove ALL of the program files under$\r$\n\
-    $\r$\n\
-    ${PATH}$\r$\n\
-    $\r$\n\
-    and cannot be undone. Are you sure you wish to continue?" \
-    /SD IDYES IDYES yes IDNO no
+        "This will remove ALL of the program files under$\r$\n\
+        $\r$\n\
+        ${PATH}$\r$\n\
+        $\r$\n\
+        and cannot be undone. Are you sure you wish to continue?" \
+        /SD IDYES IDYES yes IDNO no
 
     yes:
         StrCpy ${OUT_VAR} 1

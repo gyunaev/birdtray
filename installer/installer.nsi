@@ -318,7 +318,7 @@ SectionEnd
 
 SectionGroup /e "Windows integration" SectionGroupWinIntegration
 Section "Program Group Entry" SectionProgramGroup
-	!insertmacro MUI_STARTMENU_WRITE_BEGIN ""
+    !insertmacro MUI_STARTMENU_WRITE_BEGIN ""
 
     CreateDirectory "$SMPROGRAMS\$startMenuFolder"
     CreateShortCut "$SMPROGRAMS\$startMenuFolder\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
@@ -335,11 +335,11 @@ Section "Program Group Entry" SectionProgramGroup
             "$INSTDIR\${UNINSTALL_FILENAME}" "/currentuser"
     ${endif}
 
-	!insertmacro MUI_STARTMENU_WRITE_END
+    !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
 Section "Desktop Entry" SectionDesktopEntry
-	CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
+    CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 SectionEnd
 
 Section /o "Start Menu Entry" SectionStartMenuEntry
@@ -354,7 +354,7 @@ SectionEnd
 SectionGroupEnd
 
 Section "-Write Install Size" # Hidden section, write install size as the final step
-	!insertmacro MULTIUSER_RegistryAddInstallSizeInfo
+    !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -400,8 +400,8 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
 SectionEnd
 
 Section /o "un.${PRODUCT_NAME} User Settings" UNSectionUserSettings
-        DeleteRegKey HKCU "${USER_SETTINGS_REG_PATH}"
-        DeleteRegKey /ifempty HKCU "${USER_REG_PATH}"
+    DeleteRegKey HKCU "${USER_SETTINGS_REG_PATH}"
+    DeleteRegKey /ifempty HKCU "${USER_REG_PATH}"
 SectionEnd
 
 Section -un.Post UNSectionSystem
@@ -434,7 +434,7 @@ SectionEnd
 
 # Called when we switch from single user to multi-user installation or vice versa.
 Function InstallModePageChangeMode
-	!insertmacro MUI_STARTMENU_GETFOLDER "" $startMenuFolder
+    !insertmacro MUI_STARTMENU_GETFOLDER "" $startMenuFolder
     !insertmacro MULTIUSER_GetCurrentUserString $0
     StrCpy $currentUserString "$0"
 FunctionEnd
@@ -487,23 +487,23 @@ FunctionEnd
 
 # Called when entering the install directory page
 Function DirectoryPagePre
-	GetDlgItem $0 $HWNDPARENT 1
-	SendMessage $0 ${BCM_SETSHIELD} 0 0 # Hide SHIELD (Windows Vista and above)
+    GetDlgItem $0 $HWNDPARENT 1
+    SendMessage $0 ${BCM_SETSHIELD} 0 0 # Hide SHIELD (Windows Vista and above)
 FunctionEnd
 
 # Called when the install directory page is visible
 Function DirectoryPageShow
-	${if} $CmdLineDir != ""
-		FindWindow $R1 "#32770" "" $HWNDPARENT
+    ${if} $CmdLineDir != ""
+        FindWindow $R1 "#32770" "" $HWNDPARENT
 
         # Make the directory input read only
-		GetDlgItem $0 $R1 1019
-		SendMessage $0 ${EM_SETREADONLY} 1 0
+        GetDlgItem $0 $R1 1019
+        SendMessage $0 ${EM_SETREADONLY} 1 0
 
         # Disable the browse button
-		GetDlgItem $0 $R1 1001
-		EnableWindow $0 0
-	${endif}
+        GetDlgItem $0 $R1 1001
+        EnableWindow $0 0
+    ${endif}
 FunctionEnd
 
 # Called when leaving the installation directory selection page.
@@ -526,7 +526,7 @@ FunctionEnd
 
 # Called when entering the component page
 Function ComponentsPagePre
-	GetDlgItem $1 $HWNDPARENT 1
+    GetDlgItem $1 $HWNDPARENT 1
     !ifndef UNINSTALL_BUILDER
     ${if} ${SectionIsSelected} ${SectionProgramGroup}
         SendMessage $1 ${WM_SETTEXT} 0 "STR:$(^NextBtn)" # Not the last page before installing
@@ -539,13 +539,13 @@ Function ComponentsPagePre
         ${endif}
     ${endif}
 
-	${if} $MultiUser.InstallMode == "AllUsers"
-	    # Add "(current user only)" text to sections "Start Menu Icon" and "Quick Launch Icon"
-		${if} ${AtLeastWin7}
-			SectionGetText ${SectionStartMenuEntry} $0
-			SectionSetText ${SectionStartMenuEntry} "$0 (current user only)"
-		${endif}
-	${endif}
+    ${if} $MultiUser.InstallMode == "AllUsers"
+        # Add "(current user only)" text to sections "Start Menu Icon" and "Quick Launch Icon"
+        ${if} ${AtLeastWin7}
+            SectionGetText ${SectionStartMenuEntry} $0
+            SectionSetText ${SectionStartMenuEntry} "$0 (current user only)"
+        ${endif}
+    ${endif}
     !endif # UNINSTALL_BUILDER
 FunctionEnd
 
@@ -569,16 +569,16 @@ FunctionEnd
 # Called when entering the start menu page
 Function StartMenuPagePre
     !ifndef UNINSTALL_BUILDER
-	${ifNot} ${SectionIsSelected} ${SectionProgramGroup}
-		Abort # Don't display this dialog if SectionProgramGroup is not selected
-	${else}
-		GetDlgItem $1 $HWNDPARENT 1
-		Call MultiUser.CheckPageElevationRequired
-		${if} $0 == 2
-			SendMessage $1 ${BCM_SETSHIELD} 0 1 # Display SHIELD (Windows Vista and above)
-		${endif}
-	${endif}
-	!endif # UNINSTALL_BUILDER
+    ${ifNot} ${SectionIsSelected} ${SectionProgramGroup}
+        Abort # Don't display this dialog if SectionProgramGroup is not selected
+    ${else}
+        GetDlgItem $1 $HWNDPARENT 1
+        Call MultiUser.CheckPageElevationRequired
+        ${if} $0 == 2
+            SendMessage $1 ${BCM_SETSHIELD} 0 1 # Display SHIELD (Windows Vista and above)
+        ${endif}
+    ${endif}
+    !endif # UNINSTALL_BUILDER
 FunctionEnd
 
 # Called before installing
@@ -588,8 +588,8 @@ Function InstallerPagePre
 FunctionEnd
 
 Function .onInstFailed
-	MessageBox MB_ICONSTOP "${PRODUCT_NAME} ${VERSION} could not be fully installed.$\r$\n\
-	    Please, restart Windows and run the setup program again." /SD IDOK
+    MessageBox MB_ICONSTOP "${PRODUCT_NAME} ${VERSION} could not be fully installed.$\r$\n\
+        Please, restart Windows and run the setup program again." /SD IDOK
 FunctionEnd
 
 # === Uninstaller functions === #
@@ -632,7 +632,7 @@ Function un.onInit
 FunctionEnd
 
 Function un.InstallModePageChangeMode
-	!insertmacro MUI_STARTMENU_GETFOLDER "" $startMenuFolder
+    !insertmacro MUI_STARTMENU_GETFOLDER "" $startMenuFolder
 FunctionEnd
 
 # Called when the "Confirm Uninstall" page is visible
@@ -658,33 +658,33 @@ FunctionEnd
 
 # Called when we enter the components page
 Function un.ComponentsPagePre
-	${if} $SemiSilentMode == 1
-		Abort # If user is installing, no use to remove program settings anyway
-	${endif}
+    ${if} $SemiSilentMode == 1
+        Abort # If user is installing, no use to remove program settings anyway
+    ${endif}
 FunctionEnd
 
 # Called when showing the component page
 Function un.ComponentsPageShow
-	# Show/hide the Back button
-	GetDlgItem $0 $HWNDPARENT 3
-	ShowWindow $0 $UninstallShowBackButton
+    # Show/hide the Back button
+    GetDlgItem $0 $HWNDPARENT 3
+    ShowWindow $0 $UninstallShowBackButton
 FunctionEnd
 
 # Called when showing the finish page
 Function un.FinishPageShow
     ${if} $SemiSilentMode == 1
-		Abort # If user is installing
-	${endif}
+        Abort # If user is installing
+    ${endif}
 FunctionEnd
 
 Function un.onUninstFailed
-	${if} $SemiSilentMode == 0
-		MessageBox MB_ICONSTOP "${PRODUCT_NAME} ${VERSION} could not be fully uninstalled.$\r$\n\
-		    Please, restart Windows and run the uninstaller again." /SD IDOK
-	${else}
-		MessageBox MB_ICONSTOP "${PRODUCT_NAME} could not be fully installed.$\r$\n\
-		    Please, restart Windows and run the setup program again." /SD IDOK
-	${endif}
+    ${if} $SemiSilentMode == 0
+        MessageBox MB_ICONSTOP "${PRODUCT_NAME} ${VERSION} could not be fully uninstalled.$\r$\n\
+            Please, restart Windows and run the uninstaller again." /SD IDOK
+    ${else}
+        MessageBox MB_ICONSTOP "${PRODUCT_NAME} could not be fully installed.$\r$\n\
+            Please, restart Windows and run the setup program again." /SD IDOK
+    ${endif}
 FunctionEnd
 
 !endif # UNINSTALL_BUILDER
@@ -693,7 +693,6 @@ FunctionEnd
 
 # Function invoked by MUI_FINISHPAGE_RUN
 Function StartAppBirdTray
-
     # The installer might exit too soon before the application starts and
     # it loses the right to be the foreground window and starts in the background.
     # However, if there's no active window when the application starts,
@@ -718,39 +717,39 @@ FunctionEnd
 # $2 - SILENT_PARAM: The silent parameter for the uninstaller.
 # $3 - INSTALLETION_DIR: The directory of the previous installation.
 Function CheckInstallation
-	# If there's an installed version, uninstall it first.
-	# If both per-user and per-machine versions are installed,
-	# uninstall the one that matches $MultiUser.InstallMode.
-	StrCpy $0 ""
-	${if} $HasCurrentModeInstallation == 1
-		StrCpy $0 "$MultiUser.InstallMode"
-	${else}
-		!if ${MULTIUSER_INSTALLMODE_ALLOW_BOTH_INSTALLATIONS} == 0
-			${if} $HasPerMachineInstallation == 1
-			    # If there's no per-user installation, but there is a
-			    # per-machine installation, uninstall it.
-				StrCpy $0 "AllUsers"
-			${elseif} $HasPerUserInstallation == 1
-			    # If there's no per-machine installation, but there is a
-			    # per-user installation, uninstall it.
-				StrCpy $0 "CurrentUser"
-			${endif}
-		!endif
-	${endif}
+    # If there's an installed version, uninstall it first.
+    # If both per-user and per-machine versions are installed,
+    # uninstall the one that matches $MultiUser.InstallMode.
+    StrCpy $0 ""
+    ${if} $HasCurrentModeInstallation == 1
+        StrCpy $0 "$MultiUser.InstallMode"
+    ${else}
+        !if ${MULTIUSER_INSTALLMODE_ALLOW_BOTH_INSTALLATIONS} == 0
+            ${if} $HasPerMachineInstallation == 1
+                # If there's no per-user installation, but there is a
+                # per-machine installation, uninstall it.
+                StrCpy $0 "AllUsers"
+            ${elseif} $HasPerUserInstallation == 1
+                # If there's no per-machine installation, but there is a
+                # per-user installation, uninstall it.
+                StrCpy $0 "CurrentUser"
+            ${endif}
+        !endif
+    ${endif}
 
-	${if} "$0" != ""
-		${if} $0 == "AllUsers"
-			StrCpy $1 "$PerMachineUninstallString"
-			StrCpy $3 "$PerMachineInstallationFolder"
-		${else}
-			StrCpy $1 "$PerUserUninstallString"
-			StrCpy $3 "$PerUserInstallationFolder"
-		${endif}
-		${if} ${silent}
-			StrCpy $2 "/S"
-		${else}
-			StrCpy $2 ""
-		${endif}
-	${endif}
+    ${if} "$0" != ""
+        ${if} $0 == "AllUsers"
+            StrCpy $1 "$PerMachineUninstallString"
+            StrCpy $3 "$PerMachineInstallationFolder"
+        ${else}
+            StrCpy $1 "$PerUserUninstallString"
+            StrCpy $3 "$PerUserInstallationFolder"
+        ${endif}
+        ${if} ${silent}
+            StrCpy $2 "/S"
+        ${else}
+            StrCpy $2 ""
+        ${endif}
+    ${endif}
 FunctionEnd
 !endif # UNINSTALL_BUILDER
