@@ -379,6 +379,9 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     !insertmacro DeleteRetryAbort "$INSTDIR\${EXE_NAME}"
     !insertmacro DeleteRetryAbort "$INSTDIR\*.dll"
     RMDir /r "$INSTDIR\translations"
+    RMDir /r "$INSTDIR\imageformats"
+    RMDir /r "$INSTDIR\styles"
+    RMDir /r "$INSTDIR\platforms"
     !ifdef LICENSE_FILE
         !insertmacro DeleteRetryAbort "$INSTDIR\${LICENSE_FILE}"
     !endif
