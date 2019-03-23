@@ -47,8 +47,11 @@ rem  Clear the old deployment folder.
 if exist "%deploymentFolder%" (
     rmdir /s /q "%deploymentFolder%" 1>nul
     if exist "%deploymentFolder%" (
-        echo Failed to delete the old deployment folder at %deploymentFolder% 1>&2
-        exit /b %ERROR_DIR_NOT_EMPTY%
+        rmdir /s /q "%deploymentFolder%" 1>nul
+        if exist "%deploymentFolder%" (
+            echo Failed to delete the old deployment folder at %deploymentFolder% 1>&2
+            exit /b %ERROR_DIR_NOT_EMPTY%
+        )
     )
 )
 mkdir "%deploymentFolder%"
@@ -69,8 +72,8 @@ if errorLevel 1 (
     exit /b %errorLevel%
 )
 for /f "delims=" %%i in ("%exePath%") do set "exeFileName=%%~nxi"
-"%winDeployQtExe%" --release --no-plugins --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
-        --no-angle --no-opengl-sw --no-patchqt -no-svg "%deploymentFolder%\%exeFileName%"
+"%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
+        --no-angle --no-opengl-sw -no-svg "%deploymentFolder%\%exeFileName%"
 if errorLevel 1 (
     echo Failed to create deployment folder: windeployqt.exe failed 1>&2
     exit /b %errorLevel%
