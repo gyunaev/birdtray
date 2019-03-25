@@ -147,7 +147,9 @@ void TrayIcon::updateIcon()
     // We use 0.75 opacity if we have unread count and non-blinking.
     // We use blinking opacity if we have unread count and blinking.
     // And we use 1.0 if we have zero unread count
-    if ( unread == 0 )
+    if ( !mSnoozedUntil.isNull() )
+        p.setOpacity( 0.5 );
+    else if ( unread == 0 )
         p.setOpacity( 1.0 );
     else
         p.setOpacity( mBlinkingIconOpacity );
