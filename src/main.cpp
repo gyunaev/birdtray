@@ -22,8 +22,25 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    if ( !QSystemTrayIcon::isSystemTrayAvailable() )
-        qFatal( "Sorry, system tray cannot be controlled through this addon on your operating system");
+    // If system tray is not yet available, wait up to 60 seconds
+    int passed = 0;
+
+    while ( true )
+    {
+        if ( QSystemTrayIcon::isSystemTrayAvailable() )
+            break;
+
+        if ( passed == 0 )
+            qDebug("Waiting for system tray to become available");
+
+        passed++;
+
+        if ( passed > 120 )
+            qFatal( "Sorry, system tray cannot be controlled through this addon on your operating system");
+
+        QThread::usleep( 500 );
+    }
+
 
     // This prevents exiting the application when the dialogs are closed on Gnome/XFCE
     a.setQuitOnLastWindowClosed( false );
