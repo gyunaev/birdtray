@@ -18,6 +18,7 @@ class Utils
         static QString expandPath(const QString& path);
 
         static void debug( const char * fmt, ... );
+        [[ noreturn ]] static void fatal( const char * fmt, ... );
 };
 
 #endif // UTILS_H

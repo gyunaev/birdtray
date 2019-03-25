@@ -27,6 +27,7 @@
 
 
 #include "morkparser.h"
+#include "utils.h"
 #include <QtCore>
 
 
@@ -730,7 +731,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     MorkParser p;
 
     if ( !p.open( filename ) )
-        qFatal("error opening mork file");
+		Utils::fatal("Error opening mork file");
 
     for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
     {

@@ -36,7 +36,8 @@ int main(int argc, char *argv[])
         passed++;
 
         if ( passed > 120 )
-            qFatal( "Sorry, system tray cannot be controlled through this addon on your operating system");
+            Utils::fatal("Sorry, system tray cannot be controlled "
+                         "through this addon on your operating system");
 
         QThread::usleep( 500 );
     }
