@@ -70,7 +70,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define PROGEXE ${EXE_NAME}  # For the MultiUser plugin
 !define ICON_NAME "birdtray.ico"
 !define ICON_PATH "..\src\res\${ICON_NAME}"
-!define LICENSE_FILE "LICENSE"
+!define LICENSE_FILE "LICENSE.txt"
 !define LICENSE_PATH "..\${LICENSE_FILE}"
 !define DIST_DIR "winDeploy"
 !define UNINSTALL_REG_PATH \
