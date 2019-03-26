@@ -9,6 +9,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QApplication::setWindowIcon(QIcon(QString::fromUtf8(":/res/birdtray.ico")));
 
     if ( argc == 3 && !strcmp( argv[1], "--dumpmork" ) )
     {

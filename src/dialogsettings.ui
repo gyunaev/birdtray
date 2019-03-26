@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>SettingsDialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/res/birdtray.ico</normaloff>:/res/birdtray.ico</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="QTabWidget" name="tabWidget">
@@ -844,7 +848,9 @@ p, li { white-space: pre-wrap; }
    <header>colorbutton.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>boxLaunchThunderbirdAtStart</sender>
