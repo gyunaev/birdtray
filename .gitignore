@@ -2,6 +2,12 @@ build*/
 cmake-build-*/
 src/birdtray.pro.user
 
+installer/uninstaller/*
+installer/winDeploy/**
+installer/BirdTray-*.exe
+installer/getArch.exe
+installer/arch.nsh
+
 .idea/*
 !.idea/codeStyles
 !.idea/runConfigurations
