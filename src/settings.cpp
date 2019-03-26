@@ -93,7 +93,7 @@ void Settings::load()
     if ( mNotificationIcon.isNull() )
     {
         if ( !mNotificationIcon.load( ":res/thunderbird.png" ) )
-            qFatal("cannot load icon");
+            Utils::fatal("Cannot load default system tray icon");
     }
 
     mNotificationDefaultColor = QColor( settings.value( "common/defaultcolor", "#00FF00" ).toString() );

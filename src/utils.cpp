@@ -2,6 +2,7 @@
 #include "settings.h"
 
 #include <QTextCodec>
+#include <QtWidgets/QMessageBox>
 
 #if defined (Q_OS_WIN)
 #  include <windows.h>
@@ -166,4 +167,18 @@ void Utils::debug(const char *fmt, ...)
     va_end( vl );
 
     qDebug( "%s", buf );
+}
+
+
+void Utils::fatal(const char *fmt, ...)
+{
+    va_list vl;
+    char buf[8192];
+
+    va_start( vl, fmt );
+    vsnprintf( buf, sizeof(buf) - 1, fmt, vl );
+    va_end( vl );
+
+    QMessageBox::critical(nullptr, "Fatal", buf);
+    qFatal("%s", buf);
 }

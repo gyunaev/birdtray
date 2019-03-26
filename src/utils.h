@@ -17,7 +17,8 @@ class Utils
          */
         static QString expandPath(const QString& path);
 
-        static void debug( const char * fmt, ... );
+        static void debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
+        Q_NORETURN static void fatal( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
 };
 
 #endif // UTILS_H
