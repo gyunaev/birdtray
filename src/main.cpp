@@ -1,4 +1,8 @@
 #include <QApplication>
+#include <QAbstractNativeEventFilter>
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif /* Q_OS_WIN */
 
 #include "dialogsettings.h"
 #include "trayicon.h"
@@ -6,10 +10,37 @@
 #include "morkparser.h"
 #include "utils.h"
 
+
+#ifdef Q_OS_WIN
+/**
+ * Filter to handle WM_CLOSE events on Windows.
+ */
+class BirdtrayEventFilter: public QAbstractNativeEventFilter {
+public:
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override {
+        if (eventType == "windows_generic_MSG") {
+            MSG* messageEvent = static_cast<MSG*>(message);
+            if (messageEvent->message == WM_CLOSE) {
+                QApplication::quit();
+                if (result != nullptr) {
+                    *result = 0;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+};
+#endif /* Q_OS_WIN */
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QApplication::setWindowIcon(QIcon(QString::fromUtf8(":/res/birdtray.ico")));
+#ifdef Q_OS_WIN
+    BirdtrayEventFilter filter;
+    a.installNativeEventFilter(&filter);
+#endif /* Q_OS_WIN */
 
     if ( argc == 3 && !strcmp( argv[1], "--dumpmork" ) )
     {
