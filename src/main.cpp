@@ -1,6 +1,6 @@
 #include <QApplication>
-#include <QAbstractNativeEventFilter>
 #ifdef Q_OS_WIN
+#include <QAbstractNativeEventFilter>
 #include <windows.h>
 #endif /* Q_OS_WIN */
 
