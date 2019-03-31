@@ -1,37 +1,14 @@
 #include <QApplication>
-#ifdef Q_OS_WIN
-#include <QAbstractNativeEventFilter>
-#include <windows.h>
-#endif /* Q_OS_WIN */
 
+#ifdef Q_OS_WIN
+#include "birdtrayeventfilter.h"
+#endif /* Q_OS_WIN */
 #include "dialogsettings.h"
 #include "trayicon.h"
 #include "settings.h"
 #include "morkparser.h"
 #include "utils.h"
 
-
-#ifdef Q_OS_WIN
-/**
- * Filter to handle WM_CLOSE events on Windows.
- */
-class BirdtrayEventFilter: public QAbstractNativeEventFilter {
-public:
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override {
-        if (eventType == "windows_generic_MSG") {
-            MSG* messageEvent = static_cast<MSG*>(message);
-            if (messageEvent->message == WM_CLOSE) {
-                QApplication::quit();
-                if (result != nullptr) {
-                    *result = 0;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-};
-#endif /* Q_OS_WIN */
 
 int main(int argc, char *argv[])
 {
