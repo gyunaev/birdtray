@@ -78,6 +78,11 @@ if errorLevel 1 (
     echo Failed to create deployment folder: windeployqt.exe failed 1>&2
     exit /b %errorLevel%
 )
+if exist "%deploymentFolder%\imageformats" (
+    for /f %%F in ('dir "%deploymentFolder%\imageformats" /b /a-d ^| findstr /vile "qico.dll"') do (
+        del "%deploymentFolder%\imageformats\%%F" 1>nul
+    )
+)
 
 rem  #### Create the actual installer ####
 echo Creating the installer...
