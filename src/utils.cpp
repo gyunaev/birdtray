@@ -159,6 +159,16 @@ QString Utils::getBirdtrayVersion() {
     return QString("%1.%2.%3").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH);
 }
 
+QString Utils::getThunderbirdUpdaterName() {
+#ifdef Q_OS_WIN
+    return "updater.exe";
+#elif defined(Q_OS_MAC)
+    return "updater.app";
+#else
+    return "updater";
+#endif
+}
+
 void Utils::debug(const char *fmt, ...)
 {
     va_list vl;

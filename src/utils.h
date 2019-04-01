@@ -21,6 +21,11 @@ class Utils
          * @return The version of Birdtray as a string.
          */
         static QString getBirdtrayVersion();
+        
+        /**
+         * @return The name of the Thunderbird updater executable.
+         */
+        static QString getThunderbirdUpdaterName();
 
         static void debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
         Q_NORETURN static void fatal( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);

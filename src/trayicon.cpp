@@ -25,11 +25,16 @@ TrayIcon::TrayIcon(bool showSettings)
 
     mMenuShowHideThunderbird = 0;
     mMenuIgnoreUnreads = 0;
-    mThunderbirdProcess = 0;
-
+    mThunderbirdProcess = ProcessHandle::create(pSettings->getThunderbirdExecutablePath());
+    connect( mThunderbirdProcess, &ProcessHandle::finished, this, &TrayIcon::tbProcessFinished );
+    mThunderbirdUpdaterProcess = ProcessHandle::create(Utils::getThunderbirdUpdaterName());
+    connect( mThunderbirdUpdaterProcess, &ProcessHandle::finished,
+            this, &TrayIcon::tbUpdaterProcessFinished );
+    
     mThunderbirdWindowExists = false;
     mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
+    mThunderbirdStartFailed = false;
     connect(QApplication::instance(), &QApplication::aboutToQuit, this, &TrayIcon::onQuit);
 
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs( pSettings->mLaunchThunderbirdDelay );
@@ -59,6 +64,11 @@ TrayIcon::TrayIcon(bool showSettings)
     updateState();
     updateIcon();
     show();
+}
+
+TrayIcon::~TrayIcon() {
+    mThunderbirdProcess->deleteLater();
+    mThunderbirdUpdaterProcess->deleteLater();
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -269,7 +279,9 @@ void TrayIcon::updateState()
             if ( !mThunderbirdWindowExisted )
             {
                 // No. Shall we start it?
-                if ( pSettings->mLaunchThunderbird && !mThunderbirdProcess && mThunderbirdStartTime < QDateTime::currentDateTime() )
+                if ( pSettings->mLaunchThunderbird && !mThunderbirdStartFailed &&
+                        mThunderbirdProcess->attach() == AttachResult::PROCESS_NOT_RUNNING &&
+                        mThunderbirdStartTime < QDateTime::currentDateTime() )
                 {
                     startThunderbird();
 
@@ -281,7 +293,8 @@ void TrayIcon::updateState()
             else
             {
                 // It has run before, but not running now. Should we restart?
-                if ( pSettings->mRestartThunderbird && !mThunderbirdProcess )
+                if ( pSettings->mRestartThunderbird && !mThunderbirdStartFailed &&
+                        mThunderbirdProcess->attach() == AttachResult::PROCESS_NOT_RUNNING)
                 {
                     startThunderbird();
 
@@ -354,6 +367,15 @@ void TrayIcon::actionSettings()
         enableBlinking( false );
 
         updateIcon();
+        
+        QString newThunderbirdExePath = pSettings->getThunderbirdExecutablePath();
+        if (mThunderbirdProcess->getExecutablePath() != newThunderbirdExePath) {
+            mThunderbirdProcess->deleteLater();
+            mThunderbirdStartFailed = false;
+            mThunderbirdProcess = ProcessHandle::create(newThunderbirdExePath);
+            connect(mThunderbirdProcess, &ProcessHandle::finished,
+                    this, &TrayIcon::tbProcessFinished);
+        }
 
         emit settingsChanged();
     }
@@ -542,41 +564,36 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    QString thunderbirdExePath = pSettings->getThunderbirdExecutablePath();
-    Utils::debug("Starting Thunderbird as '%s'", qPrintable( thunderbirdExePath ) );
-
-    if ( mThunderbirdProcess )
-        mThunderbirdProcess->deleteLater();
-
-    mThunderbirdProcess = new QProcess();
-    connect( mThunderbirdProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(tbProcessFinished(int,QProcess::ExitStatus)) );
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::tbProcessError );
-#endif
-
-    mThunderbirdProcess->start( thunderbirdExePath );
+    Utils::debug("Starting Thunderbird as '%s'",
+            qPrintable( mThunderbirdProcess->getExecutablePath() ) );
+    mThunderbirdProcess->attachOrStart();
 }
 
-void TrayIcon::tbProcessError(QProcess::ProcessError )
+void TrayIcon::tbProcessFinished(ProcessHandle::ExitReason exitReason)
 {
-    QMessageBox::critical( 0,
-                           tr("Cannot start Thunderbird"),
-                           tr("Error starting Thunderbird as %1:\n\n%2")
-                                .arg( pSettings->getThunderbirdExecutablePath() )
-                                .arg( mThunderbirdProcess->errorString() ) );
-
-    // We keep the mThunderbirdProcess pointer, so the process is not restarted again
+    mThunderbirdStartFailed = exitReason.isError();
+    if (!exitReason.isError()) {
+        return;
+    }
+    if (mThunderbirdUpdaterProcess->attach() == AttachResult::SUCCESS) {
+        return;
+    }
+    QMessageBox::critical(
+            nullptr, tr("Cannot start Thunderbird"), tr("Error starting Thunderbird as %1:\n\n%2")
+            .arg( pSettings->getThunderbirdExecutablePath() )
+            .arg( exitReason.getErrorDescription() ) );
 }
 
-void TrayIcon::tbProcessFinished(int, QProcess::ExitStatus)
+void TrayIcon::tbUpdaterProcessFinished(ProcessHandle::ExitReason exitReason)
 {
-    // If we are here this could mean that either Thunderbird was quit manually,
-    // in which case it is restarted in updateState(), or that we started TB
-    // and the active instance was activated (and our instance exited).
-    // Thus we just destroy the process later, to let updateState() make decision
-    mThunderbirdProcess->deleteLater();
-    mThunderbirdProcess = 0;
+    if (!exitReason.isError()) {
+        QMessageBox::critical(
+                nullptr, tr("Cannot start Thunderbird"),
+                tr("Error starting Thunderbird, because we could not attach to the updater:\n\n%1")
+                .arg( exitReason.getErrorDescription() ) );
+        return;
+    }
+    startThunderbird();
 }
 
 void TrayIcon::onQuit() {
