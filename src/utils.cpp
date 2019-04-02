@@ -126,9 +126,9 @@ QString Utils::expandPath(const QString &path) {
 #if defined (Q_OS_WIN)
     TCHAR buffer[MAX_PATH];
 #if defined(UNICODE)
-    std::wstring originalPath = path.toStdWString();
+    std::wstring originalPath = qToStdWString(path);
 #else
-    std::string originalPath = path.toStdWString();
+    std::string originalPath = path.toStdString();
 #endif /* defined(UNICODE) */
     DWORD resultSize = ExpandEnvironmentStrings(
             originalPath.data(), buffer, sizeof(buffer) / sizeof(buffer[0]));
@@ -166,6 +166,22 @@ QString Utils::getThunderbirdUpdaterName() {
     return "updater.app";
 #else
     return "updater";
+#endif
+}
+
+QString Utils::stdWToQString(const std::wstring &str) {
+#ifdef _MSC_VER
+    return QString::fromUtf16((const ushort*) str.c_str());
+#else
+    return QString::fromStdWString(str);
+#endif
+}
+
+std::wstring Utils::qToStdWString(const QString &str) {
+#ifdef _MSC_VER
+    return std::wstring((const wchar_t*) str.utf16());
+#else
+    return str.toStdWString();
 #endif
 }
 

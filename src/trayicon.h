@@ -61,13 +61,13 @@ class TrayIcon : public QSystemTrayIcon
          * Callback if Thunderbird exits or fails to start.
          * @param exitReason The reason for the exit.
          */
-        void    tbProcessFinished(ProcessHandle::ExitReason exitReason);
+        void    tbProcessFinished(const ProcessHandle::ExitReason& exitReason);
     
        /**
         * Callback if the Thunderbird updater exits.
         * @param exitReason The reason for the exit.
         */
-        void    tbUpdaterProcessFinished(ProcessHandle::ExitReason exitReason);
+        void    tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitReason);
     
         /**
          * Callback that is called when we are about to quit.

@@ -2,9 +2,21 @@
 #include <QtCore/QFileInfo>
 
 #include "processhandle.h"
+#include "utils.h"
 #ifdef Q_OS_WIN
 #  include "processhandle_win.h"
 #endif
+
+
+static int registerExitReasonMetaType() Q_DECL_NOTHROW {
+    try {
+        return qRegisterMetaType<ProcessHandle::ExitReason>("ExitReason");
+    } catch (...) {
+        Utils::fatal("Failed to register ExitReason meta type.");
+    }
+}
+
+Q_DECL_UNUSED const int ProcessHandle::ExitReason::_typeId = registerExitReasonMetaType();
 
 
 ProcessHandle::ProcessHandle(QString executablePath):
@@ -17,9 +29,9 @@ ProcessHandle::~ProcessHandle() {
     }
 }
 
-ProcessHandle* ProcessHandle::create(QString executablePath) {
+ProcessHandle* ProcessHandle::create(const QString& executablePath) {
 #ifdef Q_OS_WIN
-    return new ProcessHandle_Win(std::move(executablePath));
+    return new ProcessHandle_Win(executablePath);
 #else
     return new ProcessHandle(std::move(executablePath));
 #endif
@@ -54,7 +66,7 @@ void ProcessHandle::onProcessError(QProcess::ProcessError) {
 }
 
 void ProcessHandle::onProcessFinished(int, QProcess::ExitStatus) {
-    emit finished(ExitReason(false, ""));
+    emit finished(ExitReason());
     process->deleteLater();
     process = nullptr;
 }
@@ -75,5 +87,9 @@ void ProcessHandle::start() {
 }
 
 QString ProcessHandle::getExecutableName() {
-    return QFileInfo(executablePath).fileName();
+    QString path = QFileInfo(executablePath).fileName();
+    if (path.endsWith('"')) {
+        path.chop(1);
+    }
+    return path.trimmed();
 }

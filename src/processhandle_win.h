@@ -11,7 +11,7 @@
  */
 class ProcessHandle_Win: public ProcessHandle {
 public:
-    explicit ProcessHandle_Win(QString executablePath);
+    explicit ProcessHandle_Win(const QString& executablePath);
     ~ProcessHandle_Win() override;
     AttachResult attach() override;
 
@@ -22,13 +22,20 @@ private:
      */
     class ProcessWaiter: public QThread {
     friend ProcessHandle_Win;
+    public:
+        ~ProcessWaiter() override {
+            quit();
+            requestInterruption();
+            wait();
+        };
+
     protected:
         void run() override;
 
     private:
         explicit ProcessWaiter(ProcessHandle_Win* processHandle):
-                processHandle(processHandle), QThread() {}
-        ProcessHandle_Win* processHandle;
+                QThread(), processHandle(processHandle) {}
+        ProcessHandle_Win* processHandle = nullptr;
     };
     
     /**

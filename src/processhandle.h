@@ -1,8 +1,7 @@
-#include <utility>
-
 #ifndef PROCESS_HANDLE_H
 #define PROCESS_HANDLE_H
 
+#include <utility>
 #include <sys/types.h>
 #include <QObject>
 #include <QString>
@@ -43,22 +42,23 @@ public:
      */
     class ExitReason {
     public:
-        ExitReason(bool error, QString description):
+        explicit ExitReason(bool error = false, QString description = ""):
                 error(error), description(std::move(description)) {};
         
         /**
          * @return true if the process exited because of an error, false otherwise.
          */
-        bool isError() { return error; };
+        bool isError() const { return error; };
 
         /**
          * @return The description of the error, that caused the process to exit, if there is one.
          */
-        const QString& getErrorDescription() { return description; }
+        const QString& getErrorDescription() const { return description; }
 
     private:
         bool error;
         QString description;
+        Q_DECL_UNUSED static const int _typeId;
     };
     
     ~ProcessHandle() override;
@@ -70,7 +70,7 @@ public:
      *
      * @param executablePath The path to the executable of the process.
      */
-    static ProcessHandle* create(QString executablePath);
+    static ProcessHandle* create(const QString& executablePath);
 
     /**
      * @return The path to the executable of the process.
@@ -97,7 +97,7 @@ signals:
      *
      * @param exitReason The reason for the exit.
      */
-    void finished(ExitReason exitReason);
+    void finished(const ExitReason& exitReason);
 
 protected:
     /**
@@ -133,6 +133,8 @@ private:
      */
     QProcess* process = nullptr;
 };
+
+Q_DECLARE_METATYPE(ProcessHandle::ExitReason)
 
 
 #endif // PROCESS_HANDLE_H

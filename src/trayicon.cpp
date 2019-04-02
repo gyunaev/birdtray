@@ -569,7 +569,7 @@ void TrayIcon::startThunderbird()
     mThunderbirdProcess->attachOrStart();
 }
 
-void TrayIcon::tbProcessFinished(ProcessHandle::ExitReason exitReason)
+void TrayIcon::tbProcessFinished(const ProcessHandle::ExitReason& exitReason)
 {
     mThunderbirdStartFailed = exitReason.isError();
     if (!exitReason.isError()) {
@@ -584,9 +584,9 @@ void TrayIcon::tbProcessFinished(ProcessHandle::ExitReason exitReason)
             .arg( exitReason.getErrorDescription() ) );
 }
 
-void TrayIcon::tbUpdaterProcessFinished(ProcessHandle::ExitReason exitReason)
+void TrayIcon::tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitReason)
 {
-    if (!exitReason.isError()) {
+    if (exitReason.isError()) {
         QMessageBox::critical(
                 nullptr, tr("Cannot start Thunderbird"),
                 tr("Error starting Thunderbird, because we could not attach to the updater:\n\n%1")
