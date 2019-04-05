@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SettingsDialog</string>
+   <string>Birdtray Settings</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -246,7 +246,7 @@
          <item>
           <widget class="QLabel" name="label_12">
            <property name="text">
-            <string>Method to parser unread notifications:</string>
+            <string>Method to parse unread notifications:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -378,7 +378,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_5">
          <property name="title">
-          <string>Launch and Hiding</string>
+          <string>Launching and Hiding</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
@@ -655,7 +655,7 @@
           <item>
            <widget class="QLabel" name="label_6">
             <property name="text">
-             <string>Please do not change those settings unless you understand whatt you're doing.</string>
+             <string>Please do not change these settings unless you understand what you're doing.</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -750,7 +750,7 @@
             <item>
              <widget class="QLabel" name="label_14">
               <property name="text">
-               <string>opacue when new mail is present</string>
+               <string>opaque when new mail is present</string>
               </property>
              </widget>
             </item>
