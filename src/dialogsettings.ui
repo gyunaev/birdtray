@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SettingsDialog</string>
+   <string>Birdtray Settings</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
