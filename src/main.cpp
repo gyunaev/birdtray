@@ -1,15 +1,23 @@
 #include <QApplication>
 
+#ifdef Q_OS_WIN
+#include "birdtrayeventfilter.h"
+#endif /* Q_OS_WIN */
 #include "dialogsettings.h"
 #include "trayicon.h"
 #include "settings.h"
 #include "morkparser.h"
 #include "utils.h"
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QApplication::setWindowIcon(QIcon(QString::fromUtf8(":/res/birdtray.ico")));
+#ifdef Q_OS_WIN
+    BirdtrayEventFilter filter;
+    a.installNativeEventFilter(&filter);
+#endif /* Q_OS_WIN */
 
     if ( argc == 3 && !strcmp( argv[1], "--dumpmork" ) )
     {

@@ -80,6 +80,6 @@ unix {
      QT += x11extras
 }
 win32 {
-     SOURCES += windowtools_win.cpp
-     HEADERS += windowtools_win.h
+     SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp
+     HEADERS += windowtools_win.h birdtrayeventfilter.h
 }
