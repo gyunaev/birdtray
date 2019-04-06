@@ -44,7 +44,7 @@ Controller.prototype.IntroductionPageCallback = function() {
 Controller.prototype.TargetDirectoryPageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
     // Keep default at "C:\Qt".
-    //gui.currentPageWidget().TargetDirectoryLineEdit.setText("E:\\Qt");
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText("C:\\Qt");
     gui.clickButton(buttons.NextButton);
 };
 
@@ -83,4 +83,5 @@ Controller.prototype.FinishedPageCallback = function() {
         checkBoxForm.launchQtCreatorCheckBox.checked = false;
     }
     gui.clickButton(buttons.FinishButton);
+    console.log("Finished Qt installation");
 };
