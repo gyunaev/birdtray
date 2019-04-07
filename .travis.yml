@@ -11,7 +11,7 @@ matrix:
       env:
         - QT_REPO="ppa:beineri/opt-qt551-trusty"
         - QT_VERSION="qt55"
-        - QTHOME="/opt/${QT_VERSION}"
+        - QT_HOME="/opt/${QT_VERSION}"
     - name: Linux Qt 5.6
       os: linux
       dist: trusty
@@ -20,7 +20,7 @@ matrix:
       env:
         - QT_REPO="ppa:beineri/opt-qt562-trusty"
         - QT_VERSION="qt56"
-        - QTHOME="/opt/${QT_VERSION}"
+        - QT_HOME="/opt/${QT_VERSION}"
     - name: Linux Qt 5.7
       os: linux
       dist: trusty
@@ -29,7 +29,7 @@ matrix:
       env:
         - QT_REPO="ppa:beineri/opt-qt571-trusty"
         - QT_VERSION="qt57"
-        - QTHOME="/opt/${QT_VERSION}"
+        - QT_HOME="/opt/${QT_VERSION}"
     - name: Linux Qt 5.8
       os: linux
       dist: trusty
@@ -38,7 +38,7 @@ matrix:
       env:
         - QT_REPO="ppa:beineri/opt-qt58-trusty"
         - QT_VERSION="qt58"
-        - QTHOME="/opt/${QT_VERSION}"
+        - QT_HOME="/opt/${QT_VERSION}"
     - name: Linux Qt 5.9
       os: linux
       dist: trusty
@@ -47,15 +47,14 @@ matrix:
       env:
         - QT_REPO="ppa:beineri/opt-qt592-trusty"
         - QT_VERSION="qt59"
-        - QTHOME="/opt/${QT_VERSION}"
+        - QT_HOME="/opt/${QT_VERSION}"
     - name: Windows 64 Bit
       os: windows
       arch: x64
       env:
         - PLATFORM="x64"
-        - QT_VERSION="5.12.0"
-        - QTHOME="C:/Qt/${QT_VERSION}"
-        - QT_COMILER_DIR="${QTHOME}/msvc2017_64"
+        - QT_COMILER="msvc2017_64"
+        - QT_HOME="C:/Qt"
       cache:
         directories:
           - C:/Qt
@@ -64,9 +63,8 @@ matrix:
       arch: x86
       env:
         - PLATFORM="x86"
-        - QT_VERSION="5.12.0"
-        - QTHOME="C:/Qt/${QT_VERSION}"
-        - QT_COMILER_DIR="${QTHOME}/msvc2017"
+        - QT_COMILER="msvc2017"
+        - QT_HOME="C:/Qt"
       cache:
         directories:
           - C:/Qt
@@ -98,7 +96,7 @@ install:
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       sudo apt-get install -qq ${QT_VERSION}base ${QT_VERSION}translations ${QT_VERSION}tools ${QT_VERSION}x11extras;
       sudo apt-get install -qq libsqlite3-dev libx11-dev;
-      source ${QTHOME}/bin/${QT_VERSION}-env.sh;
+      source ${QT_HOME}/bin/${QT_VERSION}-env.sh;
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "windows" ]; then
@@ -113,8 +111,9 @@ install:
       unzip -j ~/sqlite3-src.zip -d ~/sqlite3
       unzip -uoj ~/sqlite3.zip -d ~/sqlite3
       echo '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"' ${PLATFORM} '&& LIB /DEF:%userprofile%\sqlite3\sqlite3.def /OUT:%userprofile%\sqlite3\sqlite3.lib /MACHINE:'${PLATFORM} '|| exit /b 1' | cmd;
-      echo "Installed qt versions:" 2> /dev/null;
-      find "/c/Qt" -mindepth 1 -maxdepth 1 -type d -name "*.*.*" -printf '%f\n';
+      export QT_VERSION=$(find "${QT_HOME}" -mindepth 1 -maxdepth 1 -type d -name "*.*.*" -printf '%f' -quit 2> /dev/null);
+      echo "Installed Qt version: ${QT_VERSION}";
+      export QT_COMILER_DIR="${QT_HOME}/${QT_VERSION}/${QT_COMILER}";
       if [ ! -e "${QT_COMILER_DIR}/bin/moc.exe" ]; then
         echo "Downloading Qt installer...";
         curl -Lo ~/qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe --progress-bar;
@@ -124,6 +123,9 @@ install:
         rm -r "C:/Qt/Examples" 2> /dev/null;
         rm -r "C:/Qt/Docs" 2> /dev/null;
         rm -r "C:/Qt/Tools" 2> /dev/null;
+        export QT_VERSION=$(find "${QT_HOME}" -mindepth 1 -maxdepth 1 -type d -name "*.*.*" -printf '%f' -quit 2> /dev/null);
+        echo "Installed Qt version: ${QT_VERSION}";
+        export QT_COMILER_DIR="${QT_HOME}/${QT_VERSION}/${QT_COMILER}";
       fi
       echo "QT_COMILER_DIR: ${QT_COMILER_DIR}";
       export CMAKE_PREFIX_PATH="${QT_COMILER_DIR};~/sqlite3/";
