@@ -8,7 +8,7 @@ class DatabaseUnreadFixer : public QThread
     Q_OBJECT
 
     public:
-        DatabaseUnreadFixer( const QString& dbpath );
+        DatabaseUnreadFixer( const QString& databasePath );
 
     protected:
         virtual void run() override;

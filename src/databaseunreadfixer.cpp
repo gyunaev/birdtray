@@ -7,11 +7,11 @@
 #include "sqlite3.h"
 #include "utils.h"
 
-DatabaseUnreadFixer::DatabaseUnreadFixer(const QString &dbpath )
+DatabaseUnreadFixer::DatabaseUnreadFixer(const QString &databasePath )
     : QThread()
 {
     moveToThread( this );
-    mDbPath = dbpath + QDir::separator() + "global-messages-db.sqlite";
+    mDbPath = databasePath;
 }
 
 void DatabaseUnreadFixer::run()

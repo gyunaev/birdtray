@@ -58,7 +58,22 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
     private:
         void    changeIcon(QToolButton * button );
-        bool    isProfilePathValid();
+        
+        /**
+         * Validate the profile path.
+         *
+         * @param profilePath The profile path.
+         * @return true, if the path is valid, false otherwise.
+         */
+        bool    isProfilePathValid(const QString& profilePath) const;
+        
+        /**
+         * Check if the given profile path is valid and display a dialog, if it's not.
+         *
+         * @param profilePath The profile path.
+         * @return true, if the path is valid, false otherwise.
+         */
+        bool    reportIfProfilePathValid(const QString& profilePath) const;
         bool    isMorkParserSelected() const;
 
         QPalette mPaletteOk;
