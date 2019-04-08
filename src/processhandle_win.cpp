@@ -8,7 +8,7 @@
 #define WAIT_TIME_SECONDS 100
 
 
-ProcessHandle_Win::ProcessHandle_Win(const QString& executablePath) :
+ProcessHandle_Win::ProcessHandle_Win(const QString &executablePath) :
         ProcessHandle(executablePath) {
 }
 

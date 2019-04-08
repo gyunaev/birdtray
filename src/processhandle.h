@@ -17,12 +17,12 @@ enum AttachResult {
      * The process was successfully attached to.
      */
     SUCCESS,
-
+    
     /**
      * There was not process to attach to.
      */
     PROCESS_NOT_RUNNING,
-
+    
     /**
      * There was another error.
      */
@@ -33,8 +33,8 @@ enum AttachResult {
 /**
  * A Handle to a progress, which might or might not be running.
  */
-class ProcessHandle: public QObject {
-    Q_OBJECT
+class ProcessHandle : public QObject {
+Q_OBJECT;
 public:
     
     /**
@@ -42,22 +42,27 @@ public:
      */
     class ExitReason {
     public:
-        explicit ExitReason(bool error = false, QString description = ""):
-                error(error), description(std::move(description)) {};
+        explicit ExitReason(bool error = false, QString description = "") :
+                error(error), description(std::move(description)) {
+        };
         
         /**
          * @return true if the process exited because of an error, false otherwise.
          */
-        bool isError() const { return error; };
-
+        bool isError() const {
+            return error;
+        };
+        
         /**
          * @return The description of the error, that caused the process to exit, if there is one.
          */
-        const QString& getErrorDescription() const { return description; }
-
+        const QString &getErrorDescription() const {
+            return description;
+        }
+    
     private:
-        bool error;
-        QString description;
+        const bool error;
+        const QString description;
         Q_DECL_UNUSED static const int _typeId;
     };
     
@@ -70,13 +75,13 @@ public:
      *
      * @param executablePath The path to the executable of the process.
      */
-    static ProcessHandle* create(const QString& executablePath);
-
+    static ProcessHandle* create(const QString &executablePath);
+    
     /**
      * @return The path to the executable of the process.
      */
-    QString& getExecutablePath();
-
+    const QString &getExecutablePath() const;
+    
     /**
      * Attach to a running process or create a new one and attach to it.
      * If this function fails, the finished signal is triggered.
@@ -92,12 +97,13 @@ public:
     virtual AttachResult attach();
 
 signals:
+    
     /**
      * A signal that is triggered when the attached process exits or fails to start.
      *
      * @param exitReason The reason for the exit.
      */
-    void finished(const ExitReason& exitReason);
+    void finished(const ExitReason &exitReason);
 
 protected:
     /**
@@ -110,10 +116,22 @@ protected:
     /**
      * @return The name of the executable file, without the path.
      */
-    QString getExecutableName();
+    QString getExecutableName() const;
 
 private slots:
+    /**
+     * Called when a process started by the handle fails to start.
+     *
+     * @param error The error reason.
+     */
     void onProcessError(QProcess::ProcessError error);
+    
+    /**
+     * Called when a process started by the handler exits.
+     *
+     * @param exitCode The exit code of the process.
+     * @param exitStatus The exit status of the process.
+     */
     void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
 
 private:
@@ -126,7 +144,7 @@ private:
     /**
      * The path to the executable that identifies the process.
      */
-    QString executablePath;
+    const QString executablePath;
     
     /**
      * The process that we started.

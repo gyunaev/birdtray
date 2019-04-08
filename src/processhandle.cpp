@@ -19,7 +19,7 @@ static int registerExitReasonMetaType() Q_DECL_NOTHROW {
 Q_DECL_UNUSED const int ProcessHandle::ExitReason::_typeId = registerExitReasonMetaType();
 
 
-ProcessHandle::ProcessHandle(QString executablePath):
+ProcessHandle::ProcessHandle(QString executablePath) :
         executablePath(std::move(executablePath)) {
 }
 
@@ -29,15 +29,15 @@ ProcessHandle::~ProcessHandle() {
     }
 }
 
-ProcessHandle* ProcessHandle::create(const QString& executablePath) {
+ProcessHandle* ProcessHandle::create(const QString &executablePath) {
 #ifdef Q_OS_WIN
     return new ProcessHandle_Win(executablePath);
 #else
-    return new ProcessHandle(std::move(executablePath));
+    return new ProcessHandle(executablePath);
 #endif
 }
 
-QString& ProcessHandle::getExecutablePath() {
+const QString &ProcessHandle::getExecutablePath() const {
     return executablePath;
 }
 
@@ -78,7 +78,8 @@ void ProcessHandle::start() {
         oldProcess->deleteLater();
     }
     QProcess* newProcess = process = new QProcess();
-    connect(newProcess, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
+    connect(newProcess,
+            static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
             this, &ProcessHandle::onProcessFinished);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     connect(newProcess, &QProcess::errorOccurred, this, &ProcessHandle::onProcessError);
@@ -86,7 +87,7 @@ void ProcessHandle::start() {
     newProcess->start(getExecutablePath());
 }
 
-QString ProcessHandle::getExecutableName() {
+QString ProcessHandle::getExecutableName() const {
     QString path = QFileInfo(executablePath).fileName();
     if (path.endsWith('"')) {
         path.chop(1);

@@ -9,7 +9,7 @@
 /**
  * Process handle for the Windows platform.
  */
-class ProcessHandle_Win: public ProcessHandle {
+class ProcessHandle_Win : public ProcessHandle {
 public:
     explicit ProcessHandle_Win(const QString& executablePath);
     ~ProcessHandle_Win() override;
@@ -20,21 +20,23 @@ private:
     /**
      * Thread that waits for a process to exit.
      */
-    class ProcessWaiter: public QThread {
-    friend ProcessHandle_Win;
+    class ProcessWaiter : public QThread {
+        friend ProcessHandle_Win;
     public:
         ~ProcessWaiter() override {
             quit();
             requestInterruption();
             wait();
         };
-
+    
     protected:
         void run() override;
-
+    
     private:
-        explicit ProcessWaiter(ProcessHandle_Win* processHandle):
-                QThread(), processHandle(processHandle) {}
+        explicit ProcessWaiter(ProcessHandle_Win* processHandle) :
+                QThread(), processHandle(processHandle) {
+        }
+        
         ProcessHandle_Win* processHandle = nullptr;
     };
     
