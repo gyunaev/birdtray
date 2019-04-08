@@ -57,7 +57,7 @@ QModelIndex ModelAccountTree::parent(const QModelIndex &) const
 
 int ModelAccountTree::rowCount(const QModelIndex &) const
 {
-    return mAccounts.size();
+    return numAccounts();
 }
 
 Qt::ItemFlags ModelAccountTree::flags(const QModelIndex &) const
@@ -112,8 +112,15 @@ void ModelAccountTree::removeAccount(const QModelIndex &idx)
     endRemoveRows();
 }
 
+int ModelAccountTree::numAccounts() const {
+    return mAccounts.size();
+}
+
 void ModelAccountTree::clear()
 {
+    if (mColors.size() <= 0) {
+        return;
+    }
     beginRemoveRows( QModelIndex(), 0, mColors.size() - 1 );
     mAccounts.clear();
     mColors.clear();
