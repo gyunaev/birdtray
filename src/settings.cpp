@@ -130,7 +130,7 @@ void Settings::load()
     {
         QString entry = "accounts/account" + QString::number( index );
         QString key = settings.value( entry + "URI", "" ).toString();
-        while (key.isEmpty() && total <= index) {
+        while (key.isEmpty() && index < total) {
             Utils::debug("Removing invalid account %d", index);
             QString lastEntry = "accounts/account" + QString::number( total - 1 );
             if (index != total - 1) {
