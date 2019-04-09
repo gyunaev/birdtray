@@ -149,13 +149,13 @@ before_deploy:
       cd ..;
     fi
 
-deploy:
-  - provider: releases
-    api_key:
-      secure: yp/44KzYS3E8vlOq4JMRGIXwrPPlap92X3OPY4ANThB4b/u1AweQo1kBr1EqcGwU6d54A18bzOs0p1v7CK02m850UI/Sy4I6AMYC/eD1nPzsqpZLtjyoOgPAIeUWwNHWIsJxcD9+a98qHLg54uogx/CVdrSai3P/JLMd0N06pX4dNHXAqqrXw0b8c9uRQzEqGLHqy3bnKBoadD8Kkqi/zvKSmu/2w2ZagA3yqGLrYfBAjXWhS8Oix+XntjVI/6Nw4mamA+7vbJ3cB9xDSnrpGhqBIFcg85igRNjhQWbhytUJ4R45sclN2TkJyijWNnkvdGK2KSf6S1i3TY3fx2kwHosIcwaDsT3gndMdjPfsSpGfGSV/7ixY4DWmt2YT+MVTz04xlWuArcfzw5G/DL2XzIfPHmmmTgr/40fKgSoeDCBNPkPeUs47SStM28j9JJ82ALAiKqDXnZIHV6IgVqEMGb/TPvUb8BDOqbiT0mUurUjJtF1rBlZustbJhYpIJemwANF5OMCU3b5Lh4dE1fSoqmGPzJCwJmTv7jN6lokV4Zye56NO7e3kExG7GoySWG+b5uKsNSojcOMpYAf8CmP7BabsfjffUCRTHzSAKzPSLbefKx0TT9RCn+c6olXXHnganAzyOujqQBWpY90mJxyfC3aiiMn33r4wS7kJquhFZxI=
-    file_glob: true
-    file: installer/Birdtray-*.exe
-    skip_cleanup: true
-    on:
-      tags: true
-      branch: master
+#deploy:
+#  - provider: releases
+#    api_key:
+#      secure: SECURE_KEY_GOES_HERE
+#    file_glob: true
+#    file: installer/Birdtray-*.exe
+#    skip_cleanup: true
+#    on:
+#      tags: true
+#      branch: master
