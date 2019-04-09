@@ -44,7 +44,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnNewEmailDelete, &QPushButton::clicked, this, &DialogSettings::newEmailRemove );
 
     // Setup parameters
-    leProfilePath->setText( pSettings->mThunderbirdFolderPath );
+    leProfilePath->setText( QDir::toNativeSeparators(pSettings->mThunderbirdFolderPath) );
     btnNotificationColor->setColor( pSettings->mNotificationDefaultColor );
     notificationFont->setCurrentFont( pSettings->mNotificationFont );
     notificationFontWeight->setValue( pSettings->mNotificationFontWeight * 2 );
@@ -125,13 +125,7 @@ void DialogSettings::accept()
             QMessageBox::critical( 0, "Empty Thunderbird directory", tr("You must specify Thunderbird directory") );
             return;
         }
-
-        if ( !profilePath.endsWith( QDir::separator() ) )
-            profilePath.append( QDir::separator() );
-
-        if ( !QFile::exists( profilePath + "global-messages-db.sqlite" ) )
-        {
-            QMessageBox::critical( 0, "Invalid Thunderbird directory", tr("Valid Thunderbird directory must contain the file global-messages-db.sqlite") );
+        if (!reportIfProfilePathValid(profilePath)) {
             return;
         }
     }
@@ -184,30 +178,21 @@ void DialogSettings::accept()
 
 void DialogSettings::browsePath()
 {
-    QString e = QFileDialog::getExistingDirectory( 0,
-                                                   "Choose the Thunderbird profile path",
-                                                   leProfilePath->text(),
-                                                   QFileDialog::ShowDirsOnly );
+    QString directory = QFileDialog::getExistingDirectory(
+            nullptr, tr("Choose the Thunderbird profile path"),
+            leProfilePath->text(), QFileDialog::ShowDirsOnly );
 
-    if ( e.isEmpty() )
-        return;
-
-    if ( !e.endsWith( QDir::separator() ) )
-        e.append( QDir::separator() );
-
-    if ( !QFile::exists( e + "global-messages-db.sqlite" ) )
-    {
-        QMessageBox::critical( 0, "Invalid Thunderbird directory", tr("Valid Thunderbird directory must contain the file global-messages-db.sqlite") );
+    if (directory.isEmpty() || !reportIfProfilePathValid(directory)) {
         return;
     }
 
-    leProfilePath->setText( e );
+    leProfilePath->setText( QDir::toNativeSeparators(directory) );
 }
 
 
 void DialogSettings::profilePathChanged()
 {
-    bool valid = isProfilePathValid();
+    bool valid = isProfilePathValid(leProfilePath->text());
 
     if ( !isMorkParserSelected() )
     {
@@ -240,7 +225,8 @@ void DialogSettings::fixDatabaseUnreads()
     mProgressFixer->setWindowModality(Qt::WindowModal);
     mProgressFixer->show();
 
-    DatabaseUnreadFixer * fixer = new DatabaseUnreadFixer( leProfilePath->text() );
+    DatabaseUnreadFixer * fixer = new DatabaseUnreadFixer(
+            DatabaseAccounts::getDatabasePath(leProfilePath->text()));
     connect( fixer, &DatabaseUnreadFixer::done, this, &DialogSettings::databaseUnreadsFixed );
     connect( fixer, &DatabaseUnreadFixer::progress, this, &DialogSettings::databaseUnreadsUpdate );
 
@@ -449,24 +435,32 @@ void DialogSettings::activateTab(int tab)
     if ( tab == 1 && !isMorkParserSelected() )
     {
         // Get the account list
-        DatabaseAccounts * dba = new DatabaseAccounts( leProfilePath->text() );
+        DatabaseAccounts * dba = new DatabaseAccounts(
+                DatabaseAccounts::getDatabasePath(leProfilePath->text()));
         connect( dba, &DatabaseAccounts::done, this, &DialogSettings::accountsAvailable );
         dba->start();
     }
 }
 
-bool DialogSettings::isProfilePathValid()
+bool DialogSettings::isProfilePathValid(const QString& profilePath) const
 {
-    // Validate the profile path
-    QString profilePath = leProfilePath->text();
-
     if ( profilePath.isEmpty() )
         return false;
+    
+    QString databasePath = DatabaseAccounts::getDatabasePath(profilePath);
+    return QFile::exists(databasePath);
+}
 
-    if ( !profilePath.endsWith( QDir::separator() ) )
-        profilePath.append( QDir::separator() );
-
-    return QFile::exists( profilePath + "global-messages-db.sqlite" );
+bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const {
+    if (isProfilePathValid(profilePath)) {
+        return true;
+    }
+    if (!profilePath.isEmpty()) {
+        QMessageBox::critical(nullptr, tr("Invalid Thunderbird directory"),
+                tr("Valid Thunderbird directory must contain the file %1")
+                .arg(QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName()));
+    }
+    return false;
 }
 
 bool DialogSettings::isMorkParserSelected() const

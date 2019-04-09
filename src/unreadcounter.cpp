@@ -9,6 +9,7 @@
 #include "settings.h"
 #include "trayicon.h"
 #include "utils.h"
+#include "databaseaccounts.h"
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     : QThread( 0 ), mChangedMSFtimer(this)
@@ -41,7 +42,7 @@ UnreadMonitor::~UnreadMonitor()
 
 void UnreadMonitor::run()
 {
-    mSqliteDbFile = pSettings->mThunderbirdFolderPath + QDir::separator() + "global-messages-db.sqlite";
+    mSqliteDbFile = DatabaseAccounts::getDatabasePath(pSettings->mThunderbirdFolderPath);
 
     // Start it as soon as thread starts its event loop
     QTimer::singleShot( 0, [=](){ updateUnread(); } );

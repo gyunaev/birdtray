@@ -4,10 +4,10 @@
 #include "sqlite_statement.h"
 #include "sqlite3.h"
 
-DatabaseAccounts::DatabaseAccounts( const QString& dbpath  )
+DatabaseAccounts::DatabaseAccounts( const QString& databasePath  )
 {
     moveToThread( this );
-    mDbPath = dbpath + QDir::separator() + "global-messages-db.sqlite";
+    mDbPath = databasePath;
 }
 
 const QList<DatabaseAccounts::Account> &DatabaseAccounts::accounts() const
@@ -61,4 +61,8 @@ void DatabaseAccounts::queryAccounts()
     }
 
     emit done ( "" );
+}
+
+const QString DatabaseAccounts::getDatabasePath(const QString &directory) {
+    return QDir(directory).filePath("global-messages-db.sqlite");
 }

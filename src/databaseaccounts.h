@@ -15,7 +15,15 @@ class DatabaseAccounts : public QThread
             qint64  id;
         };
 
-        DatabaseAccounts(const QString &dbpath);
+        DatabaseAccounts(const QString &databasePath);
+        
+        /**
+         * Get the path to the database file in the given directory.
+         *
+         * @param directory The directory containing the database file.
+         * @return The path to the database file.
+         */
+        static const QString getDatabasePath(const QString &directory);
 
         const QList<Account>& accounts() const;
 
