@@ -24,11 +24,6 @@ class ModelAccountTree : public QAbstractItemModel
         void    editAccount( const QModelIndex& idx, const QString& uri, const QColor& color );
         void    getAccount( const QModelIndex& idx, QString& uri, QColor& color );
         void    removeAccount( const QModelIndex& idx );
-        
-        /**
-         * @return The number of accounts in the model.
-         */
-        int     numAccounts() const;
         void    clear();
 
         // Moves the current accounts/colors to settings
