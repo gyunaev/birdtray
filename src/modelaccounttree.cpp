@@ -114,6 +114,9 @@ void ModelAccountTree::removeAccount(const QModelIndex &idx)
 
 void ModelAccountTree::clear()
 {
+    if (mColors.isEmpty()) {
+        return;
+    }
     beginRemoveRows( QModelIndex(), 0, mColors.size() - 1 );
     mAccounts.clear();
     mColors.clear();
