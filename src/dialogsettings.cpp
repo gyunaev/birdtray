@@ -409,7 +409,7 @@ void DialogSettings::unreadParserChanged(int curr)
     }
 
     // Did we change comparing to settings?
-    if ( mAccountModel->rowCount() && isMorkParserSelected() != pSettings->mUseMorkParser )
+    if ( mAccountModel->rowCount() != 0 && isMorkParserSelected() != pSettings->mUseMorkParser )
     {
         if ( QMessageBox::question( 0,
                                tr("WARNING: Parser changed"),
