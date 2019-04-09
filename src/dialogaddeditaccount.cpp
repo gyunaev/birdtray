@@ -14,6 +14,8 @@ DialogAddEditAccount::DialogAddEditAccount(bool usemork, QWidget *parent )
     {
         leFolderPath->hide();
         btnBrowse->hide();
+        connect(boxAccounts, &QComboBox::currentTextChanged,
+                this, &DialogAddEditAccount::onAccountSelected);
     }
     else
     {
@@ -32,12 +34,13 @@ void DialogAddEditAccount::setCurrent(const QList<DatabaseAccounts::Account> &ac
     {
         for ( int i = 0; i < accounts.size(); i++ )
             boxAccounts->addItem( accounts[i].uri );
-
-        if ( !account.isEmpty() )
+        buttonBox->button(QDialogButtonBox::Ok)->setDisabled(accounts.isEmpty());
+        if ( !account.isEmpty() ) {
             boxAccounts->setCurrentText( account );
-    }
-    else
+        }
+    } else {
         leFolderPath->setText( account );
+    }
 
     btnColor->setColor( color );
 }
@@ -77,7 +80,14 @@ void DialogAddEditAccount::accept()
             QMessageBox::critical( 0, "Invalid MSF file", tr("You must specify valid, non-empty Thunderbird index file") );
             return;
         }
+    } else if (boxAccounts->currentText().isEmpty()) {
+        QMessageBox::critical(nullptr, tr("No account selected"), tr("You must select an account"));
+        return;
     }
 
     QDialog::accept();
+}
+
+void DialogAddEditAccount::onAccountSelected(const QString &accountUri) {
+    buttonBox->button(QDialogButtonBox::Ok)->setDisabled(accountUri.isEmpty());
 }

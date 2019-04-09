@@ -81,6 +81,9 @@ QVariant ModelAccountTree::headerData(int section, Qt::Orientation , int role) c
 
 void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
 {
+    if (uri.isEmpty()) {
+        return;
+    }
     // Only this line changed
     beginInsertRows( QModelIndex(), mColors.size(), mColors.size() + 1 );
 
@@ -92,6 +95,9 @@ void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
 
 void ModelAccountTree::editAccount(const QModelIndex &idx, const QString &uri, const QColor &color)
 {
+    if (uri.isEmpty()) {
+        return;
+    }
     mAccounts[ idx.row() ] = uri;
     mColors[ idx.row() ] = color;
 
