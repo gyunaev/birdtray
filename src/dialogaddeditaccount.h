@@ -25,6 +25,13 @@ class DialogAddEditAccount : public QDialog, public Ui::DialogAddEditAccount
     public slots:
         void    browse();
         void    accept();
+        
+        /**
+         * Called when an account is selected in the combobox.
+         *
+         * @param accountUri The uri of the account.
+         */
+        void    onAccountSelected(const QString& accountUri);
 
     private:
         bool    mMorkParser;
