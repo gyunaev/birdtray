@@ -123,7 +123,7 @@ QString Utils::decodeIMAPutf7(const QString &param)
 
 QString Utils::expandPath(const QString &path) {
 #if defined (Q_OS_WIN)
-    TCHAR buffer[PATH_MAX];
+    TCHAR buffer[MAX_PATH];
 #if defined(UNICODE)
     std::wstring originalPath = path.toStdWString();
 #else
