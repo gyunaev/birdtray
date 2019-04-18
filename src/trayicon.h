@@ -43,7 +43,6 @@ class TrayIcon : public QSystemTrayIcon
         void    blinkTimeout();
 
         // Context menu actions
-        void    actionQuit();
         void    actionSettings();
         void    actionActivate();
         void    actionSnoozeFor();
@@ -56,6 +55,11 @@ class TrayIcon : public QSystemTrayIcon
         void    startThunderbird();
         void    tbProcessError( QProcess::ProcessError error);
         void    tbProcessFinished( int exitCode, QProcess::ExitStatus exitStatus );
+    
+        /**
+         * Callback that is called when we are about to quit.
+         */
+        void    onQuit();
 
     private:
         void    createMenu();

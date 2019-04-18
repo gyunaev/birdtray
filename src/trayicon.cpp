@@ -30,6 +30,7 @@ TrayIcon::TrayIcon()
     mThunderbirdWindowExists = false;
     mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
+    connect(QApplication::instance(), &QApplication::aboutToQuit, this, &TrayIcon::onQuit);
 
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs( pSettings->mLaunchThunderbirdDelay );
 
@@ -333,21 +334,6 @@ void TrayIcon::blinkTimeout()
     updateIcon();
 }
 
-
-void TrayIcon::actionQuit()
-{
-    if ( mWinTools && mWinTools->isHidden() )
-        mWinTools->show();
-
-    if ( pSettings->mExitThunderbirdWhenQuit )
-    {
-        if ( mWinTools )
-            mWinTools->closeWindow();
-    }
-
-    QApplication::quit();
-}
-
 void TrayIcon::actionSettings()
 {
     DialogSettings dlg;
@@ -537,7 +523,7 @@ void TrayIcon::createMenu()
     menu->addSeparator();
 
     // And exit
-    menu->addAction( tr("Quit"), this, SLOT(actionQuit()) );
+    menu->addAction( tr("Quit"), QApplication::instance(), &QApplication::quit );
 
     setContextMenu( menu );
 }
@@ -589,6 +575,17 @@ void TrayIcon::tbProcessFinished(int, QProcess::ExitStatus)
     // Thus we just destroy the process later, to let updateState() make decision
     mThunderbirdProcess->deleteLater();
     mThunderbirdProcess = 0;
+}
+
+void TrayIcon::onQuit() {
+    if ( mWinTools && mWinTools->isHidden() )
+        mWinTools->show();
+    
+    if ( pSettings->mExitThunderbirdWhenQuit )
+    {
+        if ( mWinTools )
+            mWinTools->closeWindow();
+    }
 }
 
 void TrayIcon::hideThunderbird()
