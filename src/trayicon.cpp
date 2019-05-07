@@ -528,7 +528,7 @@ void TrayIcon::createMenu()
     menu->addSeparator();
 
     // And exit
-    menu->addAction( tr("Quit"), &TrayIcon::actionQuit );
+    menu->addAction( tr("Quit"), this, SLOT(actionQuit()) );
 
     setContextMenu( menu );
 }
