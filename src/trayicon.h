@@ -43,6 +43,7 @@ class TrayIcon : public QSystemTrayIcon
         void    blinkTimeout();
 
         // Context menu actions
+        static void actionQuit();
         void    actionSettings();
         void    actionActivate();
         void    actionSnoozeFor();

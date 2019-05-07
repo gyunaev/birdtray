@@ -334,6 +334,11 @@ void TrayIcon::blinkTimeout()
     updateIcon();
 }
 
+void TrayIcon::actionQuit()
+{
+    QApplication::quit();
+}
+
 void TrayIcon::actionSettings()
 {
     DialogSettings dlg;
@@ -523,7 +528,7 @@ void TrayIcon::createMenu()
     menu->addSeparator();
 
     // And exit
-    menu->addAction( tr("Quit"), QApplication::instance(), &QApplication::quit );
+    menu->addAction( tr("Quit"), &TrayIcon::actionQuit );
 
     setContextMenu( menu );
 }
