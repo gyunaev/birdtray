@@ -13,10 +13,10 @@
 
 Settings * pSettings;
 
-Settings::Settings()
+Settings::Settings(bool verboseOutput)
 {
     mIconSize = QSize( 128, 128 );
-    mVerboseOutput = false;
+    mVerboseOutput = verboseOutput;
 }
 
 void Settings::save()

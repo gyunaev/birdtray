@@ -13,7 +13,7 @@
 class Settings
 {
     public:
-        Settings();
+        explicit Settings(bool verboseOutput);
 
         // Desired icon size
         QSize   mIconSize;
