@@ -3,7 +3,6 @@
 #include <QFile>
 #include <QDir>
 
-#include "version.h"
 #include "settings.h"
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
@@ -84,7 +83,7 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     // Create the "About" box
     QString origabout = browserAbout->toHtml();
-    origabout.replace( "[VERSION]", QString("%1.%2").arg(VERSION_MAJOR) .arg(VERSION_MINOR) );
+    origabout.replace( "[VERSION]", Utils::getBirdtrayVersion() );
     origabout.replace( "[DATE]", QString("%1 %2").arg(__DATE__) .arg(__TIME__) );
     browserAbout->setText( origabout );
 

@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "settings.h"
+#include "version.h"
 
 #include <QTextCodec>
 #include <QtWidgets/QMessageBox>
@@ -154,6 +155,10 @@ QString Utils::expandPath(const QString &path) {
 #endif
 }
 
+QString Utils::getBirdtrayVersion() {
+    return QString("%1.%2.%3").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH);
+}
+
 void Utils::debug(const char *fmt, ...)
 {
     va_list vl;
@@ -168,7 +173,6 @@ void Utils::debug(const char *fmt, ...)
 
     qDebug( "%s", buf );
 }
-
 
 void Utils::fatal(const char *fmt, ...)
 {

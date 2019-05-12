@@ -1,7 +1,11 @@
 #include <windows.h>
+#include "version.h"
 
-#define VERSION     1,6,1,0
-#define VERSION_STR "1.6.1\0"
+#define STRINGIFY_(str) #str
+#define STRINGIFY(str) STRINGIFY_(str)
+#define VERSION     VERSION_MAJOR,VERSION_MINOR,VERSION_PATCH,0
+#define VERSION_STR \
+    STRINGIFY(VERSION_MAJOR) "." STRINGIFY(VERSION_MINOR) ". " STRINGIFY(VERSION_PATCH) "\0"
 #define IDI_ICON_1 102
 #ifndef DEBUG
 #define VER_DEBUG 0
