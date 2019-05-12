@@ -51,6 +51,8 @@ int main(int argc, char *argv[])
         {"dump-mork", QApplication::tr("Display the contents of the given mork database."),
          QApplication::tr("databaseFile")},
         {"decode", QApplication::tr("Decode an IMAP Utf7 string."), QApplication::tr("string")},
+        {"settings", QApplication::tr("Show the settings.")},
+        {{"r", "reset-settings"}, QApplication::tr("Reset the settings to the defaults.")},
         {{"d", "debug"}, QApplication::tr("Enable debugging output.")},
     });
     parser.process(app);
@@ -76,8 +78,12 @@ int main(int argc, char *argv[])
 
     // Load settings
     pSettings = new Settings(parser.isSet("debug"));
-    pSettings->load();
+    if (parser.isSet("reset-settings")) {
+        pSettings->save(); // Saving without loading will reset the values
+    } else {
+        pSettings->load();
+    }
 
-    TrayIcon trayIcon;
+    TrayIcon trayIcon(parser.isSet("settings"));
     return QApplication::exec();
 }

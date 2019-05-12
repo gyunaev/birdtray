@@ -16,7 +16,7 @@ class TrayIcon : public QSystemTrayIcon
     Q_OBJECT
 
     public:
-        TrayIcon();
+        explicit TrayIcon(bool showSettings);
 
     signals:
         void    settingsChanged();
