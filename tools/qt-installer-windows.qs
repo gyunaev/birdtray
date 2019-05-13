@@ -10,8 +10,8 @@
 // Unfortunately it is not possible to disable deps like qt.tools.qtcreator
 var INSTALL_COMPONENTS = [
     installer.environmentVariable("PLATFORM") == "x64" ?
-    "qt.qt5.5120.win64_msvc2017_64" :
-    "qt.qt5.5120.win32_msvc2017",
+    "win64_msvc2017_64" :
+    "win32_msvc2017",
 ];
 
 function Controller() {
@@ -43,8 +43,8 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 Controller.prototype.TargetDirectoryPageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
-    // Keep default at "C:\Qt".
-    gui.currentPageWidget().TargetDirectoryLineEdit.setText("C:\\Qt");
+    var qtHome = installer.environmentVariable("QT_HOME");
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText(qtHome);
     gui.clickButton(buttons.NextButton);
 };
 
@@ -52,8 +52,11 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
     var page = gui.currentPageWidget();
     page.deselectAll();
+    var latestVersion = installer.environmentVariable("Q_LATEST_VERSION");
+    var latestVersionMajor = latestVersion[0];
+    var prefix = "qt.qt" + latestVersion[0] + "." + latestVersion + ".";
     for (var i = 0; i < INSTALL_COMPONENTS.length; i++) {
-        page.selectComponent(INSTALL_COMPONENTS[i]);
+        page.selectComponent(prefix + INSTALL_COMPONENTS[i]);
     }
     gui.clickButton(buttons.NextButton);
 };
