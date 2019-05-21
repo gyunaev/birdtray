@@ -100,7 +100,6 @@ install:
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-      choco install -y nsis;
       if [ "$PLATFORM" == "x64" ]; then
         export SQLITE_URL=https://www.sqlite.org/2019/sqlite-dll-win64-x64-3270200.zip;
       else
@@ -115,10 +114,13 @@ install:
       echo "Installed Qt version: ${QT_VERSION}";
       export QT_COMILER_DIR="${QT_HOME}/${QT_VERSION}/${QT_COMILER}";
       if [ ! -e "${QT_COMILER_DIR}/bin/moc.exe" ]; then
+        rm -r "C:/Qt" 2> /dev/null;
         echo "Downloading Qt installer...";
         curl -Lo ~/qt-unified-windows-x86-online.exe http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe --progress-bar;
-        echo "Executing Qt installer...";
-        ~/qt-unified-windows-x86-online.exe --verbose --script tools/qt-installer-windows.qs | grep --line-buffered -vE 'addDownloadable|Url is|addFontToDatabase|Remove Package|QtPatchOperation::getDirContent';
+        export Q_LATEST_VERSION=$(curl -s -L http://download.qt.io/official_releases/qt/ | grep -o '[0-9]\+\.[0-9]\+' | sort -t. -k 1,1n -k 2,2n | tail -n 1);
+        export Q_LATEST_VERSION=$(curl -s -L http://download.qt.io/official_releases/qt/${Q_LATEST_VERSION} | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | sort -t. -k 1,1n -k 2,2n | tail -n 1 | tr -d '.');
+        echo "Executing Qt installer for Qt version ${Q_LATEST_VERSION}...";
+        ~/qt-unified-windows-x86-online.exe --verbose --no-force-installations --script tools/qt-installer-windows.qs | grep --line-buffered -vE 'addDownloadable|Url is|addFontToDatabase|Remove Package|QtPatchOperation::getDirContent';
         echo "Removing unneeded files...";
         rm -r "C:/Qt/Examples" 2> /dev/null;
         rm -r "C:/Qt/Docs" 2> /dev/null;
@@ -144,6 +146,7 @@ script:
 before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+      choco install -y nsis;
       cd ../installer;
       ./buildInstaller.bat "..\build\Release\birdtray.exe" "%USERPROFILE%\sqlite3\sqlite3.dll" || (exit $?);
       cd ..;
