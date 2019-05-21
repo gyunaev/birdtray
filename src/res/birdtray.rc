@@ -1,7 +1,7 @@
 #include <windows.h>
 
-#define VERSION     1,5,1,0
-#define VERSION_STR "1.5.1\0"
+#define VERSION     1,6,1,0
+#define VERSION_STR "1.6.1\0"
 #define IDI_ICON_1 102
 #ifndef DEBUG
 #define VER_DEBUG 0
