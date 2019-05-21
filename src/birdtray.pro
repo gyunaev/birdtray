@@ -80,6 +80,8 @@ unix {
      QT += x11extras
 }
 win32 {
+     DEFINES += -DUNICODE
      SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp
      HEADERS += windowtools_win.h birdtrayeventfilter.h
+     LIBS += user32.lib
 }
