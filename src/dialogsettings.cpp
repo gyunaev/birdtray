@@ -89,7 +89,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     browserAbout->setText( origabout );
 
     // Icon
-    btnNotificationIcon->setIcon( pSettings->mNotificationIcon );
+    btnNotificationIcon->setIcon( pSettings->getNotificationIcon() );
 
     if ( !pSettings->mNotificationIconUnread.isNull() )
     {
@@ -163,7 +163,7 @@ void DialogSettings::accept()
     pSettings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
     pSettings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
 
-    pSettings->mNotificationIcon = btnNotificationIcon->icon().pixmap( pSettings->mIconSize );
+    pSettings->setNotificationIcon(btnNotificationIcon->icon().pixmap( pSettings->mIconSize ));
 
     if ( boxNotificationIconUnread->isChecked() )
         pSettings->mNotificationIconUnread = btnNotificationIconUnread->icon().pixmap( pSettings->mIconSize );

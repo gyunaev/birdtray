@@ -13,13 +13,10 @@
 class Settings
 {
     public:
-        Settings();
+        explicit Settings(bool verboseOutput);
 
         // Desired icon size
         QSize   mIconSize;
-
-        // Notification icon
-        QPixmap mNotificationIcon;
 
         // Notification icon for unread emails.
         // If null, the mNotificationIcon is used
@@ -115,8 +112,23 @@ class Settings
          * @return The absolute path to the thunderbird executable.
          */
         QString getThunderbirdExecutablePath();
+        
+        /**
+         * @return The icon to use for the system tray.
+         */
+        const QPixmap& getNotificationIcon();
+        
+        /**
+         * Set the icon to use for the system tray to the new icon.
+         *
+         * @param icon The new icon.
+         */
+        void setNotificationIcon(const QPixmap& icon);
 
     private:
+        // Notification icon
+        QPixmap mNotificationIcon;
+    
         void    savePixmap( QSettings& settings, const QString& key, const QPixmap& pixmap );
         QPixmap loadPixmap( QSettings& settings, const QString& key );
 };

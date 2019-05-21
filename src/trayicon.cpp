@@ -13,7 +13,7 @@
 #include "windowtools.h"
 #include "utils.h"
 
-TrayIcon::TrayIcon()
+TrayIcon::TrayIcon(bool showSettings)
 {
     mBlinkingIconOpacity = 1.0;
     mBlinkingDelta = 0.0;
@@ -37,14 +37,11 @@ TrayIcon::TrayIcon()
     mWinTools = WindowTools::create();
 
     // If the settings are not yet configure, pop up the message
-    if ( pSettings->mFolderNotificationColors.isEmpty() )
-    {
-        if ( QMessageBox::question( 0,
-            tr( "Would you like to set up Birdtray?" ),
-            tr( "You have not yet configured any email folders to monitor. Would you like to do it now?") ) == QMessageBox::Yes )
-        {
-            actionSettings();
-        }
+    if ( showSettings || (pSettings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
+            nullptr, tr( "Would you like to set up Birdtray?" ),
+            tr( "You have not yet configured any email folders to monitor. "
+                "Would you like to do it now?") ) == QMessageBox::Yes )) {
+        actionSettings();
     }
 
     createMenu();
@@ -139,7 +136,7 @@ void TrayIcon::updateIcon()
             enableBlinking( false );
     }
 
-    QPixmap temp( pSettings->mNotificationIcon.size() );
+    QPixmap temp( pSettings->getNotificationIcon().size() );
     QPainter p;
 
     temp.fill( Qt::transparent );
@@ -158,7 +155,7 @@ void TrayIcon::updateIcon()
     if ( unread != 0 && !pSettings->mNotificationIconUnread.isNull() )
         p.drawPixmap( pSettings->mNotificationIconUnread.rect(), pSettings->mNotificationIconUnread );
     else
-        p.drawPixmap( pSettings->mNotificationIcon.rect(), pSettings->mNotificationIcon );
+        p.drawPixmap( pSettings->getNotificationIcon().rect(), pSettings->getNotificationIcon() );
 
     p.setFont( pSettings->mNotificationFont );
 

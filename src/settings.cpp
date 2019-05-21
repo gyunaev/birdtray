@@ -13,10 +13,33 @@
 
 Settings * pSettings;
 
-Settings::Settings()
+Settings::Settings(bool verboseOutput)
 {
+    mVerboseOutput = verboseOutput;
     mIconSize = QSize( 128, 128 );
-    mVerboseOutput = false;
+    mNotificationDefaultColor = QColor("#00FF00");
+    mBlinkSpeed = 0;
+    mShowHideThunderbird = false;
+    mLaunchThunderbird = false;
+    mHideWhenMinimized = false;
+    mExitThunderbirdWhenQuit = false;
+    mNotificationFontWeight = 50;
+    mMonitorThunderbirdWindow = false;
+    mRestartThunderbird = false;
+    mHideWhenStarted = false;
+    mHideWhenRestarted = false;
+    mAllowSuppressingUnreads = false;
+    mLaunchThunderbirdDelay = 0;
+    mShowUnreadEmailCount = true;
+    mThunderbirdCmdLine = THUNDERBIRD_EXE_PATH;
+    mThunderbirdWindowMatch = "- Mozilla Thunderbird";
+    mNotificationMinimumFontSize = 4;
+    mNotificationMaximumFontSize = 512;
+    mUseMorkParser = true;
+    mWatchFileTimeout = 150;
+    mBlinkingUseAlphaTransition = false;
+    mUnreadOpacityLevel = 0.75;
+    mNewEmailMenuEnabled = false;
 }
 
 void Settings::save()
@@ -96,30 +119,45 @@ void Settings::load()
             Utils::fatal("Cannot load default system tray icon");
     }
 
-    mNotificationDefaultColor = QColor( settings.value( "common/defaultcolor", "#00FF00" ).toString() );
-    mThunderbirdFolderPath = settings.value( "common/profilepath", "" ).toString();
-    mBlinkSpeed = settings.value("common/blinkspeed", 0 ).toInt();
-    mShowHideThunderbird = settings.value("common/showhidethunderbird", false ).toBool();
-    mLaunchThunderbird = settings.value("common/launchthunderbird", false ).toBool();
-    mHideWhenMinimized = settings.value("common/hidewhenminimized", false ).toBool();
-    mExitThunderbirdWhenQuit = settings.value("common/exitthunderbirdonquit", false ).toBool();
-    mNotificationFontWeight = settings.value("common/notificationfontweight", 50 ).toInt();
-    mMonitorThunderbirdWindow = settings.value("common/monitorthunderbirdwindow", false ).toBool();
-    mRestartThunderbird = settings.value("common/restartthunderbird", false ).toBool();
-    mHideWhenStarted = settings.value("common/hidewhenstarted", false ).toBool();
-    mHideWhenRestarted = settings.value("common/hidewhenrestarted", false ).toBool();
-    mAllowSuppressingUnreads = settings.value("common/allowsuppressingunread", false ).toBool();
-    mLaunchThunderbirdDelay = settings.value("common/launchthunderbirddelay", 0 ).toInt();
-    mShowUnreadEmailCount = settings.value("common/showunreademailcount", true ).toBool();
+    mNotificationDefaultColor = QColor( settings.value(
+            "common/defaultcolor", mNotificationDefaultColor.name() ).toString() );
+    mThunderbirdFolderPath = settings.value(
+            "common/profilepath", mThunderbirdFolderPath ).toString();
+    mBlinkSpeed = settings.value("common/blinkspeed", mBlinkSpeed ).toInt();
+    mShowHideThunderbird = settings.value(
+            "common/showhidethunderbird", mShowHideThunderbird ).toBool();
+    mLaunchThunderbird = settings.value("common/launchthunderbird", mLaunchThunderbird ).toBool();
+    mHideWhenMinimized = settings.value("common/hidewhenminimized", mHideWhenMinimized ).toBool();
+    mExitThunderbirdWhenQuit = settings.value(
+            "common/exitthunderbirdonquit", mExitThunderbirdWhenQuit ).toBool();
+    mNotificationFontWeight = settings.value(
+            "common/notificationfontweight", mNotificationFontWeight ).toInt();
+    mMonitorThunderbirdWindow = settings.value(
+            "common/monitorthunderbirdwindow", mMonitorThunderbirdWindow ).toBool();
+    mRestartThunderbird = settings.value(
+            "common/restartthunderbird", mRestartThunderbird ).toBool();
+    mHideWhenStarted = settings.value("common/hidewhenstarted", mHideWhenStarted ).toBool();
+    mHideWhenRestarted = settings.value("common/hidewhenrestarted", mHideWhenRestarted ).toBool();
+    mAllowSuppressingUnreads = settings.value(
+            "common/allowsuppressingunread", mAllowSuppressingUnreads ).toBool();
+    mLaunchThunderbirdDelay = settings.value(
+            "common/launchthunderbirddelay", mLaunchThunderbirdDelay ).toInt();
+    mShowUnreadEmailCount = settings.value(
+            "common/showunreademailcount", mShowUnreadEmailCount ).toBool();
 
-    mThunderbirdCmdLine = settings.value("advanced/tbcmdline", THUNDERBIRD_EXE_PATH).toString();
-    mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch", "- Mozilla Thunderbird" ).toString();
-    mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize", 4 ).toInt();
-    mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize", 512 ).toInt();
-    mUseMorkParser = settings.value("advanced/unreadmorkparser", true ).toBool();
-    mWatchFileTimeout = settings.value("advanced/watchfiletimeout", 150 ).toUInt();
-    mBlinkingUseAlphaTransition = settings.value("advanced/blinkingusealpha", false ).toBool();
-    mUnreadOpacityLevel = settings.value("advanced/unreadopacitylevel", 0.75 ).toDouble();
+    mThunderbirdCmdLine = settings.value("advanced/tbcmdline", mThunderbirdCmdLine).toString();
+    mThunderbirdWindowMatch = settings.value(
+            "advanced/tbwindowmatch", mThunderbirdWindowMatch ).toString();
+    mNotificationMinimumFontSize = settings.value(
+            "advanced/notificationfontminsize", mNotificationMinimumFontSize ).toInt();
+    mNotificationMaximumFontSize = settings.value(
+            "advanced/notificationfontmaxsize", mNotificationMaximumFontSize ).toInt();
+    mUseMorkParser = settings.value("advanced/unreadmorkparser", mUseMorkParser ).toBool();
+    mWatchFileTimeout = settings.value("advanced/watchfiletimeout", mWatchFileTimeout ).toUInt();
+    mBlinkingUseAlphaTransition = settings.value(
+            "advanced/blinkingusealpha", mBlinkingUseAlphaTransition ).toBool();
+    mUnreadOpacityLevel = settings.value(
+            "advanced/unreadopacitylevel", mUnreadOpacityLevel ).toDouble();
 
     mFolderNotificationColors.clear();
 
@@ -151,7 +189,7 @@ void Settings::load()
     }
 
     // Load new email data from settings
-    mNewEmailMenuEnabled = settings.value("newemail/enabled", false ).toBool();
+    mNewEmailMenuEnabled = settings.value("newemail/enabled", mNewEmailMenuEnabled ).toBool();
 
     mNewEmailData.clear();
     total = settings.value("newemail/count", 0 ).toInt();
@@ -170,6 +208,19 @@ QString Settings::getThunderbirdExecutablePath() {
     }
     path = Utils::expandPath(path);
     return '"' + QFileInfo(path).absoluteFilePath() + '"';
+}
+
+const QPixmap &Settings::getNotificationIcon() {
+    if (mNotificationIcon.isNull()) {
+        if (!mNotificationIcon.load(":res/thunderbird.png")) {
+            Utils::fatal("Cannot load default system tray icon");
+        }
+    }
+    return mNotificationIcon;
+}
+
+void Settings::setNotificationIcon(const QPixmap& icon) {
+    mNotificationIcon = icon;
 }
 
 void Settings::savePixmap(QSettings &settings, const QString &key, const QPixmap &pixmap)
