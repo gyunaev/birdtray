@@ -9,7 +9,7 @@
 #include "settings.h"
 #include "morkparser.h"
 #include "utils.h"
-#include "version.h"
+
 
 
 void ensureSystemTrayAvailable() {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("ulduzsoft");
     QCoreApplication::setOrganizationDomain("ulduzsoft.com");
     QCoreApplication::setApplicationName("birdtray");
-    QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR).arg(VERSION_MINOR));
+    QCoreApplication::setApplicationVersion(Utils::getBirdtrayVersion());
 #ifdef Q_OS_WIN
     BirdtrayEventFilter filter;
     app.installNativeEventFilter(&filter);

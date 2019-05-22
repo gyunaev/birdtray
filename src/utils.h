@@ -16,6 +16,11 @@ class Utils
          * @return The expanded path.
          */
         static QString expandPath(const QString& path);
+        
+        /**
+         * @return The version of Birdtray as a string.
+         */
+        static QString getBirdtrayVersion();
 
         static void debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
         Q_NORETURN static void fatal( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
