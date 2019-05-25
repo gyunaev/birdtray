@@ -34,7 +34,7 @@ To build Birdtray from source, you would need the following libraries:
 - Qt 5.5 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
 - sqlite3 (i.e. libsqlite3-dev or libsqlite3-devel)
 
-On Debian you need to install the following packages: ``qt5-defaults libsqlite3-dev libqt5x11extras-dev``
+On Debian you need to install the following packages: ``qt5-default libsqlite3-dev libqt5x11extras5-dev``
 
 On OpenSuSE you need to install ``libqt5-qtbase-devel libqt5-qtx11extras-devel sqlite3-devel``
 
