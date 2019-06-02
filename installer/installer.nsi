@@ -259,9 +259,14 @@ Section "${PRODUCT_NAME}" SectionBirdTray
             !insertmacro UAC_AsUser_Call Function RunUninstaller ${UAC_SYNCREGISTERS}
         ${endif}
         ${if} ${errors} # Stay in installer
+            MessageBox MB_OKCANCEL|MB_ICONSTOP \
+                            "Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing \
+                            will delete EVERYTHING in $3." /SD IDCANCEL IDOK Ignore
             SetErrorLevel 2 # Installation aborted by script
             BringToFront
             Abort "Error executing uninstaller."
+            Ignore:
+            RMDir /r "$3"
         ${else}
             ${Switch} $0
                 ${case} 0 # Uninstaller completed successfully - continue with installation
