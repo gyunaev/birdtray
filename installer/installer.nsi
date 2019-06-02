@@ -519,8 +519,16 @@ Function DirectoryPageLeave
     ${endif}
     ${IsDirEmpty} $0 $INSTDIR
     ${if} $0 == 0
+        IfFileExists $INSTDIR\${EXE_NAME} 0 DirNotEmptyNoBirdtray
+        IfFileExists $INSTDIR\${UNINSTALL_FILENAME} 0 DirNotEmptyNoBirdtray
+        MessageBox MB_OKCANCEL|MB_ICONINFORMATION \
+                        "The install path contains a previously installed ${PRODUCT_NAME} version, \
+                        which will be replaced." /SD IDOK IDOK Ignore
+        Abort
+        DirNotEmptyNoBirdtray:
         MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
-                'The install path is not empty. The content will get overwritten.' \
+                "The install path is not empty, but it doesn't look like it contains a previous \
+                ${PRODUCT_NAME} installation. The content will get overwritten." \
                 /SD IDOK IDOK Ignore
         Abort
         Ignore:
