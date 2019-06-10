@@ -80,6 +80,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define DEFAULT_INSTALL_PATH "$PROGRAMFILES\${PRODUCT_NAME}"
 !define UNINSTALL_FILENAME "uninstall.exe"
 !define UNINSTALL_BUILDER_FILE "uninstall_builder.exe"
+!define UNINSTALL_LIST_BUILDER_FILE "makeUninstallList.exe"
+!define UNINSTALL_LIST_FILENAME "uninstall_list.nsh"
 !define HEADER_IMG_FILE "assets\header.bmp"
 !define SIDEBAR_IMG_FILE "assets\sidebar.bmp"
 
@@ -220,7 +222,6 @@ VIAddVersionKey LegalCopyright ""
 !insertmacro MUI_UNPAGE_COMPONENTS
 
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW un.ConfirmPageShow
-!define MUI_PAGE_CUSTOMFUNCTION_LEAVE un.ConfirmPageLeave
 !insertmacro MUI_UNPAGE_CONFIRM
 
 !insertmacro MUI_UNPAGE_INSTFILES
@@ -379,14 +380,16 @@ SectionEnd
 Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     SectionIn RO # Can't deselect this section
 
-    # TODO: Automate this part, so that new files don't have to be added manually here
     # Try to delete the EXE as the first step - if it's in use, don't remove anything else
     !insertmacro DeleteRetryAbort "$INSTDIR\${EXE_NAME}"
-    !insertmacro DeleteRetryAbort "$INSTDIR\*.dll"
-    RMDir /r "$INSTDIR\translations"
-    RMDir /r "$INSTDIR\imageformats"
-    RMDir /r "$INSTDIR\styles"
-    RMDir /r "$INSTDIR\platforms"
+
+    !makensis '/DDIST_DIR="${DIST_DIR}" /DUNINSTALL_LIST_FILENAME="${UNINSTALL_LIST_FILENAME}" \
+            /DEXE_NAME="${EXE_NAME}" makeUninstallList.nsi' = 0
+    !system "${UNINSTALL_LIST_BUILDER_FILE}" = 0
+    !include "uninstaller\${UNINSTALL_LIST_FILENAME}"
+    !delfile "${UNINSTALL_LIST_BUILDER_FILE}"
+    !delfile "uninstaller\${UNINSTALL_LIST_FILENAME}"
+
     !ifdef LICENSE_FILE
         !insertmacro DeleteRetryAbort "$INSTDIR\${LICENSE_FILE}"
     !endif
@@ -657,18 +660,6 @@ Function un.ConfirmPageShow
         # Show/hide the Back button
         GetDlgItem $0 $HWNDPARENT 3
         ShowWindow $0 $UninstallShowBackButton
-    ${endif}
-FunctionEnd
-
-# Called when leaving the "Confirm Uninstall" page
-Function un.ConfirmPageLeave
-    ${ConfirmUninstallPath} $INSTDIR $R0
-    ${if} $R0 == 0
-        ${if} $SemiSilentMode == 1
-            Quit
-        ${else}
-            Abort
-        ${endif}
     ${endif}
 FunctionEnd
 
