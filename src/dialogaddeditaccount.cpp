@@ -3,6 +3,8 @@
 
 #include "settings.h"
 #include "dialogaddeditaccount.h"
+#include "utils.h"
+#include "dialogsettings.h"
 
 DialogAddEditAccount::DialogAddEditAccount(bool usemork, QWidget *parent )
     : QDialog(parent), Ui::DialogAddEditAccount()
@@ -60,10 +62,9 @@ QColor DialogAddEditAccount::color() const
 
 void DialogAddEditAccount::browse()
 {
-    QString e = QFileDialog::getOpenFileName( 0,
-                                              "Choose the MSF file",
-                                              "",
-                                              "Mail Index (*.msf)" );
+    QString e = QFileDialog::getOpenFileName(
+            0, "Choose the MSF file", Utils::expandPath(THUNDERBIRD_PROFILES_PATH),
+            "Mail Index (*.msf)" );
 
     if ( e.isEmpty() )
         return;
