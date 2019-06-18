@@ -146,7 +146,7 @@ void DialogSettings::accept()
     pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
     pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
-    pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
+    pSettings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
     pSettings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
     pSettings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
 
