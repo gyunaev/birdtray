@@ -60,6 +60,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    changeIcon(QToolButton * button );
         
         /**
+         * Update the account list from the selected sql database.
+         */
+        void    updateAccountList();
+        
+        /**
          * Validate the profile path.
          *
          * @param profilePath The profile path.
