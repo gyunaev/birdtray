@@ -70,6 +70,7 @@ class UnreadMonitor : public QThread
 
         // Last reported unread
         int    mLastReportedUnread;
+        QColor mLastColor;
 };
 
 #endif // FOLDERWATCHER_H
