@@ -177,9 +177,13 @@ void DialogSettings::accept()
 
 void DialogSettings::browsePath()
 {
+    QString path = leProfilePath->text();
+    if (path.isNull() || path.isEmpty()) {
+        path = Utils::expandPath(THUNDERBIRD_PROFILES_PATH);
+    }
     QString directory = QFileDialog::getExistingDirectory(
             nullptr, tr("Choose the Thunderbird profile path"),
-            leProfilePath->text(), QFileDialog::ShowDirsOnly );
+            path, QFileDialog::ShowDirsOnly );
 
     if (directory.isEmpty() || !reportIfProfilePathValid(directory)) {
         return;

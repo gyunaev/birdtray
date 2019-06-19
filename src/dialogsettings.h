@@ -8,6 +8,13 @@
 #include "databaseaccounts.h"
 #include "ui_dialogsettings.h"
 
+#ifdef Q_OS_WIN
+#  define THUNDERBIRD_PROFILES_PATH "%AppData%\\Thunderbird\\Profiles"
+#else
+#  define THUNDERBIRD_PROFILES_PATH "~/Library/Thunderbird/Profiles"
+#endif
+
+
 class ModelAccountTree;
 class ModelNewEmails;
 
