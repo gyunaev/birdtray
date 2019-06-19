@@ -92,10 +92,10 @@
              <string> %</string>
             </property>
             <property name="maximum">
-             <number>200</number>
+             <number>198</number>
             </property>
             <property name="singleStep">
-             <number>5</number>
+             <number>2</number>
             </property>
             <property name="value">
              <number>100</number>
