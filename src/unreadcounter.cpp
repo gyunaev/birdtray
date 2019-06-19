@@ -141,18 +141,19 @@ void UnreadMonitor::updateUnread()
     Utils::debug("Triggering the unread counter update");
 
     // We execute a single statement and then parse the groups and decide on colors.
-    QColor chosencolor;
+    QColor chosenColor;
     int total = 0;
 
     if ( pSettings->mUseMorkParser )
-        getUnreadCount_Mork( total, chosencolor );
+        getUnreadCount_Mork( total, chosenColor );
     else
-        getUnreadCount_SQLite( total, chosencolor);
+        getUnreadCount_SQLite( total, chosenColor);
 
-    if ( total != mLastReportedUnread )
+    if ( total != mLastReportedUnread || chosenColor != mLastColor )
     {
-        emit unreadUpdated( total, chosencolor );
+        emit unreadUpdated( total, chosenColor );
         mLastReportedUnread = total;
+        mLastColor = chosenColor;
     }
 }
 
@@ -178,7 +179,7 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
     }
 
     int res;
-    QColor chosencolor;
+    QColor chosenColor;
 
     while ( (res = stmt.step()) == SQLITE_ROW )
     {
@@ -192,15 +193,17 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
         if ( mFolderColorMap.contains( folderId ) )
         {
             // IF we have more than one color, bump to default color
-            if ( color.isValid() )
+            if ( chosenColor.isValid() )
             {
-                if ( chosencolor != mFolderColorMap[ folderId ] )
-                    color = pSettings->mNotificationDefaultColor;
+                if ( chosenColor != mFolderColorMap[ folderId ] ) {
+                    chosenColor = pSettings->mNotificationDefaultColor;
+                }
+            } else {
+                chosenColor = mFolderColorMap[ folderId ];
             }
-            else
-                color = mFolderColorMap[ folderId ];
         }
     }
+    color = chosenColor;
 }
 
 void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
@@ -234,19 +237,23 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
     }
 
     // Find the total, and set the color
+    QColor chosenColor;
     for ( const QString& tpath : mMorkUnreadCounts.keys() )
     {
         if ( mMorkUnreadCounts[ tpath ] > 0 )
         {
             count += mMorkUnreadCounts[ tpath ];
 
-            if ( color.isValid() )
-                color = pSettings->mNotificationDefaultColor;
-            else
-                color = pSettings->mFolderNotificationColors[ tpath ];
+            if ( chosenColor.isValid() ) {
+                if (chosenColor != pSettings->mFolderNotificationColors[tpath]) {
+                    chosenColor = pSettings->mNotificationDefaultColor;
+                }
+            } else {
+                chosenColor = pSettings->mFolderNotificationColors[ tpath ];
+            }
         }
     }
-
+    color = chosenColor;
     mChangedMSFfiles.clear();
 }
 
