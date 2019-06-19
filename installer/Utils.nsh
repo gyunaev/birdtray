@@ -288,29 +288,6 @@ FunctionEnd
     ${endif}
 !macroend
 
-# Confirm the uninstall from a given path.
-# PATH: The path of the installation to uninstall.
-# OUT_VAR: The variable to store the result in: 1 if the user agreed, 0 otherwise.
-!macro ConfirmUninstallPath PATH OUT_VAR
-    MessageBox MB_YESNO|MB_ICONEXCLAMATION \
-        "This will remove ALL of the program files under$\r$\n\
-        $\r$\n\
-        ${PATH}$\r$\n\
-        $\r$\n\
-        and cannot be undone. Are you sure you wish to continue?" \
-        /SD IDYES IDYES yes IDNO no
-
-    yes:
-        StrCpy ${OUT_VAR} 1
-        Goto done
-    no:
-        StrCpy ${OUT_VAR} 0
-        Goto done
-
-    done:
-!macroend
-!define ConfirmUninstallPath '!insertmacro ConfirmUninstallPath'
-
 # Check if a registry key exists.
 # ROOT: The registry root key.
 # KEY: The key to check for.
