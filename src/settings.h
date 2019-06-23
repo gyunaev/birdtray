@@ -25,7 +25,7 @@ class Settings
         // Font for use in notifications
         QFont   mNotificationFont;
 
-        // Notification font weight
+        // Notification font weight (0 - 99)
         unsigned int mNotificationFontWeight;
 
         // Default notification color

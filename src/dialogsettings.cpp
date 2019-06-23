@@ -146,7 +146,7 @@ void DialogSettings::accept()
     pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
     pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
-    pSettings->mNotificationFontWeight = notificationFontWeight->value() / 2;
+    pSettings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
     pSettings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
     pSettings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
 
@@ -177,9 +177,13 @@ void DialogSettings::accept()
 
 void DialogSettings::browsePath()
 {
+    QString path = leProfilePath->text();
+    if (path.isNull() || path.isEmpty()) {
+        path = Utils::expandPath(THUNDERBIRD_PROFILES_PATH);
+    }
     QString directory = QFileDialog::getExistingDirectory(
             nullptr, tr("Choose the Thunderbird profile path"),
-            leProfilePath->text(), QFileDialog::ShowDirsOnly );
+            path, QFileDialog::ShowDirsOnly );
 
     if (directory.isEmpty() || !reportIfProfilePathValid(directory)) {
         return;
@@ -199,10 +203,13 @@ void DialogSettings::profilePathChanged()
         btnFixUnreadCount->setEnabled( valid );
     }
 
-    if ( valid )
+    if ( valid ) {
         leProfilePath->setPalette( mPaletteOk );
-    else
+        updateAccountList();
+    } else {
         leProfilePath->setPalette( mPaletteErrror );
+        mAccounts.clear();
+    }
 
 }
 
@@ -428,16 +435,23 @@ void DialogSettings::changeIcon(QToolButton *button)
     button->setIcon( test );
 }
 
+
+void DialogSettings::updateAccountList() {
+    if (isMorkParserSelected()) {
+        return;
+    }
+    DatabaseAccounts * dba = new DatabaseAccounts(
+            DatabaseAccounts::getDatabasePath(leProfilePath->text()));
+    connect( dba, &DatabaseAccounts::done, this, &DialogSettings::accountsAvailable );
+    dba->start();
+}
+
 void DialogSettings::activateTab(int tab)
 {
     // #1 is the Accounts tab
-    if ( tab == 1 && !isMorkParserSelected() )
+    if ( tab == 1 )
     {
-        // Get the account list
-        DatabaseAccounts * dba = new DatabaseAccounts(
-                DatabaseAccounts::getDatabasePath(leProfilePath->text()));
-        connect( dba, &DatabaseAccounts::done, this, &DialogSettings::accountsAvailable );
-        dba->start();
+        updateAccountList();
     }
 }
 

@@ -130,8 +130,8 @@ void Settings::load()
     mHideWhenMinimized = settings.value("common/hidewhenminimized", mHideWhenMinimized ).toBool();
     mExitThunderbirdWhenQuit = settings.value(
             "common/exitthunderbirdonquit", mExitThunderbirdWhenQuit ).toBool();
-    mNotificationFontWeight = settings.value(
-            "common/notificationfontweight", mNotificationFontWeight ).toInt();
+    mNotificationFontWeight = qMin(99, settings.value(
+            "common/notificationfontweight", mNotificationFontWeight ).toInt());
     mMonitorThunderbirdWindow = settings.value(
             "common/monitorthunderbirdwindow", mMonitorThunderbirdWindow ).toBool();
     mRestartThunderbird = settings.value(
