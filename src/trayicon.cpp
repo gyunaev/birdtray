@@ -67,7 +67,9 @@ TrayIcon::TrayIcon(bool showSettings)
 }
 
 TrayIcon::~TrayIcon() {
+#ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess->deleteLater();
+#endif /* Q_OS_WIN */
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
