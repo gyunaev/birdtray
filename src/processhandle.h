@@ -24,11 +24,6 @@ enum AttachResult {
      * There was not process to attach to.
      */
     PROCESS_NOT_RUNNING,
-    
-    /**
-     * There was another error.
-     */
-    SYSTEM_ERROR
 };
 
 
