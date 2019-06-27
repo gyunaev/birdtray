@@ -1,11 +1,12 @@
 #include <utility>
-#include <QtCore/QFileInfo>
+#include <windows.h>
+#include <tlhelp32.h>
 
+#include <QtCore/QFileInfo>
 #include "processhandle.h"
 #include "utils.h"
-#ifdef Q_OS_WIN
-#  include "processhandle_win.h"
-#endif
+
+#define WAIT_TIME_SECONDS 100
 
 
 static int registerExitReasonMetaType() Q_DECL_NOTHROW {
@@ -24,67 +25,16 @@ ProcessHandle::ProcessHandle(QString executablePath) :
 }
 
 ProcessHandle::~ProcessHandle() {
-    if (process != nullptr) {
-        process->deleteLater();
+    if (processWaiter != nullptr) {
+        processWaiter->requestInterruption();
+    }
+    if (processHandle != nullptr) {
+        CloseHandle(processHandle);
     }
 }
 
 ProcessHandle* ProcessHandle::create(const QString &executablePath) {
-#ifdef Q_OS_WIN
-    return new ProcessHandle_Win(executablePath);
-#else
     return new ProcessHandle(executablePath);
-#endif
-}
-
-const QString &ProcessHandle::getExecutablePath() const {
-    return executablePath;
-}
-
-void ProcessHandle::attachOrStart() {
-    AttachResult attachResult = attach();
-    if (attachResult == AttachResult::PROCESS_NOT_RUNNING) {
-        start();
-        return;
-    }
-    if (attachResult == AttachResult::SYSTEM_ERROR) {
-        emit finished(ExitReason(true, tr("Failed to attach to running instance of %1").arg(
-                getExecutableName())));
-    }
-}
-
-AttachResult ProcessHandle::attach() {
-    return process == nullptr ? PROCESS_NOT_RUNNING : SUCCESS;
-}
-
-void ProcessHandle::onProcessError(QProcess::ProcessError) {
-    QProcess* erroredProcess = process;
-    emit finished(ExitReason(true, erroredProcess->errorString()));
-    process->deleteLater();
-    process = nullptr;
-    
-}
-
-void ProcessHandle::onProcessFinished(int, QProcess::ExitStatus) {
-    emit finished(ExitReason());
-    process->deleteLater();
-    process = nullptr;
-}
-
-void ProcessHandle::start() {
-    QProcess* oldProcess = process;
-    if (oldProcess != nullptr) {
-        oldProcess->blockSignals(true);
-        oldProcess->deleteLater();
-    }
-    QProcess* newProcess = process = new QProcess();
-    connect(newProcess,
-            static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-            this, &ProcessHandle::onProcessFinished);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    connect(newProcess, &QProcess::errorOccurred, this, &ProcessHandle::onProcessError);
-#endif
-    newProcess->start(getExecutablePath());
 }
 
 QString ProcessHandle::getExecutableName() const {
@@ -93,4 +43,79 @@ QString ProcessHandle::getExecutableName() const {
         path.chop(1);
     }
     return path.trimmed();
+}
+
+AttachResult ProcessHandle::attach() {
+    if (isAttached()) {
+        return SUCCESS;
+    }
+    if (processWaiter != nullptr) {
+        processWaiter->requestInterruption();
+    }
+    if (processHandle != nullptr) {
+        CloseHandle(processHandle);
+        processHandle = nullptr;
+    }
+    processHandle = findProcess();
+    if (processHandle == nullptr) {
+        return PROCESS_NOT_RUNNING;
+    }
+    processWaiter = new ProcessWaiter(this);
+    processWaiter->start();
+    return SUCCESS;
+}
+
+HANDLE ProcessHandle::findProcess() {
+    PROCESSENTRY32 entry;
+    entry.dwSize = sizeof(PROCESSENTRY32);
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, static_cast<DWORD>(NULL));
+    if (Process32First(snapshot, &entry) == TRUE) {
+        QString exeName = getExecutableName();
+        while (Process32Next(snapshot, &entry) == TRUE) {
+            if (exeName.compare(Utils::stdWToQString(entry.szExeFile), Qt::CaseInsensitive) == 0) {
+                CloseHandle(snapshot);
+                return OpenProcess(SYNCHRONIZE, FALSE, entry.th32ProcessID);
+            }
+        }
+    }
+    CloseHandle(snapshot);
+    return nullptr;
+}
+
+bool ProcessHandle::isAttached() {
+    return processHandle != nullptr && processWaiter != nullptr && processWaiter->isRunning();
+}
+
+void ProcessHandle::ProcessWaiter::run() {
+    DWORD waitResult;
+    while ((waitResult = WaitForSingleObject(
+            processHandle->processHandle, WAIT_TIME_SECONDS * 1000)) == WAIT_TIMEOUT) {
+        if (this->isInterruptionRequested() || processHandle->processHandle == nullptr) {
+            return;
+        }
+    }
+    QString errorMsg = "";
+    if (waitResult == WAIT_FAILED) {
+        LPTSTR errorMsgBuffer;
+        FormatMessage(
+                FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM
+                | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr, GetLastError(),
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                reinterpret_cast<LPTSTR>(&errorMsgBuffer), 0, nullptr);
+#ifdef UNICODE
+        errorMsg = Utils::stdWToQString(errorMsgBuffer);
+#else
+        errorMsg = errorMsgBuffer;
+#endif /* UNICODE */
+        LocalFree(errorMsgBuffer);
+    }
+    emit processHandle->finished(ProcessHandle::ExitReason(waitResult == WAIT_FAILED, errorMsg));
+    this->deleteLater();
+    if (processHandle->processWaiter == this) {
+        processHandle->processWaiter = nullptr;
+        if (processHandle->processHandle != nullptr) {
+            CloseHandle(processHandle->processHandle);
+            processHandle->processHandle = nullptr;
+        }
+    }
 }

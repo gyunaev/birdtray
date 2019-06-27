@@ -20,8 +20,8 @@ if (WIN32)
     ENABLE_LANGUAGE(RC)
     add_definitions(-DUNICODE)
     set(PLATFORM_SOURCES src/windowtools_win.cpp src/birdtrayeventfilter.cpp
-            src/processhandle_win.cpp src/res/birdtray.rc)
-    set(PLATFORM_HEADERS src/windowtools_win.h src/birdtrayeventfilter.h src/processhandle_win.h)
+            src/processhandle.cpp src/res/birdtray.rc)
+    set(PLATFORM_HEADERS src/windowtools_win.h src/birdtrayeventfilter.h src/processhandle.h)
 else()
     find_package(Qt5X11Extras QUIET)
     find_library(X11 X11)
@@ -54,7 +54,6 @@ set(SOURCES
         src/unreadcounter.cpp
         src/utils.cpp
         src/windowtools.cpp
-        src/processhandle.cpp
         src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
         src/dialogsettings.ui)
@@ -76,8 +75,7 @@ set(HEADERS
         src/unreadcounter.h
         src/utils.h
         src/version.h
-        src/windowtools.h
-        src/processhandle.h)
+        src/windowtools.h)
 
 set(RESOURCES src/resources.qrc)
 source_group("Resources" FILES ${RESOURCES})

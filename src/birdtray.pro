@@ -42,8 +42,7 @@ SOURCES += \
     modelnewemails.cpp \
     modelaccounttree.cpp \
     morkparser.cpp \
-    utils.cpp \
-    processhandle.cpp
+    utils.cpp
 
 HEADERS += \
     trayicon.h \
@@ -62,8 +61,7 @@ HEADERS += \
     modelnewemails.h \
     modelaccounttree.h \
     morkparser.h \
-    utils.h \
-    processhandle.h
+    utils.h
 
 FORMS += \
     dialogaddeditaccount.ui \
@@ -83,7 +81,7 @@ unix {
 }
 win32 {
      DEFINES += -DUNICODE
-     SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp processhandle_win.cpp
-     HEADERS += windowtools_win.h birdtrayeventfilter.h processhandle_win.h
+     SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp processhandle.cpp
+     HEADERS += windowtools_win.h birdtrayeventfilter.h processhandle.h
      LIBS += user32.lib
 }

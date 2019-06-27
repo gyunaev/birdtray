@@ -7,7 +7,9 @@
 #include <QImage>
 #include <QProcess>
 #include <QSystemTrayIcon>
-#include "processhandle.h"
+#ifdef Q_OS_WIN
+#  include "processhandle.h"
+#endif /* Q_OS_WIN */
 
 class UnreadMonitor;
 class WindowTools;
@@ -58,17 +60,18 @@ class TrayIcon : public QSystemTrayIcon
         void    startThunderbird();
         
         /**
-         * Callback if Thunderbird exits or fails to start.
+         * Callback if Thunderbird fails to start.
+         * @param error The reason for the start failure.
+         */
+        void    tbProcessError( QProcess::ProcessError error);
+        void    tbProcessFinished( int exitCode, QProcess::ExitStatus exitStatus );
+#ifdef Q_OS_WIN
+        /**
+         * Callback if the Thunderbird updater exits.
          * @param exitReason The reason for the exit.
          */
-        void    tbProcessFinished(const ProcessHandle::ExitReason& exitReason);
-    
-       /**
-        * Callback if the Thunderbird updater exits.
-        * @param exitReason The reason for the exit.
-        */
         void    tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitReason);
-    
+#endif /* Q_OS_WIN */
         /**
          * Callback that is called when we are about to quit.
          */
@@ -125,9 +128,6 @@ class TrayIcon : public QSystemTrayIcon
 
         // If true, it will hide Thunderbird window as soon as its shown
         bool            mThunderbirdWindowHide;
-        
-        // If true, we tried to start Thunderbird before and it failed.
-        bool            mThunderbirdStartFailed;
 
         // Number of suppressed unread emails, if nonzero
         unsigned int    mIgnoredUnreadEmails;
@@ -138,11 +138,15 @@ class TrayIcon : public QSystemTrayIcon
         // Cached last drawn icon
         QImage          mLastDrawnIcon;
 
-        // A reference to a Thunderbird process.
-        ProcessHandle* mThunderbirdProcess;
+        // Thunderbird process which we have started. This can be nullptr if Thunderbird
+        // was started before Birdtray (thus our process would just activate it and exit)
+        // Thus checking this pointer for null doesn't mean TB is not started.
+        QProcess    *   mThunderbirdProcess;
 
+#ifdef Q_OS_WIN
         // A reference to a Thunderbird updater process.
         ProcessHandle* mThunderbirdUpdaterProcess;
+#endif /* Q_OS_WIN */
 };
 
 #endif // TRAYICON_H

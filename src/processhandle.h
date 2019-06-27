@@ -1,10 +1,12 @@
 #ifndef PROCESS_HANDLE_H
 #define PROCESS_HANDLE_H
 
+#include <windows.h>
 #include <utility>
 #include <sys/types.h>
 #include <QObject>
 #include <QString>
+#include <QThread>
 #include <QtCore/QArgument>
 #include <QtCore/QProcess>
 
@@ -78,17 +80,6 @@ public:
     static ProcessHandle* create(const QString &executablePath);
     
     /**
-     * @return The path to the executable of the process.
-     */
-    const QString &getExecutablePath() const;
-    
-    /**
-     * Attach to a running process or create a new one and attach to it.
-     * If this function fails, the finished signal is triggered.
-     */
-    void attachOrStart();
-    
-    /**
      * Attach to a running process. This does nothing if the this handler
      * is already attached to the running process.
      *
@@ -118,38 +109,58 @@ protected:
      */
     QString getExecutableName() const;
 
-private slots:
-    /**
-     * Called when a process started by the handle fails to start.
-     *
-     * @param error The error reason.
-     */
-    void onProcessError(QProcess::ProcessError error);
+private:
     
     /**
-     * Called when a process started by the handler exits.
-     *
-     * @param exitCode The exit code of the process.
-     * @param exitStatus The exit status of the process.
+     * Thread that waits for a process to exit.
      */
-    void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
-
-private:
+    class ProcessWaiter : public QThread {
+        friend ProcessHandle;
+    public:
+        ~ProcessWaiter() override {
+            quit();
+            requestInterruption();
+            wait();
+        };
+    
+    protected:
+        void run() override;
+    
+    private:
+        explicit ProcessWaiter(ProcessHandle* processHandle) :
+                QThread(), processHandle(processHandle) {
+        }
+        
+        ProcessHandle* processHandle = nullptr;
+    };
+    
     /**
-     * Start a process from the executable.
-     * If this function fails, the finished signal is triggered.
+     * @return Weather the handle is attached to a process.
      */
-    void start();
+    bool isAttached();
+    
+    /**
+     * Get a handle to the running process for this handle,
+     * or nullptr if no such process is running.
+     *
+     * @return A handle to the running process or nullptr.
+     */
+    HANDLE findProcess();
+    
+    /**
+     * A handle to the process.
+     */
+    HANDLE processHandle = nullptr;
+    
+    /**
+     * A thread waiting for the process to exit.
+     */
+    QThread* processWaiter = nullptr;
     
     /**
      * The path to the executable that identifies the process.
      */
     const QString executablePath;
-    
-    /**
-     * The process that we started.
-     */
-    QProcess* process = nullptr;
 };
 
 Q_DECLARE_METATYPE(ProcessHandle::ExitReason)
