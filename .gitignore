@@ -1,6 +1,6 @@
 build*/
 cmake-build-*/
-src/birdtray.pro.user
+src/birdtray.pro.user*
 
 installer/uninstaller/*
 installer/winDeploy/**
