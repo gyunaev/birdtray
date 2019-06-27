@@ -7,6 +7,9 @@
 #include <QImage>
 #include <QProcess>
 #include <QSystemTrayIcon>
+#ifdef Q_OS_WIN
+#  include "processhandle.h"
+#endif /* Q_OS_WIN */
 
 class UnreadMonitor;
 class WindowTools;
@@ -17,6 +20,7 @@ class TrayIcon : public QSystemTrayIcon
 
     public:
         explicit TrayIcon(bool showSettings);
+        ~TrayIcon() override;
 
     signals:
         void    settingsChanged();
@@ -54,9 +58,20 @@ class TrayIcon : public QSystemTrayIcon
         void    actionSystrayIconActivated( QSystemTrayIcon::ActivationReason reason );
 
         void    startThunderbird();
+        
+        /**
+         * Callback if Thunderbird fails to start.
+         * @param error The reason for the start failure.
+         */
         void    tbProcessError( QProcess::ProcessError error);
         void    tbProcessFinished( int exitCode, QProcess::ExitStatus exitStatus );
-    
+#ifdef Q_OS_WIN
+        /**
+         * Callback if the Thunderbird updater exits.
+         * @param exitReason The reason for the exit.
+         */
+        void    tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitReason);
+#endif /* Q_OS_WIN */
         /**
          * Callback that is called when we are about to quit.
          */
@@ -127,6 +142,11 @@ class TrayIcon : public QSystemTrayIcon
         // was started before Birdtray (thus our process would just activate it and exit)
         // Thus checking this pointer for null doesn't mean TB is not started.
         QProcess    *   mThunderbirdProcess;
+
+#ifdef Q_OS_WIN
+        // A reference to a Thunderbird updater process.
+        ProcessHandle* mThunderbirdUpdaterProcess;
+#endif /* Q_OS_WIN */
 };
 
 #endif // TRAYICON_H

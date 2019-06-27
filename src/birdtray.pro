@@ -81,7 +81,7 @@ unix {
 }
 win32 {
      DEFINES += -DUNICODE
-     SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp
-     HEADERS += windowtools_win.h birdtrayeventfilter.h
+     SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp processhandle.cpp
+     HEADERS += windowtools_win.h birdtrayeventfilter.h processhandle.h
      LIBS += user32.lib
 }

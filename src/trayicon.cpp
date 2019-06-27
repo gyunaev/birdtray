@@ -26,7 +26,12 @@ TrayIcon::TrayIcon(bool showSettings)
     mMenuShowHideThunderbird = 0;
     mMenuIgnoreUnreads = 0;
     mThunderbirdProcess = 0;
-
+#ifdef Q_OS_WIN
+    mThunderbirdUpdaterProcess = ProcessHandle::create(Utils::getThunderbirdUpdaterName());
+    connect( mThunderbirdUpdaterProcess, &ProcessHandle::finished,
+            this, &TrayIcon::tbUpdaterProcessFinished );
+#endif /* Q_OS_WIN */
+    
     mThunderbirdWindowExists = false;
     mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
@@ -59,6 +64,12 @@ TrayIcon::TrayIcon(bool showSettings)
     updateState();
     updateIcon();
     show();
+}
+
+TrayIcon::~TrayIcon() {
+#ifdef Q_OS_WIN
+    mThunderbirdUpdaterProcess->deleteLater();
+#endif /* Q_OS_WIN */
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -354,6 +365,7 @@ void TrayIcon::actionSettings()
         enableBlinking( false );
 
         updateIcon();
+        // TODO: Update on thunderbird path setting change
 
         emit settingsChanged();
     }
@@ -560,7 +572,12 @@ void TrayIcon::startThunderbird()
 
 void TrayIcon::tbProcessError(QProcess::ProcessError )
 {
-    QMessageBox::critical( 0,
+#ifdef Q_OS_WIN
+    if (mThunderbirdUpdaterProcess->attach() == AttachResult::SUCCESS) {
+        return;
+    }
+#endif /* Q_OS_WIN */
+    QMessageBox::critical( nullptr,
                            tr("Cannot start Thunderbird"),
                            tr("Error starting Thunderbird as %1:\n\n%2")
                                 .arg( pSettings->getThunderbirdExecutablePath() )
@@ -575,9 +592,30 @@ void TrayIcon::tbProcessFinished(int, QProcess::ExitStatus)
     // in which case it is restarted in updateState(), or that we started TB
     // and the active instance was activated (and our instance exited).
     // Thus we just destroy the process later, to let updateState() make decision
+#ifdef Q_OS_WIN
+    if (mThunderbirdUpdaterProcess->attach() == AttachResult::SUCCESS) {
+        return;
+    }
+#endif /* Q_OS_WIN */
     mThunderbirdProcess->deleteLater();
-    mThunderbirdProcess = 0;
+    mThunderbirdProcess = nullptr;
 }
+
+#ifdef Q_OS_WIN
+void TrayIcon::tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitReason)
+{
+    if (exitReason.isError()) {
+        QMessageBox::critical(
+                nullptr, tr("Cannot start Thunderbird"),
+                tr("Error starting Thunderbird, because we could not attach to the updater:\n\n%1")
+                .arg( exitReason.getErrorDescription() ) );
+        return;
+    }
+    // The updater will start Thunderbird automatically
+    mThunderbirdProcess->deleteLater();
+    mThunderbirdProcess = nullptr;
+}
+#endif /* Q_OS_WIN */
 
 void TrayIcon::onQuit() {
     if ( mWinTools && mWinTools->isHidden() )
