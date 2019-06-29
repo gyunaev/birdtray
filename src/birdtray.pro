@@ -70,7 +70,7 @@ FORMS += \
 
 RESOURCES += \
     resources.qrc
-
+RC_INCLUDEPATH += $$PWD
 RC_FILE = res\birdtray.rc
 
 unix {
