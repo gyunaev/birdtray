@@ -201,13 +201,20 @@ void Settings::load()
     }
 }
 
-QString Settings::getThunderbirdExecutablePath() {
+QString Settings::getThunderbirdExecutablePath()
+{
     QString path = mThunderbirdCmdLine;
+
     if (path.startsWith('"')) {
         path = path.section('"', 1, 1);
     }
+
     path = Utils::expandPath(path);
+#if defined (Q_OS_WIN)
     return '"' + QFileInfo(path).absoluteFilePath() + '"';
+#else
+    return QFileInfo(path).absoluteFilePath();
+#endif
 }
 
 const QPixmap &Settings::getNotificationIcon() {
