@@ -143,6 +143,9 @@ class TrayIcon : public QSystemTrayIcon
         // Thus checking this pointer for null doesn't mean TB is not started.
         QProcess    *   mThunderbirdProcess;
 
+        // System tray context menu. Once set, it remains there, so we have to modify existing one
+        QMenu       *   mSystrayMenu;
+
 #ifdef Q_OS_WIN
         // A reference to a Thunderbird updater process.
         ProcessHandle* mThunderbirdUpdaterProcess;

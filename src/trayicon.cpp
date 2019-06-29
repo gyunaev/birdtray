@@ -23,6 +23,10 @@ TrayIcon::TrayIcon(bool showSettings)
     mUnreadCounter = 0;
     mUnreadMonitor = 0;
 
+    // Context menu
+    mSystrayMenu = new QMenu();
+    setContextMenu( mSystrayMenu );
+
     mMenuShowHideThunderbird = 0;
     mMenuIgnoreUnreads = 0;
     mThunderbirdProcess = 0;
@@ -417,12 +421,16 @@ void TrayIcon::actionNewEmail()
     if ( !pSettings->mNewEmailData.isEmpty() )
     {
         QAction * action = (QAction *) sender();
-        int index = ( action->data().toInt() );
 
-        if ( index <  0 || index > pSettings->mNewEmailData.size() - 1 )
-            return;
+        if ( action->data().isValid() )
+        {
+            int index = ( action->data().toInt() );
 
-        args << pSettings->mNewEmailData[index].asArgs();
+            if ( index <  0 || index > pSettings->mNewEmailData.size() - 1 )
+                return;
+
+            args << pSettings->mNewEmailData[index].asArgs();
+        }
     }
 
     QProcess::startDetached( pSettings->getThunderbirdExecutablePath(), args );
@@ -445,7 +453,7 @@ void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reas
 
 void TrayIcon::createMenu()
 {
-    QMenu * menu = new QMenu();
+    mSystrayMenu->clear();
 
     // Show and hide action
     mMenuShowHideThunderbird = new QAction( tr("Hide Thunderbird"), this );
@@ -454,8 +462,8 @@ void TrayIcon::createMenu()
     // We start with disabled action, and enable it once the window is detected
     mMenuShowHideThunderbird->setEnabled( false );
 
-    menu->addAction( mMenuShowHideThunderbird );
-    menu->addSeparator();
+    mSystrayMenu->addAction( mMenuShowHideThunderbird );
+    mSystrayMenu->addSeparator();
 
     // New email could be either a single action, or menu depending on settings
     if ( pSettings->mNewEmailMenuEnabled )
@@ -464,6 +472,10 @@ void TrayIcon::createMenu()
         {
             // A submenu
             QMenu * newemails = new QMenu( tr("New Email") );
+
+            // Only add the signal if the menu is empty
+            if ( pSettings->mNewEmailData.isEmpty() )
+                connect( newemails, &QMenu::triggered, this, &TrayIcon::actionNewEmail );
 
             for ( int index = 0; index < pSettings->mNewEmailData.size(); index++ )
             {
@@ -475,15 +487,15 @@ void TrayIcon::createMenu()
                 newemails->addAction( a );
             }
 
-            menu->addMenu( newemails );
+            mSystrayMenu->addMenu( newemails );
         }
         else
         {
             // A single action
-            menu->addAction( tr("New Email Message"), this, SLOT( actionNewEmail()) );
+            mSystrayMenu->addAction( tr("New Email Message"), this, SLOT( actionNewEmail()) );
         }
 
-        menu->addSeparator();
+        mSystrayMenu->addSeparator();
     }
 
     // Snoozer times map, for easy editing. The first parameter is in seconds
@@ -509,13 +521,13 @@ void TrayIcon::createMenu()
     }
 
     // And add snoozing menu itself
-    menu->addMenu( snooze );
+    mSystrayMenu->addMenu( snooze );
 
     // Unsnooze menu item is unvisible by default
     mMenuUnsnooze = new QAction( tr("Unsnooze"), this );
     connect( mMenuUnsnooze, &QAction::triggered, this, &TrayIcon::actionUnsnooze );
 
-    menu->addAction( mMenuUnsnooze );
+    mSystrayMenu->addAction( mMenuUnsnooze );
     mMenuUnsnooze->setVisible( false );
 
     // Add the ignore action
@@ -524,22 +536,20 @@ void TrayIcon::createMenu()
         mMenuIgnoreUnreads = new QAction( tr("Ignore unread emails"), this );
         connect( mMenuIgnoreUnreads, &QAction::triggered, this, &TrayIcon::actionIgnoreEmails );
 
-        menu->addAction( mMenuIgnoreUnreads );
+        mSystrayMenu->addAction( mMenuIgnoreUnreads );
     }
     else
         mMenuIgnoreUnreads = 0;
 
-    menu->addSeparator();
+    mSystrayMenu->addSeparator();
 
     // Some generic actions
-    menu->addAction( tr("Settings..."), this, SLOT(actionSettings()) );
+    mSystrayMenu->addAction( tr("Settings..."), this, SLOT(actionSettings()) );
 
-    menu->addSeparator();
+    mSystrayMenu->addSeparator();
 
     // And exit
-    menu->addAction( tr("Quit"), this, SLOT(actionQuit()) );
-
-    setContextMenu( menu );
+    mSystrayMenu->addAction( tr("Quit"), this, SLOT(actionQuit()) );
 }
 
 void TrayIcon::createUnreadCounterThread()
