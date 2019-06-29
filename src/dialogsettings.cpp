@@ -419,7 +419,7 @@ void DialogSettings::changeIcon(QToolButton *button)
     QString e = QFileDialog::getOpenFileName( 0,
                                               "Choose the new icon",
                                               "",
-                                              "Images(*.png)" );
+                                              "Images(*.png); Images(*.svg)" );
 
     if ( e.isEmpty() )
         return;
