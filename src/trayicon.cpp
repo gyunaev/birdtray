@@ -264,12 +264,10 @@ void TrayIcon::updateState()
         {
             // If the window is found, we remember it
             if ( !mThunderbirdWindowExisted )
-            {
                 mThunderbirdWindowExisted = true;
 
-                if ( !mMenuShowHideThunderbird->isEnabled() )
-                    mMenuShowHideThunderbird->setEnabled( true );
-            }
+            if ( !mMenuShowHideThunderbird->isEnabled() )
+                mMenuShowHideThunderbird->setEnabled( true );
 
             // Hide the window if requested
             if ( mThunderbirdWindowHide )
