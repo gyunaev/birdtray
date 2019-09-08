@@ -62,8 +62,10 @@ QColor DialogAddEditAccount::color() const
 
 void DialogAddEditAccount::browse()
 {
+    QString path = leFolderPath->text();
+
     QString e = QFileDialog::getOpenFileName(
-            0, "Choose the MSF file", Utils::expandPath(THUNDERBIRD_PROFILES_PATH),
+            0, "Choose the MSF file", path.isEmpty() ? Utils::expandPath(THUNDERBIRD_PROFILES_PATH) : path,
             "Mail Index (*.msf)" );
 
     if ( e.isEmpty() )
