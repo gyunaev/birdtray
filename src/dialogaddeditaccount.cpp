@@ -69,7 +69,7 @@ void DialogAddEditAccount::browse()
     if ( e.isEmpty() )
         return;
 
-    leFolderPath->setText( e );
+    leFolderPath->setText( QDir::toNativeSeparators(e) );
 }
 
 void DialogAddEditAccount::accept()
