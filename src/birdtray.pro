@@ -71,7 +71,7 @@ FORMS += \
 RESOURCES += \
     resources.qrc
 RC_INCLUDEPATH += $$PWD
-RC_FILE = res\birdtray.rc
+RC_FILE = res/birdtray.rc
 
 unix {
      SOURCES += windowtools_x11.cpp
