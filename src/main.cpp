@@ -85,5 +85,9 @@ int main(int argc, char *argv[])
     }
 
     TrayIcon trayIcon(parser.isSet("settings"));
-    return QApplication::exec();
+    int result = QApplication::exec();
+
+    delete(pSettings);
+
+    return result;
 }
