@@ -10,10 +10,13 @@
 
 #include "setting_newemail.h"
 
+class QSettings;
+
 class Settings
 {
     public:
         explicit Settings(bool verboseOutput);
+        ~Settings();
 
         // Desired icon size
         QSize   mIconSize;
@@ -128,9 +131,11 @@ class Settings
     private:
         // Notification icon
         QPixmap mNotificationIcon;
+
+        QSettings *mSettings;
     
-        void    savePixmap( QSettings& settings, const QString& key, const QPixmap& pixmap );
-        QPixmap loadPixmap( QSettings& settings, const QString& key );
+        void    savePixmap( const QString& key, const QPixmap& pixmap );
+        QPixmap loadPixmap( const QString& key );
 };
 
 extern Settings * pSettings;
