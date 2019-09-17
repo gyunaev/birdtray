@@ -342,13 +342,8 @@ void MorkParser::parseCell()
 			break;
 		case '\\':
 			{
-				// Get next two chars
-				char NextChar= nextChar();
-				if ( '\r' != NextChar && '\n' != NextChar )
-				{
-					Text += NextChar;
-				}
-				else nextChar();
+				// Get next char
+				Text += nextChar();
 			}
 			break;
 		case '$':
