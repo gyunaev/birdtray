@@ -38,6 +38,7 @@ On Debian you need to install the following packages: ``qt5-default libsqlite3-d
 
 On OpenSuSE you need to install ``libqt5-qtbase-devel libqt5-qtx11extras-devel sqlite3-devel``
 
+On Fedora (30 or later) you need to install ``libsqlite3x-devel qt5-qtbase-devel qt5-qtx11extras-devel``
 
 To build, please do the following:
 
