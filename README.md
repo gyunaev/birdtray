@@ -1,6 +1,8 @@
-# Birdtray is a system tray new mail notification for Thunderbird <68+ which does not require extensions. Does not work with version 68. [![Build Status](https://travis-ci.org/gyunaev/birdtray.svg?branch=master)](https://travis-ci.org/gyunaev/birdtray)
+# Birdtray is a system tray new mail notification for Thunderbird, which does not require extensions.[![Build Status](https://travis-ci.org/gyunaev/birdtray.svg?branch=master)](https://travis-ci.org/gyunaev/birdtray)
 
 Birdtray is a free system tray notification for new mail for Thunderbird. It supports Linux and Windows (credit for adding and maintaining Windows support goes to @Abestanis). Patches to support other platforms are welcome.
+
+For those of you using Thunderbird 68+, the sqlite-based parser will no longer work. Please switch to Mork parser.
 
 ## Features
 
