@@ -99,7 +99,7 @@ DialogSettings::DialogSettings( QWidget *parent)
         boxNotificationIconUnread->setChecked( false );
 
     // Parsers
-    boxParserSelection->addItem( tr("using global search database"), false );
+    boxParserSelection->addItem( tr("using global search database (wont work with 68+)"), false );
     boxParserSelection->addItem( tr("using Mork index files (recommended)"), true );
 
     connect( boxParserSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(unreadParserChanged(int)) );
