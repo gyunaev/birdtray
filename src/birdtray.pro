@@ -80,14 +80,24 @@ unix {
      QT += x11extras
 
      isEmpty("PREFIX"){
-         PREFIX = /usr/local
+         PREFIX = /usr
      }
      target.path=$${PREFIX}/bin
      desktop.path=$${PREFIX}/share/applications
      desktop.files=res/org.gyunaev.Birdtray.desktop
-     icon.path=$${PREFIX}/icons/hicolor/128x128/apps
-     icon.files=res/org.gyunaev.Birdtray.png
-     INSTALLS += target desktop icon
+     appdata.path=$${PREFIX}/share/metainfo
+     appdata.files=res/org.gyunaev.Birdtray.appdata.xml
+
+     icon32.path=$${PREFIX}/share/icons/hicolor/32x32/apps
+     icon32.files=res/icons/32/org.gyunaev.Birdtray.png
+     icon48.path=$${PREFIX}/share/icons/hicolor/48x48/apps
+     icon48.files=res/icons/48/org.gyunaev.Birdtray.png
+     icon64.path=$${PREFIX}/share/icons/hicolor/64x64/apps
+     icon64.files=res/icons/64/org.gyunaev.Birdtray.png
+     icon128.path=$${PREFIX}/share/icons/hicolor/128x128/apps
+     icon128.files=res/icons/128/org.gyunaev.Birdtray.png
+
+     INSTALLS += target desktop appdata icon32 icon48 icon64 icon128
 }
 win32 {
      DEFINES += -DUNICODE
