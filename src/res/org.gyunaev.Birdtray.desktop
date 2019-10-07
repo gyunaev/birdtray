@@ -27,7 +27,6 @@ Exec=birdtray
 Terminal=false
 X-MultipleArgs=false
 Type=Application
-Icon=org.gyunaev.Birdtray
+Icon=org.gyunaev.Birdtray.png
 Categories=Application;Network;Email;
 StartupNotify=true
- 
