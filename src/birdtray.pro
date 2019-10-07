@@ -78,6 +78,12 @@ unix {
      HEADERS += windowtools_x11.h
      LIBS += -lX11
      QT += x11extras
+     target.path=$$(PREFIX)/bin
+     desktop.path=$$(PREFIX)/share/applications
+     desktop.files=res/org.gyunaev.Birdtray.desktop
+     icon.path=$$(PREFIX)/icons/hicolor/128x128/apps
+     icon.files=res/org.gyunaev.Birdtray.png
+     INSTALLS += target desktop icon
 }
 win32 {
      DEFINES += -DUNICODE
