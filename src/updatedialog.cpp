@@ -14,6 +14,7 @@ UpdateDialog::UpdateDialog(QWidget* parent) :
     downloadButton->setAutoDefault(true);
     connect(downloadButton, &QPushButton::clicked, this, &UpdateDialog::onDownloadButtonClicked);
     ui->buttonBox->addButton(downloadButton, QDialogButtonBox::ButtonRole::AcceptRole);
+    ui->buttonBox->addButton(QDialogButtonBox::StandardButton::Cancel);
 }
 
 UpdateDialog::~UpdateDialog() {
@@ -25,12 +26,12 @@ void UpdateDialog::show(const QString &newVersion, const QString &changelog,
                         qulonglong estimatedSize) {
     ui->newVersionLabel->setText(newVersion);
     ui->changelogLabel->setText(changelog);
-    if (estimatedSize == 0 || estimatedSize == (qulonglong) -1) {
-        if (estimatedSize == (qulonglong) -1) {
-            downloadButton->setText(tr("Download"));
-        } else {
-            downloadButton->setText(tr("Update and Restart"));
-        }
+    if (estimatedSize == (qulonglong) -1) {
+        downloadButton->setText(tr("Download"));
+    } else {
+        downloadButton->setText(tr("Update and Restart"));
+    }
+    if (estimatedSize == 0) {
         ui->estimatedSizeDescLabel->hide();
         ui->estimatedSizeLabel->hide();
     } else {
