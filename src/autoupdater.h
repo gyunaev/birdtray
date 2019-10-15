@@ -4,6 +4,7 @@
 #include <QNetworkAccessManager>
 #include <QRegularExpression>
 #include <QtWidgets/QProgressDialog>
+#include <QUrl>
 #include "updatedialog.h"
 #include "updatedownloaddialog.h"
 
