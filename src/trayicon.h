@@ -10,6 +10,7 @@
 #ifdef Q_OS_WIN
 #  include "processhandle.h"
 #endif /* Q_OS_WIN */
+#include "dialogsettings.h"
 
 class UnreadMonitor;
 class WindowTools;
@@ -145,6 +146,11 @@ class TrayIcon : public QSystemTrayIcon
 
         // System tray context menu. Once set, it remains there, so we have to modify existing one
         QMenu       *   mSystrayMenu;
+    
+        /**
+         * The currently opened settings dialog.
+         */
+        DialogSettings* settingsDialog = nullptr;
 
 #ifdef Q_OS_WIN
         // A reference to a Thunderbird updater process.

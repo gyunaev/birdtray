@@ -9,7 +9,6 @@
 #include "settings.h"
 #include "trayicon.h"
 #include "unreadcounter.h"
-#include "dialogsettings.h"
 #include "windowtools.h"
 #include "utils.h"
 
@@ -71,6 +70,9 @@ TrayIcon::TrayIcon(bool showSettings)
 }
 
 TrayIcon::~TrayIcon() {
+    if (settingsDialog != nullptr) {
+        settingsDialog->deleteLater();
+    }
 #ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess->deleteLater();
 #endif /* Q_OS_WIN */
@@ -351,10 +353,19 @@ void TrayIcon::actionQuit()
 
 void TrayIcon::actionSettings()
 {
-    DialogSettings dlg;
-
-    if ( dlg.exec() == QDialog::Accepted )
-    {
+    if (settingsDialog != nullptr) {
+        settingsDialog->show();
+        settingsDialog->raise();
+        settingsDialog->activateWindow();
+        return;
+    }
+    settingsDialog = new DialogSettings();
+    connect(settingsDialog, &QDialog::finished, this, [=](int result) {
+        settingsDialog->deleteLater();
+        settingsDialog = nullptr;
+        if (result != QDialog::Accepted) {
+            return;
+        }
         pSettings->save();
 
         if ( !mUnreadMonitor )
@@ -370,7 +381,8 @@ void TrayIcon::actionSettings()
         // TODO: Update on thunderbird path setting change
 
         emit settingsChanged();
-    }
+    });
+    settingsDialog->show();
 }
 
 void TrayIcon::actionActivate()
