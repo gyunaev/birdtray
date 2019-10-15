@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -36,13 +36,16 @@ SOURCES += \
     databaseunreadfixer.cpp \
     dialogaddeditaccount.cpp \
     dialogsettings.cpp \
+    updatedialog.cpp \
+    updatedownloaddialog.cpp \
     windowtools.cpp \
     dialogaddeditnewemail.cpp \
     setting_newemail.cpp \
     modelnewemails.cpp \
     modelaccounttree.cpp \
     morkparser.cpp \
-    utils.cpp
+    utils.cpp \
+    autoupdater.cpp
 
 HEADERS += \
     trayicon.h \
@@ -54,6 +57,8 @@ HEADERS += \
     databaseunreadfixer.h \
     dialogaddeditaccount.h \
     dialogsettings.h \
+    updatedialog.h \
+    updatedownloaddialog.h \
     version.h \
     windowtools.h \
     dialogaddeditnewemail.h \
@@ -61,12 +66,15 @@ HEADERS += \
     modelnewemails.h \
     modelaccounttree.h \
     morkparser.h \
-    utils.h
+    utils.h \
+    autoupdater.h
 
 FORMS += \
     dialogaddeditaccount.ui \
     dialogsettings.ui \
-    dialogaddeditnewemail.ui
+    dialogaddeditnewemail.ui \
+    updatedialog.ui \
+    updatedownloaddialog.ui
 
 RESOURCES += \
     resources.qrc
@@ -104,4 +112,5 @@ win32 {
      SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp processhandle.cpp
      HEADERS += windowtools_win.h birdtrayeventfilter.h processhandle.h
      LIBS += user32.lib
+     QT += winextras
 }

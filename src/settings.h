@@ -81,6 +81,9 @@ class Settings
 
         // Whether to use alpha transition when blinking
         bool    mBlinkingUseAlphaTransition;
+        
+        // Whether to check for a new Birdtray version on startup or not.
+        bool    mUpdateOnStartup;
 
         // Whether to allow suppression of unread emails
         bool    mAllowSuppressingUnreads;

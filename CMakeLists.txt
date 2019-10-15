@@ -9,7 +9,8 @@ find_package(SQLite3 REQUIRED)
 find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
-set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets)
+find_package(Qt5Network CONFIG REQUIRED)
+set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
 
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
@@ -22,8 +23,10 @@ if (WIN32)
     set(PLATFORM_SOURCES src/windowtools_win.cpp src/birdtrayeventfilter.cpp
             src/processhandle.cpp src/res/birdtray.rc)
     set(PLATFORM_HEADERS src/windowtools_win.h src/birdtrayeventfilter.h src/processhandle.h)
+    find_package(Qt5WinExtras CONFIG REQUIRED)
+    list(APPEND REQUIRED_MODULES Qt5::WinExtras)
 else()
-    find_package(Qt5X11Extras QUIET)
+    find_package(Qt5X11Extras REQUIRED)
     find_library(X11 X11)
     list(APPEND REQUIRED_MODULES Qt5::X11Extras ${X11})
     set(PLATFORM_SOURCES src/windowtools_x11.cpp)
@@ -54,9 +57,14 @@ set(SOURCES
         src/unreadcounter.cpp
         src/utils.cpp
         src/windowtools.cpp
+        src/autoupdater.cpp
+        src/updatedialog.cpp
+        src/updatedownloaddialog.cpp
         src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
-        src/dialogsettings.ui)
+        src/dialogsettings.ui
+        src/updatedialog.ui
+        src/updatedownloaddialog.ui)
 
 set(HEADERS
         src/colorbutton.h
@@ -75,7 +83,10 @@ set(HEADERS
         src/unreadcounter.h
         src/utils.h
         src/version.h
-        src/windowtools.h)
+        src/windowtools.h
+        src/autoupdater.h
+        src/updatedialog.h
+        src/updatedownloaddialog.h)
 
 set(RESOURCES src/resources.qrc)
 source_group("Resources" FILES ${RESOURCES})

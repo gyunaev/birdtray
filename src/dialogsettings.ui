@@ -772,6 +772,43 @@
             </item>
            </layout>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QCheckBox" name="checkUpdateOnStartup">
+              <property name="toolTip">
+               <string>Check for new updates when Birdtray starts</string>
+              </property>
+              <property name="text">
+               <string>Check for new updates on startup</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="checkUpdateButton">
+              <property name="toolTip">
+               <string>Check for a new Birdtray version</string>
+              </property>
+              <property name="text">
+               <string>Check now</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>

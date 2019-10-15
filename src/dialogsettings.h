@@ -29,6 +29,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    accept() override;
         void    browsePath();
         void    profilePathChanged();
+        
+        /**
+         * Called once the update check finished.
+         */
+        void    onCheckUpdateFinished();
 
         // Calls the database fixer running in a DatabaseFixer thread
         // Receives databaseUnreadsFixed() once fixed
@@ -55,6 +60,9 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    newEmailEdit();
         void    newEmailEditIndex( const QModelIndex& index );
         void    newEmailRemove();
+        
+        // Advanced buttons
+        void    onCheckUpdateButton();
 
         // Icon change
         void    buttonChangeIcon();
