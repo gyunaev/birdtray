@@ -81,6 +81,7 @@ private:
      * The first action button.
      */
     QPushButton* actionButton;
+
 #ifdef Q_OS_WIN
     /**
      * The windows task-bar button.

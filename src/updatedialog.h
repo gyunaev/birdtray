@@ -30,6 +30,7 @@ public:
     void show(const QString &newVersion, const QString &changelog, qulonglong estimatedSize);
 
 Q_SIGNALS:
+    
     /**
      * Signalled when the user clicks on the download button.
      */

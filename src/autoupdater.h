@@ -12,10 +12,11 @@
 /**
  * Allows to check, download (and, if the platform is supported, install) new updates for Birdtray.
  */
-class AutoUpdater: public QObject {
+class AutoUpdater : public QObject {
 Q_OBJECT
 public:
     explicit AutoUpdater(QObject* parent = nullptr);
+    
     ~AutoUpdater() override;
     
     /**
@@ -25,13 +26,16 @@ public:
     void checkForUpdates();
 
 Q_SIGNALS:
+    
     /**
      * Indicates that an update check finished.
      */
     void onCheckUpdateFinished();
-    
+
 public slots:
+    
     void onRequestFinished(QNetworkReply* result);
+    
     void onDownloadProgress(QNetworkReply* result, qint64 bytesReceived, qint64 bytesTotal);
     
     /**
@@ -54,7 +58,7 @@ private:
      * @param releaseTag The release tag to parse.
      * @return true, if a valid version has been parsed from the tag.
      */
-    bool parseReleaseTag(int (&version)[3], const QString& releaseTag);
+    bool parseReleaseTag(int (&version)[3], const QString &releaseTag);
     
     /**
      * Parse the download url from the json assets array

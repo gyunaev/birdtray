@@ -109,7 +109,6 @@ void AutoUpdater::startDownload() {
     if (!downloadUrl.isValid()) {
         return;
     }
-#ifdef Q_OS_WIN
     if (haveActualInstallerDownloadUrl) {
         if (downloadProcessDialog == nullptr) {
             downloadProcessDialog = new UpdateDownloadDialog();
@@ -124,7 +123,6 @@ void AutoUpdater::startDownload() {
                 });
         return;
     }
-#endif /* Q_OS_WIN */
     QDesktopServices::openUrl(downloadUrl);
 }
 
@@ -188,7 +186,6 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
                     nullptr, tr("Installer download failed"),
                     tr("Failed to download the Birdtray installer:\nInvalid redirect: ")
                     + redirectionTarget.toString(), QMessageBox::StandardButton::Abort);
-            
         }
     } else {
         QFile installerFile(QDir::temp().filePath("birdtrayInstaller.exe"));
