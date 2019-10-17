@@ -56,10 +56,7 @@ void AutoUpdater::onRequestFinished(QNetworkReply* result) {
     bool isVersionInfoResult = result->url() == QUrl(LATEST_VERSION_INFO_URL);
     if (result->error()) {
         if (isVersionInfoResult) {
-            QMessageBox::warning(
-                    nullptr, tr("Version check failed"),
-                    tr("Failed to check for a new Birdtray version:\n") + result->errorString(),
-                    QMessageBox::StandardButton::Ok);
+            emit onCheckUpdateFinished(result->errorString());
         } else {
             installerFile.remove();
             bool wasCanceled = false;
@@ -193,7 +190,7 @@ void AutoUpdater::onReleaseInfoRequestFinished(QNetworkReply* result) {
             }
         }
     }
-    emit onCheckUpdateFinished();
+    emit onCheckUpdateFinished(QString());
 }
 
 void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {

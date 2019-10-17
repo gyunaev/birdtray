@@ -33,7 +33,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         /**
          * Called once the update check finished.
          */
-        void    onCheckUpdateFinished();
+        void    onCheckUpdateFinished(const QString &errorString);
 
         // Calls the database fixer running in a DatabaseFixer thread
         // Receives databaseUnreadsFixed() once fixed

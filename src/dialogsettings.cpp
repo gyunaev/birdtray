@@ -221,9 +221,15 @@ void DialogSettings::profilePathChanged()
 
 }
 
-void DialogSettings::onCheckUpdateFinished() {
+void DialogSettings::onCheckUpdateFinished(const QString &errorString) {
     checkUpdateButton->setText(tr("Check now"));
     checkUpdateButton->setEnabled(true);
+    if (!errorString.isNull()) {
+        QMessageBox::warning(
+                nullptr, tr("Version check failed"),
+                tr("Failed to check for a new Birdtray version:\n") + errorString,
+                QMessageBox::StandardButton::Ok);
+    }
 }
 
 void DialogSettings::fixDatabaseUnreads()
