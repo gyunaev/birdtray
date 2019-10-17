@@ -15,8 +15,8 @@ UpdateDownloadDialog::UpdateDownloadDialog(QWidget* parent) :
     actionButton = new QPushButton(tr("Background"), this);
     ui->buttonBox->addButton(actionButton, QDialogButtonBox::ButtonRole::ActionRole);
     connect(actionButton, &QPushButton::clicked, this, &UpdateDownloadDialog::onActionPressed);
-    QPushButton* cancelButton = ui->buttonBox->addButton(QDialogButtonBox::StandardButton::Cancel);
-    connect(cancelButton, &QPushButton::clicked, this, &UpdateDownloadDialog::onCancelPressed);
+    ui->buttonBox->addButton(QDialogButtonBox::StandardButton::Cancel);
+    setResult(Accepted);
 }
 
 UpdateDownloadDialog::~UpdateDownloadDialog() {
@@ -26,7 +26,7 @@ UpdateDownloadDialog::~UpdateDownloadDialog() {
 
 void UpdateDownloadDialog::reset() {
     downloadCompleted = false;
-    canceled = false;
+    setResult(Accepted);
     ui->label->setText(tr("Downloading Birdtray installer..."));
     ui->progressBar->setValue(0);
     ui->progressBar->show();
@@ -73,20 +73,15 @@ void UpdateDownloadDialog::onDownloadProgress(qint64 bytesReceived, qint64 bytes
 }
 
 bool UpdateDownloadDialog::wasCanceled() const {
-    return canceled;
+    return result() == Rejected;
 }
 
 void UpdateDownloadDialog::onActionPressed() {
     if (downloadCompleted) {
-        canceled = false;
-        close();
+        accept();
     } else {
         hide();
     }
-}
-
-void UpdateDownloadDialog::onCancelPressed() {
-    canceled = true;
 }
 
 void UpdateDownloadDialog::showEvent(QShowEvent* event) {

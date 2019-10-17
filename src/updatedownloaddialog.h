@@ -55,22 +55,12 @@ private Q_SLOTS:
      * Once the download is finished, the button closes the dialog.
      */
     void onActionPressed();
-    
-    /**
-     * Called if the user presses the cancel button.
-     */
-    void onCancelPressed();
 
 protected:
     void showEvent(QShowEvent* event) override;
 
 private:
     Ui::UpdateDownloadDialog* ui;
-    
-    /**
-     * Whether or not the user has requested to cancel the download or installation.
-     */
-    bool canceled = false;
     
     /**
      * Whether we are in download-complete or downloading UI mode.
