@@ -47,8 +47,9 @@ To build, please do the following:
     cd src
     qmake (or qmake-qt5)
     make
-    
+
 Launch the ./birdtray executable from the local directory. It will show Thunderbird icon in system tray.
+Or run `make install` to install it system wide.
 
 Right-click on this icon, and click Settings. Go to Monitoring tab ans select the Thunderbird MSF file for the mailbox you'd like to monitor. You can specify different notification colors for each mailbox. Birdtray will show the new email count using this color if only this folder has new mail. If more than one folder has new mail, the default color will be used.
 
