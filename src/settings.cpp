@@ -54,7 +54,7 @@ Settings::Settings(bool verboseOutput)
     mUseMorkParser = true;
     mWatchFileTimeout = 150;
     mBlinkingUseAlphaTransition = false;
-    mUpdateOnStartup = true;
+    mUpdateOnStartup = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
 }
