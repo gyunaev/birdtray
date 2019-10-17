@@ -212,8 +212,8 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
         installerFile.close();
         if (downloadProcessDialog != nullptr && !downloadProcessDialog->wasCanceled()) {
             downloadProcessDialog->onDownloadComplete();
-            downloadProcessDialog->exec();
-            if (downloadProcessDialog->wasCanceled()) {
+            if (downloadProcessDialog->exec() == QDialog::Rejected
+                || downloadProcessDialog->wasCanceled()) {
                 installerFile.remove();
             } else if (!QProcess::startDetached(installerFile.fileName())) {
                 QMessageBox::critical(
