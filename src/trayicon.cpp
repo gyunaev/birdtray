@@ -5,12 +5,14 @@
 #include <QProcess>
 #include <QMessageBox>
 #include <QFontMetrics>
+#include <QtNetwork/QNetworkSession>
 
 #include "settings.h"
 #include "trayicon.h"
 #include "unreadcounter.h"
 #include "windowtools.h"
 #include "utils.h"
+#include "autoupdater.h"
 
 TrayIcon::TrayIcon(bool showSettings)
 {
@@ -67,6 +69,10 @@ TrayIcon::TrayIcon(bool showSettings)
     updateState();
     updateIcon();
     show();
+    
+    if (pSettings->mUpdateOnStartup) {
+        doAutoUpdateCheck();
+    }
 }
 
 TrayIcon::~TrayIcon() {
@@ -76,6 +82,10 @@ TrayIcon::~TrayIcon() {
 #ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess->deleteLater();
 #endif /* Q_OS_WIN */
+    if (networkConnectivityManager != nullptr) {
+        networkConnectivityManager->deleteLater();
+        networkConnectivityManager = nullptr;
+    }
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -648,6 +658,29 @@ void TrayIcon::onQuit() {
     }
 }
 
+void TrayIcon::onAutoUpdateCheckFinished(const QString &errorMessage) {
+    if (errorMessage.isNull()) {
+        disconnect(autoUpdaterSingleton, &AutoUpdater::onCheckUpdateFinished,
+                   this, &TrayIcon::onAutoUpdateCheckFinished);
+    } else if (networkConnectivityManager == nullptr) {
+        networkConnectivityManager = new QNetworkConfigurationManager();
+        networkConnectivityManager->updateConfigurations();
+        auto callback = [=](const QNetworkConfiguration &config) {
+            if (config.state() == QNetworkConfiguration::Active) {
+                if (networkConnectivityManager != nullptr) {
+                    networkConnectivityManager->deleteLater();
+                    networkConnectivityManager = nullptr;
+                }
+                autoUpdaterSingleton->checkForUpdates();
+            }
+        };
+        connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationChanged,
+                this, callback);
+        connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationAdded,
+                this, callback);
+    }
+}
+
 void TrayIcon::hideThunderbird()
 {
     mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
@@ -669,4 +702,10 @@ void TrayIcon::updateIgnoredUnreads()
         else
             mMenuIgnoreUnreads->setText( tr("Ignore unread emails") );
     }
+}
+
+void TrayIcon::doAutoUpdateCheck() {
+    connect(autoUpdaterSingleton, &AutoUpdater::onCheckUpdateFinished,
+            this, &TrayIcon::onAutoUpdateCheckFinished);
+    autoUpdaterSingleton->checkForUpdates();
 }

@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QProcess>
 #include <QSystemTrayIcon>
+#include <QtNetwork/QNetworkConfigurationManager>
 #ifdef Q_OS_WIN
 #  include "processhandle.h"
 #endif /* Q_OS_WIN */
@@ -77,6 +78,13 @@ class TrayIcon : public QSystemTrayIcon
          * Callback that is called when we are about to quit.
          */
         void    onQuit();
+        
+        /**
+         * Called when the auto update finished.
+         *
+         * @param errorMessage A message indicating an error during the check, or a null string.
+         */
+        void    onAutoUpdateCheckFinished(const QString& errorMessage);
 
     private:
         void    createMenu();
@@ -84,6 +92,11 @@ class TrayIcon : public QSystemTrayIcon
         void    hideThunderbird();
         void    showThunderbird();
         void    updateIgnoredUnreads();
+        
+        /**
+         * Do an automatic check for a new version of Birdtray.
+         */
+        void    doAutoUpdateCheck();
 
         // State variables for blinking; mBlinkingTimeout=0 means we are not blinking
         double          mBlinkingIconOpacity;
@@ -156,6 +169,11 @@ class TrayIcon : public QSystemTrayIcon
         // A reference to a Thunderbird updater process.
         ProcessHandle* mThunderbirdUpdaterProcess;
 #endif /* Q_OS_WIN */
+        
+        /**
+         * A manager to check for network connectivity.
+         */
+        QNetworkConfigurationManager* networkConnectivityManager = nullptr;
 };
 
 #endif // TRAYICON_H

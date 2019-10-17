@@ -83,14 +83,9 @@ int main(int argc, char *argv[])
     } else {
         pSettings->load();
     }
+    autoUpdaterSingleton = new AutoUpdater();
 
     TrayIcon trayIcon(parser.isSet("settings"));
-    
-    // Update check
-    autoUpdaterSingleton = new AutoUpdater();
-    if (pSettings->mUpdateOnStartup) {
-        autoUpdaterSingleton->checkForUpdates();
-    }
     int result = QApplication::exec();
 
     delete pSettings;
