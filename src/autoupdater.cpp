@@ -42,6 +42,10 @@ AutoUpdater::~AutoUpdater() {
         downloadProcessDialog->deleteLater();
         downloadProcessDialog = nullptr;
     }
+    if (installerFile.isOpen()) {
+        // We quit in the middle of downloading
+        installerFile.remove();
+    }
 }
 
 void AutoUpdater::checkForUpdates() {
