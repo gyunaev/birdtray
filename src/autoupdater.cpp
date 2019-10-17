@@ -58,6 +58,14 @@ void AutoUpdater::onRequestFinished(QNetworkReply* result) {
         if (isVersionInfoResult) {
             emit onCheckUpdateFinished(result->errorString());
         } else {
+            QString errorMessage;
+            if (installerFile.error() != QFileDevice::NoError) {
+                errorMessage = tr("Failed to save the Birdtray installer:\n")
+                               + installerFile.errorString();
+            } else {
+                errorMessage = tr("Failed to download the Birdtray installer:\n")
+                        + result->errorString();
+            }
             installerFile.remove();
             bool wasCanceled = false;
             if (downloadProcessDialog != nullptr) {
@@ -67,8 +75,7 @@ void AutoUpdater::onRequestFinished(QNetworkReply* result) {
                 downloadProcessDialog = nullptr;
             }
             if (!wasCanceled && QMessageBox::critical(
-                    nullptr, tr("Installer download failed"),
-                    tr("Failed to download the Birdtray installer:\n") + result->errorString(),
+                    nullptr, tr("Installer download failed"), errorMessage,
                     QMessageBox::StandardButton::Retry | QMessageBox::StandardButton::Cancel)
                                 == QMessageBox::StandardButton::Retry) {
                 startDownload();
@@ -113,6 +120,7 @@ void AutoUpdater::startDownload() {
         return;
     }
     if (haveActualInstallerDownloadUrl) {
+        installerFile.unsetError();
         if (installerFile.isOpen()) {
             installerFile.reset();
         } else {
@@ -207,8 +215,18 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
                     tr("Failed to download the Birdtray installer:\nInvalid redirect: ")
                     + redirectionTarget.toString(), QMessageBox::StandardButton::Abort);
         }
+    } else if (installerFile.write(result->readAll()) == -1) {
+        QString errorMessage(tr("Failed to save the Birdtray installer:\n")
+                           + installerFile.errorString());
+        installerFile.remove();
+        if (QMessageBox::critical(
+                nullptr, tr("Installer download failed"), errorMessage,
+                QMessageBox::StandardButton::Retry | QMessageBox::StandardButton::Cancel)
+                == QMessageBox::StandardButton::Retry) {
+            startDownload();
+            return;
+        }
     } else {
-        installerFile.write(result->readAll());
         installerFile.close();
         if (downloadProcessDialog != nullptr && !downloadProcessDialog->wasCanceled()) {
             downloadProcessDialog->onDownloadComplete();
@@ -236,10 +254,9 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
 void AutoUpdater::onDownloadProgress(QNetworkReply* result, qint64 bytesReceived,
                                      qint64 bytesTotal) {
     if (downloadProcessDialog != nullptr) {
-        if (downloadProcessDialog->wasCanceled()) {
+        if (downloadProcessDialog->wasCanceled() || installerFile.write(result->readAll()) == -1) {
             result->close();
         } else {
-            installerFile.write(result->readAll());
             downloadProcessDialog->onDownloadProgress(bytesReceived, bytesTotal);
         }
     }
