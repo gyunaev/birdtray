@@ -36,6 +36,12 @@ Controller.prototype.CredentialsPageCallback = function() {
     gui.clickButton(buttons.NextButton);
 };
 
+Controller.prototype.DynamicTelemetryPluginFormCallback = function() {
+    var widget = gui.currentPageWidget();
+    widget.TelemetryPluginForm.statisticGroupBox.disableStatisticRadioButton.checked = true;
+    gui.clickButton(buttons.NextButton);
+}
+
 Controller.prototype.IntroductionPageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
     gui.clickButton(buttons.NextButton);
@@ -51,6 +57,12 @@ Controller.prototype.TargetDirectoryPageCallback = function() {
 Controller.prototype.ComponentSelectionPageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
     var page = gui.currentPageWidget();
+    var checkBox = gui.findChild(page, "Latest releases");
+    var fetchButton = gui.findChild(page, "FetchCategoryButton");
+
+    checkBox.click();
+    fetchButton.click();
+
     page.deselectAll();
     var latestVersion = installer.environmentVariable("Q_LATEST_VERSION");
     var latestVersionMajor = latestVersion[0];
