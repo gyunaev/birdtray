@@ -5,6 +5,7 @@
 #include <QRegularExpression>
 #include <QtWidgets/QProgressDialog>
 #include <QUrl>
+#include <QFile>
 #include "updatedialog.h"
 #include "updatedownloaddialog.h"
 
@@ -115,6 +116,11 @@ private:
      * points to the actual installer file or just a download page.
      */
     bool haveActualInstallerDownloadUrl = false;
+    
+    /**
+     * The destination to save the downloaded installer to.
+     */
+    QFile installerFile;
     
     /**
      * A regular expression to parse a version from a release tag.

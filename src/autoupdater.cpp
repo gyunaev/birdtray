@@ -14,7 +14,6 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMessageBox>
-#include <QFile>
 #include <QDir>
 #include <QApplication>
 #include <QtCore/QProcess>
@@ -28,6 +27,7 @@ AutoUpdater* autoUpdaterSingleton = nullptr;
 
 AutoUpdater::AutoUpdater(QObject* parent) :
         networkAccessManager(new QNetworkAccessManager(this)),
+        installerFile(QDir::temp().filePath("birdtrayInstaller.exe")),
         versionRe(VERSION_TAG_REGEX, QRegularExpression::CaseInsensitiveOption), QObject(parent) {
     connect(networkAccessManager, &QNetworkAccessManager::finished,
             this, &AutoUpdater::onRequestFinished);
@@ -57,6 +57,7 @@ void AutoUpdater::onRequestFinished(QNetworkReply* result) {
                     tr("Failed to check for a new Birdtray version:\n") + result->errorString(),
                     QMessageBox::StandardButton::Ok);
         } else {
+            installerFile.remove();
             bool wasCanceled = false;
             if (downloadProcessDialog != nullptr) {
                 wasCanceled = downloadProcessDialog->wasCanceled();
@@ -111,6 +112,20 @@ void AutoUpdater::startDownload() {
         return;
     }
     if (haveActualInstallerDownloadUrl) {
+        if (installerFile.isOpen()) {
+            installerFile.reset();
+        } else {
+            while (!installerFile.open(QFile::WriteOnly)) {
+                if (QMessageBox::critical(
+                        nullptr, tr("Installer download failed"),
+                        tr("Failed to save the Birdtray installer:\n")
+                        + installerFile.errorString(),
+                        QMessageBox::StandardButton::Retry | QMessageBox::StandardButton::Cancel)
+                    != QMessageBox::StandardButton::Retry) {
+                    return;
+                }
+            }
+        }
         if (downloadProcessDialog == nullptr) {
             downloadProcessDialog = new UpdateDownloadDialog();
         } else {
@@ -192,33 +207,21 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
                     + redirectionTarget.toString(), QMessageBox::StandardButton::Abort);
         }
     } else {
-        QFile installerFile(QDir::temp().filePath("birdtrayInstaller.exe"));
-        if (!installerFile.open(QFile::WriteOnly)) {
-            if (QMessageBox::critical(
-                    nullptr, tr("Installer download failed"),
-                    tr("Failed to save the Birdtray installer:\n") + installerFile.errorString(),
-                    QMessageBox::StandardButton::Retry | QMessageBox::StandardButton::Cancel)
-                == QMessageBox::StandardButton::Retry) {
-                startDownload();
-                return;
-            }
-        } else {
-            installerFile.write(result->readAll());
-            installerFile.close();
-            if (downloadProcessDialog != nullptr && !downloadProcessDialog->wasCanceled()) {
-                downloadProcessDialog->onDownloadComplete();
-                downloadProcessDialog->exec();
-                if (downloadProcessDialog->wasCanceled()) {
-                    installerFile.remove();
-                } else if (!QProcess::startDetached(installerFile.fileName())) {
-                    QMessageBox::critical(
-                            nullptr, tr("Update failed"),
-                            tr("Failed to start the Birdtray installer."),
-                            QMessageBox::StandardButton::Abort);
-                    installerFile.remove();
-                } else {
-                    QApplication::quit();
-                }
+        installerFile.write(result->readAll());
+        installerFile.close();
+        if (downloadProcessDialog != nullptr && !downloadProcessDialog->wasCanceled()) {
+            downloadProcessDialog->onDownloadComplete();
+            downloadProcessDialog->exec();
+            if (downloadProcessDialog->wasCanceled()) {
+                installerFile.remove();
+            } else if (!QProcess::startDetached(installerFile.fileName())) {
+                QMessageBox::critical(
+                        nullptr, tr("Update failed"),
+                        tr("Failed to start the Birdtray installer."),
+                        QMessageBox::StandardButton::Abort);
+                installerFile.remove();
+            } else {
+                QApplication::quit();
             }
         }
     }
@@ -235,6 +238,7 @@ void AutoUpdater::onDownloadProgress(QNetworkReply* result, qint64 bytesReceived
         if (downloadProcessDialog->wasCanceled()) {
             result->close();
         } else {
+            installerFile.write(result->readAll());
             downloadProcessDialog->onDownloadProgress(bytesReceived, bytesTotal);
         }
     }
