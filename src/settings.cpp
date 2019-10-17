@@ -92,6 +92,7 @@ void Settings::save()
     mSettings->setValue("advanced/blinkingusealpha", mBlinkingUseAlphaTransition );
     mSettings->setValue("advanced/unreadopacitylevel", mUnreadOpacityLevel );
     mSettings->setValue("advanced/updateOnStartup", mUpdateOnStartup );
+    mSettings->setValue("advanced/ignoreUpdateVersion", mIgnoreUpdateVersion );
 
     // Convert the map into settings
     mSettings->setValue("accounts/count", mFolderNotificationColors.size() );
@@ -180,6 +181,8 @@ void Settings::load()
     mUnreadOpacityLevel = mSettings->value(
             "advanced/unreadopacitylevel", mUnreadOpacityLevel ).toDouble();
     mUpdateOnStartup = mSettings->value("advanced/updateOnStartup", mUpdateOnStartup ).toBool();
+    mIgnoreUpdateVersion = mSettings->value(
+            "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
 
     mFolderNotificationColors.clear();
 

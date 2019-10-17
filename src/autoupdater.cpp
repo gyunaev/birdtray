@@ -1,5 +1,6 @@
 #include "autoupdater.h"
 #include "utils.h"
+#include "settings.h"
 
 #if defined(_WIN32) && !defined(_WIN64)
 #  include <windows.h>
@@ -165,9 +166,12 @@ void AutoUpdater::onReleaseInfoRequestFinished(QNetworkReply* result) {
         qulonglong downloadSize = parseDownloadUrl(
                 response["assets"].toArray(), response["html_url"].toString());
         if (downloadUrl.isValid()) {
-            haveActualInstallerDownloadUrl = downloadSize != (qulonglong) -1;
-            updateDialog.show(QString("%1.%2.%3").arg(version[0]).arg(version[1]).arg(version[2]),
-                              response["body"].toString(), downloadSize);
+            QString versionString = QString("%1.%2.%3")
+                    .arg(version[0]).arg(version[1]).arg(version[2]);
+            if (versionString != pSettings->mIgnoreUpdateVersion) {
+                haveActualInstallerDownloadUrl = downloadSize != (qulonglong) -1;
+                updateDialog.show(versionString, response["body"].toString(), downloadSize);
+            }
         }
     }
     emit onCheckUpdateFinished();

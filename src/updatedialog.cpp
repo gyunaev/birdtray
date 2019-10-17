@@ -1,5 +1,6 @@
 #include "updatedialog.h"
 #include "ui_updatedialog.h"
+#include "settings.h"
 #include <utils.h>
 #include <QPushButton>
 
@@ -13,13 +14,18 @@ UpdateDialog::UpdateDialog(QWidget* parent) :
     downloadButton->setDefault(true);
     downloadButton->setAutoDefault(true);
     connect(downloadButton, &QPushButton::clicked, this, &UpdateDialog::onDownloadButtonClicked);
+    ignoreVersionButton = new QPushButton(tr("Ignore this version"), ui->buttonBox);
+    connect(ignoreVersionButton, &QPushButton::clicked,
+            this, &UpdateDialog::onIgnoreVersionClicked);
     ui->buttonBox->addButton(downloadButton, QDialogButtonBox::ButtonRole::AcceptRole);
+    ui->buttonBox->addButton(ignoreVersionButton, QDialogButtonBox::ButtonRole::RejectRole);
     ui->buttonBox->addButton(QDialogButtonBox::StandardButton::Cancel);
 }
 
 UpdateDialog::~UpdateDialog() {
     delete ui;
     downloadButton->deleteLater();
+    ignoreVersionButton->deleteLater();
 }
 
 void UpdateDialog::show(const QString &newVersion, const QString &changelog,
@@ -40,4 +46,9 @@ void UpdateDialog::show(const QString &newVersion, const QString &changelog,
         ui->estimatedSizeLabel->show();
     }
     QDialog::show();
+}
+
+void UpdateDialog::onIgnoreVersionClicked() {
+    pSettings->mIgnoreUpdateVersion = ui->newVersionLabel->text();
+    pSettings->save();
 }

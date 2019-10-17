@@ -84,6 +84,9 @@ class Settings
         
         // Whether to check for a new Birdtray version on startup or not.
         bool    mUpdateOnStartup;
+        
+        // The new Birdtray version that the user selected to ignore.
+        QString mIgnoreUpdateVersion;
 
         // Whether to allow suppression of unread emails
         bool    mAllowSuppressingUnreads;

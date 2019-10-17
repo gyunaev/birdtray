@@ -36,6 +36,13 @@ Q_SIGNALS:
      */
     void onDownloadButtonClicked();
 
+public Q_SLOTS:
+    
+    /**
+     * Called when the user clicks on the ::ignoreVersionButton.
+     */
+    void onIgnoreVersionClicked();
+
 private:
     Ui::UpdateDialog* ui;
     
@@ -43,6 +50,11 @@ private:
      * The download or download & update button.
      */
     QPushButton* downloadButton;
+    
+    /**
+     * A button that lets the user ignore this new Birdtray release.
+     */
+    QPushButton* ignoreVersionButton;
 };
 
 #endif // UPDATE_DIALOG_H
