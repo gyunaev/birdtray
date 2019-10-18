@@ -9,7 +9,7 @@
 #include "settings.h"
 #include "morkparser.h"
 #include "utils.h"
-
+#include "autoupdater.h"
 
 
 void ensureSystemTrayAvailable() {
@@ -83,11 +83,13 @@ int main(int argc, char *argv[])
     } else {
         pSettings->load();
     }
+    autoUpdaterSingleton = new AutoUpdater();
 
     TrayIcon trayIcon(parser.isSet("settings"));
     int result = QApplication::exec();
 
-    delete(pSettings);
+    delete pSettings;
+    delete autoUpdaterSingleton;
 
     return result;
 }

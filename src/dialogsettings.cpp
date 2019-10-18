@@ -11,6 +11,7 @@
 #include "dialogaddeditaccount.h"
 #include "databaseunreadfixer.h"
 #include "utils.h"
+#include "autoupdater.h"
 
 DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
@@ -41,6 +42,11 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnNewEmailAdd, &QPushButton::clicked, this, &DialogSettings::newEmailAdd );
     connect( btnNewEmailEdit, &QPushButton::clicked, this, &DialogSettings::newEmailEdit );
     connect( btnNewEmailDelete, &QPushButton::clicked, this, &DialogSettings::newEmailRemove );
+    
+    connect( checkUpdateButton, &QPushButton::clicked,
+            this, &DialogSettings::onCheckUpdateButton );
+    connect( autoUpdaterSingleton, &AutoUpdater::onCheckUpdateFinished,
+            this, &DialogSettings::onCheckUpdateFinished );
 
     // Setup parameters
     leProfilePath->setText( QDir::toNativeSeparators(pSettings->mThunderbirdFolderPath) );
@@ -61,6 +67,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWindowAtRestart->setChecked( pSettings->mHideWhenRestarted );
     boxEnableNewEmail->setChecked( pSettings->mNewEmailMenuEnabled );
     boxBlinkingUsesAlpha->setChecked( pSettings->mBlinkingUseAlphaTransition );
+    checkUpdateOnStartup->setChecked( pSettings->mUpdateOnStartup );
     boxAllowSuppression->setChecked( pSettings->mAllowSuppressingUnreads );
     spinUnreadOpacityLevel->setValue( pSettings->mUnreadOpacityLevel * 100 );
     spinThunderbirdStartDelay->setValue( pSettings->mLaunchThunderbirdDelay );
@@ -157,6 +164,7 @@ void DialogSettings::accept()
     pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
     pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
     pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
+    pSettings->mUpdateOnStartup = checkUpdateOnStartup->isChecked();
     pSettings->mUseMorkParser = isMorkParserSelected();
     pSettings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
     pSettings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
@@ -211,6 +219,17 @@ void DialogSettings::profilePathChanged()
         mAccounts.clear();
     }
 
+}
+
+void DialogSettings::onCheckUpdateFinished(const QString &errorString) {
+    checkUpdateButton->setText(tr("Check now"));
+    checkUpdateButton->setEnabled(true);
+    if (!errorString.isNull()) {
+        QMessageBox::warning(
+                nullptr, tr("Version check failed"),
+                tr("Failed to check for a new Birdtray version:\n") + errorString,
+                QMessageBox::StandardButton::Ok);
+    }
 }
 
 void DialogSettings::fixDatabaseUnreads()
@@ -345,6 +364,12 @@ void DialogSettings::newEmailEditIndex(const QModelIndex &index)
 void DialogSettings::newEmailRemove()
 {
     mModelNewEmails->remove( treeNewEmails->currentIndex() );
+}
+
+void DialogSettings::onCheckUpdateButton() {
+    checkUpdateButton->setText(tr("Checking..."));
+    checkUpdateButton->setEnabled(false);
+    autoUpdaterSingleton->checkForUpdates();
 }
 
 void DialogSettings::buttonChangeIcon()

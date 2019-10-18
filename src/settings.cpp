@@ -1,4 +1,3 @@
-#include <QStandardPaths>
 #include <QBuffer>
 #include <QDir>
 #ifdef Q_OS_WIN
@@ -55,6 +54,7 @@ Settings::Settings(bool verboseOutput)
     mUseMorkParser = true;
     mWatchFileTimeout = 150;
     mBlinkingUseAlphaTransition = false;
+    mUpdateOnStartup = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
 }
@@ -91,6 +91,8 @@ void Settings::save()
     mSettings->setValue("advanced/watchfiletimeout", mWatchFileTimeout );
     mSettings->setValue("advanced/blinkingusealpha", mBlinkingUseAlphaTransition );
     mSettings->setValue("advanced/unreadopacitylevel", mUnreadOpacityLevel );
+    mSettings->setValue("advanced/updateOnStartup", mUpdateOnStartup );
+    mSettings->setValue("advanced/ignoreUpdateVersion", mIgnoreUpdateVersion );
 
     // Convert the map into settings
     mSettings->setValue("accounts/count", mFolderNotificationColors.size() );
@@ -178,6 +180,9 @@ void Settings::load()
             "advanced/blinkingusealpha", mBlinkingUseAlphaTransition ).toBool();
     mUnreadOpacityLevel = mSettings->value(
             "advanced/unreadopacitylevel", mUnreadOpacityLevel ).toDouble();
+    mUpdateOnStartup = mSettings->value("advanced/updateOnStartup", mUpdateOnStartup ).toBool();
+    mIgnoreUpdateVersion = mSettings->value(
+            "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
 
     mFolderNotificationColors.clear();
 
