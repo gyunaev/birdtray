@@ -64,7 +64,7 @@ void AutoUpdater::onRequestFinished(QNetworkReply* result) {
                                + installerFile.errorString();
             } else {
                 errorMessage = tr("Failed to download the Birdtray installer:\n")
-                        + result->errorString();
+                               + result->errorString();
             }
             installerFile.remove();
             bool wasCanceled = false;
@@ -217,12 +217,12 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
         }
     } else if (installerFile.write(result->readAll()) == -1) {
         QString errorMessage(tr("Failed to save the Birdtray installer:\n")
-                           + installerFile.errorString());
+                             + installerFile.errorString());
         installerFile.remove();
         if (QMessageBox::critical(
                 nullptr, tr("Installer download failed"), errorMessage,
                 QMessageBox::StandardButton::Retry | QMessageBox::StandardButton::Cancel)
-                == QMessageBox::StandardButton::Retry) {
+            == QMessageBox::StandardButton::Retry) {
             startDownload();
             return;
         }
