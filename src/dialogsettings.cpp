@@ -222,6 +222,9 @@ void DialogSettings::profilePathChanged()
 }
 
 void DialogSettings::onCheckUpdateFinished(const QString &errorString) {
+    if (checkUpdateButton->isEnabled()) {
+        return; // We received an error that was not initiated by us. Ignore it.
+    }
     checkUpdateButton->setText(tr("Check now"));
     checkUpdateButton->setEnabled(true);
     if (!errorString.isNull()) {
