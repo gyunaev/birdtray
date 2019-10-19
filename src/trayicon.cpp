@@ -215,7 +215,13 @@ void TrayIcon::updateIcon()
         QFontMetrics fm( pSettings->mNotificationFont );
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
         p.setPen( mUnreadColor );
-        p.drawText( (temp.width() - fm.width( countvalue )) / 2, (temp.height() - fm.height()) / 2 + fm.ascent(), countvalue );
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+        int width = fm.horizontalAdvance(countvalue);
+#else
+        int width = fm.width(countvalue);
+#endif
+        p.drawText((temp.width() - width) / 2, (temp.height() - fm.height()) / 2 + fm.ascent(),
+                   countvalue);
     }
 
     p.end();
