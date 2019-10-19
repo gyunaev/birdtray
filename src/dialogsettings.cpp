@@ -442,9 +442,9 @@ void DialogSettings::unreadParserChanged(int curr)
 void DialogSettings::changeIcon(QToolButton *button)
 {
     QString e = QFileDialog::getOpenFileName( 0,
-                                              "Choose the new icon",
+                                              tr("Choose the new icon"),
                                               "",
-                                              "Images(*.png); Images(*.svg)" );
+                                              tr("Images(*.png *.svg)") );
 
     if ( e.isEmpty() )
         return;
