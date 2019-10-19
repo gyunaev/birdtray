@@ -59,6 +59,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define BIRDTRAY_SECTION_DESCRIPTION "A free system tray notification for new mail for Thunderbird."
 !define WIN_INTEGRATION_GROUP_DESCRIPTION "Select how to integrate the program in Windows."
 !define AUTO_RUN_DESCRIPTION "Automatically start ${PRODUCT_NAME} after login."
+!define AUTO_CHECK_UPDATE_DESCRIPTION \
+        "Automatically search for updates of ${PRODUCT_NAME} at startup."
 !define PROGRAM_GROUP_DESCRIPTION \
         "Create a ${PRODUCT_NAME} program group under Start Menu > Programs."
 !define DESKTOP_ENTRY_DESCRIPTION "Create a ${PRODUCT_NAME} icon on the Desktop."
@@ -84,6 +86,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define UNINSTALL_LIST_FILENAME "uninstall_list.nsh"
 !define HEADER_IMG_FILE "assets\header.bmp"
 !define SIDEBAR_IMG_FILE "assets\sidebar.bmp"
+!define INSTALL_CONFIG_FILE ".installConfig.ini"
 
 # Other
 !define BAD_PATH_CHARS '?%*:|"<>!;'
@@ -359,6 +362,12 @@ Section /o "AutoRun" SectionAutoRun
 SectionEnd
 SectionGroupEnd
 
+Section "Auto Update-Check" SectionAutoCheckUpdate
+    FileOpen $4 "$INSTDIR\${INSTALL_CONFIG_FILE}" a
+    FileSeek $4 0 END
+    FileWrite $4 "updateOnStartup = true$\r$\n"
+SectionEnd
+
 Section "-Write Install Size" # Hidden section, write install size as the final step
     !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
 SectionEnd
@@ -366,6 +375,7 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionBirdTray} "${BIRDTRAY_SECTION_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoRun} "${AUTO_RUN_DESCRIPTION}"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoCheckUpdate} "${AUTO_CHECK_UPDATE_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupWinIntegration} \
             "${WIN_INTEGRATION_GROUP_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "${PROGRAM_GROUP_DESCRIPTION}"
@@ -393,6 +403,8 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     !ifdef LICENSE_FILE
         !insertmacro DeleteRetryAbort "$INSTDIR\${LICENSE_FILE}"
     !endif
+
+    !insertmacro DeleteRetryAbort "$INSTDIR\${INSTALL_CONFIG_FILE}"
 
     # Clean up "AutoRun"
     DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" "${PRODUCT_NAME}"

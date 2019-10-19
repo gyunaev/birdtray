@@ -224,6 +224,7 @@ void Settings::load()
         QString entry = "newemail/id" + QString::number( index );
         mNewEmailData.push_back( Setting_NewEmail::fromByteArray( mSettings->value( entry, "" ).toByteArray() ) );
     }
+    loadInstallerConfiguration();
 }
 
 QString Settings::getThunderbirdExecutablePath()
@@ -279,4 +280,17 @@ QPixmap Settings::loadPixmap(const QString &key)
     }
 
     return pix;
+}
+
+void Settings::loadInstallerConfiguration() {
+    QFileInfo installConfigFile(QDir(qApp->applicationDirPath()), ".installConfig.ini");
+    if (installConfigFile.exists()) {
+        QSettings installConfig(installConfigFile.absoluteFilePath(), QSettings::IniFormat);
+        QVariant value;
+        if (!(value = installConfig.value("updateOnStartup")).isNull()) {
+            mUpdateOnStartup = value.toBool();
+        }
+        QFile::remove(installConfigFile.absoluteFilePath());
+        save();
+    }
 }
