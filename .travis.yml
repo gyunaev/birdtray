@@ -147,8 +147,9 @@ before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       choco install -y nsis;
+      choco install -y openssl.light;
       cd ../installer;
-      ./buildInstaller.bat "..\build\Release\birdtray.exe" "%USERPROFILE%\sqlite3\sqlite3.dll" || (exit $?);
+      ./buildInstaller.bat "..\build\Release\birdtray.exe" "%USERPROFILE%\sqlite3\sqlite3.dll" "%ProgramFiles%\OpenSSL" || (exit $?);
       cd ..;
     fi
 
