@@ -124,10 +124,11 @@ goto :eof
 
 : Usage
 echo Creates the Birdtray installer. - Usage:
-echo buildInstaller.bat exePath libSqlitePath
+echo buildInstaller.bat exePath libSqlitePath openSSLPath
 echo:
 echo exePath:       The path to the birdtray.exe to include in the installer
 echo libSqlitePath: The path to the libsqlite.dll that was used to compile the Birdtray exe
+echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.ddl
 echo:
 echo The following programs must be on the PATH: windeployqt, makensis and g++.
 goto :eof
