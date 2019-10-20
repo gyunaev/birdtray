@@ -135,7 +135,7 @@ if exist "%dependencyFolder%" (
     if exist "%dependencyFolder%" (
         rmdir /s /q "%dependencyFolder%" 1>nul
         if exist "%dependencyFolder%" (
-            echo Failed to delete the old nsis dependencyFolder folder at %dependencyFolder% 1>&2
+            echo Failed to delete the old nsis dependency folder at %dependencyFolder% 1>&2
             exit /b %ERROR_DIR_NOT_EMPTY%
         )
     )
