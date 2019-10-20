@@ -412,6 +412,7 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
         !insertmacro DeleteRetryAbort "$INSTDIR\${LICENSE_FILE}"
     !endif
 
+    # Clean up "Auto Update-Check"
     ${UnStrCase} $0 "${COMPANY_NAME}" "L"
     ${UnStrCase} $1 "${PRODUCT_NAME}" "L"
     !insertmacro DeleteRetryAbort "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}"
