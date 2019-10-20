@@ -33,6 +33,9 @@ SetCompressor /SOLID lzma
 ${StrRep}
 !ifdef UNINSTALL_BUILDER
 ${UnStrRep}
+${UnStrCase}
+!else
+${StrCase}
 !endif # UNINSTALL_BUILDER
 
 # Variables
@@ -363,9 +366,14 @@ SectionEnd
 SectionGroupEnd
 
 Section "Auto Update-Check" SectionAutoCheckUpdate
-    FileOpen $4 "$INSTDIR\${INSTALL_CONFIG_FILE}" a
-    FileSeek $4 0 END
-    FileWrite $4 "updateOnStartup = true$\r$\n"
+    ${StrCase} $0 "${COMPANY_NAME}" "L"
+    ${StrCase} $1 "${PRODUCT_NAME}" "L"
+    DeleteRegValue HKCU "${USER_SETTINGS_REG_PATH}" "hasReadInstallConfig"
+    CreateDirectory "$LOCALAPPDATA\$0"
+    CreateDirectory "$LOCALAPPDATA\$0\$1"
+    FileOpen $2 "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}" a
+    FileSeek $2 0 END
+    FileWrite $2 "updateOnStartup = true$\r$\n"
 SectionEnd
 
 Section "-Write Install Size" # Hidden section, write install size as the final step
@@ -404,7 +412,11 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
         !insertmacro DeleteRetryAbort "$INSTDIR\${LICENSE_FILE}"
     !endif
 
-    !insertmacro DeleteRetryAbort "$INSTDIR\${INSTALL_CONFIG_FILE}"
+    ${UnStrCase} $0 "${COMPANY_NAME}" "L"
+    ${UnStrCase} $1 "${PRODUCT_NAME}" "L"
+    !insertmacro DeleteRetryAbort "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}"
+    RMDir /r "$LOCALAPPDATA\$0\$1"
+    RMDir /r "$LOCALAPPDATA\$0"
 
     # Clean up "AutoRun"
     DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" "${PRODUCT_NAME}"
