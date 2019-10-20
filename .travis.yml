@@ -149,7 +149,7 @@ before_deploy:
       choco install -y nsis;
       choco install -y openssl.light;
       cd ../installer;
-      ./buildInstaller.bat "..\build\Release\birdtray.exe" "%USERPROFILE%\sqlite3\sqlite3.dll" "%ProgramFiles%\OpenSSL" || (exit $?);
+      ./buildInstaller.bat "..\build\Release\birdtray.exe" "%USERPROFILE%\sqlite3\sqlite3.dll" "%PROGRAMFILES%\OpenSSL" || (exit $?);
       cd ..;
     fi
 
