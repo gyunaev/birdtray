@@ -142,6 +142,11 @@ class Settings
     
         void    savePixmap( const QString& key, const QPixmap& pixmap );
         QPixmap loadPixmap( const QString& key );
+    
+        /**
+         * At first start, load the configuration configured during installation of Birdtray.
+         */
+        void loadInstallerConfiguration();
 };
 
 extern Settings * pSettings;

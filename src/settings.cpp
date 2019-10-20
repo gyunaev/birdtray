@@ -1,5 +1,6 @@
 #include <QBuffer>
 #include <QDir>
+#include <QtCore/QStandardPaths>
 #ifdef Q_OS_WIN
 #include <QCoreApplication>
 #endif
@@ -12,6 +13,9 @@
 #else
 #  define THUNDERBIRD_EXE_PATH "/usr/bin/thunderbird"
 #endif
+
+#define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
+#define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
 
 Settings * pSettings;
 
@@ -91,7 +95,7 @@ void Settings::save()
     mSettings->setValue("advanced/watchfiletimeout", mWatchFileTimeout );
     mSettings->setValue("advanced/blinkingusealpha", mBlinkingUseAlphaTransition );
     mSettings->setValue("advanced/unreadopacitylevel", mUnreadOpacityLevel );
-    mSettings->setValue("advanced/updateOnStartup", mUpdateOnStartup );
+    mSettings->setValue(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup );
     mSettings->setValue("advanced/ignoreUpdateVersion", mIgnoreUpdateVersion );
 
     // Convert the map into settings
@@ -180,7 +184,7 @@ void Settings::load()
             "advanced/blinkingusealpha", mBlinkingUseAlphaTransition ).toBool();
     mUnreadOpacityLevel = mSettings->value(
             "advanced/unreadopacitylevel", mUnreadOpacityLevel ).toDouble();
-    mUpdateOnStartup = mSettings->value("advanced/updateOnStartup", mUpdateOnStartup ).toBool();
+    mUpdateOnStartup = mSettings->value(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup ).toBool();
     mIgnoreUpdateVersion = mSettings->value(
             "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
 
@@ -223,6 +227,9 @@ void Settings::load()
     {
         QString entry = "newemail/id" + QString::number( index );
         mNewEmailData.push_back( Setting_NewEmail::fromByteArray( mSettings->value( entry, "" ).toByteArray() ) );
+    }
+    if (!mSettings->value(READ_INSTALL_CONFIG_KEY, false).toBool()) {
+        loadInstallerConfiguration();
     }
 }
 
@@ -279,4 +286,21 @@ QPixmap Settings::loadPixmap(const QString &key)
     }
 
     return pix;
+}
+
+void Settings::loadInstallerConfiguration() {
+    QStringList configDirs = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation);
+    for (const QString& configDir : configDirs) {
+        QFileInfo installConfigFile(QDir(configDir), ".installConfig.ini");
+        if (installConfigFile.exists()) {
+            QSettings installConfig(installConfigFile.absoluteFilePath(), QSettings::IniFormat);
+            QVariant value;
+            if (!(value = installConfig.value("updateOnStartup")).isNull()) {
+                mUpdateOnStartup = value.toBool();
+                mSettings->setValue(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup);
+            }
+        }
+    }
+    mSettings->setValue(READ_INSTALL_CONFIG_KEY, true);
+    mSettings->sync();
 }

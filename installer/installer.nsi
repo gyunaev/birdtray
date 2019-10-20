@@ -33,6 +33,9 @@ SetCompressor /SOLID lzma
 ${StrRep}
 !ifdef UNINSTALL_BUILDER
 ${UnStrRep}
+${UnStrCase}
+!else
+${StrCase}
 !endif # UNINSTALL_BUILDER
 
 # Variables
@@ -59,6 +62,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define BIRDTRAY_SECTION_DESCRIPTION "A free system tray notification for new mail for Thunderbird."
 !define WIN_INTEGRATION_GROUP_DESCRIPTION "Select how to integrate the program in Windows."
 !define AUTO_RUN_DESCRIPTION "Automatically start ${PRODUCT_NAME} after login."
+!define AUTO_CHECK_UPDATE_DESCRIPTION \
+        "Automatically search for updates of ${PRODUCT_NAME} at startup."
 !define PROGRAM_GROUP_DESCRIPTION \
         "Create a ${PRODUCT_NAME} program group under Start Menu > Programs."
 !define DESKTOP_ENTRY_DESCRIPTION "Create a ${PRODUCT_NAME} icon on the Desktop."
@@ -84,6 +89,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define UNINSTALL_LIST_FILENAME "uninstall_list.nsh"
 !define HEADER_IMG_FILE "assets\header.bmp"
 !define SIDEBAR_IMG_FILE "assets\sidebar.bmp"
+!define INSTALL_CONFIG_FILE ".installConfig.ini"
 
 # Other
 !define BAD_PATH_CHARS '?%*:|"<>!;'
@@ -359,6 +365,17 @@ Section /o "AutoRun" SectionAutoRun
 SectionEnd
 SectionGroupEnd
 
+Section "Auto Update-Check" SectionAutoCheckUpdate
+    ${StrCase} $0 "${COMPANY_NAME}" "L"
+    ${StrCase} $1 "${PRODUCT_NAME}" "L"
+    DeleteRegValue HKCU "${USER_SETTINGS_REG_PATH}" "hasReadInstallConfig"
+    CreateDirectory "$LOCALAPPDATA\$0"
+    CreateDirectory "$LOCALAPPDATA\$0\$1"
+    FileOpen $2 "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}" a
+    FileSeek $2 0 END
+    FileWrite $2 "updateOnStartup = true$\r$\n"
+SectionEnd
+
 Section "-Write Install Size" # Hidden section, write install size as the final step
     !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
 SectionEnd
@@ -366,6 +383,7 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionBirdTray} "${BIRDTRAY_SECTION_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoRun} "${AUTO_RUN_DESCRIPTION}"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoCheckUpdate} "${AUTO_CHECK_UPDATE_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupWinIntegration} \
             "${WIN_INTEGRATION_GROUP_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "${PROGRAM_GROUP_DESCRIPTION}"
@@ -393,6 +411,13 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     !ifdef LICENSE_FILE
         !insertmacro DeleteRetryAbort "$INSTDIR\${LICENSE_FILE}"
     !endif
+
+    # Clean up "Auto Update-Check"
+    ${UnStrCase} $0 "${COMPANY_NAME}" "L"
+    ${UnStrCase} $1 "${PRODUCT_NAME}" "L"
+    !insertmacro DeleteRetryAbort "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}"
+    RMDir /r "$LOCALAPPDATA\$0\$1"
+    RMDir /r "$LOCALAPPDATA\$0"
 
     # Clean up "AutoRun"
     DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" "${PRODUCT_NAME}"
