@@ -49,7 +49,8 @@ AutoUpdater::~AutoUpdater() {
 }
 
 void AutoUpdater::checkForUpdates() {
-    auto result = networkAccessManager->get(QNetworkRequest(QUrl(LATEST_VERSION_INFO_URL)));
+    QNetworkReply* result = networkAccessManager->get(
+            QNetworkRequest(QUrl(LATEST_VERSION_INFO_URL)));
     if (result != nullptr && result->sslConfiguration().isNull()) {
         emit onCheckUpdateFinished(tr("No ssl configuration!\nOpenSSL might not be installed."));
     }
