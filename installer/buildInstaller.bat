@@ -146,6 +146,7 @@ if errorLevel 1 (
     echo Failed to clone NsisMultiUser 1>&2
     exit /b %errorLevel%
 )
+rmdir /s /q "%dependencyFolder%\.git" 1>nul
 set nsProcessUrl="https://nsis.sourceforge.io/mediawiki/images/1/18/NsProcess.zip"
 "%curlExe%" --silent --output "%TEMP%\NsProcess.zip" "%nsProcessUrl%" 1>nul
 if errorLevel 1 (
