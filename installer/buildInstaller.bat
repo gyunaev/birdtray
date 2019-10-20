@@ -52,6 +52,21 @@ if not defined g++Exe (
     echo g++.exe is not on the PATH 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
+for %%x in (git.exe) do (set gitExe=%%~$PATH:x)
+if not defined gitExe (
+    echo git.exe is not on the PATH 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
+)
+for %%x in (curl.exe) do (set curlExe=%%~$PATH:x)
+if not defined curlExe (
+    echo curl.exe is not on the PATH 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
+)
+for %%x in (7z.exe) do (set sevenZExe=%%~$PATH:x)
+if not defined sevenZExe (
+    echo 7z.exe is not on the PATH 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
+)
 
 rem  #### Create the deployment folder ####
 set deploymentFolder="%~dp0winDeploy"
@@ -111,6 +126,64 @@ if exist "%deploymentFolder%\imageformats" (
     )
 )
 
+rem  #### Download the installer dependencies ####
+echo Downloading installer dependencies...
+rem  Clear the old dependencies folder.
+set dependencyFolder="%~dp0nsisDependencies"
+if exist "%dependencyFolder%" (
+    rmdir /s /q "%dependencyFolder%" 1>nul
+    if exist "%dependencyFolder%" (
+        rmdir /s /q "%dependencyFolder%" 1>nul
+        if exist "%dependencyFolder%" (
+            echo Failed to delete the old nsis dependencyFolder folder at %dependencyFolder% 1>&2
+            exit /b %ERROR_DIR_NOT_EMPTY%
+        )
+    )
+)
+
+"%gitExe%" clone -q "https://github.com/Drizin/NsisMultiUser.git" "nsisDependencies" 1>nul
+if errorLevel 1 (
+    echo Failed to clone NsisMultiUser 1>&2
+    exit /b %errorLevel%
+)
+set nsProcessUrl="https://nsis.sourceforge.io/mediawiki/images/1/18/NsProcess.zip"
+"%curlExe%" --silent --output "%TEMP%\NsProcess.zip" "%nsProcessUrl%" 1>nul
+if errorLevel 1 (
+    echo Failed to download NsProcess 1>&2
+    exit /b %errorLevel%
+)
+"%sevenZExe%" e -y -o"%TEMP%\NsProcess" "%TEMP%\NsProcess.zip" 1>nul
+if errorLevel 1 (
+    echo Failed to extract NsProcess 1>&2
+    exit /b %errorLevel%
+)
+del "%TEMP%\NsProcess.zip" /F
+xcopy "%TEMP%\NsProcess\nsProcess.nsh" "%dependencyFolder%\Include" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcess.nsh 1>&2
+    echo to the deployment folder at %dependencyFolder%\Include 1>&2
+    exit /b %errorLevel%
+)
+xcopy "%TEMP%\NsProcess\nsProcess.dll" "%dependencyFolder%\Plugins\x86-ansi" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcess.dll 1>&2
+    echo to the deployment folder at %dependencyFolder%\Plugins\x86-ansi 1>&2
+    exit /b %errorLevel%
+)
+xcopy "%TEMP%\NsProcess\nsProcessW.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcessW.dll 1>&2
+    echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
+    exit /b %errorLevel%
+)
+rmdir /s /q "%TEMP%\NsProcess" 1>nul
+rename "%dependencyFolder%\Plugins\x86-unicode\nsProcessW.dll" nsProcess.dll 1>nul
+if errorLevel 1 (
+    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcessW.dll 1>&2
+    echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
+    exit /b %errorLevel%
+)
+
 rem  #### Create the actual installer ####
 echo Creating the installer...
 "%makeNsisExe%" "%~dp0installer.nsi"
@@ -130,5 +203,5 @@ echo exePath:       The path to the birdtray.exe to include in the installer
 echo libSqlitePath: The path to the libsqlite.dll that was used to compile the Birdtray exe
 echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.ddl
 echo:
-echo The following programs must be on the PATH: windeployqt, makensis and g++.
+echo The following programs must be on the PATH: windeployqt, makensis, g++, git, curl and 7z.
 goto :eof

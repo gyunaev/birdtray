@@ -10,9 +10,9 @@
 # If uncommented, installs the licence in the installation directory.
 !define INSTALL_LICENSE
 
-!addplugindir /x86-ansi nsisExtras\Plugins\x86-ansi
-!addplugindir /x86-unicode nsisExtras\Plugins\x86-unicode
-!addincludedir nsisExtras\Include
+!addplugindir /x86-ansi nsisDependencies\Plugins\x86-ansi
+!addplugindir /x86-unicode nsisDependencies\Plugins\x86-unicode
+!addincludedir nsisDependencies\Include
 !addincludedir .
 
 Unicode true
@@ -30,9 +30,7 @@ SetCompressor /SOLID lzma
 !include StrFunc.nsh
 !Include Utils.nsh
 # StrFunc.nsh requires priming the commands which actually get used later
-${StrRep}
 !ifdef UNINSTALL_BUILDER
-${UnStrRep}
 ${UnStrCase}
 !else
 ${StrCase}
@@ -53,9 +51,9 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 # General product information
 !define PRODUCT_NAME "Birdtray"
 !define COMPANY_NAME "UlduzSoft"
-!define HELP_URL "https://github.com/gyunaev/birdtray/wiki" # "Support Information" link
-!define UPDATE_URL "https://github.com/gyunaev/birdtray/releases" # "Product Updates" link
-!define ABOUT_URL "https://www.ulduzsoft.com/" # "Publisher" link
+!define URL_HELP_LINK "https://github.com/gyunaev/birdtray/wiki" # "Support Information" link
+!define URL_UPDATE_INFO "https://github.com/gyunaev/birdtray/releases" # "Product Updates" link
+!define URL_INFO_ABOUT "https://www.ulduzsoft.com/" # "Publisher" link
 !define MIN_WINDOWS_VER "XP"
 
 # Section descriptions
@@ -177,7 +175,7 @@ VIProductVersion ${VERSION}.0
 VIAddVersionKey ProductName "${PRODUCT_NAME}"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY_NAME}"
-VIAddVersionKey CompanyWebsite "${ABOUT_URL}"
+VIAddVersionKey CompanyWebsite "${URL_INFO_ABOUT}"
 VIAddVersionKey FileVersion "${VERSION}"
 !ifdef UNINSTALL_BUILDER
 VIAddVersionKey FileDescription "${PRODUCT_NAME} uninstaller"
@@ -305,11 +303,6 @@ Section "${PRODUCT_NAME}" SectionBirdTray
     File "uninstaller\${UNINSTALL_FILENAME}"
     !insertmacro MULTIUSER_RegistryAddInstallInfo
 
-    ReadRegStr $0 SHCTX "${UNINSTALL_REG_PATH}" "UninstallString"
-    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "QuietUninstallString" "$0 /S"
-    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "HelpLink" "${HELP_URL}"
-    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "URLUpdateInfo" "${UPDATE_URL}"
-    WriteRegStr SHCTX "${UNINSTALL_REG_PATH}" "URLInfoAbout" "${ABOUT_URL}"
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMajor" ${VERSION_MAJOR}
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMinor" ${VERSION_MINOR}
     ${if} ${silent} # MUI doesn't write language in silent mode
