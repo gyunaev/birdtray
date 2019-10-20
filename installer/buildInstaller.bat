@@ -21,6 +21,21 @@ if not exist "%libSqlitePath%" (
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libcrypto ^| findstr .dll` ) do (
+    set openSSLCryptoPath="%~3\%%f"
+)
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libssl ^| findstr .dll`) do (
+    set openSSLPath="%~3\%%f"
+)
+if not exist "%openSSLCryptoPath%" (
+    echo OpenSSL crypto library not found at %~3\libcrypto*.dll 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
+)
+if not exist "%openSSLPath%" (
+    echo OpenSSL library not found at %~3\libssl*.dll 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
+)
+
 rem  #### Check if required programs are available ####
 for %%x in (windeployqt.exe) do (set winDeployQtExe=%%~$PATH:x)
 if not defined winDeployQtExe (
@@ -71,6 +86,18 @@ if errorLevel 1 (
     echo to the deployment folder at %deploymentFolder% 1>&2
     exit /b %errorLevel%
 )
+xcopy "%openSSLCryptoPath%" "%deploymentFolder%" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the OpenSSL crypto library from %openSSLCryptoPath% 1>&2
+    echo to the deployment folder at %deploymentFolder% 1>&2
+    exit /b %errorLevel%
+)
+xcopy "%openSSLPath%" "%deploymentFolder%" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the OpenSSL library from %openSSLPath% 1>&2
+    echo to the deployment folder at %deploymentFolder% 1>&2
+    exit /b %errorLevel%
+)
 for /f "delims=" %%i in ("%exePath%") do set "exeFileName=%%~nxi"
 "%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
         --no-angle --no-opengl-sw -no-svg "%deploymentFolder%\%exeFileName%"
@@ -97,10 +124,11 @@ goto :eof
 
 : Usage
 echo Creates the Birdtray installer. - Usage:
-echo buildInstaller.bat exePath libSqlitePath
+echo buildInstaller.bat exePath libSqlitePath openSSLPath
 echo:
 echo exePath:       The path to the birdtray.exe to include in the installer
 echo libSqlitePath: The path to the libsqlite.dll that was used to compile the Birdtray exe
+echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.ddl
 echo:
 echo The following programs must be on the PATH: windeployqt, makensis and g++.
 goto :eof
