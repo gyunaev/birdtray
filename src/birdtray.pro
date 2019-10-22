@@ -36,6 +36,7 @@ SOURCES += \
     databaseunreadfixer.cpp \
     dialogaddeditaccount.cpp \
     dialogsettings.cpp \
+    mailaccountdialog.cpp \
     updatedialog.cpp \
     updatedownloaddialog.cpp \
     windowtools.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
     databaseaccounts.h \
     databaseunreadfixer.h \
     dialogaddeditaccount.h \
+    mailaccountdialog.h \
     dialogsettings.h \
     updatedialog.h \
     updatedownloaddialog.h \
@@ -73,6 +75,7 @@ FORMS += \
     dialogaddeditaccount.ui \
     dialogsettings.ui \
     dialogaddeditnewemail.ui \
+    mailaccountdialog.ui \
     updatedialog.ui \
     updatedownloaddialog.ui
 

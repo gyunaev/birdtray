@@ -408,13 +408,6 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="btnAccountAddMultiple">
-                <property name="text">
-                 <string>Add multiple...</string>
-                </property>
-               </widget>
-              </item>
-              <item>
                <spacer name="verticalSpacer_10">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>

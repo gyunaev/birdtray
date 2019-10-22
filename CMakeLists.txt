@@ -60,11 +60,13 @@ set(SOURCES
         src/autoupdater.cpp
         src/updatedialog.cpp
         src/updatedownloaddialog.cpp
+        src/mailaccountdialog.cpp
         src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
         src/dialogsettings.ui
         src/updatedialog.ui
-        src/updatedownloaddialog.ui)
+        src/updatedownloaddialog.ui
+        src/mailaccountdialog.ui)
 
 set(HEADERS
         src/colorbutton.h
@@ -86,7 +88,8 @@ set(HEADERS
         src/windowtools.h
         src/autoupdater.h
         src/updatedialog.h
-        src/updatedownloaddialog.h)
+        src/updatedownloaddialog.h
+        src/mailaccountdialog.h)
 
 set(RESOURCES src/resources.qrc)
 source_group("Resources" FILES ${RESOURCES})

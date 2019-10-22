@@ -49,8 +49,10 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    accountsAvailable(QString errorMsg);
 
         // Account buttons
+        /**
+         * Add one or multiple accounts.
+         */
         void    accountAdd();
-        void    accountAddMultiple();
         void    accountEdit();
         void    accountEditIndex( const QModelIndex& index );
         void    accountRemove();
