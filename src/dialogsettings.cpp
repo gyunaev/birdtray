@@ -1,4 +1,5 @@
 #include <QFileDialog>
+#include <QColorDialog>
 #include <QMessageBox>
 #include <QFile>
 #include <QDir>
@@ -333,19 +334,16 @@ void DialogSettings::accountEdit()
 
 void DialogSettings::accountEditIndex(const QModelIndex &index)
 {
-    if ( !index.isValid() )
+    if (!index.isValid()) {
         return;
-
+    }
     QString uri;
     QColor color;
-
-    mAccountModel->getAccount( index, uri, color );
-
-    DialogAddEditAccount dlg( isMorkParserSelected() );
-    dlg.setCurrent( mAccounts, uri, color );
-
-    if ( dlg.exec() == QDialog::Accepted )
-        mAccountModel->editAccount( index, dlg.account(), dlg.color() );
+    mAccountModel->getAccount(index, uri, color);
+    color = QColorDialog::getColor(color, this);
+    if (color.isValid()) {
+        mAccountModel->editAccount(index, uri, color);
+    }
 }
 
 void DialogSettings::accountRemove()
