@@ -219,6 +219,6 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 #elif defined (Q_OS_MAC)
     return {"~/Library/Thunderbird/Profiles"};
 #else // Linux
-    return {"~/.thunderbird", "~/snap/thunderbird/common/.thunderbird"}
+    return {"~/.thunderbird", "~/snap/thunderbird/common/.thunderbird"};
 #endif /* Platform */
 }
