@@ -118,9 +118,9 @@ private:
     QDir* profilesDir = nullptr;
     
     /**
-     * The `ImapMail` directory of the selected Thunderbird profile.
+     * The directories of the selected Thunderbird profile that contain the mail folder msf files.
      */
-    QDir* thunderbirdProfileImapDir = nullptr;
+    QList<QDir> thunderbirdProfileMailDirs;
 };
 
 #endif // MAIL_ACCOUNT_DIALOG_H

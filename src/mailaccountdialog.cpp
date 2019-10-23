@@ -67,7 +67,7 @@ void MailAccountDialog::onCurrentIdChanged(int id) {
         skipPage = furthestPage < PageId::profilesDirPage && profilesDir != nullptr;
         break;
     case profilePage:
-        skipPage = furthestPage < PageId::profilePage && thunderbirdProfileImapDir != nullptr;
+        skipPage = furthestPage < PageId::profilePage && !thunderbirdProfileMailDirs.isEmpty();
         break;
     case accountsPage:
     case noPage: break;
@@ -109,8 +109,7 @@ void MailAccountDialog::onProfilesDirEditCommit() {
 }
 
 void MailAccountDialog::onProfileSelectionChanged(int Q_DECL_UNUSED newProfileIndex) {
-    delete thunderbirdProfileImapDir;
-    thunderbirdProfileImapDir = nullptr;
+    thunderbirdProfileMailDirs.clear();
 }
 
 void MailAccountDialog::initializeProfilesDirPage() {
@@ -153,28 +152,36 @@ void MailAccountDialog::initializeTbProfilesPage() {
     if (profilesDir == nullptr) {
         return;
     }
-    delete thunderbirdProfileImapDir;
-    thunderbirdProfileImapDir = nullptr;
+    thunderbirdProfileMailDirs.clear();
     QStringList profileDirs = profilesDir->entryList(
             QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
     // If we don't block the signals, Qt crashes on clear or addItem.
     bool oldState = ui->profileSelector->blockSignals(true);
     ui->profileSelector->clear();
-    for (const QString &profileDir : profileDirs) {
-        QDir imapDir(profilesDir->absoluteFilePath(profileDir) + "/ImapMail");
-        if (imapDir.exists()) {
+    for (const QString &profileDirName : profileDirs) {
+        QDir profileDir(profilesDir->absoluteFilePath(profileDirName));
+        QStringList mailFolders;
+        for (const char* mailFolder : {"ImapMail", "Mail"}) {
+            QFileInfo mailFolderInfo(profileDir, mailFolder);
+            if (mailFolderInfo.isDir()) {
+                mailFolders.append(mailFolderInfo.absoluteFilePath());
+            }
+        }
+        if (!mailFolders.isEmpty()) {
             ui->profileSelector->addItem(
-                    profileDir.mid(profileDir.indexOf('.') + 1), imapDir.absolutePath());
+                    profileDirName.mid(profileDirName.indexOf('.') + 1), mailFolders);
         }
     }
     ui->profileSelector->blockSignals(oldState);
     if (ui->profileSelector->count() == 1) {
-        thunderbirdProfileImapDir = new QDir(ui->profileSelector->itemData(0).toString());
+        for (const QString &selectedDir : ui->profileSelector->itemData(0).toStringList()) {
+            thunderbirdProfileMailDirs.append(selectedDir);
+        }
     }
 }
 
 bool MailAccountDialog::validateTbProfilesPage() {
-    if (thunderbirdProfileImapDir == nullptr) {
+    if (thunderbirdProfileMailDirs.isEmpty()) {
         QVariant selected = ui->profileSelector->itemData(ui->profileSelector->currentIndex());
         if (selected.isNull()) {
             QMessageBox::warning(this, tr("Invalid Thunderbird profile"),
@@ -182,10 +189,17 @@ bool MailAccountDialog::validateTbProfilesPage() {
                                  QMessageBox::StandardButton::Ok);
             return false;
         }
-        delete thunderbirdProfileImapDir;
-        thunderbirdProfileImapDir = new QDir(selected.toString());
+        for (const QString &selectedDir : selected.toStringList()) {
+            thunderbirdProfileMailDirs.append(selectedDir);
+        }
     }
-    if (!thunderbirdProfileImapDir->exists()) {
+    QMutableListIterator<QDir> iterator(thunderbirdProfileMailDirs);
+    while (iterator.hasNext()) {
+        if (!iterator.next().exists()) {
+            iterator.remove();
+        }
+    }
+    if (thunderbirdProfileMailDirs.isEmpty()) {
         QMessageBox::warning(this, tr("Invalid Thunderbird profile"),
                              tr("The selected Thunderbird profile does not exist."),
                              QMessageBox::StandardButton::Ok);
@@ -195,20 +209,21 @@ bool MailAccountDialog::validateTbProfilesPage() {
 }
 
 void MailAccountDialog::initializeAccountsPage() {
-    if (thunderbirdProfileImapDir == nullptr) {
-        return;
-    }
     ui->accountsList->clear();
-    for (const QString &mailAccount : thunderbirdProfileImapDir->entryList(
-            QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot)) {
-        QDir mailDirectory(thunderbirdProfileImapDir->absoluteFilePath(mailAccount));
-        mailDirectory.setNameFilters({"*.msf"});
-        mailDirectory.setFilter(QDir::Filter::Files);
-        if (mailDirectory.exists("INBOX.msf")) {
+    for (const QDir &mailDir : thunderbirdProfileMailDirs) {
+        for (const QString &mailAccount : mailDir.entryList(
+                QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot)) {
+            QDir mailDirectory(mailDir.absoluteFilePath(mailAccount));
+            mailDirectory.setNameFilters({"*.msf"});
+            mailDirectory.setFilter(QDir::Filter::Files);
+            const QList<QFileInfo> msfFiles = mailDirectory.entryInfoList();
+            if (msfFiles.isEmpty()) {
+                continue;
+            }
             auto* accountItem = new QTreeWidgetItem(ui->accountsList, {mailAccount});
             accountItem->setExpanded(true);
             ui->accountsList->addTopLevelItem(accountItem);
-            for (const QFileInfo &folderFile : mailDirectory.entryInfoList()) {
+            for (const QFileInfo &folderFile : msfFiles) {
                 QString name = folderFile.baseName();
                 bool isInbox = name == "INBOX";
                 if (isInbox) {
