@@ -37,7 +37,7 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
             if (folderName == "INBOX") {
                 folderName = tr("Inbox");
             } else {
-                folderName = tr(qPrintable(folderName));
+                folderName = tr(folderName.toUtf8().constData());
             }
             QString accountName = fileInfo.dir().dirName();
             return accountName + " [" + folderName + "]";
