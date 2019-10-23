@@ -86,6 +86,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     // Accounts tab
     mAccountModel = new ModelAccountTree( this );
     treeAccounts->setModel( mAccountModel );
+    treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     // New emails tab
     mModelNewEmails = new ModelNewEmails( this );
