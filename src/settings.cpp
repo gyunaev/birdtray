@@ -155,8 +155,9 @@ void Settings::load()
             "common/defaultcolor", mNotificationDefaultColor.name() ).toString() );
     mNotificationBorderColor = QColor(mSettings->value(
             BORDER_COLOR_KEY, mNotificationBorderColor.name()).toString());
-    mNotificationBorderWidth = mSettings->value(
-            BORDER_WIDTH_KEY, mNotificationBorderWidth).toUInt();
+    mNotificationBorderWidth = mSettings->value( // Disable border on existing installations
+            BORDER_WIDTH_KEY, mSettings->value("common/defaultcolor").isNull() ?
+                              0 : mNotificationBorderWidth).toUInt();
     mThunderbirdFolderPath = mSettings->value(
             "common/profilepath", mThunderbirdFolderPath ).toString();
     mBlinkSpeed = mSettings->value("common/blinkspeed", mBlinkSpeed ).toInt();
