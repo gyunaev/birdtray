@@ -1,4 +1,6 @@
 #include <QBrush>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 #include "settings.h"
 #include "modelaccounttree.h"
@@ -25,12 +27,20 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
 {
     if ( index.row() >= 0 && index.row() < mAccounts.size() && index.column() < 2 )
     {
-        if ( role == Qt::DisplayRole )
-        {
-            if ( index.column() == 0 )
-                return Utils::decodeIMAPutf7( mAccounts[index.row()] );
-            else
-                return "uses this color";
+        if ( role == Qt::DisplayRole && index.column() == 0) {
+            QString account = mAccounts[index.row()];
+            if (!account.endsWith(".msf")) {
+                return Utils::decodeIMAPutf7(account);
+            }
+            QFileInfo fileInfo(account);
+            QString folderName = fileInfo.baseName();
+            if (folderName == "INBOX") {
+                folderName = tr("Inbox");
+            } else {
+                folderName = tr(qPrintable(folderName));
+            }
+            QString accountName = fileInfo.dir().dirName();
+            return accountName + " [" + folderName + "]";
         }
         else if ( role == Qt::BackgroundRole && index.column() == 1 )
             return QBrush( mColors[index.row()] );
