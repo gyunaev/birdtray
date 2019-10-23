@@ -33,6 +33,16 @@ class Settings
 
         // Default notification color
         QColor  mNotificationDefaultColor;
+        
+        /**
+         * The border color to use when drawing the unread mail counter.
+         */
+        QColor mNotificationBorderColor;
+    
+        /**
+         * The width of the border for the unread mail counter.
+         */
+        unsigned int mNotificationBorderWidth;
 
         // Blinking speed
         unsigned int    mBlinkSpeed;

@@ -31,6 +31,7 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     connect( btnNotificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
     connect( btnNotificationIconUnread, &QPushButton::clicked, this, &DialogSettings::buttonChangeUnreadIcon );
+    connect(borderWidthSlider, &QSlider::valueChanged, this, &DialogSettings::onBorderWidthChanged);
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
@@ -51,6 +52,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     // Setup parameters
     leProfilePath->setText( QDir::toNativeSeparators(pSettings->mThunderbirdFolderPath) );
     btnNotificationColor->setColor( pSettings->mNotificationDefaultColor );
+    borderColorButton->setColor(pSettings->mNotificationBorderColor);
+    borderWidthSlider->setValue(static_cast<int>(pSettings->mNotificationBorderWidth) * 2);
     notificationFont->setCurrentFont( pSettings->mNotificationFont );
     notificationFontWeight->setValue( pSettings->mNotificationFontWeight * 2 );
     sliderBlinkingSpeed->setValue( pSettings->mBlinkSpeed );
@@ -146,6 +149,9 @@ void DialogSettings::accept()
 
     pSettings->mThunderbirdFolderPath = leProfilePath->text();
     pSettings->mNotificationDefaultColor = btnNotificationColor->color();
+    pSettings->mNotificationBorderColor = borderColorButton->color();
+    // A width of 100 is way to much, nobody will want to go beyond 50.
+    pSettings->mNotificationBorderWidth = qRound(borderWidthSlider->value() / 2.0);
     pSettings->mNotificationFont = notificationFont->currentFont();
     pSettings->mBlinkSpeed = sliderBlinkingSpeed->value();
     pSettings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
@@ -394,6 +400,10 @@ void DialogSettings::buttonChangeIcon()
 void DialogSettings::buttonChangeUnreadIcon()
 {
     changeIcon( btnNotificationIconUnread );
+}
+
+void DialogSettings::onBorderWidthChanged(int value) {
+    borderWidthLabel->setText(value == 0 ? tr("None") : QString::number(value) + '%');
 }
 
 void DialogSettings::unreadParserChanged(int curr)

@@ -214,14 +214,21 @@ void TrayIcon::updateIcon()
         pSettings->mNotificationFont.setWeight( pSettings->mNotificationFontWeight );
         QFontMetrics fm( pSettings->mNotificationFont );
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
-        p.setPen( mUnreadColor );
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
         int width = fm.horizontalAdvance(countvalue);
 #else
         int width = fm.width(countvalue);
 #endif
-        p.drawText((temp.width() - width) / 2, (temp.height() - fm.height()) / 2 + fm.ascent(),
-                   countvalue);
+        QPainterPath textPath;
+        textPath.addText((temp.width() - width) / 2.0,
+                         (temp.height() - fm.height()) / 2.0 + fm.ascent(),
+                         pSettings->mNotificationFont, countvalue);
+        if (pSettings->mNotificationBorderWidth > 0
+            && pSettings->mNotificationBorderColor.isValid()) {
+            p.strokePath(textPath, QPen(
+                    pSettings->mNotificationBorderColor, pSettings->mNotificationBorderWidth));
+        }
+        p.fillPath(textPath, mUnreadColor);
     }
 
     p.end();

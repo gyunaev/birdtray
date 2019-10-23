@@ -14,6 +14,8 @@
 #  define THUNDERBIRD_EXE_PATH "/usr/bin/thunderbird"
 #endif
 
+#define BORDER_COLOR_KEY "common/bordercolor"
+#define BORDER_WIDTH_KEY "common/borderwidth"
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
 
@@ -37,7 +39,9 @@ Settings::Settings(bool verboseOutput)
 
     mVerboseOutput = verboseOutput;
     mIconSize = QSize( 128, 128 );
-    mNotificationDefaultColor = QColor("#00FF00");
+    mNotificationDefaultColor = QColor("#0000FF");
+    mNotificationBorderColor = QColor("#FFFFFF");
+    mNotificationBorderWidth = 15;
     mBlinkSpeed = 0;
     mShowHideThunderbird = false;
     mLaunchThunderbird = false;
@@ -72,6 +76,8 @@ void Settings::save()
 {
     mSettings->setValue("common/notificationfont", mNotificationFont.toString() );
     mSettings->setValue("common/defaultcolor", mNotificationDefaultColor.name() );
+    mSettings->setValue(BORDER_COLOR_KEY, mNotificationBorderColor.name());
+    mSettings->setValue(BORDER_WIDTH_KEY, mNotificationBorderWidth);
     mSettings->setValue("common/profilepath", mThunderbirdFolderPath );
     mSettings->setValue("common/blinkspeed", mBlinkSpeed );
     mSettings->setValue("common/showhidethunderbird", mShowHideThunderbird );
@@ -147,6 +153,11 @@ void Settings::load()
 
     mNotificationDefaultColor = QColor( mSettings->value(
             "common/defaultcolor", mNotificationDefaultColor.name() ).toString() );
+    mNotificationBorderColor = QColor(mSettings->value(
+            BORDER_COLOR_KEY, mNotificationBorderColor.name()).toString());
+    mNotificationBorderWidth = mSettings->value( // Disable border on existing installations
+            BORDER_WIDTH_KEY, mSettings->value("common/defaultcolor").isNull() ?
+                              0 : mNotificationBorderWidth).toUInt();
     mThunderbirdFolderPath = mSettings->value(
             "common/profilepath", mThunderbirdFolderPath ).toString();
     mBlinkSpeed = mSettings->value("common/blinkspeed", mBlinkSpeed ).toInt();
