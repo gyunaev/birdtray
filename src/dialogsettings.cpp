@@ -87,6 +87,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     mAccountModel = new ModelAccountTree( this );
     treeAccounts->setModel( mAccountModel );
     treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    treeAccounts->setCurrentIndex(mAccountModel->index(0, 0));
 
     // New emails tab
     mModelNewEmails = new ModelNewEmails( this );
@@ -306,20 +307,22 @@ void DialogSettings::accountAdd()
         dlg.setCurrent(mAccounts, "", btnNotificationColor->color());
         if (dlg.exec() == QDialog::Accepted) {
             mAccountModel->addAccount(dlg.account(), dlg.color());
+            treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
         }
-        return;
-    }
-    MailAccountDialog accountDialog(this, btnNotificationColor->color());
-    if (accountDialog.exec() == QDialog::Accepted) {
-        QString path;
-        QColor color;
-        QList<std::tuple<QString, QColor>> accountInfoList;
-        accountDialog.getSelectedAccounts(accountInfoList);
-        for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
-            std::tie(path, color) = accountInfo;
-            mAccountModel->addAccount(path, color);
+    } else {
+        MailAccountDialog accountDialog(this, btnNotificationColor->color());
+        if (accountDialog.exec() == QDialog::Accepted) {
+            QString path;
+            QColor color;
+            QList<std::tuple<QString, QColor>> accountInfoList;
+            accountDialog.getSelectedAccounts(accountInfoList);
+            for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
+                std::tie(path, color) = accountInfo;
+                mAccountModel->addAccount(path, color);
+            }
         }
     }
+    treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
 }
 
 void DialogSettings::accountEdit()
