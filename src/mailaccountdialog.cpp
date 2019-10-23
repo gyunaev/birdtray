@@ -229,7 +229,8 @@ void MailAccountDialog::initializeAccountsPage() {
                 if (isInbox) {
                     name = "Inbox";
                 }
-                auto* folderItem = new QTreeWidgetItem(accountItem, {tr(name.toUtf8().data())});
+                auto* folderItem = new QTreeWidgetItem(
+                        accountItem, {tr(name.toUtf8().constData())});
                 if (isInbox) {
                     QFont font = folderItem->font(0);
                     font.setBold(true);
