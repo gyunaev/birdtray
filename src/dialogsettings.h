@@ -67,6 +67,12 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         // Icon change
         void    buttonChangeIcon();
         void    buttonChangeUnreadIcon();
+        
+        /**
+         * The unread count border width changed.
+         * @param value The new border width.
+         */
+        void onBorderWidthChanged(int value);
 
         // Parser changed
         void    unreadParserChanged( int curr );
