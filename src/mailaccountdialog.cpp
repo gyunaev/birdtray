@@ -225,7 +225,7 @@ void MailAccountDialog::initializeAccountsPage() {
             ui->accountsList->addTopLevelItem(accountItem);
             for (const QFileInfo &folderFile : msfFiles) {
                 QString name = folderFile.baseName();
-                bool isInbox = name == "INBOX";
+                bool isInbox = QString::compare(name, "INBOX", Qt::CaseInsensitive) == 0;
                 if (isInbox) {
                     name = "Inbox";
                 }
