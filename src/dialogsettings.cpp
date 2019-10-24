@@ -85,8 +85,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     mPaletteErrror.setColor( QPalette::Text, Qt::red );
 
     // Accounts tab
-    mAccountModel = new ModelAccountTree( this );
-    treeAccounts->setModel( mAccountModel );
+    mAccountModel = new ModelAccountTree(this, treeAccounts);
     treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     treeAccounts->setCurrentIndex(mAccountModel->index(0, 0));
 

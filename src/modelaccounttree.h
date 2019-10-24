@@ -4,13 +4,20 @@
 #include <QList>
 #include <QColor>
 #include <QAbstractItemModel>
+#include <QtWidgets/QTreeView>
+#include <QtWidgets/QItemDelegate>
 
 #include "databaseaccounts.h"
 
-class ModelAccountTree : public QAbstractItemModel
+class ModelAccountTree : public QAbstractItemModel, public QItemDelegate
 {
     public:
-        ModelAccountTree( QObject *parent = 0 );
+        /**
+         * A model that contains information about mail accounts registered to watch.
+         * @param parent The parent of this widget.
+         * @param treeView The widget that displays this model.
+         */
+        explicit ModelAccountTree(QObject *parent = nullptr, QTreeView* treeView = nullptr);
 
         virtual int columnCount(const QModelIndex &parent = QModelIndex()) const override;
         virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -19,6 +26,9 @@ class ModelAccountTree : public QAbstractItemModel
         virtual int rowCount(const QModelIndex &parent = QModelIndex()) const override;
         virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
         virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+        void paint(QPainter* painter, const QStyleOptionViewItem &option,
+                const QModelIndex &index) const override;
+        QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
         void    addAccount( const QString& uri, const QColor& color );
         void    editAccount( const QModelIndex& idx, const QString& uri, const QColor& color );
