@@ -28,14 +28,32 @@ class ColorButton : public QPushButton
 	Q_OBJECT
 
 	public:
-		ColorButton( QWidget * parent );
+        /**
+         * A button that lets the user select a color.
+         * @param parent The parent widget.
+         * @param color The initial selected color.
+         */
+        explicit ColorButton(QWidget* parent, QColor color = Qt::black);
 
 		void	setColor( const QColor& color );
         void    allowSetAlpha( bool allow );
+        
+        /**
+         * Enable or disable drawing the button borders.
+         * @param enable Whether or not to draw the borders.
+         */
+        void    setBorderlessMode(bool enable);
 		QColor	color() const;
 
+    Q_SIGNALS:
+        /**
+         * Called when the chosen color changed.
+         * @param color The new color.
+         */
+        void onColorChanged(const QColor &color);
+		
 	protected:
-		void	paintEvent( QPaintEvent * event );
+		void	paintEvent( QPaintEvent * event ) override;
 
 	private slots:
 		void	btnClicked();
@@ -43,6 +61,11 @@ class ColorButton : public QPushButton
 	private:
 		QColor	m_selectedColor;
         bool    m_allowSetAlpha;
+        
+        /**
+         * Indicated whether or not to draw the button borders.
+         */
+        bool    drawBorder;
 };
 
 #endif // COLORBUTTON_H

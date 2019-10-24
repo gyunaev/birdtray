@@ -21,25 +21,31 @@
 
 #include "colorbutton.h"
 
-ColorButton::ColorButton( QWidget * parent )
-    : QPushButton( parent ), m_selectedColor( Qt::black )
+ColorButton::ColorButton(QWidget * parent, QColor color)
+    : QPushButton(parent), m_selectedColor(std::move(color))
 {
     m_allowSetAlpha = false;
+    drawBorder = true;
 	connect( this, SIGNAL(clicked()), this, SLOT(btnClicked()) );
 }
 
 void ColorButton::setColor( const QColor& color )
 {
 	// After the constructor is called, UIC-generated code calls setLabel, so we overwrite it here
-	setText( tr("") );
+	setText("");
 
 	m_selectedColor = color;
     update();
+    emit onColorChanged(m_selectedColor);
 }
 
 void ColorButton::allowSetAlpha(bool allow)
 {
     m_allowSetAlpha = allow;
+}
+
+void ColorButton::setBorderlessMode(bool enable) {
+    drawBorder = !enable;
 }
 
 QColor ColorButton::color() const
@@ -62,16 +68,21 @@ void ColorButton::btnClicked()
 
 void ColorButton::paintEvent( QPaintEvent * event )
 {
-	QPushButton::paintEvent( event );
-
-	// Paint a rectangle
-	QPainter painter (this);
-
-	// Take 50% of height and 80% of width
-	int rectwidth = width() * 0.8;
-	int rectheight = height() * 0.5;
-
-	QRect rect( (width() - rectwidth) / 2, (height() - rectheight) / 2, rectwidth, rectheight );
+    if (drawBorder) {
+        QPushButton::paintEvent(event);
+    }
+    
+    // Paint a rectangle
+    QPainter painter(this);
+    QRect rect;
+    if (drawBorder) {
+        // Take 50% of height and 80% of width
+        int width = qRound(this->width() * 0.8);
+        int height = qRound(this->height() * 0.5);
+        rect.setRect((this->width() - width) / 2, (this->height() - height) / 2, width, height);
+    } else {
+        rect.setRect(1, 1, width() - 2, height() - 2);
+    }
 
 	if ( isDown() )
 		rect.translate( 1, 1 );

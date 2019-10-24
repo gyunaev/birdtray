@@ -12,6 +12,7 @@
 #include "databaseunreadfixer.h"
 #include "utils.h"
 #include "autoupdater.h"
+#include "mailaccountdialog.h"
 
 DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
@@ -37,7 +38,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
     connect( btnAccountEdit, &QPushButton::clicked, this, &DialogSettings::accountEdit );
     connect( btnAccountRemove, &QPushButton::clicked, this, &DialogSettings::accountRemove );
-    connect( btnAccountAddMultiple, &QPushButton::clicked, this, &DialogSettings::accountAddMultiple );
 
     connect( treeNewEmails, &QTreeView::doubleClicked, this, &DialogSettings::newEmailEditIndex  );
     connect( btnNewEmailAdd, &QPushButton::clicked, this, &DialogSettings::newEmailAdd );
@@ -300,26 +300,25 @@ void DialogSettings::accountsAvailable( QString errorMsg )
 
 void DialogSettings::accountAdd()
 {
-    DialogAddEditAccount dlg( isMorkParserSelected() );
-    dlg.setCurrent( mAccounts, "", btnNotificationColor->color() );
-
-    if ( dlg.exec() == QDialog::Accepted )
-        mAccountModel->addAccount( dlg.account(), dlg.color() );
-}
-
-void DialogSettings::accountAddMultiple()
-{
-    QStringList files = QFileDialog::getOpenFileNames( 0,
-                                                       "Choose one or more MSF files",
-                                                       "",
-                                                       "Mail Index (*.msf)" );
-
-    if ( files.isEmpty() )
+    if (!isMorkParserSelected()) {
+        DialogAddEditAccount dlg(isMorkParserSelected());
+        dlg.setCurrent(mAccounts, "", btnNotificationColor->color());
+        if (dlg.exec() == QDialog::Accepted) {
+            mAccountModel->addAccount(dlg.account(), dlg.color());
+        }
         return;
-
-    // Add them all with default color
-    for ( QString f : files )
-        mAccountModel->addAccount( f, btnNotificationColor->color() );
+    }
+    MailAccountDialog accountDialog(this, btnNotificationColor->color());
+    if (accountDialog.exec() == QDialog::Accepted) {
+        QString path;
+        QColor color;
+        QList<std::tuple<QString, QColor>> accountInfoList;
+        accountDialog.getSelectedAccounts(accountInfoList);
+        for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
+            std::tie(path, color) = accountInfo;
+            mAccountModel->addAccount(path, color);
+        }
+    }
 }
 
 void DialogSettings::accountEdit()
@@ -420,9 +419,6 @@ void DialogSettings::unreadParserChanged(int curr)
 
         // Hide the thunderbird path as well
         groupThunderbirdProfilePath->hide();
-
-        // Show the "add multiple" button
-        btnAccountAddMultiple->setVisible( true );
     }
     else
     {
@@ -433,9 +429,6 @@ void DialogSettings::unreadParserChanged(int curr)
 
         // Trigger hiding/showing the account group
         profilePathChanged();
-
-        // Hide the "add multiple" button
-        btnAccountAddMultiple->setHidden( true );
     }
 
     // Did we change comparing to settings?

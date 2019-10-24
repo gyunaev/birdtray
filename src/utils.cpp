@@ -212,3 +212,13 @@ void Utils::fatal(const char *fmt, ...)
     QMessageBox::critical(nullptr, "Fatal", buf);
     qFatal("%s", buf);
 }
+
+QStringList Utils::getThunderbirdProfilesPaths() {
+#if defined (Q_OS_WIN)
+    return {"%APPDATA%\\Thunderbird\\Profiles"};
+#elif defined (Q_OS_MAC)
+    return {"~/Library/Thunderbird/Profiles"};
+#else // Linux
+    return {"~/.thunderbird", "~/snap/thunderbird/common/.thunderbird"};
+#endif /* Platform */
+}

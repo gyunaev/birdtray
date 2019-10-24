@@ -45,6 +45,13 @@ class Utils
 
         static void debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
         Q_NORETURN static void fatal( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
+
+        /**
+         * @return A list of possible locations of the directory
+         *         that contains the Thunderbird profiles.
+         * @see https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data#w_profile-location-summary
+         */
+        static QStringList getThunderbirdProfilesPaths();
 };
 
 #endif // UTILS_H
