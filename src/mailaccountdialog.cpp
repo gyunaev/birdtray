@@ -16,7 +16,8 @@ MailAccountDialog::MailAccountDialog(QWidget* parent, QColor defaultColor) :
             this, &MailAccountDialog::onProfilesDirBrowseButtonClicked);
     connect(ui->tbProfilesPathEdit, &QLineEdit::editingFinished,
             this, &MailAccountDialog::onProfilesDirEditCommit);
-    connect(ui->profileSelector, QOverload<int>::of(&QComboBox::currentIndexChanged),
+    connect(ui->profileSelector,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MailAccountDialog::onProfileSelectionChanged);
 }
 
