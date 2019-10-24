@@ -8,7 +8,7 @@
 #include "utils.h"
 
 ModelAccountTree::ModelAccountTree(QObject *parent, QTreeView* treeView)
-        : QAbstractItemModel( parent ), QItemDelegate(parent)
+        : QAbstractItemModel( parent ), QStyledItemDelegate(parent)
 {
     // Get the current settings in proper(stored) order
     for ( QString uri : pSettings->mFolderNotificationList )
@@ -92,10 +92,9 @@ QVariant ModelAccountTree::headerData(int section, Qt::Orientation , int role) c
 
 void ModelAccountTree::paint(QPainter* painter, const QStyleOptionViewItem &option,
                              const QModelIndex &index) const {
+    QStyledItemDelegate::paint(painter, option, index);
     if (index.column() == 1) {
         painter->fillRect(option.rect.marginsRemoved(QMargins(1, 1, 1, 1)), mColors[index.row()]);
-    } else {
-        QItemDelegate::paint(painter, option, index);
     }
 }
 

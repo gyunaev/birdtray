@@ -5,11 +5,11 @@
 #include <QColor>
 #include <QAbstractItemModel>
 #include <QtWidgets/QTreeView>
-#include <QtWidgets/QItemDelegate>
+#include <QtWidgets/QStyledItemDelegate>
 
 #include "databaseaccounts.h"
 
-class ModelAccountTree : public QAbstractItemModel, public QItemDelegate
+class ModelAccountTree : public QAbstractItemModel, public QStyledItemDelegate
 {
     public:
         /**
