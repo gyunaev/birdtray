@@ -1,4 +1,5 @@
 #include <QFileDialog>
+#include <QColorDialog>
 #include <QMessageBox>
 #include <QFile>
 #include <QDir>
@@ -84,8 +85,9 @@ DialogSettings::DialogSettings( QWidget *parent)
     mPaletteErrror.setColor( QPalette::Text, Qt::red );
 
     // Accounts tab
-    mAccountModel = new ModelAccountTree( this );
-    treeAccounts->setModel( mAccountModel );
+    mAccountModel = new ModelAccountTree(this, treeAccounts);
+    treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    treeAccounts->setCurrentIndex(mAccountModel->index(0, 0));
 
     // New emails tab
     mModelNewEmails = new ModelNewEmails( this );
@@ -305,20 +307,22 @@ void DialogSettings::accountAdd()
         dlg.setCurrent(mAccounts, "", btnNotificationColor->color());
         if (dlg.exec() == QDialog::Accepted) {
             mAccountModel->addAccount(dlg.account(), dlg.color());
+            treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
         }
-        return;
-    }
-    MailAccountDialog accountDialog(this, btnNotificationColor->color());
-    if (accountDialog.exec() == QDialog::Accepted) {
-        QString path;
-        QColor color;
-        QList<std::tuple<QString, QColor>> accountInfoList;
-        accountDialog.getSelectedAccounts(accountInfoList);
-        for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
-            std::tie(path, color) = accountInfo;
-            mAccountModel->addAccount(path, color);
+    } else {
+        MailAccountDialog accountDialog(this, btnNotificationColor->color());
+        if (accountDialog.exec() == QDialog::Accepted) {
+            QString path;
+            QColor color;
+            QList<std::tuple<QString, QColor>> accountInfoList;
+            accountDialog.getSelectedAccounts(accountInfoList);
+            for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
+                std::tie(path, color) = accountInfo;
+                mAccountModel->addAccount(path, color);
+            }
         }
     }
+    treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
 }
 
 void DialogSettings::accountEdit()
@@ -329,19 +333,16 @@ void DialogSettings::accountEdit()
 
 void DialogSettings::accountEditIndex(const QModelIndex &index)
 {
-    if ( !index.isValid() )
+    if (!index.isValid()) {
         return;
-
+    }
     QString uri;
     QColor color;
-
-    mAccountModel->getAccount( index, uri, color );
-
-    DialogAddEditAccount dlg( isMorkParserSelected() );
-    dlg.setCurrent( mAccounts, uri, color );
-
-    if ( dlg.exec() == QDialog::Accepted )
-        mAccountModel->editAccount( index, dlg.account(), dlg.color() );
+    mAccountModel->getAccount(index, uri, color);
+    color = QColorDialog::getColor(color, this);
+    if (color.isValid()) {
+        mAccountModel->editAccount(index, uri, color);
+    }
 }
 
 void DialogSettings::accountRemove()

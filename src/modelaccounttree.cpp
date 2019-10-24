@@ -1,11 +1,14 @@
 #include <QBrush>
+#include <QPainter>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 #include "settings.h"
 #include "modelaccounttree.h"
 #include "utils.h"
 
-ModelAccountTree::ModelAccountTree( QObject *parent )
-    : QAbstractItemModel( parent )
+ModelAccountTree::ModelAccountTree(QObject *parent, QTreeView* treeView)
+        : QAbstractItemModel( parent ), QStyledItemDelegate(parent)
 {
     // Get the current settings in proper(stored) order
     for ( QString uri : pSettings->mFolderNotificationList )
@@ -13,6 +16,8 @@ ModelAccountTree::ModelAccountTree( QObject *parent )
         mAccounts.push_back( uri );
         mColors.push_back( pSettings->mFolderNotificationColors[uri] );
     }
+    treeView->setModel(this);
+    treeView->setItemDelegateForColumn(1, this);
 }
 
 int ModelAccountTree::columnCount(const QModelIndex &) const
@@ -25,17 +30,23 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
 {
     if ( index.row() >= 0 && index.row() < mAccounts.size() && index.column() < 2 )
     {
-        if ( role == Qt::DisplayRole )
-        {
-            if ( index.column() == 0 )
-                return Utils::decodeIMAPutf7( mAccounts[index.row()] );
-            else
-                return "uses this color";
-        }
-        else if ( role == Qt::BackgroundRole && index.column() == 1 )
-            return QBrush( mColors[index.row()] );
-        else if ( role == Qt::ToolTipRole && index.column() == 0 )
+        if ( role == Qt::DisplayRole && index.column() == 0) {
+            QString account = mAccounts[index.row()];
+            if (!account.endsWith(".msf")) {
+                return Utils::decodeIMAPutf7(account);
+            }
+            QFileInfo fileInfo(account);
+            QString folderName = fileInfo.baseName();
+            if (folderName == "INBOX") {
+                folderName = QObject::tr("Inbox");
+            } else {
+                folderName = QObject::tr(folderName.toUtf8().constData());
+            }
+            QString accountName = fileInfo.dir().dirName();
+            return accountName + " [" + folderName + "]";
+        } else if ( role == Qt::ToolTipRole && index.column() == 0 ) {
             return mAccounts[index.row()];
+        }
     }
 
     return QVariant();
@@ -77,6 +88,14 @@ QVariant ModelAccountTree::headerData(int section, Qt::Orientation , int role) c
     }
 
     return QVariant();
+}
+
+void ModelAccountTree::paint(QPainter* painter, const QStyleOptionViewItem &option,
+                             const QModelIndex &index) const {
+    QStyledItemDelegate::paint(painter, option, index);
+    if (index.column() == 1) {
+        painter->fillRect(option.rect.marginsRemoved(QMargins(1, 1, 1, 1)), mColors[index.row()]);
+    }
 }
 
 void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
