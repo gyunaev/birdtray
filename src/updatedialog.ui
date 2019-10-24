@@ -55,9 +55,6 @@
    </item>
    <item row="1" column="0" colspan="3">
     <widget class="QScrollArea" name="bodyLabel">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
