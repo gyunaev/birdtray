@@ -99,11 +99,6 @@ void ModelAccountTree::paint(QPainter* painter, const QStyleOptionViewItem &opti
     }
 }
 
-QSize ModelAccountTree::sizeHint(const QStyleOptionViewItem &option,
-                                 const QModelIndex &index) const {
-    return QItemDelegate::sizeHint(option, index);
-}
-
 void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
 {
     if (uri.isEmpty()) {

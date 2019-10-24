@@ -27,8 +27,7 @@ class ModelAccountTree : public QAbstractItemModel, public QItemDelegate
         virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
         virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
         void paint(QPainter* painter, const QStyleOptionViewItem &option,
-                const QModelIndex &index) const override;
-        QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+                   const QModelIndex &index) const override;
 
         void    addAccount( const QString& uri, const QColor& color );
         void    editAccount( const QModelIndex& idx, const QString& uri, const QColor& color );
