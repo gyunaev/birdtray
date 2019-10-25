@@ -50,12 +50,9 @@ Qt::ItemFlags ModelNewEmails::flags(const QModelIndex &) const
 
 QVariant ModelNewEmails::headerData(int section, Qt::Orientation , int role) const
 {
-    if ( role == Qt::DisplayRole )
-    {
-        if ( section == 0 )
-            return "Menu entry item";
+    if (role == Qt::DisplayRole && section == 0) {
+        return tr("Menu entry item");
     }
-
     return QVariant();
 }
 

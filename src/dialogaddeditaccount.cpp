@@ -65,8 +65,9 @@ void DialogAddEditAccount::browse()
     QString path = leFolderPath->text();
 
     QString e = QFileDialog::getOpenFileName(
-            0, "Choose the MSF file", path.isEmpty() ? Utils::expandPath(THUNDERBIRD_PROFILES_PATH) : path,
-            "Mail Index (*.msf)" );
+            nullptr, tr("Choose the MSF file"),
+            path.isEmpty() ? Utils::expandPath(THUNDERBIRD_PROFILES_PATH) : path,
+            tr("Mail Index (*.msf)"));
 
     if ( e.isEmpty() )
         return;
@@ -80,7 +81,8 @@ void DialogAddEditAccount::accept()
     {
         if ( leFolderPath->text().isEmpty() || !QFile::exists( leFolderPath->text() ) )
         {
-            QMessageBox::critical( 0, "Invalid MSF file", tr("You must specify valid, non-empty Thunderbird index file") );
+            QMessageBox::critical(nullptr, tr("Invalid MSF file"),
+                                  tr("You must specify valid, non-empty Thunderbird index file"));
             return;
         }
     } else if (boxAccounts->currentText().isEmpty()) {

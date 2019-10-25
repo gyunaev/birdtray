@@ -21,8 +21,8 @@ void ensureSystemTrayAvailable() {
         }
         passed++;
         if ( passed > 120 ) {
-            Utils::fatal("Sorry, system tray cannot be controlled "
-                         "through this addon on your operating system");
+            Utils::fatal(QApplication::tr("Sorry, system tray cannot be controlled "
+                                          "through this addon on your operating system"));
         }
         QThread::msleep( 500 );
     }

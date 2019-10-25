@@ -159,7 +159,7 @@
           <item row="1" column="1" colspan="5">
            <widget class="ColorButton" name="btnNotificationColor">
             <property name="text">
-             <string>PushButton</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -225,7 +225,7 @@
           <item row="2" column="1" colspan="2">
            <widget class="ColorButton" name="borderColorButton">
             <property name="text">
-             <string>PushButton</string>
+             <string/>
             </property>
            </widget>
           </item>

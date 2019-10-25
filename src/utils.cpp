@@ -2,6 +2,7 @@
 #include "settings.h"
 #include "version.h"
 
+#include <QApplication>
 #include <QTextCodec>
 #include <QtWidgets/QMessageBox>
 
@@ -200,17 +201,9 @@ void Utils::debug(const char *fmt, ...)
     qDebug( "%s", buf );
 }
 
-void Utils::fatal(const char *fmt, ...)
-{
-    va_list vl;
-    char buf[8192];
-
-    va_start( vl, fmt );
-    vsnprintf( buf, sizeof(buf) - 1, fmt, vl );
-    va_end( vl );
-
-    QMessageBox::critical(nullptr, "Fatal", buf);
-    qFatal("%s", buf);
+void Utils::fatal(const QString &message) {
+    QMessageBox::critical(nullptr, QApplication::tr("Fatal"), message);
+    qFatal("%s", message.toUtf8().constData());
 }
 
 QStringList Utils::getThunderbirdProfilesPaths() {

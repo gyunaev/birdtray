@@ -35,7 +35,7 @@ void DatabaseAccounts::queryAccounts()
                            &sqlitedb,
                            SQLITE_OPEN_READONLY, 0 ) != SQLITE_OK )
     {
-        emit done( QString("Error opening sqlite database: %1") .arg( sqlite3_errmsg(sqlitedb) ) );
+        emit done(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(sqlitedb)));
         return;
     }
 
@@ -43,7 +43,8 @@ void DatabaseAccounts::queryAccounts()
 
     if ( !stmt.prepare( sqlitedb, "SELECT id,folderURI FROM folderlocations") )
     {
-        emit done ("Cannot access the database. If you're using Thunderbird 68+, this method no longer works. Please use the Mork parser." );
+        emit done(tr("Cannot access the database. If you're using Thunderbird 68+, "
+                     "this method no longer works. Please use the Mork parser."));
         return;
     }
 

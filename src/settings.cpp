@@ -145,11 +145,7 @@ void Settings::load()
     mNotificationIcon = loadPixmap( "common/notificationicon" );
     mNotificationIconUnread = loadPixmap( "common/notificationiconunread" );
 
-    if ( mNotificationIcon.isNull() )
-    {
-        if ( !mNotificationIcon.load( ":res/thunderbird.png" ) )
-            Utils::fatal("Cannot load default system tray icon");
-    }
+    (void) getNotificationIcon(); // Load the default
 
     mNotificationDefaultColor = QColor( mSettings->value(
             "common/defaultcolor", mNotificationDefaultColor.name() ).toString() );
@@ -263,7 +259,7 @@ QString Settings::getThunderbirdExecutablePath()
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Utils::fatal("Cannot load default system tray icon");
+            Utils::fatal(QCoreApplication::tr("Cannot load default system tray icon"));
         }
     }
     return mNotificationIcon;

@@ -134,7 +134,8 @@ void DialogSettings::accept()
 
         if ( profilePath.isEmpty() )
         {
-            QMessageBox::critical( 0, "Empty Thunderbird directory", tr("You must specify Thunderbird directory") );
+            QMessageBox::critical(nullptr, tr("Empty Thunderbird directory"),
+                                  tr("You must specify Thunderbird directory"));
             return;
         }
         if (!reportIfProfilePathValid(profilePath)) {
@@ -144,7 +145,9 @@ void DialogSettings::accept()
 
     if ( boxEnableNewEmail->isChecked() && leThunderbirdBinary->text().isEmpty() )
     {
-        QMessageBox::critical( 0, "Empty Thunderbird path", tr("You have enabled New Email menu, but you did not specify Thunderbird path") );
+        QMessageBox::critical(nullptr, tr("Empty Thunderbird path"),
+                              tr("You have enabled New Email menu, "
+                                 "but you did not specify Thunderbird path"));
         tabWidget->setCurrentIndex( 0 );
         leThunderbirdBinary->setFocus();
         return;
@@ -283,17 +286,21 @@ void DialogSettings::databaseUnreadsFixed( QString errorMsg )
     delete mProgressFixer;
     mProgressFixer = 0;
 
-    if ( errorMsg.isEmpty() )
-        QMessageBox::information( 0, "Database updated", "Successfully updated the database");
-    else
-        QMessageBox::critical( 0, "Error updating database", tr("Error updating the database:\n%1") .arg( errorMsg ));
+    if (errorMsg.isEmpty()) {
+        QMessageBox::information(nullptr, tr("Database updated"),
+                                 tr("Successfully updated the database"));
+    } else {
+        QMessageBox::critical(nullptr, tr("Error updating database"),
+                              tr("Error updating the database:\n%1").arg(errorMsg));
+    }
 }
 
 void DialogSettings::accountsAvailable( QString errorMsg )
 {
     if ( !errorMsg.isEmpty() )
     {
-        QMessageBox::critical( 0, "Error retrieving accounts", tr("Error retrieving accounts:\n%1") .arg( errorMsg ));
+        QMessageBox::critical(nullptr, tr("Error retrieving accounts"),
+                              tr("Error retrieving accounts:\n%1").arg(errorMsg));
         return;
     }
 
@@ -454,7 +461,7 @@ void DialogSettings::changeIcon(QToolButton *button)
     QString e = QFileDialog::getOpenFileName( 0,
                                               tr("Choose the new icon"),
                                               "",
-                                              tr("Images(*.png *.svg)") );
+                                              tr("Images (*.png *.svg)") );
 
     if ( e.isEmpty() )
         return;
@@ -463,7 +470,8 @@ void DialogSettings::changeIcon(QToolButton *button)
 
     if ( !test.load( e ) )
     {
-        QMessageBox::critical( 0, "Invalid icon", tr("Could not load the icon from this file") );
+        QMessageBox::critical(nullptr, tr("Invalid icon"),
+                              tr("Could not load the icon from this file"));
         return;
     }
 

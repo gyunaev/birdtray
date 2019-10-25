@@ -34,7 +34,7 @@ void DatabaseUnreadFixer::updateDatabase()
                            &sqlitedb,
                            SQLITE_OPEN_READWRITE, 0 ) != SQLITE_OK )
     {
-        emit done( QString("Error opening sqlite database: %1") .arg( sqlite3_errmsg(sqlitedb) ) );
+        emit done(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(sqlitedb)));
         return;
     }
 
@@ -42,16 +42,12 @@ void DatabaseUnreadFixer::updateDatabase()
     qint64 totalrows = 0, currentrow = 0;
 
     SQLiteStatement stmt, stmtrows;
-
-    if ( !stmtrows.prepare( sqlitedb, "SELECT COUNT(id) FROM messages WHERE json_extract( jsonAttributes, '$.59' ) = 0") )
-    {
-        emit done ("Cannot query database");
-        return;
-    }
-
-    if ( stmtrows.step() != SQLITE_ROW )
-    {
-        emit done ("Cannot query database");
+    
+    if (!stmtrows.prepare(
+            sqlitedb,
+            "SELECT COUNT(id) FROM messages WHERE json_extract( jsonAttributes, '$.59' ) = 0") ||
+        stmtrows.step() != SQLITE_ROW) {
+        emit done(tr("Cannot query database"));
         return;
     }
 
@@ -70,7 +66,7 @@ void DatabaseUnreadFixer::updateDatabase()
     // but sqlite would set the value of 59 to 1, instead of true. There seem to be no way to force it to true.
     if ( !stmt.prepare( sqlitedb, "SELECT id,jsonAttributes FROM messages WHERE json_extract( jsonAttributes, '$.59' ) = 0") )
     {
-        emit done ("Cannot query database");
+        emit done(tr("Cannot query database"));
         return;
     }
 

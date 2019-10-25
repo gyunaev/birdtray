@@ -3,6 +3,7 @@
 #include <tlhelp32.h>
 
 #include <QtCore/QFileInfo>
+#include <QtWidgets/QApplication>
 #include "processhandle.h"
 #include "utils.h"
 
@@ -13,7 +14,7 @@ static int registerExitReasonMetaType() Q_DECL_NOTHROW {
     try {
         return qRegisterMetaType<ProcessHandle::ExitReason>("ExitReason");
     } catch (...) {
-        Utils::fatal("Failed to register ExitReason meta type.");
+        Utils::fatal(QApplication::tr("Failed to register ExitReason meta type."));
     }
 }
 
