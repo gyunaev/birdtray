@@ -10,6 +10,7 @@ find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5Network CONFIG REQUIRED)
+find_package(Qt5LinguistTools CONFIG REQUIRED)
 set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
 
 set(PLATFORM_SOURCES)
@@ -96,6 +97,10 @@ source_group("Resources" FILES ${RESOURCES})
 qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
+qt5_create_translation(TRANSLATION_FILES
+        src/translations/main_en.ts)
+
 add_executable(birdtray ${EXECUTABLE_OPTIONS}
-        ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${HEADERS} ${PLATFORM_HEADERS})
+        ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${TRANSLATION_FILES}
+        ${HEADERS} ${PLATFORM_HEADERS})
 target_link_libraries(birdtray ${REQUIRED_MODULES})
