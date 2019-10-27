@@ -216,7 +216,7 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
         } else {
             QMessageBox::critical(
                     nullptr, tr("Installer download failed"),
-                    tr("Failed to download the Birdtray installer:\nInvalid redirect: ")
+                    tr("Failed to download the Birdtray installer:\n") + tr("Invalid redirect: ")
                     + redirectionTarget.toString(), QMessageBox::StandardButton::Abort);
         }
     } else if (installerFile.write(result->readAll()) == -1) {

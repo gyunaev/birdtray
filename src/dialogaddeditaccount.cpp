@@ -82,7 +82,7 @@ void DialogAddEditAccount::accept()
         if ( leFolderPath->text().isEmpty() || !QFile::exists( leFolderPath->text() ) )
         {
             QMessageBox::critical(nullptr, tr("Invalid MSF file"),
-                                  tr("You must specify valid, non-empty Thunderbird index file"));
+                                  tr("You must specify a valid, non-empty Thunderbird index file"));
             return;
         }
     } else if (boxAccounts->currentText().isEmpty()) {

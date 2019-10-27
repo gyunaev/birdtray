@@ -10,9 +10,6 @@
     <height>204</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
-  </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
     <normaloff>:/res/birdtray.ico</normaloff>:/res/birdtray.ico</iconset>
