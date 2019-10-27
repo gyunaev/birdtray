@@ -2,24 +2,17 @@
 #include "dialogaddeditnewemail.h"
 
 DialogAddEditNewEmail::DialogAddEditNewEmail()
-    : QDialog(), Ui::DialogAddEditNewEmail()
-{
-    setupUi( this );
-
-    connect( buttonBox, &QDialogButtonBox::accepted, this, &DialogAddEditNewEmail::accept );
-    connect( buttonBox, &QDialogButtonBox::rejected, this, &DialogAddEditNewEmail::reject );
+        : QDialog(), Ui::DialogAddEditNewEmail() {
+    setupUi(this);
 }
 
-void DialogAddEditNewEmail::accept()
-{
-    if ( leMenuEntry->text().isEmpty() )
-    {
-        QMessageBox::critical( 0,
-                               tr("Empty menu entry"),
-                               tr("Menu entry cannot be empty") );
+void DialogAddEditNewEmail::accept() {
+    if (leMenuEntry->text().isEmpty()) {
+        QMessageBox::critical(nullptr,
+                              tr("Empty menu entry"),
+                              tr("Menu entry cannot be empty"));
         leMenuEntry->setFocus();
         return;
     }
-
     QDialog::accept();
 }
