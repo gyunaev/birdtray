@@ -306,21 +306,22 @@ void DialogSettings::accountAdd()
     if (!isMorkParserSelected()) {
         DialogAddEditAccount dlg(isMorkParserSelected());
         dlg.setCurrent(mAccounts, "", btnNotificationColor->color());
-        if (dlg.exec() == QDialog::Accepted) {
-            mAccountModel->addAccount(dlg.account(), dlg.color());
-            treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
+        if (dlg.exec() != QDialog::Accepted) {
+            return;
         }
+        mAccountModel->addAccount(dlg.account(), dlg.color());
     } else {
         MailAccountDialog accountDialog(this, btnNotificationColor->color());
-        if (accountDialog.exec() == QDialog::Accepted) {
-            QString path;
-            QColor color;
-            QList<std::tuple<QString, QColor>> accountInfoList;
-            accountDialog.getSelectedAccounts(accountInfoList);
-            for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
-                std::tie(path, color) = accountInfo;
-                mAccountModel->addAccount(path, color);
-            }
+        if (accountDialog.exec() != QDialog::Accepted) {
+            return;
+        }
+        QString path;
+        QColor color;
+        QList<std::tuple<QString, QColor>> accountInfoList;
+        accountDialog.getSelectedAccounts(accountInfoList);
+        for (const std::tuple<QString, QColor> &accountInfo : accountInfoList) {
+            std::tie(path, color) = accountInfo;
+            mAccountModel->addAccount(path, color);
         }
     }
     treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
