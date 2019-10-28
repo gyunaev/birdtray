@@ -92,6 +92,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     // New emails tab
     mModelNewEmails = new ModelNewEmails( this );
     treeNewEmails->setModel( mModelNewEmails );
+    treeNewEmails->setCurrentIndex(mModelNewEmails->index(0, 0));
 
     // Create the "About" box
     QString origabout = browserAbout->toHtml();
@@ -355,9 +356,10 @@ void DialogSettings::accountRemove()
     mAccountModel->removeAccount( index );
 }
 
-void DialogSettings::newEmailAdd()
-{
-    mModelNewEmails->add();
+void DialogSettings::newEmailAdd() {
+    if (mModelNewEmails->add()) {
+        treeNewEmails->setCurrentIndex(mModelNewEmails->index(mModelNewEmails->rowCount() -1, 0));
+    }
 }
 
 void DialogSettings::newEmailEdit()
