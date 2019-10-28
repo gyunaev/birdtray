@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>&quot;New Email&quot; Entry</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -19,41 +19,48 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Name:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="leMenuEntry"/>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Only Menu entry field is mandatory</string>
+      <string>(Optional) Prefilled fields</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Menu entry:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QLineEdit" name="leMenuEntry"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Email &quot;To:&quot; </string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
+      <item row="4" column="0" colspan="3">
+       <widget class="QTextEdit" name="leMessage"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Email &quot;Subject&quot;:</string>
+         <string>Email subject:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Email message text:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -63,16 +70,13 @@
       <item row="2" column="1" colspan="2">
        <widget class="QLineEdit" name="leSubject"/>
       </item>
-      <item row="4" column="0" colspan="3">
-       <widget class="QTextEdit" name="leMessage"/>
-      </item>
-      <item row="3" column="0" colspan="3">
-       <widget class="QLabel" name="label_4">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Email message text:</string>
+         <string>Email recipient:</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
