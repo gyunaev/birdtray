@@ -17,7 +17,12 @@ class ModelNewEmails : public QAbstractItemModel
         virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
         virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-        void    add();
+        /**
+         * Add a new entry.
+         *
+         * @return True, if a new entry was added.
+         */
+        bool    add();
         void    edit( const QModelIndex &idx );
         void    remove( const QModelIndex& idx );
 

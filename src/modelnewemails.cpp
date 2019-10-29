@@ -59,17 +59,16 @@ QVariant ModelNewEmails::headerData(int section, Qt::Orientation , int role) con
     return QVariant();
 }
 
-void ModelNewEmails::add()
-{
+bool ModelNewEmails::add() {
     Setting_NewEmail item;
-
-    if ( item.edit() )
-    {
-        // Only this line changed
-        beginInsertRows( QModelIndex(), mNewEmailData.size(), mNewEmailData.size() + 1 );
-        mNewEmailData.push_back( item );
-        endInsertRows();
+    if (!item.edit()) {
+        return false;
     }
+    // Only this line changed
+    beginInsertRows(QModelIndex(), mNewEmailData.size(), mNewEmailData.size() + 1);
+    mNewEmailData.push_back(item);
+    endInsertRows();
+    return true;
 }
 
 void ModelNewEmails::edit(const QModelIndex &idx)

@@ -9,8 +9,8 @@ DialogAddEditNewEmail::DialogAddEditNewEmail()
 void DialogAddEditNewEmail::accept() {
     if (leMenuEntry->text().isEmpty()) {
         QMessageBox::critical(nullptr,
-                              tr("Empty menu entry"),
-                              tr("Menu entry cannot be empty"));
+                              tr("No name specified"),
+                              tr("The name cannot be empty"));
         leMenuEntry->setFocus();
         return;
     }
