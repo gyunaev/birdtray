@@ -85,7 +85,8 @@ RC_INCLUDEPATH += $$PWD
 RC_FILE = res/birdtray.rc
 
 TRANSLATIONS += \
-    translations/main_en.ts
+    translations/main_en.ts \
+     translations/main_de.ts
 
 unix {
      SOURCES += windowtools_x11.cpp

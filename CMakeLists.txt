@@ -98,7 +98,8 @@ qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
 qt5_create_translation(TRANSLATION_FILES
-        src/translations/main_en.ts)
+        src/translations/main_en.ts
+        src/translations/main_de.ts)
 
 add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${TRANSLATION_FILES}
