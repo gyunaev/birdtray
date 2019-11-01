@@ -227,7 +227,9 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
         for ( const QString& tpath : pSettings->mFolderNotificationColors.keys() )
         {
             mMorkUnreadCounts[ tpath ] = getMorkUnreadCount( tpath );
-            mDBWatcher.addPath( tpath );
+            if (!mDBWatcher.files().contains(tpath) && !mDBWatcher.addPath( tpath )) {
+                emit error(tr("Unable to watch %1 for changes.").arg(tpath));
+            }
         }
     }
     else
