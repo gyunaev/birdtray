@@ -97,9 +97,13 @@ source_group("Resources" FILES ${RESOURCES})
 qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
-qt5_create_translation(TRANSLATION_FILES
+set(TS_FILES
         src/translations/main_en.ts
         src/translations/main_de.ts)
+set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION
+        ${CMAKE_CURRENT_BINARY_DIR}/translations)
+qt5_create_translation(TRANSLATION_FILES
+        ${TS_FILES})
 
 add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${TRANSLATION_FILES}

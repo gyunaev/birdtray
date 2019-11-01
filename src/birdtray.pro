@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network
-CONFIG += c++11
+CONFIG += c++11 lrelease file_copies
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = birdtray
@@ -87,6 +87,11 @@ RC_FILE = res/birdtray.rc
 TRANSLATIONS += \
     translations/main_en.ts \
      translations/main_de.ts
+CONFIG(release, debug|release): OUT_DIR = $$OUT_PWD/release
+CONFIG(debug, debug|release): OUT_DIR = $$OUT_PWD/debug
+translations.path = $$OUT_DIR/translations
+translations.files = translations/*.qm
+COPIES += translations
 
 unix {
      SOURCES += windowtools_x11.cpp

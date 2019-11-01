@@ -1,6 +1,7 @@
 build*/
 cmake-build-*/
 src/birdtray.pro.user*
+src/translations/*.qm
 
 installer/uninstaller/*
 installer/winDeploy/**
