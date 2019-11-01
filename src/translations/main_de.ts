@@ -290,7 +290,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <location filename="../dialogsettings.ui" line="325"/>
         <source>Method to parse unread notifications:</source>
-        <translation>Methode zum Einlesen der Anzahl der ungelesenen Emails:</translation>
+        <translation>Methode zum Einlesen der Anzahl ungelesener Emails:</translation>
     </message>
     <message>
         <location filename="../dialogsettings.ui" line="346"/>
