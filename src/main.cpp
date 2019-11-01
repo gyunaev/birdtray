@@ -39,6 +39,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("birdtray");
     QCoreApplication::setApplicationVersion(Utils::getBirdtrayVersion());
     QTranslator translator;
+    translator.load(QCoreApplication::applicationDirPath()
+                    + "/translations/qt_" + QLocale::system().name());
     bool translationLoadFailed = !translator.load(QCoreApplication::applicationDirPath() +
                                                   "/translations/main_" + QLocale::system().name());
     QCoreApplication::installTranslator(&translator);
