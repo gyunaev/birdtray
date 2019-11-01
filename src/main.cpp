@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QTranslator>
 #include <QtCore/QCommandLineParser>
 
 #ifdef Q_OS_WIN
@@ -37,6 +38,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("ulduzsoft.com");
     QCoreApplication::setApplicationName("birdtray");
     QCoreApplication::setApplicationVersion(Utils::getBirdtrayVersion());
+    QTranslator translator;
+    translator.load(QCoreApplication::applicationDirPath() +
+                    "/translations/main_" + QLocale::system().name());
+    QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_WIN
     BirdtrayEventFilter filter;
     app.installNativeEventFilter(&filter);
