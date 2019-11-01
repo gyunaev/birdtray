@@ -82,20 +82,16 @@ QString Setting_NewEmail::menuentry() const
     return mName;
 }
 
-QString Setting_NewEmail::asArgs()
-{
+QString Setting_NewEmail::asArgs() {
     QStringList args;
-
-    if ( !mRecipient.isEmpty() )
-        args.push_back( "to='" + mRecipient + "'" );
-
-    if ( !mSubject.isEmpty() )
-        args.push_back( "subject='" + mSubject + "'" );
-
-    if ( !mMessage.isEmpty() )
-    {
-        //FIXME
+    if (!mRecipient.isEmpty()) {
+        args.push_back("to='" + mRecipient.replace('\'', "\u2032") + "'");
     }
-
-    return args.join( "," );
+    if (!mSubject.isEmpty()) {
+        args.push_back("subject='" + mSubject.replace('\'', "\u2032") + "'");
+    }
+    if (!mMessage.isEmpty()) {
+        args.push_back("body='" + mMessage.replace('\'', "\u2032") + "'");
+    }
+    return args.join(",");
 }
