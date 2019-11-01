@@ -95,6 +95,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>leMenuEntry</tabstop>
+  <tabstop>leTo</tabstop>
+  <tabstop>leSubject</tabstop>
+  <tabstop>leMessage</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
