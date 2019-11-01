@@ -71,7 +71,7 @@ OpenSSL might not be installed.</source>
     <message>
         <location filename="../databaseunreadfixer.cpp" line="50"/>
         <location filename="../databaseunreadfixer.cpp" line="69"/>
-        <source>Cannot query database</source>
+        <source>Cannot query database.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -114,55 +114,60 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <location filename="../dialogaddeditaccount.cpp" line="85"/>
-        <source>You must specify a valid, non-empty Thunderbird index file</source>
+        <source>You must specify a valid, non-empty Thunderbird index file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogaddeditaccount.cpp" line="89"/>
+        <location filename="../dialogaddeditaccount.cpp" line="91"/>
+        <source>You must select an account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogaddeditaccount.cpp" line="90"/>
         <source>No account selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogaddeditaccount.cpp" line="89"/>
-        <source>You must select an account</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditNewEmail</name>
     <message>
-        <location filename="../dialogaddeditnewemail.ui" line="21"/>
-        <source>Only Menu entry field is mandatory</source>
+        <location filename="../dialogaddeditnewemail.ui" line="14"/>
+        <source>&quot;New Email&quot; Entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogaddeditnewemail.ui" line="27"/>
-        <source>Menu entry:</source>
+        <location filename="../dialogaddeditnewemail.ui" line="26"/>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogaddeditnewemail.ui" line="40"/>
-        <source>Email &quot;To:&quot; </source>
+        <location filename="../dialogaddeditnewemail.ui" line="41"/>
+        <source>(Optional) Prefilled fields</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogaddeditnewemail.ui" line="50"/>
-        <source>Email &quot;Subject&quot;:</source>
+        <source>Email subject:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogaddeditnewemail.ui" line="69"/>
+        <location filename="../dialogaddeditnewemail.ui" line="60"/>
         <source>Email message text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogaddeditnewemail.cpp" line="18"/>
-        <source>Empty menu entry</source>
+        <location filename="../dialogaddeditnewemail.ui" line="76"/>
+        <source>Email recipient:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogaddeditnewemail.cpp" line="19"/>
-        <source>Menu entry cannot be empty</source>
+        <location filename="../dialogaddeditnewemail.cpp" line="11"/>
+        <source>No name specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogaddeditnewemail.cpp" line="12"/>
+        <source>The name cannot be empty.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -184,14 +189,8 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.ui" line="67"/>
-        <location filename="../dialogsettings.ui" line="104"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../dialogsettings.ui" line="87"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of blinking (or different, if changed) icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -235,12 +234,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.ui" line="172"/>
-        <location filename="../dialogsettings.ui" line="809"/>
-        <source> %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../dialogsettings.ui" line="188"/>
         <source>Blinking speed:</source>
         <translation type="unfinished"></translation>
@@ -267,7 +260,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <location filename="../dialogsettings.ui" line="258"/>
-        <location filename="../dialogsettings.cpp" line="413"/>
+        <location filename="../dialogsettings.cpp" line="416"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -377,7 +370,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <location filename="../dialogsettings.ui" line="511"/>
-        <source>Terminate Thunderbird when quitting Birdtray </source>
+        <source>Terminate Thunderbird when quitting Birdtray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -472,7 +465,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <location filename="../dialogsettings.ui" line="859"/>
-        <location filename="../dialogsettings.cpp" line="239"/>
+        <location filename="../dialogsettings.cpp" line="240"/>
         <source>Check now</source>
         <translation type="unfinished"></translation>
     </message>
@@ -499,143 +492,143 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="114"/>
+        <location filename="../dialogsettings.cpp" line="115"/>
         <source>using global search database (wont work with 68+)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="115"/>
+        <location filename="../dialogsettings.cpp" line="116"/>
         <source>using Mork index files (recommended)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="136"/>
+        <location filename="../dialogsettings.cpp" line="137"/>
         <source>Empty Thunderbird directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="137"/>
-        <source>You must specify Thunderbird directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogsettings.cpp" line="147"/>
+        <location filename="../dialogsettings.cpp" line="148"/>
         <source>Empty Thunderbird path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="148"/>
-        <source>You have enabled New Email menu, but you did not specify Thunderbird path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogsettings.cpp" line="204"/>
+        <location filename="../dialogsettings.cpp" line="205"/>
         <source>Choose the Thunderbird profile path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="243"/>
+        <location filename="../dialogsettings.cpp" line="244"/>
         <source>Version check failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="244"/>
+        <location filename="../dialogsettings.cpp" line="245"/>
         <source>Failed to check for a new Birdtray version:
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="252"/>
+        <location filename="../dialogsettings.cpp" line="253"/>
         <source>Fix the unread messages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="253"/>
+        <location filename="../dialogsettings.cpp" line="254"/>
         <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="260"/>
+        <location filename="../dialogsettings.cpp" line="261"/>
         <source>Updating the database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="289"/>
+        <location filename="../dialogsettings.cpp" line="290"/>
         <source>Database updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="290"/>
-        <source>Successfully updated the database</source>
+        <location filename="../dialogsettings.cpp" line="138"/>
+        <source>You must specify a Thunderbird directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="292"/>
-        <source>Error updating database</source>
+        <location filename="../dialogsettings.cpp" line="149"/>
+        <source>You have enabled New Email menu, but you did not specify Thunderbird path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogsettings.cpp" line="291"/>
+        <source>Successfully updated the database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogsettings.cpp" line="293"/>
+        <source>Error updating database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogsettings.cpp" line="294"/>
         <source>Error updating the database:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="301"/>
+        <location filename="../dialogsettings.cpp" line="302"/>
         <source>Error retrieving accounts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="302"/>
+        <location filename="../dialogsettings.cpp" line="303"/>
         <source>Error retrieving accounts:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="386"/>
+        <location filename="../dialogsettings.cpp" line="389"/>
         <source>Checking...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="446"/>
+        <location filename="../dialogsettings.cpp" line="449"/>
         <source>WARNING: Parser changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="447"/>
+        <location filename="../dialogsettings.cpp" line="450"/>
         <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
 
 Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="459"/>
+        <location filename="../dialogsettings.cpp" line="462"/>
         <source>Choose the new icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="461"/>
+        <location filename="../dialogsettings.cpp" line="464"/>
         <source>Images (*.png *.svg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="470"/>
+        <location filename="../dialogsettings.cpp" line="473"/>
         <source>Invalid icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="471"/>
-        <source>Could not load the icon from this file</source>
+        <location filename="../dialogsettings.cpp" line="474"/>
+        <source>Could not load the icon from this file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogsettings.cpp" line="512"/>
+        <location filename="../dialogsettings.cpp" line="517"/>
+        <source>Valid Thunderbird directory must contain the file %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogsettings.cpp" line="516"/>
         <source>Invalid Thunderbird directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogsettings.cpp" line="513"/>
-        <source>Valid Thunderbird directory must contain the file %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -647,16 +640,12 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mailaccountdialog.ui" line="21"/>
-        <source>Thunderbird Profile Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mailaccountdialog.ui" line="24"/>
         <source>Select the directory that contains the Thunderbird profiles.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mailaccountdialog.ui" line="21"/>
         <location filename="../mailaccountdialog.ui" line="33"/>
         <source>Thunderbird Profiles Directory</source>
         <translation type="unfinished"></translation>
@@ -692,12 +681,12 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mailaccountdialog.ui" line="133"/>
+        <location filename="../mailaccountdialog.ui" line="130"/>
         <source>Notification Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mailaccountdialog.ui" line="141"/>
+        <location filename="../mailaccountdialog.ui" line="138"/>
         <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -767,7 +756,7 @@ Do you want to continue?</source>
     <name>QApplication</name>
     <message>
         <location filename="../main.cpp" line="24"/>
-        <source>Sorry, system tray cannot be controlled through this addon on your operating system</source>
+        <source>Sorry, system tray cannot be controlled through this addon on your operating system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -830,47 +819,47 @@ Do you want to continue?</source>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="94"/>
-        <source>Unsupported version</source>
+        <source>Unsupported version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="174"/>
-        <source>invalid format</source>
+        <source>Invalid format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="228"/>
-        <source>Parsing error</source>
+        <source>Parsing error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="244"/>
-        <source>Unexpected EOF</source>
+        <source>Unexpected EOF.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="309"/>
-        <source>invalid comment</source>
+        <source>Invalid comment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="605"/>
-        <source>format error</source>
+        <source>Format error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="647"/>
-        <source>Unexpected end of group</source>
+        <source>Unexpected end of group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../morkparser.cpp" line="769"/>
-        <source>Error opening mork file</source>
+        <source>Error opening mork file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="257"/>
-        <source>Cannot load default system tray icon</source>
+        <source>Cannot load default system tray icon.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1013,12 +1002,12 @@ Do you want to continue?</source>
     </message>
     <message>
         <location filename="../unreadcounter.cpp" line="131"/>
-        <source>Folder %1 was not found in database</source>
+        <source>Folder %1 was not found in database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../unreadcounter.cpp" line="184"/>
-        <source>Cannot query database</source>
+        <source>Cannot query database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

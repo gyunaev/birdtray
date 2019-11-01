@@ -47,7 +47,7 @@ void DatabaseUnreadFixer::updateDatabase()
             sqlitedb,
             "SELECT COUNT(id) FROM messages WHERE json_extract( jsonAttributes, '$.59' ) = 0") ||
         stmtrows.step() != SQLITE_ROW) {
-        emit done(tr("Cannot query database"));
+        emit done(tr("Cannot query database."));
         return;
     }
 
@@ -66,7 +66,7 @@ void DatabaseUnreadFixer::updateDatabase()
     // but sqlite would set the value of 59 to 1, instead of true. There seem to be no way to force it to true.
     if ( !stmt.prepare( sqlitedb, "SELECT id,jsonAttributes FROM messages WHERE json_extract( jsonAttributes, '$.59' ) = 0") )
     {
-        emit done(tr("Cannot query database"));
+        emit done(tr("Cannot query database."));
         return;
     }
 

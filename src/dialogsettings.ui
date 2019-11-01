@@ -64,7 +64,7 @@
             <item>
              <widget class="QToolButton" name="btnNotificationIcon">
               <property name="text">
-               <string>...</string>
+               <string notr="true">...</string>
               </property>
              </widget>
             </item>
@@ -84,7 +84,7 @@
             <item>
              <widget class="QCheckBox" name="boxShowUnreadCount">
               <property name="whatsThis">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of blinking (or different, if changed) icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Show unread count</string>
@@ -101,7 +101,7 @@
             <item>
              <widget class="QToolButton" name="btnNotificationIconUnread">
               <property name="text">
-               <string>...</string>
+               <string notr="true">...</string>
               </property>
              </widget>
             </item>
@@ -169,7 +169,7 @@
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="suffix">
-             <string> %</string>
+             <string notr="true"> %</string>
             </property>
             <property name="maximum">
              <number>198</number>
@@ -508,7 +508,7 @@
                <bool>true</bool>
               </property>
               <property name="text">
-               <string>Terminate Thunderbird when quitting Birdtray </string>
+               <string>Terminate Thunderbird when quitting Birdtray</string>
               </property>
              </widget>
             </item>
@@ -806,7 +806,7 @@
             <item>
              <widget class="QSpinBox" name="spinUnreadOpacityLevel">
               <property name="suffix">
-               <string> %</string>
+               <string notr="true"> %</string>
               </property>
               <property name="prefix">
                <string/>

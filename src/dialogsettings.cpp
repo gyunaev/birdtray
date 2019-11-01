@@ -135,7 +135,7 @@ void DialogSettings::accept()
         if ( profilePath.isEmpty() )
         {
             QMessageBox::critical(nullptr, tr("Empty Thunderbird directory"),
-                                  tr("You must specify Thunderbird directory"));
+                                  tr("You must specify a Thunderbird directory."));
             return;
         }
         if (!reportIfProfilePathValid(profilePath)) {
@@ -147,7 +147,7 @@ void DialogSettings::accept()
     {
         QMessageBox::critical(nullptr, tr("Empty Thunderbird path"),
                               tr("You have enabled New Email menu, "
-                                 "but you did not specify Thunderbird path"));
+                                 "but you did not specify Thunderbird path."));
         tabWidget->setCurrentIndex( 0 );
         leThunderbirdBinary->setFocus();
         return;
@@ -288,7 +288,7 @@ void DialogSettings::databaseUnreadsFixed( QString errorMsg )
 
     if (errorMsg.isEmpty()) {
         QMessageBox::information(nullptr, tr("Database updated"),
-                                 tr("Successfully updated the database"));
+                                 tr("Successfully updated the database."));
     } else {
         QMessageBox::critical(nullptr, tr("Error updating database"),
                               tr("Error updating the database:\n%1").arg(errorMsg));
@@ -471,7 +471,7 @@ void DialogSettings::changeIcon(QToolButton *button)
     if ( !test.load( e ) )
     {
         QMessageBox::critical(nullptr, tr("Invalid icon"),
-                              tr("Could not load the icon from this file"));
+                              tr("Could not load the icon from this file."));
         return;
     }
 
@@ -512,9 +512,10 @@ bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const 
         return true;
     }
     if (!profilePath.isEmpty()) {
+        const QString name = QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName();
         QMessageBox::critical(nullptr, tr("Invalid Thunderbird directory"),
-                tr("Valid Thunderbird directory must contain the file %1")
-                .arg(QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName()));
+                              tr("Valid Thunderbird directory must contain the file %1.")
+                                      .arg(name));
     }
     return false;
 }

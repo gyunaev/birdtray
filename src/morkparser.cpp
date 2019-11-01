@@ -91,7 +91,7 @@ bool MorkParser::open( const QString &path )
 
 	if ( !MagicHeader.contains( MorkMagicHeader ) )
 	{
-        mErrorMessage = QCoreApplication::tr("Unsupported version");
+        mErrorMessage = QCoreApplication::tr("Unsupported version.");
         return false;
     }
 
@@ -171,7 +171,7 @@ void MorkParser::parse()
 				break;
 
             default:
-                throw MorkParserException(QCoreApplication::tr("invalid format"));
+                throw MorkParserException(QCoreApplication::tr("Invalid format."));
 				break;
 			}
 		}
@@ -225,7 +225,7 @@ void MorkParser::skip( const char * string )
     while ( *string )
     {
         if (*string != nextChar()) {
-            throw MorkParserException(QCoreApplication::tr("Parsing error"));
+            throw MorkParserException(QCoreApplication::tr("Parsing error."));
         }
         string++;
     }
@@ -241,7 +241,7 @@ QChar MorkParser::readNext()
 QChar MorkParser::peekNext()
 {
     if (morkPos_ >= morkData_.length()) {
-        throw MorkParserException(QCoreApplication::tr("Unexpected EOF"));
+        throw MorkParserException(QCoreApplication::tr("Unexpected EOF."));
     }
     return QChar( morkData_[ morkPos_ ] );
 }
@@ -306,7 +306,7 @@ inline void MorkParser::parseComment()
 	char cur = nextChar();
 
     if ( '/' != cur ) {
-        throw MorkParserException(QCoreApplication::tr("invalid comment"));
+        throw MorkParserException(QCoreApplication::tr("Invalid comment."));
     }
 
 	while ( cur != '\r' && cur != '\n' && cur )
@@ -602,7 +602,7 @@ void MorkParser::parseRow( int TableId, int TableScope )
                 parseMeta( ']' );
 				break;
 			default:
-                throw MorkParserException(QCoreApplication::tr("format error"));
+                throw MorkParserException(QCoreApplication::tr("Format error."));
 				break;
 			}
 		}
@@ -644,7 +644,7 @@ void MorkParser::parseGroup()
     ofst = morkData_.indexOf( endCommit, morkPos_ );
 
     if (ofst == -1) {
-        throw MorkParserException(QCoreApplication::tr("Unexpected end of group"));
+        throw MorkParserException(QCoreApplication::tr("Unexpected end of group."));
     }
     // Transaction succeeded. Copy the transaction data
     QByteArray transaction = morkData_.mid( morkPos_, ofst - morkPos_ );
@@ -766,7 +766,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     MorkParser p;
 
     if ( !p.open( filename ) )
-        Utils::fatal(QCoreApplication::tr("Error opening mork file"));
+        Utils::fatal(QCoreApplication::tr("Error opening mork file."));
 
     for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
     {

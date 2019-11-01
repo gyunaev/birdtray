@@ -259,7 +259,7 @@ QString Settings::getThunderbirdExecutablePath()
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Utils::fatal(QCoreApplication::tr("Cannot load default system tray icon"));
+            Utils::fatal(QCoreApplication::tr("Cannot load default system tray icon."));
         }
     }
     return mNotificationIcon;

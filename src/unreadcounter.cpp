@@ -121,7 +121,7 @@ bool UnreadMonitor::openDatabase()
     // If anything left, we didn't find those
     if ( !folders.isEmpty() )
     {
-        emit error(tr("Folder %1 was not found in database").arg(folders.firstKey()));
+        emit error(tr("Folder %1 was not found in database.").arg(folders.firstKey()));
         return false;
     }
 
@@ -174,7 +174,7 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
     // This returns the number of unread messages (JSON attribute "59": false)
     if ( !stmt.prepare( mSqlitedb, QString("SELECT folderID FROM messages WHERE folderID IN (%1) AND json_extract( jsonAttributes, '$.59' ) = 0") .arg( mAllFolderIDs) ) )
     {
-        emit error(tr("Cannot query database"));
+        emit error(tr("Cannot query database."));
         this->exit( 0 );
     }
 
