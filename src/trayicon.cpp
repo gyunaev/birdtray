@@ -499,35 +499,26 @@ void TrayIcon::createMenu()
     mSystrayMenu->addSeparator();
 
     // New email could be either a single action, or menu depending on settings
-    if ( pSettings->mNewEmailMenuEnabled )
-    {
-        if ( !pSettings->mNewEmailData.isEmpty() )
-        {
+    if (pSettings->mNewEmailMenuEnabled) {
+        if (!pSettings->mNewEmailData.isEmpty()) {
             // A submenu
-            QMenu * newemails = new QMenu( tr("New Email") );
-
-            // Only add the signal if the menu is empty
-            if ( pSettings->mNewEmailData.isEmpty() )
-                connect( newemails, &QMenu::triggered, this, &TrayIcon::actionNewEmail );
-
-            for ( int index = 0; index < pSettings->mNewEmailData.size(); index++ )
-            {
-                QAction * a = new QAction( pSettings->mNewEmailData[index].menuentry(), this );
-                connect( a, &QAction::triggered, this, &TrayIcon::actionNewEmail );
-
+            auto* newEmails = new QMenu(tr("New Email"));
+            auto* action = new QAction(tr("Blank"), this);
+            connect(action, &QAction::triggered, this, &TrayIcon::actionNewEmail);
+            newEmails->addAction(action);
+            newEmails->addSeparator();
+            for (int index = 0; index < pSettings->mNewEmailData.size(); index++) {
+                action = new QAction(pSettings->mNewEmailData[index].menuentry(), this);
+                connect(action, &QAction::triggered, this, &TrayIcon::actionNewEmail);
                 // Remember the delay in the action itself
-                a->setData( index );
-                newemails->addAction( a );
+                action->setData(index);
+                newEmails->addAction(action);
             }
-
-            mSystrayMenu->addMenu( newemails );
-        }
-        else
-        {
+            mSystrayMenu->addMenu(newEmails);
+        } else {
             // A single action
-            mSystrayMenu->addAction( tr("New Email Message"), this, SLOT( actionNewEmail()) );
+            mSystrayMenu->addAction(tr("New Email Message"), this, SLOT(actionNewEmail()));
         }
-
         mSystrayMenu->addSeparator();
     }
 
