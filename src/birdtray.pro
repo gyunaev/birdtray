@@ -111,9 +111,9 @@ unix {
      INSTALLS += target desktop appdata icon32 icon48 icon64 icon128
 }
 win32 {
-     DEFINES += -DUNICODE
+     DEFINES += UNICODE
      SOURCES += windowtools_win.cpp birdtrayeventfilter.cpp processhandle.cpp
      HEADERS += windowtools_win.h birdtrayeventfilter.h processhandle.h
-     LIBS += user32.lib
+     LIBS += -luser32
      QT += winextras
 }
