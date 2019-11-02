@@ -879,7 +879,7 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Downloading Birdtray installer... (%1 Mb/ %2 Mb).</source>
+        <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

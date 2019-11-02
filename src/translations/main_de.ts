@@ -904,8 +904,8 @@ Wollen Sie fortfahren?</translation>
         <translation>Download abgeschlossen. Soll Birdtray aktualisiert und neugestartet werden?</translation>
     </message>
     <message>
-        <source>Downloading Birdtray installer... (%1 Mb/ %2 Mb).</source>
-        <translation>Lade die Birdtray Installationsdatei herunter... (%1 Mb/ %2 Mb).</translation>
+        <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
+        <translation>Lade die Birdtray Installationsdatei herunter... (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
