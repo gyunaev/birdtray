@@ -755,47 +755,47 @@ Do you want to continue?</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="24"/>
+        <location filename="../main.cpp" line="25"/>
         <source>Sorry, system tray cannot be controlled through this addon on your operating system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="46"/>
+        <location filename="../main.cpp" line="53"/>
         <source>A free system tray notification for new mail for Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="51"/>
+        <location filename="../main.cpp" line="58"/>
         <source>Display the contents of the given mork database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="52"/>
+        <location filename="../main.cpp" line="59"/>
         <source>databaseFile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="60"/>
         <source>Decode an IMAP Utf7 string.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="60"/>
         <source>string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="54"/>
+        <location filename="../main.cpp" line="61"/>
         <source>Show the settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="55"/>
+        <location filename="../main.cpp" line="62"/>
         <source>Reset the settings to the defaults.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="56"/>
+        <location filename="../main.cpp" line="63"/>
         <source>Enable debugging output.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -895,100 +895,105 @@ Do you want to continue?</source>
     </message>
     <message>
         <location filename="../trayicon.cpp" line="335"/>
-        <location filename="../trayicon.cpp" line="699"/>
+        <location filename="../trayicon.cpp" line="690"/>
         <source>Show Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../trayicon.cpp" line="337"/>
         <location filename="../trayicon.cpp" line="492"/>
-        <location filename="../trayicon.cpp" line="705"/>
+        <location filename="../trayicon.cpp" line="696"/>
         <source>Hide Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="507"/>
+        <location filename="../trayicon.cpp" line="505"/>
         <source>New Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="528"/>
+        <location filename="../trayicon.cpp" line="506"/>
+        <source>Blank</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../trayicon.cpp" line="520"/>
         <source>New Email Message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="537"/>
+        <location filename="../trayicon.cpp" line="528"/>
         <source>5 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="538"/>
+        <location filename="../trayicon.cpp" line="529"/>
         <source>10 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="539"/>
+        <location filename="../trayicon.cpp" line="530"/>
         <source>30 minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="540"/>
+        <location filename="../trayicon.cpp" line="531"/>
         <source>1 hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="541"/>
+        <location filename="../trayicon.cpp" line="532"/>
         <source>4 hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="544"/>
+        <location filename="../trayicon.cpp" line="535"/>
         <source>Snooze for ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="560"/>
+        <location filename="../trayicon.cpp" line="551"/>
         <source>Unsnooze</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="569"/>
-        <location filename="../trayicon.cpp" line="716"/>
+        <location filename="../trayicon.cpp" line="560"/>
+        <location filename="../trayicon.cpp" line="707"/>
         <source>Ignore unread emails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="580"/>
+        <location filename="../trayicon.cpp" line="571"/>
         <source>Settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="585"/>
+        <location filename="../trayicon.cpp" line="576"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="624"/>
-        <location filename="../trayicon.cpp" line="652"/>
+        <location filename="../trayicon.cpp" line="615"/>
+        <location filename="../trayicon.cpp" line="643"/>
         <source>Cannot start Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="625"/>
+        <location filename="../trayicon.cpp" line="616"/>
         <source>Error starting Thunderbird as %1:
 
 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="653"/>
+        <location filename="../trayicon.cpp" line="644"/>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../trayicon.cpp" line="714"/>
+        <location filename="../trayicon.cpp" line="705"/>
         <source>Ignore unread emails (now %1)</source>
         <translation type="unfinished"></translation>
     </message>
