@@ -97,16 +97,23 @@ source_group("Resources" FILES ${RESOURCES})
 qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
-set(TRANSLATION_FILES
+set(MAIN_TRANSLATION_FILES
         src/translations/main_en.ts
         src/translations/main_de.ts)
+set(DYN_TRANSLATION_FILES
+        src/translations/dynamic_en.ts
+        src/translations/dynamic_de.ts)
 
-set_source_files_properties(${TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
+set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
+        ${CMAKE_CURRENT_BINARY_DIR}/translations)
+set_source_files_properties(${DYN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
         ${CMAKE_CURRENT_BINARY_DIR}/translations)
 qt5_create_translation(GEN_TRANSLATION_FILES
-        ${TRANSLATION_FILES}
+        ${MAIN_TRANSLATION_FILES}
         ${SOURCES} ${PLATFORM_SOURCES} ${HEADERS} ${PLATFORM_HEADERS}
         OPTIONS -locations none)
+qt5_add_translation(GEN_DYN_TRANSLATION_FILES ${DYN_TRANSLATION_FILES})
+list(APPEND GEN_TRANSLATION_FILES ${GEN_DYN_TRANSLATION_FILES})
 
 add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}

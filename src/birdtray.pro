@@ -87,6 +87,9 @@ RC_FILE = res/birdtray.rc
 TRANSLATIONS += \
     translations/main_en.ts \
     translations/main_de.ts
+EXTRA_TRANSLATIONS += \
+    translations/dynamic_en.ts \
+    translations/dynamic_de.ts
 
 release::OUT_DIR = $$OUT_PWD/release
 debug::OUT_DIR = $$OUT_PWD/debug

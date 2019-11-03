@@ -38,12 +38,17 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("ulduzsoft.com");
     QCoreApplication::setApplicationName("birdtray");
     QCoreApplication::setApplicationVersion(Utils::getBirdtrayVersion());
-    QTranslator translator;
-    translator.load(QCoreApplication::applicationDirPath()
-                    + "/translations/qt_" + QLocale::system().name());
-    bool translationLoadFailed = !translator.load(QCoreApplication::applicationDirPath() +
-                                                  "/translations/main_" + QLocale::system().name());
-    QCoreApplication::installTranslator(&translator);
+    QTranslator qtTranslator;
+    QTranslator dynamicTranslator;
+    QTranslator mainTranslator;
+    QString translationDir = QCoreApplication::applicationDirPath() + "/translations";
+    bool translationLoadFailed = !qtTranslator.load(QLocale::system(), "qt", "_", translationDir);
+    translationLoadFailed |= !dynamicTranslator.load(
+            QLocale::system(), "dynamic", "_", translationDir);
+    translationLoadFailed |= !mainTranslator.load(QLocale::system(), "main", "_", translationDir);
+    QCoreApplication::installTranslator(&qtTranslator);
+    QCoreApplication::installTranslator(&dynamicTranslator);
+    QCoreApplication::installTranslator(&mainTranslator);
 #ifdef Q_OS_WIN
     BirdtrayEventFilter filter;
     app.installNativeEventFilter(&filter);

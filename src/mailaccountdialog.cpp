@@ -230,7 +230,7 @@ void MailAccountDialog::initializeAccountsPage() {
                 if (isInbox) {
                     name = tr("Inbox");
                 } else {
-                    name = tr(name.toUtf8().constData());
+                    name = QCoreApplication::translate("EmailFolders", name.toUtf8().constData());
                 }
                 auto* folderItem = new QTreeWidgetItem(accountItem, {name});
                 if (isInbox) {

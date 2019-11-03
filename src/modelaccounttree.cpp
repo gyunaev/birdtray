@@ -1,3 +1,4 @@
+#include <QCoreApplication>
 #include <QBrush>
 #include <QPainter>
 #include <QtCore/QFileInfo>
@@ -40,7 +41,8 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
             if (folderName == "INBOX") {
                 folderName = QObject::tr("Inbox");
             } else {
-                folderName = QObject::tr(folderName.toUtf8().constData());
+                folderName = QCoreApplication::translate(
+                        "EmailFolders", folderName.toUtf8().constData());
             }
             QString accountName = fileInfo.dir().dirName();
             return accountName + " [" + folderName + "]";
