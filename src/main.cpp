@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QtCore/QCommandLineParser>
+#include <QtCore/QLibraryInfo>
 
 #ifdef Q_OS_WIN
 #include "birdtrayeventfilter.h"
@@ -42,7 +43,8 @@ int main(int argc, char *argv[])
     QTranslator dynamicTranslator;
     QTranslator mainTranslator;
     QString translationDir = QCoreApplication::applicationDirPath() + "/translations";
-    bool translationLoadFailed = !qtTranslator.load(QLocale::system(), "qt", "_", translationDir);
+    bool translationLoadFailed = !qtTranslator.load(
+            QLocale::system(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     translationLoadFailed |= !dynamicTranslator.load(
             QLocale::system(), "dynamic", "_", translationDir);
     translationLoadFailed |= !mainTranslator.load(QLocale::system(), "main", "_", translationDir);
