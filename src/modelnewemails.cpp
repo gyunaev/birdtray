@@ -1,11 +1,8 @@
 #include "modelnewemails.h"
-#include "settings.h"
-#include "dialogaddeditnewemail.h"
+#include "birdtrayapp.h"
 
-ModelNewEmails::ModelNewEmails(QObject *parent)
-    : QAbstractItemModel( parent )
-{
-    mNewEmailData = pSettings->mNewEmailData;
+ModelNewEmails::ModelNewEmails(QObject* parent) : QAbstractItemModel(parent) {
+    mNewEmailData = BirdtrayApp::get()->getSettings()->mNewEmailData;
 }
 
 int ModelNewEmails::columnCount(const QModelIndex &) const
@@ -84,7 +81,6 @@ void ModelNewEmails::remove(const QModelIndex &idx)
     endRemoveRows();
 }
 
-void ModelNewEmails::applySettings()
-{
-    pSettings->mNewEmailData = mNewEmailData;
+void ModelNewEmails::applySettings() {
+    BirdtrayApp::get()->getSettings()->mNewEmailData = mNewEmailData;
 }

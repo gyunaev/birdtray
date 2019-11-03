@@ -62,6 +62,7 @@ set(SOURCES
         src/updatedialog.cpp
         src/updatedownloaddialog.cpp
         src/mailaccountdialog.cpp
+        src/birdtrayapp.cpp
         src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
         src/dialogsettings.ui
@@ -90,7 +91,8 @@ set(HEADERS
         src/autoupdater.h
         src/updatedialog.h
         src/updatedownloaddialog.h
-        src/mailaccountdialog.h)
+        src/mailaccountdialog.h
+        src/birdtrayapp.h)
 
 set(RESOURCES src/resources.qrc)
 source_group("Resources" FILES ${RESOURCES})

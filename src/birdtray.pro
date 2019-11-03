@@ -46,7 +46,8 @@ SOURCES += \
     modelaccounttree.cpp \
     morkparser.cpp \
     utils.cpp \
-    autoupdater.cpp
+    autoupdater.cpp \
+    birdtrayapp.cpp
 
 HEADERS += \
     trayicon.h \
@@ -69,7 +70,8 @@ HEADERS += \
     modelaccounttree.h \
     morkparser.h \
     utils.h \
-    autoupdater.h
+    autoupdater.h \
+    birdtrayapp.h
 
 FORMS += \
     dialogaddeditaccount.ui \

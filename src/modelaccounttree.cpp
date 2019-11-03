@@ -4,18 +4,17 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 
-#include "settings.h"
 #include "modelaccounttree.h"
 #include "utils.h"
+#include "birdtrayapp.h"
 
-ModelAccountTree::ModelAccountTree(QObject *parent, QTreeView* treeView)
-        : QAbstractItemModel( parent ), QStyledItemDelegate(parent)
-{
+ModelAccountTree::ModelAccountTree(QObject* parent, QTreeView* treeView)
+        : QAbstractItemModel(parent), QStyledItemDelegate(parent) {
+    Settings* settings = BirdtrayApp::get()->getSettings();
     // Get the current settings in proper(stored) order
-    for ( QString uri : pSettings->mFolderNotificationList )
-    {
-        mAccounts.push_back( uri );
-        mColors.push_back( pSettings->mFolderNotificationColors[uri] );
+    for (const QString& uri : settings->mFolderNotificationList) {
+        mAccounts.push_back(uri);
+        mColors.push_back(settings->mFolderNotificationColors[uri]);
     }
     treeView->setModel(this);
     treeView->setItemDelegateForColumn(1, this);
@@ -151,14 +150,13 @@ void ModelAccountTree::clear()
     endRemoveRows();
 }
 
-void ModelAccountTree::applySettings()
-{
-    pSettings->mFolderNotificationColors.clear();
-    pSettings->mFolderNotificationList.clear();
+void ModelAccountTree::applySettings() {
+    Settings* settings = BirdtrayApp::get()->getSettings();
+    settings->mFolderNotificationColors.clear();
+    settings->mFolderNotificationList.clear();
 
-    for ( int i = 0; i < mAccounts.size(); i++ )
-    {
-        pSettings->mFolderNotificationList.push_back( mAccounts[i] );
-        pSettings->mFolderNotificationColors[ mAccounts[i] ] = mColors[i];
+    for (int i = 0; i < mAccounts.size(); i++) {
+        settings->mFolderNotificationList.push_back(mAccounts[i]);
+        settings->mFolderNotificationColors[mAccounts[i]] = mColors[i];
     }
 }

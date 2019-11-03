@@ -159,6 +159,4 @@ class Settings
         void loadInstallerConfiguration();
 };
 
-extern Settings * pSettings;
-
 #endif // SETTINGS_H

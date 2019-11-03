@@ -39,6 +39,41 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
 </context>
 <context>
+    <name>BirdtrayApp</name>
+    <message>
+        <source>A free system tray notification for new mail for Thunderbird</source>
+        <translation>Ein freies Taskleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
+    </message>
+    <message>
+        <source>Display the contents of the given mork database.</source>
+        <translation>Zeige den Inhalt der Mork-Datenbank an.</translation>
+    </message>
+    <message>
+        <source>databaseFile</source>
+        <translation>datenbankDatei</translation>
+    </message>
+    <message>
+        <source>Decode an IMAP Utf7 string.</source>
+        <translation>Dekodiere eine IMAP Utf7 Zeichenkette.</translation>
+    </message>
+    <message>
+        <source>string</source>
+        <translation>zeichenkette</translation>
+    </message>
+    <message>
+        <source>Show the settings.</source>
+        <translation>Öffne die Einstellungen.</translation>
+    </message>
+    <message>
+        <source>Reset the settings to the defaults.</source>
+        <translation>Setze die Einstellungen auf die Standardwerte zurück.</translation>
+    </message>
+    <message>
+        <source>Enable debugging output.</source>
+        <translation>Aktiviert Debugging-Ausgaben.</translation>
+    </message>
+</context>
+<context>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
@@ -622,48 +657,16 @@ Wollen Sie fortfahren?</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <source>Sorry, system tray cannot be controlled through this addon on your operating system.</source>
-        <translation>Die Taskleiste kann leider auf Ihrem System nicht durch dieses Add-on kontrolliert werden.</translation>
-    </message>
-    <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Ein freies Taskleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
-    </message>
-    <message>
-        <source>Display the contents of the given mork database.</source>
-        <translation>Zeige den Inhalt der Mork-Datenbank an.</translation>
-    </message>
-    <message>
-        <source>databaseFile</source>
-        <translation>datenbankDatei</translation>
-    </message>
-    <message>
-        <source>Decode an IMAP Utf7 string.</source>
-        <translation>Dekodiere eine IMAP Utf7 Zeichenkette.</translation>
-    </message>
-    <message>
-        <source>string</source>
-        <translation>zeichenkette</translation>
-    </message>
-    <message>
-        <source>Show the settings.</source>
-        <translation>Öffne die Einstellungen.</translation>
-    </message>
-    <message>
-        <source>Reset the settings to the defaults.</source>
-        <translation>Setze die Einstellungen zu den Standardwerten zurück.</translation>
-    </message>
-    <message>
-        <source>Enable debugging output.</source>
-        <translation>Aktiviert Debugging-Ausgaben.</translation>
-    </message>
-    <message>
         <source>Failed to register ExitReason meta type.</source>
         <translation>Das Registrieren des ExitReason Metatypen schlug fehl.</translation>
     </message>
     <message>
         <source>Fatal</source>
         <translation>Fatal</translation>
+    </message>
+    <message>
+        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
+        <translation>Die Taskleiste kann leider auf Ihrem System nicht durch dieses Add-on kontrolliert werden.</translation>
     </message>
 </context>
 <context>

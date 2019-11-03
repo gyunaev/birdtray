@@ -23,6 +23,11 @@ class TrayIcon : public QSystemTrayIcon
     public:
         explicit TrayIcon(bool showSettings);
         ~TrayIcon() override;
+        
+        /**
+         * @return The window tools used by the tray icon.
+         */
+        WindowTools* getWindowTools() const;
 
     signals:
         void    settingsChanged();

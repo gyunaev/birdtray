@@ -1,6 +1,6 @@
 #include "utils.h"
-#include "settings.h"
 #include "version.h"
+#include "birdtrayapp.h"
 
 #include <QApplication>
 #include <QTextCodec>
@@ -191,8 +191,9 @@ void Utils::debug(const char *fmt, ...)
     va_list vl;
     char buf[8192];
 
-    if ( !pSettings->mVerboseOutput )
+    if (!BirdtrayApp::get()->getSettings()->mVerboseOutput) {
         return;
+    }
 
     va_start( vl, fmt );
     vsnprintf( buf, sizeof(buf) - 1, fmt, vl );

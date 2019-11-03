@@ -1,16 +1,7 @@
 #include "windowtools_win.h"
 #include <tlhelp32.h>
-#include "settings.h"
+#include "birdtrayapp.h"
 
-#ifndef __unused
-#  ifdef __GNUC__
-#    define __unused __attribute__((unused))
-#  elif defined(__LCLINT__)
-#    define __unused /*@unused@*/
-#  else
-#    define __unused
-#  endif
-#endif /* !defined(__unused) */
 
 /**
  * Helper data structure for the findMainWindow function.
@@ -19,11 +10,6 @@ struct _WindowFindData {
     HWND windowHandle;
     DWORD processId;
 };
-
-/**
- * A static instance for the minimize callback.
- */
-WindowTools_Win* WindowTools_Win::singleton = nullptr;
 
 /**
  * Determine whether a window handle is the main window of the corresponding process.
@@ -93,7 +79,6 @@ static DWORD getProcessId(LPCWCH processName) {
 
 
 WindowTools_Win::WindowTools_Win() : WindowTools() {
-    singleton = this;
     thunderbirdWindow = nullptr;
     thunderbirdMinimizeHook = nullptr;
 }
@@ -169,13 +154,15 @@ bool WindowTools_Win::checkWindow() {
 }
 
 void CALLBACK WindowTools_Win::minimizeCallback(
-        HWINEVENTHOOK __unused eventHook, DWORD event, HWND window, LONG idObject,
-        LONG idChild, DWORD __unused idEventThread, DWORD __unused eventTime) {
+        Q_DECL_UNUSED HWINEVENTHOOK eventHook, DWORD event, HWND window, LONG idObject,
+        LONG idChild, Q_DECL_UNUSED DWORD idEventThread, Q_DECL_UNUSED DWORD eventTime) {
+    BirdtrayApp* app = BirdtrayApp::get();
+    auto* winTools = dynamic_cast<WindowTools_Win*>(app->getTrayIcon()->getWindowTools());
     if (event == EVENT_SYSTEM_MINIMIZESTART &&
-        window == singleton->thunderbirdWindow &&
+        window == winTools->thunderbirdWindow &&
         idObject == OBJID_WINDOW && idChild == INDEXID_CONTAINER &&
-        pSettings->mHideWhenMinimized && singleton->isValid() &&
-        IsIconic(singleton->thunderbirdWindow) && IsWindowVisible(singleton->thunderbirdWindow)) {
-        singleton->hide();
+        app->getSettings()->mHideWhenMinimized && winTools->isValid() &&
+        IsIconic(winTools->thunderbirdWindow) && IsWindowVisible(winTools->thunderbirdWindow)) {
+        winTools->hide();
     }
 }

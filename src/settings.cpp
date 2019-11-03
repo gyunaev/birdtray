@@ -19,8 +19,6 @@
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
 
-Settings * pSettings;
-
 Settings::Settings(bool verboseOutput)
 {
 #ifdef Q_OS_WIN

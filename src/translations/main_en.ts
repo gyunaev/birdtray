@@ -36,6 +36,41 @@ OpenSSL might not be installed.</source>
     </message>
 </context>
 <context>
+    <name>BirdtrayApp</name>
+    <message>
+        <source>A free system tray notification for new mail for Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display the contents of the given mork database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>databaseFile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decode an IMAP Utf7 string.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>string</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the settings to the defaults.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable debugging output.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
@@ -609,39 +644,7 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, system tray cannot be controlled through this addon on your operating system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Display the contents of the given mork database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>databaseFile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decode an IMAP Utf7 string.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>string</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show the settings.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset the settings to the defaults.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable debugging output.</source>
+        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,7 +1,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "settings.h"
 #include "dialogaddeditaccount.h"
 #include "utils.h"
 #include "dialogsettings.h"

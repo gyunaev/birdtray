@@ -140,6 +140,4 @@ private:
     UpdateDownloadDialog* downloadProcessDialog = nullptr;
 };
 
-extern AutoUpdater* autoUpdaterSingleton;
-
 #endif /* AUTO_UPDATER_H */

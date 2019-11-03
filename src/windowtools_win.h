@@ -79,11 +79,6 @@ private:
             LONG idChild, DWORD idEventThread, DWORD eventTime);
     
     /**
-     * A static instance for the minimize callback.
-     */
-    static WindowTools_Win* singleton;
-    
-    /**
      * The handle to the minimize hook.
      */
     HWINEVENTHOOK thunderbirdMinimizeHook;
