@@ -86,11 +86,16 @@ RC_FILE = res/birdtray.rc
 
 TRANSLATIONS += \
     translations/main_en.ts \
-     translations/main_de.ts
-CONFIG(release, debug|release): OUT_DIR = $$OUT_PWD/release
-CONFIG(debug, debug|release): OUT_DIR = $$OUT_PWD/debug
+    translations/main_de.ts
+
+release::OUT_DIR = $$OUT_PWD/release
+debug::OUT_DIR = $$OUT_PWD/debug
 translations.path = $$OUT_DIR/translations
-translations.files = translations/*.qm
+for(TRANSLATION_FILE, $$list($$files(translations/*.ts))) {
+    TRANSLATION_FILE_NAME = $$basename(TRANSLATION_FILE)
+    translations.files += $$OUT_DIR/$$replace(TRANSLATION_FILE_NAME, .ts, .qm)
+    log("$$replace(TRANSLATION_FILE_NAME, .ts, .qm)")
+}
 COPIES += translations
 
 unix {
