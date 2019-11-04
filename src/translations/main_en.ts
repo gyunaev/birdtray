@@ -636,10 +636,6 @@ Do you want to continue?</source>
 <context>
     <name>QApplication</name>
     <message>
-        <source>Failed to register ExitReason meta type.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation type="unfinished"></translation>
     </message>

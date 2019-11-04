@@ -657,10 +657,6 @@ Wollen Sie fortfahren?</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <source>Failed to register ExitReason meta type.</source>
-        <translation>Das Registrieren des ExitReason Metatypen schlug fehl.</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Fatal</translation>
     </message>
