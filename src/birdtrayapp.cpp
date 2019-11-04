@@ -82,6 +82,12 @@ TrayIcon* BirdtrayApp::getTrayIcon() const {
 }
 
 bool BirdtrayApp::event(QEvent* event) {
+    if (event->type() == QEvent::LocaleChange) {
+        if (!loadTranslations()) {
+            Utils::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
+        }
+        return true;
+    }
     return QApplication::event(event);
 }
 
