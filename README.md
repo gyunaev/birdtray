@@ -33,7 +33,7 @@ For those of you using Thunderbird 68+, the sqlite-based parser will no longer w
 
 To build Birdtray from source, you would need the following libraries:
 
-- Qt 5.5 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
+- Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
 - sqlite3 (i.e. libsqlite3-dev or libsqlite3-devel)
 
 On Debian you need to install the following packages: ``qt5-default libsqlite3-dev libqt5x11extras5-dev qttools5-dev``

@@ -99,7 +99,6 @@ translations.path = $$OUT_DIR/translations
 for(TRANSLATION_FILE, $$list($$files(translations/*.ts))) {
     TRANSLATION_FILE_NAME = $$basename(TRANSLATION_FILE)
     translations.files += $$OUT_DIR/$$replace(TRANSLATION_FILE_NAME, .ts, .qm)
-    log("$$replace(TRANSLATION_FILE_NAME, .ts, .qm)")
 }
 COPIES += translations
 
