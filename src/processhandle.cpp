@@ -3,7 +3,6 @@
 #include <tlhelp32.h>
 
 #include <QtCore/QFileInfo>
-#include <QtWidgets/QApplication>
 #include "processhandle.h"
 #include "utils.h"
 

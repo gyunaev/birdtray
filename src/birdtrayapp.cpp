@@ -133,7 +133,6 @@ void BirdtrayApp::parseCmdArguments(QCommandLineParser &parser) {
 }
 
 void BirdtrayApp::ensureSystemTrayAvailable() {
-    // If system tray is not yet available, wait up to 60 seconds
     int passed = 0;
     while ( !QSystemTrayIcon::isSystemTrayAvailable() ) {
         if ( passed == 0 ) {

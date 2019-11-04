@@ -518,8 +518,7 @@ bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const 
     if (!profilePath.isEmpty()) {
         const QString name = QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName();
         QMessageBox::critical(nullptr, tr("Invalid Thunderbird directory"),
-                              tr("Valid Thunderbird directory must contain the file %1.")
-                                      .arg(name));
+                tr("Valid Thunderbird directory must contain the file %1.").arg(name));
     }
     return false;
 }

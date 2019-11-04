@@ -210,7 +210,7 @@ void TrayIcon::updateIcon()
     if (unread > 0 && settings->mShowUnreadEmailCount) {
         // Find the suitable font size, starting from 4
         QString countvalue = QString::number( unread );
-    
+
         int fontsize = static_cast<int>(largestFontSize(
                 settings->mNotificationFont,
                 static_cast<int>(settings->mNotificationMinimumFontSize),
