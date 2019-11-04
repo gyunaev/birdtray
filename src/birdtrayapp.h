@@ -88,6 +88,18 @@ private:
     bool loadTranslations();
     
     /**
+     * Try to load the translation.
+     *
+     * @param translator The translator to load the translation
+     * @param locale The locale of the translation to load.
+     * @param translationName The name of the translation to load.
+     * @param path The directory that contains the translation to load.
+     * @return True, if the translation was loaded successfully.
+     */
+    static bool loadTranslation(QTranslator &translator, QLocale &locale,
+                                const QString &translationName, const QString &path);
+    
+    /**
      * Parse the command line arguments.
      *
      * @param parser A command line parser that will contain the parsed arguments.
@@ -101,4 +113,4 @@ private:
 };
 
 
-#endif //BIRDTRAY_BIRDTRAY_APP_H
+#endif /* BIRDTRAY_BIRDTRAY_APP_H */
