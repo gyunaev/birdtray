@@ -1,5 +1,6 @@
 #include <QTimer>
 
+#include "birdtrayapp.h"
 #include "windowtools_x11.h"
 #include "utils.h"
 

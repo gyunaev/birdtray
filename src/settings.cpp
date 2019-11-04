@@ -1,9 +1,7 @@
 #include <QBuffer>
 #include <QDir>
 #include <QtCore/QStandardPaths>
-#ifdef Q_OS_WIN
 #include <QCoreApplication>
-#endif
 
 #include "settings.h"
 #include "utils.h"
