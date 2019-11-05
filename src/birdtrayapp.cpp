@@ -55,7 +55,6 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
         Utils::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
     }
     autoUpdater = new AutoUpdater();
-    
     trayIcon = new TrayIcon(parser.isSet("settings"));
 }
 
@@ -134,15 +133,15 @@ void BirdtrayApp::parseCmdArguments(QCommandLineParser &parser) {
 
 void BirdtrayApp::ensureSystemTrayAvailable() {
     int passed = 0;
-    while ( !QSystemTrayIcon::isSystemTrayAvailable() ) {
-        if ( passed == 0 ) {
+    while (!QSystemTrayIcon::isSystemTrayAvailable()) {
+        if (passed == 0) {
             qDebug("Waiting for system tray to become available");
         }
         passed++;
-        if ( passed > 120 ) {
+        if (passed > 120) {
             Utils::fatal(QApplication::tr("Sorry, system tray cannot be controlled "
                                           "through this add-on on your operating system."));
         }
-        QThread::msleep( 500 );
+        QThread::msleep(500);
     }
 }
