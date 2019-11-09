@@ -122,6 +122,12 @@ add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${HEADERS} ${PLATFORM_HEADERS})
 target_link_libraries(birdtray ${REQUIRED_MODULES})
 
+if(MSVC)
+    target_compile_options(birdtray PRIVATE /Wall /WX)
+else()
+    target_compile_options(birdtray PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
+
 # Installation
 if(WIN32)
     # Find ssl libraries
