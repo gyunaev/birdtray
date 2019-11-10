@@ -6,6 +6,7 @@
 
 class ModelNewEmails : public QAbstractItemModel
 {
+    Q_OBJECT
     public:
         ModelNewEmails( QObject * parent );
 

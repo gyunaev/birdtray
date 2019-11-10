@@ -1,6 +1,6 @@
 #include "updatedialog.h"
 #include "ui_updatedialog.h"
-#include "settings.h"
+#include "birdtrayapp.h"
 #include <utils.h>
 #include <QPushButton>
 
@@ -49,6 +49,7 @@ void UpdateDialog::show(const QString &newVersion, const QString &changelog,
 }
 
 void UpdateDialog::onIgnoreVersionClicked() {
-    pSettings->mIgnoreUpdateVersion = ui->newVersionLabel->text();
-    pSettings->save();
+    Settings* settings = BirdtrayApp::get()->getSettings();
+    settings->mIgnoreUpdateVersion = ui->newVersionLabel->text();
+    settings->save();
 }

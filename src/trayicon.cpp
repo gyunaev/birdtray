@@ -7,12 +7,12 @@
 #include <QFontMetrics>
 #include <QtNetwork/QNetworkSession>
 
-#include "settings.h"
 #include "trayicon.h"
 #include "unreadcounter.h"
 #include "windowtools.h"
 #include "utils.h"
 #include "autoupdater.h"
+#include "birdtrayapp.h"
 
 TrayIcon::TrayIcon(bool showSettings)
 {
@@ -42,12 +42,13 @@ TrayIcon::TrayIcon(bool showSettings)
     mThunderbirdWindowHide = false;
     connect(QApplication::instance(), &QApplication::aboutToQuit, this, &TrayIcon::onQuit);
 
-    mThunderbirdStartTime = QDateTime::currentDateTime().addSecs( pSettings->mLaunchThunderbirdDelay );
+    Settings* settings = BirdtrayApp::get()->getSettings();
+    mThunderbirdStartTime = QDateTime::currentDateTime().addSecs(settings->mLaunchThunderbirdDelay);
 
     mWinTools = WindowTools::create();
 
     // If the settings are not yet configure, pop up the message
-    if ( showSettings || (pSettings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
+    if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
             nullptr, tr( "Would you like to set up Birdtray?" ),
             tr( "You have not yet configured any email folders to monitor. "
                 "Would you like to do it now?") ) == QMessageBox::Yes )) {
@@ -70,7 +71,7 @@ TrayIcon::TrayIcon(bool showSettings)
     updateIcon();
     show();
     
-    if (pSettings->mUpdateOnStartup) {
+    if (settings->mUpdateOnStartup) {
         doAutoUpdateCheck();
     }
 }
@@ -86,6 +87,10 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager->deleteLater();
         networkConnectivityManager = nullptr;
     }
+}
+
+WindowTools* TrayIcon::getWindowTools() const {
+    return mWinTools;
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -120,7 +125,8 @@ static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxf
     {
         cursize = minfontsize + (maxfontsize - minfontsize) / 2;
         testfont.setPointSize( cursize );
-        testfont.setWeight( pSettings->mNotificationFontWeight );
+        testfont.setWeight(
+                static_cast<int>(BirdtrayApp::get()->getSettings()->mNotificationFontWeight));
         QSize size = QFontMetrics( testfont ).size( Qt::TextSingleLine, text );
 
         if ( size.width() < rectsize.width() && size.height() <= rectsize.height() )
@@ -134,6 +140,7 @@ static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxf
 
 void TrayIcon::updateIcon()
 {
+    Settings* settings = BirdtrayApp::get()->getSettings();
     // How many unread messages are here?
     unsigned int unread = mUnreadCounter;
 
@@ -156,14 +163,15 @@ void TrayIcon::updateIcon()
         unread -= mIgnoredUnreadEmails;
 
         // Are we blinking, and if not, should we be?
-        if ( unread > 0 && pSettings->mBlinkSpeed > 0 && mBlinkingTimeout == 0 )
-            enableBlinking( true );
+        if (unread > 0 && settings->mBlinkSpeed > 0 && mBlinkingTimeout == 0) {
+            enableBlinking(true);
+        }
 
         if ( unread == 0 && mBlinkingTimeout != 0 )
             enableBlinking( false );
     }
 
-    QPixmap temp( pSettings->getNotificationIcon().size() );
+    QPixmap temp(settings->getNotificationIcon().size());
     QPainter p;
 
     temp.fill( Qt::transparent );
@@ -179,16 +187,16 @@ void TrayIcon::updateIcon()
     else
         p.setOpacity( mBlinkingIconOpacity );
 
-    if ( unread != 0 && !pSettings->mNotificationIconUnread.isNull() )
-        p.drawPixmap( pSettings->mNotificationIconUnread.rect(), pSettings->mNotificationIconUnread );
-    else
-        p.drawPixmap( pSettings->getNotificationIcon().rect(), pSettings->getNotificationIcon() );
+    if (unread != 0 && !settings->mNotificationIconUnread.isNull()) {
+        p.drawPixmap(settings->mNotificationIconUnread.rect(), settings->mNotificationIconUnread);
+    } else {
+        p.drawPixmap(settings->getNotificationIcon().rect(), settings->getNotificationIcon());
+    }
 
-    p.setFont( pSettings->mNotificationFont );
+    p.setFont(settings->mNotificationFont);
 
     // Do we need to draw error sign?
-    if ( mUnreadMonitor == 0 || (pSettings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists ) )
-    {
+    if (mUnreadMonitor == 0 || (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
         pen.setWidth( (temp.width() * 10) / 100 );
@@ -199,20 +207,19 @@ void TrayIcon::updateIcon()
     }
 
     // Do we need to draw the unread counter?
-    if ( unread > 0 && pSettings->mShowUnreadEmailCount )
-    {
+    if (unread > 0 && settings->mShowUnreadEmailCount) {
         // Find the suitable font size, starting from 4
         QString countvalue = QString::number( unread );
 
-        int fontsize = largestFontSize( pSettings->mNotificationFont,
-                                        pSettings->mNotificationMinimumFontSize,
-                                        pSettings->mNotificationMaximumFontSize,
-                                        countvalue,
-                                        temp.size() - QSize( 2, 2 ) );
+        int fontsize = static_cast<int>(largestFontSize(
+                settings->mNotificationFont,
+                static_cast<int>(settings->mNotificationMinimumFontSize),
+                static_cast<int>(settings->mNotificationMaximumFontSize),
+                countvalue, temp.size() - QSize(2, 2)));
 
-        pSettings->mNotificationFont.setPointSize( fontsize );
-        pSettings->mNotificationFont.setWeight( pSettings->mNotificationFontWeight );
-        QFontMetrics fm( pSettings->mNotificationFont );
+        settings->mNotificationFont.setPointSize(fontsize);
+        settings->mNotificationFont.setWeight(static_cast<int>(settings->mNotificationFontWeight));
+        QFontMetrics fm(settings->mNotificationFont);
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
         int width = fm.horizontalAdvance(countvalue);
@@ -221,12 +228,12 @@ void TrayIcon::updateIcon()
 #endif
         QPainterPath textPath;
         textPath.addText((temp.width() - width) / 2.0,
-                         (temp.height() - fm.height()) / 2.0 + fm.ascent(),
-                         pSettings->mNotificationFont, countvalue);
-        if (pSettings->mNotificationBorderWidth > 0
-            && pSettings->mNotificationBorderColor.isValid()) {
+                (temp.height() - fm.height()) / 2.0 + fm.ascent(),
+                settings->mNotificationFont, countvalue);
+        if (settings->mNotificationBorderWidth > 0
+            && settings->mNotificationBorderColor.isValid()) {
             p.strokePath(textPath, QPen(
-                    pSettings->mNotificationBorderColor, pSettings->mNotificationBorderWidth));
+                    settings->mNotificationBorderColor, settings->mNotificationBorderWidth));
         }
         p.fillPath(textPath, mUnreadColor);
     }
@@ -245,19 +252,17 @@ void TrayIcon::enableBlinking(bool enabled)
 {
     if ( enabled )
     {
+        Settings* settings = BirdtrayApp::get()->getSettings();
         mBlinkingIconOpacity = 1.0;
 
         // If we are using the alpha transition, we have to update icon more often
-        if ( pSettings->mBlinkingUseAlphaTransition )
-        {
-            mBlinkingDelta = pSettings->mBlinkSpeed / 100.0;
+        if (settings->mBlinkingUseAlphaTransition) {
+            mBlinkingDelta = settings->mBlinkSpeed / 100.0;
             mBlinkingTimeout = 100;
-        }
-        else
-        {
+        } else {
             // The blinking speed slider is a value from 0 to 30, so we make it 50x
             mBlinkingDelta = 0;
-            mBlinkingTimeout = pSettings->mBlinkSpeed * 50;
+            mBlinkingTimeout = settings->mBlinkSpeed * 50;
         }
 
         mBlinkingTimer.setInterval( mBlinkingTimeout );
@@ -303,29 +308,28 @@ void TrayIcon::updateState()
         }
         else
         {
+            Settings* settings = BirdtrayApp::get()->getSettings();
             // Thunderbird is not running. Has it run before?
-            if ( !mThunderbirdWindowExisted )
-            {
+            if (!mThunderbirdWindowExisted) {
                 // No. Shall we start it?
-                if ( pSettings->mLaunchThunderbird && !mThunderbirdProcess && mThunderbirdStartTime < QDateTime::currentDateTime() )
-                {
+                if (settings->mLaunchThunderbird && !mThunderbirdProcess &&
+                    mThunderbirdStartTime < QDateTime::currentDateTime()) {
                     startThunderbird();
 
                     // Hide after?
-                    if ( pSettings->mHideWhenStarted )
+                    if (settings->mHideWhenStarted) {
                         mThunderbirdWindowHide = true;
+                    }
                 }
-            }
-            else
-            {
+            } else {
                 // It has run before, but not running now. Should we restart?
-                if ( pSettings->mRestartThunderbird && !mThunderbirdProcess )
-                {
+                if (settings->mRestartThunderbird && !mThunderbirdProcess) {
                     startThunderbird();
 
                     // Hide after?
-                    if ( pSettings->mHideWhenRestarted )
+                    if (settings->mHideWhenRestarted) {
                         mThunderbirdWindowHide = true;
+                    }
                 }
             }
         }
@@ -352,18 +356,19 @@ void TrayIcon::blinkTimeout()
     }
     else
     {
+        Settings* settings = BirdtrayApp::get()->getSettings();
         // We are either not blinking at all, or doing no transition
-        // this depends on nonzero pSettings->mBlinkSpeed
-        if ( pSettings->mBlinkSpeed != 0 )
-        {
+        // this depends on nonzero settings->mBlinkSpeed
+        if (settings->mBlinkSpeed != 0) {
             // Flip the opacity
-            if ( mBlinkingIconOpacity == pSettings->mUnreadOpacityLevel )
-                mBlinkingIconOpacity = 1.0 - pSettings->mUnreadOpacityLevel;
-            else
-                mBlinkingIconOpacity = pSettings->mUnreadOpacityLevel;
+            if (mBlinkingIconOpacity == settings->mUnreadOpacityLevel) {
+                mBlinkingIconOpacity = 1.0 - settings->mUnreadOpacityLevel;
+            } else {
+                mBlinkingIconOpacity = settings->mUnreadOpacityLevel;
+            }
+        } else {
+            mBlinkingIconOpacity = settings->mUnreadOpacityLevel;
         }
-        else
-            mBlinkingIconOpacity = pSettings->mUnreadOpacityLevel;
     }
 
     updateIcon();
@@ -389,7 +394,7 @@ void TrayIcon::actionSettings()
         if (result != QDialog::Accepted) {
             return;
         }
-        pSettings->save();
+        BirdtrayApp::get()->getSettings()->save();
 
         if ( !mUnreadMonitor )
             createUnreadCounterThread();
@@ -446,27 +451,22 @@ void TrayIcon::actionUnsnooze()
     updateIcon();
 }
 
-void TrayIcon::actionNewEmail()
-{
+void TrayIcon::actionNewEmail() {
+    Settings* settings = BirdtrayApp::get()->getSettings();
     QStringList args;
     args << "-compose";
 
-    if ( !pSettings->mNewEmailData.isEmpty() )
-    {
-        QAction * action = (QAction *) sender();
-
-        if ( action->data().isValid() )
-        {
-            int index = ( action->data().toInt() );
-
-            if ( index <  0 || index > pSettings->mNewEmailData.size() - 1 )
+    if (!settings->mNewEmailData.isEmpty()) {
+        auto* action = (QAction*) sender();
+        if (action->data().isValid()) {
+            int index = (action->data().toInt());
+            if (index < 0 || index > settings->mNewEmailData.size() - 1) {
                 return;
-
-            args << pSettings->mNewEmailData[index].asArgs();
+            }
+            args << settings->mNewEmailData[index].asArgs();
         }
     }
-
-    QProcess::startDetached( pSettings->getThunderbirdExecutablePath(), args );
+    QProcess::startDetached(settings->getThunderbirdExecutablePath(), args);
 }
 
 void TrayIcon::actionIgnoreEmails()
@@ -475,17 +475,17 @@ void TrayIcon::actionIgnoreEmails()
     updateIgnoredUnreads();
 }
 
-void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason)
-{
-    if ( reason == QSystemTrayIcon::Trigger )
-    {
-        if ( pSettings->mShowHideThunderbird )
+void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason) {
+    if (reason == QSystemTrayIcon::Trigger) {
+        if (BirdtrayApp::get()->getSettings()->mShowHideThunderbird) {
             actionActivate();
+        }
     }
 }
 
 void TrayIcon::createMenu()
 {
+    Settings* settings = BirdtrayApp::get()->getSettings();
     mSystrayMenu->clear();
 
     // Show and hide action
@@ -499,16 +499,16 @@ void TrayIcon::createMenu()
     mSystrayMenu->addSeparator();
 
     // New email could be either a single action, or menu depending on settings
-    if (pSettings->mNewEmailMenuEnabled) {
-        if (!pSettings->mNewEmailData.isEmpty()) {
+    if (settings->mNewEmailMenuEnabled) {
+        if (!settings->mNewEmailData.isEmpty()) {
             // A submenu
             auto* newEmails = new QMenu(tr("New Email"));
             auto* action = new QAction(tr("Blank"), this);
             connect(action, &QAction::triggered, this, &TrayIcon::actionNewEmail);
             newEmails->addAction(action);
             newEmails->addSeparator();
-            for (int index = 0; index < pSettings->mNewEmailData.size(); index++) {
-                action = new QAction(pSettings->mNewEmailData[index].menuentry(), this);
+            for (int index = 0; index < settings->mNewEmailData.size(); index++) {
+                action = new QAction(settings->mNewEmailData[index].menuentry(), this);
                 connect(action, &QAction::triggered, this, &TrayIcon::actionNewEmail);
                 // Remember the delay in the action itself
                 action->setData(index);
@@ -555,8 +555,7 @@ void TrayIcon::createMenu()
     mMenuUnsnooze->setVisible( false );
 
     // Add the ignore action
-    if ( pSettings->mAllowSuppressingUnreads )
-    {
+    if (settings->mAllowSuppressingUnreads) {
         mMenuIgnoreUnreads = new QAction( tr("Ignore unread emails"), this );
         connect( mMenuIgnoreUnreads, &QAction::triggered, this, &TrayIcon::actionIgnoreEmails );
 
@@ -588,7 +587,7 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    QString thunderbirdExePath = pSettings->getThunderbirdExecutablePath();
+    QString thunderbirdExePath = BirdtrayApp::get()->getSettings()->getThunderbirdExecutablePath();
     Utils::debug("Starting Thunderbird as '%s'", qPrintable( thunderbirdExePath ) );
 
     if ( mThunderbirdProcess )
@@ -611,11 +610,11 @@ void TrayIcon::tbProcessError(QProcess::ProcessError )
         return;
     }
 #endif /* Q_OS_WIN */
-    QMessageBox::critical( nullptr,
-                           tr("Cannot start Thunderbird"),
-                           tr("Error starting Thunderbird as %1:\n\n%2")
-                                .arg( pSettings->getThunderbirdExecutablePath() )
-                                .arg( mThunderbirdProcess->errorString() ) );
+    QMessageBox::critical(nullptr,
+            tr("Cannot start Thunderbird"),
+            tr("Error starting Thunderbird as %1:\n\n%2")
+                    .arg(BirdtrayApp::get()->getSettings()->getThunderbirdExecutablePath())
+                    .arg(mThunderbirdProcess->errorString()));
 
     // We keep the mThunderbirdProcess pointer, so the process is not restarted again
 }
@@ -652,19 +651,20 @@ void TrayIcon::tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitRea
 #endif /* Q_OS_WIN */
 
 void TrayIcon::onQuit() {
-    if ( mWinTools && mWinTools->isHidden() )
+    if (mWinTools && mWinTools->isHidden()) {
         mWinTools->show();
-    
-    if ( pSettings->mExitThunderbirdWhenQuit )
-    {
-        if ( mWinTools )
+    }
+    if (BirdtrayApp::get()->getSettings()->mExitThunderbirdWhenQuit) {
+        if (mWinTools) {
             mWinTools->closeWindow();
+        }
     }
 }
 
 void TrayIcon::onAutoUpdateCheckFinished(const QString &errorMessage) {
+    AutoUpdater* autoUpdater = BirdtrayApp::get()->getAutoUpdater();
     if (errorMessage.isNull()) {
-        disconnect(autoUpdaterSingleton, &AutoUpdater::onCheckUpdateFinished,
+        disconnect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,
                    this, &TrayIcon::onAutoUpdateCheckFinished);
     } else if (networkConnectivityManager == nullptr) {
         networkConnectivityManager = new QNetworkConfigurationManager();
@@ -675,7 +675,7 @@ void TrayIcon::onAutoUpdateCheckFinished(const QString &errorMessage) {
                     networkConnectivityManager->deleteLater();
                     networkConnectivityManager = nullptr;
                 }
-                autoUpdaterSingleton->checkForUpdates();
+                autoUpdater->checkForUpdates();
             }
         };
         connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationChanged,
@@ -709,7 +709,8 @@ void TrayIcon::updateIgnoredUnreads()
 }
 
 void TrayIcon::doAutoUpdateCheck() {
-    connect(autoUpdaterSingleton, &AutoUpdater::onCheckUpdateFinished,
+    AutoUpdater* autoUpdater = BirdtrayApp::get()->getAutoUpdater();
+    connect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,
             this, &TrayIcon::onAutoUpdateCheckFinished);
-    autoUpdaterSingleton->checkForUpdates();
+    autoUpdater->checkForUpdates();
 }

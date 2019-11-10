@@ -3,15 +3,6 @@ depth: 3
 
 matrix:
   include:
-    - name: Linux Qt 5.5
-      os: linux
-      dist: trusty
-      sudo: true
-      compiler: gcc
-      env:
-        - QT_REPO="ppa:beineri/opt-qt551-trusty"
-        - QT_VERSION="qt55"
-        - QT_HOME="/opt/${QT_VERSION}"
     - name: Linux Qt 5.6
       os: linux
       dist: trusty

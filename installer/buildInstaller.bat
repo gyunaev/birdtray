@@ -113,7 +113,10 @@ if errorLevel 1 (
     echo to the deployment folder at %deploymentFolder% 1>&2
     exit /b %errorLevel%
 )
-for /f "delims=" %%i in ("%exePath%") do set "exeFileName=%%~nxi"
+for /f "delims=" %%i in ("%exePath%") do (
+    set "exeFileName=%%~nxi"
+    set "translationDir=%%~di%%~pitranslations"
+)
 "%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
         --no-angle --no-opengl-sw -no-svg "%deploymentFolder%\%exeFileName%"
 if errorLevel 1 (
@@ -124,6 +127,17 @@ if exist "%deploymentFolder%\imageformats" (
     for /f %%F in ('dir "%deploymentFolder%\imageformats" /b /a-d ^| findstr /vile "qico.dll"') do (
         del "%deploymentFolder%\imageformats\%%F" 1>nul
     )
+)
+rem  Copy translations
+if exist "%translationDir%" (
+    xcopy "%translationDir%" "%deploymentFolder%\translations" /q /y 1>nul
+    if errorLevel 1 (
+        echo Failed to copy the translations from %translationDir% 1>&2
+        echo to the deployment folder at %deploymentFolder%\translations 1>&2
+        exit /b %errorLevel%
+    )
+) else (
+    echo Warning: Did not find translations directory at %translationDir%
 )
 
 rem  #### Download the installer dependencies ####
@@ -205,4 +219,6 @@ echo libSqlitePath: The path to the libsqlite.dll that was used to compile the B
 echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.ddl
 echo:
 echo The following programs must be on the PATH: windeployqt, makensis, g++, git, curl and 7z.
+echo The script also searches for translations in translations subdirectory
+echo of the directory containing the birdtray executable.
 goto :eof

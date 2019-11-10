@@ -4,7 +4,6 @@
 #include <QFile>
 #include <QDir>
 
-#include "settings.h"
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
 #include "modelnewemails.h"
@@ -14,12 +13,15 @@
 #include "utils.h"
 #include "autoupdater.h"
 #include "mailaccountdialog.h"
+#include "birdtrayapp.h"
 
 DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
 {
     setupUi(this);
     mProgressFixer = 0;
+    BirdtrayApp* app = BirdtrayApp::get();
+    Settings* settings = app->getSettings();
 
     // Show the first tab
     tabWidget->setCurrentIndex( 0 );
@@ -47,38 +49,38 @@ DialogSettings::DialogSettings( QWidget *parent)
     
     connect( checkUpdateButton, &QPushButton::clicked,
             this, &DialogSettings::onCheckUpdateButton );
-    connect( autoUpdaterSingleton, &AutoUpdater::onCheckUpdateFinished,
+    connect( app->getAutoUpdater(), &AutoUpdater::onCheckUpdateFinished,
             this, &DialogSettings::onCheckUpdateFinished );
 
     // Setup parameters
-    leProfilePath->setText( QDir::toNativeSeparators(pSettings->mThunderbirdFolderPath) );
-    btnNotificationColor->setColor( pSettings->mNotificationDefaultColor );
-    borderColorButton->setColor(pSettings->mNotificationBorderColor);
-    borderWidthSlider->setValue(static_cast<int>(pSettings->mNotificationBorderWidth) * 2);
-    notificationFont->setCurrentFont( pSettings->mNotificationFont );
-    notificationFontWeight->setValue( pSettings->mNotificationFontWeight * 2 );
-    sliderBlinkingSpeed->setValue( pSettings->mBlinkSpeed );
-    boxLaunchThunderbirdAtStart->setChecked( pSettings->mLaunchThunderbird );
-    boxShowHideThunderbird->setChecked( pSettings->mShowHideThunderbird );
-    boxHideWhenMinimized->setChecked( pSettings->mHideWhenMinimized );
-    boxMonitorThunderbirdWindow->setChecked( pSettings->mMonitorThunderbirdWindow );
-    boxRestartThunderbird->setChecked( pSettings->mRestartThunderbird );
-    leThunderbirdBinary->setText( pSettings->mThunderbirdCmdLine  );
-    leThunderbirdWindowMatch->setText( pSettings->mThunderbirdWindowMatch  );
-    spinMinimumFontSize->setValue( pSettings->mNotificationMinimumFontSize );
-    spinMinimumFontSize->setMaximum( pSettings->mNotificationMaximumFontSize - 1 );
-    boxHideWindowAtStart->setChecked( pSettings->mHideWhenStarted );
-    boxHideWindowAtRestart->setChecked( pSettings->mHideWhenRestarted );
-    boxEnableNewEmail->setChecked( pSettings->mNewEmailMenuEnabled );
-    boxBlinkingUsesAlpha->setChecked( pSettings->mBlinkingUseAlphaTransition );
-    checkUpdateOnStartup->setChecked( pSettings->mUpdateOnStartup );
-    boxAllowSuppression->setChecked( pSettings->mAllowSuppressingUnreads );
-    spinUnreadOpacityLevel->setValue( pSettings->mUnreadOpacityLevel * 100 );
-    spinThunderbirdStartDelay->setValue( pSettings->mLaunchThunderbirdDelay );
-    boxShowUnreadCount->setChecked( pSettings->mShowUnreadEmailCount );
+    leProfilePath->setText( QDir::toNativeSeparators(settings->mThunderbirdFolderPath) );
+    btnNotificationColor->setColor( settings->mNotificationDefaultColor );
+    borderColorButton->setColor(settings->mNotificationBorderColor);
+    borderWidthSlider->setValue(static_cast<int>(settings->mNotificationBorderWidth) * 2);
+    notificationFont->setCurrentFont( settings->mNotificationFont );
+    notificationFontWeight->setValue( settings->mNotificationFontWeight * 2 );
+    sliderBlinkingSpeed->setValue( settings->mBlinkSpeed );
+    boxLaunchThunderbirdAtStart->setChecked( settings->mLaunchThunderbird );
+    boxShowHideThunderbird->setChecked( settings->mShowHideThunderbird );
+    boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
+    boxMonitorThunderbirdWindow->setChecked( settings->mMonitorThunderbirdWindow );
+    boxRestartThunderbird->setChecked( settings->mRestartThunderbird );
+    leThunderbirdBinary->setText( settings->mThunderbirdCmdLine  );
+    leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
+    spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
+    spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
+    boxHideWindowAtStart->setChecked( settings->mHideWhenStarted );
+    boxHideWindowAtRestart->setChecked( settings->mHideWhenRestarted );
+    boxEnableNewEmail->setChecked( settings->mNewEmailMenuEnabled );
+    boxBlinkingUsesAlpha->setChecked( settings->mBlinkingUseAlphaTransition );
+    checkUpdateOnStartup->setChecked( settings->mUpdateOnStartup );
+    boxAllowSuppression->setChecked( settings->mAllowSuppressingUnreads );
+    spinUnreadOpacityLevel->setValue( settings->mUnreadOpacityLevel * 100 );
+    spinThunderbirdStartDelay->setValue( settings->mLaunchThunderbirdDelay );
+    boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
 
-    if ( pSettings->mLaunchThunderbird )
-        boxStopThunderbirdOnExit->setChecked( pSettings->mExitThunderbirdWhenQuit );
+    if ( settings->mLaunchThunderbird )
+        boxStopThunderbirdOnExit->setChecked( settings->mExitThunderbirdWhenQuit );
 
     // Prepare the error palette
     mPaletteErrror = mPaletteOk = leProfilePath->palette();
@@ -101,12 +103,12 @@ DialogSettings::DialogSettings( QWidget *parent)
     browserAbout->setText( origabout );
 
     // Icon
-    btnNotificationIcon->setIcon( pSettings->getNotificationIcon() );
+    btnNotificationIcon->setIcon( settings->getNotificationIcon() );
 
-    if ( !pSettings->mNotificationIconUnread.isNull() )
+    if ( !settings->mNotificationIconUnread.isNull() )
     {
         boxNotificationIconUnread->setChecked( true );
-        btnNotificationIconUnread->setIcon( pSettings->mNotificationIconUnread );
+        btnNotificationIconUnread->setIcon( settings->mNotificationIconUnread );
     }
     else
         boxNotificationIconUnread->setChecked( false );
@@ -117,7 +119,7 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     connect( boxParserSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(unreadParserChanged(int)) );
 
-    if ( pSettings->mUseMorkParser )
+    if ( settings->mUseMorkParser )
         boxParserSelection->setCurrentIndex( 1 );
     else
         boxParserSelection->setCurrentIndex( 0 );
@@ -134,7 +136,8 @@ void DialogSettings::accept()
 
         if ( profilePath.isEmpty() )
         {
-            QMessageBox::critical( 0, "Empty Thunderbird directory", tr("You must specify Thunderbird directory") );
+            QMessageBox::critical(nullptr, tr("Empty Thunderbird directory"),
+                                  tr("You must specify a Thunderbird directory."));
             return;
         }
         if (!reportIfProfilePathValid(profilePath)) {
@@ -144,47 +147,51 @@ void DialogSettings::accept()
 
     if ( boxEnableNewEmail->isChecked() && leThunderbirdBinary->text().isEmpty() )
     {
-        QMessageBox::critical( 0, "Empty Thunderbird path", tr("You have enabled New Email menu, but you did not specify Thunderbird path") );
+        QMessageBox::critical(nullptr, tr("Empty Thunderbird path"),
+                              tr("You have enabled New Email menu, "
+                                 "but you did not specify Thunderbird path."));
         tabWidget->setCurrentIndex( 0 );
         leThunderbirdBinary->setFocus();
         return;
     }
-
-    pSettings->mThunderbirdFolderPath = leProfilePath->text();
-    pSettings->mNotificationDefaultColor = btnNotificationColor->color();
-    pSettings->mNotificationBorderColor = borderColorButton->color();
+    
+    BirdtrayApp* app = BirdtrayApp::get();
+    Settings* settings = app->getSettings();
+    settings->mThunderbirdFolderPath = leProfilePath->text();
+    settings->mNotificationDefaultColor = btnNotificationColor->color();
+    settings->mNotificationBorderColor = borderColorButton->color();
     // A width of 100 is way to much, nobody will want to go beyond 50.
-    pSettings->mNotificationBorderWidth = qRound(borderWidthSlider->value() / 2.0);
-    pSettings->mNotificationFont = notificationFont->currentFont();
-    pSettings->mBlinkSpeed = sliderBlinkingSpeed->value();
-    pSettings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
-    pSettings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
-    pSettings->mThunderbirdCmdLine = leThunderbirdBinary->text();
-    pSettings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
-    pSettings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
-    pSettings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
-    pSettings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
-    pSettings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
+    settings->mNotificationBorderWidth = qRound(borderWidthSlider->value() / 2.0);
+    settings->mNotificationFont = notificationFont->currentFont();
+    settings->mBlinkSpeed = sliderBlinkingSpeed->value();
+    settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
+    settings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
+    settings->mThunderbirdCmdLine = leThunderbirdBinary->text();
+    settings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
+    settings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
+    settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
+    settings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
+    settings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
 
-    pSettings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
-    pSettings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
-    pSettings->mRestartThunderbird = boxRestartThunderbird->isChecked();
-    pSettings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
-    pSettings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
-    pSettings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
-    pSettings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
-    pSettings->mUpdateOnStartup = checkUpdateOnStartup->isChecked();
-    pSettings->mUseMorkParser = isMorkParserSelected();
-    pSettings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
-    pSettings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
-    pSettings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
+    settings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
+    settings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
+    settings->mRestartThunderbird = boxRestartThunderbird->isChecked();
+    settings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
+    settings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
+    settings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
+    settings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
+    settings->mUpdateOnStartup = checkUpdateOnStartup->isChecked();
+    settings->mUseMorkParser = isMorkParserSelected();
+    settings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
+    settings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
+    settings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
 
-    pSettings->setNotificationIcon(btnNotificationIcon->icon().pixmap( pSettings->mIconSize ));
+    settings->setNotificationIcon(btnNotificationIcon->icon().pixmap( settings->mIconSize ));
 
     if ( boxNotificationIconUnread->isChecked() )
-        pSettings->mNotificationIconUnread = btnNotificationIconUnread->icon().pixmap( pSettings->mIconSize );
+        settings->mNotificationIconUnread = btnNotificationIconUnread->icon().pixmap( settings->mIconSize );
     else
-        pSettings->mNotificationIconUnread = QPixmap();
+        settings->mNotificationIconUnread = QPixmap();
 
     mModelNewEmails->applySettings();
     mAccountModel->applySettings();
@@ -283,17 +290,21 @@ void DialogSettings::databaseUnreadsFixed( QString errorMsg )
     delete mProgressFixer;
     mProgressFixer = 0;
 
-    if ( errorMsg.isEmpty() )
-        QMessageBox::information( 0, "Database updated", "Successfully updated the database");
-    else
-        QMessageBox::critical( 0, "Error updating database", tr("Error updating the database:\n%1") .arg( errorMsg ));
+    if (errorMsg.isEmpty()) {
+        QMessageBox::information(nullptr, tr("Database updated"),
+                                 tr("Successfully updated the database."));
+    } else {
+        QMessageBox::critical(nullptr, tr("Error updating database"),
+                              tr("Error updating the database:\n%1").arg(errorMsg));
+    }
 }
 
 void DialogSettings::accountsAvailable( QString errorMsg )
 {
     if ( !errorMsg.isEmpty() )
     {
-        QMessageBox::critical( 0, "Error retrieving accounts", tr("Error retrieving accounts:\n%1") .arg( errorMsg ));
+        QMessageBox::critical(nullptr, tr("Error retrieving accounts"),
+                              tr("Error retrieving accounts:\n%1").arg(errorMsg));
         return;
     }
 
@@ -381,7 +392,7 @@ void DialogSettings::newEmailRemove()
 void DialogSettings::onCheckUpdateButton() {
     checkUpdateButton->setText(tr("Checking..."));
     checkUpdateButton->setEnabled(false);
-    autoUpdaterSingleton->checkForUpdates();
+    BirdtrayApp::get()->getAutoUpdater()->checkForUpdates();
 }
 
 void DialogSettings::buttonChangeIcon()
@@ -436,8 +447,8 @@ void DialogSettings::unreadParserChanged(int curr)
     }
 
     // Did we change comparing to settings?
-    if ( mAccountModel->rowCount() != 0 && isMorkParserSelected() != pSettings->mUseMorkParser )
-    {
+    if (mAccountModel->rowCount() != 0 &&
+        isMorkParserSelected() != BirdtrayApp::get()->getSettings()->mUseMorkParser) {
         if ( QMessageBox::question( 0,
                                tr("WARNING: Parser changed"),
                                tr("You have changed the parser, but the account format is not compatible "
@@ -454,7 +465,7 @@ void DialogSettings::changeIcon(QToolButton *button)
     QString e = QFileDialog::getOpenFileName( 0,
                                               tr("Choose the new icon"),
                                               "",
-                                              tr("Images(*.png *.svg)") );
+                                              tr("Images (*.png *.svg)") );
 
     if ( e.isEmpty() )
         return;
@@ -463,7 +474,8 @@ void DialogSettings::changeIcon(QToolButton *button)
 
     if ( !test.load( e ) )
     {
-        QMessageBox::critical( 0, "Invalid icon", tr("Could not load the icon from this file") );
+        QMessageBox::critical(nullptr, tr("Invalid icon"),
+                              tr("Could not load the icon from this file."));
         return;
     }
 
@@ -504,9 +516,9 @@ bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const 
         return true;
     }
     if (!profilePath.isEmpty()) {
+        const QString name = QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName();
         QMessageBox::critical(nullptr, tr("Invalid Thunderbird directory"),
-                tr("Valid Thunderbird directory must contain the file %1")
-                .arg(QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName()));
+                tr("Valid Thunderbird directory must contain the file %1.").arg(name));
     }
     return false;
 }

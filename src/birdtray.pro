@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network
-CONFIG += c++11
+CONFIG += c++11 lrelease file_copies
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = birdtray
@@ -46,7 +46,8 @@ SOURCES += \
     modelaccounttree.cpp \
     morkparser.cpp \
     utils.cpp \
-    autoupdater.cpp
+    autoupdater.cpp \
+    birdtrayapp.cpp
 
 HEADERS += \
     trayicon.h \
@@ -69,7 +70,8 @@ HEADERS += \
     modelaccounttree.h \
     morkparser.h \
     utils.h \
-    autoupdater.h
+    autoupdater.h \
+    birdtrayapp.h
 
 FORMS += \
     dialogaddeditaccount.ui \
@@ -83,6 +85,22 @@ RESOURCES += \
     resources.qrc
 RC_INCLUDEPATH += $$PWD
 RC_FILE = res/birdtray.rc
+
+TRANSLATIONS += \
+    translations/main_en.ts \
+    translations/main_de.ts
+EXTRA_TRANSLATIONS += \
+    translations/dynamic_en.ts \
+    translations/dynamic_de.ts
+
+release::OUT_DIR = $$OUT_PWD/release
+debug::OUT_DIR = $$OUT_PWD/debug
+translations.path = $$OUT_DIR/translations
+for(TRANSLATION_FILE, $$list($$files(translations/*.ts))) {
+    TRANSLATION_FILE_NAME = $$basename(TRANSLATION_FILE)
+    translations.files += $$OUT_DIR/$$replace(TRANSLATION_FILE_NAME, .ts, .qm)
+}
+COPIES += translations
 
 unix {
      SOURCES += windowtools_x11.cpp

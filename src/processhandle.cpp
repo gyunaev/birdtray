@@ -13,6 +13,8 @@ static int registerExitReasonMetaType() Q_DECL_NOTHROW {
     try {
         return qRegisterMetaType<ProcessHandle::ExitReason>("ExitReason");
     } catch (...) {
+        // Don't translate the message, because it gets marked as vanished
+        // by the lupdate tool on non-Windows platforms.
         Utils::fatal("Failed to register ExitReason meta type.");
     }
 }

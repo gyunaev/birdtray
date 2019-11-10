@@ -60,7 +60,7 @@ void UpdateDownloadDialog::onDownloadProgress(qint64 bytesReceived, qint64 bytes
         return;
     }
     ui->label->setText(
-            tr("Downloading Birdtray installer... (%1 Mb/ %2 Mb).")
+            tr("Downloading Birdtray installer... (%1 Mb / %2 Mb).")
                     .arg(qRound(bytesReceived / 1000000.0))
                     .arg(qRound(bytesTotal / 1000000.0)));
     int percent = qRound((bytesReceived / (double) bytesTotal) * 100.0);

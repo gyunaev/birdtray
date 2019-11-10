@@ -1,5 +1,6 @@
 #include <QTimer>
 
+#include "birdtrayapp.h"
 #include "windowtools_x11.h"
 #include "utils.h"
 
@@ -371,7 +372,8 @@ bool WindowTools_X11::lookup()
     if ( isValid() )
         return mWinId;
 
-    mWinId = findWindow( QX11Info::display(), QX11Info::appRootWindow(), true, pSettings->mThunderbirdWindowMatch );
+    mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), true,
+            BirdtrayApp::get()->getSettings()->mThunderbirdWindowMatch);
 
     Utils::debug("Window ID found: %lX", mWinId );
 
@@ -478,8 +480,9 @@ void WindowTools_X11::doHide()
 
 void WindowTools_X11::timerWindowState()
 {
-    if ( mWinId == None || !pSettings->mHideWhenMinimized )
+    if (mWinId == None || !BirdtrayApp::get()->getSettings()->mHideWhenMinimized) {
         return;
+    }
 
     // _NET_WM_STATE_HIDDEN is set for minimized windows, so if we see it, this means it was minimized by the user
     if ( checkWindowState( QX11Info::display(), mWinId, "_NET_WM_STATE_HIDDEN" ) && mHiddenStateCounter == 0 )

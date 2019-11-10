@@ -228,10 +228,11 @@ void MailAccountDialog::initializeAccountsPage() {
                 QString name = folderFile.baseName();
                 bool isInbox = QString::compare(name, "INBOX", Qt::CaseInsensitive) == 0;
                 if (isInbox) {
-                    name = "Inbox";
+                    name = tr("Inbox");
+                } else {
+                    name = QCoreApplication::translate("EmailFolders", name.toUtf8().constData());
                 }
-                auto* folderItem = new QTreeWidgetItem(
-                        accountItem, {tr(name.toUtf8().constData())});
+                auto* folderItem = new QTreeWidgetItem(accountItem, {name});
                 if (isInbox) {
                     QFont font = folderItem->font(0);
                     font.setBold(true);

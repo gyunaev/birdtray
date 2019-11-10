@@ -6,10 +6,10 @@
 #include "unreadcounter.h"
 #include "sqlite_statement.h"
 #include "morkparser.h"
-#include "settings.h"
 #include "trayicon.h"
 #include "utils.h"
 #include "databaseaccounts.h"
+#include "birdtrayapp.h"
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     : QThread( 0 ), mChangedMSFtimer(this)
@@ -28,7 +28,7 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     connect( parent, &TrayIcon::settingsChanged, this, &UnreadMonitor::slotSettingsChanged );
 
     // Set up the watched file timer
-    mChangedMSFtimer.setInterval( pSettings->mWatchFileTimeout );
+    mChangedMSFtimer.setInterval(BirdtrayApp::get()->getSettings()->mWatchFileTimeout);
     mChangedMSFtimer.setSingleShot( true );
 
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
@@ -42,7 +42,8 @@ UnreadMonitor::~UnreadMonitor()
 
 void UnreadMonitor::run()
 {
-    mSqliteDbFile = DatabaseAccounts::getDatabasePath(pSettings->mThunderbirdFolderPath);
+    mSqliteDbFile = DatabaseAccounts::getDatabasePath(
+            BirdtrayApp::get()->getSettings()->mThunderbirdFolderPath);
 
     // Start it as soon as thread starts its event loop
     QTimer::singleShot( 0, [=](){ updateUnread(); } );
@@ -85,7 +86,7 @@ bool UnreadMonitor::openDatabase()
                            &mSqlitedb,
                            SQLITE_OPEN_READONLY, 0 ) != SQLITE_OK )
     {
-        emit error( QString("Error opening sqlite database: %1") .arg( sqlite3_errmsg(mSqlitedb) ) );
+        emit error(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(mSqlitedb)));
         return false;
     }
 
@@ -99,7 +100,7 @@ bool UnreadMonitor::openDatabase()
         return false;
 
     // Make a copy as we'd delete them when found
-    auto folders = pSettings->mFolderNotificationColors;
+    auto folders = BirdtrayApp::get()->getSettings()->mFolderNotificationColors;
 
     while ( stmt.step() == SQLITE_ROW )
     {
@@ -121,7 +122,7 @@ bool UnreadMonitor::openDatabase()
     // If anything left, we didn't find those
     if ( !folders.isEmpty() )
     {
-        emit error( QString("Folder %1 was not found in database") .arg( folders.firstKey() ) );
+        emit error(tr("Folder %1 was not found in database.").arg(folders.firstKey()));
         return false;
     }
 
@@ -144,10 +145,11 @@ void UnreadMonitor::updateUnread()
     QColor chosenColor;
     int total = 0;
 
-    if ( pSettings->mUseMorkParser )
-        getUnreadCount_Mork( total, chosenColor );
-    else
-        getUnreadCount_SQLite( total, chosenColor);
+    if (BirdtrayApp::get()->getSettings()->mUseMorkParser) {
+        getUnreadCount_Mork(total, chosenColor);
+    } else {
+        getUnreadCount_SQLite(total, chosenColor);
+    }
 
     if ( total != mLastReportedUnread || chosenColor != mLastColor )
     {
@@ -174,7 +176,7 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
     // This returns the number of unread messages (JSON attribute "59": false)
     if ( !stmt.prepare( mSqlitedb, QString("SELECT folderID FROM messages WHERE folderID IN (%1) AND json_extract( jsonAttributes, '$.59' ) = 0") .arg( mAllFolderIDs) ) )
     {
-        emit error("Cannot query database");
+        emit error(tr("Cannot query database."));
         this->exit( 0 );
     }
 
@@ -196,7 +198,7 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
             if ( chosenColor.isValid() )
             {
                 if ( chosenColor != mFolderColorMap[ folderId ] ) {
-                    chosenColor = pSettings->mNotificationDefaultColor;
+                    chosenColor = BirdtrayApp::get()->getSettings()->mNotificationDefaultColor;
                 }
             } else {
                 chosenColor = mFolderColorMap[ folderId ];
@@ -208,6 +210,7 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
 
 void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 {
+    Settings* settings = BirdtrayApp::get()->getSettings();
     bool rescanall = false;
 
     // We rebuild and rescan the whole map if there is no such path in there, or map is empty (first run)
@@ -224,10 +227,12 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
     {
         mMorkUnreadCounts.clear();
 
-        for ( const QString& tpath : pSettings->mFolderNotificationColors.keys() )
+        for ( const QString& tpath : settings->mFolderNotificationColors.keys() )
         {
             mMorkUnreadCounts[ tpath ] = getMorkUnreadCount( tpath );
-            mDBWatcher.addPath( tpath );
+            if (!mDBWatcher.files().contains(tpath) && !mDBWatcher.addPath( tpath )) {
+                emit error(tr("Unable to watch %1 for changes.").arg(tpath));
+            }
         }
     }
     else
@@ -245,11 +250,11 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
             count += mMorkUnreadCounts[ tpath ];
 
             if ( chosenColor.isValid() ) {
-                if (chosenColor != pSettings->mFolderNotificationColors[tpath]) {
-                    chosenColor = pSettings->mNotificationDefaultColor;
+                if (chosenColor != settings->mFolderNotificationColors[tpath]) {
+                    chosenColor = settings->mNotificationDefaultColor;
                 }
             } else {
-                chosenColor = pSettings->mFolderNotificationColors[ tpath ];
+                chosenColor = settings->mFolderNotificationColors[ tpath ];
             }
         }
     }

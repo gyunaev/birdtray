@@ -1,9 +1,7 @@
 #include <QBuffer>
 #include <QDir>
 #include <QtCore/QStandardPaths>
-#ifdef Q_OS_WIN
 #include <QCoreApplication>
-#endif
 
 #include "settings.h"
 #include "utils.h"
@@ -18,8 +16,6 @@
 #define BORDER_WIDTH_KEY "common/borderwidth"
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
-
-Settings * pSettings;
 
 Settings::Settings(bool verboseOutput)
 {
@@ -145,11 +141,7 @@ void Settings::load()
     mNotificationIcon = loadPixmap( "common/notificationicon" );
     mNotificationIconUnread = loadPixmap( "common/notificationiconunread" );
 
-    if ( mNotificationIcon.isNull() )
-    {
-        if ( !mNotificationIcon.load( ":res/thunderbird.png" ) )
-            Utils::fatal("Cannot load default system tray icon");
-    }
+    (void) getNotificationIcon(); // Load the default
 
     mNotificationDefaultColor = QColor( mSettings->value(
             "common/defaultcolor", mNotificationDefaultColor.name() ).toString() );
@@ -263,7 +255,7 @@ QString Settings::getThunderbirdExecutablePath()
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Utils::fatal("Cannot load default system tray icon");
+            Utils::fatal(QCoreApplication::tr("Cannot load default system tray icon."));
         }
     }
     return mNotificationIcon;

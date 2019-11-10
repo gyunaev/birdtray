@@ -2,7 +2,6 @@
 #define WINDOWTOOLS_X11_H
 
 #include "windowtools.h"
-#include "settings.h"
 
 #include <QTimer>
 #include <QX11Info>

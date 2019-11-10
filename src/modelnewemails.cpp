@@ -1,11 +1,8 @@
 #include "modelnewemails.h"
-#include "settings.h"
-#include "dialogaddeditnewemail.h"
+#include "birdtrayapp.h"
 
-ModelNewEmails::ModelNewEmails(QObject *parent)
-    : QAbstractItemModel( parent )
-{
-    mNewEmailData = pSettings->mNewEmailData;
+ModelNewEmails::ModelNewEmails(QObject* parent) : QAbstractItemModel(parent) {
+    mNewEmailData = BirdtrayApp::get()->getSettings()->mNewEmailData;
 }
 
 int ModelNewEmails::columnCount(const QModelIndex &) const
@@ -50,12 +47,9 @@ Qt::ItemFlags ModelNewEmails::flags(const QModelIndex &) const
 
 QVariant ModelNewEmails::headerData(int section, Qt::Orientation , int role) const
 {
-    if ( role == Qt::DisplayRole )
-    {
-        if ( section == 0 )
-            return "Menu entry item";
+    if (role == Qt::DisplayRole && section == 0) {
+        return tr("Menu entry item");
     }
-
     return QVariant();
 }
 
@@ -87,7 +81,6 @@ void ModelNewEmails::remove(const QModelIndex &idx)
     endRemoveRows();
 }
 
-void ModelNewEmails::applySettings()
-{
-    pSettings->mNewEmailData = mNewEmailData;
+void ModelNewEmails::applySettings() {
+    BirdtrayApp::get()->getSettings()->mNewEmailData = mNewEmailData;
 }

@@ -18,7 +18,7 @@
   </property>
   <widget class="QWizardPage" name="profilesDirPage">
    <property name="title">
-    <string>Thunderbird Profile Directory</string>
+    <string>Thunderbird Profiles Directory</string>
    </property>
    <property name="subTitle">
     <string>Select the directory that contains the Thunderbird profiles.</string>
@@ -117,9 +117,6 @@
       <property name="columnCount">
        <number>2</number>
       </property>
-      <attribute name="headerVisible">
-       <bool>true</bool>
-      </attribute>
       <attribute name="headerDefaultSectionSize">
        <number>300</number>
       </attribute>
@@ -146,4 +143,5 @@
   </widget>
  </widget>
  <resources/>
+ <connections/>
 </ui>

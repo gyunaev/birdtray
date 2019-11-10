@@ -29,7 +29,37 @@
 #include "morkparser.h"
 #include "utils.h"
 #include <QtCore>
+#include <utility>
 
+
+/**
+ * An exception during parsing of a mork file.
+ */
+class MorkParserException: public std::exception {
+public:
+    /**
+     * Indicates, that there was an exception while parsing a mork file.
+     * @param message: The exception message.
+     */
+    MorkParserException(QString message) : std::exception(), message(std::move(message)) {}
+    
+    const char* what() const noexcept override {
+        return message.toUtf8().constData();
+    }
+    
+    /**
+     * @return The translated error message.
+     */
+    const QString& getMessage() const {
+        return message;
+    }
+
+private:
+    /**
+     * The error message.
+     */
+    const QString message;
+};
 
 //	=============================================================
 //	MorkParser::MorkParser
@@ -52,7 +82,7 @@ bool MorkParser::open( const QString &path )
 	// Open file
     if ( !MorkFile.exists() || !MorkFile.open( QIODevice::ReadOnly ) )
 	{
-        mErrorMessage = "Couldn't open file: " + MorkFile.errorString();
+        mErrorMessage = QCoreApplication::tr("Couldn't open file: ") + MorkFile.errorString();
 		return false;
 	}
 
@@ -61,7 +91,7 @@ bool MorkParser::open( const QString &path )
 
 	if ( !MagicHeader.contains( MorkMagicHeader ) )
 	{
-        mErrorMessage = "Unsupported version";
+        mErrorMessage = QCoreApplication::tr("Unsupported version.");
         return false;
     }
 
@@ -69,14 +99,11 @@ bool MorkParser::open( const QString &path )
 	MorkFile.close();
 
 	// Parse mork
-    try
-    {
+    try {
         parse();
         return true;
-    }
-    catch ( const char * errormsg )
-    {
-        mErrorMessage = errormsg;
+    } catch (MorkParserException &error) {
+        mErrorMessage = error.getMessage();
         return false;
     }
 }
@@ -144,7 +171,7 @@ void MorkParser::parse()
 				break;
 
             default:
-                throw "invalid format";
+                throw MorkParserException(QCoreApplication::tr("Invalid format."));
 				break;
 			}
 		}
@@ -197,9 +224,9 @@ void MorkParser::skip( const char * string )
 {
     while ( *string )
     {
-        if ( *string != nextChar() )
-            throw "Parsing error";
-
+        if (*string != nextChar()) {
+            throw MorkParserException(QCoreApplication::tr("Parsing error."));
+        }
         string++;
     }
 }
@@ -213,9 +240,9 @@ QChar MorkParser::readNext()
 
 QChar MorkParser::peekNext()
 {
-    if ( morkPos_ >= morkData_.length() )
-        throw "Unexpected EOF";
-
+    if (morkPos_ >= morkData_.length()) {
+        throw MorkParserException(QCoreApplication::tr("Unexpected EOF."));
+    }
     return QChar( morkData_[ morkPos_ ] );
 }
 
@@ -279,7 +306,7 @@ inline void MorkParser::parseComment()
 	char cur = nextChar();
 
     if ( '/' != cur ) {
-        throw "invalid comment";
+        throw MorkParserException(QCoreApplication::tr("Invalid comment."));
     }
 
 	while ( cur != '\r' && cur != '\n' && cur )
@@ -575,7 +602,7 @@ void MorkParser::parseRow( int TableId, int TableScope )
                 parseMeta( ']' );
 				break;
 			default:
-                throw "format error";
+                throw MorkParserException(QCoreApplication::tr("Format error."));
 				break;
 			}
 		}
@@ -616,9 +643,9 @@ void MorkParser::parseGroup()
     // Now look up for success
     ofst = morkData_.indexOf( endCommit, morkPos_ );
 
-    if ( ofst == -1 )
-        throw "Unexpected end of group";
-
+    if (ofst == -1) {
+        throw MorkParserException(QCoreApplication::tr("Unexpected end of group."));
+    }
     // Transaction succeeded. Copy the transaction data
     QByteArray transaction = morkData_.mid( morkPos_, ofst - morkPos_ );
 
@@ -739,7 +766,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     MorkParser p;
 
     if ( !p.open( filename ) )
-        Utils::fatal("Error opening mork file");
+        Utils::fatal(QCoreApplication::tr("Error opening mork file."));
 
     for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
     {

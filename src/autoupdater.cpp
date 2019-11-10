@@ -1,6 +1,6 @@
 #include "autoupdater.h"
 #include "utils.h"
-#include "settings.h"
+#include "birdtrayapp.h"
 
 #if defined(_WIN32) && !defined(_WIN64)
 #  include <windows.h>
@@ -11,8 +11,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <version.h>
-#include <QtWidgets/QGridLayout>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMessageBox>
 #include <QDir>
 #include <QApplication>
@@ -22,8 +20,6 @@
 #define LATEST_VERSION_INFO_URL "https://api.github.com/repos/gyunaev/birdtray/releases/latest"
 #define GENERIC_DOWNLOAD_URL "https://github.com/gyunaev/birdtray/releases/latest"
 #define VERSION_TAG_REGEX "^(RELEASE_)?(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?$"
-
-AutoUpdater* autoUpdaterSingleton = nullptr;
 
 AutoUpdater::AutoUpdater(QObject* parent) :
         networkAccessManager(new QNetworkAccessManager(this)),
@@ -196,7 +192,7 @@ void AutoUpdater::onReleaseInfoRequestFinished(QNetworkReply* result) {
         if (downloadUrl.isValid()) {
             QString versionString = QString("%1.%2.%3")
                     .arg(version[0]).arg(version[1]).arg(version[2]);
-            if (versionString != pSettings->mIgnoreUpdateVersion) {
+            if (versionString != BirdtrayApp::get()->getSettings()->mIgnoreUpdateVersion) {
                 haveActualInstallerDownloadUrl = downloadSize != (qulonglong) -1;
                 updateDialog.show(versionString, response["body"].toString(), downloadSize);
             }
@@ -216,7 +212,7 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
         } else {
             QMessageBox::critical(
                     nullptr, tr("Installer download failed"),
-                    tr("Failed to download the Birdtray installer:\nInvalid redirect: ")
+                    tr("Failed to download the Birdtray installer:\n") + tr("Invalid redirect: ")
                     + redirectionTarget.toString(), QMessageBox::StandardButton::Abort);
         }
     } else if (installerFile.write(result->readAll()) == -1) {
