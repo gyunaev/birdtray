@@ -31,14 +31,13 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
     
     QString morkPath = parser.value("dump-mork");
     if (!morkPath.isEmpty()) {
-        MorkParser::dumpMorkFile(morkPath);
-        exit(1); // TODO: Why 1? Replace with return code of dumpMorkFile
+        exit(MorkParser::dumpMorkFile(morkPath));
         return;
     }
     QString imapString = parser.value("decode");
     if (!imapString.isEmpty()) {
         printf("Decoded: %s\n", qPrintable(Utils::decodeIMAPutf7(imapString)));
-        exit(1); // TODO: Why 1? Replace with EXIT_SUCCESS
+        exit(EXIT_SUCCESS);
         return;
     }
     
