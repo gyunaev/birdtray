@@ -33,9 +33,6 @@ else()
     set(PLATFORM_SOURCES src/windowtools_x11.cpp)
     set(PLATFORM_HEADERS src/windowtools_x11.h)
 endif(WIN32)
-if(MSVC)
-    target_compile_options(birdtray PRIVATE /utf-8)
-endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -124,6 +121,9 @@ add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
         ${HEADERS} ${PLATFORM_HEADERS})
 target_link_libraries(birdtray ${REQUIRED_MODULES})
+if(MSVC)
+    target_compile_options(birdtray PRIVATE /utf-8)
+endif()
 
 option(COMPILER_WARNINGS_AS_ERRORS "Fail the build on compiler warnings" OFF)
 if(COMPILER_WARNINGS_AS_ERRORS)
