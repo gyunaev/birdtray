@@ -170,6 +170,8 @@ qulonglong AutoUpdater::parseDownloadUrl(const QJsonArray &assets, const QString
             }
         }
     }
+#else  /* !Q_OS_WIN */
+    Q_UNUSED(assets)
 #endif /* Q_OS_WIN */
     if (defaultUrl.isNull()) {
         downloadUrl = GENERIC_DOWNLOAD_URL;  // Last resort
