@@ -2,11 +2,6 @@
 #include <tlhelp32.h>
 #include "birdtrayapp.h"
 
-#ifdef Q_CC_MSVC
-#  undef Q_DECL_UNUSED
-#  define Q_DECL_UNUSED __pragma(warning(suppress:4100))
-#endif
-
 
 /**
  * Helper data structure for the findMainWindow function.
@@ -159,8 +154,11 @@ bool WindowTools_Win::checkWindow() {
 }
 
 void CALLBACK WindowTools_Win::minimizeCallback(
-        Q_DECL_UNUSED HWINEVENTHOOK eventHook, DWORD event, HWND window, LONG idObject,
-        LONG idChild, Q_DECL_UNUSED DWORD idEventThread, Q_DECL_UNUSED DWORD eventTime) {
+        HWINEVENTHOOK eventHook, DWORD event, HWND window, LONG idObject,
+        LONG idChild, DWORD idEventThread, DWORD eventTime) {
+    Q_UNUSED(eventHook)
+    Q_UNUSED(idEventThread)
+    Q_UNUSED(eventTime)
     BirdtrayApp* app = BirdtrayApp::get();
     auto* winTools = dynamic_cast<WindowTools_Win*>(app->getTrayIcon()->getWindowTools());
     if (event == EVENT_SYSTEM_MINIMIZESTART &&

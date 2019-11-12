@@ -6,11 +6,6 @@
 #include "utils.h"
 #include "colorbutton.h"
 
-#ifdef Q_CC_MSVC
-#  undef Q_DECL_UNUSED
-#  define Q_DECL_UNUSED __pragma(warning(suppress:4100))
-#endif
-
 MailAccountDialog::MailAccountDialog(QWidget* parent, QColor defaultColor) :
         QWizard(parent),
         ui(new Ui::MailAccountDialog),
@@ -114,7 +109,8 @@ void MailAccountDialog::onProfilesDirEditCommit() {
     }
 }
 
-void MailAccountDialog::onProfileSelectionChanged(int Q_DECL_UNUSED newProfileIndex) {
+void MailAccountDialog::onProfileSelectionChanged(int newProfileIndex) {
+    Q_UNUSED(newProfileIndex)
     thunderbirdProfileMailDirs.clear();
 }
 
