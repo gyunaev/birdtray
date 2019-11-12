@@ -76,7 +76,7 @@ private:
     /**
      * The windows task-bar button.
      */
-    QWinTaskbarButton taskBarButton;
+    QWinTaskbarButton* taskBarButton = nullptr;
 #endif
 };
 

@@ -31,7 +31,7 @@ enum AttachResult {
  * A Handle to a progress, which might or might not be running.
  */
 class ProcessHandle : public QObject {
-Q_OBJECT;
+Q_OBJECT
 public:
     
     /**

@@ -2,6 +2,11 @@
 #include <tlhelp32.h>
 #include "birdtrayapp.h"
 
+#ifdef Q_CC_MSVC
+#  undef Q_DECL_UNUSED
+#  define Q_DECL_UNUSED __pragma(warning(suppress:4100))
+#endif
+
 
 /**
  * Helper data structure for the findMainWindow function.

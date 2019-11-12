@@ -276,13 +276,12 @@ void MorkParser::parseDict()
 			switch ( cur )
 			{
 			case '<':
-				if ( morkData_.mid( morkPos_ - 1, strlen( MorkDictColumnMeta ) ) 
-					== MorkDictColumnMeta )
-				{
-					nowParsing_ = NPColumns;
-					morkPos_ += strlen( MorkDictColumnMeta ) - 1;
-				}
-				break;
+                if (morkData_.mid(morkPos_ - 1, static_cast<int>(strlen(MorkDictColumnMeta)))
+                    == MorkDictColumnMeta) {
+                    nowParsing_ = NPColumns;
+                    morkPos_ += static_cast<int>(strlen(MorkDictColumnMeta)) - 1;
+                }
+                break;
 			case '(':
                 parseCell();
 				break;

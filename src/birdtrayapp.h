@@ -13,7 +13,7 @@
  * Represents the Birdtray application.
  */
 class BirdtrayApp: public QApplication {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     
     /**
