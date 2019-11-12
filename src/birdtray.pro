@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network
-CONFIG += c++11 lrelease file_copies
+CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = birdtray
@@ -93,14 +93,22 @@ EXTRA_TRANSLATIONS += \
     translations/dynamic_en.ts \
     translations/dynamic_de.ts
 
-release::OUT_DIR = $$OUT_PWD/release
-debug::OUT_DIR = $$OUT_PWD/debug
-translations.path = $$OUT_DIR/translations
+qtPrepareTool(L_RELEASE, lrelease)
+equals(PWD, $${OUT_PWD}) {
+    QM_FILES_INSTALL_PATH = $$OUT_PWD/translations
+} else { # Qt Creator places the executable in a debug or release directory
+    release::QM_FILES_INSTALL_PATH = $$OUT_PWD/release/translations
+    debug::QM_FILES_INSTALL_PATH = $$OUT_PWD/debug/translations
+}
+!exists($$QM_FILES_INSTALL_PATH) {
+    mkpath($$QM_FILES_INSTALL_PATH) | error("Unable to create directory at $$QM_FILES_INSTALL_PATH")
+}
 for(TRANSLATION_FILE, $$list($$files(translations/*.ts))) {
     TRANSLATION_FILE_NAME = $$basename(TRANSLATION_FILE)
-    translations.files += $$OUT_DIR/$$replace(TRANSLATION_FILE_NAME, .ts, .qm)
+    COMMAND = $$L_RELEASE -removeidentical $$TRANSLATION_FILE \
+                          -qm $$QM_FILES_INSTALL_PATH/$$replace(TRANSLATION_FILE_NAME, .ts, .qm)
+    system($$COMMAND) | error("Failed to generate translations: Failed to run: $$COMMAND")
 }
-COPIES += translations
 
 unix {
      SOURCES += windowtools_x11.cpp
