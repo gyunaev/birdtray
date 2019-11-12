@@ -123,7 +123,7 @@ add_executable(birdtray ${EXECUTABLE_OPTIONS}
 target_link_libraries(birdtray ${REQUIRED_MODULES})
 
 if(MSVC)
-    target_compile_options(birdtray PRIVATE /Wall /WX)
+    target_compile_options(birdtray PRIVATE /W4 /WX)
 else()
     target_compile_options(birdtray PRIVATE -Wall -Wextra -Wpedantic -Werror)
 endif()
