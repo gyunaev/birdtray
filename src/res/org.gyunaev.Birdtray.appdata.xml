@@ -52,7 +52,6 @@
     </screenshot>
   </screenshots>
 
-  <content_rating type="oars-1.1">
-  </content_rating>
-
+  <content_rating type="oars-1.1"></content_rating>
+  <translation type="qt">birdtray</translation>
 </component>
