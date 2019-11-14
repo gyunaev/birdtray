@@ -125,7 +125,7 @@ unix {
      appdata.path=$${PREFIX}/share/metainfo
      appdata.files=res/org.gyunaev.Birdtray.appdata.xml
 
-     translations.path=$${PREFIX}/share/birdtray/
+     translations.path="$${PREFIX}/share/birdtray/translations"
      translations.files="$$QM_FILES_INSTALL_PATH/*.qm"
      DEFINES += LINUX_TRANSLATIONS_DIR=\\\"$${PREFIX}/share/birdtray/translations\\\"
 
