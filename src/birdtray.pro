@@ -125,6 +125,9 @@ unix {
      appdata.path=$${PREFIX}/share/metainfo
      appdata.files=res/org.gyunaev.Birdtray.appdata.xml
 
+     translations.path=$${PREFIX}/share/birdtray/
+     translations.files="$$QM_FILES_INSTALL_PATH"
+
      icon32.path=$${PREFIX}/share/icons/hicolor/32x32/apps
      icon32.files=res/icons/32/org.gyunaev.Birdtray.png
      icon48.path=$${PREFIX}/share/icons/hicolor/48x48/apps
@@ -134,7 +137,7 @@ unix {
      icon128.path=$${PREFIX}/share/icons/hicolor/128x128/apps
      icon128.files=res/icons/128/org.gyunaev.Birdtray.png
 
-     INSTALLS += target desktop appdata icon32 icon48 icon64 icon128
+     INSTALLS += target desktop appdata translations icon32 icon48 icon64 icon128
 }
 win32 {
      DEFINES += UNICODE
