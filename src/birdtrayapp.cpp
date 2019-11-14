@@ -15,7 +15,7 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
     QCoreApplication::setApplicationVersion(Utils::getBirdtrayVersion());
     // This prevents exiting the application when the dialogs are closed on Gnome/XFCE
     QApplication::setQuitOnLastWindowClosed(false);
-    
+
     bool translationLoadedSuccessfully = loadTranslations();
     QCoreApplication::installTranslator(&qtTranslator);
     QCoreApplication::installTranslator(&dynamicTranslator);
@@ -25,10 +25,10 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
     BirdtrayEventFilter filter;
     installNativeEventFilter(&filter);
 #endif /* Q_OS_WIN */
-    
+
     QCommandLineParser parser;
     parseCmdArguments(parser);
-    
+
     QString morkPath = parser.value("dump-mork");
     if (!morkPath.isEmpty()) {
         exit(MorkParser::dumpMorkFile(morkPath));
@@ -40,9 +40,9 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
         exit(EXIT_SUCCESS);
         return;
     }
-    
+
     ensureSystemTrayAvailable();
-    
+
     // Load settings
     settings = new Settings(parser.isSet("debug"));
     if (parser.isSet("reset-settings")) {
@@ -94,8 +94,15 @@ bool BirdtrayApp::loadTranslations() {
     QLocale locale = QLocale::system();
     bool success = loadTranslation(
             qtTranslator, locale, "qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    #ifdef LINUX_TRANSLATIONS_DIR
+    success &= loadTranslation(dynamicTranslator, locale, "dynamic", translationDir) ||
+               loadTranslation(dynamicTranslator, locale, "dynamic", LINUX_TRANSLATIONS_DIR);
+    success &= loadTranslation(mainTranslator, locale, "main", translationDir) ||
+               loadTranslation(mainTranslator, locale, "main", LINUX_TRANSLATIONS_DIR);
+    #else
     success &= loadTranslation(dynamicTranslator, locale, "dynamic", translationDir);
     success &= loadTranslation(mainTranslator, locale, "main", translationDir);
+    #endif
     return success;
 }
 

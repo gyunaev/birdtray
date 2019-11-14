@@ -99,3 +99,5 @@ Once you done, create a pull request with your changes to [this repository](http
 ## Author and license
 
 Birdtray is written by George Yunaev, and is licensed under GPLv3 license.
+
+![birdtray-settings](screenshots/birdtray-settings.png)

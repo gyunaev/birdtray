@@ -22,9 +22,6 @@
       <li>Can monitor that Thunderbird is running, and indicate it if you accidentally closed it.</li>
       <li>Has configurable "New Email" functionality, allowing pre-configured email templates.</li>
     </ul>
-    <p>
-      The feature to "Start Thunderbird when Birdtray starts" needs the flathub thunderbird installed by default. The default thunderbird directory is "~/.var/app/org.mozilla.Thunderbird/.thunderbird".
-    </p>
   </description>
 
   <categories>
@@ -41,21 +38,21 @@
   <url type="homepage">https://github.com/gyunaev/birdtray/</url>
   <url type="bugtracker">https://github.com/gyunaev/birdtray/issues/</url>
   <launchable type="desktop-id">org.gyunaev.Birdtray.desktop</launchable>
- 
+
   <releases>
     <release date="2019-05-21" version="1.6" urgency="medium" />
   </releases>
- 
+
   <project_group>gyunaev</project_group>
   <project_license>GPL-3.0+</project_license>
   <developer_name>gyunaev</developer_name>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/flathub/org.gyunaev.Birdtray/master/birdtray-settings.png</image>
+      <image>https://raw.githubusercontent.com/gyunaev/birdtray/master/screenshots/birdtray-settings.png</image>
     </screenshot>
   </screenshots>
- 
+
   <content_rating type="oars-1.1">
   </content_rating>
- 
+
 </component>

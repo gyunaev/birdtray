@@ -127,6 +127,7 @@ unix {
 
      translations.path=$${PREFIX}/share/birdtray/
      translations.files="$$QM_FILES_INSTALL_PATH"
+     DEFINES += LINUX_TRANSLATIONS_DIR=\\\"$${PREFIX}/share/birdtray/translations\\\"
 
      icon32.path=$${PREFIX}/share/icons/hicolor/32x32/apps
      icon32.files=res/icons/32/org.gyunaev.Birdtray.png
