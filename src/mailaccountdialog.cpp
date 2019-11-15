@@ -161,14 +161,10 @@ void MailAccountDialog::initializeTbProfilesPage() {
     ui->profileSelector->clear();
     for (const QString &profileDirName : profileDirs) {
         QDir profileDir(profilesDir->absoluteFilePath(profileDirName));
-        QStringList mailFolders;
-        for (const char* mailFolder : {"ImapMail", "Mail"}) {
-            QFileInfo mailFolderInfo(profileDir, mailFolder);
-            if (mailFolderInfo.isDir()) {
-                mailFolders.append(mailFolderInfo.absoluteFilePath());
-            }
-        }
+        QStringList mailFolders = profileDir.entryList({"*Mail"}, QDir::Dirs);
         if (!mailFolders.isEmpty()) {
+            std::transform(mailFolders.begin(), mailFolders.end(), mailFolders.begin(),
+                    [=](const QString& folder) { return profileDir.absoluteFilePath(folder); });
             ui->profileSelector->addItem(
                     profileDirName.mid(profileDirName.indexOf('.') + 1), mailFolders);
         }
