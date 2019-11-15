@@ -57,9 +57,9 @@ Launch the `./birdtray` executable from the build directory.
 
 ## Installation
 
-Run `cmake.exe --build . --target install` to install Birdtray.
-On Unix systems, you can configure the install location by appending `-DCMAKE_INSTALL_PREFIX=/usr`
-to the command above.
+Run `cmake --build . --target install` to install Birdtray.
+On Unix systems, you can configure the install location by running
+`cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..` before the command above.
 On Windows, the command will build a graphical installer and execute it.
 It requires [NSIS](https://nsis.sourceforge.io/Main_Page) to be installed on your system.
 It is recommended for Windows users to use the
