@@ -149,6 +149,6 @@ else()
         install(FILES src/res/icons/${size}/org.gyunaev.Birdtray.png
                 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps)
     endforeach()
-    install(DIRECTORY s${CMAKE_BINARY_DIR}/translations
-            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/birdtray/translations)
+    install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
 endif()
