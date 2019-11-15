@@ -251,7 +251,7 @@ QString Settings::getThunderbirdCommand(QStringList &arguments) {
 #if defined (Q_OS_WIN)
     return '"' + QFileInfo(executable).absoluteFilePath() + '"';
 #else
-    return = QFileInfo(executable).absoluteFilePath();
+    return QFileInfo(executable).absoluteFilePath();
 #endif
 }
 
