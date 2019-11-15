@@ -1,5 +1,6 @@
 build*/
 cmake-build-*/
+CMakeLists.txt.user
 src/birdtray.pro.user*
 src/translations/*.qm
 
@@ -8,6 +9,7 @@ installer/winDeploy/**
 installer/nsisDependencies
 installer/BirdTray-*.exe
 installer/getArch.exe
+installer/makeUninstallList.exe
 installer/arch.nsh
 
 .idea/*

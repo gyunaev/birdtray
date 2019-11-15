@@ -17,7 +17,7 @@ set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
 set(EXECUTABLE_OPTIONS)
 
-if (WIN32)
+if(WIN32)
     set(EXECUTABLE_OPTIONS WIN32)
     ENABLE_LANGUAGE(RC)
     add_definitions(-DUNICODE)
@@ -32,7 +32,7 @@ else()
     list(APPEND REQUIRED_MODULES Qt5::X11Extras ${X11})
     set(PLATFORM_SOURCES src/windowtools_x11.cpp)
     set(PLATFORM_HEADERS src/windowtools_x11.h)
-endif (WIN32)
+endif(WIN32)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -121,3 +121,34 @@ add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
         ${HEADERS} ${PLATFORM_HEADERS})
 target_link_libraries(birdtray ${REQUIRED_MODULES})
+
+# Installation
+if(WIN32)
+    # Find ssl libraries
+    find_library(SSL_LIBRARY NAMES ssl)
+    get_filename_component(SSL_PATH ${SSL_LIBRARY} DIRECTORY)
+    if (SSL_LIBRARY)
+        STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
+    endif()
+
+    # Create installer
+    STRING(REGEX REPLACE "/" "\\\\\\\\" BIRDTRAY_EXE ${CMAKE_BINARY_DIR}/birdtray.exe)
+    STRING(REGEX REPLACE "/" "\\\\\\\\" SQLITE3_PATH ${SQLITE3_LIBRARY})
+    install(CODE "execute_process(
+        COMMAND cmd /C buildInstaller.bat
+            \"${BIRDTRAY_EXE}\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" --install
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer)")
+else()
+    include(GNUInstallDirs)
+    install(TARGETS birdtray RUNTIME DESTINATION bin)
+    install(FILES src/res/org.gyunaev.Birdtray.desktop
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
+    install(FILES src/res/org.gyunaev.Birdtray.appdata.xml
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
+    foreach(size 32 48 64 128)
+        install(FILES src/res/icons/${size}/org.gyunaev.Birdtray.png
+                DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps)
+    endforeach()
+    install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
+endif()

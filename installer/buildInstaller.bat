@@ -10,22 +10,22 @@ if "x%~1" == "x" (
 if "%~1" == "/?" (
     goto Usage
 )
-set exePath="%~1"
+set "exePath=%~1"
 if not exist "%exePath%" (
     echo Birdtray executable not found at %exePath% 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
-set libSqlitePath="%~2"
+set "libSqlitePath=%~2"
 if not exist "%libSqlitePath%" (
     echo Sqlite library not found at %libSqlitePath% 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 
 for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libcrypto ^| findstr .dll` ) do (
-    set openSSLCryptoPath="%~3\%%f"
+    set "openSSLCryptoPath=%~3\%%f"
 )
 for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libssl ^| findstr .dll`) do (
-    set openSSLPath="%~3\%%f"
+    set "openSSLPath=%~3\%%f"
 )
 if not exist "%openSSLCryptoPath%" (
     echo OpenSSL crypto library not found at %~3\libcrypto*.dll 1>&2
@@ -34,6 +34,10 @@ if not exist "%openSSLCryptoPath%" (
 if not exist "%openSSLPath%" (
     echo OpenSSL library not found at %~3\libssl*.dll 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
+)
+
+if "%~4" == "--install" (
+    set "installAfterBuild=1"
 )
 
 rem  #### Check if required programs are available ####
@@ -69,10 +73,8 @@ if not defined sevenZExe (
 )
 
 rem  #### Create the deployment folder ####
-set deploymentFolder="%~dp0winDeploy"
+set "deploymentFolder=%~dp0winDeploy"
 echo Creating deployment folder at %deploymentFolder%...
-rem  Set the cwd to the directory of the batch file.
-cd /D "%~dp0"
 rem  Clear the old deployment folder.
 if exist "%deploymentFolder%" (
     rmdir /s /q "%deploymentFolder%" 1>nul
@@ -143,7 +145,7 @@ if exist "%translationDir%" (
 rem  #### Download the installer dependencies ####
 echo Downloading installer dependencies...
 rem  Clear the old dependencies folder.
-set dependencyFolder="%~dp0nsisDependencies"
+set "dependencyFolder=%~dp0nsisDependencies"
 if exist "%dependencyFolder%" (
     rmdir /s /q "%dependencyFolder%" 1>nul
     if exist "%dependencyFolder%" (
@@ -155,13 +157,13 @@ if exist "%dependencyFolder%" (
     )
 )
 
-"%gitExe%" clone -q "https://github.com/Drizin/NsisMultiUser.git" "nsisDependencies" 1>nul
+"%gitExe%" clone -q "https://github.com/Drizin/NsisMultiUser.git" "%dependencyFolder%" 1>nul
 if errorLevel 1 (
     echo Failed to clone NsisMultiUser 1>&2
     exit /b %errorLevel%
 )
 rmdir /s /q "%dependencyFolder%\.git" 1>nul
-set nsProcessUrl="https://nsis.sourceforge.io/mediawiki/images/1/18/NsProcess.zip"
+set "nsProcessUrl=https://nsis.sourceforge.io/mediawiki/images/1/18/NsProcess.zip"
 "%curlExe%" --silent --output "%TEMP%\NsProcess.zip" "%nsProcessUrl%" 1>nul
 if errorLevel 1 (
     echo Failed to download NsProcess 1>&2
@@ -206,17 +208,33 @@ if errorLevel 1 (
     echo Failed to create installer: makensis.exe failed 1>&2
     exit /b %errorLevel%
 )
-
 echo Successfully created the installer
+
+rem  #### Run the installer, if called with --install ####
+if not defined installAfterBuild (
+    goto :eof
+)
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~dp0" 2^>nul ^| findstr Birdtray ^| findstr .exe`) do (
+    set "installerExe=%~dp0%%f"
+)
+if "x%installerExe%" == "x" (
+    echo Failed to start the installer: Unable to find the generated installer executable 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
+)
+echo Executing installer...
+"%installerExe%"
+exit /b %errorLevel%
+
 goto :eof
 
 : Usage
 echo Creates the Birdtray installer. - Usage:
-echo buildInstaller.bat exePath libSqlitePath openSSLPath
+echo buildInstaller.bat exePath libSqlitePath openSSLPath [--install]
 echo:
 echo exePath:       The path to the birdtray.exe to include in the installer
 echo libSqlitePath: The path to the libsqlite.dll that was used to compile the Birdtray exe
-echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.ddl
+echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.dll
+echo --install:     Optional parameter. If specified, executes the generated installer.
 echo:
 echo The following programs must be on the PATH: windeployqt, makensis, g++, git, curl and 7z.
 echo The script also searches for translations in translations subdirectory

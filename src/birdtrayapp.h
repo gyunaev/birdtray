@@ -93,11 +93,11 @@ private:
      * @param translator The translator to load the translation
      * @param locale The locale of the translation to load.
      * @param translationName The name of the translation to load.
-     * @param path The directory that contains the translation to load.
+     * @param paths A list of directories to search for the translation to load.
      * @return True, if the translation was loaded successfully.
      */
     static bool loadTranslation(QTranslator &translator, QLocale &locale,
-                                const QString &translationName, const QString &path);
+                                const QString &translationName, const QStringList &paths);
     
     /**
      * Parse the command line arguments.
