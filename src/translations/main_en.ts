@@ -777,12 +777,6 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error starting Thunderbird as %1:
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
@@ -790,6 +784,12 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Ignore unread emails (now %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error starting Thunderbird as &apos;%1 %2&apos;:
+
+%3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

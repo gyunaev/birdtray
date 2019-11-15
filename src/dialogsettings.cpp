@@ -65,7 +65,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
     boxMonitorThunderbirdWindow->setChecked( settings->mMonitorThunderbirdWindow );
     boxRestartThunderbird->setChecked( settings->mRestartThunderbird );
-    leThunderbirdBinary->setText( settings->mThunderbirdCmdLine  );
+    leThunderbirdBinary->setText(settings->mThunderbirdCmdLine.join(' '));
     leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
@@ -166,7 +166,7 @@ void DialogSettings::accept()
     settings->mBlinkSpeed = sliderBlinkingSpeed->value();
     settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
     settings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
-    settings->mThunderbirdCmdLine = leThunderbirdBinary->text();
+    settings->mThunderbirdCmdLine = splitCommandLine(leThunderbirdBinary->text());
     settings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     settings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
@@ -524,4 +524,17 @@ bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const 
 bool DialogSettings::isMorkParserSelected() const
 {
     return boxParserSelection->currentIndex() == 1;
+}
+
+QStringList DialogSettings::splitCommandLine(QString commandLine) const {
+    QStringList parts;
+    commandLine = commandLine.trimmed();
+    // TODO
+//    int spaceIndex = -1;
+//    while ((spaceIndex = commandLine.indexOf(' ', spaceIndex + 1)) != -1) {
+//        if (commandLine[spaceIndex - 1] == '')
+//    }
+//    parts << commandLine;
+    parts = commandLine.split(' ');
+    return parts;
 }

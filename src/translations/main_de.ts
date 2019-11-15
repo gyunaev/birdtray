@@ -801,7 +801,7 @@ Wollen Sie fortfahren?</translation>
         <source>Error starting Thunderbird as %1:
 
 %2</source>
-        <translation>Beim Starten von Thunderbird als %1 ist ein Fehler aufgetreten:
+        <translation type="vanished">Beim Starten von Thunderbird als %1 ist ein Fehler aufgetreten:
 
 %2</translation>
     </message>
@@ -816,6 +816,12 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>Ignore unread emails (now %1)</source>
         <translation>Ignoriere ungelesene Emails (momentan %1)</translation>
+    </message>
+    <message>
+        <source>Error starting Thunderbird as &apos;%1 %2&apos;:
+
+%3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

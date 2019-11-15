@@ -6,12 +6,6 @@
 #include "settings.h"
 #include "utils.h"
 
-#ifdef Q_OS_WIN
-#  define THUNDERBIRD_EXE_PATH "\"%ProgramFiles(x86)%\\Mozilla Thunderbird\\thunderbird.exe\""
-#else
-#  define THUNDERBIRD_EXE_PATH "/usr/bin/thunderbird"
-#endif
-
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
@@ -51,7 +45,6 @@ Settings::Settings(bool verboseOutput)
     mAllowSuppressingUnreads = false;
     mLaunchThunderbirdDelay = 0;
     mShowUnreadEmailCount = true;
-    mThunderbirdCmdLine = THUNDERBIRD_EXE_PATH;
     mThunderbirdWindowMatch = "- Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
@@ -61,6 +54,17 @@ Settings::Settings(bool verboseOutput)
     mUpdateOnStartup = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
+
+#ifdef Q_OS_WIN
+    mThunderbirdCmdLine << R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")";
+#else
+    if (QFileInfo("/usr/bin/thunderbird").isExecutable()) {
+        mThunderbirdCmdLine << "/usr/bin/thunderbird";
+    } else {
+        mThunderbirdCmdLine << "/usr/bin/flatpak-spawn" << "--host" << "flatpak"
+                            << "run" << "org.mozilla.Thunderbird";
+    }
+#endif
 }
 
 Settings::~Settings()
@@ -174,7 +178,8 @@ void Settings::load()
     mShowUnreadEmailCount = mSettings->value(
             "common/showunreademailcount", mShowUnreadEmailCount ).toBool();
 
-    mThunderbirdCmdLine = mSettings->value("advanced/tbcmdline", mThunderbirdCmdLine).toString();
+    mThunderbirdCmdLine = mSettings->value(
+            "advanced/tbcmdline", mThunderbirdCmdLine).toStringList();
     mThunderbirdWindowMatch = mSettings->value(
             "advanced/tbwindowmatch", mThunderbirdWindowMatch ).toString();
     mNotificationMinimumFontSize = mSettings->value(
@@ -236,19 +241,17 @@ void Settings::load()
     }
 }
 
-QString Settings::getThunderbirdExecutablePath()
-{
-    QString path = mThunderbirdCmdLine;
-
-    if (path.startsWith('"')) {
-        path = path.section('"', 1, 1);
+QString Settings::getThunderbirdCommand(QStringList &arguments) {
+    arguments = mThunderbirdCmdLine;
+    QString executable = arguments.takeFirst();
+    if (executable.startsWith('"')) {
+        executable = executable.section('"', 1, 1);
     }
-
-    path = Utils::expandPath(path);
+    executable = Utils::expandPath(executable);
 #if defined (Q_OS_WIN)
-    return '"' + QFileInfo(path).absoluteFilePath() + '"';
+    return '"' + QFileInfo(executable).absoluteFilePath() + '"';
 #else
-    return QFileInfo(path).absoluteFilePath();
+    return = QFileInfo(executable).absoluteFilePath();
 #endif
 }
 

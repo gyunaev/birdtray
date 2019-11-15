@@ -458,6 +458,7 @@ void TrayIcon::actionUnsnooze()
 void TrayIcon::actionNewEmail() {
     Settings* settings = BirdtrayApp::get()->getSettings();
     QStringList args;
+    QString executable = settings->getThunderbirdCommand(args);
     args << "-compose";
 
     if (!settings->mNewEmailData.isEmpty()) {
@@ -470,7 +471,7 @@ void TrayIcon::actionNewEmail() {
             args << settings->mNewEmailData[index].asArgs();
         }
     }
-    QProcess::startDetached(settings->getThunderbirdExecutablePath(), args);
+    QProcess::startDetached(executable, args);
 }
 
 void TrayIcon::actionIgnoreEmails()
@@ -591,8 +592,10 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    QString thunderbirdExePath = BirdtrayApp::get()->getSettings()->getThunderbirdExecutablePath();
-    Utils::debug("Starting Thunderbird as '%s'", qPrintable( thunderbirdExePath ) );
+    QStringList arguments;
+    QString executable = BirdtrayApp::get()->getSettings()->getThunderbirdCommand(arguments);
+    Utils::debug("Starting Thunderbird as '%s %s'",
+            qPrintable(executable), qPrintable(arguments.join(' ')));
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();
@@ -604,7 +607,7 @@ void TrayIcon::startThunderbird()
     connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::tbProcessError );
 #endif
 
-    mThunderbirdProcess->start( thunderbirdExePath );
+    mThunderbirdProcess->start(executable, arguments);
 }
 
 void TrayIcon::tbProcessError(QProcess::ProcessError )
@@ -614,10 +617,12 @@ void TrayIcon::tbProcessError(QProcess::ProcessError )
         return;
     }
 #endif /* Q_OS_WIN */
+    QStringList arguments;
+    QString executable = BirdtrayApp::get()->getSettings()->getThunderbirdCommand(arguments);
     QMessageBox::critical(nullptr,
             tr("Cannot start Thunderbird"),
-            tr("Error starting Thunderbird as %1:\n\n%2")
-                    .arg(BirdtrayApp::get()->getSettings()->getThunderbirdExecutablePath())
+            tr("Error starting Thunderbird as '%1 %2':\n\n%3")
+                    .arg(executable).arg(arguments.join(' '))
                     .arg(mThunderbirdProcess->errorString()));
 
     // We keep the mThunderbirdProcess pointer, so the process is not restarted again

@@ -103,6 +103,14 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          */
         bool    reportIfProfilePathValid(const QString& profilePath) const;
         bool    isMorkParserSelected() const;
+        
+        /**
+         * Split the command line string back into its parts.
+         *
+         * @param commandLine The command line string.
+         * @return The parts of the command line.
+         */
+        QStringList splitCommandLine(QString commandLine) const;
 
         QPalette mPaletteOk;
         QPalette mPaletteErrror;
