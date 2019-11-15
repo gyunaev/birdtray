@@ -134,7 +134,6 @@ if(WIN32)
     # Create installer
     STRING(REGEX REPLACE "/" "\\\\\\\\" BIRDTRAY_EXE ${CMAKE_BINARY_DIR}/birdtray.exe)
     STRING(REGEX REPLACE "/" "\\\\\\\\" SQLITE3_PATH ${SQLITE3_LIBRARY})
-    message(WARNING "cmd /C buildInstaller.bat \"${BIRDTRAY_EXE}\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" --install")
     install(CODE "execute_process(
         COMMAND cmd /C buildInstaller.bat
             \"${BIRDTRAY_EXE}\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" --install
@@ -150,5 +149,6 @@ else()
         install(FILES src/res/icons/${size}/org.gyunaev.Birdtray.png
                 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps)
     endforeach()
-    # TODO: Install translations
+    install(DIRECTORY s${CMAKE_BINARY_DIR}/translations
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/birdtray/translations)
 endif()

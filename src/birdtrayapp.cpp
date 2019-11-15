@@ -1,4 +1,5 @@
 #include <QtCore/QLibraryInfo>
+#include <QtCore/QStandardPaths>
 #include "birdtrayapp.h"
 #ifdef Q_OS_WIN
 #  include "birdtrayeventfilter.h"
@@ -90,28 +91,36 @@ bool BirdtrayApp::event(QEvent* event) {
 }
 
 bool BirdtrayApp::loadTranslations() {
-    QString translationDir = QCoreApplication::applicationDirPath() + "/translations";
+    QStringList locations = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+    locations.prepend(QCoreApplication::applicationDirPath());
+    std::transform(locations.begin(), locations.end(), locations.begin(),
+            [](QString path) { return path.append("/translations"); });
     QLocale locale = QLocale::system();
     bool success = loadTranslation(
-            qtTranslator, locale, "qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    success &= loadTranslation(dynamicTranslator, locale, "dynamic", translationDir);
-    success &= loadTranslation(mainTranslator, locale, "main", translationDir);
+            qtTranslator, locale, "qt", {QLibraryInfo::location(QLibraryInfo::TranslationsPath)});
+    success &= loadTranslation(dynamicTranslator, locale, "dynamic", locations);
+    success &= loadTranslation(mainTranslator, locale, "main", locations);
     return success;
 }
 
 bool BirdtrayApp::loadTranslation(QTranslator &translator, QLocale &locale,
-                                  const QString &translationName, const QString &path) {
-    if (translator.load(locale, translationName, "_", path)) {
-        return true;
-    }
-    // On Ubuntu, when switching to another language, the LANGUAGE environment variable
-    // does not include the base language, only the language with country,
-    // e.g. LANGUAGE=de_DE:en_US:en
-    // instead of LANGUAGE=de_DE:de:en_US:en
-    // As a result, the translator does not find the <translationName>_de.qm files.
-    // That's why we try to load the translation without the country appendix.
+                                  const QString &translationName, const QStringList &paths) {
     QLocale languageWithoutCountry(locale.language());
-    return translator.load(languageWithoutCountry, translationName, "_", path);
+    for (const QString &path : paths) {
+        if (translator.load(locale, translationName, "_", path)) {
+            return true;
+        }
+        // On Ubuntu, when switching to another language, the LANGUAGE environment variable
+        // does not include the base language, only the language with country,
+        // e.g. LANGUAGE=de_DE:en_US:en
+        // instead of LANGUAGE=de_DE:de:en_US:en
+        // As a result, the translator does not find the <translationName>_de.qm files.
+        // That's why we try to load the translation without the country appendix.
+        if (translator.load(languageWithoutCountry, translationName, "_", path)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void BirdtrayApp::parseCmdArguments(QCommandLineParser &parser) {
