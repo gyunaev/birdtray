@@ -31,8 +31,10 @@ For those of you using Thunderbird 68+, the sqlite-based parser will no longer w
 
 ## Building
 
-To build Birdtray from source, you would need the following libraries:
+To build Birdtray from source, you would need the following components:
 
+- A C++ compiler
+- Cmake
 - Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
 - sqlite3 (i.e. libsqlite3-dev or libsqlite3-devel)
 
@@ -44,12 +46,28 @@ On Fedora (30 or later) you need to install ``libsqlite3x-devel qt5-qtbase-devel
 
 To build, please do the following:
 
-    cd src
-    qmake (or qmake-qt5)
-    make
+```shell script
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build .
+```
 
-Launch the ./birdtray executable from the local directory. It will show Thunderbird icon in system tray.
-Or run `make install` to install it system wide.
+Launch the `./birdtray` executable from the build directory.
+
+## Installation
+
+Run `cmake.exe --build . --target install` to install Birdtray.
+On Unix systems, you can configure the install location by appending `-DCMAKE_INSTALL_PREFIX=/usr`
+to the command above.
+On Windows, the command will build a graphical installer and execute it.
+It requires [NSIS](https://nsis.sourceforge.io/Main_Page) to be installed on your system.
+It is recommended for Windows users to use the
+[precompiled installers for the latest release](https://github.com/gyunaev/birdtray/releases/latest).  
+
+## Usage
+
+Once started, Birdtray will show the Thunderbird icon in system tray.
 
 Right-click on this icon, and click Settings. Go to Monitoring tab ans select the Thunderbird MSF file for the mailbox you'd like to monitor. You can specify different notification colors for each mailbox. Birdtray will show the new email count using this color if only this folder has new mail. If more than one folder has new mail, the default color will be used.
 
