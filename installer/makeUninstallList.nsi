@@ -145,5 +145,7 @@ FunctionEnd
 !define CreateFileList '!insertmacro CreateFileList'
 
 Section
+    System::Call "kernel32::GetCurrentDirectory(i ${NSIS_MAX_STRLEN}, t .r0)"
+    CreateDirectory "$0\uninstaller"
     ${CreateFileList} "${DIST_DIR}" "uninstaller\${UNINSTALL_LIST_FILENAME}" "${EXE_NAME}"
 SectionEnd
