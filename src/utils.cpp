@@ -144,7 +144,7 @@ QString Utils::expandPath(const QString &path) {
 
 #elif defined (Q_OS_MAC)
     return path;
-    
+
 #else
     wordexp_t result;
     if (wordexp(path.toStdString().data(), &result, WRDE_NOCMD) != 0) {
@@ -213,6 +213,6 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 #elif defined (Q_OS_MAC)
     return {"~/Library/Thunderbird/Profiles"};
 #else // Linux
-    return {"~/.thunderbird", "~/snap/thunderbird/common/.thunderbird"};
+    return {"~/.thunderbird", "~/snap/thunderbird/common/.thunderbird", "~/.var/app/org.mozilla.Thunderbird/.thunderbird"};
 #endif /* Platform */
 }
