@@ -22,9 +22,10 @@
 #define VERSION_TAG_REGEX "^(RELEASE_)?(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?$"
 
 AutoUpdater::AutoUpdater(QObject* parent) :
+        QObject(parent),
         networkAccessManager(new QNetworkAccessManager(this)),
         installerFile(QDir::temp().filePath("birdtrayInstaller.exe")),
-        versionRe(VERSION_TAG_REGEX, QRegularExpression::CaseInsensitiveOption), QObject(parent) {
+        versionRe(VERSION_TAG_REGEX, QRegularExpression::CaseInsensitiveOption) {
     connect(networkAccessManager, &QNetworkAccessManager::finished,
             this, &AutoUpdater::onRequestFinished);
     connect(&updateDialog, &UpdateDialog::onDownloadButtonClicked,
@@ -169,6 +170,8 @@ qulonglong AutoUpdater::parseDownloadUrl(const QJsonArray &assets, const QString
             }
         }
     }
+#else  /* !Q_OS_WIN */
+    Q_UNUSED(assets)
 #endif /* Q_OS_WIN */
     if (defaultUrl.isNull()) {
         downloadUrl = GENERIC_DOWNLOAD_URL;  // Last resort

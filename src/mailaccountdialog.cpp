@@ -109,7 +109,8 @@ void MailAccountDialog::onProfilesDirEditCommit() {
     }
 }
 
-void MailAccountDialog::onProfileSelectionChanged(int Q_DECL_UNUSED newProfileIndex) {
+void MailAccountDialog::onProfileSelectionChanged(int newProfileIndex) {
+    Q_UNUSED(newProfileIndex)
     thunderbirdProfileMailDirs.clear();
 }
 

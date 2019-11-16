@@ -493,11 +493,9 @@ void DialogSettings::updateAccountList() {
     dba->start();
 }
 
-void DialogSettings::activateTab(int tab)
-{
+void DialogSettings::activateTab(int tabIndex) {
     // #1 is the Accounts tab
-    if ( tab == 1 )
-    {
+    if (tabIndex == 1) {
         updateAccountList();
     }
 }

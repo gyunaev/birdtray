@@ -43,7 +43,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Tab activation (to refresh accounts)
         // Calls the account query running in a DatabaseAccounts thread
-        void    activateTab(int tab );
+        void    activateTab(int tabIndex );
 
         // Receives accountsAvailable()
         void    accountsAvailable(QString errorMsg);

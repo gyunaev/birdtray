@@ -131,7 +131,7 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake -A "${PLATFORM}" .. || (code=$?; echo "Error log (CMakeOutput.log):"; cat ./CMakeFiles/CMakeOutput.log; echo "Error log (CMakeError.log):"; cat ./CMakeFiles/CMakeError.log; (exit $code););
+  - cmake -D COMPILER_WARNINGS_AS_ERRORS=ON -A "${PLATFORM}" .. || (code=$?; echo "Error log (CMakeOutput.log):"; cat ./CMakeFiles/CMakeOutput.log; echo "Error log (CMakeError.log):"; cat ./CMakeFiles/CMakeError.log; (exit $code););
   - cmake --build . --config Release --target birdtray
 
 before_deploy:
