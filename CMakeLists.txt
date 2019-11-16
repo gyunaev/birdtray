@@ -127,7 +127,7 @@ if(WIN32)
     # Find ssl libraries
     find_library(SSL_LIBRARY NAMES ssl)
     get_filename_component(SSL_PATH ${SSL_LIBRARY} DIRECTORY)
-    if (SSL_LIBRARY)
+    if(SSL_LIBRARY)
         STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
     endif()
 
@@ -152,3 +152,20 @@ else()
     install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
 endif()
+
+add_custom_target(clean_translations COMMENT "Remove obsolete translation entries")
+foreach(TRANSLATION_FILE ${MAIN_TRANSLATION_FILES})
+    get_filename_component(TRANSLATION_NAME ${TRANSLATION_FILE} NAME)
+    set(TRANSLATION_LST_FILE
+            "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${TRANSLATION_NAME}_lst_file")
+    if(NOT EXISTS ${TRANSLATION_LST_FILE})
+        get_filename_component(TRANSLATION_NAME ${TRANSLATION_FILE} NAME_WE)
+        set(TRANSLATION_LST_FILE
+                "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${TRANSLATION_NAME}_lst_file")
+    endif()
+    add_custom_command(TARGET clean_translations
+            COMMAND ${Qt5_LUPDATE_EXECUTABLE}
+            ARGS -locations none -no-obsolete "@${TRANSLATION_LST_FILE}"
+            -ts ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_FILE}
+            DEPENDS ${TRANSLATION_LST_FILE})
+endforeach()
