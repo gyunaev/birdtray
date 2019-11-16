@@ -364,10 +364,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Bitte ändern Sie diese Einstellungen nur wenn Sie wissen was Sie tun.</translation>
     </message>
     <message>
-        <source>Path to Thunderbird executable:</source>
-        <translation>Pfad zum Thunderbird-Programm:</translation>
-    </message>
-    <message>
         <source>Thunderbird window name pattern:</source>
         <translation>Namensschema des Thunderbird-Fensters:</translation>
     </message>
@@ -452,10 +448,6 @@ p, li { white-space: pre-wrap; }
         <translation>Leeres Thunderbird Verzeichnis</translation>
     </message>
     <message>
-        <source>Empty Thunderbird path</source>
-        <translation>Leerer Thunderbird Pfad</translation>
-    </message>
-    <message>
         <source>Choose the Thunderbird profile path</source>
         <translation>Wähle den Thunderbird Profil-Pfad</translation>
     </message>
@@ -488,10 +480,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>You must specify a Thunderbird directory.</source>
         <translation>Es muss ein Thunderbird-Verzeichnis angegeben werden.</translation>
-    </message>
-    <message>
-        <source>You have enabled New Email menu, but you did not specify Thunderbird path.</source>
-        <translation>Sie haben das &quot;Neue Email&quot;-Menü aktiviert, aber keinen Pfad zur ausführbaren Datei von Thunderbird festgelegt.</translation>
     </message>
     <message>
         <source>Successfully updated the database.</source>
@@ -556,6 +544,26 @@ Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
     <message>
         <source>Invalid Thunderbird directory</source>
         <translation>Ungültiges Thunderbird-Verzeichnis</translation>
+    </message>
+    <message>
+        <source>Empty Thunderbird command</source>
+        <translation>Kein Thunderbird Befehl</translation>
+    </message>
+    <message>
+        <source>You have enabled New Email menu, but you did not specify a Thunderbird command.</source>
+        <translation>Sie haben das &quot;Neue Email&quot;-Menü aktiviert, aber keinen Befehl zum Starten von Thunderbird festgelegt.</translation>
+    </message>
+    <message>
+        <source>Thunderbird Command</source>
+        <translation>Thunderbird Befehl</translation>
+    </message>
+    <message>
+        <source>Thunderbird command:</source>
+        <translation>Thunderbird Befehl:</translation>
+    </message>
+    <message>
+        <source>Edit the Thunderbird command</source>
+        <translation>Bearbeite den Thunderbird Befehl</translation>
     </message>
 </context>
 <context>
@@ -798,14 +806,6 @@ Wollen Sie fortfahren?</translation>
         <translation>Kann Thunderbird nicht starten</translation>
     </message>
     <message>
-        <source>Error starting Thunderbird as %1:
-
-%2</source>
-        <translation type="vanished">Beim Starten von Thunderbird als %1 ist ein Fehler aufgetreten:
-
-%2</translation>
-    </message>
-    <message>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
@@ -821,7 +821,9 @@ Wollen Sie fortfahren?</translation>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
 
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Starten von Thunderbird als &apos;%1 %2&apos; ist ein Fehler aufgetreten:
+
+%3</translation>
     </message>
 </context>
 <context>

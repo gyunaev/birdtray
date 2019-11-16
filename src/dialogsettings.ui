@@ -732,22 +732,34 @@
            </widget>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_3">
+           <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1,0">
+            <item row="1" column="1" colspan="2">
+             <widget class="QLineEdit" name="leThunderbirdWindowMatch"/>
+            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>Path to Thunderbird executable:</string>
+               <string>Thunderbird command:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="leThunderbirdBinary"/>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_8">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Thunderbird window name pattern:</string>
               </property>
@@ -756,11 +768,14 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="leThunderbirdWindowMatch"/>
-            </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_11">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Minimum notification font size:</string>
               </property>
@@ -769,8 +784,14 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="2" column="1" colspan="2">
              <widget class="QSpinBox" name="spinMinimumFontSize">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="suffix">
                <string> points</string>
               </property>
@@ -782,6 +803,32 @@
               </property>
               <property name="value">
                <number>4</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="thunderbirdCommandLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QToolButton" name="thunderbirdCommandEditButton">
+              <property name="toolTip">
+               <string>Edit the Thunderbird command</string>
+              </property>
+              <property name="text">
+               <string notr="true">...</string>
               </property>
              </widget>
             </item>
@@ -954,6 +1001,50 @@ p, li { white-space: pre-wrap; }
    <header>colorbutton.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>notificationFont</tabstop>
+  <tabstop>sliderBlinkingSpeed</tabstop>
+  <tabstop>btnNotificationIcon</tabstop>
+  <tabstop>boxShowUnreadCount</tabstop>
+  <tabstop>boxNotificationIconUnread</tabstop>
+  <tabstop>btnNotificationIconUnread</tabstop>
+  <tabstop>btnNotificationColor</tabstop>
+  <tabstop>notificationFontWeight</tabstop>
+  <tabstop>borderColorButton</tabstop>
+  <tabstop>borderWidthSlider</tabstop>
+  <tabstop>btnFixUnreadCount</tabstop>
+  <tabstop>boxParserSelection</tabstop>
+  <tabstop>leProfilePath</tabstop>
+  <tabstop>btnBrowse</tabstop>
+  <tabstop>treeAccounts</tabstop>
+  <tabstop>btnAccountAdd</tabstop>
+  <tabstop>btnAccountEdit</tabstop>
+  <tabstop>btnAccountRemove</tabstop>
+  <tabstop>boxAllowSuppression</tabstop>
+  <tabstop>boxLaunchThunderbirdAtStart</tabstop>
+  <tabstop>spinThunderbirdStartDelay</tabstop>
+  <tabstop>boxHideWindowAtStart</tabstop>
+  <tabstop>boxStopThunderbirdOnExit</tabstop>
+  <tabstop>boxShowHideThunderbird</tabstop>
+  <tabstop>boxHideWhenMinimized</tabstop>
+  <tabstop>boxMonitorThunderbirdWindow</tabstop>
+  <tabstop>boxRestartThunderbird</tabstop>
+  <tabstop>boxHideWindowAtRestart</tabstop>
+  <tabstop>boxEnableNewEmail</tabstop>
+  <tabstop>treeNewEmails</tabstop>
+  <tabstop>btnNewEmailAdd</tabstop>
+  <tabstop>btnNewEmailEdit</tabstop>
+  <tabstop>btnNewEmailDelete</tabstop>
+  <tabstop>thunderbirdCommandEditButton</tabstop>
+  <tabstop>leThunderbirdWindowMatch</tabstop>
+  <tabstop>spinMinimumFontSize</tabstop>
+  <tabstop>boxBlinkingUsesAlpha</tabstop>
+  <tabstop>spinUnreadOpacityLevel</tabstop>
+  <tabstop>checkUpdateOnStartup</tabstop>
+  <tabstop>checkUpdateButton</tabstop>
+  <tabstop>browserAbout</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QProgressDialog>
 #include <QPalette>
+#include <QtCore/QStringListModel>
 
 #include "databaseaccounts.h"
 #include "ui_dialogsettings.h"
@@ -64,6 +65,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    newEmailRemove();
         
         // Advanced buttons
+        void    editThunderbirdCommand();
         void    onCheckUpdateButton();
 
         // Icon change
@@ -105,12 +107,15 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         bool    isMorkParserSelected() const;
         
         /**
-         * Split the command line string back into its parts.
+         * Called when the user edited an entry of the Thunderbird command line model.
          *
-         * @param commandLine The command line string.
-         * @return The parts of the command line.
+         * @param topLeft The top left item that was changed.
+         * @param bottomRight The bottom right item that was changed.
+         * @param roles The data roles that have been modified.
          */
-        QStringList splitCommandLine(QString commandLine) const;
+        void onThunderbirdCommandModelChanged(
+                const QModelIndex &topLeft, const QModelIndex &bottomRight,
+                const QVector<int> &roles = QVector<int>());
 
         QPalette mPaletteOk;
         QPalette mPaletteErrror;
@@ -126,6 +131,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Model to show new emails
         ModelNewEmails      *   mModelNewEmails;
+    
+        /**
+         * Model that contains the Thunderbird command line.
+         */
+        QStringListModel* thunderbirdCmdModel = nullptr;
 
 };
 
