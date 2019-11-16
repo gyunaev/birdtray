@@ -563,11 +563,11 @@ bool DialogSettings::isMorkParserSelected() const
 void DialogSettings::onThunderbirdCommandModelChanged(
         const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
     if (topLeft.row() != thunderbirdCmdModel->rowCount() - 1
-        && thunderbirdCmdModel->data(topLeft).toString().isEmpty()) {
+        && thunderbirdCmdModel->data(topLeft, Qt::DisplayRole).toString().isEmpty()) {
         thunderbirdCmdModel->removeRow(topLeft.row());
     }
     if (!thunderbirdCmdModel->data(thunderbirdCmdModel->index(
-            thunderbirdCmdModel->rowCount() - 1, 0)).toString().isEmpty()) {
+            thunderbirdCmdModel->rowCount() - 1, 0), Qt::DisplayRole).toString().isEmpty()) {
         thunderbirdCmdModel->insertRow(thunderbirdCmdModel->rowCount());
         thunderbirdCmdModel->setData(
                 thunderbirdCmdModel->index(thunderbirdCmdModel->rowCount() - 1, 0), "");
