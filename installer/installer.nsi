@@ -57,6 +57,9 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MIN_WINDOWS_VER "XP"
 
 # Paths
+!define TRANSLATIONS_GROUP_DESCRIPTION "Select translations for Birdtray. \
+        Birdtray will choose a translation based on the system language."
+
 !define EXE_NAME "birdtray.exe"
 !define PROGEXE ${EXE_NAME}  # For the MultiUser plugin
 !define ICON_NAME "birdtray.ico"
@@ -75,6 +78,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define UNINSTALL_LIST_FILENAME "uninstall_list.nsh"
 !define INSTALLER_TRANSLATIONS_BUILDER_FILE "makeInstallerTranslations.exe"
 !define INSTALLER_TRANSLATIONS_FILENAME "installerTranslations.nsi"
+!define TRANSLATIONS_LIST_BUILDER_FILE "makeTranslationsList.exe"
+!define TRANSLATIONS_LIST_FILENAME "translations_list.nsh"
 !define HEADER_IMG_FILE "assets\header.bmp"
 !define SIDEBAR_IMG_FILE "assets\sidebar.bmp"
 !define INSTALL_CONFIG_FILE ".installConfig.ini"
@@ -301,7 +306,7 @@ Section "${PRODUCT_NAME}" SectionBirdTray
             "${MUI_LANGDLL_REGISTRY_VALUENAME}" $LANGUAGE
     ${endif}
 
-    File /r "${DIST_DIR}\*"
+    File /r /x translations "${DIST_DIR}\*"
 
     !ifdef INSTALL_LICENSE
         File "${LICENSE_PATH}"
@@ -360,6 +365,16 @@ Section "$(AutoCheckUpdateSectionName)" SectionAutoCheckUpdate
     FileWrite $2 "updateOnStartup = true$\r$\n"
 SectionEnd
 
+SectionGroup /e "Translations" SectionGroupTranslations
+    !makensis '/DDIST_DIR="${DIST_DIR}" \
+                /DTRANSLATIONS_LIST_FILENAME="${TRANSLATIONS_LIST_FILENAME}" \
+                makeTranslationsList.nsi' = 0
+    !system "${TRANSLATIONS_LIST_BUILDER_FILE}" = 0
+    !include "${TRANSLATIONS_LIST_FILENAME}"
+    !delfile "${TRANSLATIONS_LIST_BUILDER_FILE}"
+    !delfile "${TRANSLATIONS_LIST_FILENAME}"
+SectionGroupEnd
+
 Section "-Write Install Size" # Hidden section, write install size as the final step
     !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
 SectionEnd
@@ -370,6 +385,8 @@ SectionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoCheckUpdate} "$(AutoCheckUpdateDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupWinIntegration} \
             "$(WinIntegrationGroupDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupTranslations} \
+            "${TRANSLATIONS_GROUP_DESCRIPTION}"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "$(ProgramGroupDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionDesktopEntry} "$(DesktopEntryDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionStartMenuEntry} "$(StartMenuDescription)"
