@@ -57,23 +57,23 @@ const char MorkDictColumnMeta[] = "<(a=c)>";
 // Error codes
 enum MorkErrors
 {
-	NoError = 0,
-	FailedToOpen,
-	UnsupportedVersion,
-	DefectedFormat
+    NoError = 0,
+    FailedToOpen,
+    UnsupportedVersion,
+    DefectedFormat
 };
 
 // Mork term types
 enum MorkTerm
 {
-	NoneTerm = 0,
-	DictTerm,
-	GroupTerm,
-	TableTerm,
-	RowTerm,
-	CellTerm,
-	CommentTerm,
-	LiteralTerm
+    NoneTerm = 0,
+    DictTerm,
+    GroupTerm,
+    TableTerm,
+    RowTerm,
+    CellTerm,
+    CommentTerm,
+    LiteralTerm
 };
 
 
@@ -83,39 +83,39 @@ class MorkParser
 {
 public:
 
-	MorkParser( int defaultScope = 0x80 );
+    MorkParser( int defaultScope = 0x80 );
 
-	///
-	/// Open and parse mork file
+    ///
+    /// Open and parse mork file
 
-	bool open( const QString &path );
+    bool open( const QString &path );
 
-	///
-	/// Return error status
+    ///
+    /// Return error status
 
     QString errorMsg();
 
-	///
-	/// Returns all tables of specified scope
+    ///
+    /// Returns all tables of specified scope
 
-	MorkTableMap *getTables( int tableScope );
+    MorkTableMap *getTables( int tableScope );
 
-	///
-	/// Rerturns all rows under specified scope
+    ///
+    /// Rerturns all rows under specified scope
 
-	MorkRowMap *getRows( int rowScope, RowScopeMap *table );
+    MorkRowMap *getRows( int rowScope, RowScopeMap *table );
 
     // Returns all rows for a specific table scope, table ID and row scope.
     // Return an empty map if not found
     const MorkRowMap * rows(int tablescope, int tableid, int rowscope );
 
-	///
-	/// Return value of specified value oid
+    ///
+    /// Return value of specified value oid
 
     QString getValue( int oid );
 
-	///
-	/// Return value of specified column oid
+    ///
+    /// Return value of specified column oid
 
     QString getColumn( int oid );
 
@@ -142,7 +142,7 @@ protected: // Members
     void    parseScopeId( const QString &TextId, int *Id, int *Scope );
     void    setCurrentRow( int TableScope, int TableId, int RowScope, int RowId );
 
-	// Parse methods
+    // Parse methods
     void    parse();
     void    parseDict();
     void    parseComment();
@@ -154,26 +154,26 @@ protected: // Members
 
 protected: // Data
 
-	// Columns in mork means value names
-	MorkDict columns_;
-	MorkDict values_;
+    // Columns in mork means value names
+    MorkDict columns_;
+    MorkDict values_;
 
-	// All mork file data
-	TableScopeMap mork_;
-	MorkCells *currentCells_;
+    // All mork file data
+    TableScopeMap mork_;
+    MorkCells *currentCells_;
 
-	// Error status of last operation
+    // Error status of last operation
     QString mErrorMessage;
 
-	// All Mork data
-	QByteArray morkData_;
+    // All Mork data
+    QByteArray morkData_;
 
-	int morkPos_;
-	int nextAddValueId_;
-	int defaultScope_;
+    int morkPos_;
+    int nextAddValueId_;
+    int defaultScope_;
 
-	// Indicates intity is being parsed
-	enum { NPColumns, NPValues, NPRows } nowParsing_;
+    // Indicates intity is being parsed
+    enum { NPColumns, NPValues, NPRows } nowParsing_;
 };
 
 #endif // __MorkParser_h__
