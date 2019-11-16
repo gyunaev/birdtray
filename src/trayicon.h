@@ -127,7 +127,7 @@ class TrayIcon : public QSystemTrayIcon
         QDateTime       mSnoozedUntil;
 
         // Unread counter thread
-        UnreadMonitor * mUnreadMonitor;
+        UnreadMonitor * mUnreadMonitor = nullptr;
 
         // State checking timer (once a second)
         QTimer          mStateTimer;

@@ -52,6 +52,12 @@ void UnreadMonitor::run()
     exec();
 }
 
+void UnreadMonitor::quitAndDelete() {
+    quit();
+    wait();
+    deleteLater();
+}
+
 void UnreadMonitor::slotSettingsChanged()
 {
     // We reinitialize everything because the settings changed

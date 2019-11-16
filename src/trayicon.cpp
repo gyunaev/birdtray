@@ -22,7 +22,6 @@ TrayIcon::TrayIcon(bool showSettings)
 
     mIgnoredUnreadEmails = 0;
     mUnreadCounter = 0;
-    mUnreadMonitor = 0;
 
     // Context menu
     mSystrayMenu = new QMenu();
@@ -87,6 +86,10 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager->deleteLater();
         networkConnectivityManager = nullptr;
     }
+    if (mUnreadMonitor != nullptr) {
+        mUnreadMonitor->quitAndDelete();
+        mUnreadMonitor = nullptr;
+    }
 }
 
 WindowTools* TrayIcon::getWindowTools() const {
@@ -107,8 +110,8 @@ void TrayIcon::unreadCounterError(QString message)
     qWarning("UnreadCounter generated an error: %s", qPrintable(message) );
 
     mCurrentStatus = message;
-    mUnreadMonitor->deleteLater();
-    mUnreadMonitor = 0;
+    mUnreadMonitor->quitAndDelete();
+    mUnreadMonitor = nullptr;
 
     mUnreadCounter = 0;
     updateIcon();
@@ -196,7 +199,8 @@ void TrayIcon::updateIcon()
     p.setFont(settings->mNotificationFont);
 
     // Do we need to draw error sign?
-    if (mUnreadMonitor == 0 || (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
+    if (mUnreadMonitor == nullptr ||
+        (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
         pen.setWidth( (temp.width() * 10) / 100 );
