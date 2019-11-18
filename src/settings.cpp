@@ -48,7 +48,6 @@ Settings::Settings(bool verboseOutput)
     mThunderbirdWindowMatch = "- Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
-    mUseMorkParser = true;
     mWatchFileTimeout = 150;
     mBlinkingUseAlphaTransition = false;
     mUpdateOnStartup = false;
@@ -68,7 +67,6 @@ void Settings::save()
     mSettings->setValue("common/defaultcolor", mNotificationDefaultColor.name() );
     mSettings->setValue(BORDER_COLOR_KEY, mNotificationBorderColor.name());
     mSettings->setValue(BORDER_WIDTH_KEY, mNotificationBorderWidth);
-    mSettings->setValue("common/profilepath", mThunderbirdFolderPath );
     mSettings->setValue("common/blinkspeed", mBlinkSpeed );
     mSettings->setValue("common/showhidethunderbird", mShowHideThunderbird );
     mSettings->setValue("common/launchthunderbird", mLaunchThunderbird );
@@ -85,7 +83,6 @@ void Settings::save()
 
     mSettings->setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     mSettings->setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
-    mSettings->setValue("advanced/unreadmorkparser", mUseMorkParser );
     mSettings->setValue("advanced/notificationfontminsize", mNotificationMinimumFontSize );
     mSettings->setValue("advanced/notificationfontmaxsize", mNotificationMaximumFontSize );
     mSettings->setValue("advanced/watchfiletimeout", mWatchFileTimeout );
@@ -97,13 +94,11 @@ void Settings::save()
     // Convert the map into settings
     mSettings->setValue("accounts/count", mFolderNotificationColors.size() );
     int index = 0;
-
-    for ( QString uri : mFolderNotificationList )
-    {
-        QString entry = "accounts/account" + QString::number( index );
-        mSettings->setValue( entry + "Color", mFolderNotificationColors[uri].name() );
-        mSettings->setValue( entry + "URI", uri );
-
+    
+    for (const QString &path : mFolderNotificationList) {
+        QString entry = "accounts/account" + QString::number(index);
+        mSettings->setValue(entry + "Color", mFolderNotificationColors[path].name());
+        mSettings->setValue(entry + "URI", path);
         index++;
     }
 
@@ -144,8 +139,6 @@ void Settings::load()
     mNotificationBorderWidth = mSettings->value( // Disable border on existing installations
             BORDER_WIDTH_KEY, mSettings->value("common/defaultcolor").isNull() ?
                               0 : mNotificationBorderWidth).toUInt();
-    mThunderbirdFolderPath = mSettings->value(
-            "common/profilepath", mThunderbirdFolderPath ).toString();
     mBlinkSpeed = mSettings->value("common/blinkspeed", mBlinkSpeed ).toInt();
     mShowHideThunderbird = mSettings->value(
             "common/showhidethunderbird", mShowHideThunderbird ).toBool();
@@ -179,7 +172,6 @@ void Settings::load()
             "advanced/notificationfontminsize", mNotificationMinimumFontSize ).toInt();
     mNotificationMaximumFontSize = mSettings->value(
             "advanced/notificationfontmaxsize", mNotificationMaximumFontSize ).toInt();
-    mUseMorkParser = mSettings->value("advanced/unreadmorkparser", mUseMorkParser ).toBool();
     mWatchFileTimeout = mSettings->value("advanced/watchfiletimeout", mWatchFileTimeout ).toUInt();
     mBlinkingUseAlphaTransition = mSettings->value(
             "advanced/blinkingusealpha", mBlinkingUseAlphaTransition ).toBool();

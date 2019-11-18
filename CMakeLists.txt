@@ -5,13 +5,12 @@ project(Birdtray CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(SQLite3 REQUIRED)
 find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5Network CONFIG REQUIRED)
 find_package(Qt5LinguistTools CONFIG REQUIRED)
-set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
+set(REQUIRED_MODULES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
 
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
@@ -37,14 +36,11 @@ endif(WIN32)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
-include_directories(${SQLITE3_INCLUDE_DIRS} src)
+include_directories(src)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
 
 set(SOURCES
         src/colorbutton.cpp
-        src/databaseaccounts.cpp
-        src/databaseunreadfixer.cpp
-        src/dialogaddeditaccount.cpp
         src/dialogaddeditnewemail.cpp
         src/dialogsettings.cpp
         src/main.cpp
@@ -53,9 +49,8 @@ set(SOURCES
         src/morkparser.cpp
         src/setting_newemail.cpp
         src/settings.cpp
-        src/sqlite_statement.cpp
         src/trayicon.cpp
-        src/unreadcounter.cpp
+        src/unreadmonitor.cpp
         src/utils.cpp
         src/windowtools.cpp
         src/autoupdater.cpp
@@ -63,7 +58,6 @@ set(SOURCES
         src/updatedownloaddialog.cpp
         src/mailaccountdialog.cpp
         src/birdtrayapp.cpp
-        src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
         src/dialogsettings.ui
         src/updatedialog.ui
@@ -72,9 +66,6 @@ set(SOURCES
 
 set(HEADERS
         src/colorbutton.h
-        src/databaseaccounts.h
-        src/databaseunreadfixer.h
-        src/dialogaddeditaccount.h
         src/dialogaddeditnewemail.h
         src/dialogsettings.h
         src/modelaccounttree.h
@@ -82,9 +73,8 @@ set(HEADERS
         src/morkparser.h
         src/setting_newemail.h
         src/settings.h
-        src/sqlite_statement.h
         src/trayicon.h
-        src/unreadcounter.h
+        src/unreadmonitor.h
         src/utils.h
         src/version.h
         src/windowtools.h
@@ -145,10 +135,8 @@ if(WIN32)
 
     # Create installer
     STRING(REGEX REPLACE "/" "\\\\\\\\" BIRDTRAY_EXE ${CMAKE_BINARY_DIR}/birdtray.exe)
-    STRING(REGEX REPLACE "/" "\\\\\\\\" SQLITE3_PATH ${SQLITE3_LIBRARY})
     install(CODE "execute_process(
-        COMMAND cmd /C buildInstaller.bat
-            \"${BIRDTRAY_EXE}\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" --install
+        COMMAND cmd /C buildInstaller.bat \"${BIRDTRAY_EXE}\" \"${SSL_PATH}\" --install
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer)")
 else()
     include(GNUInstallDirs)

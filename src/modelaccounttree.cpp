@@ -12,9 +12,9 @@ ModelAccountTree::ModelAccountTree(QObject* parent, QTreeView* treeView)
         : QAbstractItemModel(parent), QStyledItemDelegate(parent) {
     Settings* settings = BirdtrayApp::get()->getSettings();
     // Get the current settings in proper(stored) order
-    for (const QString& uri : settings->mFolderNotificationList) {
-        mAccounts.push_back(uri);
-        mColors.push_back(settings->mFolderNotificationColors[uri]);
+    for (const QString& folderPath : settings->mFolderNotificationList) {
+        mAccounts.push_back(folderPath);
+        mColors.push_back(settings->mFolderNotificationColors[folderPath]);
     }
     treeView->setModel(this);
     treeView->setItemDelegateForColumn(1, this);
@@ -31,19 +31,15 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
     if ( index.row() >= 0 && index.row() < mAccounts.size() && index.column() < 2 )
     {
         if ( role == Qt::DisplayRole && index.column() == 0) {
-            QString account = mAccounts[index.row()];
-            if (!account.endsWith(".msf")) {
-                return Utils::decodeIMAPutf7(account);
-            }
-            QFileInfo fileInfo(account);
-            QString folderName = fileInfo.baseName();
+            QFileInfo accountMsfFile(mAccounts[index.row()]);
+            QString folderName = accountMsfFile.baseName();
             if (folderName == "INBOX") {
                 folderName = QObject::tr("Inbox");
             } else {
                 folderName = QCoreApplication::translate(
                         "EmailFolders", folderName.toUtf8().constData());
             }
-            QString accountName = fileInfo.dir().dirName();
+            QString accountName = accountMsfFile.dir().dirName();
             return accountName + " [" + folderName + "]";
         } else if ( role == Qt::ToolTipRole && index.column() == 0 ) {
             return mAccounts[index.row()];
@@ -100,35 +96,32 @@ void ModelAccountTree::paint(QPainter* painter, const QStyleOptionViewItem &opti
     }
 }
 
-void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
-{
-    if (uri.isEmpty()) {
+void ModelAccountTree::addAccount(const QString &path, const QColor &color) {
+    if (path.isEmpty()) {
         return;
     }
     // Only this line changed
-    beginInsertRows( QModelIndex(), mColors.size(), mColors.size() + 1 );
-
-    mAccounts.push_back( uri );
-    mColors.push_back( color );
-
+    beginInsertRows(QModelIndex(), mColors.size(), mColors.size() + 1);
+    
+    mAccounts.push_back(path);
+    mColors.push_back(color);
+    
     endInsertRows();
 }
 
-void ModelAccountTree::editAccount(const QModelIndex &idx, const QString &uri, const QColor &color)
-{
-    if (uri.isEmpty()) {
+void ModelAccountTree::editAccount(
+        const QModelIndex &idx, const QString &path, const QColor &color) {
+    if (path.isEmpty()) {
         return;
     }
-    mAccounts[ idx.row() ] = uri;
-    mColors[ idx.row() ] = color;
-
-    emit dataChanged( createIndex( idx.row(), 0 ),  createIndex( idx.row(), 1 ) );
+    mAccounts[idx.row()] = path;
+    mColors[idx.row()] = color;
+    emit dataChanged(createIndex(idx.row(), 0), createIndex(idx.row(), 1));
 }
 
-void ModelAccountTree::getAccount(const QModelIndex &idx, QString &uri, QColor &color)
-{
-    uri = mAccounts[ idx.row() ];
-    color = mColors[ idx.row() ];
+void ModelAccountTree::getAccount(const QModelIndex &idx, QString &path, QColor &color) {
+    path = mAccounts[idx.row()];
+    color = mColors[idx.row()];
 }
 
 void ModelAccountTree::removeAccount(const QModelIndex &idx)

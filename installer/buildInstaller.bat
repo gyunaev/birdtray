@@ -15,28 +15,23 @@ if not exist "%exePath%" (
     echo Birdtray executable not found at %exePath% 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
-set "libSqlitePath=%~2"
-if not exist "%libSqlitePath%" (
-    echo Sqlite library not found at %libSqlitePath% 1>&2
-    exit /b %ERROR_FILE_NOT_FOUND%
-)
 
-for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libcrypto ^| findstr .dll` ) do (
-    set "openSSLCryptoPath=%~3\%%f"
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~2" 2^>nul ^| findstr libcrypto ^| findstr .dll` ) do (
+    set "openSSLCryptoPath=%~2\%%f"
 )
-for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libssl ^| findstr .dll`) do (
-    set "openSSLPath=%~3\%%f"
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~2" 2^>nul ^| findstr libssl ^| findstr .dll`) do (
+    set "openSSLPath=%~2\%%f"
 )
 if not exist "%openSSLCryptoPath%" (
-    echo OpenSSL crypto library not found at %~3\libcrypto*.dll 1>&2
+    echo OpenSSL crypto library not found at %~2\libcrypto*.dll 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 if not exist "%openSSLPath%" (
-    echo OpenSSL library not found at %~3\libssl*.dll 1>&2
+    echo OpenSSL library not found at %~2\libssl*.dll 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 
-if "%~4" == "--install" (
+if "%~3" == "--install" (
     set "installAfterBuild=1"
 )
 
@@ -94,12 +89,6 @@ if errorLevel 1 (
 xcopy "%exePath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
     echo Failed to copy the Birdtray executable from %exePath% 1>&2
-    echo to the deployment folder at %deploymentFolder% 1>&2
-    exit /b %errorLevel%
-)
-xcopy "%libSqlitePath%" "%deploymentFolder%" /q /y 1>nul
-if errorLevel 1 (
-    echo Failed to copy the Sqlite library from %libSqlitePath% 1>&2
     echo to the deployment folder at %deploymentFolder% 1>&2
     exit /b %errorLevel%
 )
@@ -260,10 +249,9 @@ goto :eof
 
 : Usage
 echo Creates the Birdtray installer. - Usage:
-echo buildInstaller.bat exePath libSqlitePath openSSLPath [--install]
+echo buildInstaller.bat exePath openSSLPath [--install]
 echo:
 echo exePath:       The path to the birdtray.exe to include in the installer
-echo libSqlitePath: The path to the libsqlite.dll that was used to compile the Birdtray exe
 echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.dll
 echo --install:     Optional parameter. If specified, executes the generated installer.
 echo:

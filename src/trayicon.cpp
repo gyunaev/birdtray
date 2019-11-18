@@ -8,7 +8,7 @@
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
-#include "unreadcounter.h"
+#include "unreadmonitor.h"
 #include "windowtools.h"
 #include "utils.h"
 #include "autoupdater.h"

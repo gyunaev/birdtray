@@ -86,21 +86,11 @@ install:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       sudo apt-get install -qq ${QT_VERSION}base ${QT_VERSION}translations ${QT_VERSION}tools ${QT_VERSION}x11extras;
-      sudo apt-get install -qq libsqlite3-dev libx11-dev;
+      sudo apt-get install -qq libx11-dev;
       source ${QT_HOME}/bin/${QT_VERSION}-env.sh;
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-      if [ "$PLATFORM" == "x64" ]; then
-        export SQLITE_URL=https://www.sqlite.org/2019/sqlite-dll-win64-x64-3270200.zip;
-      else
-        export SQLITE_URL=https://www.sqlite.org/2019/sqlite-dll-win32-x86-3270200.zip;
-      fi
-      curl -Lo ~/sqlite3-src.zip https://www.sqlite.org/2019/sqlite-amalgamation-3270200.zip;
-      curl -Lo ~/sqlite3.zip $SQLITE_URL
-      unzip -j ~/sqlite3-src.zip -d ~/sqlite3
-      unzip -uoj ~/sqlite3.zip -d ~/sqlite3
-      echo '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"' ${PLATFORM} '&& LIB /DEF:%userprofile%\sqlite3\sqlite3.def /OUT:%userprofile%\sqlite3\sqlite3.lib /MACHINE:'${PLATFORM} '|| exit /b 1' | cmd;
       export QT_VERSION=$(find "${QT_HOME}" -mindepth 1 -maxdepth 1 -type d -name "*.*.*" -printf '%f' -quit 2> /dev/null);
       echo "Installed Qt version: ${QT_VERSION}";
       export QT_COMILER_DIR="${QT_HOME}/${QT_VERSION}/${QT_COMILER}";
@@ -121,7 +111,7 @@ install:
         export QT_COMILER_DIR="${QT_HOME}/${QT_VERSION}/${QT_COMILER}";
       fi
       echo "QT_COMILER_DIR: ${QT_COMILER_DIR}";
-      export CMAKE_PREFIX_PATH="${QT_COMILER_DIR};~/sqlite3/";
+      export CMAKE_PREFIX_PATH="${QT_COMILER_DIR}";
       export PATH=$PATH:/c/Program\ Files\ \(x86\)/NSIS/:$(echo "/${QT_COMILER_DIR}" | sed -e 's/\\/\//g' -e 's/://')/bin;
       if [ "${PLATFORM}" = "x86" ]; then
         export PLATFORM="Win32";
@@ -140,7 +130,7 @@ before_deploy:
       choco install -y nsis;
       choco install -y openssl.light;
       cd ../installer;
-      ./buildInstaller.bat "..\build\Release\birdtray.exe" "%USERPROFILE%\sqlite3\sqlite3.dll" "%PROGRAMFILES%\OpenSSL" || (exit $?);
+      ./buildInstaller.bat "..\build\Release\birdtray.exe" "%PROGRAMFILES%\OpenSSL" || (exit $?);
       cd ..;
     fi
 

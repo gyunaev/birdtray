@@ -7,7 +7,6 @@
 #include <QtWidgets/QTreeView>
 #include <QtWidgets/QStyledItemDelegate>
 
-#include "databaseaccounts.h"
 
 class ModelAccountTree : public QAbstractItemModel, public QStyledItemDelegate
 {
@@ -29,9 +28,9 @@ class ModelAccountTree : public QAbstractItemModel, public QStyledItemDelegate
         void paint(QPainter* painter, const QStyleOptionViewItem &option,
                    const QModelIndex &index) const override;
 
-        void    addAccount( const QString& uri, const QColor& color );
-        void    editAccount( const QModelIndex& idx, const QString& uri, const QColor& color );
-        void    getAccount( const QModelIndex& idx, QString& uri, QColor& color );
+        void    addAccount(const QString& path, const QColor& color );
+        void    editAccount(const QModelIndex& idx, const QString& path, const QColor& color );
+        void    getAccount(const QModelIndex& idx, QString& path, QColor& color );
         void    removeAccount( const QModelIndex& idx );
         void    clear();
 
