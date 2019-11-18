@@ -75,16 +75,16 @@ FunctionEnd
 # $R0 - OUTPUT_FILE: The file to write the translations to.
 # $R1 - TRANSLATION_FOLDER: The directory that contains the translations.
 Function CreateTranslations
-	Pop $R1  # translations folder
-	Pop $R0	 # output file
+    Pop $R1  # translations folder
+    Pop $R0	 # output file
 
     FileOpen $R4 $R0 w
-	ClearErrors
+    ClearErrors
 
-	FindFirst $R2 $R3 "$R1\installer_*.ts"
+    FindFirst $R2 $R3 "$R1\installer_*.ts"
 
 CreateTranslations_Loop:
-	IfErrors CreateTranslations_Done
+    IfErrors CreateTranslations_Done
 
     ${xml::LoadFile} "$R1\$R3" $0
     ${if} $0 = -1
@@ -134,13 +134,13 @@ CreateTranslations_Loop:
         ${endif}
         ${xml::NextSiblingElement} "message" $1 $0
     ${loop}
-	ClearErrors
-	FindNext $R2 $R3
-	Goto CreateTranslations_Loop
+    ClearErrors
+    FindNext $R2 $R3
+    Goto CreateTranslations_Loop
 
 CreateTranslations_Done:
-	FindClose $R2
-	FileClose $R4
+    FindClose $R2
+    FileClose $R4
 FunctionEnd
 
 
