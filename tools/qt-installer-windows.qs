@@ -91,8 +91,6 @@ Controller.prototype.ReadyForInstallationPageCallback = function() {
 
 Controller.prototype.FinishedPageCallback = function() {
     console.log("Step: " + gui.currentPageWidget());
-    // TODO somehow the installer crashes after this step.
-    // https://stackoverflow.com/questions/25105269/silent-install-qt-run-installer-on-ubuntu-server
     var checkBoxForm = gui.currentPageWidget().LaunchQtCreatorCheckBoxForm;
     if (checkBoxForm && checkBoxForm.launchQtCreatorCheckBox) {
         checkBoxForm.launchQtCreatorCheckBox.checked = false;
