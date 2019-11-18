@@ -9,8 +9,8 @@ RequestExecutionLevel user
 # $R0 - OUTPUT_FILE: The file to write the sections to.
 # $R1 - TRANSLATION_FOLDER: The directory that contains the translations.
 Function CreateTranslationsList
-	Pop $R1  # translations folder
-	Pop $R0	 # output file
+    Pop $R1  # translations folder
+    Pop $R0	 # output file
 
     FileOpen $R4 $R0 w
     FileWrite $R4 '!macro insert_translation_section name$\r$\n'
@@ -20,24 +20,24 @@ Function CreateTranslationsList
     FileWrite $R4 '  SectionEnd$\r$\n'
     FileWrite $R4 '!macroend$\r$\n'
 
-	ClearErrors
-	FindFirst $R2 $R3 "$R1\main_*.qm"
+    ClearErrors
+    FindFirst $R2 $R3 "$R1\main_*.qm"
 
 CreateTranslationsList_Loop:
-	IfErrors CreateTranslationsList_Done
+    IfErrors CreateTranslationsList_Done
 
-	# Add section for translation
-	FileSeek $R4 0 END
-	StrCpy $R5 $R3 -3 5
-	FileWrite $R4 '!insertmacro insert_translation_section "$R5"$\r$\n'
+    # Add section for translation
+    FileSeek $R4 0 END
+    StrCpy $R5 $R3 -3 5
+    FileWrite $R4 '!insertmacro insert_translation_section "$R5"$\r$\n'
 
-	ClearErrors
-	FindNext $R2 $R3
-	Goto CreateTranslationsList_Loop
+    ClearErrors
+    FindNext $R2 $R3
+    Goto CreateTranslationsList_Loop
 
 CreateTranslationsList_Done:
-	FindClose $R2
-	FileClose $R4
+    FindClose $R2
+    FileClose $R4
 FunctionEnd
 
 
