@@ -61,6 +61,14 @@
         <translation>Create a ${PRODUCT_NAME} icon in the Start Menu.</translation>
     </message>
     <message>
+        <source>TranslationsSectionName</source>
+        <translation>Translations</translation>
+    </message>
+    <message>
+        <source>TranslationsDescription</source>
+        <translation>Select translations for ${PRODUCT_NAME}. ${PRODUCT_NAME} will choose a translation based on the system language.</translation>
+    </message>
+    <message>
         <source>UserSettingsSectionName</source>
         <translation>${PRODUCT_NAME} User Settings</translation>
     </message>
@@ -171,6 +179,14 @@
     <message>
         <source>UninstallerAborted</source>
         <translation>Uninstalling ${PRODUCT_NAME} has been aborted. Please try again later.</translation>
+    </message>
+    <message>
+        <source>Lang_en</source>
+        <translation>English</translation>
+    </message>
+    <message>
+        <source>Lang_de</source>
+        <translation>German</translation>
     </message>
 </context>
 </TS>

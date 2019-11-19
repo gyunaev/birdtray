@@ -57,9 +57,6 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MIN_WINDOWS_VER "XP"
 
 # Paths
-!define TRANSLATIONS_GROUP_DESCRIPTION "Select translations for Birdtray. \
-        Birdtray will choose a translation based on the system language."
-
 !define EXE_NAME "birdtray.exe"
 !define PROGEXE ${EXE_NAME}  # For the MultiUser plugin
 !define ICON_NAME "birdtray.ico"
@@ -365,7 +362,7 @@ Section "$(AutoCheckUpdateSectionName)" SectionAutoCheckUpdate
     FileWrite $2 "updateOnStartup = true$\r$\n"
 SectionEnd
 
-SectionGroup /e "Translations" SectionGroupTranslations
+SectionGroup /e "$(TranslationsSectionName)" SectionGroupTranslations
     !makensis '/DDIST_DIR="${DIST_DIR}" \
                 /DTRANSLATIONS_LIST_FILENAME="${TRANSLATIONS_LIST_FILENAME}" \
                 makeTranslationsList.nsi' = 0
@@ -385,8 +382,7 @@ SectionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoCheckUpdate} "$(AutoCheckUpdateDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupWinIntegration} \
             "$(WinIntegrationGroupDescription)"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupTranslations} \
-            "${TRANSLATIONS_GROUP_DESCRIPTION}"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupTranslations} "$(TranslationsDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "$(ProgramGroupDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionDesktopEntry} "$(DesktopEntryDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionStartMenuEntry} "$(StartMenuDescription)"

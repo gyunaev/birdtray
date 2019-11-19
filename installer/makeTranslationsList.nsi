@@ -14,7 +14,7 @@ Function CreateTranslationsList
 
     FileOpen $R4 $R0 w
     FileWrite $R4 '!macro insert_translation_section name$\r$\n'
-    FileWrite $R4 '  Section "$${name}"$\r$\n'
+    FileWrite $R4 '  Section "$$(Lang_$${name})"$\r$\n'
     FileWrite $R4 '    SetOutPath "$$INSTDIR\translations"$\r$\n'
     FileWrite $R4 '    File /nonfatal "$R1\*_$${name}.qm"$\r$\n'
     FileWrite $R4 '  SectionEnd$\r$\n'
