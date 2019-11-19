@@ -26,15 +26,15 @@ ColorButton::ColorButton(QWidget * parent, QColor color)
 {
     m_allowSetAlpha = false;
     drawBorder = true;
-	connect( this, SIGNAL(clicked()), this, SLOT(btnClicked()) );
+    connect( this, SIGNAL(clicked()), this, SLOT(btnClicked()) );
 }
 
 void ColorButton::setColor( const QColor& color )
 {
-	// After the constructor is called, UIC-generated code calls setLabel, so we overwrite it here
-	setText("");
+    // After the constructor is called, UIC-generated code calls setLabel, so we overwrite it here
+    setText("");
 
-	m_selectedColor = color;
+    m_selectedColor = color;
     update();
     emit onColorChanged(m_selectedColor);
 }
@@ -50,7 +50,7 @@ void ColorButton::setBorderlessMode(bool enable) {
 
 QColor ColorButton::color() const
 {
-	return m_selectedColor;
+    return m_selectedColor;
 }
 
 void ColorButton::btnClicked()
@@ -62,8 +62,8 @@ void ColorButton::btnClicked()
                                                   QColorDialog::ShowAlphaChannel :
                                                   QColorDialog::ColorDialogOptions() );
 
-	if ( newcolor.isValid() )
-		setColor( newcolor );
+    if ( newcolor.isValid() )
+        setColor( newcolor );
 }
 
 void ColorButton::paintEvent( QPaintEvent * event )
@@ -84,9 +84,9 @@ void ColorButton::paintEvent( QPaintEvent * event )
         rect.setRect(1, 1, width() - 2, height() - 2);
     }
 
-	if ( isDown() )
-		rect.translate( 1, 1 );
+    if ( isDown() )
+        rect.translate( 1, 1 );
 
-	painter.fillRect( rect, m_selectedColor );
-	painter.end();
+    painter.fillRect( rect, m_selectedColor );
+    painter.end();
 }
