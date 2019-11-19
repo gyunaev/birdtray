@@ -832,6 +832,10 @@ Wollen Sie fortfahren?</translation>
         <source>Cannot query database.</source>
         <translation>Kann nicht von der Datenbank lesen.</translation>
     </message>
+    <message>
+        <source>Unable to watch %1 for changes.</source>
+        <translation>Kann %1 nicht auf Änderungen überwachen.</translation>
+    </message>
 </context>
 <context>
     <name>UpdateDialog</name>

@@ -807,6 +807,10 @@ Do you want to continue?</source>
         <source>Cannot query database.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to watch %1 for changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateDialog</name>
