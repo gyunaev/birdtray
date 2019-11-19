@@ -22,6 +22,11 @@ class UnreadMonitor : public QThread
 
         // Thread run function
         virtual void run() override;
+        
+        /**
+         * Safely enqueues the this unread monitor for deletion.
+         */
+        void quitAndDelete();
 
     signals:
         // Unread counter changed
