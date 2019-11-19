@@ -99,7 +99,7 @@ joined with a `_` (e.g. `en` for english or `en_US` for american english).
 ###### Adding a new translation:
 
 To add a new translation to Birdtray, you need to know the [language tag](#language-tag) for the language you want to add.
-Choose one `main_*.ts` and a `dynamic_*.ts` file from [here](src/translations), where `*` is another language tag.
+Choose one `main_*.ts`, a `dynamic_*.ts` and a `installer_*.ts` file from [here](src/translations), where `*` is another language tag.
 Copy the files into the same directory, but replace the previous language tag with the tag for your language.
 Now open both files with a text editor and find the line near the top that looks like this: `<TS version="2.1" language="*">`
 Again, `*` will be another language tag. Replace that tag with your new language tag.
@@ -107,7 +107,7 @@ Now you can continue to edit the new files as described in the next section.
 
 ###### Edit an existing translation:
 
-To change an existing translation, you need to edit the `main_*.ts` and / or `dynamic_*.ts` translation file
+To change an existing translation, you need to edit the `main_*.ts`, `dynamic_*.ts` and / or `installer_*.ts` translation file
 of that language in the [translations directory](src/translations).
 The `*` represents the [language tag](#language-tag) of the language you want to change. To edit these files,
 you can use a text editor or the [Qt Linguist](https://doc.qt.io/qt-5/linguist-translators.html).

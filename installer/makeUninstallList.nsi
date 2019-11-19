@@ -63,73 +63,73 @@ FunctionEnd
 # $R2 - LOCAL_FOLDER: The current folder relative to the global folder to examine.
 # $R3 - GLOBAL_FOLDER: The global root folder from where the search starts.
 Function MakeRecurrentFileList
-	Pop $R3  # global folder
-	Pop $R2	 # local folder
-	Pop $R1	 # filter
-	Pop $R0	 # output file
+    Pop $R3  # global folder
+    Pop $R2	 # local folder
+    Pop $R1	 # filter
+    Pop $R0	 # output file
 
-	ClearErrors
-	FindFirst $R4 $R5 "$R3\$R2\*.*"
+    ClearErrors
+    FindFirst $R4 $R5 "$R3\$R2\*.*"
 
 MakeRecurrentFileList_Loop:
-	IfErrors MakeRecurrentFileList_Done
-	# check if it is folder
-	IfFileExists "$R3\$R2\$R5\*.*"  0 MakeRecurrentFileList_file
-	# directory
-	StrCmp $R5 "." MakeRecurrentFileList_next			# skip current folder
-	StrCmp $R5 ".." MakeRecurrentFileList_next			# skip parent folder
-	# go Recurrent
-	# save current variables
-	Push $R5
-	Push $R4
-	Push $R3
-	Push $R2
-	Push $R1
-	Push $R0
+    IfErrors MakeRecurrentFileList_Done
+    # check if it is folder
+    IfFileExists "$R3\$R2\$R5\*.*"  0 MakeRecurrentFileList_file
+    # directory
+    StrCmp $R5 "." MakeRecurrentFileList_next			# skip current folder
+    StrCmp $R5 ".." MakeRecurrentFileList_next			# skip parent folder
+    # go Recurrent
+    # save current variables
+    Push $R5
+    Push $R4
+    Push $R3
+    Push $R2
+    Push $R1
+    Push $R0
 
-	# set parameters
-	Push $R0		# output file
-	Push $R1		# filter
-	Push "$R2\$R5"	# local folder
-	Push $R3		# global folder
-	Call MakeRecurrentFileList
-	# restore current variables
-	Pop $R0
-	Pop $R1
-	Pop $R2
-	Pop $R3
-	Pop $R4
-	Pop $R5
+    # set parameters
+    Push $R0		# output file
+    Push $R1		# filter
+    Push "$R2\$R5"	# local folder
+    Push $R3		# global folder
+    Call MakeRecurrentFileList
+    # restore current variables
+    Pop $R0
+    Pop $R1
+    Pop $R2
+    Pop $R3
+    Pop $R4
+    Pop $R5
 
     Push $R1
-	FileOpen $R6 $R0 a
+    FileOpen $R6 $R0 a
     FileSeek $R6 0 END
     ${StrStrip} ".\" "$R2\$R5" $R1
     FileWrite $R6 "RMDir $\"$$INSTDIR\$R1$\"$\r$\n"
     FileClose $R6
     Pop $R1
-	Goto MakeRecurrentFileList_next
+    Goto MakeRecurrentFileList_next
 
 MakeRecurrentFileList_file:
-	# use filter
-	StrCmp $R1 $R5 MakeRecurrentFileList_skip
-	# filter found, add file to list
-	Push $R1
-	FileOpen $R6 $R0 a
-	FileSeek $R6 0 END
-	${StrStrip} ".\" "$R2\$R5" $R1
-	FileWrite $R6 "!insertmacro DeleteRetryAbort $\"$$INSTDIR\$R1$\"$\r$\n"
-	FileClose $R6
-	Pop $R1
+    # use filter
+    StrCmp $R1 $R5 MakeRecurrentFileList_skip
+    # filter found, add file to list
+    Push $R1
+    FileOpen $R6 $R0 a
+    FileSeek $R6 0 END
+    ${StrStrip} ".\" "$R2\$R5" $R1
+    FileWrite $R6 "!insertmacro DeleteRetryAbort $\"$$INSTDIR\$R1$\"$\r$\n"
+    FileClose $R6
+    Pop $R1
 
 MakeRecurrentFileList_skip:
 MakeRecurrentFileList_next:
-	ClearErrors
-	FindNext $R4 $R5
-	Goto MakeRecurrentFileList_Loop
+    ClearErrors
+    FindNext $R4 $R5
+    Goto MakeRecurrentFileList_Loop
 
 MakeRecurrentFileList_Done:
-	FindClose $R4
+    FindClose $R4
 FunctionEnd
 
 

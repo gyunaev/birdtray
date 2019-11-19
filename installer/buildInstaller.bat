@@ -200,6 +200,37 @@ if errorLevel 1 (
     echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
     exit /b %errorLevel%
 )
+set "nsisXMLUrl=https://nsis.sourceforge.io/mediawiki/images/5/55/Xml.zip"
+"%curlExe%" --silent --output "%TEMP%\nsisXML.zip" "%nsisXMLUrl%" 1>nul
+if errorLevel 1 (
+    echo Failed to download nsisXML 1>&2
+    exit /b %errorLevel%
+)
+"%sevenZExe%" e -y -o"%TEMP%\nsisXML" "%TEMP%\nsisXML.zip" 1>nul
+if errorLevel 1 (
+    echo Failed to extract nsisXML 1>&2
+    exit /b %errorLevel%
+)
+del "%TEMP%\nsisXML.zip" /F
+xcopy "%TEMP%\nsisXML\XML.nsh" "%dependencyFolder%\Include" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the nsisXML library from %TEMP%\nsisXML\XML.nsh 1>&2
+    echo to the deployment folder at %dependencyFolder%\Include 1>&2
+    exit /b %errorLevel%
+)
+xcopy "%TEMP%\nsisXML\xml.dll" "%dependencyFolder%\Plugins\x86-ansi" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the nsisXML library from %TEMP%\nsisXML\xml.dll 1>&2
+    echo to the deployment folder at %dependencyFolder%\Plugins\x86-ansi 1>&2
+    exit /b %errorLevel%
+)
+xcopy "%TEMP%\nsisXML\xml.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the nsisXML library from %TEMP%\nsisXML\xml.dll 1>&2
+    echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
+    exit /b %errorLevel%
+)
+rmdir /s /q "%TEMP%\nsisXML" 1>nul
 
 rem  #### Create the actual installer ####
 echo Creating the installer...
