@@ -61,6 +61,14 @@
         <translation>Erstellt eine ${PRODUCT_NAME} Verknüpfung im Startmenü.</translation>
     </message>
     <message>
+        <source>TranslationsSectionName</source>
+        <translation>Anzeigesprachen</translation>
+    </message>
+    <message>
+        <source>TranslationsDescription</source>
+        <translation>Wählen Sie Anzeigesprachen für ${PRODUCT_NAME} aus. ${PRODUCT_NAME} wird eine Sprache basierend auf die Systemsprache auswählen.</translation>
+    </message>
+    <message>
         <source>UserSettingsSectionName</source>
         <translation>${PRODUCT_NAME} Benutzerkonfiguration</translation>
     </message>
@@ -171,6 +179,14 @@
     <message>
         <source>UninstallerAborted</source>
         <translation>Die ${PRODUCT_NAME} Deinstallation wurde abgebrochen. Bitte versuchen Sie es später erneut.</translation>
+    </message>
+    <message>
+        <source>Lang_en</source>
+        <translation>Englisch</translation>
+    </message>
+    <message>
+        <source>Lang_de</source>
+        <translation>Deutsch</translation>
     </message>
 </context>
 </TS>

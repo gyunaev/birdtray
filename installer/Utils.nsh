@@ -292,3 +292,41 @@ FunctionEnd
         ${loop}
     ${endif}
 !macroend
+
+!define TVGN_ROOT        0
+!define TVGN_NEXT        1
+!define TVGN_NEXTVISIBLE 6
+!define TVIF_TEXT        1
+!define TVM_GETNEXTITEM  4362
+!define TVM_GETITEMA     4364
+!define TVM_GETITEMW     4414
+!define TVM_SORTCHILDREN 4371
+!define TVITEM '(i, i, i, i, i, i, i, i, i, i)'
+!ifdef NSIS_UNICODE
+    !define TVM_GETITEM ${TVM_GETITEMW}
+!else
+    !define TVM_GETITEM ${TVM_GETITEMA}
+!endif
+
+# Sorts all items inside of a section group alphabetically.
+# SORT_SECTION_GROUP: The name of the section group.
+!macro SORT_SECTION_GROUP GROUP_NAME
+    FindWindow $0 "#32770" "" $HWNDPARENT
+    GetDlgItem $0 $0 1032
+    SendMessage $0 ${TVM_GETNEXTITEM} ${TVGN_ROOT} 0 $1
+
+    System::Alloc ${NSIS_MAX_STRLEN}
+    Pop $2
+    loop:
+        System::Call '*${TVITEM}(${TVIF_TEXT}, r1,,, r2, ${NSIS_MAX_STRLEN},,,,) i .r3'
+        SendMessage $0 ${TVM_GETITEM} 0 $3
+        System::Call '*$2(&t${NSIS_MAX_STRLEN} .r4)'
+        StrCmp $4 "${GROUP_NAME}" found
+        SendMessage $0 ${TVM_GETNEXTITEM} ${TVGN_NEXTVISIBLE} $1 $1
+        StrCmp 0 $1 done loop
+    found:
+        SendMessage $0 ${TVM_SORTCHILDREN} 0 $1
+    done:
+    System::Free $2
+    System::Free $3
+!macroend
