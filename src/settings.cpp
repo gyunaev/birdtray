@@ -2,9 +2,13 @@
 #include <QDir>
 #include <QtCore/QStandardPaths>
 #include <QCoreApplication>
+#include <QtWidgets/QMessageBox>
+#include <QtCore/QUrl>
+#include <QDirIterator>
 
 #include "settings.h"
 #include "utils.h"
+#include "version.h"
 
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
@@ -224,6 +228,89 @@ void Settings::load()
     if (!mSettings->value(READ_INSTALL_CONFIG_KEY, false).toBool()) {
         loadInstallerConfiguration();
     }
+#if VERSION_MAJOR == 1 && VERSION_MINOR <= 8
+    QString profilePath = mSettings->value("common/profilepath").toString();
+    if (!profilePath.isNull() && std::any_of(mFolderNotificationColors.keyBegin(),
+            mFolderNotificationColors.keyEnd(),
+            [](const QString &path) {return !path.endsWith(".msf");})) {
+        bool foundMigrationProblem = false;
+        QDir profileDir(profilePath);
+        for (const QString &path : mFolderNotificationColors.keys()) {
+            if (path.endsWith(".msf")) {
+                continue;
+            }
+            QUrl uri(path);
+            QString scheme;
+            QString account;
+            QString folder;
+            if (uri.isValid()) {
+                scheme = uri.scheme();
+                account = uri.host();
+                folder = uri.path();
+            } else {
+                QString decodedPath = QUrl::fromPercentEncoding(path.toUtf8());
+                scheme = decodedPath.section('/', 0, 0).chopped(1);
+                account = decodedPath.section('/', 2, 2);
+                int index;
+                if ((index = account.indexOf('@')) != -1) {
+                    account = account.mid(index + 1);
+                }
+                folder = decodedPath.section('/', 3);
+                if (!folder.isEmpty()) {
+                    folder = '/' + folder;
+                }
+            }
+            const QString mailFolder = scheme == "mailbox" ? "Mail" :
+                                       scheme[0].toUpper() + scheme.midRef(1) + "Mail";
+            QDir accountDir(profileDir.absoluteFilePath(mailFolder) + '/' + account);
+            
+            QStringList mockFiles;
+            if (!folder.isNull() && !folder.isEmpty()) {
+                mockFiles << accountDir.absoluteFilePath(
+                        folder.mid(1).split('/').join(".sbd/") + ".msf");
+                
+            } else {
+                QDirIterator it(accountDir.absolutePath(), {"*.msf"},
+                        QDir::Files, QDirIterator::Subdirectories);
+                if (!it.hasNext()) {
+                    foundMigrationProblem = true;
+                }
+                while (it.hasNext()) {
+                    mockFiles << it.next();
+                }
+            }
+            for (const QString &mockFile: mockFiles) {
+                if (!QFile::exists(mockFile)) {
+                    foundMigrationProblem = true;
+                } else if (!mFolderNotificationColors.contains(mockFile)) {
+                    mFolderNotificationColors[mockFile] = mFolderNotificationColors[path];
+                    mFolderNotificationList.append(mockFile);
+                }
+            }
+            mFolderNotificationColors.remove(path);
+            mFolderNotificationList.removeAll(path);
+        }
+        mSettings->remove("common/profilepath");
+        save();
+        if (foundMigrationProblem) {
+            QMessageBox::warning(nullptr,
+                    QCoreApplication::tr("Sqlite based accounts migrated"), QCoreApplication::tr(
+                            "You had configured monitoring of one or more mail folders using "
+                            "the Sqlite parser. This method has been removed. Your configurations "
+                            "has been migrated to the Mork parser, but some configured mail "
+                            "folders could not be found."));
+        } else {
+            QMessageBox::information(nullptr,
+                    QCoreApplication::tr("Sqlite based accounts migrated"), QCoreApplication::tr(
+                            "You had configured monitoring of one or more mail accounts using "
+                            "the Sqlite parser. This method has been removed. Your configurations "
+                            "has been migrated to the Mork parser. Please verify that all accounts "
+                            "were mapped correctly."));
+        }
+    }
+#else
+#  error "This code converts attempts to convert legacy "
+#endif /* Birdtray version check */
 }
 
 QString Settings::getThunderbirdCommand(QStringList &arguments) {

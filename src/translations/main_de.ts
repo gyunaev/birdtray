@@ -719,6 +719,18 @@ Wollen Sie fortfahren?</translation>
         <source>Cannot load default system tray icon.</source>
         <translation>Das Standard-Taskleistenicon konnte nicht geladen werden.</translation>
     </message>
+    <message>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Sqlite basierende Konten migriert</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
