@@ -195,6 +195,7 @@ VIAddVersionKey LegalCopyright ""
 !insertmacro MUI_PAGE_DIRECTORY
 
 !define MUI_PAGE_CUSTOMFUNCTION_PRE ComponentsPagePre
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW ComponentsPageShow
 !insertmacro MUI_PAGE_COMPONENTS
 
 !define MUI_PAGE_CUSTOMFUNCTION_PRE StartMenuPagePre
@@ -581,6 +582,10 @@ Function ComponentsPagePre
         ${endif}
     ${endif}
     !endif # UNINSTALL_BUILDER
+FunctionEnd
+
+Function ComponentsPageShow
+    !insertmacro SORT_SECTION_GROUP "$(TranslationsSectionName)"
 FunctionEnd
 
 # Called when changing selections on the component page
