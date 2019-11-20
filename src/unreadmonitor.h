@@ -19,6 +19,11 @@ public:
     
     // Thread run function
     void run() override;
+    
+    /**
+     * Safely enqueues the this unread monitor for deletion.
+     */
+    void quitAndDelete();
 
 signals:
     

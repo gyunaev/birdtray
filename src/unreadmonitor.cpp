@@ -34,6 +34,12 @@ void UnreadMonitor::run() {
     exec();
 }
 
+void UnreadMonitor::quitAndDelete() {
+    quit();
+    wait();
+    deleteLater();
+}
+
 void UnreadMonitor::slotSettingsChanged() {
     mMorkUnreadCounts.clear();
     updateUnread();
