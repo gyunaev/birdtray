@@ -318,14 +318,14 @@ FunctionEnd
     System::Alloc ${NSIS_MAX_STRLEN}
     Pop $2
     loop:
-    	System::Call '*${TVITEM}(${TVIF_TEXT}, r1,,, r2, ${NSIS_MAX_STRLEN},,,,) i .r3'
-    	SendMessage $0 ${TVM_GETITEM} 0 $3
-    	System::Call '*$2(&t${NSIS_MAX_STRLEN} .r4)'
-    	StrCmp $4 "${GROUP_NAME}" found
-    	SendMessage $0 ${TVM_GETNEXTITEM} ${TVGN_NEXTVISIBLE} $1 $1
-    	StrCmp 0 $1 done loop
+        System::Call '*${TVITEM}(${TVIF_TEXT}, r1,,, r2, ${NSIS_MAX_STRLEN},,,,) i .r3'
+        SendMessage $0 ${TVM_GETITEM} 0 $3
+        System::Call '*$2(&t${NSIS_MAX_STRLEN} .r4)'
+        StrCmp $4 "${GROUP_NAME}" found
+        SendMessage $0 ${TVM_GETNEXTITEM} ${TVGN_NEXTVISIBLE} $1 $1
+        StrCmp 0 $1 done loop
     found:
-    	SendMessage $0 ${TVM_SORTCHILDREN} 0 $1
+        SendMessage $0 ${TVM_SORTCHILDREN} 0 $1
     done:
     System::Free $2
     System::Free $3
