@@ -562,6 +562,8 @@ bool DialogSettings::isMorkParserSelected() const
 
 void DialogSettings::onThunderbirdCommandModelChanged(
         const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
+    Q_UNUSED(bottomRight)
+    Q_UNUSED(roles)
     if (topLeft.row() != thunderbirdCmdModel->rowCount() - 1
         && thunderbirdCmdModel->data(topLeft, Qt::DisplayRole).toString().isEmpty()) {
         thunderbirdCmdModel->removeRow(topLeft.row());
