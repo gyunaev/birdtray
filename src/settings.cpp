@@ -242,6 +242,9 @@ void Settings::load()
 }
 
 QString Settings::getThunderbirdCommand(QStringList &arguments) {
+    if (mThunderbirdCmdLine.isEmpty()) {
+        return QString();
+    }
     arguments = mThunderbirdCmdLine;
     QString executable = arguments.takeFirst();
     if (executable.startsWith('"')) {
