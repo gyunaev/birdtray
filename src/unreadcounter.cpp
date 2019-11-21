@@ -53,8 +53,10 @@ void UnreadMonitor::run()
 }
 
 void UnreadMonitor::quitAndDelete() {
-    quit();
-    wait();
+    if (isRunning()) {
+        quit();
+        wait();
+    }
     deleteLater();
 }
 
