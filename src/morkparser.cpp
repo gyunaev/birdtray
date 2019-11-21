@@ -66,8 +66,8 @@ private:
 
 MorkParser::MorkParser( int DefaultScope )
 {
-	initVars();
-	defaultScope_ = DefaultScope;
+    initVars();
+    defaultScope_ = DefaultScope;
 }
 
 //	=============================================================
@@ -75,30 +75,30 @@ MorkParser::MorkParser( int DefaultScope )
 
 bool MorkParser::open( const QString &path )
 {
-	initVars();
+    initVars();
 
-	QFile MorkFile( path );
+    QFile MorkFile( path );
 
-	// Open file
+    // Open file
     if ( !MorkFile.exists() || !MorkFile.open( QIODevice::ReadOnly ) )
-	{
+    {
         mErrorMessage = QCoreApplication::tr("Couldn't open file: ") + MorkFile.errorString();
-		return false;
-	}
+        return false;
+    }
 
-	// Check magic header
-	QByteArray MagicHeader = MorkFile.readLine();
+    // Check magic header
+    QByteArray MagicHeader = MorkFile.readLine();
 
-	if ( !MagicHeader.contains( MorkMagicHeader ) )
-	{
+    if ( !MagicHeader.contains( MorkMagicHeader ) )
+    {
         mErrorMessage = QCoreApplication::tr("Unsupported version.");
         return false;
     }
 
-	morkData_ = MorkFile.readAll();
-	MorkFile.close();
+    morkData_ = MorkFile.readAll();
+    MorkFile.close();
 
-	// Parse mork
+    // Parse mork
     try {
         parse();
         return true;
@@ -121,10 +121,10 @@ inline QString MorkParser::errorMsg()
 
 void MorkParser::initVars()
 {
-	morkPos_ = 0;
-	nowParsing_ = NPValues;
-	currentCells_ = 0;
-	nextAddValueId_ = 0x7fffffff;
+    morkPos_ = 0;
+    nowParsing_ = NPValues;
+    currentCells_ = 0;
+    nextAddValueId_ = 0x7fffffff;
 }
 
 //	=============================================================
@@ -132,53 +132,53 @@ void MorkParser::initVars()
 
 void MorkParser::parse()
 {
-	// Run over mork chars and parse each term
+    // Run over mork chars and parse each term
     char cur = nextChar();
 
-	int i = 0;
+    int i = 0;
 
     while ( cur )
-	{
-		if ( !isWhiteSpace( cur ) )
-		{
-			i++;
-			// Figure out what a term
-			switch ( cur )
-			{
-			case '<':
-				// Dict
+    {
+        if ( !isWhiteSpace( cur ) )
+        {
+            i++;
+            // Figure out what a term
+            switch ( cur )
+            {
+            case '<':
+                // Dict
                 parseDict();
-				break;
+                break;
 
             case '/':
-				// Comment
+                // Comment
                 parseComment();
-				break;
+                break;
 
             case '{':
                 parseTable();
-				// Table
-				break;
+                // Table
+                break;
 
             case '[':
                 parseRow( 0, 0 );
-				// Row
-				break;
+                // Row
+                break;
 
             case '@':
                 parseGroup();
-				// Group
-				break;
+                // Group
+                break;
 
             default:
                 throw MorkParserException(QCoreApplication::tr("Invalid format."));
-				break;
-			}
-		}
+                break;
+            }
+        }
 
-		// Get next char
-		cur = nextChar();
-	}
+        // Get next char
+        cur = nextChar();
+    }
 }
 
 //	=============================================================
@@ -186,17 +186,17 @@ void MorkParser::parse()
 
 bool MorkParser::isWhiteSpace( char c )
 {
-	switch ( c )
-	{
-	case ' ':
-	case '\t':
-	case '\r':
-	case '\n':
-	case '\f':
-		return true;
-	default:
-		return false;
-	}
+    switch ( c )
+    {
+    case ' ':
+    case '\t':
+    case '\r':
+    case '\n':
+    case '\f':
+        return true;
+    default:
+        return false;
+    }
 }
 
 //	=============================================================
@@ -204,20 +204,20 @@ bool MorkParser::isWhiteSpace( char c )
 
 inline char MorkParser::nextChar()
 {
-	char cur = 0;
+    char cur = 0;
 
-	if ( morkPos_ < morkData_.length() )
-	{
-		cur = morkData_[ morkPos_ ];
-		morkPos_++;
-	}
+    if ( morkPos_ < morkData_.length() )
+    {
+        cur = morkData_[ morkPos_ ];
+        morkPos_++;
+    }
 
-	if ( !cur )
-	{
-		cur = 0;
-	}
+    if ( !cur )
+    {
+        cur = 0;
+    }
 
-	return cur;
+    return cur;
 }
 
 void MorkParser::skip( const char * string )
@@ -266,36 +266,35 @@ QString MorkParser::readHexNumber()
 
 void MorkParser::parseDict()
 {
-	char cur = nextChar();
-	nowParsing_ = NPValues;
+    char cur = nextChar();
+    nowParsing_ = NPValues;
 
     while ( cur != '>' && cur )
-	{
-		if ( !isWhiteSpace( cur ) )
-		{
-			switch ( cur )
-			{
-			case '<':
-				if ( morkData_.mid( morkPos_ - 1, strlen( MorkDictColumnMeta ) ) 
-					== MorkDictColumnMeta )
-				{
-					nowParsing_ = NPColumns;
-					morkPos_ += strlen( MorkDictColumnMeta ) - 1;
-				}
-				break;
-			case '(':
+    {
+        if ( !isWhiteSpace( cur ) )
+        {
+            switch ( cur )
+            {
+            case '<':
+                if (morkData_.mid(morkPos_ - 1, static_cast<int>(strlen(MorkDictColumnMeta)))
+                    == MorkDictColumnMeta) {
+                    nowParsing_ = NPColumns;
+                    morkPos_ += static_cast<int>(strlen(MorkDictColumnMeta)) - 1;
+                }
+                break;
+            case '(':
                 parseCell();
-				break;
+                break;
 
-			case '/':
+            case '/':
                 parseComment();
-				break;
+                break;
 
-			}
-		}
+            }
+        }
 
-		cur = nextChar();
-	}
+        cur = nextChar();
+    }
 }
 
 //	=============================================================
@@ -303,16 +302,16 @@ void MorkParser::parseDict()
 
 inline void MorkParser::parseComment()
 {
-	char cur = nextChar();
+    char cur = nextChar();
 
     if ( '/' != cur ) {
         throw MorkParserException(QCoreApplication::tr("Invalid comment."));
     }
 
-	while ( cur != '\r' && cur != '\n' && cur )
-	{
-		cur = nextChar();
-	}
+    while ( cur != '\r' && cur != '\n' && cur )
+    {
+        cur = nextChar();
+    }
 }
 
 //	=============================================================
@@ -322,59 +321,59 @@ void MorkParser::parseCell()
 {
     //bool bColumnOid = false;
     bool bValueOid = false;
-	bool bColumn = true;
-	int Corners = 0;
+    bool bColumn = true;
+    int Corners = 0;
 
-	// Column = Value
+    // Column = Value
     QString Column;
     QString Text;
-	Column.reserve( 4 );
-	Text.reserve( 32 );
+    Column.reserve( 4 );
+    Text.reserve( 32 );
 
-	char cur = nextChar();
+    char cur = nextChar();
 
-	// Process cell start with column (bColumn == true)
+    // Process cell start with column (bColumn == true)
     while ( cur != ')' && cur )
-	{
-		switch ( cur )
-		{
-		case '^':
-			// Oids
-			Corners++;
-			if ( 1 == Corners )
-			{
+    {
+        switch ( cur )
+        {
+        case '^':
+            // Oids
+            Corners++;
+            if ( 1 == Corners )
+            {
                 //bColumnOid = true;
-			}
-			else if ( 2 == Corners )
-			{
-				bColumn = false;
-				bValueOid = true;
-			}
-			else
-			{
-				Text += cur;
-			}
+            }
+            else if ( 2 == Corners )
+            {
+                bColumn = false;
+                bValueOid = true;
+            }
+            else
+            {
+                Text += cur;
+            }
 
-			break;
-		case '=':
-			// From column to value
-			if ( bColumn )
-			{
-				bColumn = false;
-			}
-			else
-			{
-				Text += cur;
-			}
-			break;
-		case '\\':
-			{
+            break;
+        case '=':
+            // From column to value
+            if ( bColumn )
+            {
+                bColumn = false;
+            }
+            else
+            {
+                Text += cur;
+            }
+            break;
+        case '\\':
+            {
                 // GY: logic changed
-				char NextChar= nextChar();
-				if ( '\r' != NextChar && '\n' != NextChar )
-				{
-					Text += NextChar;
-				}
+                char NextChar= nextChar();
+                if ( '\r' != NextChar && '\n' != NextChar )
+                {
+                    Text += NextChar;
+                }
                 else {
 
                     // Handle line termination with \r\n linefeed sequence
@@ -384,70 +383,70 @@ void MorkParser::parseCell()
                     if ( NextChar != '\r' && NextChar != '\n' )
                         morkPos_--;
                 }
-			}
-			break;
-		case '$':
-			{
-				// Get next two chars
+            }
+            break;
+        case '$':
+            {
+                // Get next two chars
                 QString HexChar;
-				HexChar += nextChar();
-				HexChar += nextChar();
+                HexChar += nextChar();
+                HexChar += nextChar();
                 Text += ( char ) HexChar.toInt( 0, 16 );
-			}
-			break;
-		default:
-			// Just a char
-			if ( bColumn )
-			{
-				Column += cur;
-			}
-			else
-			{
-				Text += cur;
-			}
-			break;
-		}
+            }
+            break;
+        default:
+            // Just a char
+            if ( bColumn )
+            {
+                Column += cur;
+            }
+            else
+            {
+                Text += cur;
+            }
+            break;
+        }
 
-		cur = nextChar();
-	}
+        cur = nextChar();
+    }
 
-	// Apply column and text
+    // Apply column and text
     int ColumnId = Column.toInt( 0, 16 );
 
-	if ( NPRows != nowParsing_ )
-	{
-		// Dicts
-		if ( "" != Text )
-		{
-			if ( nowParsing_ == NPColumns )
-			{
-				columns_[ ColumnId ] = Text;
-			}
-			else
-			{
-				values_[ ColumnId ] = Text;
-			}
-		}
-	}
-	else
-	{
-		if ( "" != Text )
-		{
-			// Rows
+    if ( NPRows != nowParsing_ )
+    {
+        // Dicts
+        if ( "" != Text )
+        {
+            if ( nowParsing_ == NPColumns )
+            {
+                columns_[ ColumnId ] = Text;
+            }
+            else
+            {
+                values_[ ColumnId ] = Text;
+            }
+        }
+    }
+    else
+    {
+        if ( "" != Text )
+        {
+            // Rows
             int ValueId = Text.toInt( 0, 16 );
 
-			if ( bValueOid  )
-			{
-				( *currentCells_ )[ ColumnId ] = ValueId;
-			}
-			else
-			{
-				nextAddValueId_--;
-				values_[ nextAddValueId_ ] = Text;
-				( *currentCells_ )[ ColumnId ] = nextAddValueId_;
-			}
-		}
-	}
+            if ( bValueOid  )
+            {
+                ( *currentCells_ )[ ColumnId ] = ValueId;
+            }
+            else
+            {
+                nextAddValueId_--;
+                values_[ nextAddValueId_ ] = Text;
+                ( *currentCells_ )[ ColumnId ] = nextAddValueId_;
+            }
+        }
+    }
 }
 
 //	=============================================================
@@ -456,65 +455,65 @@ void MorkParser::parseCell()
 void MorkParser::parseTable()
 {
     QString TextId;
-	int Id = 0, Scope = 0;
+    int Id = 0, Scope = 0;
 
-	char cur = nextChar();
+    char cur = nextChar();
 
-	// Get id
-	while ( cur != '{' && cur != '[' && cur != '}' && cur )
-	{
-		if ( !isWhiteSpace( cur ) )
-		{
-			TextId += cur;
-		}
+    // Get id
+    while ( cur != '{' && cur != '[' && cur != '}' && cur )
+    {
+        if ( !isWhiteSpace( cur ) )
+        {
+            TextId += cur;
+        }
 
-		cur = nextChar();
-	}
+        cur = nextChar();
+    }
 
-	parseScopeId( TextId, &Id, &Scope );
+    parseScopeId( TextId, &Id, &Scope );
 
-	// Parse the table
+    // Parse the table
     while ( cur != '}' && cur )
-	{
-		if ( !isWhiteSpace( cur ) )
-		{
-			switch ( cur )
-			{
-			case '{':
+    {
+        if ( !isWhiteSpace( cur ) )
+        {
+            switch ( cur )
+            {
+            case '{':
                 parseMeta( '}' );
-				break;
+                break;
 
-			case '[':
+            case '[':
                 parseRow( Id, Scope );
-				break;
+                break;
 
-			case '-':
-			case '+':
-				break;
+            case '-':
+            case '+':
+                break;
 
-			default:
-				{
+            default:
+                {
                     QString JustId;
-					while ( !isWhiteSpace( cur ) && cur )
-					{
-						JustId += cur;
-						cur = nextChar();
+                    while ( !isWhiteSpace( cur ) && cur )
+                    {
+                        JustId += cur;
+                        cur = nextChar();
 
-						if ( cur == '}' )
-						{
+                        if ( cur == '}' )
+                        {
                             return;
-						}
-					}
+                        }
+                    }
 
-					int JustIdNum = 0, JustScopeNum = 0;
-					parseScopeId( JustId, &JustIdNum, &JustScopeNum );
-					setCurrentRow( Scope, Id, JustScopeNum, JustIdNum );
-				}
-				break;
-			}
-		}
+                    int JustIdNum = 0, JustScopeNum = 0;
+                    parseScopeId( JustId, &JustIdNum, &JustScopeNum );
+                    setCurrentRow( Scope, Id, JustScopeNum, JustIdNum );
+                }
+                break;
+            }
+        }
 
-		cur = nextChar();
+        cur = nextChar();
     }
 }
 
@@ -523,26 +522,26 @@ void MorkParser::parseTable()
 
 void MorkParser::parseScopeId(const QString &TextId, int *Id, int *Scope )
 {
-	int Pos = 0;
+    int Pos = 0;
 
     if ( ( Pos = TextId.indexOf( ':' ) ) >= 0 )
-	{
+    {
         QString tId = TextId.mid( 0, Pos );
         QString tSc = TextId.mid( Pos + 1, TextId.length() - Pos );
 
-		if ( tSc.length() > 1 && '^' == tSc[ 0 ] )
-		{
-			// Delete '^'
+        if ( tSc.length() > 1 && '^' == tSc[ 0 ] )
+        {
+            // Delete '^'
             tSc.remove( 0, 1 );
-		}
+        }
 
         *Id = tId.toInt( 0, 16 );
         *Scope = tSc.toInt( 0, 16 );
-	}
-	else
-	{
+    }
+    else
+    {
         *Id = TextId.toInt( 0, 16 );
-	}
+    }
 }
 
 //	=============================================================
@@ -550,17 +549,17 @@ void MorkParser::parseScopeId(const QString &TextId, int *Id, int *Scope )
 
 inline void MorkParser::setCurrentRow( int TableScope, int TableId, int RowScope, int RowId )
 {
-	if ( !RowScope )
-	{
-		RowScope = defaultScope_;
-	}
+    if ( !RowScope )
+    {
+        RowScope = defaultScope_;
+    }
 
-	if ( !TableScope )
-	{
-		TableScope = defaultScope_;
-	}
+    if ( !TableScope )
+    {
+        TableScope = defaultScope_;
+    }
 
-	currentCells_ = &( mork_[ abs( TableScope ) ][ abs( TableId ) ][ abs( RowScope ) ][ abs( RowId ) ] );
+    currentCells_ = &( mork_[ abs( TableScope ) ][ abs( TableId ) ][ abs( RowScope ) ][ abs( RowId ) ] );
 }
 
 //	=============================================================
@@ -569,46 +568,46 @@ inline void MorkParser::setCurrentRow( int TableScope, int TableId, int RowScope
 void MorkParser::parseRow( int TableId, int TableScope )
 {
     QString TextId;
-	int Id = 0, Scope = 0;
-	nowParsing_ = NPRows;
+    int Id = 0, Scope = 0;
+    nowParsing_ = NPRows;
 
-	char cur = nextChar();
+    char cur = nextChar();
 
-	// Get id
-	while ( cur != '(' && cur != ']' && cur != '[' && cur )
-	{
-		if ( !isWhiteSpace( cur ) )
-		{
-			TextId += cur;
-		}
+    // Get id
+    while ( cur != '(' && cur != ']' && cur != '[' && cur )
+    {
+        if ( !isWhiteSpace( cur ) )
+        {
+            TextId += cur;
+        }
 
-		cur = nextChar();
-	}
+        cur = nextChar();
+    }
 
-	parseScopeId( TextId, &Id, &Scope );
-	setCurrentRow( TableScope, TableId, Scope, Id );
+    parseScopeId( TextId, &Id, &Scope );
+    setCurrentRow( TableScope, TableId, Scope, Id );
 
-	// Parse the row
+    // Parse the row
     while ( cur != ']' && cur )
-	{
-		if ( !isWhiteSpace( cur ) )
-		{
-			switch ( cur )
-			{
-			case '(':
+    {
+        if ( !isWhiteSpace( cur ) )
+        {
+            switch ( cur )
+            {
+            case '(':
                 parseCell();
-				break;
-			case '[':
+                break;
+            case '[':
                 parseMeta( ']' );
-				break;
-			default:
+                break;
+            default:
                 throw MorkParserException(QCoreApplication::tr("Format error."));
-				break;
-			}
-		}
+                break;
+            }
+        }
 
-		cur = nextChar();
-	}
+        cur = nextChar();
+    }
 }
 
 //	=============================================================
@@ -673,12 +672,12 @@ void MorkParser::parseGroup()
 
 void MorkParser::parseMeta( char c )
 {
-	char cur = nextChar();
+    char cur = nextChar();
 
-	while ( cur != c && cur )
-	{
-		cur = nextChar();
-	}
+    while ( cur != c && cur )
+    {
+        cur = nextChar();
+    }
 }
 
 //	=============================================================
@@ -686,15 +685,15 @@ void MorkParser::parseMeta( char c )
 
 MorkTableMap *MorkParser::getTables( int TableScope )
 {
-	TableScopeMap::iterator iter;
-	iter = mork_.find( TableScope );
+    TableScopeMap::iterator iter;
+    iter = mork_.find( TableScope );
 
-	if ( iter == mork_.end() )
-	{
-		return 0;
-	}
+    if ( iter == mork_.end() )
+    {
+        return 0;
+    }
 
-	return &iter.value();
+    return &iter.value();
 }
 
 //	=============================================================
@@ -702,13 +701,13 @@ MorkTableMap *MorkParser::getTables( int TableScope )
 
 MorkRowMap *MorkParser::getRows( int RowScope, RowScopeMap *table )
 {
-	RowScopeMap::iterator iter;
-	iter = table->find( RowScope );
+    RowScopeMap::iterator iter;
+    iter = table->find( RowScope );
 
-	if ( iter == table->end() )
-	{
-		return 0;
-	}
+    if ( iter == table->end() )
+    {
+        return 0;
+    }
 
     return &iter.value();
 }
@@ -736,14 +735,14 @@ const MorkRowMap * MorkParser::rows(int tablescope, int tableid, int rowscope )
 
 QString MorkParser::getValue( int oid )
 {
-	MorkDict::iterator foundIter = values_.find( oid );
+    MorkDict::iterator foundIter = values_.find( oid );
 
-	if ( values_.end() == foundIter )
-	{
+    if ( values_.end() == foundIter )
+    {
         return QString();
-	}
+    }
 
-	return *foundIter;
+    return *foundIter;
 }
 
 //	=============================================================
@@ -751,14 +750,14 @@ QString MorkParser::getValue( int oid )
 
 QString MorkParser::getColumn( int oid )
 {
-	MorkDict::iterator foundIter = columns_.find( oid );
+    MorkDict::iterator foundIter = columns_.find( oid );
 
-	if ( columns_.end() == foundIter )
-	{
+    if ( columns_.end() == foundIter )
+    {
         return QString();
-	}
+    }
 
-	return *foundIter;
+    return *foundIter;
 }
 
 int MorkParser::dumpMorkFile( const QString& filename )
@@ -803,5 +802,5 @@ int MorkParser::dumpMorkFile( const QString& filename )
         printf("\n\n" );
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }

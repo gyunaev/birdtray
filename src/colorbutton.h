@@ -25,9 +25,9 @@
 // and lets the user to select a color on click.
 class ColorButton : public QPushButton
 {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
+    public:
         /**
          * A button that lets the user select a color.
          * @param parent The parent widget.
@@ -35,7 +35,7 @@ class ColorButton : public QPushButton
          */
         explicit ColorButton(QWidget* parent, QColor color = Qt::black);
 
-		void	setColor( const QColor& color );
+        void	setColor( const QColor& color );
         void    allowSetAlpha( bool allow );
         
         /**
@@ -43,7 +43,7 @@ class ColorButton : public QPushButton
          * @param enable Whether or not to draw the borders.
          */
         void    setBorderlessMode(bool enable);
-		QColor	color() const;
+        QColor	color() const;
 
     Q_SIGNALS:
         /**
@@ -51,15 +51,15 @@ class ColorButton : public QPushButton
          * @param color The new color.
          */
         void onColorChanged(const QColor &color);
-		
-	protected:
-		void	paintEvent( QPaintEvent * event ) override;
+        
+    protected:
+        void	paintEvent( QPaintEvent * event ) override;
 
-	private slots:
-		void	btnClicked();
+    private slots:
+        void	btnClicked();
 
-	private:
-		QColor	m_selectedColor;
+    private:
+        QColor	m_selectedColor;
         bool    m_allowSetAlpha;
         
         /**

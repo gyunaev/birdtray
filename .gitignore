@@ -10,7 +10,11 @@ installer/nsisDependencies
 installer/BirdTray-*.exe
 installer/getArch.exe
 installer/makeUninstallList.exe
+installer/makeTranslationsList.exe
+installer/translations_list.nsh
 installer/arch.nsh
+installer/installerTranslations.nsi
+installer/makeInstallerTranslations.exe
 
 .idea/*
 !.idea/codeStyles

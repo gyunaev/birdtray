@@ -53,8 +53,8 @@ class Settings
         // Path to Thunderbird folder
         QString mThunderbirdFolderPath;
 
-        // Thunderbird binary and command line
-        QString mThunderbirdCmdLine;
+        // The command to start Thunderbird. The first element is the executable to launch.
+        QStringList mThunderbirdCmdLine;
 
         // Thunderbird window match
         QString mThunderbirdWindowMatch;
@@ -128,9 +128,11 @@ class Settings
         void    load();
         
         /**
-         * @return The absolute path to the thunderbird executable.
+         * @note The returned executable might not be the Thunderbird executable.
+         * @param arguments The arguments necessary to start Thunderbird.
+         * @return The executable that starts Thunderbird.
          */
-        QString getThunderbirdExecutablePath();
+        QString getThunderbirdCommand(QStringList &arguments);
         
         /**
          * @return The icon to use for the system tray.

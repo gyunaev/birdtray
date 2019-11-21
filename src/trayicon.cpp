@@ -22,7 +22,6 @@ TrayIcon::TrayIcon(bool showSettings)
 
     mIgnoredUnreadEmails = 0;
     mUnreadCounter = 0;
-    mUnreadMonitor = 0;
 
     // Context menu
     mSystrayMenu = new QMenu();
@@ -87,6 +86,10 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager->deleteLater();
         networkConnectivityManager = nullptr;
     }
+    if (mUnreadMonitor != nullptr) {
+        mUnreadMonitor->quitAndDelete();
+        mUnreadMonitor = nullptr;
+    }
 }
 
 WindowTools* TrayIcon::getWindowTools() const {
@@ -107,8 +110,11 @@ void TrayIcon::unreadCounterError(QString message)
     qWarning("UnreadCounter generated an error: %s", qPrintable(message) );
 
     mCurrentStatus = message;
-    mUnreadMonitor->deleteLater();
-    mUnreadMonitor = 0;
+    if (mUnreadMonitor == nullptr) {
+        return;
+    }
+    mUnreadMonitor->quitAndDelete();
+    mUnreadMonitor = nullptr;
 
     mUnreadCounter = 0;
     updateIcon();
@@ -196,7 +202,8 @@ void TrayIcon::updateIcon()
     p.setFont(settings->mNotificationFont);
 
     // Do we need to draw error sign?
-    if (mUnreadMonitor == 0 || (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
+    if (mUnreadMonitor == nullptr ||
+        (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
         pen.setWidth( (temp.width() * 10) / 100 );
@@ -454,6 +461,7 @@ void TrayIcon::actionUnsnooze()
 void TrayIcon::actionNewEmail() {
     Settings* settings = BirdtrayApp::get()->getSettings();
     QStringList args;
+    QString executable = settings->getThunderbirdCommand(args);
     args << "-compose";
 
     if (!settings->mNewEmailData.isEmpty()) {
@@ -466,7 +474,7 @@ void TrayIcon::actionNewEmail() {
             args << settings->mNewEmailData[index].asArgs();
         }
     }
-    QProcess::startDetached(settings->getThunderbirdExecutablePath(), args);
+    QProcess::startDetached(executable, args);
 }
 
 void TrayIcon::actionIgnoreEmails()
@@ -587,8 +595,10 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    QString thunderbirdExePath = BirdtrayApp::get()->getSettings()->getThunderbirdExecutablePath();
-    Utils::debug("Starting Thunderbird as '%s'", qPrintable( thunderbirdExePath ) );
+    QStringList arguments;
+    QString executable = BirdtrayApp::get()->getSettings()->getThunderbirdCommand(arguments);
+    Utils::debug("Starting Thunderbird as '%s %s'",
+            qPrintable(executable), qPrintable(arguments.join(' ')));
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();
@@ -600,7 +610,7 @@ void TrayIcon::startThunderbird()
     connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::tbProcessError );
 #endif
 
-    mThunderbirdProcess->start( thunderbirdExePath );
+    mThunderbirdProcess->start(executable, arguments);
 }
 
 void TrayIcon::tbProcessError(QProcess::ProcessError )
@@ -610,10 +620,12 @@ void TrayIcon::tbProcessError(QProcess::ProcessError )
         return;
     }
 #endif /* Q_OS_WIN */
+    QStringList arguments;
+    QString executable = BirdtrayApp::get()->getSettings()->getThunderbirdCommand(arguments);
     QMessageBox::critical(nullptr,
             tr("Cannot start Thunderbird"),
-            tr("Error starting Thunderbird as %1:\n\n%2")
-                    .arg(BirdtrayApp::get()->getSettings()->getThunderbirdExecutablePath())
+            tr("Error starting Thunderbird as '%1 %2':\n\n%3")
+                    .arg(executable).arg(arguments.join(' '))
                     .arg(mThunderbirdProcess->errorString()));
 
     // We keep the mThunderbirdProcess pointer, so the process is not restarted again

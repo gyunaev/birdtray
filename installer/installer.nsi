@@ -56,18 +56,6 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define URL_INFO_ABOUT "https://www.ulduzsoft.com/" # "Publisher" link
 !define MIN_WINDOWS_VER "XP"
 
-# Section descriptions
-!define BIRDTRAY_SECTION_DESCRIPTION "A free system tray notification for new mail for Thunderbird."
-!define WIN_INTEGRATION_GROUP_DESCRIPTION "Select how to integrate the program in Windows."
-!define AUTO_RUN_DESCRIPTION "Automatically start ${PRODUCT_NAME} after login."
-!define AUTO_CHECK_UPDATE_DESCRIPTION \
-        "Automatically search for updates of ${PRODUCT_NAME} at startup."
-!define PROGRAM_GROUP_DESCRIPTION \
-        "Create a ${PRODUCT_NAME} program group under Start Menu > Programs."
-!define DESKTOP_ENTRY_DESCRIPTION "Create a ${PRODUCT_NAME} icon on the Desktop."
-!define START_MENU_DESCRIPTION "Create a ${PRODUCT_NAME} icon in the Start Menu."
-!define USER_SETTINGS_DESCRIPTION "Your settings and configuration made within ${PRODUCT_NAME}."
-
 # Paths
 !define EXE_NAME "birdtray.exe"
 !define PROGEXE ${EXE_NAME}  # For the MultiUser plugin
@@ -85,13 +73,16 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define UNINSTALL_BUILDER_FILE "uninstall_builder.exe"
 !define UNINSTALL_LIST_BUILDER_FILE "makeUninstallList.exe"
 !define UNINSTALL_LIST_FILENAME "uninstall_list.nsh"
+!define INSTALLER_TRANSLATIONS_BUILDER_FILE "makeInstallerTranslations.exe"
+!define INSTALLER_TRANSLATIONS_FILENAME "installerTranslations.nsi"
+!define TRANSLATIONS_LIST_BUILDER_FILE "makeTranslationsList.exe"
+!define TRANSLATIONS_LIST_FILENAME "translations_list.nsh"
 !define HEADER_IMG_FILE "assets\header.bmp"
 !define SIDEBAR_IMG_FILE "assets\sidebar.bmp"
 !define INSTALL_CONFIG_FILE ".installConfig.ini"
 
 # Other
 !define BAD_PATH_CHARS '?%*:|"<>!;'
-!define LICENSE_START_MENU_LINK_NAME "License Agreement"
 !define SETUP_MUTEX "${COMPANY_NAME} ${PRODUCT_NAME} Setup Mutex" # Don't change this
 
 # === Automatic configuration based on the birdtray executable === #
@@ -123,7 +114,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "StartMenuFolder"
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "${PRODUCT_NAME}"
 !define MUI_FINISHPAGE_RUN
-!define MUI_FINISHPAGE_RUN_TEXT "Start ${PRODUCT_NAME}"
+!define MUI_FINISHPAGE_RUN_TEXT "$(FinishPageRunBirdtray)"
 !define MUI_FINISHPAGE_RUN_FUNCTION StartAppBirdTray
 !define MUI_LANGDLL_ALLLANGUAGES
 !define MUI_LANGDLL_REGISTRY_ROOT SHCTX
@@ -133,7 +124,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP ${SIDEBAR_IMG_FILE}
 !define MUI_UNICON ${MUI_ICON} # Same icon for installer and un-installer.
 !define MUI_UNABORTWARNING
-!define MUI_UNCONFIRMPAGE_TEXT_TOP "Click uninstall to begin the process."
+!define MUI_UNCONFIRMPAGE_TEXT_TOP "$(UninstallerConfirmation)"
 !endif # UNINSTALL_BUILDER
 
 # MultiUser config
@@ -204,6 +195,7 @@ VIAddVersionKey LegalCopyright ""
 !insertmacro MUI_PAGE_DIRECTORY
 
 !define MUI_PAGE_CUSTOMFUNCTION_PRE ComponentsPagePre
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW ComponentsPageShow
 !insertmacro MUI_PAGE_COMPONENTS
 
 !define MUI_PAGE_CUSTOMFUNCTION_PRE StartMenuPagePre
@@ -232,12 +224,18 @@ VIAddVersionKey LegalCopyright ""
 
 !define MUI_PAGE_CUSTOMFUNCTION_PRE un.FinishPageShow
 !insertmacro MUI_UNPAGE_FINISH
-!endif # UNINSTALL_BUILDER
-
 
 # Installer/Uninstaller languages
-!insertmacro MUI_LANGUAGE "English"
-# Add more languages here
+!makensis '/DINSTALLER_TRANSLATIONS_BUILDER_FILE="${INSTALLER_TRANSLATIONS_BUILDER_FILE}" \
+        /DINSTALLER_TRANSLATIONS_FILENAME="${INSTALLER_TRANSLATIONS_FILENAME}" \
+        makeInstallerTranslations.nsi' = 0
+!system "${INSTALLER_TRANSLATIONS_BUILDER_FILE}" = 0
+!include "${INSTALLER_TRANSLATIONS_FILENAME}"
+!delfile "${INSTALLER_TRANSLATIONS_BUILDER_FILE}"
+!else
+!include "${INSTALLER_TRANSLATIONS_FILENAME}"
+!delfile "${INSTALLER_TRANSLATIONS_FILENAME}"
+!endif # UNINSTALL_BUILDER
 
 !insertmacro MULTIUSER_LANGUAGE_INIT
 !insertmacro MUI_RESERVEFILE_LANGDLL # Make language data faster to decompress at startup
@@ -252,11 +250,8 @@ Section "${PRODUCT_NAME}" SectionBirdTray
     !ifndef UNINSTALL_BUILDER
     !insertmacro UAC_AsUser_Call Function CheckInstallation ${UAC_SYNCREGISTERS}
     ${if} $0 != ""
-        DetailPrint "Uninstalling previous version of ${PRODUCT_NAME}"
-        !insertmacro STOP_PROCESS ${EXE_NAME} "${PRODUCT_NAME} is currently running. \
-                Press OK to stop ${PRODUCT_NAME} to continue with the installation." \
-                "Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually \
-                to continue with the installation."
+        DetailPrint "$(UninstallPreviousVersion)"
+        !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtray)" "$(StopBirdtrayError)"
         ClearErrors
         ${if} $0 == "AllUsers"
             Call RunUninstaller
@@ -264,12 +259,11 @@ Section "${PRODUCT_NAME}" SectionBirdTray
             !insertmacro UAC_AsUser_Call Function RunUninstaller ${UAC_SYNCREGISTERS}
         ${endif}
         ${if} ${errors} # Stay in installer
-            MessageBox MB_OKCANCEL|MB_ICONSTOP \
-                            "Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing \
-                            will delete EVERYTHING in $3." /SD IDCANCEL IDOK Ignore
+            MessageBox MB_OKCANCEL|MB_ICONSTOP "$(UninstallPreviousVersionError)" \
+                /SD IDCANCEL IDOK Ignore
             SetErrorLevel 2 # Installation aborted by script
             BringToFront
-            Abort "Error executing uninstaller."
+            Abort "$(UninstallExecutionError)"
             Ignore:
             RMDir /r "$3"
         ${else}
@@ -286,7 +280,7 @@ Section "${PRODUCT_NAME}" SectionBirdTray
                 ${default} # All other error codes - Abort installer
                     SetErrorLevel $0
                     BringToFront
-                    Abort "Error executing uninstaller."
+                    Abort "$(UninstallExecutionError)"
             ${EndSwitch}
         ${endif}
 
@@ -310,7 +304,7 @@ Section "${PRODUCT_NAME}" SectionBirdTray
             "${MUI_LANGDLL_REGISTRY_VALUENAME}" $LANGUAGE
     ${endif}
 
-    File /r "${DIST_DIR}\*"
+    File /r /x translations "${DIST_DIR}\*"
 
     !ifdef INSTALL_LICENSE
         File "${LICENSE_PATH}"
@@ -321,15 +315,15 @@ SectionEnd
 
 !ifndef UNINSTALL_BUILDER
 
-SectionGroup /e "Windows integration" SectionGroupWinIntegration
-Section "Program Group Entry" SectionProgramGroup
+SectionGroup /e "$(WinIntegrationSectionName)" SectionGroupWinIntegration
+Section "$(ProgramGroupSectionName)" SectionProgramGroup
     !insertmacro MUI_STARTMENU_WRITE_BEGIN ""
 
     CreateDirectory "$SMPROGRAMS\$startMenuFolder"
     CreateShortCut "$SMPROGRAMS\$startMenuFolder\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 
     !ifdef INSTALL_LICENSE
-        CreateShortCut "$SMPROGRAMS\$startMenuFolder\${LICENSE_START_MENU_LINK_NAME}.lnk" \
+        CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(LicenseStartMenuLinkName).lnk" \
             "$INSTDIR\${LICENSE_FILE}"
     !endif
     ${if} $MultiUser.InstallMode == "AllUsers"
@@ -343,22 +337,22 @@ Section "Program Group Entry" SectionProgramGroup
     !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
-Section "Desktop Entry" SectionDesktopEntry
+Section "$(DesktopEntrySectionName)" SectionDesktopEntry
     CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 SectionEnd
 
-Section /o "Start Menu Entry" SectionStartMenuEntry
+Section /o "$(StartMenuSectionName)" SectionStartMenuEntry
     CreateShortCut "$STARTMENU\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
 SectionEnd
 
-Section /o "AutoRun" SectionAutoRun
+Section /o "$(AutoRunSectionName)" SectionAutoRun
     WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" \
         "${PRODUCT_NAME}" "$\"$INSTDIR\${EXE_NAME}$\""
     AddSize 1
 SectionEnd
 SectionGroupEnd
 
-Section "Auto Update-Check" SectionAutoCheckUpdate
+Section "$(AutoCheckUpdateSectionName)" SectionAutoCheckUpdate
     ${StrCase} $0 "${COMPANY_NAME}" "L"
     ${StrCase} $1 "${PRODUCT_NAME}" "L"
     DeleteRegValue HKCU "${USER_SETTINGS_REG_PATH}" "hasReadInstallConfig"
@@ -369,19 +363,30 @@ Section "Auto Update-Check" SectionAutoCheckUpdate
     FileWrite $2 "updateOnStartup = true$\r$\n"
 SectionEnd
 
+SectionGroup /e "$(TranslationsSectionName)" SectionGroupTranslations
+    !makensis '/DDIST_DIR="${DIST_DIR}" \
+                /DTRANSLATIONS_LIST_FILENAME="${TRANSLATIONS_LIST_FILENAME}" \
+                makeTranslationsList.nsi' = 0
+    !system "${TRANSLATIONS_LIST_BUILDER_FILE}" = 0
+    !include "${TRANSLATIONS_LIST_FILENAME}"
+    !delfile "${TRANSLATIONS_LIST_BUILDER_FILE}"
+    !delfile "${TRANSLATIONS_LIST_FILENAME}"
+SectionGroupEnd
+
 Section "-Write Install Size" # Hidden section, write install size as the final step
     !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionBirdTray} "${BIRDTRAY_SECTION_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoRun} "${AUTO_RUN_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoCheckUpdate} "${AUTO_CHECK_UPDATE_DESCRIPTION}"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionBirdTray} "$(BirdtraySectionDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoRun} "$(AutoRunDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionAutoCheckUpdate} "$(AutoCheckUpdateDescription)"
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupWinIntegration} \
-            "${WIN_INTEGRATION_GROUP_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "${PROGRAM_GROUP_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionDesktopEntry} "${DESKTOP_ENTRY_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionStartMenuEntry} "${START_MENU_DESCRIPTION}"
+            "$(WinIntegrationGroupDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupTranslations} "$(TranslationsDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionProgramGroup} "$(ProgramGroupDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionDesktopEntry} "$(DesktopEntryDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionStartMenuEntry} "$(StartMenuDescription)"
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 !endif # UNINSTALL_BUILDER
@@ -428,7 +433,7 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
 
 SectionEnd
 
-Section /o "un.${PRODUCT_NAME} User Settings" UNSectionUserSettings
+Section /o "un.$(UserSettingsSectionName)" UNSectionUserSettings
     DeleteRegKey HKCU "${USER_SETTINGS_REG_PATH}"
     DeleteRegKey /ifempty HKCU "${USER_REG_PATH}"
 SectionEnd
@@ -454,8 +459,8 @@ Section -un.Post UNSectionSystem
 SectionEnd
 
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${UNSectionBirdTray} "${BIRDTRAY_SECTION_DESCRIPTION}"
-    !insertmacro MUI_DESCRIPTION_TEXT ${UNSectionUserSettings} "${USER_SETTINGS_DESCRIPTION}"
+    !insertmacro MUI_DESCRIPTION_TEXT ${UNSectionBirdTray} "$(BirdtraySectionDescription)"
+    !insertmacro MUI_DESCRIPTION_TEXT ${UNSectionUserSettings} "$(UserSettingsDescription)"
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_END
 !endif # UNINSTALL_BUILDER
 
@@ -482,9 +487,7 @@ Function .onInit
     !insertmacro CheckMinWinVer ${MIN_WINDOWS_VER}
     ${ifNot} ${UAC_IsInnerInstance}
         !insertmacro CheckPlatform ${Arch}
-        !insertmacro CheckSingleInstance "The setup of ${PRODUCT_NAME} is already running.$\r$\n \
-            Please, close all instances of it and click Retry to continue, or Cancel to exit." \
-            "Global" "${SETUP_MUTEX}"
+        !insertmacro CheckSingleInstance "$(SetupAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 
     !insertmacro MULTIUSER_INIT
@@ -539,8 +542,7 @@ FunctionEnd
 Function DirectoryPageLeave
     ${ValidPath} $0 $INSTDIR ${BAD_PATH_CHARS}
     ${if} $0 != 0
-        MessageBox MB_OK|MB_ICONEXCLAMATION \
-                'The install path must not contain any of ${BAD_PATH_CHARS}.' /SD IDOK
+        MessageBox MB_OK|MB_ICONEXCLAMATION "$(BadInstallPath)" /SD IDOK
         Abort
     ${endif}
     ${IsDirEmpty} $0 $INSTDIR
@@ -548,14 +550,10 @@ Function DirectoryPageLeave
         IfFileExists $INSTDIR\${EXE_NAME} 0 DirNotEmptyNoBirdtray
         IfFileExists $INSTDIR\${UNINSTALL_FILENAME} 0 DirNotEmptyNoBirdtray
         MessageBox MB_OKCANCEL|MB_ICONINFORMATION \
-                        "The install path contains a previously installed ${PRODUCT_NAME} version, \
-                        which will be replaced." /SD IDOK IDOK Ignore
+                        "$(InstallPathContainsPreviousVersion)" /SD IDOK IDOK Ignore
         Abort
         DirNotEmptyNoBirdtray:
-        MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
-                "The install path is not empty, but it doesn't look like it contains a previous \
-                ${PRODUCT_NAME} installation. The content will get overwritten." \
-                /SD IDOK IDOK Ignore
+        MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "$(InstallPathNotEmpty)" /SD IDOK IDOK Ignore
         Abort
         Ignore:
     ${endif}
@@ -577,13 +575,17 @@ Function ComponentsPagePre
     ${endif}
 
     ${if} $MultiUser.InstallMode == "AllUsers"
-        # Add "(current user only)" text to sections "Start Menu Icon" and "Quick Launch Icon"
+        # Add "(current user only)" text to sections "Start Menu Icon"
         ${if} ${AtLeastWin7}
             SectionGetText ${SectionStartMenuEntry} $0
-            SectionSetText ${SectionStartMenuEntry} "$0 (current user only)"
+            SectionSetText ${SectionStartMenuEntry} "$(CurrentUserOnly)"
         ${endif}
     ${endif}
     !endif # UNINSTALL_BUILDER
+FunctionEnd
+
+Function ComponentsPageShow
+    !insertmacro SORT_SECTION_GROUP "$(TranslationsSectionName)"
 FunctionEnd
 
 # Called when changing selections on the component page
@@ -625,8 +627,7 @@ Function InstallerPagePre
 FunctionEnd
 
 Function .onInstFailed
-    MessageBox MB_ICONSTOP "${PRODUCT_NAME} ${VERSION} could not be fully installed.$\r$\n\
-        Please, restart Windows and run the setup program again." /SD IDOK
+    MessageBox MB_ICONSTOP "$(InstallFailed)" /SD IDOK
 FunctionEnd
 
 # === Uninstaller functions === #
@@ -652,9 +653,7 @@ Function un.onInit
 
     ${ifNot} ${UAC_IsInnerInstance}
     ${andIf} $RunningFromInstaller == 0
-        !insertmacro CheckSingleInstance "The uninstall of ${PRODUCT_NAME} is already running.$\r\
-            $\n Please, close all instances of it and click Retry to continue, or Cancel to exit." \
-            "Global" "${SETUP_MUTEX}"
+        !insertmacro CheckSingleInstance "$(UninstallAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 
     !insertmacro MULTIUSER_UNINIT
@@ -662,10 +661,7 @@ Function un.onInit
     # We always get the language, since the outer and inner instance might have different language
     !insertmacro MUI_UNGETLANGUAGE
 
-    !insertmacro STOP_PROCESS ${EXE_NAME} "${PRODUCT_NAME} is currently running. \
-        Press OK to stop ${PRODUCT_NAME} to continue with the uninstall." \
-        "Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually \
-        to continue with the uninstall."
+    !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtrayUninstall)" "$(StopBirdtrayUninstallError)"
 FunctionEnd
 
 Function un.InstallModePageChangeMode
@@ -704,11 +700,9 @@ FunctionEnd
 
 Function un.onUninstFailed
     ${if} $SemiSilentMode == 0
-        MessageBox MB_ICONSTOP "${PRODUCT_NAME} ${VERSION} could not be fully uninstalled.$\r$\n\
-            Please, restart Windows and run the uninstaller again." /SD IDOK
+        MessageBox MB_ICONSTOP "$(UninstallFailed)" /SD IDOK
     ${else}
-        MessageBox MB_ICONSTOP "${PRODUCT_NAME} could not be fully installed.$\r$\n\
-            Please, restart Windows and run the setup program again." /SD IDOK
+        MessageBox MB_ICONSTOP "$(InstallFailedCauseUninstallerFailed)" /SD IDOK
     ${endif}
 FunctionEnd
 

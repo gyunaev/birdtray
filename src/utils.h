@@ -10,7 +10,8 @@ class Utils
         static QString  decodeIMAPutf7( const QString& param );
     
         /**
-         * Expand the path as a shell would do. This will expand variables and ~/
+         * Expand the path as a shell would do. This will expand variables and ~/.
+         * This function will also remove wrapping quotes.
          *
          * @param path The path.
          * @return The expanded path.
@@ -58,6 +59,11 @@ class Utils
          * @see https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data#w_profile-location-summary
          */
         static QStringList getThunderbirdProfilesPaths();
+
+        /**
+         * @return The default Thunderbird command for the current platform.
+         */
+        static QStringList getDefaultThunderbirdCommand();
 };
 
 #endif // UTILS_H

@@ -52,6 +52,14 @@ void UnreadMonitor::run()
     exec();
 }
 
+void UnreadMonitor::quitAndDelete() {
+    if (isRunning()) {
+        quit();
+        wait();
+    }
+    deleteLater();
+}
+
 void UnreadMonitor::slotSettingsChanged()
 {
     // We reinitialize everything because the settings changed
@@ -226,12 +234,13 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
     if ( rescanall )
     {
         mMorkUnreadCounts.clear();
-
-        for ( const QString& tpath : settings->mFolderNotificationColors.keys() )
-        {
-            mMorkUnreadCounts[ tpath ] = getMorkUnreadCount( tpath );
-            if (!mDBWatcher.files().contains(tpath) && !mDBWatcher.addPath( tpath )) {
-                emit error(tr("Unable to watch %1 for changes.").arg(tpath));
+        for (const QString &path : settings->mFolderNotificationColors.keys()) {
+            if (!QFile::exists(path)) {
+                continue;
+            }
+            mMorkUnreadCounts[path] = getMorkUnreadCount(path);
+            if (!mDBWatcher.files().contains(path) && !mDBWatcher.addPath(path)) {
+                emit error(tr("Unable to watch %1 for changes.").arg(path));
             }
         }
     }
