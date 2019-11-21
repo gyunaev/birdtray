@@ -411,7 +411,7 @@ void DialogSettings::editThunderbirdCommand() {
     connect(detectButton, &QPushButton::clicked, this, [&]() {
         commandListView.setEnabled(false);
         QStringList command = searchThunderbird();
-        if (command.isEmpty() || !QFileInfo(command[0]).isExecutable()) {
+        if (command.isEmpty() || !QFileInfo(Utils::expandPath(command[0])).isExecutable()) {
             QMessageBox::warning(&commandDialog, tr("Thunderbird not found"),
                     tr("Unable to detect Thunderbird on your system."));
         } else {
@@ -590,7 +590,8 @@ bool DialogSettings::isMorkParserSelected() const
 
 QStringList DialogSettings::searchThunderbird() const {
     QStringList defaultCommand = Utils::getDefaultThunderbirdCommand();
-    if (defaultCommand.count() == 1 && !QFileInfo(defaultCommand[0]).isExecutable()) {
+    if (defaultCommand.count() == 1
+        && !QFileInfo(Utils::expandPath(defaultCommand[0])).isExecutable()) {
         return defaultCommand;
     }
     QString thunderbirdPath = QStandardPaths::findExecutable("thunderbird");

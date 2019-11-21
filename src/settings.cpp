@@ -239,11 +239,7 @@ QString Settings::getThunderbirdCommand(QStringList &arguments) {
         return QString();
     }
     arguments = mThunderbirdCmdLine;
-    QString executable = arguments.takeFirst();
-    if (executable.startsWith('"')) {
-        executable = executable.section('"', 1, 1);
-    }
-    executable = Utils::expandPath(executable);
+    QString executable = Utils::expandPath(arguments.takeFirst());
 #if defined (Q_OS_WIN)
     return '"' + QFileInfo(executable).absoluteFilePath() + '"';
 #else

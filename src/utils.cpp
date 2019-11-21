@@ -125,17 +125,23 @@ QString Utils::decodeIMAPutf7(const QString &param)
 }
 
 QString Utils::expandPath(const QString &path) {
+    QString rawPath;
+    if (path.startsWith('"') && path.endsWith('"')) {
+        rawPath = path.section('"', 1, 1);
+    } else {
+        rawPath = path;
+    }
 #if defined (Q_OS_WIN)
     TCHAR buffer[MAX_PATH];
 #if defined(UNICODE)
-    std::wstring originalPath = qToStdWString(path);
+    std::wstring originalPath = qToStdWString(rawPath);
 #else
-    std::string originalPath = path.toStdString();
+    std::string originalPath = rawPath.toStdString();
 #endif /* defined(UNICODE) */
     DWORD resultSize = ExpandEnvironmentStrings(
             originalPath.data(), buffer, sizeof(buffer) / sizeof(buffer[0]));
     if (resultSize == 0 || resultSize > sizeof(buffer) / sizeof(buffer[0])) {
-        return path;
+        return rawPath;
     }
 #if defined(UNICODE)
     return QString::fromWCharArray(buffer, static_cast<int>(resultSize - 1));
@@ -144,12 +150,11 @@ QString Utils::expandPath(const QString &path) {
 #endif /* defined(UNICODE) */
 
 #elif defined (Q_OS_MAC)
-    return path;
-    
+    return rawPath;
 #else
     wordexp_t result;
-    if (wordexp(path.toStdString().data(), &result, WRDE_NOCMD) != 0) {
-        return path;
+    if (wordexp(rawPath.toStdString().data(), &result, WRDE_NOCMD) != 0) {
+        return rawPath;
     }
     QString expandedPath(result.we_wordv[0]);
     wordfree(&result);
