@@ -411,7 +411,7 @@ void DialogSettings::editThunderbirdCommand() {
     connect(detectButton, &QPushButton::clicked, this, [&]() {
         commandListView.setEnabled(false);
         QStringList command = searchThunderbird();
-        if (command.isEmpty()) {
+        if (command.isEmpty() || !QFileInfo(command[0]).isExecutable()) {
             QMessageBox::warning(&commandDialog, tr("Thunderbird not found"),
                     tr("Unable to detect Thunderbird on your system."));
         } else {
@@ -597,14 +597,5 @@ QStringList DialogSettings::searchThunderbird() const {
     if (!thunderbirdPath.isEmpty()) {
         return {thunderbirdPath};
     }
-    if (QApplication::applicationDirPath().contains("flatpak")) { // TODO: Is this the best way to detect if we are installed with flatpak and does it even work?
-        // TODO: Is this really the best way to check for other apps?
-        int result = QProcess::execute("/usr/bin/flatpak-spawn",
-                {"--host", "file", "/usr/bin/thunderbird"});
-        if (result == 0) {
-            return {"/usr/bin/flatpak-spawn", "--host", "thunderbird"};
-        }
-        // TODO: Do this for flatpak and snap Thunderbird
-    }
-    return QStringList();
+    return defaultCommand;
 }
