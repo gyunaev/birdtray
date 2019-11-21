@@ -170,7 +170,7 @@ void Settings::load()
 
     QStringList thunderbirdCommand = mSettings->value(
             "advanced/tbcmdline", mThunderbirdCmdLine).toStringList();
-    if (!thunderbirdCommand.isEmpty()) {
+    if (!thunderbirdCommand.isEmpty() && !thunderbirdCommand[0].isEmpty()) {
         mThunderbirdCmdLine = thunderbirdCommand;
     }
     mThunderbirdWindowMatch = mSettings->value(
