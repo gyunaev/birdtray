@@ -415,7 +415,7 @@ void DialogSettings::editThunderbirdCommand() {
             QMessageBox::warning(&commandDialog, tr("Thunderbird not found"),
                     tr("Unable to detect Thunderbird on your system."));
         } else {
-            thunderbirdCmdModel->setStringList(command);
+            thunderbirdCmdModel->setStringList(command << "");
         }
         commandListView.setEnabled(true);
     });
