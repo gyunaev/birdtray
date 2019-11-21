@@ -154,15 +154,6 @@ void DialogSettings::accept()
             return;
         }
     }
-
-    if (boxEnableNewEmail->isChecked() && thunderbirdCmdModel->rowCount() <= 1) {
-        QMessageBox::critical(nullptr, tr("Empty Thunderbird command"),
-                              tr("You have enabled New Email menu, "
-                                 "but you did not specify a Thunderbird command."));
-        tabWidget->setCurrentIndex( 4 );
-        thunderbirdCommandEditButton->setFocus();
-        return;
-    }
     
     BirdtrayApp* app = BirdtrayApp::get();
     Settings* settings = app->getSettings();
@@ -415,12 +406,19 @@ void DialogSettings::editThunderbirdCommand() {
     connect(&dialogButtonBox, &QDialogButtonBox::accepted, &commandDialog, &QDialog::accept);
     connect(&dialogButtonBox, &QDialogButtonBox::rejected, &commandDialog, &QDialog::reject);
     commandDialog.setLayout(&layout);
-    if (commandDialog.exec() == QDialog::Accepted) {
-        QStringList thunderbirdCommand = thunderbirdCmdModel->stringList();
-        thunderbirdCommand.removeLast();
-        thunderbirdCommandLabel->setText(thunderbirdCommand.join(' '));
-        thunderbirdCommandLabel->setToolTip(thunderbirdCommand.join('\n'));
+    QStringList thunderbirdCommand = thunderbirdCmdModel->stringList();
+    if (commandDialog.exec() != QDialog::Accepted) {
+        thunderbirdCmdModel->setStringList(thunderbirdCommand);
+        return;
     }
+    thunderbirdCommand = thunderbirdCmdModel->stringList();
+    if (thunderbirdCommand.count() <= 1) {
+        thunderbirdCommand = Utils::getDefaultThunderbirdCommand() << "";
+        thunderbirdCmdModel->setStringList(thunderbirdCommand);
+    }
+    thunderbirdCommand.removeLast();
+    thunderbirdCommandLabel->setText(thunderbirdCommand.join(' '));
+    thunderbirdCommandLabel->setToolTip(thunderbirdCommand.join('\n'));
 }
 
 void DialogSettings::onCheckUpdateButton() {

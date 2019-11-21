@@ -10,6 +10,7 @@
 #  include <windows.h>
 #elif defined (Q_OS_MAC)
 #else
+#  include <QtCore/QFileInfo>
 #  include <wordexp.h>
 #endif
 
@@ -215,4 +216,16 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 #else // Linux
     return {"~/.thunderbird", "~/snap/thunderbird/common/.thunderbird"};
 #endif /* Platform */
+}
+
+QStringList Utils::getDefaultThunderbirdCommand() {
+#ifdef Q_OS_WIN
+    return {R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")"};
+#else
+    if (QFileInfo("/usr/bin/thunderbird").isExecutable()) {
+        return {"/usr/bin/thunderbird"};
+    } else {
+        return {"/usr/bin/flatpak-spawn", "--host", "flatpak", "run", "org.mozilla.Thunderbird"};
+    }
+#endif
 }

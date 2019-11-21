@@ -54,17 +54,7 @@ Settings::Settings(bool verboseOutput)
     mUpdateOnStartup = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
-
-#ifdef Q_OS_WIN
-    mThunderbirdCmdLine << R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")";
-#else
-    if (QFileInfo("/usr/bin/thunderbird").isExecutable()) {
-        mThunderbirdCmdLine << "/usr/bin/thunderbird";
-    } else {
-        mThunderbirdCmdLine << "/usr/bin/flatpak-spawn" << "--host" << "flatpak"
-                            << "run" << "org.mozilla.Thunderbird";
-    }
-#endif
+    mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
 }
 
 Settings::~Settings()
@@ -178,8 +168,11 @@ void Settings::load()
     mShowUnreadEmailCount = mSettings->value(
             "common/showunreademailcount", mShowUnreadEmailCount ).toBool();
 
-    mThunderbirdCmdLine = mSettings->value(
+    QStringList thunderbirdCommand = mSettings->value(
             "advanced/tbcmdline", mThunderbirdCmdLine).toStringList();
+    if (!thunderbirdCommand.isEmpty()) {
+        mThunderbirdCmdLine = thunderbirdCommand;
+    }
     mThunderbirdWindowMatch = mSettings->value(
             "advanced/tbwindowmatch", mThunderbirdWindowMatch ).toString();
     mNotificationMinimumFontSize = mSettings->value(

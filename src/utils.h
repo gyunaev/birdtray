@@ -58,6 +58,11 @@ class Utils
          * @see https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data#w_profile-location-summary
          */
         static QStringList getThunderbirdProfilesPaths();
+
+        /**
+         * @return The default Thunderbird command for the current platform.
+         */
+        static QStringList getDefaultThunderbirdCommand();
 };
 
 #endif // UTILS_H
