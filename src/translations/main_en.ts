@@ -510,14 +510,6 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Empty Thunderbird command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have enabled New Email menu, but you did not specify a Thunderbird command.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Thunderbird Command</source>
         <translation type="unfinished"></translation>
     </message>
@@ -543,6 +535,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit the Thunderbird command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto detect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thunderbird not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to detect Thunderbird on your system.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

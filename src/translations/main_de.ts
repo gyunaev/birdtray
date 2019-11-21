@@ -546,14 +546,6 @@ Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
         <translation>Ungültiges Thunderbird-Verzeichnis</translation>
     </message>
     <message>
-        <source>Empty Thunderbird command</source>
-        <translation>Kein Thunderbird Befehl</translation>
-    </message>
-    <message>
-        <source>You have enabled New Email menu, but you did not specify a Thunderbird command.</source>
-        <translation>Sie haben das &quot;Neue Email&quot;-Menü aktiviert, aber keinen Befehl zum Starten von Thunderbird festgelegt.</translation>
-    </message>
-    <message>
         <source>Thunderbird Command</source>
         <translation>Thunderbird Befehl</translation>
     </message>
@@ -564,6 +556,18 @@ Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
     <message>
         <source>Edit the Thunderbird command</source>
         <translation>Bearbeite den Thunderbird Befehl</translation>
+    </message>
+    <message>
+        <source>Auto detect</source>
+        <translation>Automatisch erkennen</translation>
+    </message>
+    <message>
+        <source>Thunderbird not found</source>
+        <translation>Thunderbird konnte nicht gefunden werden</translation>
+    </message>
+    <message>
+        <source>Unable to detect Thunderbird on your system.</source>
+        <translation>Thunderbird konnte auf ihrem System nicht gefunden werden.</translation>
     </message>
 </context>
 <context>
