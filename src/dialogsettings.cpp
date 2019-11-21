@@ -3,6 +3,8 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QDir>
+#include <QtWidgets/QListView>
+#include <QtCore/QStandardPaths>
 
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
@@ -47,6 +49,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnNewEmailEdit, &QPushButton::clicked, this, &DialogSettings::newEmailEdit );
     connect( btnNewEmailDelete, &QPushButton::clicked, this, &DialogSettings::newEmailRemove );
     
+    connect( thunderbirdCommandEditButton, &QToolButton::clicked,
+            this, &DialogSettings::editThunderbirdCommand );
     connect( checkUpdateButton, &QPushButton::clicked,
             this, &DialogSettings::onCheckUpdateButton );
     connect( app->getAutoUpdater(), &AutoUpdater::onCheckUpdateFinished,
@@ -65,7 +69,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
     boxMonitorThunderbirdWindow->setChecked( settings->mMonitorThunderbirdWindow );
     boxRestartThunderbird->setChecked( settings->mRestartThunderbird );
-    leThunderbirdBinary->setText( settings->mThunderbirdCmdLine  );
+    thunderbirdCommandLabel->setText(settings->mThunderbirdCmdLine.join(' '));
+    thunderbirdCommandLabel->setToolTip(settings->mThunderbirdCmdLine.join('\n'));
     leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
@@ -95,6 +100,12 @@ DialogSettings::DialogSettings( QWidget *parent)
     mModelNewEmails = new ModelNewEmails( this );
     treeNewEmails->setModel( mModelNewEmails );
     treeNewEmails->setCurrentIndex(mModelNewEmails->index(0, 0));
+    
+    // Advanced tab
+    QStringList thunderbirdCommandLine = settings->mThunderbirdCmdLine;
+    thunderbirdCmdModel = new QStringListModel(thunderbirdCommandLine << "", this);
+    connect(thunderbirdCmdModel, &QAbstractItemModel::dataChanged,
+            this, &DialogSettings::onThunderbirdCommandModelChanged);
 
     // Create the "About" box
     QString origabout = browserAbout->toHtml();
@@ -144,16 +155,6 @@ void DialogSettings::accept()
             return;
         }
     }
-
-    if ( boxEnableNewEmail->isChecked() && leThunderbirdBinary->text().isEmpty() )
-    {
-        QMessageBox::critical(nullptr, tr("Empty Thunderbird path"),
-                              tr("You have enabled New Email menu, "
-                                 "but you did not specify Thunderbird path."));
-        tabWidget->setCurrentIndex( 0 );
-        leThunderbirdBinary->setFocus();
-        return;
-    }
     
     BirdtrayApp* app = BirdtrayApp::get();
     Settings* settings = app->getSettings();
@@ -166,7 +167,9 @@ void DialogSettings::accept()
     settings->mBlinkSpeed = sliderBlinkingSpeed->value();
     settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
     settings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
-    settings->mThunderbirdCmdLine = leThunderbirdBinary->text();
+    QStringList thunderbirdCommand = thunderbirdCmdModel->stringList();
+    thunderbirdCommand.removeLast();
+    settings->mThunderbirdCmdLine = thunderbirdCommand;
     settings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     settings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
@@ -389,6 +392,49 @@ void DialogSettings::newEmailRemove()
     mModelNewEmails->remove( treeNewEmails->currentIndex() );
 }
 
+void DialogSettings::editThunderbirdCommand() {
+    QDialog commandDialog(this);
+    commandDialog.setWindowTitle(tr("Thunderbird Command"));
+    commandDialog.resize(500, 300);
+    QVBoxLayout layout(&commandDialog);
+    QListView commandListView(&commandDialog);
+    commandListView.setAlternatingRowColors(true);
+    commandListView.setModel(thunderbirdCmdModel);
+    layout.addWidget(&commandListView);
+    QDialogButtonBox dialogButtonBox(
+            QDialogButtonBox::Save | QDialogButtonBox::Cancel, &commandDialog);
+    QPushButton* detectButton = dialogButtonBox.addButton(
+            tr("Auto detect"), QDialogButtonBox::ActionRole);
+    layout.addWidget(&dialogButtonBox);
+    connect(&dialogButtonBox, &QDialogButtonBox::accepted, &commandDialog, &QDialog::accept);
+    connect(&dialogButtonBox, &QDialogButtonBox::rejected, &commandDialog, &QDialog::reject);
+    connect(detectButton, &QPushButton::clicked, this, [&]() {
+        commandListView.setEnabled(false);
+        QStringList command = searchThunderbird();
+        if (command.isEmpty() || !QFileInfo(Utils::expandPath(command[0])).isExecutable()) {
+            QMessageBox::warning(&commandDialog, tr("Thunderbird not found"),
+                    tr("Unable to detect Thunderbird on your system."));
+        } else {
+            thunderbirdCmdModel->setStringList(command << "");
+        }
+        commandListView.setEnabled(true);
+    });
+    commandDialog.setLayout(&layout);
+    QStringList thunderbirdCommand = thunderbirdCmdModel->stringList();
+    if (commandDialog.exec() != QDialog::Accepted) {
+        thunderbirdCmdModel->setStringList(thunderbirdCommand);
+        return;
+    }
+    thunderbirdCommand = thunderbirdCmdModel->stringList();
+    if (thunderbirdCommand.count() <= 1) {
+        thunderbirdCommand = Utils::getDefaultThunderbirdCommand() << "";
+        thunderbirdCmdModel->setStringList(thunderbirdCommand);
+    }
+    thunderbirdCommand.removeLast();
+    thunderbirdCommandLabel->setText(thunderbirdCommand.join(' '));
+    thunderbirdCommandLabel->setToolTip(thunderbirdCommand.join('\n'));
+}
+
 void DialogSettings::onCheckUpdateButton() {
     checkUpdateButton->setText(tr("Checking..."));
     checkUpdateButton->setEnabled(false);
@@ -460,6 +506,22 @@ void DialogSettings::unreadParserChanged(int curr)
     }
 }
 
+void DialogSettings::onThunderbirdCommandModelChanged(
+        const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
+    Q_UNUSED(bottomRight)
+    Q_UNUSED(roles)
+    if (topLeft.row() != thunderbirdCmdModel->rowCount() - 1
+        && thunderbirdCmdModel->data(topLeft, Qt::DisplayRole).toString().isEmpty()) {
+        thunderbirdCmdModel->removeRow(topLeft.row());
+    }
+    if (!thunderbirdCmdModel->data(thunderbirdCmdModel->index(
+            thunderbirdCmdModel->rowCount() - 1, 0), Qt::DisplayRole).toString().isEmpty()) {
+        thunderbirdCmdModel->insertRow(thunderbirdCmdModel->rowCount());
+        thunderbirdCmdModel->setData(
+                thunderbirdCmdModel->index(thunderbirdCmdModel->rowCount() - 1, 0), "");
+    }
+}
+
 void DialogSettings::changeIcon(QToolButton *button)
 {
     QString e = QFileDialog::getOpenFileName( 0,
@@ -524,4 +586,17 @@ bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const 
 bool DialogSettings::isMorkParserSelected() const
 {
     return boxParserSelection->currentIndex() == 1;
+}
+
+QStringList DialogSettings::searchThunderbird() const {
+    QStringList defaultCommand = Utils::getDefaultThunderbirdCommand();
+    if (defaultCommand.count() == 1
+        && !QFileInfo(Utils::expandPath(defaultCommand[0])).isExecutable()) {
+        return defaultCommand;
+    }
+    QString thunderbirdPath = QStandardPaths::findExecutable("thunderbird");
+    if (!thunderbirdPath.isEmpty()) {
+        return {thunderbirdPath};
+    }
+    return defaultCommand;
 }

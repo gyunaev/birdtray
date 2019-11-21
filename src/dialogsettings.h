@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QProgressDialog>
 #include <QPalette>
+#include <QtCore/QStringListModel>
 
 #include "databaseaccounts.h"
 #include "ui_dialogsettings.h"
@@ -64,6 +65,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    newEmailRemove();
         
         // Advanced buttons
+        void    editThunderbirdCommand();
         void    onCheckUpdateButton();
 
         // Icon change
@@ -78,6 +80,17 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Parser changed
         void    unreadParserChanged( int curr );
+
+        /**
+         * Called when the user edited an entry of the Thunderbird command line model.
+         *
+         * @param topLeft The top left item that was changed.
+         * @param bottomRight The bottom right item that was changed.
+         * @param roles The data roles that have been modified.
+         */
+        void onThunderbirdCommandModelChanged(
+                const QModelIndex &topLeft, const QModelIndex &bottomRight,
+                const QVector<int> &roles = QVector<int>());
 
     private:
         void    changeIcon(QToolButton * button );
@@ -103,6 +116,13 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          */
         bool    reportIfProfilePathValid(const QString& profilePath) const;
         bool    isMorkParserSelected() const;
+    
+        /**
+         * Try to find a command to start Thunderbird on the current system.
+         *
+         * @return The command that was found.
+         */
+        QStringList searchThunderbird() const;
 
         QPalette mPaletteOk;
         QPalette mPaletteErrror;
@@ -118,6 +138,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
         // Model to show new emails
         ModelNewEmails      *   mModelNewEmails;
+    
+        /**
+         * Model that contains the Thunderbird command line.
+         */
+        QStringListModel* thunderbirdCmdModel = nullptr;
 
 };
 
