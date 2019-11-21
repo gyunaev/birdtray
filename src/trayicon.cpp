@@ -110,6 +110,9 @@ void TrayIcon::unreadCounterError(QString message)
     qWarning("UnreadCounter generated an error: %s", qPrintable(message) );
 
     mCurrentStatus = message;
+    if (mUnreadMonitor == nullptr) {
+        return;
+    }
     mUnreadMonitor->quitAndDelete();
     mUnreadMonitor = nullptr;
 
