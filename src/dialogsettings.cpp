@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QDir>
 #include <QtWidgets/QListView>
+#include <QtCore/QStandardPaths>
 
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
@@ -402,9 +403,22 @@ void DialogSettings::editThunderbirdCommand() {
     layout.addWidget(&commandListView);
     QDialogButtonBox dialogButtonBox(
             QDialogButtonBox::Save | QDialogButtonBox::Cancel, &commandDialog);
+    QPushButton* detectButton = dialogButtonBox.addButton(
+            tr("Auto detect"), QDialogButtonBox::ActionRole);
     layout.addWidget(&dialogButtonBox);
     connect(&dialogButtonBox, &QDialogButtonBox::accepted, &commandDialog, &QDialog::accept);
     connect(&dialogButtonBox, &QDialogButtonBox::rejected, &commandDialog, &QDialog::reject);
+    connect(detectButton, &QPushButton::clicked, this, [&]() {
+        commandListView.setEnabled(false);
+        QStringList command = searchThunderbird();
+        if (command.isEmpty()) {
+            QMessageBox::warning(&commandDialog, tr("Thunderbird not found"),
+                    tr("Unable to detect Thunderbird on your system."));
+        } else {
+            thunderbirdCmdModel->setStringList(command);
+        }
+        commandListView.setEnabled(true);
+    });
     commandDialog.setLayout(&layout);
     QStringList thunderbirdCommand = thunderbirdCmdModel->stringList();
     if (commandDialog.exec() != QDialog::Accepted) {
@@ -492,6 +506,22 @@ void DialogSettings::unreadParserChanged(int curr)
     }
 }
 
+void DialogSettings::onThunderbirdCommandModelChanged(
+        const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
+    Q_UNUSED(bottomRight)
+    Q_UNUSED(roles)
+    if (topLeft.row() != thunderbirdCmdModel->rowCount() - 1
+        && thunderbirdCmdModel->data(topLeft, Qt::DisplayRole).toString().isEmpty()) {
+        thunderbirdCmdModel->removeRow(topLeft.row());
+    }
+    if (!thunderbirdCmdModel->data(thunderbirdCmdModel->index(
+            thunderbirdCmdModel->rowCount() - 1, 0), Qt::DisplayRole).toString().isEmpty()) {
+        thunderbirdCmdModel->insertRow(thunderbirdCmdModel->rowCount());
+        thunderbirdCmdModel->setData(
+                thunderbirdCmdModel->index(thunderbirdCmdModel->rowCount() - 1, 0), "");
+    }
+}
+
 void DialogSettings::changeIcon(QToolButton *button)
 {
     QString e = QFileDialog::getOpenFileName( 0,
@@ -558,18 +588,23 @@ bool DialogSettings::isMorkParserSelected() const
     return boxParserSelection->currentIndex() == 1;
 }
 
-void DialogSettings::onThunderbirdCommandModelChanged(
-        const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
-    Q_UNUSED(bottomRight)
-    Q_UNUSED(roles)
-    if (topLeft.row() != thunderbirdCmdModel->rowCount() - 1
-        && thunderbirdCmdModel->data(topLeft, Qt::DisplayRole).toString().isEmpty()) {
-        thunderbirdCmdModel->removeRow(topLeft.row());
+QStringList DialogSettings::searchThunderbird() const {
+    QStringList defaultCommand = Utils::getDefaultThunderbirdCommand();
+    if (defaultCommand.count() == 1 && !QFileInfo(defaultCommand[0]).isExecutable()) {
+        return defaultCommand;
     }
-    if (!thunderbirdCmdModel->data(thunderbirdCmdModel->index(
-            thunderbirdCmdModel->rowCount() - 1, 0), Qt::DisplayRole).toString().isEmpty()) {
-        thunderbirdCmdModel->insertRow(thunderbirdCmdModel->rowCount());
-        thunderbirdCmdModel->setData(
-                thunderbirdCmdModel->index(thunderbirdCmdModel->rowCount() - 1, 0), "");
+    QString thunderbirdPath = QStandardPaths::findExecutable("thunderbird");
+    if (!thunderbirdPath.isEmpty()) {
+        return {thunderbirdPath};
     }
+    if (QApplication::applicationDirPath().contains("flatpak")) { // TODO: Is this the best way to detect if we are installed with flatpak and does it even work?
+        // TODO: Is this really the best way to check for other apps?
+        int result = QProcess::execute("/usr/bin/flatpak-spawn",
+                {"--host", "file", "/usr/bin/thunderbird"});
+        if (result == 0) {
+            return {"/usr/bin/flatpak-spawn", "--host", "thunderbird"};
+        }
+        // TODO: Do this for flatpak and snap Thunderbird
+    }
+    return QStringList();
 }
