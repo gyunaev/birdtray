@@ -262,7 +262,7 @@ void Settings::load()
                 }
             }
             const QString mailFolder = scheme == "mailbox" ? "Mail" :
-                                       scheme[0].toUpper() + scheme.midRef(1) + "Mail";
+                                       scheme[0].toUpper() + scheme.mid(1) + "Mail";
             account = Utils::decodeIMAPutf7(account);
             QDir accountDir(profileDir.absoluteFilePath(mailFolder) + '/' + account);
             
