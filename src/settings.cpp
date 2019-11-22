@@ -310,7 +310,7 @@ void Settings::load()
         }
     }
 #else
-#  error "This code converts attempts to convert from legacy sqlite based mail account configuration to mork based configuration. A few releases have passed, we should remove thin now."
+#  error "This code converts attempts to convert from legacy sqlite based mail account configuration to mork based configuration. A few releases have passed, we should remove this now."
 #endif /* Birdtray version check */
 }
 
