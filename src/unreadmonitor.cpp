@@ -10,9 +10,6 @@
 UnreadMonitor::UnreadMonitor(TrayIcon* parent) : QThread(parent), changedMorkTimer(this) {
     mLastReportedUnread = 0;
     
-    // Everything should be owned by our thread.
-    moveToThread(this);
-    
     // We get notification once Mork files have been modified.
     // This way we don't need to pull them too often.
     connect(&morkFilesWatcher, &QFileSystemWatcher::fileChanged, this,
@@ -27,19 +24,18 @@ UnreadMonitor::UnreadMonitor(TrayIcon* parent) : QThread(parent), changedMorkTim
     connect(&changedMorkTimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread);
 }
 
+UnreadMonitor::~UnreadMonitor() {
+    if (isRunning()) {
+        quit();
+        wait();
+    }
+}
+
 void UnreadMonitor::run() {
     // Start it as soon as thread starts its event loop
     QTimer::singleShot(0, [=]() { updateUnread(); });
     // Start the event loop
     exec();
-}
-
-void UnreadMonitor::quitAndDelete() {
-    if (!isRunning()) {
-        quit();
-        wait();
-    }
-    deleteLater();
 }
 
 void UnreadMonitor::slotSettingsChanged() {

@@ -16,6 +16,7 @@ Q_OBJECT
 
 public:
     explicit UnreadMonitor(TrayIcon* parent);
+    ~UnreadMonitor() override;
     
     // Thread run function
     void run() override;

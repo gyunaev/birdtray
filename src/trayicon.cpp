@@ -87,7 +87,7 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager = nullptr;
     }
     if (mUnreadMonitor != nullptr) {
-        mUnreadMonitor->quitAndDelete();
+        mUnreadMonitor->deleteLater();
         mUnreadMonitor = nullptr;
     }
 }
@@ -113,7 +113,7 @@ void TrayIcon::unreadCounterError(QString message)
     if (mUnreadMonitor == nullptr) {
         return;
     }
-    mUnreadMonitor->quitAndDelete();
+    mUnreadMonitor->deleteLater();
     mUnreadMonitor = nullptr;
 
     mUnreadCounter = 0;
