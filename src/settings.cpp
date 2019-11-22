@@ -263,13 +263,13 @@ void Settings::load()
             }
             const QString mailFolder = scheme == "mailbox" ? "Mail" :
                                        scheme[0].toUpper() + scheme.midRef(1) + "Mail";
+            account = Utils::decodeIMAPutf7(account);
             QDir accountDir(profileDir.absoluteFilePath(mailFolder) + '/' + account);
             
             QStringList mockFiles;
             if (!folder.isNull() && !folder.isEmpty()) {
                 mockFiles << accountDir.absoluteFilePath(
-                        folder.mid(1).split('/').join(".sbd/") + ".msf");
-                
+                        Utils::decodeIMAPutf7(folder).mid(1).split('/').join(".sbd/") + ".msf");
             } else {
                 QDirIterator it(accountDir.absolutePath(), {"*.msf"},
                         QDir::Files, QDirIterator::Subdirectories);
