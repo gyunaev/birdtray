@@ -71,71 +71,6 @@ OpenSSL might not be installed.</source>
     </message>
 </context>
 <context>
-    <name>DatabaseAccounts</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseUnreadFixer</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogAddEditAccount</name>
-    <message>
-        <source>Please assing the message number text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folder:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notification text color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose the MSF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid MSF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No account selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must select an account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
@@ -245,31 +180,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fix the unread message count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Monitoring</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Method to parse unread notifications:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -405,26 +316,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>using global search database (wont work with 68+)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>using Mork index files (recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Empty Thunderbird directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must specify a Thunderbird directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose the Thunderbird profile path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Version check failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -434,55 +325,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fix the unread messages?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updating the database...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Database updated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Successfully updated the database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error updating database</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error updating the database:
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts:
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Checking...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WARNING: Parser changed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
-
-Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -499,14 +342,6 @@ Do you want to clear the accounts?</source>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Valid Thunderbird directory must contain the file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -819,18 +654,6 @@ Do you want to continue?</source>
 </context>
 <context>
     <name>UnreadMonitor</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folder %1 was not found in database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Unable to watch %1 for changes.</source>
         <translation type="unfinished"></translation>
