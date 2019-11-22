@@ -1,5 +1,6 @@
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QThread>
 #include "birdtrayapp.h"
 #ifdef Q_OS_WIN
 #  include "birdtrayeventfilter.h"

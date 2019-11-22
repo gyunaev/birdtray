@@ -249,7 +249,8 @@ void Settings::load()
                 folder = uri.path();
             } else {
                 QString decodedPath = QUrl::fromPercentEncoding(path.toUtf8());
-                scheme = decodedPath.section('/', 0, 0).chopped(1);
+                scheme = decodedPath.section('/', 0, 0);
+                scheme.chop(1);
                 account = decodedPath.section('/', 2, 2);
                 int index;
                 if ((index = account.indexOf('@')) != -1) {
