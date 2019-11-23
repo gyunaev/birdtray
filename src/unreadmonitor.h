@@ -17,11 +17,11 @@ class UnreadMonitor : public QThread
     Q_OBJECT
 
     public:
-        explicit UnreadMonitor( TrayIcon * parent );
-        ~UnreadMonitor() override;
+        UnreadMonitor( TrayIcon * parent );
+        virtual ~UnreadMonitor();
 
         // Thread run function
-        void run() override;
+        virtual void run() override;
 
     signals:
         // Unread counter changed

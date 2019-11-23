@@ -12,9 +12,9 @@
 #include "birdtrayapp.h"
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
-    : QThread(nullptr ), mChangedMSFtimer(this)
+    : QThread( 0 ), mChangedMSFtimer(this)
 {
-    mSqlitedb = nullptr;
+    mSqlitedb = 0;
     mLastReportedUnread = 0;
 
     // We get notification once either sqlite file or Mork files have been modified.
@@ -25,8 +25,7 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     connect( parent, &TrayIcon::settingsChanged, this, &UnreadMonitor::slotSettingsChanged );
 
     // Set up the watched file timer
-    mChangedMSFtimer.setInterval(
-            static_cast<int>(BirdtrayApp::get()->getSettings()->mWatchFileTimeout));
+    mChangedMSFtimer.setInterval(BirdtrayApp::get()->getSettings()->mWatchFileTimeout);
     mChangedMSFtimer.setSingleShot( true );
 
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
@@ -60,7 +59,7 @@ void UnreadMonitor::slotSettingsChanged()
     if ( mSqlitedb )
     {
         sqlite3_close_v2( mSqlitedb );
-        mSqlitedb = nullptr;
+        mSqlitedb = 0;
     }
 
     mMorkUnreadCounts.clear();
@@ -86,7 +85,7 @@ bool UnreadMonitor::openDatabase()
     // Open the database
     if ( sqlite3_open_v2( mSqliteDbFile.toUtf8().data(),
                            &mSqlitedb,
-                           SQLITE_OPEN_READONLY, nullptr ) != SQLITE_OK )
+                           SQLITE_OPEN_READONLY, 0 ) != SQLITE_OK )
     {
         emit error(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(mSqlitedb)));
         return false;
