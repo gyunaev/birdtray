@@ -3,7 +3,7 @@
 
 #include <sqlite3.h>
 
-#include "unreadcounter.h"
+#include "unreadmonitor.h"
 #include "sqlite_statement.h"
 #include "morkparser.h"
 #include "trayicon.h"
@@ -12,13 +12,10 @@
 #include "birdtrayapp.h"
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
-    : QThread( 0 ), mChangedMSFtimer(this)
+    : QThread(nullptr ), mChangedMSFtimer(this)
 {
-    mSqlitedb = 0;
+    mSqlitedb = nullptr;
     mLastReportedUnread = 0;
-
-    // Everything should be owned by our thread
-    moveToThread( this );
 
     // We get notification once either sqlite file or Mork files have been modified.
     // This way we don't need to pull the db often
@@ -28,16 +25,21 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     connect( parent, &TrayIcon::settingsChanged, this, &UnreadMonitor::slotSettingsChanged );
 
     // Set up the watched file timer
-    mChangedMSFtimer.setInterval(BirdtrayApp::get()->getSettings()->mWatchFileTimeout);
+    mChangedMSFtimer.setInterval(
+            static_cast<int>(BirdtrayApp::get()->getSettings()->mWatchFileTimeout));
     mChangedMSFtimer.setSingleShot( true );
 
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
 }
 
-UnreadMonitor::~UnreadMonitor()
-{
-    if ( mSqlitedb )
-        sqlite3_close_v2( mSqlitedb );
+UnreadMonitor::~UnreadMonitor() {
+    if (isRunning()) {
+        quit();
+        wait();
+    }
+    if (mSqlitedb) {
+        sqlite3_close_v2(mSqlitedb);
+    }
 }
 
 void UnreadMonitor::run()
@@ -52,21 +54,13 @@ void UnreadMonitor::run()
     exec();
 }
 
-void UnreadMonitor::quitAndDelete() {
-    if (isRunning()) {
-        quit();
-        wait();
-    }
-    deleteLater();
-}
-
 void UnreadMonitor::slotSettingsChanged()
 {
     // We reinitialize everything because the settings changed
     if ( mSqlitedb )
     {
         sqlite3_close_v2( mSqlitedb );
-        mSqlitedb = 0;
+        mSqlitedb = nullptr;
     }
 
     mMorkUnreadCounts.clear();
@@ -92,7 +86,7 @@ bool UnreadMonitor::openDatabase()
     // Open the database
     if ( sqlite3_open_v2( mSqliteDbFile.toUtf8().data(),
                            &mSqlitedb,
-                           SQLITE_OPEN_READONLY, 0 ) != SQLITE_OK )
+                           SQLITE_OPEN_READONLY, nullptr ) != SQLITE_OK )
     {
         emit error(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(mSqlitedb)));
         return false;

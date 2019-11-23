@@ -55,7 +55,7 @@ set(SOURCES
         src/settings.cpp
         src/sqlite_statement.cpp
         src/trayicon.cpp
-        src/unreadcounter.cpp
+        src/unreadmonitor.cpp
         src/utils.cpp
         src/windowtools.cpp
         src/autoupdater.cpp
@@ -84,7 +84,7 @@ set(HEADERS
         src/settings.h
         src/sqlite_statement.h
         src/trayicon.h
-        src/unreadcounter.h
+        src/unreadmonitor.h
         src/utils.h
         src/version.h
         src/windowtools.h

@@ -8,7 +8,7 @@
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
-#include "unreadcounter.h"
+#include "unreadmonitor.h"
 #include "windowtools.h"
 #include "utils.h"
 #include "autoupdater.h"
@@ -87,7 +87,7 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager = nullptr;
     }
     if (mUnreadMonitor != nullptr) {
-        mUnreadMonitor->quitAndDelete();
+        mUnreadMonitor->deleteLater();
         mUnreadMonitor = nullptr;
     }
 }
@@ -113,7 +113,7 @@ void TrayIcon::unreadCounterError(QString message)
     if (mUnreadMonitor == nullptr) {
         return;
     }
-    mUnreadMonitor->quitAndDelete();
+    mUnreadMonitor->deleteLater();
     mUnreadMonitor = nullptr;
 
     mUnreadCounter = 0;

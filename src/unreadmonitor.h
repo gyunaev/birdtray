@@ -1,5 +1,5 @@
-#ifndef FOLDERWATCHER_H
-#define FOLDERWATCHER_H
+#ifndef UNREAD_MONITOR_H
+#define UNREAD_MONITOR_H
 
 #include <QThread>
 #include <QString>
@@ -17,16 +17,11 @@ class UnreadMonitor : public QThread
     Q_OBJECT
 
     public:
-        UnreadMonitor( TrayIcon * parent );
-        virtual ~UnreadMonitor();
+        explicit UnreadMonitor( TrayIcon * parent );
+        ~UnreadMonitor() override;
 
         // Thread run function
-        virtual void run() override;
-        
-        /**
-         * Safely enqueues the this unread monitor for deletion.
-         */
-        void quitAndDelete();
+        void run() override;
 
     signals:
         // Unread counter changed
@@ -78,4 +73,4 @@ class UnreadMonitor : public QThread
         QColor mLastColor;
 };
 
-#endif // FOLDERWATCHER_H
+#endif /* UNREAD_MONITOR_H */
