@@ -227,7 +227,7 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 
 QStringList Utils::getDefaultThunderbirdCommand() {
 #if defined (OPT_THUBDERBIRD_EXE)
-    QStringList cmd = { QString(OPT_THUBDERBIRD_EXE).replace('\'', '"') };
+    QStringList cmd = { OPT_THUBDERBIRD_EXE };
 
 #if defined (OPT_THUBDERBIRD_ARGS)
     cmd << QString(OPT_THUBDERBIRD_ARGS).split( ' ' );
@@ -241,3 +241,54 @@ QStringList Utils::getDefaultThunderbirdCommand() {
     return { "/usr/bin/thunderbird" };
 #endif
 }
+
+QStringList Utils::splitCommandLine(const QString &src)
+{
+    // This must handle strings like "C:\Program Files\exe\thunderbird.exe" --profile test --title "My test profile" test "a 'bb' \"V\" c"
+    // must return an array with 7 elements
+    QChar sep = QChar::Null;
+    QStringList out;
+    QString current;
+
+    for ( int i = 0; i < src.length(); i++ )
+    {
+        QChar ch = src[i];
+
+        // Pass-through escapes
+        if ( ch == '\\' )
+        {
+            // Append both chars if we have them
+            current.append( ch );
+
+            if ( i < src.length() - 1 )
+            {
+                i++;
+                current.append( src[i] );
+            }
+
+            continue;
+        }
+
+        // If we're inside a separator, we reset sep if we encounter a separator.
+        // This ensures things like "aa 'bb' cc" are handled properly
+        if ( sep != QChar::Null && ch == sep )
+            sep = QChar::Null;
+        else if ( sep == QChar::Null && (ch == '\'' || ch == '"') )
+            sep = ch;
+
+        // Space separates strings, but only if we're not inside a separator
+        if ( sep == QChar::Null && ch.isSpace() )
+        {
+            out.push_back( current );
+            current.clear();
+        }
+        else
+            current.append( ch );
+    }
+
+    if ( !current.isEmpty() )
+        out.push_back( current );
+
+    return out;
+}
+

@@ -64,6 +64,9 @@ class Utils
          * @return The default Thunderbird command for the current platform.
          */
         static QStringList getDefaultThunderbirdCommand();
+
+        // Splits the string into stringlist using space as separator, but ignoring spaces inside quoted content
+        static QStringList splitCommandLine( const QString& src );
 };
 
 #endif // UTILS_H
