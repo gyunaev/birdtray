@@ -214,7 +214,9 @@ void Utils::fatal(const QString &message) {
 }
 
 QStringList Utils::getThunderbirdProfilesPaths() {
-#if defined (Q_OS_WIN)
+#if defined (OPT_THUBDERBIRD_PROFILE)
+    return { OPT_THUBDERBIRD_PROFILE };
+#elif defined (Q_OS_WIN)
     return {"%APPDATA%\\Thunderbird\\Profiles"};
 #elif defined (Q_OS_MAC)
     return {"~/Library/Thunderbird/Profiles"};
@@ -224,13 +226,18 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 }
 
 QStringList Utils::getDefaultThunderbirdCommand() {
-#ifdef Q_OS_WIN
+#if defined (OPT_THUBDERBIRD_EXE)
+    QStringList cmd = { QString(OPT_THUBDERBIRD_EXE).replace('\'', '"') };
+
+#if defined (OPT_THUBDERBIRD_ARGS)
+    cmd << QString(OPT_THUBDERBIRD_ARGS).split( ' ' );
+#endif
+
+    return cmd;
+
+#elif defined (Q_OS_WIN)
     return {R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")"};
 #else
-    if (QFileInfo("/usr/bin/thunderbird").isExecutable()) {
-        return {"/usr/bin/thunderbird"};
-    } else {
-        return {"/usr/bin/flatpak-spawn", "--host", "flatpak", "run", "org.mozilla.Thunderbird"};
-    }
+    return { "/usr/bin/thunderbird" };
 #endif
 }
