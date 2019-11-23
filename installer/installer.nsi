@@ -428,7 +428,7 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     # Clean up "Start Menu Icon"
     !insertmacro DeleteRetryAbort "$STARTMENU\${PRODUCT_NAME}.lnk"
 
-    # Clean up "Dektop Icon"
+    # Clean up "Desktop Icon"
     !insertmacro DeleteRetryAbort "$DESKTOP\${PRODUCT_NAME}.lnk"
 
 SectionEnd
@@ -599,7 +599,7 @@ Function .onSelChange
         SendMessage $1 ${WM_SETTEXT} 0 "STR:$(^InstallBtn)" # The last page before installing
         Call MultiUser.CheckPageElevationRequired
         ${if} $0 == 2
-            SendMessage $1 ${BCM_SETSHIELD} 0 1 # Hisplay SHIELD (Windows Vista and above)
+            SendMessage $1 ${BCM_SETSHIELD} 0 1 # Display SHIELD (Windows Vista and above)
         ${endif}
     ${endif}
     !endif # UNINSTALL_BUILDER
