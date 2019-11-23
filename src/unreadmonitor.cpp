@@ -3,7 +3,7 @@
 
 #include <sqlite3.h>
 
-#include "unreadcounter.h"
+#include "unreadmonitor.h"
 #include "sqlite_statement.h"
 #include "morkparser.h"
 #include "trayicon.h"
@@ -16,9 +16,6 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
 {
     mSqlitedb = 0;
     mLastReportedUnread = 0;
-
-    // Everything should be owned by our thread
-    moveToThread( this );
 
     // We get notification once either sqlite file or Mork files have been modified.
     // This way we don't need to pull the db often
@@ -34,10 +31,14 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
 }
 
-UnreadMonitor::~UnreadMonitor()
-{
-    if ( mSqlitedb )
-        sqlite3_close_v2( mSqlitedb );
+UnreadMonitor::~UnreadMonitor() {
+    if (isRunning()) {
+        quit();
+        wait();
+    }
+    if (mSqlitedb) {
+        sqlite3_close_v2(mSqlitedb);
+    }
 }
 
 void UnreadMonitor::run()
@@ -50,14 +51,6 @@ void UnreadMonitor::run()
 
     // Start the event loop
     exec();
-}
-
-void UnreadMonitor::quitAndDelete() {
-    if (isRunning()) {
-        quit();
-        wait();
-    }
-    deleteLater();
 }
 
 void UnreadMonitor::slotSettingsChanged()
