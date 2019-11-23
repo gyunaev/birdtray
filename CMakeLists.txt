@@ -10,12 +10,16 @@ find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5Network CONFIG REQUIRED)
-find_package(Qt5LinguistTools CONFIG REQUIRED)
+find_package(Qt5LinguistTools CONFIG QUIET)
 set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
 
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
 set(EXECUTABLE_OPTIONS)
+
+if(NOT Qt5LinguistTools_FOUND)
+    message(STATUS "Qt5LinguistTools package not found: translations will not be available")
+endif(NOT Qt5LinguistTools_FOUND)
 
 if(WIN32)
     set(EXECUTABLE_OPTIONS WIN32)
@@ -99,23 +103,26 @@ source_group("Resources" FILES ${RESOURCES})
 qt5_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
-set(MAIN_TRANSLATION_FILES
-        src/translations/main_en.ts
-        src/translations/main_de.ts)
-set(DYN_TRANSLATION_FILES
-        src/translations/dynamic_en.ts
-        src/translations/dynamic_de.ts)
+if(Qt5LinguistTools_FOUND)
+    set(MAIN_TRANSLATION_FILES
+            src/translations/main_en.ts
+            src/translations/main_de.ts)
+    set(DYN_TRANSLATION_FILES
+            src/translations/dynamic_en.ts
+            src/translations/dynamic_de.ts)
 
-set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
-        ${CMAKE_CURRENT_BINARY_DIR}/translations)
-set_source_files_properties(${DYN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
-        ${CMAKE_CURRENT_BINARY_DIR}/translations)
-qt5_create_translation(GEN_TRANSLATION_FILES
-        ${MAIN_TRANSLATION_FILES}
-        ${SOURCES} ${PLATFORM_SOURCES} ${HEADERS} ${PLATFORM_HEADERS}
-        OPTIONS -locations none)
-qt5_add_translation(GEN_DYN_TRANSLATION_FILES ${DYN_TRANSLATION_FILES})
-list(APPEND GEN_TRANSLATION_FILES ${GEN_DYN_TRANSLATION_FILES})
+    set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
+            ${CMAKE_CURRENT_BINARY_DIR}/translations)
+    set_source_files_properties(${DYN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
+            ${CMAKE_CURRENT_BINARY_DIR}/translations)
+
+    qt5_create_translation(GEN_TRANSLATION_FILES
+            ${MAIN_TRANSLATION_FILES}
+            ${SOURCES} ${PLATFORM_SOURCES} ${HEADERS} ${PLATFORM_HEADERS}
+            OPTIONS -locations none)
+    qt5_add_translation(GEN_DYN_TRANSLATION_FILES ${DYN_TRANSLATION_FILES})
+    list(APPEND GEN_TRANSLATION_FILES ${GEN_DYN_TRANSLATION_FILES})
+endif(Qt5LinguistTools_FOUND)
 
 add_executable(birdtray ${EXECUTABLE_OPTIONS}
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
