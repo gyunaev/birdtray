@@ -811,6 +811,14 @@ Do you want to continue?</source>
         <source>Unable to watch %1 for changes.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to read from %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot query database: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateDialog</name>

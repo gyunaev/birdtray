@@ -123,18 +123,12 @@ void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
     updateIcon();
 }
 
-void TrayIcon::unreadCounterError(QString message)
-{
-    qWarning("UnreadCounter generated an error: %s", qPrintable(message) );
-
-    mCurrentStatus = message;
-    if (mUnreadMonitor == nullptr) {
-        return;
+void TrayIcon::unreadMonitorWarningChanged(const QString &path) {
+    const QString &message = mUnreadMonitor->getWarnings().value(path);
+    if (!message.isNull()) {
+        qWarning("UnreadMonitor generated a warning for %s: %s",
+                qPrintable(path), qPrintable(message));
     }
-    mUnreadMonitor->deleteLater();
-    mUnreadMonitor = nullptr;
-
-    mUnreadCounter = 0;
     updateIcon();
 }
 
@@ -622,7 +616,8 @@ void TrayIcon::createUnreadCounterThread()
     mUnreadMonitor = new UnreadMonitor( this );
 
     connect( mUnreadMonitor, &UnreadMonitor::unreadUpdated, this, &TrayIcon::unreadCounterUpdate );
-    connect( mUnreadMonitor, &UnreadMonitor::error, this, &TrayIcon::unreadCounterError );
+    connect(mUnreadMonitor, &UnreadMonitor::warningChanged, this,
+            &TrayIcon::unreadMonitorWarningChanged);
 
     mUnreadMonitor->start();
 }

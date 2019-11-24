@@ -35,8 +35,12 @@ class TrayIcon : public QSystemTrayIcon
     public slots:
         void    unreadCounterUpdate(unsigned int total, QColor color );
 
-        // An error happened
-        void    unreadCounterError( QString message );
+        /**
+         * The warning status of a watched path in the unread monitor changed.
+         *
+         * @param path The path whose warning has changed or a null-string for a global warning.
+         */
+        void unreadMonitorWarningChanged(const QString &path);
 
 
     private slots:
@@ -136,9 +140,6 @@ class TrayIcon : public QSystemTrayIcon
 
         // State checking timer (once a second)
         QTimer          mStateTimer;
-
-        // Current status
-        QString         mCurrentStatus;
 
         // Time when Thunderbird could be started
         QDateTime       mThunderbirdStartTime;

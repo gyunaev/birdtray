@@ -53,6 +53,10 @@ void UnreadMonitor::run()
     exec();
 }
 
+const QMap<QString, QString> UnreadMonitor::getWarnings() const {
+    return warnings;
+}
+
 void UnreadMonitor::slotSettingsChanged()
 {
     // We reinitialize everything because the settings changed
@@ -87,7 +91,7 @@ bool UnreadMonitor::openDatabase()
                            &mSqlitedb,
                            SQLITE_OPEN_READONLY, 0 ) != SQLITE_OK )
     {
-        emit error(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(mSqlitedb)));
+        setWarning(tr("Error opening sqlite database: %1").arg(sqlite3_errmsg(mSqlitedb)));
         return false;
     }
 
@@ -96,9 +100,12 @@ bool UnreadMonitor::openDatabase()
     mAllFolderIDs.clear();
 
     SQLiteStatement stmt;
-
-    if ( !stmt.prepare( mSqlitedb, "SELECT id,folderURI FROM folderlocations") )
+    
+    if (!stmt.prepare(mSqlitedb, "SELECT id,folderURI FROM folderlocations")) {
+        setWarning(tr("Cannot query database: %1").arg(sqlite3_errmsg(mSqlitedb)));
         return false;
+    }
+    clearWarning();
 
     // Make a copy as we'd delete them when found
     auto folders = BirdtrayApp::get()->getSettings()->mFolderNotificationColors;
@@ -117,13 +124,15 @@ bool UnreadMonitor::openDatabase()
 
             mAllFolderIDs += QString::number( id );
             folders.remove( uri );
+            clearWarning(uri);
         }
     }
 
     // If anything left, we didn't find those
-    if ( !folders.isEmpty() )
-    {
-        emit error(tr("Folder %1 was not found in database.").arg(folders.firstKey()));
+    for (const QString &uri: folders.keys()) {
+        setWarning(tr("Folder %1 was not found in database.").arg(uri), uri);
+    }
+    if (!folders.isEmpty()) {
         return false;
     }
 
@@ -175,10 +184,13 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
     SQLiteStatement stmt;
 
     // This returns the number of unread messages (JSON attribute "59": false)
-    if ( !stmt.prepare( mSqlitedb, QString("SELECT folderID FROM messages WHERE folderID IN (%1) AND json_extract( jsonAttributes, '$.59' ) = 0") .arg( mAllFolderIDs) ) )
-    {
-        emit error(tr("Cannot query database."));
-        this->exit( 0 );
+    if (!stmt.prepare(mSqlitedb,QString(
+            "SELECT folderID FROM messages WHERE folderID IN (%1) "
+            "AND json_extract( jsonAttributes, '$.59' ) = 0").arg(mAllFolderIDs))) {
+        setWarning(tr("Cannot query database."));
+        this->exit(0);
+    } else {
+        clearWarning();
     }
 
     int res;
@@ -228,12 +240,11 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
     {
         mMorkUnreadCounts.clear();
         for (const QString &path : settings->mFolderNotificationColors.keys()) {
-            if (!QFile::exists(path)) {
-                continue;
-            }
             mMorkUnreadCounts[path] = getMorkUnreadCount(path);
             if (!mDBWatcher.files().contains(path) && !mDBWatcher.addPath(path)) {
-                emit error(tr("Unable to watch %1 for changes.").arg(path));
+                setWarning(tr("Unable to watch %1 for changes.").arg(path), path);
+            } else {
+                clearWarning(path);
             }
         }
     }
@@ -267,10 +278,12 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 int UnreadMonitor::getMorkUnreadCount(const QString &path)
 {
     MorkParser parser;
-
-    if ( !parser.open( path ) )
+    if (!parser.open(path)) {
+        setWarning(tr("Unable to read from %1.").arg(path), path);
         return 0;
-
+    } else {
+        clearWarning(path);
+    }
     unsigned int unread = 0;
 
     // First we parse the unreadChildren column (generic view)
@@ -330,4 +343,17 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
 
     Utils::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
+}
+
+void UnreadMonitor::setWarning(const QString &message, const QString &path) {
+    if (warnings.value(path) != message) {
+        warnings.insert(path, message);
+        emit warningChanged(path);
+    }
+}
+
+void UnreadMonitor::clearWarning(const QString &path) {
+    if (warnings.remove(path) > 0) {
+        emit warningChanged(path);
+    }
 }
