@@ -226,15 +226,8 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 }
 
 QStringList Utils::getDefaultThunderbirdCommand() {
-#if defined (OPT_THUBDERBIRD_EXE)
-    QStringList cmd = { OPT_THUBDERBIRD_EXE };
-
-#if defined (OPT_THUBDERBIRD_ARGS)
-    cmd << QString(OPT_THUBDERBIRD_ARGS).split( ' ' );
-#endif
-
-    return cmd;
-
+#if defined (OPT_THUBDERBIRD_CMDLINE)
+    return Utils::splitCommandLine( OPT_THUBDERBIRD_CMDLINE );
 #elif defined (Q_OS_WIN)
     return {R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")"};
 #else
@@ -253,21 +246,6 @@ QStringList Utils::splitCommandLine(const QString &src)
     for ( int i = 0; i < src.length(); i++ )
     {
         QChar ch = src[i];
-
-        // Pass-through escapes
-        if ( ch == '\\' )
-        {
-            // Append both chars if we have them
-            current.append( ch );
-
-            if ( i < src.length() - 1 )
-            {
-                i++;
-                current.append( src[i] );
-            }
-
-            continue;
-        }
 
         // If we're inside a separator, we reset sep if we encounter a separator.
         // This ensures things like "aa 'bb' cc" are handled properly
