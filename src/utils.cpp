@@ -214,8 +214,8 @@ void Utils::fatal(const QString &message) {
 }
 
 QStringList Utils::getThunderbirdProfilesPaths() {
-#if defined (OPT_THUBDERBIRD_PROFILE)
-    return { OPT_THUBDERBIRD_PROFILE };
+#if defined (OPT_THUNDERBIRD_PROFILE)
+    return { OPT_THUNDERBIRD_PROFILE };
 #elif defined (Q_OS_WIN)
     return {"%APPDATA%\\Thunderbird\\Profiles"};
 #elif defined (Q_OS_MAC)
@@ -226,8 +226,8 @@ QStringList Utils::getThunderbirdProfilesPaths() {
 }
 
 QStringList Utils::getDefaultThunderbirdCommand() {
-#if defined (OPT_THUBDERBIRD_CMDLINE)
-    return Utils::splitCommandLine( OPT_THUBDERBIRD_CMDLINE );
+#if defined (OPT_THUNDERBIRD_CMDLINE)
+    return Utils::splitCommandLine( OPT_THUNDERBIRD_CMDLINE );
 #elif defined (Q_OS_WIN)
     return {R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")"};
 #else
