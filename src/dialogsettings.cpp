@@ -67,7 +67,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
     boxMonitorThunderbirdWindow->setChecked( settings->mMonitorThunderbirdWindow );
     boxRestartThunderbird->setChecked( settings->mRestartThunderbird );
-    leThunderbirdCmdLine->setText( settings->mThunderbirdCmdLine.join(' ') );
     leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
@@ -80,6 +79,21 @@ DialogSettings::DialogSettings( QWidget *parent)
     spinUnreadOpacityLevel->setValue( settings->mUnreadOpacityLevel * 100 );
     spinThunderbirdStartDelay->setValue( settings->mLaunchThunderbirdDelay );
     boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
+
+    // Form the proper command-line (with escaped arguments if they contain spaces
+    QString tbcmdline;
+    for ( QString a : settings->mThunderbirdCmdLine )
+    {
+        if ( !tbcmdline.isEmpty() )
+            tbcmdline += ' ';
+
+        if ( a.contains( ' ') )
+            tbcmdline += '"' + a + '"';
+        else
+            tbcmdline += a;
+    }
+
+    leThunderbirdCmdLine->setText( tbcmdline );
 
     if ( settings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( settings->mExitThunderbirdWhenQuit );

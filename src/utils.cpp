@@ -250,9 +250,15 @@ QStringList Utils::splitCommandLine(const QString &src)
         // If we're inside a separator, we reset sep if we encounter a separator.
         // This ensures things like "aa 'bb' cc" are handled properly
         if ( sep != QChar::Null && ch == sep )
+        {
             sep = QChar::Null;
+            continue;
+        }
         else if ( sep == QChar::Null && (ch == '\'' || ch == '"') )
+        {
             sep = ch;
+            continue;
+        }
 
         // Space separates strings, but only if we're not inside a separator
         if ( sep == QChar::Null && ch.isSpace() )

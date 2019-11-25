@@ -460,8 +460,13 @@ void TrayIcon::actionUnsnooze()
 
 void TrayIcon::actionNewEmail() {
     Settings* settings = BirdtrayApp::get()->getSettings();
+
+    QString executable;
     QStringList args;
-    QString executable = settings->getThunderbirdCommand(args);
+
+    if ( !settings->getStartThunderbirdCmdline( executable, args ) )
+        return;
+
     args << "-compose";
 
     if (!settings->mNewEmailData.isEmpty()) {
@@ -474,6 +479,7 @@ void TrayIcon::actionNewEmail() {
             args << settings->mNewEmailData[index].asArgs();
         }
     }
+
     QProcess::startDetached(executable, args);
 }
 
@@ -595,10 +601,16 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
-    QStringList arguments;
-    QString executable = BirdtrayApp::get()->getSettings()->getThunderbirdCommand(arguments);
-    Utils::debug("Starting Thunderbird as '%s %s'",
-            qPrintable(executable), qPrintable(arguments.join(' ')));
+    QString executable;
+    QStringList args;
+
+    if ( !BirdtrayApp::get()->getSettings()->getStartThunderbirdCmdline( executable, args ) )
+    {
+        Utils::debug("Failed to get Thunderbird command-line" );
+        return;
+    }
+
+    Utils::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();
@@ -610,23 +622,24 @@ void TrayIcon::startThunderbird()
     connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::tbProcessError );
 #endif
 
-    mThunderbirdProcess->start(executable, arguments);
+    mThunderbirdProcess->start(executable, args);
 }
 
 void TrayIcon::tbProcessError(QProcess::ProcessError )
 {
 #ifdef Q_OS_WIN
-    if (mThunderbirdUpdaterProcess->attach() == AttachResult::SUCCESS) {
+    if (mThunderbirdUpdaterProcess->attach() == AttachResult::SUCCESS)
+    {
         return;
     }
 #endif /* Q_OS_WIN */
-    QStringList arguments;
-    QString executable = BirdtrayApp::get()->getSettings()->getThunderbirdCommand(arguments);
+
     QMessageBox::critical(nullptr,
             tr("Cannot start Thunderbird"),
             tr("Error starting Thunderbird as '%1 %2':\n\n%3")
-                    .arg(executable).arg(arguments.join(' '))
-                    .arg(mThunderbirdProcess->errorString()));
+                    .arg( mThunderbirdProcess->program() )
+                    .arg( mThunderbirdProcess->arguments().join(' ') )
+                    .arg( mThunderbirdProcess->errorString()) );
 
     // We keep the mThunderbirdProcess pointer, so the process is not restarted again
 }

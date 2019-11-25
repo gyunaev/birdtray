@@ -132,7 +132,7 @@ class Settings
          * @param arguments The arguments necessary to start Thunderbird.
          * @return The executable that starts Thunderbird.
          */
-        QString getThunderbirdCommand(QStringList &arguments);
+        bool getStartThunderbirdCmdline( QString& executable, QStringList &arguments );
         
         /**
          * @return The icon to use for the system tray.
