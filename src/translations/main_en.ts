@@ -510,10 +510,6 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Thunderbird Command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -530,23 +526,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Thunderbird command:</source>
+        <source>Thunderbird command line:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit the Thunderbird command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto detect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thunderbird not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to detect Thunderbird on your system.</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

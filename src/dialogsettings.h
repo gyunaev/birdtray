@@ -105,13 +105,6 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         bool    reportIfProfilePathValid(const QString& profilePath) const;
         bool    isMorkParserSelected() const;
     
-        /**
-         * Try to find a command to start Thunderbird on the current system.
-         *
-         * @return The command that was found.
-         */
-        QStringList searchThunderbird() const;
-
         QPalette mPaletteOk;
         QPalette mPaletteErrror;
 

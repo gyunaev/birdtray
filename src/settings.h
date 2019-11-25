@@ -128,9 +128,9 @@ class Settings
         void    load();
         
         /**
-         * @note The returned executable might not be the Thunderbird executable.
+         * @param executable The actual executable necessary to start (not necessary Thunderbird itself - may be shell or script).
          * @param arguments The arguments necessary to start Thunderbird.
-         * @return The executable that starts Thunderbird.
+         * @return true if executable/arguments is set, false if error
          */
         bool getStartThunderbirdCmdline( QString& executable, QStringList &arguments );
         

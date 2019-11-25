@@ -87,7 +87,7 @@ DialogSettings::DialogSettings( QWidget *parent)
         if ( !tbcmdline.isEmpty() )
             tbcmdline += ' ';
 
-        if ( a.contains( ' ') )
+        if ( a.contains( ' ') && a[0] != '"' )
             tbcmdline += '"' + a + '"';
         else
             tbcmdline += a;
@@ -530,17 +530,4 @@ bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const 
 bool DialogSettings::isMorkParserSelected() const
 {
     return boxParserSelection->currentIndex() == 1;
-}
-
-QStringList DialogSettings::searchThunderbird() const {
-    QStringList defaultCommand = Utils::getDefaultThunderbirdCommand();
-    if (defaultCommand.count() == 1
-        && !QFileInfo(Utils::expandPath(defaultCommand[0])).isExecutable()) {
-        return defaultCommand;
-    }
-    QString thunderbirdPath = QStandardPaths::findExecutable("thunderbird");
-    if (!thunderbirdPath.isEmpty()) {
-        return {thunderbirdPath};
-    }
-    return defaultCommand;
 }
