@@ -745,7 +745,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Thunderbird command:</string>
+               <string>Thunderbird command line:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -807,28 +807,9 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLabel" name="thunderbirdCommandLabel">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QToolButton" name="thunderbirdCommandEditButton">
+             <widget class="QLineEdit" name="leThunderbirdCmdLine">
               <property name="toolTip">
-               <string>Edit the Thunderbird command</string>
-              </property>
-              <property name="text">
-               <string notr="true">...</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -1039,7 +1020,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>btnNewEmailAdd</tabstop>
   <tabstop>btnNewEmailEdit</tabstop>
   <tabstop>btnNewEmailDelete</tabstop>
-  <tabstop>thunderbirdCommandEditButton</tabstop>
   <tabstop>leThunderbirdWindowMatch</tabstop>
   <tabstop>spinMinimumFontSize</tabstop>
   <tabstop>boxBlinkingUsesAlpha</tabstop>

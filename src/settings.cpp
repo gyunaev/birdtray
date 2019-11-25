@@ -234,17 +234,19 @@ void Settings::load()
     }
 }
 
-QString Settings::getThunderbirdCommand(QStringList &arguments) {
-    if (mThunderbirdCmdLine.isEmpty()) {
-        return QString();
-    }
+bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arguments )
+{
+    if ( mThunderbirdCmdLine.isEmpty() )
+        return false;
+
     arguments = mThunderbirdCmdLine;
-    QString executable = Utils::expandPath(arguments.takeFirst());
+    executable = QFileInfo( Utils::expandPath( arguments.takeFirst() ) ).absoluteFilePath();
+
 #if defined (Q_OS_WIN)
-    return '"' + QFileInfo(executable).absoluteFilePath() + '"';
-#else
-    return QFileInfo(executable).absoluteFilePath();
+    executable = '"' + executable + '"';
 #endif
+
+    return true;
 }
 
 const QPixmap &Settings::getNotificationIcon() {

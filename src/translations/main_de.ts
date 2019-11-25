@@ -519,27 +519,35 @@ Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
     </message>
     <message>
         <source>Thunderbird Command</source>
-        <translation>Thunderbird Befehl</translation>
+        <translation type="vanished">Thunderbird Befehl</translation>
     </message>
     <message>
         <source>Thunderbird command:</source>
-        <translation>Thunderbird Befehl:</translation>
+        <translation type="vanished">Thunderbird Befehl:</translation>
     </message>
     <message>
         <source>Edit the Thunderbird command</source>
-        <translation>Bearbeite den Thunderbird Befehl</translation>
+        <translation type="vanished">Bearbeite den Thunderbird Befehl</translation>
     </message>
     <message>
         <source>Auto detect</source>
-        <translation>Automatisch erkennen</translation>
+        <translation type="vanished">Automatisch erkennen</translation>
     </message>
     <message>
         <source>Thunderbird not found</source>
-        <translation>Thunderbird konnte nicht gefunden werden</translation>
+        <translation type="vanished">Thunderbird konnte nicht gefunden werden</translation>
     </message>
     <message>
         <source>Unable to detect Thunderbird on your system.</source>
-        <translation>Thunderbird konnte auf ihrem System nicht gefunden werden.</translation>
+        <translation type="vanished">Thunderbird konnte auf ihrem System nicht gefunden werden.</translation>
+    </message>
+    <message>
+        <source>Thunderbird command line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
