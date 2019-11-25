@@ -212,37 +212,22 @@ void UnreadMonitor::getUnreadCount_SQLite(int &count, QColor &color)
 void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 {
     Settings* settings = BirdtrayApp::get()->getSettings();
-    bool rescanall = false;
-
-    // We rebuild and rescan the whole map if there is no such path in there, or map is empty (first run)
-    if ( mMorkUnreadCounts.isEmpty() )
-        rescanall = true;
-    else
-    {
-        for ( QString path : mChangedMSFfiles )
-            if ( !mMorkUnreadCounts.contains( path ) )
-                rescanall = true;
-    }
-
-    if ( rescanall )
-    {
-        mMorkUnreadCounts.clear();
-        for (const QString &path : settings->mFolderNotificationColors.keys()) {
-            if (!QFile::exists(path)) {
+    for (const QString &path : settings->mFolderNotificationColors.keys()) {
+        if (!QFile::exists(path)) {
+            continue;
+        }
+        if (!mDBWatcher.files().contains(path)) {
+            if (!mDBWatcher.addPath(path)) {
+                emit error(tr("Unable to watch %1 for changes.").arg(path));
                 continue;
             }
             mMorkUnreadCounts[path] = getMorkUnreadCount(path);
-            if (!mDBWatcher.files().contains(path) && !mDBWatcher.addPath(path)) {
-                emit error(tr("Unable to watch %1 for changes.").arg(path));
-            }
         }
     }
-    else
-    {
-        for ( QString path : mChangedMSFfiles )
-            mMorkUnreadCounts[ path ] = getMorkUnreadCount( path );
+    for (const QString &path : mChangedMSFfiles) {
+        mMorkUnreadCounts[path] = getMorkUnreadCount(path);
     }
-
+    mChangedMSFfiles.clear();
     // Find the total, and set the color
     QColor chosenColor;
     for ( const QString& tpath : mMorkUnreadCounts.keys() )
@@ -261,7 +246,6 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
         }
     }
     color = chosenColor;
-    mChangedMSFfiles.clear();
 }
 
 int UnreadMonitor::getMorkUnreadCount(const QString &path)
