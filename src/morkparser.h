@@ -101,7 +101,7 @@ public:
     MorkTableMap *getTables( int tableScope );
 
     ///
-    /// Rerturns all rows under specified scope
+    /// Returns all rows under specified scope
 
     MorkRowMap *getRows( int rowScope, RowScopeMap *table );
 
@@ -172,7 +172,7 @@ protected: // Data
     int nextAddValueId_;
     int defaultScope_;
 
-    // Indicates intity is being parsed
+    // Indicates the entity that is being parsed
     enum { NPColumns, NPValues, NPRows } nowParsing_;
 };
 

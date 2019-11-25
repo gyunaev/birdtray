@@ -106,7 +106,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         bool    isMorkParserSelected() const;
     
         QPalette mPaletteOk;
-        QPalette mPaletteErrror;
+        QPalette mPaletteError;
 
         // For database fixer
         QProgressDialog * mProgressFixer;

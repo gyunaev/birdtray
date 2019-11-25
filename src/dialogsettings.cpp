@@ -99,8 +99,8 @@ DialogSettings::DialogSettings( QWidget *parent)
         boxStopThunderbirdOnExit->setChecked( settings->mExitThunderbirdWhenQuit );
 
     // Prepare the error palette
-    mPaletteErrror = mPaletteOk = leProfilePath->palette();
-    mPaletteErrror.setColor( QPalette::Text, Qt::red );
+    mPaletteError = mPaletteOk = leProfilePath->palette();
+    mPaletteError.setColor(QPalette::Text, Qt::red);
 
     // Accounts tab
     mAccountModel = new ModelAccountTree(this, treeAccounts);
@@ -237,7 +237,7 @@ void DialogSettings::profilePathChanged()
         leProfilePath->setPalette( mPaletteOk );
         updateAccountList();
     } else {
-        leProfilePath->setPalette( mPaletteErrror );
+        leProfilePath->setPalette(mPaletteError);
         mAccounts.clear();
     }
 

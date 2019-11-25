@@ -221,7 +221,7 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
     {
         for ( QString path : mChangedMSFfiles )
             if ( !mMorkUnreadCounts.contains( path ) )
-                rescanall = false;
+                rescanall = true;
     }
 
     if ( rescanall )
