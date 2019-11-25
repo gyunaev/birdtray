@@ -125,7 +125,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         QStringList searchThunderbird() const;
 
         QPalette mPaletteOk;
-        QPalette mPaletteErrror;
+        QPalette mPaletteError;
 
         // For database fixer
         QProgressDialog * mProgressFixer;
