@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html -->
 <component type="desktop">
-  <id>org.gyunaev.Birdtray</id>
+  <id>com.ulduzsoft.Birdtray</id>
   <translation type="qt">birdtray</translation>
   <metadata_license>CC0-1.0</metadata_license>
   <name>Birdtray</name>
@@ -38,7 +38,7 @@
   </categories>
   <url type="homepage">https://github.com/gyunaev/birdtray/</url>
   <url type="bugtracker">https://github.com/gyunaev/birdtray/issues/</url>
-  <launchable type="desktop-id">org.gyunaev.Birdtray.desktop</launchable>
+  <launchable type="desktop-id">com.ulduzsoft.Birdtray.desktop</launchable>
 
   <releases>
     <release date="2019-05-21" version="1.6" urgency="medium" />
