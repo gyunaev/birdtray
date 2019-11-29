@@ -213,10 +213,7 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 {
     Settings* settings = BirdtrayApp::get()->getSettings();
     for (const QString &path : settings->mFolderNotificationColors.keys()) {
-        if (!QFile::exists(path)) {
-            continue;
-        }
-        if (!mDBWatcher.files().contains(path)) {
+        if (!mDBWatcher.files().contains(path) && QFile::exists(path)) {
             if (!mDBWatcher.addPath(path)) {
                 emit error(tr("Unable to watch %1 for changes.").arg(path));
                 continue;
