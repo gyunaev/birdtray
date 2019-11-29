@@ -45,6 +45,7 @@ TrayIcon::TrayIcon(bool showSettings)
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs(settings->mLaunchThunderbirdDelay);
 
     mWinTools = WindowTools::create();
+    createUnreadCounterThread();
 
     // If the settings are not yet configure, pop up the message
     if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
@@ -55,7 +56,6 @@ TrayIcon::TrayIcon(bool showSettings)
     }
 
     createMenu();
-    createUnreadCounterThread();
 
     connect( &mBlinkingTimer, &QTimer::timeout, this, &TrayIcon::blinkTimeout );
     connect( this, &TrayIcon::activated, this, &TrayIcon::actionSystrayIconActivated );
@@ -214,8 +214,7 @@ void TrayIcon::updateIcon()
     p.setFont(settings->mNotificationFont);
 
     // Do we need to draw error sign?
-    if (mUnreadMonitor == nullptr ||
-        (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
+    if (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists) {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
         pen.setWidth( (temp.width() * 10) / 100 );
@@ -255,6 +254,41 @@ void TrayIcon::updateIcon()
                     settings->mNotificationBorderColor, settings->mNotificationBorderWidth));
         }
         p.fillPath(textPath, mUnreadColor);
+    }
+    const QMap<QString, QString> warnings = mUnreadMonitor->getWarnings();
+    if (warnings.isEmpty()) {
+        setToolTip(QString());
+    } else {
+        QStringList toolTip;
+        const QString &globalWarning = warnings.value(QString());
+        if (!globalWarning.isNull()) {
+            toolTip << tr("Warning: %1").arg(globalWarning);
+        }
+        for (auto it = warnings.constKeyValueBegin(); it != warnings.constKeyValueEnd(); it++) {
+            const QString &path = (*it).first;
+            if (path.isNull()) {
+                continue;
+            }
+            QString name;
+            if (path.endsWith(".msf")) {
+                QFileInfo accountInfo(path);
+                name = Utils::getMailAccountName(accountInfo)
+                       + " [" + Utils::getMailFolderName(accountInfo) + "]";
+            } else {
+                name = Utils::decodeIMAPutf7(path);
+            }
+            const QString &warning = (*it).second;
+            toolTip << name + ": " + warning;
+        }
+        setToolTip(toolTip.join('\n'));
+        p.setOpacity(1.0);
+        QPen pen(QColor(255, 146, 0, 255));
+        int width = temp.width() / 5;
+        pen.setWidth(width);
+        p.setPen(pen);
+        int x = temp.width() - 10 - width/ 2;
+        p.drawLine(x, static_cast<int>(temp.height() * 0.33), x, temp.height() - 20 - width);
+        p.drawPoint(x, temp.height() - 10 - width / 2);
     }
 
     p.end();
@@ -416,9 +450,6 @@ void TrayIcon::actionSettings()
             return;
         }
         settings->save();
-
-        if ( !mUnreadMonitor )
-            createUnreadCounterThread();
 
         // Recreate menu
         createMenu();

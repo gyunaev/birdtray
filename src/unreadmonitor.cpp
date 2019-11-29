@@ -53,7 +53,7 @@ void UnreadMonitor::run()
     exec();
 }
 
-const QMap<QString, QString> UnreadMonitor::getWarnings() const {
+const QMap<QString, QString> &UnreadMonitor::getWarnings() const {
     return warnings;
 }
 

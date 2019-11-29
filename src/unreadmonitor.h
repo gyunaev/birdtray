@@ -29,7 +29,7 @@ class UnreadMonitor : public QThread
          *
          * @return A path to warnings mapping.
          */
-        const QMap<QString, QString> getWarnings() const;
+        const QMap<QString, QString> &getWarnings() const;
 
     signals:
         // Unread counter changed

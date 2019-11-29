@@ -792,6 +792,10 @@ Do you want to continue?</source>
 %3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Warning: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UnreadMonitor</name>
