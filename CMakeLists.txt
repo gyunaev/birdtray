@@ -181,6 +181,9 @@ else()
         install(FILES src/res/icons/${size}/com.ulduzsoft.Birdtray.png
                 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps)
     endforeach()
+    install (FILES src/res/birdtray.svg
+             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps 
+             RENAME com.ulduzsoft.Birdtray.svg)
     install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
 endif()
