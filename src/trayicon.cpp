@@ -282,13 +282,20 @@ void TrayIcon::updateIcon()
         }
         setToolTip(toolTip.join('\n'));
         p.setOpacity(1.0);
-        QPen pen(QColor(255, 146, 0, 255));
-        int width = temp.width() / 5;
+        int width = temp.width() / 4;
+        QPen pen(QColor(255, 150, 0, 255));
+//        QPen pen(Qt::white);
         pen.setWidth(width);
         p.setPen(pen);
-        int x = temp.width() - 10 - width/ 2;
+        int x = temp.width() - static_cast<int>(temp.width() * 0.125) - pen.width() / 2;
+        p.drawLine(x, static_cast<int>(temp.height() * 0.33), x, temp.height() - width / 2);
+        pen.setColor(Qt::red);
+//        pen.setColor(QColor(255, 100, 0, 255));
+        pen.setWidthF(std::max(pen.width() - 16, 1));
+//        pen.setWidthF(std::max(pen.width() - 12, 1));
+        p.setPen(pen);
         p.drawLine(x, static_cast<int>(temp.height() * 0.33), x, temp.height() - 20 - width);
-        p.drawPoint(x, temp.height() - 10 - width / 2);
+        p.drawPoint(x, temp.height() - width / 2);
     }
 
     p.end();
