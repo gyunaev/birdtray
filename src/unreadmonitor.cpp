@@ -242,7 +242,8 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
         for (const QString &path : settings->mFolderNotificationColors.keys()) {
             mMorkUnreadCounts[path] = getMorkUnreadCount(path);
             if (!mDBWatcher.files().contains(path) && !mDBWatcher.addPath(path)) {
-                setWarning(tr("Unable to watch %1 for changes.").arg(path), path);
+                setWarning(tr("Unable to watch %1 for changes.")
+                        .arg(QFileInfo(path).fileName()), path);
             } else {
                 clearWarning(path);
             }
@@ -279,7 +280,7 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
 {
     MorkParser parser;
     if (!parser.open(path)) {
-        setWarning(tr("Unable to read from %1.").arg(path), path);
+        setWarning(tr("Unable to read from %1.").arg(QFileInfo(path).fileName()), path);
         return 0;
     } else {
         clearWarning(path);
