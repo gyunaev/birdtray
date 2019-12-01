@@ -4,6 +4,10 @@
 <context>
     <name>EmailFolders</name>
     <message>
+        <source>INBOX</source>
+        <translation>Inbox</translation>
+    </message>
+    <message>
         <source>Archives</source>
         <translation>Archives</translation>
     </message>

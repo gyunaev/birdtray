@@ -36,14 +36,8 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
                 return Utils::decodeIMAPutf7(account);
             }
             QFileInfo fileInfo(account);
-            QString folderName = fileInfo.baseName();
-            if (folderName == "INBOX") {
-                folderName = QObject::tr("Inbox");
-            } else {
-                folderName = QCoreApplication::translate(
-                        "EmailFolders", folderName.toUtf8().constData());
-            }
-            QString accountName = fileInfo.dir().dirName();
+            QString folderName = Utils::getMailFolderName(fileInfo);
+            QString accountName = Utils::getMailAccountName(fileInfo);
             return accountName + " [" + folderName + "]";
         } else if ( role == Qt::ToolTipRole && index.column() == 0 ) {
             return mAccounts[index.row()];

@@ -5,12 +5,12 @@
 #include <QApplication>
 #include <QTextCodec>
 #include <QtWidgets/QMessageBox>
+#include <QtCore/QDir>
 
 #if defined (Q_OS_WIN)
 #  include <windows.h>
 #elif defined (Q_OS_MAC)
 #else
-#  include <QtCore/QFileInfo>
 #  include <wordexp.h>
 #endif
 
@@ -274,5 +274,28 @@ QStringList Utils::splitCommandLine(const QString &src)
         out.push_back( current );
 
     return out;
+}
+
+QString Utils::getMailFolderName(const QFileInfo &morkFile) {
+    QString dirName;
+    QDir parentDir = morkFile.dir();
+    QString name = QCoreApplication::translate(
+            "EmailFolders", morkFile.completeBaseName().toUtf8().constData());
+    while ((dirName = parentDir.dirName()).endsWith(".sbd")) {
+        dirName.chop(4);
+        name = QCoreApplication::translate(
+                "EmailFolders", dirName.toUtf8().constData()) + '/' + name;
+        parentDir.cdUp();
+    }
+    return name;
+}
+
+QString Utils::getMailAccountName(const QFileInfo &morkFile) {
+    QDir parentDir = morkFile.dir();
+    QString name;
+    while ((name = parentDir.dirName()).endsWith(".sbd")) {
+        parentDir.cdUp();
+    }
+    return name;
 }
 
