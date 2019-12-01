@@ -173,14 +173,17 @@ if(WIN32)
 else()
     include(GNUInstallDirs)
     install(TARGETS birdtray RUNTIME DESTINATION bin)
-    install(FILES src/res/org.gyunaev.Birdtray.desktop
+    install(FILES src/res/com.ulduzsoft.Birdtray.desktop
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
-    install(FILES src/res/org.gyunaev.Birdtray.appdata.xml
+    install(FILES src/res/com.ulduzsoft.Birdtray.appdata.xml
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
     foreach(size 32 48 64 128)
-        install(FILES src/res/icons/${size}/org.gyunaev.Birdtray.png
+        install(FILES src/res/icons/${size}/com.ulduzsoft.Birdtray.png
                 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps)
     endforeach()
+    install (FILES src/res/birdtray.svg
+             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps 
+             RENAME com.ulduzsoft.Birdtray.svg)
     install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
 endif()
