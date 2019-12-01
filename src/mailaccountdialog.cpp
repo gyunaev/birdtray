@@ -1,6 +1,7 @@
+#include <utility>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QFileDialog>
-#include <utility>
+#include <QtCore/QDirIterator>
 #include "mailaccountdialog.h"
 #include "ui_mailaccountdialog.h"
 #include "utils.h"
@@ -211,32 +212,28 @@ void MailAccountDialog::initializeAccountsPage() {
     for (const QDir &mailDir : thunderbirdProfileMailDirs) {
         for (const QString &mailAccount : mailDir.entryList(
                 QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot)) {
-            QDir mailDirectory(mailDir.absoluteFilePath(mailAccount));
-            mailDirectory.setNameFilters({"*.msf"});
-            mailDirectory.setFilter(QDir::Filter::Files);
-            const QList<QFileInfo> msfFiles = mailDirectory.entryInfoList();
-            if (msfFiles.isEmpty()) {
+            QString accountDirectoryPath = mailDir.absoluteFilePath(mailAccount);
+            QDirIterator msfFileIterator(accountDirectoryPath, {"*.msf"},
+                    QDir::Files, QDirIterator::Subdirectories);
+            if (!msfFileIterator.hasNext()) {
                 continue;
             }
             auto* accountItem = new QTreeWidgetItem(ui->accountsList, {mailAccount});
             accountItem->setExpanded(true);
             ui->accountsList->addTopLevelItem(accountItem);
-            for (const QFileInfo &folderFile : msfFiles) {
-                QString name = folderFile.baseName();
-                bool isInbox = QString::compare(name, "INBOX", Qt::CaseInsensitive) == 0;
-                if (isInbox) {
-                    name = tr("Inbox");
-                } else {
-                    name = QCoreApplication::translate("EmailFolders", name.toUtf8().constData());
-                }
+            while (msfFileIterator.hasNext()) {
+                (void) msfFileIterator.next();
+                QFileInfo msfFile = msfFileIterator.fileInfo();
+                QString name = Utils::getMailFolderName(msfFile);
                 auto* folderItem = new QTreeWidgetItem(accountItem, {name});
-                if (isInbox) {
+                if (QString::compare(
+                        msfFile.completeBaseName(), "INBOX", Qt::CaseInsensitive) == 0) {
                     QFont font = folderItem->font(0);
                     font.setBold(true);
                     folderItem->setFont(0, font);
                 }
                 folderItem->setCheckState(0, Qt::Unchecked);
-                folderItem->setData(0, Qt::UserRole, folderFile.absoluteFilePath());
+                folderItem->setData(0, Qt::UserRole, msfFile.absoluteFilePath());
                 auto* colorButton = new ColorButton(ui->accountsList, defaultColor);
                 colorButton->setBorderlessMode(true);
                 connect(colorButton, &ColorButton::onColorChanged, this, [=](const QColor &color) {

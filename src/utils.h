@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <QString>
+#include <QtCore/QFileInfo>
 
 class Utils
 {
@@ -67,6 +68,22 @@ class Utils
 
         // Splits the string into stringlist using space as separator, but ignoring spaces inside quoted content
         static QStringList splitCommandLine( const QString& src );
+        
+        /**
+         * Get the mail folder name from the mork path.
+         *
+         * @param morkPath The file info for a msf file.
+         * @return The mail folder name.
+         */
+        static QString getMailFolderName(const QFileInfo &morkFile);
+        
+        /**
+         * Get the mil account name from a mork path
+         *
+         * @param morkPath The file info for a msf file.
+         * @return The mail account name.
+         */
+        static QString getMailAccountName(const QFileInfo &morkFile);
 };
 
 #endif // UTILS_H

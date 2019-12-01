@@ -518,30 +518,6 @@ Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
         <translation>Ungültiges Thunderbird-Verzeichnis</translation>
     </message>
     <message>
-        <source>Thunderbird Command</source>
-        <translation type="vanished">Thunderbird Befehl</translation>
-    </message>
-    <message>
-        <source>Thunderbird command:</source>
-        <translation type="vanished">Thunderbird Befehl:</translation>
-    </message>
-    <message>
-        <source>Edit the Thunderbird command</source>
-        <translation type="vanished">Bearbeite den Thunderbird Befehl</translation>
-    </message>
-    <message>
-        <source>Auto detect</source>
-        <translation type="vanished">Automatisch erkennen</translation>
-    </message>
-    <message>
-        <source>Thunderbird not found</source>
-        <translation type="vanished">Thunderbird konnte nicht gefunden werden</translation>
-    </message>
-    <message>
-        <source>Unable to detect Thunderbird on your system.</source>
-        <translation type="vanished">Thunderbird konnte auf ihrem System nicht gefunden werden.</translation>
-    </message>
-    <message>
         <source>Thunderbird command line:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,10 +629,6 @@ p, li { white-space: pre-wrap; }
         <translation>Das gewählte Thunderbird Profil existiert nicht mehr.</translation>
     </message>
     <message>
-        <source>Inbox</source>
-        <translation>Posteingang</translation>
-    </message>
-    <message>
         <source>No folder selected</source>
         <translation>Kein Ordner ausgewählt</translation>
     </message>
@@ -730,10 +702,6 @@ Wollen Sie fortfahren?</translation>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Inbox</source>
-        <translation>Posteingang</translation>
-    </message>
     <message>
         <source>Account</source>
         <translation>Konto</translation>
