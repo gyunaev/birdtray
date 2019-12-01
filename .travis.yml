@@ -144,13 +144,14 @@ before_deploy:
       cd ..;
     fi
 
-#deploy:
-#  - provider: releases
-#    api_key:
-#      secure: SECURE_KEY_GOES_HERE
-#    file_glob: true
-#    file: installer/Birdtray-*.exe
-#    skip_cleanup: true
-#    on:
-#      tags: true
-#      branch: master
+deploy:
+  - provider: releases
+    api_key:
+      secure: SECURE_KEY_GOES_HERE
+    file_glob: true
+    file: installer/Birdtray-*.exe
+    skip_cleanup: true
+    draft: true
+    on:
+      tags: true
+      branch: master
