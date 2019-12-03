@@ -162,11 +162,12 @@ qulonglong AutoUpdater::parseDownloadUrl(const QJsonArray &assets, const QString
     const QString fileEnding = is64Bit ? "x64.exe" : "x86.exe";
 #endif
     for (auto assetInfo : assets) {
-        QString name = assetInfo["name"].toString();
+        const QJsonObject assetsInfoObject = assetInfo.toObject();
+        QString name = assetsInfoObject["name"].toString();
         if (!name.isNull() && name.endsWith(fileEnding)) {
-            downloadUrl = assetInfo["browser_download_url"].toString();
+            downloadUrl = assetsInfoObject["browser_download_url"].toString();
             if (downloadUrl.isValid()) {
-                return assetInfo["size"].toVariant().toULongLong();
+                return assetsInfoObject["size"].toVariant().toULongLong();
             }
         }
     }
