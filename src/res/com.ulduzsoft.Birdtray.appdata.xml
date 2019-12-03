@@ -41,7 +41,8 @@
   <launchable type="desktop-id">com.ulduzsoft.Birdtray.desktop</launchable>
 
   <releases>
-    <release date="2019-05-21" version="1.6" urgency="medium" />
+      <release date="2019-12-03" version="1.7.0" urgency="medium"/>
+      <release date="2019-05-21" version="1.6" urgency="medium"/>
   </releases>
 
   <project_group>ulduzsoft</project_group>
@@ -53,5 +54,5 @@
     </screenshot>
   </screenshots>
 
-  <content_rating type="oars-1.1"></content_rating>
+  <content_rating type="oars-1.1"/>
 </component>
