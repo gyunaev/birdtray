@@ -122,7 +122,7 @@
       </attribute>
       <column>
        <property name="text">
-        <string notr="true">Email Folder</string>
+        <string>Email Folder</string>
        </property>
       </column>
       <column>

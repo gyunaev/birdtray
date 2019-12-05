@@ -638,6 +638,10 @@ Do you want to continue?</source>
         <translation>Es wurde kein Email-Ordner zur Überwachung ausgewählt.
 Wollen Sie fortfahren?</translation>
     </message>
+    <message>
+        <source>Email Folder</source>
+        <translation>Email Ordner</translation>
+    </message>
 </context>
 <context>
     <name>ModelNewEmails</name>
