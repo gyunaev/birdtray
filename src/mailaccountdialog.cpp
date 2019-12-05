@@ -120,7 +120,26 @@ void MailAccountDialog::onAccountItemChanged(QTreeWidgetItem* item, int column) 
     if (column != 0) {
         return;
     }
-    propagateChangesToAccountChildren(item, item->checkState(column));
+    Qt::CheckState checkState = item->checkState(column);
+    if (checkState != Qt::PartiallyChecked) {
+        for (int i = 0; i < item->childCount(); i++) {
+            item->child(i)->setCheckState(column, checkState);
+        }
+    }
+    QTreeWidgetItem* parent = item->parent();
+    if (parent == nullptr) {
+        return;
+    }
+    bool isPartiallySelected = checkState == Qt::PartiallyChecked;
+    if (!isPartiallySelected) {
+        for (int i = 0; i < parent->childCount(); i++) {
+            if (parent->child(i)->checkState(column) != checkState) {
+                isPartiallySelected = true;
+                break;
+            }
+        }
+    }
+    parent->setCheckState(column, isPartiallySelected ? Qt::PartiallyChecked : checkState);
 }
 
 void MailAccountDialog::initializeProfilesDirPage() {
@@ -275,13 +294,4 @@ QList<QTreeWidgetItem*> MailAccountDialog::getCheckedAccountItems() const {
         }
     }
     return checkedItems;
-}
-
-void MailAccountDialog::propagateChangesToAccountChildren(
-        QTreeWidgetItem* parent, Qt::CheckState checkState) {
-    for (int i = 0; i < parent->childCount(); i++) {
-        QTreeWidgetItem* child = parent->child(i);
-        child->setCheckState(0, checkState);
-        propagateChangesToAccountChildren(child, checkState);
-    }
 }
