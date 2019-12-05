@@ -279,7 +279,7 @@ QList<QTreeWidgetItem*> MailAccountDialog::getCheckedAccountItems() const {
 
 void MailAccountDialog::propagateChangesToAccountChildren(
         QTreeWidgetItem* parent, Qt::CheckState checkState) {
-    for (int i = 0; i < parent->childCount(); ++i) {
+    for (int i = 0; i < parent->childCount(); i++) {
         QTreeWidgetItem* child = parent->child(i);
         child->setCheckState(0, checkState);
         propagateChangesToAccountChildren(child, checkState);

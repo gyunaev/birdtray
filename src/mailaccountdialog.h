@@ -105,8 +105,8 @@ private:
     /**
      * Propagates the changes to the parent account item to it's children.
      *
-     * @param parent
-     * @param checkState
+     * @param parent The parent of the account item.
+     * @param checkState The new check state of the children.
      */
     static void propagateChangesToAccountChildren(
             QTreeWidgetItem* parent, Qt::CheckState checkState);
