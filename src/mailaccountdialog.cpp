@@ -20,6 +20,7 @@ MailAccountDialog::MailAccountDialog(QWidget* parent, QColor defaultColor) :
     connect(ui->profileSelector,
             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MailAccountDialog::onProfileSelectionChanged);
+    connect(ui->accountsList, &QTreeWidget::itemChanged, &MailAccountDialog::onAccountItemChanged);
 }
 
 MailAccountDialog::~MailAccountDialog() {
@@ -113,6 +114,32 @@ void MailAccountDialog::onProfilesDirEditCommit() {
 void MailAccountDialog::onProfileSelectionChanged(int newProfileIndex) {
     Q_UNUSED(newProfileIndex)
     thunderbirdProfileMailDirs.clear();
+}
+
+void MailAccountDialog::onAccountItemChanged(QTreeWidgetItem* item, int column) {
+    if (column != 0) {
+        return;
+    }
+    Qt::CheckState checkState = item->checkState(column);
+    if (checkState != Qt::PartiallyChecked) {
+        for (int i = 0; i < item->childCount(); i++) {
+            item->child(i)->setCheckState(column, checkState);
+        }
+    }
+    QTreeWidgetItem* parent = item->parent();
+    if (parent == nullptr) {
+        return;
+    }
+    bool isPartiallySelected = checkState == Qt::PartiallyChecked;
+    if (!isPartiallySelected) {
+        for (int i = 0; i < parent->childCount(); i++) {
+            if (parent->child(i)->checkState(column) != checkState) {
+                isPartiallySelected = true;
+                break;
+            }
+        }
+    }
+    parent->setCheckState(column, isPartiallySelected ? Qt::PartiallyChecked : checkState);
 }
 
 void MailAccountDialog::initializeProfilesDirPage() {
@@ -220,6 +247,7 @@ void MailAccountDialog::initializeAccountsPage() {
             }
             auto* accountItem = new QTreeWidgetItem(ui->accountsList, {mailAccount});
             accountItem->setExpanded(true);
+            accountItem->setCheckState(0, Qt::Unchecked);
             ui->accountsList->addTopLevelItem(accountItem);
             while (msfFileIterator.hasNext()) {
                 (void) msfFileIterator.next();

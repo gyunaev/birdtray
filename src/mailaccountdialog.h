@@ -63,6 +63,13 @@ private Q_SLOTS:
      * @param newProfileIndex The index of the new selected profile.
      */
     void onProfileSelectionChanged(int newProfileIndex);
+    
+    /**
+     * Called when an account item in the accounts list changed.
+     * @param item The account item.
+     * @param column The changed column.
+     */
+    static void onAccountItemChanged(QTreeWidgetItem* item, int column);
 
 private:
     /**
