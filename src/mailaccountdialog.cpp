@@ -20,6 +20,7 @@ MailAccountDialog::MailAccountDialog(QWidget* parent, QColor defaultColor) :
     connect(ui->profileSelector,
             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MailAccountDialog::onProfileSelectionChanged);
+    connect(ui->accountsList, &QTreeWidget::itemChanged, &MailAccountDialog::onAccountItemChanged);
 }
 
 MailAccountDialog::~MailAccountDialog() {
@@ -113,6 +114,13 @@ void MailAccountDialog::onProfilesDirEditCommit() {
 void MailAccountDialog::onProfileSelectionChanged(int newProfileIndex) {
     Q_UNUSED(newProfileIndex)
     thunderbirdProfileMailDirs.clear();
+}
+
+void MailAccountDialog::onAccountItemChanged(QTreeWidgetItem* item, int column) {
+    if (column != 0) {
+        return;
+    }
+    propagateChangesToAccountChildren(item, item->checkState(column));
 }
 
 void MailAccountDialog::initializeProfilesDirPage() {
@@ -220,6 +228,7 @@ void MailAccountDialog::initializeAccountsPage() {
             }
             auto* accountItem = new QTreeWidgetItem(ui->accountsList, {mailAccount});
             accountItem->setExpanded(true);
+            accountItem->setCheckState(0, Qt::Unchecked);
             ui->accountsList->addTopLevelItem(accountItem);
             while (msfFileIterator.hasNext()) {
                 (void) msfFileIterator.next();
@@ -266,4 +275,13 @@ QList<QTreeWidgetItem*> MailAccountDialog::getCheckedAccountItems() const {
         }
     }
     return checkedItems;
+}
+
+void MailAccountDialog::propagateChangesToAccountChildren(
+        QTreeWidgetItem* parent, Qt::CheckState checkState) {
+    for (int i = 0; i < parent->childCount(); ++i) {
+        QTreeWidgetItem* child = parent->child(i);
+        child->setCheckState(0, checkState);
+        propagateChangesToAccountChildren(child, checkState);
+    }
 }

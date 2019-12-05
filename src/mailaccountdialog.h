@@ -63,6 +63,13 @@ private Q_SLOTS:
      * @param newProfileIndex The index of the new selected profile.
      */
     void onProfileSelectionChanged(int newProfileIndex);
+    
+    /**
+     * Called when an account item in the accounts list changed.
+     * @param item The account item.
+     * @param column The changed column.
+     */
+    static void onAccountItemChanged(QTreeWidgetItem* item, int column);
 
 private:
     /**
@@ -94,6 +101,15 @@ private:
      * @return Whether or not the account selection is valid.
      */
     bool validateAccountsPage();
+    
+    /**
+     * Propagates the changes to the parent account item to it's children.
+     *
+     * @param parent
+     * @param checkState
+     */
+    static void propagateChangesToAccountChildren(
+            QTreeWidgetItem* parent, Qt::CheckState checkState);
     
     /**
      * @return All checked account items from the accountList.
