@@ -5,6 +5,9 @@
 #include <QProcess>
 #include <QMessageBox>
 #include <QFontMetrics>
+#include <QSharedMemory>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
@@ -14,7 +17,7 @@
 #include "autoupdater.h"
 #include "birdtrayapp.h"
 
-TrayIcon::TrayIcon(bool showSettings)
+TrayIcon::TrayIcon(bool showSettings, QSharedMemory *ipcSharedMemory)
 {
     mBlinkingIconOpacity = 1.0;
     mBlinkingDelta = 0.0;
@@ -22,6 +25,7 @@ TrayIcon::TrayIcon(bool showSettings)
 
     mIgnoredUnreadEmails = 0;
     mUnreadCounter = 0;
+    mSharedMemory = ipcSharedMemory;
 
     // Context menu
     mSystrayMenu = new QMenu();
@@ -79,6 +83,9 @@ TrayIcon::~TrayIcon() {
     if (settingsDialog != nullptr) {
         settingsDialog->deleteLater();
     }
+
+    delete mSharedMemory;
+
 #ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess->deleteLater();
 #endif /* Q_OS_WIN */
@@ -147,6 +154,7 @@ static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxf
 void TrayIcon::updateIcon()
 {
     Settings* settings = BirdtrayApp::get()->getSettings();
+
     // How many unread messages are here?
     unsigned int unread = mUnreadCounter;
 
@@ -253,6 +261,8 @@ void TrayIcon::updateIcon()
         mLastDrawnIcon = temp.toImage();
         setIcon( temp );
     }
+
+    checkSharedMemoryMessage();
 }
 
 void TrayIcon::enableBlinking(bool enabled)
@@ -731,6 +741,39 @@ void TrayIcon::updateIgnoredUnreads()
         else
             mMenuIgnoreUnreads->setText( tr("Ignore unread emails") );
     }
+}
+
+void TrayIcon::checkSharedMemoryMessage()
+{
+    QByteArray commands;
+    mSharedMemory->lock();
+
+    // Is there any data?
+    char * data = (char*) mSharedMemory->data();
+
+    if ( data[0] != 0 || data[1] != 0 )
+    {
+        // Get the message length and the message
+        short len = *((short*) data);
+        commands = QByteArray::fromRawData( data + 2, len );
+
+        // Reset it back
+        *((short*) data) = 0;
+    }
+
+    mSharedMemory->unlock();
+
+    if ( commands.isEmpty() )
+        return;
+
+    qDebug("Received shared memory cmdline options: %s", qPrintable( commands ) );
+
+    // And process it if we find anything
+    QJsonObject cmd = QJsonDocument::fromJson(commands).object();
+
+    // For now we only process one option "toggle"
+    if ( cmd.contains("toggle") )
+        actionActivate();
 }
 
 void TrayIcon::doAutoUpdateCheck() {

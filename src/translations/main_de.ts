@@ -72,6 +72,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <source>Enable debugging output.</source>
         <translation>Aktiviert Debugging-Ausgaben.</translation>
     </message>
+    <message>
+        <source>Shared memory segment failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to create a shared memory segment: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle Thunderbird visibility (requires another running instance)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DatabaseAccounts</name>

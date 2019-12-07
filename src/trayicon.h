@@ -15,13 +15,14 @@
 
 class UnreadMonitor;
 class WindowTools;
+class QSharedMemory;
 
 class TrayIcon : public QSystemTrayIcon
 {
     Q_OBJECT
 
     public:
-        explicit TrayIcon(bool showSettings);
+        explicit TrayIcon(bool showSettings, QSharedMemory * ipcSharedMemory );
         ~TrayIcon() override;
         
         /**
@@ -97,6 +98,7 @@ class TrayIcon : public QSystemTrayIcon
         void    hideThunderbird();
         void    showThunderbird();
         void    updateIgnoredUnreads();
+        void    checkSharedMemoryMessage();
         
         /**
          * Do an automatic check for a new version of Birdtray.
@@ -164,6 +166,10 @@ class TrayIcon : public QSystemTrayIcon
 
         // System tray context menu. Once set, it remains there, so we have to modify existing one
         QMenu       *   mSystrayMenu;
+
+        // This is the shared memory buffer which is used to pass command-line options from
+        // new Birdtray instances.
+        QSharedMemory * mSharedMemory;
     
         /**
          * The currently opened settings dialog.

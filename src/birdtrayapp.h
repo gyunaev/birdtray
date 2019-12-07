@@ -27,6 +27,14 @@ public:
     ~BirdtrayApp() override;
     
     /**
+     * Returns true if another Birdtray instance is running
+     * and we have passed the arguments to it. This means the current
+     * instance should close, as the action would be performed by
+     * another instance.
+     */
+    bool    isInstanceRunning();
+
+    /**
      * @return The main Birdtray app instance.
      */
     static BirdtrayApp* get();
@@ -110,6 +118,9 @@ private:
      * Wait for the system tray to become available and exit if it doesn't within 60 seconds.
      */
     static void ensureSystemTrayAvailable();
+
+
+    QCommandLineParser mParser;
 };
 
 
