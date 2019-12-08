@@ -285,21 +285,7 @@ void TrayIcon::updateIcon()
             toolTip << name + ": " + warning;
         }
         setToolTip(toolTip.join('\n'));
-        p.setOpacity(1.0);
-        int width = temp.width() / 4;
-        QPen pen(QColor(255, 150, 0, 255));
-//        QPen pen(Qt::white);
-        pen.setWidth(width);
-        p.setPen(pen);
-        int x = temp.width() - static_cast<int>(temp.width() * 0.125) - pen.width() / 2;
-        p.drawLine(x, static_cast<int>(temp.height() * 0.33), x, temp.height() - width / 2);
-        pen.setColor(Qt::red);
-//        pen.setColor(QColor(255, 100, 0, 255));
-        pen.setWidthF(std::max(pen.width() - 16, 1));
-//        pen.setWidthF(std::max(pen.width() - 12, 1));
-        p.setPen(pen);
-        p.drawLine(x, static_cast<int>(temp.height() * 0.33), x, temp.height() - 20 - width);
-        p.drawPoint(x, temp.height() - width / 2);
+        drawWarningIndicator(p, temp.size());
     }
 
     p.end();
@@ -803,4 +789,21 @@ void TrayIcon::doAutoUpdateCheck() {
     connect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,
             this, &TrayIcon::onAutoUpdateCheckFinished);
     autoUpdater->checkForUpdates();
+}
+
+void TrayIcon::drawWarningIndicator(QPainter &painter, const QSize &iconSize) {
+    painter.setOpacity(1.0);
+    int width = iconSize.width() / 4;
+    QPen pen(QColor(255, 200, 0, 255));
+    pen.setWidth(width);
+    painter.setPen(pen);
+    int x = iconSize.width() - static_cast<int>(iconSize.width() * 0.125) - pen.width() / 2;
+    painter.drawLine(x, static_cast<int>(iconSize.height() * 0.33),
+            x, iconSize.height() - width / 2);
+    pen.setColor(QColor(255, 120, 0, 255));
+    pen.setWidthF(std::max(pen.width() - 16, 1));
+    painter.setPen(pen);
+    painter.drawLine(x, static_cast<int>(iconSize.height() * 0.33),
+            x, iconSize.height() - 20 - width);
+    painter.drawPoint(x, iconSize.height() - width / 2);
 }

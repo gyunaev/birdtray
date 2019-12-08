@@ -111,6 +111,13 @@ class TrayIcon : public QSystemTrayIcon
          * Do an automatic check for a new version of Birdtray.
          */
         void    doAutoUpdateCheck();
+        
+        /**
+         * Draw the warning indicator.
+         * @param painter The painter to use when drawing.
+         * @param iconSize The size of the icon image to draw on in pixel.
+         */
+        static void drawWarningIndicator(QPainter &painter, const QSize &iconSize);
 
         // State variables for blinking; mBlinkingTimeout=0 means we are not blinking
         double          mBlinkingIconOpacity;
