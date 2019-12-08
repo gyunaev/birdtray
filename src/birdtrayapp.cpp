@@ -133,6 +133,7 @@ bool BirdtrayApp::isInstanceRunning()
 
     autoUpdater = new AutoUpdater();
     trayIcon = new TrayIcon( mParser.isSet("settings"), sharedMemory );
+    return false;
 }
 
 BirdtrayApp* BirdtrayApp::get() {
