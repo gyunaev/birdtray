@@ -28,6 +28,11 @@ class TrayIcon : public QSystemTrayIcon
          * @return The window tools used by the tray icon.
          */
         WindowTools* getWindowTools() const;
+    
+        /**
+         * @return The unread monitor holding information about the watched mail accounts.
+         */
+        UnreadMonitor* getUnreadMonitor() const;
 
     signals:
         void    settingsChanged();

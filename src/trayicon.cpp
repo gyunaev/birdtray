@@ -100,6 +100,10 @@ WindowTools* TrayIcon::getWindowTools() const {
     return mWinTools;
 }
 
+UnreadMonitor* TrayIcon::getUnreadMonitor() const {
+    return mUnreadMonitor;
+}
+
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 {
     Utils::debug("unreadCounterUpdate %d", total );

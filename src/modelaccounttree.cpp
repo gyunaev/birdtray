@@ -7,6 +7,7 @@
 #include "modelaccounttree.h"
 #include "utils.h"
 #include "birdtrayapp.h"
+#include "unreadmonitor.h"
 
 ModelAccountTree::ModelAccountTree(QObject* parent, QTreeView* treeView)
         : QAbstractItemModel(parent), QStyledItemDelegate(parent) {
@@ -26,11 +27,10 @@ int ModelAccountTree::columnCount(const QModelIndex &) const
     return 2;
 }
 
-QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
-{
-    if ( index.row() >= 0 && index.row() < mAccounts.size() && index.column() < 2 )
-    {
-        if ( role == Qt::DisplayRole && index.column() == 0) {
+QVariant ModelAccountTree::data(const QModelIndex &index, int role) const {
+    if (index.row() >= 0 && index.row() < mAccounts.size() && index.column() == 0) {
+        switch (role) {
+        case Qt::DisplayRole: {
             QString account = mAccounts[index.row()];
             if (!account.endsWith(".msf")) {
                 return Utils::decodeIMAPutf7(account);
@@ -39,11 +39,22 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const
             QString folderName = Utils::getMailFolderName(fileInfo);
             QString accountName = Utils::getMailAccountName(fileInfo);
             return accountName + " [" + folderName + "]";
-        } else if ( role == Qt::ToolTipRole && index.column() == 0 ) {
-            return mAccounts[index.row()];
+        }
+        case Qt::ToolTipRole: {
+            QString warning = BirdtrayApp::get()->getTrayIcon()->getUnreadMonitor()->getWarnings()
+                                                .value(mAccounts[index.row()]);
+            return warning.isNull() ? mAccounts[index.row()] : warning;
+        }
+        case Qt::TextColorRole:
+            if (BirdtrayApp::get()->getTrayIcon()->getUnreadMonitor()->getWarnings().contains(
+                    mAccounts[index.row()])) {
+                return QColor(255, 150, 0, 255);
+            }
+            return QVariant();
+        default:
+            break;
         }
     }
-
     return QVariant();
 }
 
