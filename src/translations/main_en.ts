@@ -69,6 +69,18 @@ OpenSSL might not be installed.</source>
         <source>Enable debugging output.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toggle the Thunderbird window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the Thunderbird window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide the Thunderbird window.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DatabaseAccounts</name>

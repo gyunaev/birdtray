@@ -33,6 +33,16 @@ class TrayIcon : public QSystemTrayIcon
          * @return The unread monitor holding information about the watched mail accounts.
          */
         UnreadMonitor* getUnreadMonitor() const;
+    
+        /**
+         * Hide the Thunderbird window.
+         */
+        void hideThunderbird();
+        
+        /**
+         * Show the Thunderbird window.
+         */
+        void showThunderbird();
 
     signals:
         void    settingsChanged();
@@ -46,6 +56,11 @@ class TrayIcon : public QSystemTrayIcon
          * @param path The path whose warning has changed or a null-string for a global warning.
          */
         void unreadMonitorWarningChanged(const QString &path);
+        
+        /**
+         * Show the settings dialog.
+         */
+        void showSettings();
 
 
     private slots:
@@ -64,7 +79,6 @@ class TrayIcon : public QSystemTrayIcon
 
         // Context menu actions
         static void actionQuit();
-        void    actionSettings();
         void    actionActivate();
         void    actionSnoozeFor();
         void    actionUnsnooze();
@@ -103,8 +117,6 @@ class TrayIcon : public QSystemTrayIcon
     private:
         void    createMenu();
         void    createUnreadCounterThread();
-        void    hideThunderbird();
-        void    showThunderbird();
         void    updateIgnoredUnreads();
         
         /**
