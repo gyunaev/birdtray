@@ -267,8 +267,10 @@ void TrayIcon::updateIcon()
         if (!globalWarning.isNull()) {
             toolTip << tr("Warning: %1").arg(globalWarning);
         }
-        for (auto it = warnings.constKeyValueBegin(); it != warnings.constKeyValueEnd(); it++) {
-            const QString &path = (*it).first;
+        QMapIterator<QString, QString> warningsIterator(warnings);
+        while (warningsIterator.hasNext()) {
+            warningsIterator.next();
+            const QString &path = warningsIterator.key();
             if (path.isNull()) {
                 continue;
             }
@@ -280,7 +282,7 @@ void TrayIcon::updateIcon()
             } else {
                 name = Utils::decodeIMAPutf7(path);
             }
-            const QString &warning = (*it).second;
+            const QString &warning = warningsIterator.value();
             toolTip << name + ": " + warning;
         }
         setToolTip(toolTip.join('\n'));
