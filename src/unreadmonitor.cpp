@@ -67,7 +67,12 @@ void UnreadMonitor::slotSettingsChanged()
     }
 
     mMorkUnreadCounts.clear();
-
+    QStringList accountsList = BirdtrayApp::get()->getSettings()->mFolderNotificationList;
+    for (const QString &path : warnings.keys()) {
+        if (!accountsList.contains(path)) {
+            clearWarning(path);
+        }
+    }
     updateUnread();
 }
 
