@@ -84,7 +84,7 @@ TrayIcon::TrayIcon(bool showSettings)
         }
     }
     if (showSettings) {
-        QTimer::singleShot(0, this, &TrayIcon::actionSettings);
+        QTimer::singleShot(0, this, &TrayIcon::showSettings);
     }
 }
 
