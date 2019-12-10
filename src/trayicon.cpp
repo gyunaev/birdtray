@@ -52,7 +52,7 @@ TrayIcon::TrayIcon(bool showSettings)
             nullptr, tr( "Would you like to set up Birdtray?" ),
             tr( "You have not yet configured any email folders to monitor. "
                 "Would you like to do it now?") ) == QMessageBox::Yes )) {
-        actionSettings();
+        QTimer::singleShot(0, this, &TrayIcon::actionSettings);
     }
 
     createMenu();
