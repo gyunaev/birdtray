@@ -36,7 +36,7 @@ class UnreadMonitor : public QThread
         void    unreadUpdated( unsigned int total, QColor color );
 
         /**
-         * A warning was added or removed for the given watched path
+         * A warning was added or removed for the given watched path.
          *
          * @param path The watched path or null-string for a global warning.
          */
