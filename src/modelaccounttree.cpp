@@ -45,7 +45,7 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const {
                                                 .value(mAccounts[index.row()]);
             return warning.isNull() ? mAccounts[index.row()] : warning;
         }
-        case Qt::TextColorRole:
+        case Qt::ForegroundRole:
             if (BirdtrayApp::get()->getTrayIcon()->getUnreadMonitor()->getWarnings().contains(
                     mAccounts[index.row()])) {
                 return QColor(255, 150, 0, 255);
