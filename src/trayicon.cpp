@@ -45,17 +45,8 @@ TrayIcon::TrayIcon(bool showSettings)
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs(settings->mLaunchThunderbirdDelay);
 
     mWinTools = WindowTools::create();
-    createUnreadCounterThread();
-
-    // If the settings are not yet configure, pop up the message
-    if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
-            nullptr, tr( "Would you like to set up Birdtray?" ),
-            tr( "You have not yet configured any email folders to monitor. "
-                "Would you like to do it now?") ) == QMessageBox::Yes )) {
-        QTimer::singleShot(0, this, &TrayIcon::actionSettings);
-    }
-
     createMenu();
+    createUnreadCounterThread();
 
     connect( &mBlinkingTimer, &QTimer::timeout, this, &TrayIcon::blinkTimeout );
     connect( this, &TrayIcon::activated, this, &TrayIcon::actionSystrayIconActivated );
@@ -76,6 +67,14 @@ TrayIcon::TrayIcon(bool showSettings)
     
     if (settings->mFolderNotificationList.isEmpty()) {
         unreadEmailsAtStart = 0;
+    }
+    
+    // If the settings are not yet configure, pop up the message
+    if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
+            nullptr, tr( "Would you like to set up Birdtray?" ),
+            tr( "You have not yet configured any email folders to monitor. "
+                "Would you like to do it now?") ) == QMessageBox::Yes )) {
+        QTimer::singleShot(0, this, &TrayIcon::actionSettings);
     }
 }
 
