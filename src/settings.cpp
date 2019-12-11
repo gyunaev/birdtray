@@ -45,6 +45,7 @@ Settings::Settings(bool verboseOutput)
     mAllowSuppressingUnreads = false;
     mLaunchThunderbirdDelay = 0;
     mShowUnreadEmailCount = true;
+    ignoreStartUnreadCount = false;
     mThunderbirdWindowMatch = "- Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
@@ -82,6 +83,7 @@ void Settings::save()
     mSettings->setValue("common/allowsuppressingunread", mAllowSuppressingUnreads );
     mSettings->setValue("common/launchthunderbirddelay", mLaunchThunderbirdDelay );
     mSettings->setValue("common/showunreademailcount", mShowUnreadEmailCount );
+    mSettings->setValue("common/ignoreStartUnreadCount", ignoreStartUnreadCount);
 
     mSettings->setValue("advanced/tbcmdline", mThunderbirdCmdLine );
     mSettings->setValue("advanced/tbwindowmatch", mThunderbirdWindowMatch );
@@ -167,6 +169,8 @@ void Settings::load()
             "common/launchthunderbirddelay", mLaunchThunderbirdDelay ).toInt();
     mShowUnreadEmailCount = mSettings->value(
             "common/showunreademailcount", mShowUnreadEmailCount ).toBool();
+    ignoreStartUnreadCount = mSettings->value(
+            "common/ignoreStartUnreadCount", ignoreStartUnreadCount).toBool();
 
     QStringList thunderbirdCommand = mSettings->value(
             "advanced/tbcmdline", mThunderbirdCmdLine).toStringList();

@@ -115,6 +115,11 @@ class TrayIcon : public QSystemTrayIcon
         // Current unread messages count and color
         unsigned int    mUnreadCounter;
         QColor          mUnreadColor;
+        
+        /**
+         * The number of unread emails at Birdtray startup.
+         */
+        long            unreadEmailsAtStart = -1;
 
         // Show/hide Thunderbird menu item (we modify its text)
         QAction *       mMenuShowHideThunderbird;

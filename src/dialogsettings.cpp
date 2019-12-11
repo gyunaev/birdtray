@@ -79,6 +79,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     spinUnreadOpacityLevel->setValue( settings->mUnreadOpacityLevel * 100 );
     spinThunderbirdStartDelay->setValue( settings->mLaunchThunderbirdDelay );
     boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
+    ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
 
     // Form the proper command-line (with escaped arguments if they contain spaces
     QString tbcmdline;
@@ -191,6 +192,7 @@ void DialogSettings::accept()
     settings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
     settings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
     settings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
+    settings->ignoreStartUnreadCount = ignoreStartupMailCountBox->isChecked();
 
     settings->setNotificationIcon(btnNotificationIcon->icon().pixmap( settings->mIconSize ));
 

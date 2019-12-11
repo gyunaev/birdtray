@@ -518,6 +518,14 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Ignore unread emails at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
