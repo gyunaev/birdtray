@@ -103,6 +103,11 @@ class Settings
 
         // Whether to show the unread email count
         bool    mShowUnreadEmailCount;
+        
+        /**
+         * Ignore the total number of unread emails that are present at startup.
+         */
+        bool    ignoreStartUnreadCount;
 
         // Watching file timeout (ms)
         unsigned int mWatchFileTimeout;

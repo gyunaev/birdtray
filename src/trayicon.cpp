@@ -73,6 +73,10 @@ TrayIcon::TrayIcon(bool showSettings)
     if (settings->mUpdateOnStartup) {
         doAutoUpdateCheck();
     }
+    
+    if (settings->mFolderNotificationList.isEmpty()) {
+        unreadEmailsAtStart = 0;
+    }
 }
 
 TrayIcon::~TrayIcon() {
@@ -99,6 +103,20 @@ WindowTools* TrayIcon::getWindowTools() const {
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 {
     Utils::debug("unreadCounterUpdate %d", total );
+    
+    if (unreadEmailsAtStart == -1) {
+        unreadEmailsAtStart = static_cast<long>(total);
+    }
+    if (unreadEmailsAtStart != 0 && BirdtrayApp::get()->getSettings()->ignoreStartUnreadCount) {
+        // Ignore unread emails that were present at Birdtray startup.
+        if (static_cast<long>(total) > unreadEmailsAtStart) {
+            total = total - unreadEmailsAtStart;
+        } else {
+            unreadEmailsAtStart = static_cast<long>(total);
+            total = 0;
+        }
+    }
+    
     mUnreadCounter = total;
     mUnreadColor = color;
 
@@ -394,6 +412,8 @@ void TrayIcon::actionSettings()
         settingsDialog->activateWindow();
         return;
     }
+    Settings* settings = BirdtrayApp::get()->getSettings();
+    bool ignoreStartUnreadCountBefore = settings->ignoreStartUnreadCount;
     settingsDialog = new DialogSettings();
     connect(settingsDialog, &QDialog::finished, this, [=](int result) {
         settingsDialog->deleteLater();
@@ -401,7 +421,7 @@ void TrayIcon::actionSettings()
         if (result != QDialog::Accepted) {
             return;
         }
-        BirdtrayApp::get()->getSettings()->save();
+        settings->save();
 
         if ( !mUnreadMonitor )
             createUnreadCounterThread();
@@ -411,7 +431,15 @@ void TrayIcon::actionSettings()
 
         // Recalculate the delta
         enableBlinking( false );
-
+    
+        if (unreadEmailsAtStart != -1
+            && settings->ignoreStartUnreadCount != ignoreStartUnreadCountBefore) {
+            if (!settings->ignoreStartUnreadCount) {
+                mUnreadCounter += unreadEmailsAtStart;
+            } else if (mUnreadCounter - unreadEmailsAtStart >= 0) {
+                mUnreadCounter -= unreadEmailsAtStart;
+            }
+        }
         updateIcon();
         // TODO: Update on thunderbird path setting change
 
