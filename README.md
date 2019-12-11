@@ -77,7 +77,17 @@ You can also enable birdtray to start Thunderbird when you start Birdtray, or en
 
 Once you change settings, often you need to restart birdtray for the new settings to take effect.
 
-All birdtray settings are stored on a per-user basis in `$HOME/.config/ulduzsoft/birdtray.conf`.
+### Configuration File Location
+*Birdtray configuration is stored on a per-user basis, where the location differs depending on environment, as follows:*
+
+#### Linux Package Installation
+`$HOME/.config/ulduzsoft/birdtray.conf`
+
+#### Linux Flatpak Installation
+`$HOME/.var/app/com.ulduzsoft.Birdtray/config/ulduzsoft/birdtray.conf`
+
+#### Windows Installation
+`HKEY_CURRENT_USER\Software\ulduzsoft\birdtray` (Windows registry)
 
 ## Troubleshooting
 
