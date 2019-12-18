@@ -77,6 +77,18 @@ You can also enable birdtray to start Thunderbird when you start Birdtray, or en
 
 Once you change settings, often you need to restart birdtray for the new settings to take effect.
 
+### Configuration File Location
+*Birdtray configuration is stored on a per-user basis, where the location differs depending on environment, as follows:*
+
+#### Linux Package Installation
+`$HOME/.config/ulduzsoft/birdtray.conf`
+
+#### Linux Flatpak Installation
+`$HOME/.var/app/com.ulduzsoft.Birdtray/config/ulduzsoft/birdtray.conf`
+
+#### Windows Installation
+`HKEY_CURRENT_USER\Software\ulduzsoft\birdtray` (Windows registry)
+
 ## Troubleshooting
 
 If you have lots of unread messages shown, and you are using global search database to look for unread messages, it may be because the database is corrupt or too old. You may delete the file global-messages-db.sqlite and restart Thunderbird which would rebuild this file. This will also help if "search" function in Thunderbird finds emails which no longer exist.
