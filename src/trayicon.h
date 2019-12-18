@@ -28,6 +28,11 @@ class TrayIcon : public QSystemTrayIcon
          * @return The window tools used by the tray icon.
          */
         WindowTools* getWindowTools() const;
+    
+        /**
+         * @return The unread monitor holding information about the watched mail accounts.
+         */
+        UnreadMonitor* getUnreadMonitor() const;
 
     signals:
         void    settingsChanged();
@@ -35,8 +40,12 @@ class TrayIcon : public QSystemTrayIcon
     public slots:
         void    unreadCounterUpdate(unsigned int total, QColor color );
 
-        // An error happened
-        void    unreadCounterError( QString message );
+        /**
+         * The warning status of a watched path in the unread monitor changed.
+         *
+         * @param path The path whose warning has changed or a null-string for a global warning.
+         */
+        void unreadMonitorWarningChanged(const QString &path);
 
 
     private slots:
@@ -102,6 +111,13 @@ class TrayIcon : public QSystemTrayIcon
          * Do an automatic check for a new version of Birdtray.
          */
         void    doAutoUpdateCheck();
+        
+        /**
+         * Draw the warning indicator.
+         * @param painter The painter to use when drawing.
+         * @param iconSize The size of the icon image to draw on in pixel.
+         */
+        static void drawWarningIndicator(QPainter &painter, const QSize &iconSize);
 
         // State variables for blinking; mBlinkingTimeout=0 means we are not blinking
         double          mBlinkingIconOpacity;
@@ -136,9 +152,6 @@ class TrayIcon : public QSystemTrayIcon
 
         // State checking timer (once a second)
         QTimer          mStateTimer;
-
-        // Current status
-        QString         mCurrentStatus;
 
         // Time when Thunderbird could be started
         QDateTime       mThunderbirdStartTime;

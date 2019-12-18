@@ -37,7 +37,7 @@ endif(NOT Qt5LinguistTools_FOUND)
 if(WIN32)
     set(EXECUTABLE_OPTIONS WIN32)
     ENABLE_LANGUAGE(RC)
-    add_definitions(-DUNICODE)
+    add_definitions(-DUNICODE -DNOMINMAX)
     set(PLATFORM_SOURCES src/windowtools_win.cpp src/birdtrayeventfilter.cpp
             src/processhandle.cpp src/res/birdtray.rc)
     set(PLATFORM_HEADERS src/windowtools_win.h src/birdtrayeventfilter.h src/processhandle.h)

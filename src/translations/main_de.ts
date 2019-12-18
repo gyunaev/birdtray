@@ -817,6 +817,10 @@ Wollen Sie fortfahren?</translation>
 
 %3</translation>
     </message>
+    <message>
+        <source>Warning: %1</source>
+        <translation>Warnung: %1</translation>
+    </message>
 </context>
 <context>
     <name>UnreadMonitor</name>
@@ -835,6 +839,14 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>Unable to watch %1 for changes.</source>
         <translation>Kann %1 nicht auf Änderungen überwachen.</translation>
+    </message>
+    <message>
+        <source>Unable to read from %1.</source>
+        <translation>Kann nicht von %1 lesen</translation>
+    </message>
+    <message>
+        <source>Cannot query database: %1</source>
+        <translation>Kann die Datenbank nicht einlesen: %1</translation>
     </message>
 </context>
 <context>

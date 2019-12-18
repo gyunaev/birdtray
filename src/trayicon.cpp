@@ -45,15 +45,6 @@ TrayIcon::TrayIcon(bool showSettings)
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs(settings->mLaunchThunderbirdDelay);
 
     mWinTools = WindowTools::create();
-
-    // If the settings are not yet configure, pop up the message
-    if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
-            nullptr, tr( "Would you like to set up Birdtray?" ),
-            tr( "You have not yet configured any email folders to monitor. "
-                "Would you like to do it now?") ) == QMessageBox::Yes )) {
-        actionSettings();
-    }
-
     createMenu();
     createUnreadCounterThread();
 
@@ -77,6 +68,14 @@ TrayIcon::TrayIcon(bool showSettings)
     if (settings->mFolderNotificationList.isEmpty()) {
         unreadEmailsAtStart = 0;
     }
+    
+    // If the settings are not yet configure, pop up the message
+    if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
+            nullptr, tr( "Would you like to set up Birdtray?" ),
+            tr( "You have not yet configured any email folders to monitor. "
+                "Would you like to do it now?") ) == QMessageBox::Yes )) {
+        QTimer::singleShot(0, this, &TrayIcon::actionSettings);
+    }
 }
 
 TrayIcon::~TrayIcon() {
@@ -98,6 +97,10 @@ TrayIcon::~TrayIcon() {
 
 WindowTools* TrayIcon::getWindowTools() const {
     return mWinTools;
+}
+
+UnreadMonitor* TrayIcon::getUnreadMonitor() const {
+    return mUnreadMonitor;
 }
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
@@ -123,18 +126,12 @@ void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
     updateIcon();
 }
 
-void TrayIcon::unreadCounterError(QString message)
-{
-    qWarning("UnreadCounter generated an error: %s", qPrintable(message) );
-
-    mCurrentStatus = message;
-    if (mUnreadMonitor == nullptr) {
-        return;
+void TrayIcon::unreadMonitorWarningChanged(const QString &path) {
+    const QString &message = mUnreadMonitor->getWarnings().value(path);
+    if (!message.isNull()) {
+        qWarning("UnreadMonitor generated a warning for %s: %s",
+                qPrintable(path), qPrintable(message));
     }
-    mUnreadMonitor->deleteLater();
-    mUnreadMonitor = nullptr;
-
-    mUnreadCounter = 0;
     updateIcon();
 }
 
@@ -220,8 +217,7 @@ void TrayIcon::updateIcon()
     p.setFont(settings->mNotificationFont);
 
     // Do we need to draw error sign?
-    if (mUnreadMonitor == nullptr ||
-        (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists)) {
+    if (settings->mMonitorThunderbirdWindow && !mThunderbirdWindowExists) {
         p.setOpacity( 1.0 );
         QPen pen( Qt::red );
         pen.setWidth( (temp.width() * 10) / 100 );
@@ -261,6 +257,36 @@ void TrayIcon::updateIcon()
                     settings->mNotificationBorderColor, settings->mNotificationBorderWidth));
         }
         p.fillPath(textPath, mUnreadColor);
+    }
+    const QMap<QString, QString> warnings = mUnreadMonitor->getWarnings();
+    if (warnings.isEmpty()) {
+        setToolTip(QString());
+    } else {
+        QStringList toolTip;
+        const QString &globalWarning = warnings.value(QString());
+        if (!globalWarning.isNull()) {
+            toolTip << tr("Warning: %1").arg(globalWarning);
+        }
+        QMapIterator<QString, QString> warningsIterator(warnings);
+        while (warningsIterator.hasNext()) {
+            warningsIterator.next();
+            const QString &path = warningsIterator.key();
+            if (path.isNull()) {
+                continue;
+            }
+            QString name;
+            if (path.endsWith(".msf")) {
+                QFileInfo accountInfo(path);
+                name = Utils::getMailAccountName(accountInfo)
+                       + " [" + Utils::getMailFolderName(accountInfo) + "]";
+            } else {
+                name = Utils::decodeIMAPutf7(path);
+            }
+            const QString &warning = warningsIterator.value();
+            toolTip << name + ": " + warning;
+        }
+        setToolTip(toolTip.join('\n'));
+        drawWarningIndicator(p, temp.size());
     }
 
     p.end();
@@ -422,9 +448,6 @@ void TrayIcon::actionSettings()
             return;
         }
         settings->save();
-
-        if ( !mUnreadMonitor )
-            createUnreadCounterThread();
 
         // Recreate menu
         createMenu();
@@ -622,7 +645,8 @@ void TrayIcon::createUnreadCounterThread()
     mUnreadMonitor = new UnreadMonitor( this );
 
     connect( mUnreadMonitor, &UnreadMonitor::unreadUpdated, this, &TrayIcon::unreadCounterUpdate );
-    connect( mUnreadMonitor, &UnreadMonitor::error, this, &TrayIcon::unreadCounterError );
+    connect(mUnreadMonitor, &UnreadMonitor::warningChanged, this,
+            &TrayIcon::unreadMonitorWarningChanged);
 
     mUnreadMonitor->start();
 }
@@ -766,4 +790,21 @@ void TrayIcon::doAutoUpdateCheck() {
     connect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,
             this, &TrayIcon::onAutoUpdateCheckFinished);
     autoUpdater->checkForUpdates();
+}
+
+void TrayIcon::drawWarningIndicator(QPainter &painter, const QSize &iconSize) {
+    painter.setOpacity(1.0);
+    int width = iconSize.width() / 4;
+    QPen pen(QColor(255, 200, 0, 255));
+    pen.setWidth(width);
+    painter.setPen(pen);
+    int x = iconSize.width() - static_cast<int>(iconSize.width() * 0.125) - pen.width() / 2;
+    painter.drawLine(x, static_cast<int>(iconSize.height() * 0.33),
+            x, iconSize.height() - width / 2);
+    pen.setColor(QColor(255, 120, 0, 255));
+    pen.setWidthF(std::max(pen.width() - 16, 1));
+    painter.setPen(pen);
+    painter.drawLine(x, static_cast<int>(iconSize.height() * 0.33),
+            x, iconSize.height() - 20 - width);
+    painter.drawPoint(x, iconSize.height() - width / 2);
 }
