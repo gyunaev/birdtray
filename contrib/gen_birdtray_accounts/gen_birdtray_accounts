@@ -1,0 +1,520 @@
+#!/bin/bash
+
+#
+# Generate the .msf's to monitor via the CLI.  This script is ideal if you have many
+# .msf's, make wide use of filters+.msf's, are lazy.
+#
+# pablo@blueoakdb.com
+#
+# License
+# =======
+# We inherit the project's License.  ;)
+#
+# Synposis
+# ========
+# Use the CLI to populate the 'Monitoring' > 'Accounts to monitor'
+#
+# Process
+# =======
+#
+#   1) To use the necessary flags to generate the desired accounts
+#   2) When ready, stop birdtray and re-run the script using -x to change
+#      the birdtray config
+#
+# birdtray.conf
+# =============
+#
+#   ~/.config/ulduzsoft/birdtray.conf
+#
+# Thunderbird Information
+# =======================
+# Location of profile
+# -------------------
+# Profile Location Summary:  ~/.thunderbird/xxxxx.default/
+#
+#   https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data
+#
+
+#
+# Scratch files
+#
+# See https://unix.stackexchange.com/questions/181937/how-create-a-temporary-file-in-shell-script
+#
+FILTERS=$(mktemp /tmp/.filters.XXXXXX)
+exec 3>"$FILTERS"
+rm "$FILTERS"
+
+RM_ACCOUNTS=$(mktemp /tmp/.filters.XXXXXX)
+exec 4>"$RM_ACCOUNTS"
+rm "$RM_ACCOUNTS"
+
+GEN_ACCOUNTS=$(mktemp /tmp/.filters.XXXXXX)
+exec 4>"$RM_ACCOUNTS"
+rm "$RM_ACCOUNTS"
+
+ACCOUNTS=$(mktemp /tmp/.filters.XXXXXX)
+exec 5>"$ACCOUNTS"
+rm "$ACCOUNTS"
+
+#
+# Create an awk script to remove all the old accounts from the birdtray .config file
+#
+# The results of the script should be:
+#
+#   ...
+#   [accounts]
+#
+#   [advanced]
+#   ...
+#
+cat > $RM_ACCOUNTS <<EOF
+{
+    if (\$0 ~ /^[[]accounts[]]/) {
+        print \$0 # keep [accounts]
+        while (\$0 !~ /^count/) {
+            getline
+        }
+    } else {
+        print \$0
+    }
+}
+EOF
+
+#
+# Generate the [accounts] entries plus the 'count=' entry at the end
+#
+# We follow the naming pattern found in the birdtray config file
+#
+cat > $GEN_ACCOUNTS <<EOF
+{
+   printf "account%dColor=%s\naccount%dURI=%s\n", i, RGB, i, \$0; i++
+}
+END { printf "count=%d\n", i}
+EOF
+
+#
+# Defaults
+#
+NOTIFICATION_COLOR=55FF00
+TBIRD_DIR=$HOME/.thunderbird
+SAVED_FILTERS=$HOME/.gen_birdtray.filters
+BIRDTRAY_CONF=$HOME/.config/ulduzsoft/birdtray.conf
+
+usage()
+{
+   printf "usage:  %s [ -b birdtray.config ] [ -c hex ] [ -d profile_dir ] [ -fhlnwx ]\n" $(basename $0)
+   printf "\n"
+   printf "where\n"
+   printf "\t-b /path/to/birdtray.config\n"
+   printf "\t   = Path to birdtray.config [$BIRDTRAY_CONF]\n"
+   printf "\t-c hex\n"
+   printf "\t   = The hex notificaiton color for all accounts [$NOTIFICATION_COLOR - bright green]\n"
+   printf "\t-d profile_dir\n"
+   printf "\t   = Your Thunderbird default profile directory.\n"
+   printf "\t     Used when we cannot find it or there is more than one\n"
+   printf "\t-f = Use the saved Filter File instead of prompting for filters\n"
+   printf "\t-h = This help\n"
+   printf "\t-l = Ignore symbolic links found in the IMAP or Mail subdirectories\n"
+   printf "\t-n = No-prompt mode; implied -f, may require -d\n"
+   printf "\t-w = Ignored if -f specified, otherwise save the gathered filters\n"
+   printf "\t-x = Change the birdtray config file\n"
+   printf "\n"
+   printf '\t     *************************************\n'
+   printf "\t          birdtray must not be running\n"
+   printf '\t     *************************************\n'
+   printf "\n"
+   printf "Fitler File\n"
+   printf "===========\n"
+   printf "The Filter File contains 'grep' Regular Expresssions.  Any .msf's\n"
+   printf "path name that matches the expression is excluded from the result.\n"
+   printf "\n"
+   printf "The text file can be created/managed using an editor or via this script.\n"
+   printf "\n"
+   printf "Location\n"
+   printf -- "--------\n"
+   printf "$SAVED_FILTERS\n"
+   printf "\n"
+   printf "Creation\n"
+   printf -- "--------\n"
+   printf "o Created when -w is specified.\n"
+   printf "o Populated using the filters gathered when -f is not specified.\n"
+   printf "\n"
+   printf "Removal\n"
+   printf -- "-------\n"
+   printf "$ rm $SAVED_FILTERS\n"
+   printf "\n"
+   printf "Updating\n"
+   printf -- "--------\n"
+   printf "o The file can be managed with any text editor and/or\n"
+   printf "o Recreated with -w and not specifying -f -- exactly like 'Creation'\n"
+   printf "\n"
+   printf "  Tip:  create once and after manage it with an editor.\n"
+   printf "\n"
+   printf "Filter Examples\n"
+   printf -- "---------------\n"
+   printf "o 'Online Archive' - exclude all .msf files within the 'Online Archive'\n"
+   printf "                     folder\n"
+   printf "o Trash.msf        - exclude ... Trash.msf   ;)\n"
+   printf "\n"
+   printf "Example Executions\n"
+   printf "==================\n"
+   printf "Process Overwview\n"
+   printf -- "-----------------\n"
+   printf "1) Write to stdout the accounts to be created\n"
+   printf "2) Use -x to change the birdtray config file\n"
+   printf "\n"
+   printf "Save the gathered filters and review accounts to be monitored\n"
+   printf -- "-------------------------------------------------------------\n"
+   printf '$ %s -w\n' $(basename $0)
+   printf "\n"
+   printf "Run without prompting, changing the birdtray config file\n"
+   printf -- "--------------------------------------------------------\n"
+   printf "#\n"
+   printf "# Ensure birdtray is not running before using the -x option.\n"
+   printf "#\n"
+   printf '$ %s -n -x\n' $(basename $0)
+   printf "\n"
+   printf "Same as above but use red as the notification color\n"
+   printf -- "---------------------------------------------------\n"
+   printf "#\n"
+   printf '$ %s -n -x -c ff0000\n' $(basename $0)
+   printf "\n"
+   printf "Same as above but for a specific default profile directory\n"
+   printf -- "----------------------------------------------------------\n"
+   printf '$ %s -n -x -c ff0000 -d ~/.thunderbird/my.default\n' $(basename $0)
+   printf "\n"
+}
+
+validate_dir()
+{
+   A_DIR="$1"
+
+   if [ ! -d "$A_DIR" ] ; then
+      echo "$A_DIR is not accessible"
+      return 1
+   else
+      return 0
+   fi
+}
+
+#
+# Confirm existence of Filter File
+#
+filter_file_existence()
+{
+   if [ ! "$SAVED_FILTERS" ] ; then
+      "$SAVED_FILTERS is not accessible"
+      exit 1
+   fi
+}
+
+#
+# Look for the tbird profile directory.
+#
+# Handle the three cases:
+#
+# o Not found - allow the user to enter it
+# o A single found - present and confirm (allow override)
+# o Multiple found - allow user to select
+#
+# Validate that the directory is accessible.
+#
+set_tbird_profile_dir()
+{
+   if [ $PROFILE_DIR_FLAG -eq 1 ] ; then
+      validate_dir
+      if [ $? -eq 1 ] ; then
+         exit 1
+      else
+         return 0
+      fi
+   else # Look for profile directories
+      PROFILE_DIR_COUNT=$(find $TBIRD_DIR -maxdepth 1 -type d -name '*[.]default' | wc -l)
+      case $PROFILE_DIR_COUNT in
+         0) # No profile directory.  They should use switch to specify
+            echo "Could not find a profile directory in ~/.thunderbird, use -d to specify its location"
+            exit 1
+            ;;
+         1) # Single match, use it.
+            PROFILE_DIR=$(find $TBIRD_DIR -maxdepth 1 -type d -name '*[.]default')
+            ;;
+         *) # More than one found, present them and ask them to specify via switch
+            echo "Found more than one profile directory, use -d to specify which to use:"
+            echo
+            find $TBIRD_DIR -maxdepth 1 -type d -name '*[.]default'
+            exit 1
+            ;;
+      esac
+   fi
+}
+
+#
+# Present the list of default filters
+#
+default_filters()
+{
+   echo "Do Not Monitor These Folders"
+   echo "----------------------------"
+   echo "To remove the suggestion, type any value followed by ENTER"
+   echo
+   echo "To keep the suggestion, press ENTER without any value"
+   echo
+   for MSF in Trash.msf Drafts.msf Received.msf Sent.msf "Unsent Messages.msf" Templates.msf ; do
+      echo -n "$MSF? "
+      read RESPONSE
+      if [ -z "$RESPONSE" ] ; then
+         echo "$MSF" >> $FILTERS
+      fi
+   done
+}
+
+#
+# Gather any new filters
+#
+new_filters()
+{
+   echo
+   echo "Optional Additional Filters"
+   echo "---------------------------"
+   echo "Optionally, filter addtitional .msf's"
+   echo
+   echo "You may enter a literal string or a regular expression."
+   echo
+   echo "The full .msf path name is matched against the string."
+   echo
+   echo "Press ENTER with no value to stop entering values."
+   echo
+   RESPONSE="start"
+   while [ -n "$RESPONSE" ] ; do
+      echo -n "Filter? "
+      read RESPONSE
+      if [ -n "$RESPONSE" ] ; then
+         echo "$RESPONSE" >> $FILTERS
+      fi
+   done
+
+   if [ "$WRITE_FILTERS_FLAG" -eq 1 ] ; then
+      echo
+      echo -n "Saving filters to $SAVED_FILTERS ... "
+      cat $FILTERS > $SAVED_FILTERS
+      echo "done"
+   fi
+}
+
+get_filters()
+{
+   echo
+   echo "Gather Filters"
+   echo "=============="
+   echo "This is a two-step process."
+   echo
+   echo "1) Confirm the suggested list of folders that should not be monitored."
+   echo "2) Add any customizations"
+   echo
+
+   default_filters
+   new_filters
+}
+
+#############################################
+###  Start
+#############################################
+
+#############################################
+###  Process switches
+#############################################
+IGNORE_SYM_LINKS_FLAG=0
+NO_PROMPT_FLAG=0
+SAVED_FILTER_FLAG=0
+WRITE_FILTERS_FLAG=0
+
+COLOR_FLAG=0
+COLOR='#'$NOTIFICATION_COLOR
+
+BIRDTRAY_CONF_FLAG=0
+
+PROFILE_DIR_FLAG=0
+PROFILE_DIR=
+
+WRITE_CONFIG_FLAG=0
+while getopts b:c:d:fhlnwx SWITCH ; do
+   case $SWITCH in
+      b) BIRDTRAY_CONF_FLAG=1
+         BIRDTRAY_CONF="$OPTARG"
+         ;;
+      c) COLOR_FLAG=1
+         COLOR='#'"$OPTARG"
+         ;;
+      d) PROFILE_DIR_FLAG=1;
+         PROFILE_DIR="$OPTARG"
+         ;;
+      f) SAVED_FILTER_FLAG=1;
+         if [ ! -f "$SAVED_FILTERS" ] ; then
+            echo "$SAVED_FILTERS is not accessible"
+            exit 1
+         else
+            cat $SAVED_FILTERS > $FILTERS
+         fi
+         ;;
+      h) usage
+         exit 1
+         ;;
+      l) IGNORE_SYM_LINKS_FLAG=1
+         IGNORE_SYM_LINKS="! -type l"
+         ;;
+      n) NO_PROMPT_FLAG=1
+         ;;
+      w) WRITE_FILTERS_FLAG=1
+         ;;
+      x) WRITE_CONFIG_FLAG=1
+         ;;
+      ?) usage;
+         exit 2;;
+   esac
+done
+
+shift $(($OPTIND - 1))
+
+if [ $# -ne 0 ] ; then
+   echo "This script does not accept any arguments"
+   exit 1
+fi
+
+if [ ! -f "$BIRDTRAY_CONF" ] ; then
+   echo "birdtray.conf is notaccessible [$BIRDTRAY_CONF]"
+   exit 1
+fi
+
+if [ $NO_PROMPT_FLAG -eq 1 -a $SAVED_FILTER_FLAG -eq 0 ] ; then
+   SAVED_FILTER_FLAG=1 # This flag is implied when -n is used
+   if [ ! -f "$SAVED_FILTERS" ] ; then
+      echo "$SAVED_FILTERS is not accessible"
+      exit 1
+   else
+      cat $SAVED_FILTERS > $FILTERS
+   fi
+fi
+
+#############################################
+###  Gather & Validate
+#############################################
+set_tbird_profile_dir
+
+if [ $SAVED_FILTER_FLAG -eq 0 ] ; then
+   get_filters
+fi 
+
+#############################################
+### Confirm before continuing ...
+#############################################
+if [ $NO_PROMPT_FLAG -eq 0 ] ; then
+   echo
+   echo "Confirm ..."
+   echo "==========="
+   echo "o Profile Directory ... $PROFILE_DIR"
+   echo "o Skip .msf's matching the following patterns:"
+   echo "-8-<---8-<---8-<---8-<---8-<--"
+   cat $FILTERS
+   echo "-8-<---8-<---8-<---8-<---8-<--"
+   echo
+   echo -n "Press ENTER to continue or CTRL-C to abort ... "
+   read MEH
+fi
+
+#############################################
+### Generate the Accounts
+#############################################
+MAIL_DIR="$PROFILE_DIR"/Mail
+IMAP_DIR="$PROFILE_DIR"/ImapMail
+
+if [ $WRITE_CONFIG_FLAG -eq 0 ] ; then
+   ( find $MAIL_DIR -mindepth 1 -type f -name '*.msf' $IGNORE_SYM_LINKS ;
+     find $IMAP_DIR -mindepth 1 -type f -name '*.msf' $IGNORE_SYM_LINKS ) |
+      egrep -v -f $FILTERS |
+      awk -v RGB=$COLOR -f $GEN_ACCOUNTS
+else
+   ( find $MAIL_DIR -mindepth 1 -type f -name '*.msf' $IGNORE_SYM_LINKS ;
+     find $IMAP_DIR -mindepth 1 -type f -name '*.msf' $IGNORE_SYM_LINKS ) |
+      egrep -v -f $FILTERS |
+      awk -v RGB=$COLOR -f $GEN_ACCOUNTS > $ACCOUNTS
+
+   if [ $? -ne 0 ] ; then
+      echo "Error creating Accounts"
+      exit 1
+   fi
+
+   #
+   # Preserve permissions of the original file in .bak
+   #
+   # We work against .bak
+   #
+   cp ${BIRDTRAY_CONF} ${BIRDTRAY_CONF}.bak
+   if [ $? -ne 0 ] ; then
+      echo "Original unaffected - could not create .bak"
+      exit 1
+   fi
+   echo "Created ${BIRDTRAY_CONF}.bak"
+
+   #
+   # Temporarily preserve the original - see the final step
+   #
+   cp ${BIRDTRAY_CONF} ${BIRDTRAY_CONF}.orig
+   if [ $? -ne 0 ] ; then
+      echo "Original unaffected - could not create .orig"
+      exit 1
+   fi
+   echo "Created ${BIRDTRAY_CONF}.orig"
+
+   #
+   # Remove the current Accounts, writing the results to .bak
+   #
+   awk -f $RM_ACCOUNTS ${BIRDTRAY_CONF} > ${BIRDTRAY_CONF}.bak
+   if [ $? -ne 0 ] ; then
+      echo "Original unaffected - error removing the old Accounts"
+      exit 1
+   fi
+   echo "Removed accounts from ${BIRDTRAY_CONF}.bak"
+
+   #
+   # Add the new Accounts to the .bak file
+   #
+   sed -i "/^[[]accounts[]]/ r $ACCOUNTS" ${BIRDTRAY_CONF}.bak
+   if [ $? -ne 0 ] ; then
+      echo "Original unaffected - failed to add new accounts"
+      exit 1
+   fi
+   echo "Added accounts to ${BIRDTRAY_CONF}.bak"
+
+   #
+   # Install the new file (.bak) and preserve the original
+   # file in .bak
+   #
+   # At this point:
+   #
+   # o .bak has the new file
+   # o .orig has the original file
+   # o config file is unaffected
+   #
+   cp ${BIRDTRAY_CONF}.bak ${BIRDTRAY_CONF}
+   if [ $? -ne 0 ] ; then
+      echo "Failed to copy .bak to the config file"
+      exit 1
+   fi
+   echo "Installed new config file from .bak"
+
+   cp ${BIRDTRAY_CONF}.orig ${BIRDTRAY_CONF}.bak
+   if [ $? -ne 0 ] ; then
+      echo "Failed to copy .orig to .bak"
+      exit 1
+   fi
+   echo "Saved .orig to .bak"
+
+   rm ${BIRDTRAY_CONF}.orig
+   if [ $? -ne 0 ] ; then
+      echo "Failed to remove .orig"
+      exit 1
+   fi
+   echo "Removed .orig"
+fi
+
+exit 0
