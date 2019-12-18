@@ -102,9 +102,11 @@ BIRDTRAY_CONF=$HOME/.config/ulduzsoft/birdtray.conf
 
 usage()
 {
-   printf "usage:  %s [ -c hex ] [ -d profile_dir ] [ -fhlnwx ]\n" $(basename $0)
+   printf "usage:  %s [ -b birdtray.config ] [ -c hex ] [ -d profile_dir ] [ -fhlnwx ]\n" $(basename $0)
    printf "\n"
    printf "where\n"
+   printf "\t-b /path/to/birdtray.config\n"
+   printf "\t   = Path to birdtray.config [$BIRDTRAY_CONF]\n"
    printf "\t-c hex\n"
    printf "\t   = The hex notificaiton color for all accounts [$NOTIFICATION_COLOR - bright green]\n"
    printf "\t-d profile_dir\n"
@@ -315,12 +317,8 @@ get_filters()
 }
 
 #############################################
-###  Initialize
+###  Start
 #############################################
-if [ ! -f "$BIRDTRAY_CONF" ] ; then
-   echo "birdtray .conf file inaccessible ($BIRDTRAY_CONF)"
-   exit 1
-fi
 
 #############################################
 ###  Process switches
@@ -333,12 +331,17 @@ WRITE_FILTERS_FLAG=0
 COLOR_FLAG=0
 COLOR='#'$NOTIFICATION_COLOR
 
+BIRDTRAY_CONF_FLAG=0
+
 PROFILE_DIR_FLAG=0
 PROFILE_DIR=
 
 WRITE_CONFIG_FLAG=0
-while getopts c:d:fhlnwx SWITCH ; do
+while getopts b:c:d:fhlnwx SWITCH ; do
    case $SWITCH in
+      b) BIRDTRAY_CONF_FLAG=1
+         BIRDTRAY_CONF="$OPTARG"
+         ;;
       c) COLOR_FLAG=1
          COLOR='#'"$OPTARG"
          ;;
@@ -371,6 +374,16 @@ while getopts c:d:fhlnwx SWITCH ; do
 done
 
 shift $(($OPTIND - 1))
+
+if [ $# -ne 0 ] ; then
+   echo "This script does not accept any arguments"
+   exit 1
+fi
+
+if [ ! -f "$BIRDTRAY_CONF" ] ; then
+   echo "birdtray.conf is notaccessible [$BIRDTRAY_CONF]"
+   exit 1
+fi
 
 if [ $NO_PROMPT_FLAG -eq 1 -a $SAVED_FILTER_FLAG -eq 0 ] ; then
    SAVED_FILTER_FLAG=1 # This flag is implied when -n is used
