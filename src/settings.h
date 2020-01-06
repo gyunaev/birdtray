@@ -108,6 +108,11 @@ class Settings
          * Ignore the total number of unread emails that are present at startup.
          */
         bool    ignoreStartUnreadCount;
+        
+        /**
+         * Enables or disabled the dialog on startup that shows if no accounts were configured.
+         */
+        bool    showDialogIfNoAccountsConfigured;
 
         // Watching file timeout (ms)
         unsigned int mWatchFileTimeout;

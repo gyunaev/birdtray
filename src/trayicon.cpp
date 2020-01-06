@@ -70,10 +70,20 @@ TrayIcon::TrayIcon(bool showSettings)
     }
     
     // If the settings are not yet configure, pop up the message
-    if ( showSettings || (settings->mFolderNotificationColors.isEmpty() && QMessageBox::question(
-            nullptr, tr( "Would you like to set up Birdtray?" ),
-            tr( "You have not yet configured any email folders to monitor. "
-                "Would you like to do it now?") ) == QMessageBox::Yes )) {
+    if (!showSettings && settings->showDialogIfNoAccountsConfigured
+        && settings->mFolderNotificationColors.isEmpty()) {
+        QMessageBox questionDialog(QMessageBox::Question, tr("Would you like to set up Birdtray?"),
+                tr("You have not yet configured any email folders to monitor. "
+                   "Would you like to do it now?"), QMessageBox::Yes | QMessageBox::No);
+        QPushButton* dontAskAgainButton = questionDialog.addButton(
+                tr("Don't ask again"), QMessageBox::RejectRole);
+        showSettings = questionDialog.exec() == QDialog::Accepted;
+        if (questionDialog.clickedButton() == dontAskAgainButton) {
+            settings->showDialogIfNoAccountsConfigured = false;
+            settings->save();
+        }
+    }
+    if (showSettings) {
         QTimer::singleShot(0, this, &TrayIcon::actionSettings);
     }
 }
