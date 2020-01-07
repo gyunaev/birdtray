@@ -9,6 +9,10 @@
 #include "windowtools.h"
 
 #define SINGLE_INSTANCE_SERVER_NAME "birdtray.ulduzsoft.single.instance.server.socket"
+#define TOGGLE_THUNDERBIRD_COMMAND "toggle"
+#define SHOW_THUNDERBIRD_COMMAND "show"
+#define HIDE_THUNDERBIRD_COMMAND "hide"
+#define SETTINGS_COMMAND "settings"
 
 
 BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
@@ -106,7 +110,7 @@ void BirdtrayApp::onSecondInstanceAttached() {
     QLocalSocket* clientSocket = singleInstanceServer->nextPendingConnection();
     if (clientSocket != nullptr) {
         connect(clientSocket, &QLocalSocket::readyRead,
-                this, [=] () {onSecondInstanceCommand(clientSocket);});
+                this, [=]() { onSecondInstanceCommand(clientSocket); });
     }
 }
 
@@ -152,10 +156,10 @@ void BirdtrayApp::parseCmdArguments() {
             {"dump-mork", tr("Display the contents of the given mork database."),
              tr("databaseFile")},
             {"decode", tr("Decode an IMAP Utf7 string."), tr("string")},
-            {"settings", tr("Show the settings.")},
-            {"toggle", tr("Toggle the Thunderbird window.")},
-            {"show", tr("Show the Thunderbird window.")},
-            {"hide", tr("Hide the Thunderbird window.")},
+            {SETTINGS_COMMAND, tr("Show the settings.")},
+            {TOGGLE_THUNDERBIRD_COMMAND, tr("Toggle the Thunderbird window.")},
+            {SHOW_THUNDERBIRD_COMMAND, tr("Show the Thunderbird window.")},
+            {HIDE_THUNDERBIRD_COMMAND, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
             {{"d", "debug"}, tr("Enable debugging output.")},
     });
@@ -165,19 +169,23 @@ void BirdtrayApp::parseCmdArguments() {
 bool BirdtrayApp::startSingleInstanceServer() {
     singleInstanceServer = new QLocalServer();
     bool serverListening = singleInstanceServer->listen(SINGLE_INSTANCE_SERVER_NAME);
-    if (!serverListening && (singleInstanceServer->serverError() == QAbstractSocket::AddressInUseError)) {
+    if (!serverListening
+        && (singleInstanceServer->serverError() == QAbstractSocket::AddressInUseError)) {
         if (connectToRunningInstance()) {
             return false;
         }
-        QLocalServer::removeServer(SINGLE_INSTANCE_SERVER_NAME); //cleanup
-        serverListening = singleInstanceServer->listen(SINGLE_INSTANCE_SERVER_NAME); //try again
+        // The other instance might have crashed, try to remove the dead socket and try again.
+        QLocalServer::removeServer(SINGLE_INSTANCE_SERVER_NAME);
+        serverListening = singleInstanceServer->listen(SINGLE_INSTANCE_SERVER_NAME);
     }
 
 #if defined(Q_OS_WIN)
+    // On Windows, binding to the same address as the other instance doesn't fail,
+    // so we use a mutex to detect if there is another Birdtray instance.
     if (serverListening) {
         CreateMutex(nullptr, true, TEXT(SINGLE_INSTANCE_SERVER_NAME));
-        if (GetLastError() == ERROR_ALREADY_EXISTS) { //someone has this Mutex
-            singleInstanceServer->close(); //disable server
+        if (GetLastError() == ERROR_ALREADY_EXISTS) {
+            singleInstanceServer->close(); // Disable our new server instance
             serverListening = false;
         }
     }
@@ -203,17 +211,17 @@ bool BirdtrayApp::connectToRunningInstance() const {
 }
 
 void BirdtrayApp::sendCommandsToRunningInstance(QLocalSocket &serverSocket) const {
-    if (commandLineParser.isSet("toggle")) {
-        serverSocket.write("toggle\n");
+    if (commandLineParser.isSet(TOGGLE_THUNDERBIRD_COMMAND)) {
+        serverSocket.write(TOGGLE_THUNDERBIRD_COMMAND "\n");
     }
-    if (commandLineParser.isSet("show")) {
-        serverSocket.write("show\n");
+    if (commandLineParser.isSet(SHOW_THUNDERBIRD_COMMAND)) {
+        serverSocket.write(SHOW_THUNDERBIRD_COMMAND "\n");
     }
-    if (commandLineParser.isSet("hide")) {
-        serverSocket.write("hide\n");
+    if (commandLineParser.isSet(HIDE_THUNDERBIRD_COMMAND)) {
+        serverSocket.write(HIDE_THUNDERBIRD_COMMAND "\n");
     }
-    if (commandLineParser.isSet("settings")) {
-        serverSocket.write("settings\n");
+    if (commandLineParser.isSet(SETTINGS_COMMAND)) {
+        serverSocket.write(SETTINGS_COMMAND "\n");
     }
 }
 
@@ -223,17 +231,17 @@ void BirdtrayApp::onSecondInstanceCommand(QLocalSocket* clientSocket) {
     }
     QByteArray line = clientSocket->readLine(128);
     line.chop(1);
-    if (line == "toggle") {
+    if (line == TOGGLE_THUNDERBIRD_COMMAND) {
         if (trayIcon->getWindowTools()->isHidden()) {
             trayIcon->showThunderbird();
         } else {
             trayIcon->hideThunderbird();
         }
-    } else if (line == "show") {
+    } else if (line == SHOW_THUNDERBIRD_COMMAND) {
         trayIcon->showThunderbird();
-    } else if (line == "hide") {
+    } else if (line == HIDE_THUNDERBIRD_COMMAND) {
         trayIcon->hideThunderbird();
-    } else if (line == "settings") {
+    } else if (line == SETTINGS_COMMAND) {
         trayIcon->showSettings();
     }
 }
