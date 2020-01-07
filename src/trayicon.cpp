@@ -77,7 +77,7 @@ TrayIcon::TrayIcon(bool showSettings)
                    "Would you like to do it now?"), QMessageBox::Yes | QMessageBox::No);
         QPushButton* dontAskAgainButton = questionDialog.addButton(
                 tr("Don't ask again"), QMessageBox::RejectRole);
-        showSettings = questionDialog.exec() == QDialog::Accepted;
+        showSettings = questionDialog.exec() == QMessageBox::Yes;
         if (questionDialog.clickedButton() == dontAskAgainButton) {
             settings->showDialogIfNoAccountsConfigured = false;
             settings->save();
