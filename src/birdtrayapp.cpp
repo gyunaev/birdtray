@@ -6,6 +6,13 @@
 #endif /* Q_OS_WIN */
 #include "utils.h"
 #include "morkparser.h"
+#include "windowtools.h"
+
+#define SINGLE_INSTANCE_SERVER_NAME "birdtray.ulduzsoft.single.instance.server.socket"
+#define TOGGLE_THUNDERBIRD_COMMAND "toggle"
+#define SHOW_THUNDERBIRD_COMMAND "show"
+#define HIDE_THUNDERBIRD_COMMAND "hide"
+#define SETTINGS_COMMAND "settings"
 
 
 BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
@@ -27,26 +34,30 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
     installNativeEventFilter(&filter);
 #endif /* Q_OS_WIN */
     
-    QCommandLineParser parser;
-    parseCmdArguments(parser);
+    parseCmdArguments();
     
-    QString morkPath = parser.value("dump-mork");
+    QString morkPath = commandLineParser.value("dump-mork");
     if (!morkPath.isEmpty()) {
-        exit(MorkParser::dumpMorkFile(morkPath));
+        QTimer::singleShot(0, [=]() { exit(MorkParser::dumpMorkFile(morkPath)); });
         return;
     }
-    QString imapString = parser.value("decode");
+    QString imapString = commandLineParser.value("decode");
     if (!imapString.isEmpty()) {
         printf("Decoded: %s\n", qPrintable(Utils::decodeIMAPutf7(imapString)));
-        exit(EXIT_SUCCESS);
+        QTimer::singleShot(0, &BirdtrayApp::quit);
+        return;
+    }
+    
+    if (!startSingleInstanceServer()) {
+        QTimer::singleShot(0, &BirdtrayApp::quit);
         return;
     }
     
     ensureSystemTrayAvailable();
     
     // Load settings
-    settings = new Settings(parser.isSet("debug"));
-    if (parser.isSet("reset-settings")) {
+    settings = new Settings(commandLineParser.isSet("debug"));
+    if (commandLineParser.isSet("reset-settings")) {
         settings->save(); // Saving without loading will reset the values
     } else {
         settings->load();
@@ -55,13 +66,18 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
         Utils::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
     }
     autoUpdater = new AutoUpdater();
-    trayIcon = new TrayIcon(parser.isSet("settings"));
+    trayIcon = new TrayIcon(commandLineParser.isSet("settings"));
 }
 
 BirdtrayApp::~BirdtrayApp() {
     delete trayIcon;
     delete autoUpdater;
     delete settings;
+    if (singleInstanceServer != nullptr) {
+        singleInstanceServer->close();
+        singleInstanceServer->deleteLater();
+        singleInstanceServer = nullptr;
+    }
 }
 
 BirdtrayApp* BirdtrayApp::get() {
@@ -88,6 +104,14 @@ bool BirdtrayApp::event(QEvent* event) {
         return true;
     }
     return QApplication::event(event);
+}
+
+void BirdtrayApp::onSecondInstanceAttached() {
+    QLocalSocket* clientSocket = singleInstanceServer->nextPendingConnection();
+    if (clientSocket != nullptr) {
+        connect(clientSocket, &QLocalSocket::readyRead,
+                this, [=]() { onSecondInstanceCommand(clientSocket); });
+    }
 }
 
 bool BirdtrayApp::loadTranslations() {
@@ -123,20 +147,103 @@ bool BirdtrayApp::loadTranslation(QTranslator &translator, QLocale &locale,
     return false;
 }
 
-void BirdtrayApp::parseCmdArguments(QCommandLineParser &parser) {
-    parser.setApplicationDescription(
+void BirdtrayApp::parseCmdArguments() {
+    commandLineParser.setApplicationDescription(
             tr("A free system tray notification for new mail for Thunderbird"));
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addOptions({
+    commandLineParser.addHelpOption();
+    commandLineParser.addVersionOption();
+    commandLineParser.addOptions({
             {"dump-mork", tr("Display the contents of the given mork database."),
              tr("databaseFile")},
             {"decode", tr("Decode an IMAP Utf7 string."), tr("string")},
-            {"settings", tr("Show the settings.")},
+            {SETTINGS_COMMAND, tr("Show the settings.")},
+            {TOGGLE_THUNDERBIRD_COMMAND, tr("Toggle the Thunderbird window.")},
+            {SHOW_THUNDERBIRD_COMMAND, tr("Show the Thunderbird window.")},
+            {HIDE_THUNDERBIRD_COMMAND, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
             {{"d", "debug"}, tr("Enable debugging output.")},
     });
-    parser.process(*this);
+    commandLineParser.process(*this);
+}
+
+bool BirdtrayApp::startSingleInstanceServer() {
+    singleInstanceServer = new QLocalServer();
+    bool serverListening = singleInstanceServer->listen(SINGLE_INSTANCE_SERVER_NAME);
+    if (!serverListening
+        && (singleInstanceServer->serverError() == QAbstractSocket::AddressInUseError)) {
+        if (connectToRunningInstance()) {
+            return false;
+        }
+        // The other instance might have crashed, try to remove the dead socket and try again.
+        QLocalServer::removeServer(SINGLE_INSTANCE_SERVER_NAME);
+        serverListening = singleInstanceServer->listen(SINGLE_INSTANCE_SERVER_NAME);
+    }
+
+#if defined(Q_OS_WIN)
+    // On Windows, binding to the same address as the other instance doesn't fail,
+    // so we use a mutex to detect if there is another Birdtray instance.
+    if (serverListening) {
+        CreateMutex(nullptr, true, TEXT(SINGLE_INSTANCE_SERVER_NAME));
+        if (GetLastError() == ERROR_ALREADY_EXISTS) {
+            singleInstanceServer->close(); // Disable our new server instance
+            serverListening = false;
+        }
+    }
+#endif
+    if (!serverListening) {
+        return !connectToRunningInstance();
+    }
+    connect(singleInstanceServer, &QLocalServer::newConnection,
+            this, &BirdtrayApp::onSecondInstanceAttached);
+    return true;
+}
+
+bool BirdtrayApp::connectToRunningInstance() const {
+    bool connectionSuccessful = false;
+    QLocalSocket serverSocket;
+    serverSocket.connectToServer(SINGLE_INSTANCE_SERVER_NAME, QLocalSocket::WriteOnly);
+    if (serverSocket.waitForConnected()) {
+        sendCommandsToRunningInstance(serverSocket);
+        connectionSuccessful = true;
+    }
+    serverSocket.disconnect();
+    return connectionSuccessful;
+}
+
+void BirdtrayApp::sendCommandsToRunningInstance(QLocalSocket &serverSocket) const {
+    if (commandLineParser.isSet(TOGGLE_THUNDERBIRD_COMMAND)) {
+        serverSocket.write(TOGGLE_THUNDERBIRD_COMMAND "\n");
+    }
+    if (commandLineParser.isSet(SHOW_THUNDERBIRD_COMMAND)) {
+        serverSocket.write(SHOW_THUNDERBIRD_COMMAND "\n");
+    }
+    if (commandLineParser.isSet(HIDE_THUNDERBIRD_COMMAND)) {
+        serverSocket.write(HIDE_THUNDERBIRD_COMMAND "\n");
+    }
+    if (commandLineParser.isSet(SETTINGS_COMMAND)) {
+        serverSocket.write(SETTINGS_COMMAND "\n");
+    }
+}
+
+void BirdtrayApp::onSecondInstanceCommand(QLocalSocket* clientSocket) {
+    if (!clientSocket->canReadLine()) {
+        return;
+    }
+    QByteArray line = clientSocket->readLine(128);
+    line.chop(1);
+    if (line == TOGGLE_THUNDERBIRD_COMMAND) {
+        if (trayIcon->getWindowTools()->isHidden()) {
+            trayIcon->showThunderbird();
+        } else {
+            trayIcon->hideThunderbird();
+        }
+    } else if (line == SHOW_THUNDERBIRD_COMMAND) {
+        trayIcon->showThunderbird();
+    } else if (line == HIDE_THUNDERBIRD_COMMAND) {
+        trayIcon->hideThunderbird();
+    } else if (line == SETTINGS_COMMAND) {
+        trayIcon->showSettings();
+    }
 }
 
 void BirdtrayApp::ensureSystemTrayAvailable() {

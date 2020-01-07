@@ -84,7 +84,7 @@ TrayIcon::TrayIcon(bool showSettings)
         }
     }
     if (showSettings) {
-        QTimer::singleShot(0, this, &TrayIcon::actionSettings);
+        QTimer::singleShot(0, this, &TrayIcon::showSettings);
     }
 }
 
@@ -440,7 +440,7 @@ void TrayIcon::actionQuit()
     QApplication::quit();
 }
 
-void TrayIcon::actionSettings()
+void TrayIcon::showSettings()
 {
     if (settingsDialog != nullptr) {
         settingsDialog->show();
@@ -642,7 +642,7 @@ void TrayIcon::createMenu()
     mSystrayMenu->addSeparator();
 
     // Some generic actions
-    mSystrayMenu->addAction( tr("Settings..."), this, SLOT(actionSettings()) );
+    mSystrayMenu->addAction( tr("Settings..."), this, SLOT(showSettings()) );
 
     mSystrayMenu->addSeparator();
 
