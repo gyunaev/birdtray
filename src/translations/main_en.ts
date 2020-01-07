@@ -796,6 +796,10 @@ Do you want to continue?</source>
         <source>Warning: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Don&apos;t ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UnreadMonitor</name>

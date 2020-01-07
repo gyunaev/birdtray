@@ -821,6 +821,10 @@ Wollen Sie fortfahren?</translation>
         <source>Warning: %1</source>
         <translation>Warnung: %1</translation>
     </message>
+    <message>
+        <source>Don&apos;t ask again</source>
+        <translation>Nicht nochmal fragen</translation>
+    </message>
 </context>
 <context>
     <name>UnreadMonitor</name>
