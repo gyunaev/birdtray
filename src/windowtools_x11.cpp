@@ -185,33 +185,27 @@ static bool analyzeWindow(Display *display, Window w, const QString &ename )
  */
 static Window findWindow(Display *display, Window window, bool checkNormality, const QString &ename, QList<Window> dockedWindows = QList<Window>() )
 {
-    Window w = None;
+    Window targetWindow = None;
     Window root;
     Window parent;
-    Window *child;
+    Window *children;
     unsigned int num_child;
 
-    if (XQueryTree(display, window, &root, &parent, &child, &num_child) != 0) {
+    if (XQueryTree(display, window, &root, &parent, &children, &num_child) != 0) {
         for (unsigned int i = 0; i < num_child; i++) {
-            if (analyzeWindow(display, child[i], ename)) {
-                if (!dockedWindows.contains(child[i])) {
-                    if (checkNormality) {
-                        if (isNormalWindow(display, child[i])) {
-                            return child[i];
-                        }
-                    } else {
-                        return child[i];
-                    }
-                }
+            if (analyzeWindow(display, children[i], ename) && !dockedWindows.contains(children[i])
+                && (!checkNormality || isNormalWindow(display, children[i]))) {
+                targetWindow = children[i];
+                break;
             }
-
-            w = findWindow(display, child[i], checkNormality, ename);
-            if (w != None) {
+            targetWindow = findWindow(display, children[i], checkNormality, ename);
+            if (targetWindow != None) {
                 break;
             }
         }
+        XFree(children);
     }
-    return w;
+    return targetWindow;
 }
 
 /*
@@ -249,6 +243,9 @@ static Window activeWindow(Display * display) {
     } else {
         int revert;
         XGetInputFocus(display, &w, &revert);
+    }
+    if (r == Success) {
+        XFree(data);
     }
     return w;
 }
