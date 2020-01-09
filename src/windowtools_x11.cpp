@@ -244,6 +244,9 @@ static Window activeWindow(Display * display) {
         int revert;
         XGetInputFocus(display, &w, &revert);
     }
+    if (r == Success) {
+        XFree(data);
+    }
     return w;
 }
 
