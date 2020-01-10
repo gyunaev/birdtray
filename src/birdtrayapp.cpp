@@ -9,9 +9,9 @@
 #include "windowtools.h"
 
 #define SINGLE_INSTANCE_SERVER_NAME "birdtray.ulduzsoft.single.instance.server.socket"
-#define TOGGLE_THUNDERBIRD_COMMAND "toggle"
-#define SHOW_THUNDERBIRD_COMMAND "show"
-#define HIDE_THUNDERBIRD_COMMAND "hide"
+#define TOGGLE_THUNDERBIRD_COMMAND "toggle-thunderbird"
+#define SHOW_THUNDERBIRD_COMMAND "show-thunderbird"
+#define HIDE_THUNDERBIRD_COMMAND "hide-thunderbird"
 #define SETTINGS_COMMAND "settings"
 
 
