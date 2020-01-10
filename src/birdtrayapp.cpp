@@ -9,9 +9,9 @@
 #include "windowtools.h"
 
 #define SINGLE_INSTANCE_SERVER_NAME "birdtray.ulduzsoft.single.instance.server.socket"
-#define TOGGLE_THUNDERBIRD_COMMAND "toggle"
-#define SHOW_THUNDERBIRD_COMMAND "show"
-#define HIDE_THUNDERBIRD_COMMAND "hide"
+#define TOGGLE_THUNDERBIRD_COMMAND "toggle-tb"
+#define SHOW_THUNDERBIRD_COMMAND "show-tb"
+#define HIDE_THUNDERBIRD_COMMAND "hide-tb"
 #define SETTINGS_COMMAND "settings"
 
 
@@ -157,9 +157,9 @@ void BirdtrayApp::parseCmdArguments() {
              tr("databaseFile")},
             {"decode", tr("Decode an IMAP Utf7 string."), tr("string")},
             {SETTINGS_COMMAND, tr("Show the settings.")},
-            {TOGGLE_THUNDERBIRD_COMMAND, tr("Toggle the Thunderbird window.")},
-            {SHOW_THUNDERBIRD_COMMAND, tr("Show the Thunderbird window.")},
-            {HIDE_THUNDERBIRD_COMMAND, tr("Hide the Thunderbird window.")},
+            {{"t", TOGGLE_THUNDERBIRD_COMMAND}, tr("Toggle the Thunderbird window.")},
+            {{"s", SHOW_THUNDERBIRD_COMMAND}, tr("Show the Thunderbird window.")},
+            {{"H", HIDE_THUNDERBIRD_COMMAND}, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
             {{"d", "debug"}, tr("Enable debugging output.")},
     });
