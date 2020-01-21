@@ -334,6 +334,16 @@ void DialogSettings::accountAdd()
             return;
         }
         mAccountModel->addAccount(dlg.account(), dlg.color());
+    } else if (QGuiApplication::keyboardModifiers() & Qt::ShiftModifier &&
+               QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
+        QStringList files = QFileDialog::getOpenFileNames(
+                nullptr, tr("Choose one or more MSF files"), "", tr("Mail Index (*.msf)"));
+        if (files.isEmpty()) {
+            return;
+        }
+        for (const QString &file : files) {
+            mAccountModel->addAccount(file, btnNotificationColor->color());
+        }
     } else {
         MailAccountDialog accountDialog(this, btnNotificationColor->color());
         if (accountDialog.exec() != QDialog::Accepted) {
