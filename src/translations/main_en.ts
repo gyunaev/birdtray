@@ -393,10 +393,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>opaque when new mail is present</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Check for new updates when Birdtray starts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -535,6 +531,22 @@ Do you want to clear the accounts?</source>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose one or more MSF files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>opaque when new mail is present,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hide it if no new mail is present</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

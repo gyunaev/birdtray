@@ -80,6 +80,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     spinThunderbirdStartDelay->setValue( settings->mLaunchThunderbirdDelay );
     boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
     ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
+    onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
 
     // Form the proper command-line (with escaped arguments if they contain spaces
     QString tbcmdline;
@@ -193,6 +194,7 @@ void DialogSettings::accept()
     settings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
     settings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
     settings->ignoreStartUnreadCount = ignoreStartupMailCountBox->isChecked();
+    settings->onlyShowIconOnUnreadMessages = onlyShowIconOnNewMail->isChecked();
 
     settings->setNotificationIcon(btnNotificationIcon->icon().pixmap( settings->mIconSize ));
 

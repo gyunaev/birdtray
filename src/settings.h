@@ -113,6 +113,11 @@ class Settings
          * Enables or disabled the dialog on startup that shows if no accounts were configured.
          */
         bool    showDialogIfNoAccountsConfigured;
+        
+        /**
+         * Whether to show the Birdtray system tray icon only if there are unread Mail messages.
+         */
+        bool    onlyShowIconOnUnreadMessages;
 
         // Watching file timeout (ms)
         unsigned int mWatchFileTimeout;

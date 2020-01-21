@@ -9,6 +9,7 @@
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
+#define ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY "advanced/onlyShowIconOnUnreadMessages"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
 
 Settings::Settings(bool verboseOutput)
@@ -54,6 +55,7 @@ Settings::Settings(bool verboseOutput)
     mWatchFileTimeout = 150;
     mBlinkingUseAlphaTransition = false;
     mUpdateOnStartup = false;
+    onlyShowIconOnUnreadMessages = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
@@ -98,6 +100,7 @@ void Settings::save()
     mSettings->setValue("advanced/unreadopacitylevel", mUnreadOpacityLevel );
     mSettings->setValue(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup );
     mSettings->setValue("advanced/ignoreUpdateVersion", mIgnoreUpdateVersion );
+    mSettings->setValue(ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY, onlyShowIconOnUnreadMessages );
 
     // Convert the map into settings
     mSettings->setValue("accounts/count", mFolderNotificationColors.size() );
@@ -195,6 +198,8 @@ void Settings::load()
     mUnreadOpacityLevel = mSettings->value(
             "advanced/unreadopacitylevel", mUnreadOpacityLevel ).toDouble();
     mUpdateOnStartup = mSettings->value(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup ).toBool();
+    onlyShowIconOnUnreadMessages = mSettings->value(
+            ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY, onlyShowIconOnUnreadMessages ).toBool();
     mIgnoreUpdateVersion = mSettings->value(
             "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
 

@@ -396,10 +396,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Setze die Transparenz des Taskleistensymbols auf</translation>
     </message>
     <message>
-        <source>opaque when new mail is present</source>
-        <translation>beim Eingang neuer Mails</translation>
-    </message>
-    <message>
         <source>Check for new updates when Birdtray starts</source>
         <translation>Suche nach Aktualisierungen, wenn Birdtray startet</translation>
     </message>
@@ -576,6 +572,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Ignoriere alle ungelesenen Emails, die beim Starten von Birdtray bereits vorhanden sind. Nur neue Emails werden bei der Berechnung der Anzahl ungelesener Emails beachtet.</translation>
+    </message>
+    <message>
+        <source>Choose one or more MSF files</source>
+        <translation>Wähle eine oder mehrere MSF Dateien</translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation>Mail Index (*.msf)</translation>
+    </message>
+    <message>
+        <source>opaque when new mail is present,</source>
+        <translation>beim Eingang neuer Mails,</translation>
+    </message>
+    <message>
+        <source>hide it if no new mail is present</source>
+        <translation>verstecke es, wenn es keine neuen Mails gibt.</translation>
     </message>
     <message>
         <source>No new updates found</source>

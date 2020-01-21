@@ -201,6 +201,12 @@ void TrayIcon::updateIcon()
         if ( unread == 0 && mBlinkingTimeout != 0 )
             enableBlinking( false );
     }
+    if (settings->onlyShowIconOnUnreadMessages && unread == 0) {
+        this->hide();
+        return;
+    } else {
+        this->show();
+    }
 
     QPixmap temp(settings->getNotificationIcon().size());
     QPainter p;
