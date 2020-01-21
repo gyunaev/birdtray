@@ -534,10 +534,6 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose one or more MSF files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Mail Index (*.msf)</source>
         <translation type="unfinished"></translation>
     </message>
