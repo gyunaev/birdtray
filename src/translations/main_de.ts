@@ -574,10 +574,6 @@ p, li { white-space: pre-wrap; }
         <translation>Ignoriere alle ungelesenen Emails, die beim Starten von Birdtray bereits vorhanden sind. Nur neue Emails werden bei der Berechnung der Anzahl ungelesener Emails beachtet.</translation>
     </message>
     <message>
-        <source>Mail Index (*.msf)</source>
-        <translation>Mail Index (*.msf)</translation>
-    </message>
-    <message>
         <source>opaque when new mail is present,</source>
         <translation>beim Eingang neuer Mails,</translation>
     </message>
