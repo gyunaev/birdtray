@@ -70,14 +70,14 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
 }
 
 BirdtrayApp::~BirdtrayApp() {
-    delete trayIcon;
-    delete autoUpdater;
-    delete settings;
     if (singleInstanceServer != nullptr) {
         singleInstanceServer->close();
         singleInstanceServer->deleteLater();
         singleInstanceServer = nullptr;
     }
+    delete trayIcon;
+    delete autoUpdater;
+    delete settings;
 }
 
 BirdtrayApp* BirdtrayApp::get() {
