@@ -31,9 +31,10 @@ Q_SIGNALS:
     /**
      * Indicates that an update check finished.
      *
+     * @param hasUpdate true if a new update was found.
      * @param errorString An error String of the request failed, else a null string.
      */
-    void onCheckUpdateFinished(const QString &errorString);
+    void onCheckUpdateFinished(bool hasUpdate, const QString &errorString);
 
 public slots:
     

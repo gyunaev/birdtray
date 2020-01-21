@@ -110,9 +110,10 @@ class TrayIcon : public QSystemTrayIcon
         /**
          * Called when the auto update finished.
          *
+         * @param hasUpdate true if a new update was found.
          * @param errorMessage A message indicating an error during the check, or a null string.
          */
-        void    onAutoUpdateCheckFinished(const QString& errorMessage);
+        void    onAutoUpdateCheckFinished(bool foundUpdate, const QString& errorMessage);
 
     private:
         void    createMenu();

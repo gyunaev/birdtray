@@ -245,7 +245,7 @@ void DialogSettings::profilePathChanged()
 
 }
 
-void DialogSettings::onCheckUpdateFinished(const QString &errorString) {
+void DialogSettings::onCheckUpdateFinished(bool foundUpdate, const QString &errorString) {
     if (checkUpdateButton->isEnabled()) {
         return; // We received an error that was not initiated by us. Ignore it.
     }
@@ -256,6 +256,8 @@ void DialogSettings::onCheckUpdateFinished(const QString &errorString) {
                 nullptr, tr("Version check failed"),
                 tr("Failed to check for a new Birdtray version:\n") + errorString,
                 QMessageBox::StandardButton::Ok);
+    } else {
+        noUpdateIndicator->setVisible(!foundUpdate);
     }
 }
 
@@ -505,6 +507,8 @@ void DialogSettings::activateTab(int tabIndex) {
     // #1 is the Accounts tab
     if (tabIndex == 1) {
         updateAccountList();
+    } else if (tabIndex == 4) {
+        noUpdateIndicator->hide();
     }
 }
 

@@ -748,7 +748,8 @@ void TrayIcon::onQuit() {
     }
 }
 
-void TrayIcon::onAutoUpdateCheckFinished(const QString &errorMessage) {
+void TrayIcon::onAutoUpdateCheckFinished(bool foundUpdate, const QString &errorMessage) {
+    Q_UNUSED(foundUpdate)
     AutoUpdater* autoUpdater = BirdtrayApp::get()->getAutoUpdater();
     if (errorMessage.isNull()) {
         disconnect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,

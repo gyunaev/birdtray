@@ -903,6 +903,19 @@
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="noUpdateIndicator">
+              <property name="text">
+               <string>No new updates found</string>
+              </property>
+              <property name="textInteractionFlags">
+               <set>Qt::NoTextInteraction</set>
+              </property>
+              <property name="visible">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>

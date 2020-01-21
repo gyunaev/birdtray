@@ -33,8 +33,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         
         /**
          * Called once the update check finished.
+         *
+         * @param hasUpdate true if a new update was found.
+         * @param errorMessage A message indicating an error during the check, or a null string.
          */
-        void    onCheckUpdateFinished(const QString &errorString);
+        void    onCheckUpdateFinished(bool foundUpdate, const QString &errorString);
 
         // Calls the database fixer running in a DatabaseFixer thread
         // Receives databaseUnreadsFixed() once fixed
