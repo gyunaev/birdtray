@@ -868,7 +868,7 @@
             <item>
              <widget class="QCheckBox" name="onlyShowIconOnNewMail">
               <property name="text">
-               <string>hide it if no new mail is present</string>
+               <string>hide it if no new mail is present.</string>
               </property>
              </widget>
             </item>

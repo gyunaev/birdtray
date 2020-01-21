@@ -546,7 +546,7 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>hide it if no new mail is present</source>
+        <source>hide it if no new mail is present.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

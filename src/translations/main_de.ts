@@ -586,7 +586,7 @@ p, li { white-space: pre-wrap; }
         <translation>beim Eingang neuer Mails,</translation>
     </message>
     <message>
-        <source>hide it if no new mail is present</source>
+        <source>hide it if no new mail is present.</source>
         <translation>verstecke es, wenn es keine neuen Mails gibt.</translation>
     </message>
     <message>
