@@ -205,8 +205,8 @@ bool BirdtrayApp::connectToRunningInstance() const {
     if (serverSocket.waitForConnected()) {
         sendCommandsToRunningInstance(serverSocket);
         connectionSuccessful = true;
+        serverSocket.disconnectFromServer();
     }
-    serverSocket.disconnect();
     return connectionSuccessful;
 }
 
