@@ -223,6 +223,7 @@ void BirdtrayApp::sendCommandsToRunningInstance(QLocalSocket &serverSocket) cons
     if (commandLineParser.isSet(SETTINGS_COMMAND)) {
         serverSocket.write(SETTINGS_COMMAND "\n");
     }
+    serverSocket.flush();
 }
 
 void BirdtrayApp::onSecondInstanceCommand(QLocalSocket* clientSocket) {
