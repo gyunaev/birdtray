@@ -1004,19 +1004,19 @@ p, li { white-space: pre-wrap; }
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>notificationFont</tabstop>
+  <tabstop>notificationFontWeight</tabstop>
+  <tabstop>btnNotificationColor</tabstop>
+  <tabstop>borderColorButton</tabstop>
+  <tabstop>borderWidthSlider</tabstop>
   <tabstop>sliderBlinkingSpeed</tabstop>
   <tabstop>btnNotificationIcon</tabstop>
   <tabstop>boxShowUnreadCount</tabstop>
   <tabstop>boxNotificationIconUnread</tabstop>
   <tabstop>btnNotificationIconUnread</tabstop>
-  <tabstop>btnNotificationColor</tabstop>
-  <tabstop>notificationFontWeight</tabstop>
-  <tabstop>borderColorButton</tabstop>
-  <tabstop>borderWidthSlider</tabstop>
   <tabstop>btnFixUnreadCount</tabstop>
   <tabstop>boxParserSelection</tabstop>
-  <tabstop>leProfilePath</tabstop>
   <tabstop>btnBrowse</tabstop>
+  <tabstop>leProfilePath</tabstop>
   <tabstop>treeAccounts</tabstop>
   <tabstop>btnAccountAdd</tabstop>
   <tabstop>btnAccountEdit</tabstop>
@@ -1037,6 +1037,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>btnNewEmailAdd</tabstop>
   <tabstop>btnNewEmailEdit</tabstop>
   <tabstop>btnNewEmailDelete</tabstop>
+  <tabstop>leThunderbirdCmdLine</tabstop>
   <tabstop>leThunderbirdWindowMatch</tabstop>
   <tabstop>spinMinimumFontSize</tabstop>
   <tabstop>boxBlinkingUsesAlpha</tabstop>
