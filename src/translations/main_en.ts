@@ -563,75 +563,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MailAccountDialog</name>
     <message>
-        <source>Mail Accounts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thunderbird Profiles Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select the directory that contains the Thunderbird profiles.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thunderbird Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select theThunderbird profile, that contains the mail account which you want to monitor.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Selected Profile:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Accounts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select the mail accounts you want to monitor.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notification Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Choose the Thunderbird profiles path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird profile directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please enter the path to a valid directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Thunderbird profile directory contains no profiles.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please select a valid Thunderbird profile.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The selected Thunderbird profile does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -644,7 +576,44 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Select Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the directory that contains the Thunderbird profiles.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thunderbird Profiles Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the mail accounts you want to monitor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Email Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notification Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (Profile)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No mail profiles were found.
+Please make sure you selected the correct profiles directory.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

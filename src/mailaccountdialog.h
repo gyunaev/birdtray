@@ -5,33 +5,55 @@
 #include <QWizard>
 #include <QtCore/QDir>
 #include <QtWidgets/QTreeWidgetItem>
+#include <utility>
 
 namespace Ui {
     class MailAccountDialog;
 }
 
-class MailAccountDialog : public QWizard {
-public:
-    enum PageId : int {
-        noPage = -1,
-        profilesDirPage,
-        profilePage,
-        accountsPage,
-    };
-
+/**
+ * A QTreeWidget that displays a custom text if no items are in the tree.
+ */
+class AccountsTreeWidget : public QTreeWidget {
 Q_OBJECT
-protected:
-    void initializePage(int id) override;
+Q_PROPERTY(QString emptyText READ emptyText WRITE setEmptyText)
+public:
+    explicit AccountsTreeWidget(QWidget* parent = nullptr, QString emptyText = QString()) :
+            QTreeWidget(parent), _emptyText(std::move(emptyText)) {
+    }
+    
+    /**
+     * @param emptyText The new text that is displayed if the tree is empty.
+     */
+    void setEmptyText(const QString &emptyText) {
+        _emptyText = emptyText;
+    }
+    
+    /**
+     * @return The text that is displayed if the tree is empty.
+     */
+    const QString &emptyText() const {
+        return _emptyText;
+    }
 
+protected:
+    /**
+     * The text that is displayed if the tree is empty.
+     */
+    QString _emptyText;
+    
+    void paintEvent(QPaintEvent* event) override;
+};
+
+/**
+ * A dialog that lets the user add new msf files to monitor.
+ */
+class MailAccountDialog : public QDialog {
+Q_OBJECT
 public:
     explicit MailAccountDialog(QWidget* parent = nullptr, QColor defaultColor = Qt::black);
     
     ~MailAccountDialog() override;
-    
-    /**
-     * @return True if the values selected on the current page are valid.
-     */
-    bool validateCurrentPage() override;
     
     /**
      * Returns the list of paths to the selected msf files as well as the optional selected color.
@@ -39,30 +61,18 @@ public:
      * @param outList: The list of paths to the selected msf files and the selected color.
      */
     void getSelectedAccounts(QList<std::tuple<QString, QColor>> &outList) const;
+    
+    void accept() override;
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private Q_SLOTS:
-    
-    /**
-     * Called when the current page id of the wizard changes.
-     * @param id The new page id.
-     */
-    void onCurrentIdChanged(int id);
     
     /**
      * Called when the user clicks on th button to browse for the Thunderbird profiles directory.
      */
     void onProfilesDirBrowseButtonClicked();
-    
-    /**
-     * Called when the user presses enter on the Thunderbird profiles directory path text editor.
-     */
-    void onProfilesDirEditCommit();
-    
-    /**
-     * Called when the profile selection changes.
-     * @param newProfileIndex The index of the new selected profile.
-     */
-    void onProfileSelectionChanged(int newProfileIndex);
     
     /**
      * Called when an account item in the accounts list changed.
@@ -72,41 +82,45 @@ private Q_SLOTS:
     static void onAccountItemChanged(QTreeWidgetItem* item, int column);
 
 private:
-    /**
-     * Set up the profiles directory page.
-     */
-    void initializeProfilesDirPage();
     
     /**
-     * @return Whether or not the selected profiles directory is valid.
+     * Populate the list of profiles and accounts and mail folders.
      */
-    bool validateProfilesDirPage();
+    void loadProfiles();
     
     /**
-     * Set up the Thunderbird profiles page.
+     * Populate the profiles tree item with the accounts and mail folders.
+     *
+     * @param profileTreeItem The profiles tree item to populate.
+     * @param mailFolders The mail folders for the profiles, which contain the account folders.
      */
-    void initializeTbProfilesPage();
+    void loadAccounts(QTreeWidgetItem* profileTreeItem, const QStringList &mailFolders);
     
     /**
-     * @return Whether or not the selected Thunderbird profile is valid.
+     * @return An iterator over all checked account items from the accountList.
      */
-    bool validateTbProfilesPage();
+    Q_ALWAYS_INLINE QTreeWidgetItemIterator iterateCheckedAccountItems() const;
     
     /**
-     * Set up the accounts selection page.
+     * Determine all mail folders in the profile directory.
+     * Mail folders are folders which contain msf files.
+     *
+     * @param profileDirPath The path to the profile directory.
+     * @return A list of absolute file paths to the mail folders.
      */
-    void initializeAccountsPage();
+    static QStringList getMailFoldersFor(const QString &profileDirPath);
     
     /**
-     * @return Whether or not the account selection is valid.
+     * Get the name of the profile from the profile directory name.
+     *
+     * @param profileDirName The profile directory name.
+     * @return The name of the profile.
      */
-    bool validateAccountsPage();
+    static QString getProfileName(const QString &profileDirName);
     
     /**
-     * @return All checked account items from the accountList.
+     * The UI of the dialog.
      */
-    QList<QTreeWidgetItem*> getCheckedAccountItems() const;
-    
     Ui::MailAccountDialog* ui;
     
     /**
@@ -115,19 +129,9 @@ private:
     const QColor defaultColor;
     
     /**
-     * The id of the furthest page we have reached;
+     * The current directory path that contains the profiles.
      */
-    PageId furthestPage = noPage;
-    
-    /**
-     * The directory containing the Thunderbird profiles.
-     */
-    QDir* profilesDir = nullptr;
-    
-    /**
-     * The directories of the selected Thunderbird profile that contain the mail folder msf files.
-     */
-    QList<QDir> thunderbirdProfileMailDirs;
+    QString profilesDirPath;
 };
 
 #endif // MAIL_ACCOUNT_DIALOG_H

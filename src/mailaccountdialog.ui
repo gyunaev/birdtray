@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MailAccountDialog</class>
- <widget class="QWizard" name="MailAccountDialog">
+ <widget class="QDialog" name="MailAccountDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,137 +11,128 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Mail Accounts</string>
+   <string>Select Accounts</string>
   </property>
-  <property name="wizardStyle">
-   <enum>QWizard::AeroStyle</enum>
-  </property>
-  <widget class="QWizardPage" name="profilesDirPage">
-   <property name="title">
-    <string>Thunderbird Profiles Directory</string>
-   </property>
-   <property name="subTitle">
-    <string>Select the directory that contains the Thunderbird profiles.</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">MailAccountDialog::PageId::profilesDirPage</string>
-   </attribute>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLineEdit" name="tbProfilesPathEdit">
-      <property name="placeholderText">
-       <string>Thunderbird Profiles Directory</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="tbProfilesBrowseButton">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Select the directory that contains the Thunderbird profiles.</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="tbProfilesPathEdit">
+        <property name="placeholderText">
+         <string>Thunderbird Profiles Directory</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="tbProfilesBrowseButton">
+        <property name="text">
+         <string>Browse</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Select the mail accounts you want to monitor.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="AccountsTreeWidget" name="accountsList">
+     <property name="tabKeyNavigation">
+      <bool>true</bool>
+     </property>
+     <property name="showDropIndicator" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="columnCount">
+      <number>2</number>
+     </property>
+     <property name="emptyText" stdset="0">
+      <string>No mail profiles were found.
+Please make sure you selected the correct profiles directory.</string>
+     </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>300</number>
+     </attribute>
+     <column>
       <property name="text">
-       <string>Browse</string>
+       <string>Email Folder</string>
       </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWizardPage" name="profilePage">
-   <property name="title">
-    <string>Thunderbird Profile</string>
-   </property>
-   <property name="subTitle">
-    <string>Select theThunderbird profile, that contains the mail account which you want to monitor.</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">MailAccountDialog::PageId::profilePage</string>
-   </attribute>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
+     </column>
+     <column>
       <property name="text">
-       <string>Selected Profile:</string>
+       <string>Notification Color</string>
       </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Preferred</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QComboBox" name="profileSelector">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWizardPage" name="accountsPage">
-   <property name="title">
-    <string>Select Accounts</string>
-   </property>
-   <property name="subTitle">
-    <string>Select the mail accounts you want to monitor.</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">MailAccountDialog::PageId::accountsPage</string>
-   </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QTreeWidget" name="accountsList">
-      <property name="tabKeyNavigation">
-       <bool>true</bool>
-      </property>
-      <property name="showDropIndicator" stdset="0">
-       <bool>true</bool>
-      </property>
-      <property name="columnCount">
-       <number>2</number>
-      </property>
-      <attribute name="headerDefaultSectionSize">
-       <number>300</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Email Folder</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Notification Color</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AccountsTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>mailaccountdialog.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>MailAccountDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>384</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>144</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>MailAccountDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>223</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
