@@ -577,6 +577,10 @@ p, li { white-space: pre-wrap; }
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Ignoriere alle ungelesenen Emails, die beim Starten von Birdtray bereits vorhanden sind. Nur neue Emails werden bei der Berechnung der Anzahl ungelesener Emails beachtet.</translation>
     </message>
+    <message>
+        <source>No new updates found</source>
+        <translation>Keine neue Version gefunden</translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>

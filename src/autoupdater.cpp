@@ -49,7 +49,8 @@ void AutoUpdater::checkForUpdates() {
     QNetworkReply* result = networkAccessManager->get(
             QNetworkRequest(QUrl(LATEST_VERSION_INFO_URL)));
     if (result != nullptr && result->sslConfiguration().isNull()) {
-        emit onCheckUpdateFinished(tr("No ssl configuration!\nOpenSSL might not be installed."));
+        emit onCheckUpdateFinished(
+                false, tr("No ssl configuration!\nOpenSSL might not be installed."));
     }
 }
 
@@ -57,7 +58,7 @@ void AutoUpdater::onRequestFinished(QNetworkReply* result) {
     bool isVersionInfoResult = result->url() == QUrl(LATEST_VERSION_INFO_URL);
     if (result->error()) {
         if (isVersionInfoResult) {
-            emit onCheckUpdateFinished(result->errorString());
+            emit onCheckUpdateFinished(false, result->errorString());
         } else {
             QString errorMessage;
             if (installerFile.error() != QFileDevice::NoError) {
@@ -189,6 +190,7 @@ void AutoUpdater::onReleaseInfoRequestFinished(QNetworkReply* result) {
     QJsonObject response = responseDocument.object();
     QString releaseTag = response["tag_name"].toString();
     int version[3];
+    bool foundUpdate = false;
     if (!updateDialog.isVisible() && parseReleaseTag(version, releaseTag) &&
         versionGrater(version, {VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH})) {
         qulonglong downloadSize = parseDownloadUrl(
@@ -199,10 +201,11 @@ void AutoUpdater::onReleaseInfoRequestFinished(QNetworkReply* result) {
             if (versionString != BirdtrayApp::get()->getSettings()->mIgnoreUpdateVersion) {
                 haveActualInstallerDownloadUrl = downloadSize != (qulonglong) -1;
                 updateDialog.show(versionString, response["body"].toString(), downloadSize);
+                foundUpdate = true;
             }
         }
     }
-    emit onCheckUpdateFinished(QString());
+    emit onCheckUpdateFinished(foundUpdate, QString());
 }
 
 void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
