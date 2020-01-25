@@ -1,0 +1,70 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        arch: [x86, x64]
+        qt_version: [5.6, 5.9, 5.13.2]
+        include:
+          - os: windows-latest
+            arch: x86
+            qt_compile_suite: win32_msvc2017
+          - os: windows-latest
+            arch: x64
+            qt_compile_suite: win64_msvc2017_64
+        exclude:
+          # We only want to test for the latest version of Qt on Windows
+          - os: windows-latest
+            qt_version: 5.6
+          - os: windows-latest
+            qt_version: 5.9
+          # We only compile for the current architecture of the runner for linux
+          - os: ubuntu-latest
+            arch: x86
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Qt ${{ matrix.qt_version }}
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt_version }}
+          arch: ${{ matrix.qt_compile_suite }}
+      - name: Install additional dependencies
+        shell: bash
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            sudo apt-get update -qq;
+            sudo apt install -qq libsqlite3-dev libx11-dev
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+            export sqliteDir=C:\\ProgramData\\chocolatey\\lib\\SQLite\\tools
+            if [ "$ARCH" == "x86" ]; then
+              echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
+            else
+              echo "::set-env name=CMAKE_PLATFORM_ARG::-A x64"
+            fi
+            echo "::set-env name=CMAKE_PREFIX_PATH::$sqliteDir"
+            choco install -y sqlite --params \"/NoTools\"
+            curl -sS https://www.sqlite.org/2019/sqlite-amalgamation-3300100.zip > sqlite-source.zip
+            unzip -p sqlite-source.zip sqlite-amalgamation-3300100/sqlite3.h > $sqliteDir/sqlite3.h
+            rm sqlite-source.zip
+            echo '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\vcvarsall.bat" '$ARCH' && LIB /DEF:'$sqliteDir'\\sqlite3.def /OUT:'$sqliteDir'\\sqlite3.lib /MACHINE:'$ARCH' || exit /b 1' | cmd
+          else
+            echo "$RUNNER_OS not supported"
+            exit 1
+          fi
+      - name: Create build environment
+        run: cmake -E make_directory ${{runner.workspace}}/build
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        run: cmake --build . --config Release --target birdtray
