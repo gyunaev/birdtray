@@ -70,14 +70,14 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
 }
 
 BirdtrayApp::~BirdtrayApp() {
-    delete trayIcon;
-    delete autoUpdater;
-    delete settings;
     if (singleInstanceServer != nullptr) {
         singleInstanceServer->close();
         singleInstanceServer->deleteLater();
         singleInstanceServer = nullptr;
     }
+    delete trayIcon;
+    delete autoUpdater;
+    delete settings;
 }
 
 BirdtrayApp* BirdtrayApp::get() {
@@ -205,8 +205,8 @@ bool BirdtrayApp::connectToRunningInstance() const {
     if (serverSocket.waitForConnected()) {
         sendCommandsToRunningInstance(serverSocket);
         connectionSuccessful = true;
+        serverSocket.disconnectFromServer();
     }
-    serverSocket.disconnect();
     return connectionSuccessful;
 }
 
@@ -223,6 +223,7 @@ void BirdtrayApp::sendCommandsToRunningInstance(QLocalSocket &serverSocket) cons
     if (commandLineParser.isSet(SETTINGS_COMMAND)) {
         serverSocket.write(SETTINGS_COMMAND "\n");
     }
+    serverSocket.waitForBytesWritten();
 }
 
 void BirdtrayApp::onSecondInstanceCommand(QLocalSocket* clientSocket) {
