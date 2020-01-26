@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>UserSettingsDescription</source>
-        <translation>Uw persoonlijke  ${PRODUCT_NAME}-instellingen en -configuratie.</translation>
+        <translation>Uw persoonlijke ${PRODUCT_NAME}-instellingen en -configuratie.</translation>
     </message>
     <message>
         <source>LicenseStartMenuLinkName</source>
