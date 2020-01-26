@@ -188,5 +188,9 @@
         <source>Lang_de</source>
         <translation>Deutsch</translation>
     </message>
+        <message>
+        <source>Lang_nl</source>
+        <translation>Niederländisch</translation>
+    </message>
 </context>
 </TS>
