@@ -54,7 +54,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translation>Decodeer een IMAP-Utf6-string.</translation>
+        <translation>Decodeer een IMAP-Utf7-string.</translation>
     </message>
     <message>
         <source>string</source>
