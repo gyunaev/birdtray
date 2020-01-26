@@ -8,6 +8,10 @@
         <translatorcomment>This must be the name of one of the NSIS translation files at https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/ without the file extension.</translatorcomment>
         <translation>Dutch</translation>
     </message>
+        <message>
+        <source>Lang_nl</source>
+        <translation>Nederlands</translation>
+    </message>
     <message>
         <source>BirdtraySectionDescription</source>
         <translation>Een gratis systeemvakprogramma dat meldingen toont van Thunderbird.</translation>
@@ -30,11 +34,11 @@
     </message>
     <message>
         <source>AutoCheckUpdateSectionName</source>
-        <translation>Automatisch controlenen op updates</translation>
+        <translation>Automatisch controleren op updates</translation>
     </message>
     <message>
         <source>AutoCheckUpdateDescription</source>
-        <translation>Zoek automatisch naar updates van ${PRODUCT_NAME} na het opstarten.</translation>
+        <translation>Zoek tijdens het opstarten van ${PRODUCT_NAME} automatisch naar updates.</translation>
     </message>
     <message>
         <source>ProgramGroupSectionName</source>
@@ -170,7 +174,7 @@
     </message>
     <message>
         <source>Install32On64BitError</source>
-        <translation>Deze installatiewizard bevan een 64-bitversie van ${PRODUCT_NAME}. Uw computer draait een 32-bitversie van Windows, maar deze kan geen 64-bitprogramma&apos;s uitvoeren. Download the 32-bitinstallatiewizard van ${PRODUCT_NAME}.</translation>
+        <translation>Deze installatiewizard bevat een 64-bitversie van ${PRODUCT_NAME}. Uw computer draait een 32-bitversie van Windows, maar deze kan geen 64-bitprogramma&apos;s uitvoeren. Download the 32-bitinstallatiewizard van ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>UnsupportedWindowsVersionError</source>
