@@ -10,11 +10,13 @@ int main(int argc, char *argv[]) {
 #ifdef Q_OS_WIN
     for (int i = 1; i < argc; i++) {
         if (strcmp("--debug", argv[i]) == 0) {
-            AttachConsole(ATTACH_PARENT_PROCESS);
-            // reopen the std I/O streams to redirect I/O to the parents console.
-            freopen("CON", "w", stdout);
-            freopen("CON", "w", stderr);
-            freopen("CON", "r", stdin);
+            if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+                // reopen the std I/O streams to redirect I/O to the parents console.
+                FILE* newFile = nullptr;
+                freopen_s(&newFile, "CON", "w", stdout);
+                freopen_s(&newFile, "CON", "w", stderr);
+                freopen_s(&newFile, "CON", "r", stdin);
+            }
             break;
         }
     }
