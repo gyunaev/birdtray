@@ -589,10 +589,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MailAccountDialog</name>
     <message>
-        <source>Mail Accounts</source>
-        <translation>Email Konten</translation>
-    </message>
-    <message>
         <source>Select the directory that contains the Thunderbird profiles.</source>
         <translation>Wählen Sie bitte das Verzeichnis aus, das die Thunderbird Profile enthält.</translation>
     </message>
@@ -603,18 +599,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Browse</source>
         <translation>Durchsuchen</translation>
-    </message>
-    <message>
-        <source>Thunderbird Profile</source>
-        <translation>Thunderbird Profil</translation>
-    </message>
-    <message>
-        <source>Select theThunderbird profile, that contains the mail account which you want to monitor.</source>
-        <translation>Wählen Sie das Thunderbird Profil aus, welches das Email Konto enthält, das Sie überwachen wollen.</translation>
-    </message>
-    <message>
-        <source>Selected Profile:</source>
-        <translation>Ausgewähltes Profil:</translation>
     </message>
     <message>
         <source>Select Accounts</source>
@@ -637,30 +621,6 @@ p, li { white-space: pre-wrap; }
         <translation>Wähle das Verzeichnis der Thunderbird Profile</translation>
     </message>
     <message>
-        <source>Invalid Thunderbird profile directory</source>
-        <translation>Ungültiges Thunderbird Profil-Verzeichnis</translation>
-    </message>
-    <message>
-        <source>Please enter the path to a valid directory.</source>
-        <translation>Bitte geben Sie einen Pfad zu einem gültigen Verzeichnis ein.</translation>
-    </message>
-    <message>
-        <source>The Thunderbird profile directory contains no profiles.</source>
-        <translation>Das Thunderbird Profil-Verzeichnis enthält keine Profile.</translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird profile</source>
-        <translation>Ungültiges Thunderbird Profil</translation>
-    </message>
-    <message>
-        <source>Please select a valid Thunderbird profile.</source>
-        <translation>Bitte wählen Sie ein gültiges Thunderbird Profil.</translation>
-    </message>
-    <message>
-        <source>The selected Thunderbird profile does not exist.</source>
-        <translation>Das gewählte Thunderbird Profil existiert nicht mehr.</translation>
-    </message>
-    <message>
         <source>No folder selected</source>
         <translation>Kein Ordner ausgewählt</translation>
     </message>
@@ -673,6 +633,16 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>Email Folder</source>
         <translation>Email Ordner</translation>
+    </message>
+    <message>
+        <source>%1 (Profile)</source>
+        <translation>%1 (Profil)</translation>
+    </message>
+    <message>
+        <source>No mail profiles were found.
+Please make sure you selected the correct profiles directory.</source>
+        <translation>Es wurden keine Mail Ordner gefunden.
+Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgewählt haben.</translation>
     </message>
 </context>
 <context>
