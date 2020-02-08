@@ -861,7 +861,14 @@
             <item>
              <widget class="QLabel" name="label_14">
               <property name="text">
-               <string>opaque when new mail is present</string>
+               <string>opaque when new mail is present,</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="onlyShowIconOnNewMail">
+              <property name="text">
+               <string>hide it if no new mail is present.</string>
               </property>
              </widget>
             </item>
@@ -1055,6 +1062,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>spinMinimumFontSize</tabstop>
   <tabstop>boxBlinkingUsesAlpha</tabstop>
   <tabstop>spinUnreadOpacityLevel</tabstop>
+  <tabstop>onlyShowIconOnNewMail</tabstop>
   <tabstop>checkUpdateOnStartup</tabstop>
   <tabstop>checkUpdateButton</tabstop>
   <tabstop>browserAbout</tabstop>
