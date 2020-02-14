@@ -119,10 +119,12 @@ set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 if(Qt5LinguistTools_FOUND)
     set(MAIN_TRANSLATION_FILES
             src/translations/main_en.ts
-            src/translations/main_de.ts)
+            src/translations/main_de.ts
+            src/translations/main_nl.ts)
     set(DYN_TRANSLATION_FILES
             src/translations/dynamic_en.ts
-            src/translations/dynamic_de.ts)
+            src/translations/dynamic_de.ts
+            src/translations/dynamic_nl.ts)
 
     set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
             ${CMAKE_CURRENT_BINARY_DIR}/translations)
