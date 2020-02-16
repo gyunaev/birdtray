@@ -199,7 +199,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type=></translation>
+        <translation>&lt;html&gt;&lt;testa/&gt;&lt;corpo&gt;&lt;p&gt;Se questa casella è selezionata, l'icona Birdtray mostrerà il numero di e-mail non lette.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Se è deselezionato, non verrà mostrato alcun conteggio e saprai delle e-mail non lette a causa dell'icona lampeggiante o diversa, a seconda delle tue impostazioni.&lt;/p&gt;&lt;/corpo&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Show unread count</source>
@@ -223,7 +223,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;testa/&gt;&lt;corpo&gt;&lt;p&gt;Questo colore di notifica verrà utilizzato quando più di un account monitorato contiene e-mail non lette.&lt;/p&gt;&lt;/corpo&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
@@ -231,7 +231,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;testa/&gt;&lt;corpo&gt;&lt;p&gt;Ciò modifica lo spessore del carattere, ovvero rende grassetto il carattere.&lt;/p&gt;&lt;/corpo&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -303,7 +303,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;testa/&gt;&lt;corpo&gt;&lt;p&gt;Se abilitata, questa opzione aggiunge la &amp;quot;Ignora le e-mail attualmente non lette&amp;quot; azione al menu contestuale. Questa azione ti consente di ignorare le e-mail attualmente non lette. Birdtray avrebbe quindi fatto finta che non fossero rimaste e-mail non lette e avrebbe mostrato solo nuove e-mail oltre il conteggio ignorato.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Ad esempio, se c'erano 10 e-mail non lette e hai fatto clic su &amp;quot;Ignora&amp;quot;azione, Birdtray non mostrerà alcun indicatore e-mail non letto finché il conteggio e-mail non letto rimane a 10. Una volta ricevuta la nuova e-mail e hai 11 e-mail totali non lette, Birdtray mostrerà il nuovo conteggio e-mail come 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Se il conteggio e-mail non letto è inferiore ad email di &amp;quot;ignored&amp;quot; quantità, l'ignore si azzera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
@@ -323,7 +323,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quando sia Thunderbird che Birdtray sono impostati per iniziare con il sistema operativo, di solito ciò comporta l'avvio di due copie di Thunderbird. Qui puoi aggiungere un ritardo prima dell'avvio di Thunderbird, per evitarlo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source> second delay</source>
@@ -526,7 +526,7 @@ Vuoi cancellare gli account?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Questa è la riga di comando completa (con argomenti) che verrà utilizzata per avviare Thunderbird. Gli argomenti sono separati da spazi, ma sono consentiti spazi tra virgolette, vale a dire qualcosa di simile &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Ignore unread emails at startup</source>
@@ -788,7 +788,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
 
 %3</source>
-        <translation>Errore durante l'avvio di Thunderbird come %1 %2:
+        <translation>Errore durante l'avvio di Thunderbird come &apos;%1 %2&apos;:
 
 %3</translation>
     </message>
@@ -798,7 +798,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
-        <translation>Non chiedere ancora</translation>
+        <translation>Non&apos;chiedere ancora</translation>
     </message>
 </context>
 <context>
