@@ -6,220 +6,220 @@
     <message>
         <source>No ssl configuration!
 OpenSSL might not be installed.</source>
-        <translation type=>Nessuna configurazione SSL!
+        <translation>Nessuna configurazione SSL!
 OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation type=>Impossibile salvare il programma di installazione di Birdtray:</translation>
+        <translation>Impossibile salvare il programma di installazione di Birdtray:</translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation type=>Impossibile scaricare il programma di installazione Birdtray:</translation>
+        <translation>Impossibile scaricare il programma di installazione Birdtray:</translation>
     </message>
     <message>
         <source>Installer download failed</source>
-        <translation type=>Download del programma di installazione non riuscito</translation>
+        <translation>Download del programma di installazione non riuscito</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
-        <translation type=>Reindirizzamento non valido:</translation>
+        <translation>Reindirizzamento non valido:</translation>
     </message>
     <message>
         <source>Update failed</source>
-        <translation type=>Aggiornamento non riuscito</translation>
+        <translation>Aggiornamento non riuscito</translation>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translation type=>Impossibile avviare il programma di installazione Birdtray.</translation>
+        <translation>Impossibile avviare il programma di installazione Birdtray.</translation>
     </message>
 </context>
 <context>
     <name>BirdtrayApp</name>
     <message>
         <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation type=>Una notifica gratuita sulla barra delle applicazioni per la nuova posta per Thunderbird</translation>
+        <translation>Una notifica gratuita sulla barra delle applicazioni per la nuova posta per Thunderbird</translation>
     </message>
     <message>
         <source>Display the contents of the given mork database.</source>
-        <translation type=>Visualizza i contenuti del database mork.</translation>
+        <translation>Visualizza i contenuti del database mork.</translation>
     </message>
     <message>
         <source>databaseFile</source>
-        <translation type=>file database</translation>
+        <translation>file database</translation>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translation type=>Decodifica una stringa IMAP Utf7.</translation>
+        <translation>Decodifica una stringa IMAP Utf7.</translation>
     </message>
     <message>
         <source>string</source>
-        <translation type=>stringa</translation>
+        <translation>stringa</translation>
     </message>
     <message>
         <source>Show the settings.</source>
-        <translation type=>Mostra le impostazioni.</translation>
+        <translation>Mostra le impostazioni.</translation>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
-        <translation type=>Ripristina le impostazioni predefinite.</translation>
+        <translation>Ripristina le impostazioni predefinite.</translation>
     </message>
     <message>
         <source>Enable debugging output.</source>
-        <translation type=>Abilita output di debug.</translation>
+        <translation>Abilita output di debug.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
-        <translation type=>Attiva/disattiva la finestra di Thunderbird.</translation>
+        <translation>Attiva/disattiva la finestra di Thunderbird.</translation>
     </message>
     <message>
         <source>Show the Thunderbird window.</source>
-        <translation type=>Mostra la finestra di Thunderbird.</translation>
+        <translation>Mostra la finestra di Thunderbird.</translation>
     </message>
     <message>
         <source>Hide the Thunderbird window.</source>
-        <translation type=>Nascondi la finestra di Thunderbird.</translation>
+        <translation>Nascondi la finestra di Thunderbird.</translation>
     </message>
 </context>
 <context>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation type=>Errore durante l'apertura del database sqlite: %1</translation>
+        <translation>Errore durante l'apertura del database sqlite: %1</translation>
     </message>
     <message>
         <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation type=>Impossibile accedere al database. Se stai usando Thunderbird 68+, questo metodo non funziona più. Si prega di utilizzare il parser Mork.</translation>
+        <translation>Impossibile accedere al database. Se stai usando Thunderbird 68+, questo metodo non funziona più. Si prega di utilizzare il parser Mork.</translation>
     </message>
 </context>
 <context>
     <name>DatabaseUnreadFixer</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation type=>Errore durante l'apertura del database sqlite: %1</translation>
+        <translation>Errore durante l'apertura del database sqlite: %1</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation type=>Impossibile interrogare il database.</translation>
+        <translation>Impossibile interrogare il database.</translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditAccount</name>
     <message>
         <source>Folder:</source>
-        <translation type=>Cartella:</translation>
+        <translation>Cartella:</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type=Sfoglia></translation>
+        <translation>Sfoglia</translation>
     </message>
     <message>
         <source>Notification text color:</source>
-        <translation type=>Colore testo notifica:</translation>
+        <translation>Colore testo notifica:</translation>
     </message>
     <message>
         <source>Choose the MSF file</source>
-        <translation type=>Scegli il file MSF</translation>
+        <translation>Scegli il file MSF</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation type=>Indice di posta (*.msf)</translation>
+        <translation>Indice di posta (*.msf)</translation>
     </message>
     <message>
         <source>Invalid MSF file</source>
-        <translation type=>File MSF non valido</translation>
+        <translation>File MSF non valido</translation>
     </message>
     <message>
         <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation type=>È necessario specificare un file di indice Thunderbird valido e non vuoto.</translation>
+        <translation>È necessario specificare un file di indice Thunderbird valido e non vuoto.</translation>
     </message>
     <message>
         <source>No account selected</source>
-        <translation type=>Nessun account selezionato</translation>
+        <translation>Nessun account selezionato</translation>
     </message>
     <message>
         <source>You must select an account.</source>
-        <translation type=>Devi selezionare un account.</translation>
+        <translation>Devi selezionare un account.</translation>
     </message>
     <message>
         <source>Please assign the message number text color</source>
-        <translation type=>Si prega di assegnare il colore del testo del numero del messaggio</translation>
+        <translation>Si prega di assegnare il colore del testo del numero del messaggio</translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuova Email in entrata</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type=>Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>(Optional) Prefilled fields</source>
-        <translation type=>(Facoltativo) Campi precompilati</translation>
+        <translation>(Facoltativo) Campi precompilati</translation>
     </message>
     <message>
         <source>Email subject:</source>
-        <translation type=>Oggetto dell'email:</translation>
+        <translation>Oggetto dell'email:</translation>
     </message>
     <message>
         <source>Email message text:</source>
-        <translation type=>Testo del messaggio e-mail:</translation>
+        <translation>Testo del messaggio e-mail:</translation>
     </message>
     <message>
         <source>Email recipient:</source>
-        <translation type=>Destinatario email:</translation>
+        <translation>Destinatario email:</translation>
     </message>
     <message>
         <source>No name specified</source>
-        <translation type=>Nessun nome specificato</translation>
+        <translation>Nessun nome specificato</translation>
     </message>
     <message>
         <source>The name cannot be empty.</source>
-        <translation type=>Il nome non può essere vuoto.</translation>
+        <translation>Il nome non può essere vuoto.</translation>
     </message>
 </context>
 <context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
-        <translation type=>Impostazioni Birdtray</translation>
+        <translation>Impostazioni Birdtray</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type=>Generale</translation>
+        <translation>Generale</translation>
     </message>
     <message>
         <source>New Mail Notification</source>
-        <translation type=>Nuova notifica di posta</translation>
+        <translation>Nuova notifica di posta</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type=></translation>
     </message>
     <message>
         <source>Show unread count</source>
-        <translation type=>Mostra il conteggio non letto</translation>
+        <translation>Mostra il conteggio non letto</translation>
     </message>
     <message>
         <source>Different icon when unread:</source>
-        <translation type=>Icona diversa quando non letto:</translation>
+        <translation>Icona diversa quando non letto:</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type=>Spento</translation>
+        <translation>Spento</translation>
     </message>
     <message>
         <source>Fastest</source>
-        <translation type=>Più veloce</translation>
+        <translation>Più veloce</translation>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translation type=>Icona (Ctrl-clic per ripristinare):</translation>
+        <translation>Icona (Ctrl-clic per ripristinare):</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -227,7 +227,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
-        <translation type=>Colore di notifica multipla:</translation>
+        <translation>Colore di notifica multipla:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -235,71 +235,71 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
-        <translation type=>Velocità lampeggiante:</translation>
+        <translation>Velocità lampeggio:</translation>
     </message>
     <message>
         <source>Font style:</source>
-        <translation type=>Stile del font:</translation>
+        <translation>Stile del font:</translation>
     </message>
     <message>
         <source>Bold:</source>
-        <translation type=>Grassetto:</translation>
+        <translation>Grassetto:</translation>
     </message>
     <message>
         <source>Notification border color:</source>
-        <translation type=>Colore bordo notifica:</translation>
+        <translation>Colore bordo notifica:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type=>Larghezza:</translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type=>Nessuno</translation>
+        <translation>Nessuno</translation>
     </message>
     <message>
         <source>Fix the unread message count</source>
-        <translation type=>Correggi il conteggio dei messaggi non letti</translation>
+        <translation>Correggi il conteggio dei messaggi non letti</translation>
     </message>
     <message>
         <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation type=>Utilizzare questo strumento se il contatore non letto è diverso da zero e non ci sono messaggi non letti nelle cartelle:</translation>
+        <translation>Utilizzare questo strumento se il contatore non letto è diverso da zero e non ci sono messaggi non letti nelle cartelle:</translation>
     </message>
     <message>
         <source>Fix</source>
-        <translation type=>Aggiusta</translation>
+        <translation>Aggiusta</translation>
     </message>
     <message>
         <source>Monitoring</source>
-        <translation type=>Monitoraggio</translation>
+        <translation>Monitoraggio</translation>
     </message>
     <message>
         <source>Method to parse unread notifications:</source>
-        <translation type=>Metodo per analizzare le notifiche non lette:</translation>
+        <translation>Metodo per analizzare le notifiche non lette:</translation>
     </message>
     <message>
         <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation type=>Scegli il database dei profili Thunderbird da monitorare</translation>
+        <translation>Scegli il database dei profili Thunderbird da monitorare</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type=>Sfoglia</translation>
+        <translation>Sfoglia</translation>
     </message>
     <message>
         <source>Accounts to monitor</source>
-        <translation type=>Account da monitorare</translation>
+        <translation>Account da monitorare</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type=>Aggiungi</translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type=>Modifica</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type=>Rimuovi</translation>
+        <translation>Rimuovi</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -307,19 +307,19 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
-        <translation type=>Consenti di ignorare l'attuale contatore di e-mail non lette</translation>
+        <translation>Consenti di ignorare l'attuale contatore di e-mail non lette</translation>
     </message>
     <message>
         <source>Hiding</source>
-        <translation type=>Nascondere</translation>
+        <translation>Nascondere</translation>
     </message>
     <message>
         <source>Launching and Hiding</source>
-        <translation type=>Lanciare e nascondere</translation>
+        <translation>Lanciare e nascondere</translation>
     </message>
     <message>
         <source>Start Thunderbird when Birdtray starts</source>
-        <translation type=>Avvia Thunderbird all'avvio di Birdtray</translation>
+        <translation>Avvia Thunderbird all'avvio di Birdtray</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -327,124 +327,124 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source> second delay</source>
-        <translation type=>secondo ritardo</translation>
+        <translation>secondo ritardo</translation>
     </message>
     <message>
         <source>with a </source>
-        <translation type=>con un</translation>
+        <translation>con un</translation>
     </message>
     <message>
         <source>and hide it</source>
-        <translation type=>e nascondilo</translation>
+        <translation>e nascondilo</translation>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
-        <translation type=>Terminare Thunderbird quando si esce da Birdtray</translation>
+        <translation>Terminare Thunderbird quando si esce da Birdtray</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation type=>Nascondi/mostra la finestra di Thunderbird quando si fa clic sull'icona nella barra delle applicazioni</translation>
+        <translation>Nascondi/mostra la finestra di Thunderbird quando si fa clic sull'icona nella barra delle applicazioni</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
-        <translation type=>Nascondi la finestra di Thunderbird quando è ridotta a icona</translation>
+        <translation>Nascondi la finestra di Thunderbird quando è ridotta a icona</translation>
     </message>
     <message>
         <source>Show red X in tray icon if Thunderbird is not running</source>
-        <translation type=>Mostra la X rossa nella barra delle applicazioni se Thunderbird non è in esecuzione</translation>
+        <translation>Mostra la X rossa nella barra delle applicazioni se Thunderbird non è in esecuzione</translation>
     </message>
     <message>
         <source>Restart Thunderbird if it was closed</source>
-        <translation type=>Riavvia Thunderbird se è stato chiuso</translation>
+        <translation>Riavvia Thunderbird se è stato chiuso</translation>
     </message>
     <message>
         <source>New Email</source>
-        <translation type=>Nuova email</translation>
+        <translation>Nuova email</translation>
     </message>
     <message>
         <source>Enable New Email submenu</source>
-        <translation type=>Abilita il sottomenu Nuova e-mail</translation>
+        <translation>Abilita il sottomenu Nuova e-mail</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type=>Avanzate</translation>
+        <translation>Avanzate</translation>
     </message>
     <message>
         <source>Please do not change these settings unless you understand what you&apos;re doing.</source>
-        <translation type=>Si prega di non modificare queste impostazioni a meno che non si capisca cosa si sta facendo.</translation>
+        <translation>Si prega di non modificare queste impostazioni a meno che non si capisca cosa si sta facendo.</translation>
     </message>
     <message>
         <source>Thunderbird window name pattern:</source>
-        <translation type="unfinished">Nome modello finestra  Thunderbird:</translation>
+        <translation>Nome modello finestra  Thunderbird:</translation>
     </message>
     <message>
         <source>Minimum notification font size:</source>
-        <translation type=>Dimensione minima del carattere di notifica:</translation>
+        <translation>Dimensione minima del carattere di notifica:</translation>
     </message>
     <message>
         <source> points</source>
-        <translation type=>punti</translation>
+        <translation>punti</translation>
     </message>
     <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
-        <translation type=>Quando lampeggia, usa la transizione fade-in/fade-out (aumenta l'uso della CPU!)</translation>
+        <translation>Quando lampeggia, usa la transizione fade-in/fade-out (aumenta l'uso della CPU!)</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation type=>Crea l'icona nella barra delle applicazioni</translation>
+        <translation>Crea l'icona nella barra delle applicazioni</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts</source>
-        <translation type=>Verifica la presenza di nuovi aggiornamenti all'avvio di Birdtray</translation>
+        <translation>Verifica la presenza di nuovi aggiornamenti all'avvio di Birdtray</translation>
     </message>
     <message>
         <source>Check for new updates on startup</source>
-        <translation type=>Verifica la presenza di nuovi aggiornamenti all'avvio</translation>
+        <translation>Verifica la presenza di nuovi aggiornamenti all'avvio</translation>
     </message>
     <message>
         <source>Check for a new Birdtray version</source>
-        <translation type=>Cerca una nuova versione di Birdtray</translation>
+        <translation>Cerca una nuova versione di Birdtray</translation>
     </message>
     <message>
         <source>Check now</source>
-        <translation type=>Controlla ora</translation>
+        <translation>Controlla ora</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type=>Informazioni su</translation>
+        <translation>Informazioni su</translation>
     </message>
     <message>
         <source>using global search database (wont work with 68+)</source>
-        <translation type=>utilizzando il database di ricerca globale (non funzionerà con 68+)</translation>
+        <translation>utilizzando il database di ricerca globale (non funzionerà con 68+)</translation>
     </message>
     <message>
         <source>using Mork index files (recommended)</source>
-        <translation type=>utilizzando i file di indice di Mork (consigliato)</translation>
+        <translation>utilizzando i file di indice di Mork (consigliato)</translation>
     </message>
     <message>
         <source>Empty Thunderbird directory</source>
-        <translation type=>Directory vuota di Thunderbird</translation>
+        <translation>Directory vuota di Thunderbird</translation>
     </message>
     <message>
         <source>You must specify a Thunderbird directory.</source>
-        <translation type=>È necessario specificare una directory Thunderbird.</translation>
+        <translation>È necessario specificare una directory Thunderbird.</translation>
     </message>
     <message>
         <source>Choose the Thunderbird profile path</source>
-        <translation type=>Scegli il percorso del profilo Thunderbird</translation>
+        <translation>Scegli il percorso del profilo Thunderbird</translation>
     </message>
     <message>
         <source>Version check failed</source>
-        <translation type=>Verifica della versione non riuscita</translation>
+        <translation>Verifica della versione non riuscita</translation>
     </message>
     <message>
         <source>Failed to check for a new Birdtray version:
 </source>
-        <translation type=>Impossibile verificare una nuova versione di Birdtray:</translation>
+        <translation>Impossibile verificare una nuova versione di Birdtray:</translation>
     </message>
     <message>
         <source>Fix the unread messages?</source>
-        <translation type=>Risolvi i messaggi non letti?</translation>
+        <translation>Risolvi i messaggi non letti?</translation>
     </message>
     <message>
         <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
@@ -452,77 +452,77 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Updating the database...</source>
-        <translation type=>Aggiornamento del database ...</translation>
+        <translation>Aggiornamento del database ...</translation>
     </message>
     <message>
         <source>Database updated</source>
-        <translation type=>Database aggiornato</translation>
+        <translation>Database aggiornato</translation>
     </message>
     <message>
         <source>Successfully updated the database.</source>
-        <translation type=>Database aggiornato correttamente.</translation>
+        <translation>Database aggiornato correttamente.</translation>
     </message>
     <message>
         <source>Error updating database</source>
-        <translation type=>Errore durante l'aggiornamento del database</translation>
+        <translation>Errore durante l'aggiornamento del database</translation>
     </message>
     <message>
         <source>Error updating the database:
 %1</source>
-        <translation type=>Errore durante l'aggiornamento del database:</translation>
+        <translation>Errore durante l'aggiornamento del database:</translation>
     </message>
     <message>
         <source>Error retrieving accounts</source>
-        <translation type=>Errore durante il recupero degli account</translation>
+        <translation>Errore durante il recupero degli account</translation>
     </message>
     <message>
         <source>Error retrieving accounts:
 %1</source>
-        <translation type=>Errore durante il recupero degli account:</translation>
+        <translation>Errore durante il recupero degli account:</translation>
     </message>
     <message>
         <source>Checking...</source>
-        <translation type=>Controllo...</translation>
+        <translation>Controllo...</translation>
     </message>
     <message>
         <source>WARNING: Parser changed</source>
-        <translation type=>Il parser è cambiato</translation>
+        <translation>Il parser è cambiato</translation>
     </message>
     <message>
         <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
 
 Do you want to clear the accounts?</source>
-        <translation type=>Hai modificato il parser, ma il formato dell'account non è compatibile tra i parser e devi reimpostarli.
+        <translation>Hai modificato il parser, ma il formato dell'account non è compatibile tra i parser e devi reimpostarli.
 
 Vuoi cancellare gli account?</translation>
     </message>
     <message>
         <source>Choose the new icon</source>
-        <translation type=>Scegli la nuova icona</translation>
+        <translation>Scegli la nuova icona</translation>
     </message>
     <message>
         <source>Images (*.png *.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Immagini (*.png *.svg)</translation>
     </message>
     <message>
         <source>Invalid icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icona non valida</translation>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile caricare l'icona da questo file.</translation>
     </message>
     <message>
         <source>Invalid Thunderbird directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Directory Thunderbird non valida</translation>
     </message>
     <message>
         <source>Valid Thunderbird directory must contain the file %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>La directory Thunderbird valida deve contenere il file% 1.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Riga di comando di Thunderbird:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -530,19 +530,19 @@ Vuoi cancellare gli account?</translation>
     </message>
     <message>
         <source>Ignore unread emails at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora e-mail non lette all'avvio</translation>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora tutte le e-mail non lette presenti all'avvio di Birdtray. Solo le nuove e-mail verranno prese in considerazione dal contatore non lette.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translation type="unfinished"></translation>
+        <translation>opaco quando è presente nuova posta,</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translation type="unfinished"></translation>
+        <translation>nasconderlo se non è presente nuova posta.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -564,332 +564,338 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>No new updates found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun nuovo aggiornamento trovato</translation>
     </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
     <message>
         <source>Choose the Thunderbird profiles path</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli il percorso dei profili Thunderbird</translation>
     </message>
     <message>
         <source>No folder selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna cartella selezionata</translation>
     </message>
     <message>
         <source>No mail folder was selected to monitor.
 Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna cartella di posta è stata selezionata per il monitoraggio.
+Vuoi continuare?</translation>
     </message>
     <message>
         <source>Select Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona account</translation>
     </message>
     <message>
         <source>Select the directory that contains the Thunderbird profiles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona la directory che contiene i profili di Thunderbird.</translation>
     </message>
     <message>
         <source>Thunderbird Profiles Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Directory dei profili di Thunderbird</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfoglia</translation>
     </message>
     <message>
         <source>Select the mail accounts you want to monitor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona gli account di posta che desideri monitorare.</translation>
     </message>
     <message>
         <source>Email Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartella e-mail</translation>
     </message>
     <message>
         <source>Notification Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Colore di notifica</translation>
     </message>
     <message>
         <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se si monitorano più cartelle, il colore di notifica predefinito viene utilizzato per mostrare la somma di tutti i messaggi non letti.</translation>
     </message>
     <message>
         <source>%1 (Profile)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (profilo)</translation>
     </message>
     <message>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nessun profilo di posta trovato.
+Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
 </context>
 <context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
-        <translation type="unfinished"></translation>
+        <translation>Voce di menu</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Fatal</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatale</translation>
     </message>
     <message>
         <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Siamo spiacenti, la barra delle applicazioni non può essere controllata tramite questo componente aggiuntivo sul tuo sistema operativo.</translation>
     </message>
 </context>
 <context>
     <name>QCoreApplication</name>
     <message>
         <source>Cannot load default system tray icon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile caricare l'icona della barra delle applicazioni predefinita.</translation>
     </message>
     <message>
         <source>Couldn&apos;t open file: </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire il file:</translation>
     </message>
     <message>
         <source>Unsupported version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione non supportata.</translation>
     </message>
     <message>
         <source>Invalid format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato non valido.</translation>
     </message>
     <message>
         <source>Parsing error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di analisi.</translation>
     </message>
     <message>
         <source>Unexpected EOF.</source>
-        <translation type="unfinished"></translation>
+        <translation>EOF imprevisto.</translation>
     </message>
     <message>
         <source>Invalid comment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Commento non valido</translation>
     </message>
     <message>
         <source>Format error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di formato.</translation>
     </message>
     <message>
         <source>Unexpected end of group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Termine inaspettato del gruppo.</translation>
     </message>
     <message>
         <source>Error opening mork file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante l'apertura del file mork.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Account</translation>
     </message>
     <message>
         <source>Notification color</source>
-        <translation type="unfinished"></translation>
+        <translation>Colore di notifica</translation>
     </message>
 </context>
 <context>
     <name>TrayIcon</name>
     <message>
         <source>Would you like to set up Birdtray?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi installare Birdtray?</translation>
     </message>
     <message>
         <source>You have not yet configured any email folders to monitor. Would you like to do it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Non hai ancora configurato alcuna cartella di posta elettronica da monitorare. Ti piacerebbe farlo ora?</translation>
     </message>
     <message>
         <source>Show Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Thunderbird</translation>
     </message>
     <message>
         <source>Hide Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Nascondi Thunderbird</translation>
     </message>
     <message>
         <source>New Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuova Email</translation>
     </message>
     <message>
         <source>Blank</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuota</translation>
     </message>
     <message>
         <source>New Email Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo messaggio e-mail</translation>
     </message>
     <message>
         <source>5 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>5 minuti</translation>
     </message>
     <message>
         <source>10 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>10 minuti</translation>
     </message>
     <message>
         <source>30 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>30 minuti</translation>
     </message>
     <message>
         <source>1 hour</source>
-        <translation type="unfinished"></translation>
+        <translation>1 ora</translation>
     </message>
     <message>
         <source>4 hours</source>
-        <translation type="unfinished"></translation>
+        <translation>4 ore</translation>
     </message>
     <message>
         <source>Snooze for ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Posticipa per...</translation>
     </message>
     <message>
         <source>Unsnooze</source>
-        <translation type="unfinished"></translation>
+        <translation>Non posticipare</translation>
     </message>
     <message>
         <source>Ignore unread emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora le email non lette</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni...</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Esci</translation>
     </message>
     <message>
         <source>Cannot start Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile avviare Thunderbird</translation>
     </message>
     <message>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante l'avvio di Thunderbird, perché non è stato possibile collegarsi al programma di aggiornamento:
+
+1%</translation>
     </message>
     <message>
         <source>Ignore unread emails (now %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora email non lette (ora %1)</translation>
     </message>
     <message>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
 
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante l'avvio di Thunderbird come %1 %2:
+
+%3</translation>
     </message>
     <message>
         <source>Warning: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviso: %1</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Non chiedere ancora</translation>
     </message>
 </context>
 <context>
     <name>UnreadMonitor</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante l'apertura del database sqlite: %1</translation>
     </message>
     <message>
         <source>Folder %1 was not found in database.</source>
-        <translation type="unfinished"></translation>
+        <translation>La cartella %1 non è stata trovata nel database.</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile interrogare il database.</translation>
     </message>
     <message>
         <source>Unable to watch %1 for changes.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossibile guardare %1 per le modifiche.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile leggere da %1.</translation>
     </message>
     <message>
         <source>Cannot query database: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile eseguire una query sul database: %1</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>Birdtray Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiornamento Birdtray</translation>
     </message>
     <message>
         <source>Current version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione corrente:</translation>
     </message>
     <message>
         <source>A new version of Birdtray is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>È disponibile una nuova versione di Birdtray.</translation>
     </message>
     <message>
         <source>New version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuova versione:</translation>
     </message>
     <message>
         <source>Download size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensione del download:</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Download</translation>
     </message>
     <message>
         <source>Ignore this version</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora questa versione</translation>
     </message>
     <message>
         <source>Update and Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna e riavvia</translation>
     </message>
     <message>
         <source>ca. %1 Mb</source>
-        <translation type="unfinished"></translation>
+        <translation>ca. %1 Mb</translation>
     </message>
 </context>
 <context>
     <name>UpdateDownloadDialog</name>
     <message>
         <source>Birdtray Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiornamento Birdtray</translation>
     </message>
     <message>
         <source>Downloading Birdtray update...</source>
-        <translation type="unfinished"></translation>
+        <translation>Download aggiornamento Birdtray...</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfondo</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Download del programma di installazione Birdtray...</translation>
     </message>
     <message>
         <source>Update and Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna e riavvia</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
-        <translation type="unfinished"></translation>
+        <translation>Download completato. Riavvia e aggiorna Birdtray?</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation type="unfinished"></translation>
+        <translation>Download del programma di installazione Birdtray... (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
