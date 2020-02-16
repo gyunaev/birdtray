@@ -94,11 +94,11 @@
     </message>
     <message>
         <source>UninstallPreviousVersion</source>
-        <translation>Disinstallazione della versione precedente di $ {PRODUCT_NAME}</translation>
+        <translation>Disinstallazione della versione precedente di ${PRODUCT_NAME}</translation>
     </message>
     <message>
         <source>UninstallPreviousVersionError</source>
-        <translation>Disinstallazione non riuscita della vecchia installazione $ {PRODUCT_NAME}! Continuando cancellerai TUTTO in $ 3.</translation>
+        <translation>Disinstallazione non riuscita della vecchia installazione ${PRODUCT_NAME}! Continuando cancellerai TUTTO in $ 3.</translation>
     </message>
     <message>
         <source>UninstallExecutionError</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>StopBirdtray</source>
-        <translation>$ {PRODUCT_NAME} è attualmente in esecuzione. Premi OK per interrompere ${PRODUCT_NAME} per continuare con l'installazione.</translation>
+        <translation>${PRODUCT_NAME} è attualmente in esecuzione. Premi OK per interrompere ${PRODUCT_NAME} per continuare con l'installazione.</translation>
     </message>
     <message>
         <source>StoppingBirdtray</source>
@@ -114,7 +114,7 @@
     </message>
     <message>
         <source>StopBirdtrayError</source>
-        <translation>Impossibile chiudere ${PRODUCT_NAME}. Riprova o esci da $ {PRODUCT_NAME} manualmente per continuare con l'installazione.</translation>
+        <translation>Impossibile chiudere ${PRODUCT_NAME}. Riprova o esci da ${PRODUCT_NAME} manualmente per continuare con l'installazione.</translation>
     </message>
     <message>
         <source>StopBirdtrayUninstall</source>
@@ -134,11 +134,11 @@
     </message>
     <message>
         <source>BadInstallPath</source>
-        <translation>Il percorso di installazione non deve contenere $\r$\n     ${BAD_PATH_CHARS}.</translation>
+        <translation>Il percorso di installazione non deve contenere $\r$\n ${BAD_PATH_CHARS}.</translation>
     </message>
     <message>
         <source>InstallPathContainsPreviousVersion</source>
-        <translation>TIl percorso di installazione contiene una versione $ {PRODUCT_NAME} precedentemente installata, che verrà sostituita.</translation>
+        <translation>TIl percorso di installazione contiene una versione ${PRODUCT_NAME} precedentemente installata, che verrà sostituita.</translation>
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>UnsupportedWindowsVersionError</source>
-        <translation>Questo programma richiede almeno Windows $ {MIN_WINDOWS_VER}.</translation>
+        <translation>Questo programma richiede almeno Windows ${MIN_WINDOWS_VER}.</translation>
     </message>
     <message>
         <source>UninstallerAborted</source>
