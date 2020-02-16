@@ -152,7 +152,7 @@ OpenSSL potrebbe non essere installato.</translation>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
-        <translation>Nuova Email in entrata</translation>
+        <translation>&quot;Nuova Email&quot;in entrata</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -448,7 +448,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;Questa opzione dovrebbe essere utilizzata se non si hanno messaggi non letti, ma si vede ancora il nuovo contatore e-mail.&lt;br&gt;Per utilizzare questa opzione, è obbligatorio chiudere Thunderbird.&lt;br&gt;La riparazione può richiedere fino a cinque minuti.&lt;br&gt;&lt;br&gt;Confermi che Thunderbird è chiuso e vuoi procedere?&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Updating the database...</source>
@@ -622,7 +622,7 @@ Vuoi continuare?</translation>
     <message>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
-        <translation type="unfinished">Nessun profilo di posta trovato.
+        <translation>Nessun profilo di posta trovato.
 Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
 </context>
@@ -817,7 +817,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>Unable to watch %1 for changes.</source>
-        <translation type="unfinished">Impossibile guardare %1 per le modifiche.</translation>
+        <translation>Impossibile guardare %1 per le modifiche.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
