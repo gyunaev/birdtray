@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>UninstallPreviousVersionError</source>
-        <translation>Disinstallazione non riuscita della vecchia installazione ${PRODUCT_NAME}! Continuando cancellerai TUTTO in $ 3.</translation>
+        <translation>Disinstallazione non riuscita della vecchia installazione ${PRODUCT_NAME}! Continuando cancellerai TUTTO in $3.</translation>
     </message>
     <message>
         <source>UninstallExecutionError</source>
@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
-        <translation>L'impostazione di ${PRODUCT_NAME} è già in esecuzione. $\ R$\nSi prega di chiudere tutte le istanze e fare clic su Riprova per continuare o Annulla per uscire.</translation>
+        <translation>L'impostazione di ${PRODUCT_NAME} è già in esecuzione. $\R$\nSi prega di chiudere tutte le istanze e fare clic su Riprova per continuare o Annulla per uscire.</translation>
     </message>
     <message>
         <source>UninstallAlreadyRunning</source>
@@ -146,7 +146,7 @@
     </message>
     <message>
         <source>CurrentUserOnly</source>
-        <translation>$ 0 (solo utente corrente)</translation>
+        <translation>$0 (solo utente corrente)</translation>
     </message>
     <message>
         <source>InstallFailed</source>
