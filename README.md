@@ -100,31 +100,8 @@ Please use Github issue tracker.
 ### Translations
 
 Translations are maintained by the community.
-
-###### Language tag
-
-All translation are connected to their language via the language tag of that language.
-The language tag consists of the [ISO 639‑1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-and optionally the [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-joined with a `_` (e.g. `en` for english or `en_US` for american english).
-
-###### Adding a new translation:
-
-To add a new translation to Birdtray, you need to know the [language tag](#language-tag) for the language you want to add.
-Choose one `main_*.ts`, a `dynamic_*.ts` and a `installer_*.ts` file from [here](src/translations), where `*` is another language tag.
-Copy the files into the same directory, but replace the previous language tag with the tag for your language.
-Now open both files with a text editor and find the line near the top that looks like this: `<TS version="2.1" language="*">`
-Again, `*` will be another language tag. Replace that tag with your new language tag.
-Now you can continue to edit the new files as described in the next section.
-
-###### Edit an existing translation:
-
-To change an existing translation, you need to edit the `main_*.ts`, `dynamic_*.ts` and / or `installer_*.ts` translation file
-of that language in the [translations directory](src/translations).
-The `*` represents the [language tag](#language-tag) of the language you want to change. To edit these files,
-you can use a text editor or the [Qt Linguist](https://doc.qt.io/qt-5/linguist-translators.html).
-
-Once you done, create a pull request with your changes to [this repository](https://github.com/gyunaev/birdtray).
+If you want to add a translation, you can follow [this guide](https://github.com/gyunaev/birdtray/wiki/Add-a-new-translation)
+and if you want to edit an existing translation, read [this page](https://github.com/gyunaev/birdtray/wiki/Edit-an-existing-translation).
 
 ## Author and license
 
