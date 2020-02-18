@@ -177,4 +177,13 @@ protected: // Data
     enum { NPColumns, NPValues, NPRows } nowParsing_;
 };
 
+
+/**
+ * A mork parse for mail databases.
+ */
+class MailMorkParser : public MorkParser {
+public:
+    int getMorkUnreadCount();
+};
+
 #endif // __MorkParser_h__

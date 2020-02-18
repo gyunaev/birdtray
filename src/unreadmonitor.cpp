@@ -283,70 +283,14 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 
 int UnreadMonitor::getMorkUnreadCount(const QString &path)
 {
-    MorkParser parser;
+    MailMorkParser parser;
     if (!parser.open(path)) {
         setWarning(tr("Unable to read from %1.").arg(QFileInfo(path).fileName()), path);
         return 0;
     } else {
         clearWarning(path);
     }
-    unsigned int unread = 0;
-
-    // First we parse the unreadChildren column (generic view)
-    const MorkRowMap * rows = parser.rows( 0x80, 0, 0x80 );
-
-    if ( rows )
-    {
-        for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
-        {
-            MorkCells cells = rit.value();
-
-            for ( int colid : cells.keys() )
-            {
-                QString columnName = parser.getColumn( colid );
-
-                if ( columnName == "unreadChildren" )
-                {
-                    bool correct;
-                    unsigned int value = parser.getValue(cells[colid ]).toUInt( &correct, 16 );
-
-                    if ( correct )
-                        unread += value;
-                    else
-                        Utils::debug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));                }
-            }
-        }
-    }
-    else
-    {
-        // Now parse the smart inbox
-        rows = parser.rows( 0x80, 0, 0x9F );
-
-        if ( rows )
-        {
-            for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
-            {
-                MorkCells cells = rit.value();
-
-                for ( int colid : cells.keys() )
-                {
-                    QString columnName = parser.getColumn( colid );
-
-                    if ( columnName == "numNewMsgs" )
-                    {
-                        bool correct;
-                        unsigned int value = parser.getValue(cells[colid ]).toInt( &correct, 16 );
-
-                        if ( correct )
-                            unread += value;
-                        else
-                            Utils::debug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));
-                    }
-                }
-            }
-        }
-    }
-
+    int unread = parser.getMorkUnreadCount();
     Utils::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
 }
