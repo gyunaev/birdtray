@@ -568,7 +568,7 @@ inline void MorkParser::setCurrentRow( int TableScope, int TableId, int RowScope
 void MorkParser::parseRow( int TableId, int TableScope )
 {
     QString TextId;
-    int Id = 0, Scope = 0;
+    int Id = 0, Scope = TableScope;
     nowParsing_ = NPRows;
 
     char cur = nextChar();
