@@ -161,6 +161,7 @@ protected: // Data
     // All mork file data
     TableScopeMap mork_;
     MorkCells *currentCells_;
+    QMap<int, QMap<int, QPair<int, int>>> rowMappings;
 
     // Error status of last operation
     QString mErrorMessage;

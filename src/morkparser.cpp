@@ -553,6 +553,12 @@ inline void MorkParser::setCurrentRow( int TableScope, int TableId, int RowScope
     {
         RowScope = defaultScope_;
     }
+    
+    if (!TableId) {
+        QPair<int, int> rowMapping = rowMappings.value(abs(RowId)).value(RowScope, {0, 0});
+        TableScope = rowMapping.first;
+        TableId = rowMapping.second;
+    }
 
     if ( !TableScope )
     {
@@ -607,6 +613,9 @@ void MorkParser::parseRow( int TableId, int TableScope )
         }
 
         cur = nextChar();
+    }
+    if (TableId != 0) {
+        rowMappings[abs(Id)][Scope == 0 ? defaultScope_ : Scope] = {TableScope, TableId};
     }
 }
 
