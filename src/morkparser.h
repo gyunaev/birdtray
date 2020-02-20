@@ -183,7 +183,10 @@ protected: // Data
  */
 class MailMorkParser : public MorkParser {
 public:
-    int getMorkUnreadCount();
+    /**
+     * @return The number of unread emails in the mork file.
+     */
+    unsigned int getNumUnreadMessages();
 };
 
 #endif // __MorkParser_h__

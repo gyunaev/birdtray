@@ -290,7 +290,7 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
     } else {
         clearWarning(path);
     }
-    int unread = parser.getMorkUnreadCount();
+    int unread = static_cast<int>(parser.getNumUnreadMessages());
     Utils::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
 }

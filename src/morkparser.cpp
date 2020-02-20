@@ -814,7 +814,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     return EXIT_SUCCESS;
 }
 
-int MailMorkParser::getMorkUnreadCount() {
+unsigned int MailMorkParser::getNumUnreadMessages() {
     unsigned int unread = 0;
     
     // First we parse the unreadChildren column (generic view)
