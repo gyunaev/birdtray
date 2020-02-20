@@ -5,7 +5,7 @@
 using namespace testing;
 
 TEST(MailMorkParser, correctUnreadCount) {
-    std::pair<const char*, int> cases[] = {
+    std::pair<const char*, unsigned int> cases[] = {
             std::make_pair("6_Unread_Inbox.msf", 6),
             std::make_pair("1_Unread_Filter.msf", 1),
             std::make_pair("0_Unread_Trash.msf", 0),
@@ -13,7 +13,7 @@ TEST(MailMorkParser, correctUnreadCount) {
     for (const auto testCase : cases) {
         MailMorkParser parser;
         QString path = TestResources::getAbsoluteResourcePath(std::get<0>(testCase));
-        int expectedUnreadCount = std::get<1>(testCase);
+        unsigned int expectedUnreadCount = std::get<1>(testCase);
         if (!parser.open(path)) {
             ADD_FAILURE() << "Expected the MailMorkParser to be able to open " << qPrintable(path);
             continue;
