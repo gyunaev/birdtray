@@ -1,0 +1,44 @@
+// <!-- <mdb:mork:z v="1.4"/> -->
+< <(a=c)> // (f=iso-8859-1)
+  (B8=viewFlags)(B9=viewType)(BA=columnStates)(BB=MRUTime)
+  (BC=sortColumns)(BD=customSortCol)(80=ns:msg:db:row:scope:msgs:all)
+  (81=subject)(82=sender)(83=message-id)(84=references)(85=recipients)
+  (86=date)(87=size)(88=flags)(89=priority)(8A=label)(8B=statusOfset)
+  (8C=numLines)(8D=ccList)(8E=bccList)(8F=msgThreadId)(90=threadId)
+  (91=threadFlags)(92=threadNewestMsgDate)(93=children)
+  (94=unreadChildren)(95=threadSubject)(96=msgCharSet)
+  (97=ns:msg:db:table:kind:msgs)(98=ns:msg:db:table:kind:thread)
+  (99=ns:msg:db:table:kind:allthreads)
+  (9A=ns:msg:db:row:scope:threads:all)(9B=threadParent)(9C=threadRoot)
+  (9D=msgOffset)(9E=offlineMsgSize)
+  (9F=ns:msg:db:row:scope:dbfolderinfo:all)
+  (A0=ns:msg:db:table:kind:dbfolderinfo)(A1=numMsgs)(A2=numNewMsgs)
+  (A3=folderSize)(A4=expungedBytes)(A5=folderDate)(A6=highWaterKey)
+  (A7=mailboxName)(A8=UIDValidity)(A9=totPendingMsgs)
+  (AA=unreadPendingMsgs)(AB=expiredMark)(AC=version)(AD=forceReparse)
+  (AE=fixedBadRefThreading)(AF=folderName)(B0=charSetOverride)
+  (B1=charSet)(B2=searchStr)(B3=searchFolderUri)(B4=searchOnline)
+  (B5=searchFolderFlag)(B6=sortType)(B7=sortOrder)>
+
+<(80=1)(81=0)(83=24)(84=AND (subject,contains,Email\))(85
+    =mailbox://me@localhost/Inbox)(86=1581100303)(87
+    ={"threadCol":{"visible":true},"attachmentCol":{"visible":true},"flaggedCo\
+l":{"visible":true},"subjectCol":{"visible":true},"unreadButtonColHeader":{"vi\
+sible":true},"senderCol":{"visible":false},"recipientCol":{"visible":false},"c\
+orrespondentCol":{"visible":true},"junkStatusCol":{"visible":true},"dateCol":{\
+"visible":true},"locationCol":{"visible":false}})>
+{1:^9F {(k^A0:c)(s=9u)} 
+  [1(^AC=1)(^AD=0)(^AE=1)(^88=24)(^B2^84)(^B3^85)(^B4=0)(^BB^86)(^BA^87)]}
+
+@$${6{@
+[-1:^9F(^AC=1)(^AD=0)(^AE=1)(^88=24)(^B2^84)(^B3^85)(^B4=0)(^BB^86)
+    (^BA^87)(^A2=1)(^A1=1)]
+@$$}6}@
+
+@$${7{@
+<(8A=1581100304)(88=12)(89=)>[-1:^9F(^AC=1)(^AD=0)(^AE=1)(^88=24)(^B2^84)
+    (^B3^85)(^B4=0)(^BB^8A)(^BA^87)(^A2=1)(^A1=1)(^B6=12)(^B7=1)(^BC=)]
+@$$}7}@
+
+@$${8{@
+@$$}8}@
