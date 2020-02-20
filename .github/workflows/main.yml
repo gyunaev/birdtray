@@ -64,7 +64,10 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON
+        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON
       - name: Build
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target birdtray
+      - name: Tests
+        working-directory: ${{runner.workspace}}/build
+        run: cmake --build . --config Release --target run_tests
