@@ -317,7 +317,7 @@ inline void MorkParser::parseComment()
 //	=============================================================
 //	MorkParser::parseCell
 
-void MorkParser::parseCell()
+void MorkParser::parseCell(bool isInCutMode)
 {
     //bool bColumnOid = false;
     bool bValueOid = false;
@@ -430,8 +430,7 @@ void MorkParser::parseCell()
     }
     else
     {
-        if ( "" != Text )
-        {
+        if (!Text.isEmpty() && !(isInCutMode && (*currentCells_).contains(ColumnId))) {
             // Rows
             int ValueId = Text.toInt( 0, 16 );
 
@@ -605,7 +604,7 @@ void MorkParser::parseRow( int TableId, int TableScope )
             switch ( cur )
             {
             case '(':
-                parseCell();
+                parseCell(cutMode);
                 break;
             case '[':
                 parseMeta( ']' );

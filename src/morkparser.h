@@ -146,7 +146,7 @@ protected: // Members
     void    parse();
     void    parseDict();
     void    parseComment();
-    void    parseCell();
+    void    parseCell(bool isInCutMode = false);
     void    parseTable();
     void    parseMeta( char c );
     void    parseRow( int TableId, int TableScope );
