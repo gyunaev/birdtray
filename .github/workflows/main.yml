@@ -28,7 +28,7 @@ jobs:
           - os: ubuntu-latest
             arch: x86
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Install Qt ${{ matrix.qt_version }}
         uses: ouuan/install-qt-action@v2.3.1
         with:
