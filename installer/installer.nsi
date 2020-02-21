@@ -321,6 +321,8 @@ Section "$(ProgramGroupSectionName)" SectionProgramGroup
 
     CreateDirectory "$SMPROGRAMS\$startMenuFolder"
     CreateShortCut "$SMPROGRAMS\$startMenuFolder\${PRODUCT_NAME}.lnk" "$INSTDIR\${EXE_NAME}"
+    CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(SettingsLink).lnk" "$INSTDIR\${EXE_NAME}" \
+        "--settings"
 
     !ifdef INSTALL_LICENSE
         CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(LicenseStartMenuLinkName).lnk" \

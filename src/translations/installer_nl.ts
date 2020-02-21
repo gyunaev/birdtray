@@ -185,6 +185,10 @@
         <translation>De deïnstallatiewizard van ${PRODUCT_NAME} is afgebroken. Probeer het later opnieuw.</translation>
     </message>
     <message>
+        <source>SettingsLink</source>
+        <translation>${PRODUCT_NAME} settings</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>Engels</translation>
     </message>

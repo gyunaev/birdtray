@@ -181,6 +181,10 @@
         <translation>Die ${PRODUCT_NAME} Deinstallation wurde abgebrochen. Bitte versuchen Sie es später erneut.</translation>
     </message>
     <message>
+        <source>SettingsLink</source>
+        <translation>${PRODUCT_NAME} Einstellungen</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>Englisch</translation>
     </message>
