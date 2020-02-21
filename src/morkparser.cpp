@@ -591,7 +591,11 @@ void MorkParser::parseRow( int TableId, int TableScope )
     }
 
     parseScopeId( TextId, &Id, &Scope );
+    bool cutMode = Id < 0;
     setCurrentRow( TableScope, TableId, Scope, Id );
+    if (cutMode) {
+        (*currentCells_).clear();
+    }
 
     // Parse the row
     while ( cur != ']' && cur )
