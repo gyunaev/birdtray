@@ -10,6 +10,7 @@ TEST(MailMorkParser, correctUnreadCount) {
             std::make_pair("1_Unread_Filter.msf", 1),
             std::make_pair("0_Unread_Trash.msf", 0),
             std::make_pair("1_Unread_Inbox_Large.msf", 1),
+            std::make_pair("1_Unread_Inbox_Duplicate_cells.msf", 1),
     };
     for (const auto testCase : cases) {
         MailMorkParser parser;
