@@ -29,7 +29,7 @@ Settings::Settings(bool verboseOutput)
 #endif
 
     mVerboseOutput = verboseOutput;
-    mIconSize = QSize( 128, 128 );
+    mIconSize = QSize( ICON_SIZE, ICON_SIZE );
     mNotificationDefaultColor = QColor("#0000FF");
     mNotificationBorderColor = QColor("#FFFFFF");
     mNotificationBorderWidth = 15;
