@@ -46,11 +46,11 @@
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
-        <translation>Schreibtischverknüpfung</translation>
+        <translation>Desktop-Verknüpfung</translation>
     </message>
     <message>
         <source>DesktopEntryDescription</source>
-        <translation>Erstellt eine ${PRODUCT_NAME} Verknüpfung auf dem Schreibtisch.</translation>
+        <translation>Erstellt eine ${PRODUCT_NAME} Verknüpfung auf dem Desktop.</translation>
     </message>
     <message>
         <source>StartMenuSectionName</source>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>UninstallPreviousVersion</source>
-        <translation>Vorherige ${PRODUCT_NAME}-Version deinstallieren</translation>
+        <translation>Vorherige ${PRODUCT_NAME}-Version wird deinstalliert</translation>
     </message>
     <message>
         <source>UninstallPreviousVersionError</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>StoppingBirdtray</source>
-        <translation>Prozess ${EXE_NAME} anhalten</translation>
+        <translation>Prozess ${EXE_NAME} wird anhalten</translation>
     </message>
     <message>
         <source>StopBirdtrayError</source>
@@ -170,7 +170,7 @@
     </message>
     <message>
         <source>Install32On64BitError</source>
-        <translation>Dieses Installationsprogramm beinhaltet die 64-Bit-Version von ${PRODUCT_NAME}. Auf Ihrem Rechner läuft eine 32-Bit-Version von Windows, welche keine 64-Bit-Programme ausführen kann. Bitte laden sie das 32-Bit-Installationsprogramm von ${PRODUCT_NAME} herunter.</translation>
+        <translation>Dieses Installationsprogramm beinhaltet die 64-Bit-Version von ${PRODUCT_NAME}. Auf Ihrem Computer läuft eine 32-Bit-Version von Windows, welche keine 64-Bit-Programme ausführen kann. Bitte laden sie das 32-Bit-Installationsprogramm von ${PRODUCT_NAME} herunter.</translation>
     </message>
     <message>
         <source>UnsupportedWindowsVersionError</source>
