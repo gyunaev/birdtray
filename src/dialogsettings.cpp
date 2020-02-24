@@ -31,7 +31,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( buttonBox, &QDialogButtonBox::accepted, this, &DialogSettings::accept );
     connect( buttonBox, &QDialogButtonBox::rejected, this, &DialogSettings::reject );
     connect( btnBrowse, &QPushButton::clicked, this, &DialogSettings::browsePath );
-    connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
 
@@ -135,6 +134,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxParserSelection->addItem( tr("using global search database (wont work with 68+)"), false );
     boxParserSelection->addItem( tr("using Mork index files (recommended)"), true );
 
+    // Should not be called before boxParserSelection is set up
+    connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( boxParserSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(unreadParserChanged(int)) );
 
     if ( settings->mUseMorkParser )
