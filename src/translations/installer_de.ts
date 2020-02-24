@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>StoppingBirdtray</source>
-        <translation>Prozess ${EXE_NAME} wird anhalten</translation>
+        <translation>Prozess ${EXE_NAME} wird angehalten</translation>
     </message>
     <message>
         <source>StopBirdtrayError</source>
