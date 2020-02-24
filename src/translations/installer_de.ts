@@ -10,15 +10,15 @@
     </message>
     <message>
         <source>BirdtraySectionDescription</source>
-        <translation>Ein freies Taskleisten Benachrichtigungsprogramm für neue Mails von Thunderbird.</translation>
+        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird.</translation>
     </message>
     <message>
         <source>WinIntegrationSectionName</source>
-        <translation>Windows Integration</translation>
+        <translation>Windows-Integration</translation>
     </message>
     <message>
         <source>WinIntegrationGroupDescription</source>
-        <translation>Wähle aus, wie ${PRODUCT_NAME} in Windows integriert werden soll.</translation>
+        <translation>Auswählen, wie ${PRODUCT_NAME} in Windows integriert werden soll.</translation>
     </message>
     <message>
         <source>AutoRunSectionName</source>
@@ -26,7 +26,7 @@
     </message>
     <message>
         <source>AutoRunDescription</source>
-        <translation>Starte ${PRODUCT_NAME} automatisch nach dem Einloggen.</translation>
+        <translation>${PRODUCT_NAME} automatisch nach dem Anmelden starten.</translation>
     </message>
     <message>
         <source>AutoCheckUpdateSectionName</source>
@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>AutoCheckUpdateDescription</source>
-        <translation>Suche beim Starten von ${PRODUCT_NAME} automatisch nach Aktualisierungen.</translation>
+        <translation>Beim Starten von ${PRODUCT_NAME} automatisch nach Aktualisierungen suchen.</translation>
     </message>
     <message>
         <source>ProgramGroupSectionName</source>
@@ -42,11 +42,11 @@
     </message>
     <message>
         <source>ProgramGroupDescription</source>
-        <translation>Erstellt eine ${PRODUCT_NAME} Programmgruppe in der Programmliste des Startmenüs.</translation>
+        <translation>Erstellt eine ${PRODUCT_NAME}-Programmgruppe in der Programmliste des Startmenüs.</translation>
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
-        <translation>Desktop Verknüpfung</translation>
+        <translation>Desktop-Verknüpfung</translation>
     </message>
     <message>
         <source>DesktopEntryDescription</source>
@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>StartMenuSectionName</source>
-        <translation>Startmenü Verknüpfung</translation>
+        <translation>Startmenüverknüpfung</translation>
     </message>
     <message>
         <source>StartMenuDescription</source>
-        <translation>Erstellt eine ${PRODUCT_NAME} Verknüpfung im Startmenü.</translation>
+        <translation>Erstellt eine ${PRODUCT_NAME}-Verknüpfung im Startmenü.</translation>
     </message>
     <message>
         <source>TranslationsSectionName</source>
@@ -66,11 +66,11 @@
     </message>
     <message>
         <source>TranslationsDescription</source>
-        <translation>Wählen Sie Anzeigesprachen für ${PRODUCT_NAME} aus. ${PRODUCT_NAME} wird eine Sprache basierend auf die Systemsprache auswählen.</translation>
+        <translation>Wählen Sie Anzeigesprachen für ${PRODUCT_NAME} aus. ${PRODUCT_NAME} wird eine Sprache basierend auf der Systemsprache auswählen.</translation>
     </message>
     <message>
         <source>UserSettingsSectionName</source>
-        <translation>${PRODUCT_NAME} Benutzerkonfiguration</translation>
+        <translation>${PRODUCT_NAME}-Benutzereinstellungen</translation>
     </message>
     <message>
         <source>UserSettingsDescription</source>
@@ -82,19 +82,19 @@
     </message>
     <message>
         <source>FinishPageRunBirdtray</source>
-        <translation>Starte ${PRODUCT_NAME}</translation>
+        <translation>${PRODUCT_NAME} starten</translation>
     </message>
     <message>
         <source>UninstallerConfirmation</source>
-        <translation>Klicke &quot;Deinstallieren&quot;, um den Vorgang zu starten.</translation>
+        <translation>&quot;Deinstallieren&quot; klicken, um den Vorgang zu starten.</translation>
     </message>
     <message>
         <source>UninstallPreviousVersion</source>
-        <translation>Deinstalliere vorherige ${PRODUCT_NAME} Version</translation>
+        <translation>Vorherige ${PRODUCT_NAME}-Version wird deinstalliert</translation>
     </message>
     <message>
         <source>UninstallPreviousVersionError</source>
-        <translation>Das Deinstallieren der alten ${PRODUCT_NAME} Version ist fehlgeschlagen! Wollen Sie fortfahren und ALLES in $3 löschen.</translation>
+        <translation>Das Deinstallieren der alten ${PRODUCT_NAME}-Version ist fehlgeschlagen! Wollen Sie fortfahren und ALLES in $3 löschen.</translation>
     </message>
     <message>
         <source>UninstallExecutionError</source>
@@ -102,23 +102,23 @@
     </message>
     <message>
         <source>StopBirdtray</source>
-        <translation>${PRODUCT_NAME} wird momentan ausgeführt. Drücken Sie OK, um ${PRODUCT_NAME} zu stoppen und mit der Installation fortzufahren.</translation>
+        <translation>${PRODUCT_NAME} wird momentan ausgeführt. Drücken Sie OK, um ${PRODUCT_NAME} anzuhalten und mit der Installation fortzufahren.</translation>
     </message>
     <message>
         <source>StoppingBirdtray</source>
-        <translation>Stoppe Prozess ${EXE_NAME}</translation>
+        <translation>Prozess ${EXE_NAME} wird angehalten</translation>
     </message>
     <message>
         <source>StopBirdtrayError</source>
-        <translation>Das Stoppen von ${PRODUCT_NAME} ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schließen Sie ${PRODUCT_NAME} manuell, um mit der Installation fortzufahren.</translation>
+        <translation>Das Anhalten von ${PRODUCT_NAME} ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schließen Sie ${PRODUCT_NAME} manuell, um mit der Installation fortzufahren.</translation>
     </message>
     <message>
         <source>StopBirdtrayUninstall</source>
-        <translation>${PRODUCT_NAME} wird momentan ausgeführt. Drücken Sie OK, um ${PRODUCT_NAME} zu stoppen und mit der Deinstallation fortzufahren.</translation>
+        <translation>${PRODUCT_NAME} wird momentan ausgeführt. Drücken Sie OK, um ${PRODUCT_NAME} anzuhalten und mit der Deinstallation fortzufahren.</translation>
     </message>
     <message>
         <source>StopBirdtrayUninstallError</source>
-        <translation>Das Stoppen von ${PRODUCT_NAME} ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schließen Sie ${PRODUCT_NAME} manuell, um mit der Deinstallation fortzufahren.</translation>
+        <translation>Das Anhalten von ${PRODUCT_NAME} ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schließen Sie ${PRODUCT_NAME} manuell, um mit der Deinstallation fortzufahren.</translation>
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
@@ -134,15 +134,15 @@
     </message>
     <message>
         <source>InstallPathContainsPreviousVersion</source>
-        <translation>Im Installationspfad wurde eine vorherig installierte ${PRODUCT_NAME} Version gefunden, die ersetzt wird.</translation>
+        <translation>Im Installationspfad wurde eine vorherig installierte ${PRODUCT_NAME}-Version gefunden, die ersetzt wird.</translation>
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
-        <translation>Der Installationspfad ist nicht leer, aber scheint keine vorherig installierte ${PRODUCT_NAME} Version zu beinhalten. Der Inhalt des Ordners wird Überschrieben.</translation>
+        <translation>Der Installationspfad ist nicht leer, aber scheint keine vorherig installierte ${PRODUCT_NAME}-Version zu beinhalten. Der Inhalt des Ordners wird Überschrieben.</translation>
     </message>
     <message>
         <source>CurrentUserOnly</source>
-        <translation>$0 (nur für den momentaner Benutzer)</translation>
+        <translation>$0 (nur für den aktuellen Benutzer)</translation>
     </message>
     <message>
         <source>InstallFailed</source>
@@ -166,11 +166,11 @@
     </message>
     <message>
         <source>Install64On32BitWarning</source>
-        <translation>Sie sind dabei, die 32-bit Version von ${PRODUCT_NAME} auf ihrem 64-bit Windows zu installieren. Es gibt eine 64-bit ${PRODUCT_NAME} Version, die heruntergeladen werden kann.</translation>
+        <translation>Sie sind dabei, die 32-Bit-Version von ${PRODUCT_NAME} auf ihrem 64-Bit-Windows zu installieren. Es gibt eine 64-bit-${PRODUCT_NAME}-Version, die heruntergeladen werden kann.</translation>
     </message>
     <message>
         <source>Install32On64BitError</source>
-        <translation>Dieses Installationsprogramm beinhaltet die 64-bit Version von ${PRODUCT_NAME}. Auf Ihrem Computer läuft eine 32-bit Version von Windows, welche keine 64-bit Programme ausführen kann. Bitte laden sie das 32-bit Installationsprogramm von ${PRODUCT_NAME} herunter.</translation>
+        <translation>Dieses Installationsprogramm beinhaltet die 64-Bit-Version von ${PRODUCT_NAME}. Auf Ihrem Computer läuft eine 32-Bit-Version von Windows, welche keine 64-Bit-Programme ausführen kann. Bitte laden sie das 32-Bit-Installationsprogramm von ${PRODUCT_NAME} herunter.</translation>
     </message>
     <message>
         <source>UnsupportedWindowsVersionError</source>
