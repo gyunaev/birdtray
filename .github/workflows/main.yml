@@ -46,11 +46,13 @@ jobs:
             export sqliteDir=C:\\ProgramData\\chocolatey\\lib\\SQLite\\tools
             if [ "$ARCH" == "x86" ]; then
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
+              export archParam="--forcex86"
             else
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A x64"
             fi
             echo "::set-env name=CMAKE_PREFIX_PATH::$sqliteDir"
-            choco install -y sqlite --params \"/NoTools\"
+            echo "::add-path::$sqliteDir"
+            choco install -y $archParam sqlite --params \"/NoTools\"
             curl -sS https://www.sqlite.org/2019/sqlite-amalgamation-3300100.zip > sqlite-source.zip
             unzip -p sqlite-source.zip sqlite-amalgamation-3300100/sqlite3.h > $sqliteDir/sqlite3.h
             rm sqlite-source.zip
@@ -64,7 +66,10 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON
+        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON
       - name: Build
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target birdtray
+      - name: Tests
+        working-directory: ${{runner.workspace}}/build
+        run: cmake --build . --config Release --target run_tests

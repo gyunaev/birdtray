@@ -17,21 +17,21 @@ set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
 set(EXECUTABLE_OPTIONS)
 
-option( OPT_THUNDERBIRD_CMDLINE "Default Thunderbird startup command-line" [])
-option( OPT_THUNDERBIRD_PROFILE "Default Thunderbird profile path" [])
+option(OPT_THUNDERBIRD_CMDLINE "Default Thunderbird startup command-line" [])
+option(OPT_THUNDERBIRD_PROFILE "Default Thunderbird profile path" [])
 
-if (OPT_THUNDERBIRD_CMDLINE)
+if(OPT_THUNDERBIRD_CMDLINE)
     message(STATUS "Setting Thunderbird command-line to ${OPT_THUNDERBIRD_CMDLINE}")
     add_definitions(-DOPT_THUNDERBIRD_CMDLINE="${OPT_THUNDERBIRD_CMDLINE}")
 endif(OPT_THUNDERBIRD_CMDLINE)
 
-if (OPT_THUNDERBIRD_PROFILE)
-    message(STATUS "Setting Thunderbird command line to ${OPT_THUNDERBIRD_PROFILE}")
+if(OPT_THUNDERBIRD_PROFILE)
+    message(STATUS "Setting Thunderbird profile path to ${OPT_THUNDERBIRD_PROFILE}")
     add_definitions(-DOPT_THUNDERBIRD_PROFILE="${OPT_THUNDERBIRD_PROFILE}")
 endif(OPT_THUNDERBIRD_PROFILE)
 
 if(NOT Qt5LinguistTools_FOUND)
-    message(STATUS "Qt5LinguistTools package not found: translations will not be available")
+    message(STATUS "Qt5LinguistTools package not found: Translations will not be available")
 endif(NOT Qt5LinguistTools_FOUND)
 
 if(WIN32)
@@ -39,7 +39,8 @@ if(WIN32)
     ENABLE_LANGUAGE(RC)
     add_definitions(-DUNICODE -DNOMINMAX)
     set(PLATFORM_SOURCES src/windowtools_win.cpp src/birdtrayeventfilter.cpp
-            src/processhandle.cpp src/res/birdtray.rc)
+            src/processhandle.cpp)
+    set(PLATFORM_EXE_SOURCES src/res/birdtray.rc)
     set(PLATFORM_HEADERS src/windowtools_win.h src/birdtrayeventfilter.h src/processhandle.h)
     find_package(Qt5WinExtras CONFIG REQUIRED)
     list(APPEND REQUIRED_MODULES Qt5::WinExtras)
@@ -51,10 +52,8 @@ else()
     set(PLATFORM_HEADERS src/windowtools_x11.h)
 endif(WIN32)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
-include_directories(${SQLITE3_INCLUDE_DIRS} src)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
 
 set(SOURCES
@@ -64,7 +63,6 @@ set(SOURCES
         src/dialogaddeditaccount.cpp
         src/dialogaddeditnewemail.cpp
         src/dialogsettings.cpp
-        src/main.cpp
         src/modelaccounttree.cpp
         src/modelnewemails.cpp
         src/morkparser.cpp
@@ -141,21 +139,35 @@ if(Qt5LinguistTools_FOUND)
     list(APPEND GEN_TRANSLATION_FILES ${GEN_DYN_TRANSLATION_FILES})
 endif(Qt5LinguistTools_FOUND)
 
-add_executable(birdtray ${EXECUTABLE_OPTIONS}
+add_library(birdtray_lib STATIC
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
         ${HEADERS} ${PLATFORM_HEADERS})
-target_link_libraries(birdtray ${REQUIRED_MODULES})
+target_include_directories(birdtray_lib PUBLIC ${SQLITE3_INCLUDE_DIRS} src)
+target_link_libraries(birdtray_lib PUBLIC ${REQUIRED_MODULES})
+
+add_executable(birdtray
+        ${EXECUTABLE_OPTIONS} src/main.cpp ${PLATFORM_EXE_SOURCES} ${RESOURCES_SOURCES}
+        ${HEADERS} ${PLATFORM_HEADERS})
+target_link_libraries(birdtray birdtray_lib)
+
 if(MSVC)
-    target_compile_options(birdtray PRIVATE /utf-8)
+    target_compile_options(birdtray_lib PUBLIC /utf-8)
 endif()
 
 option(COMPILER_WARNINGS_AS_ERRORS "Fail the build on compiler warnings" OFF)
 if(COMPILER_WARNINGS_AS_ERRORS)
     if(MSVC)
-        target_compile_options(birdtray PRIVATE /W4 /WX)
+        target_compile_options(birdtray_lib PUBLIC /W4 /WX)
     else()
-        target_compile_options(birdtray PRIVATE -Wall -Wextra -Wpedantic -Werror)
+        target_compile_options(birdtray_lib PUBLIC -Wall -Wextra -Wpedantic -Werror)
     endif()
+endif()
+
+# Tests
+option(BUILD_WITH_TESTS "Build and add a test target. This requires GTest." OFF)
+if(BUILD_WITH_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
 
 # Installation
@@ -185,9 +197,9 @@ else()
         install(FILES src/res/icons/${size}/com.ulduzsoft.Birdtray.png
                 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps)
     endforeach()
-    install (FILES src/res/birdtray.svg
-             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps 
-             RENAME com.ulduzsoft.Birdtray.svg)
+    install(FILES src/res/birdtray.svg
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps
+            RENAME com.ulduzsoft.Birdtray.svg)
     install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
 endif()

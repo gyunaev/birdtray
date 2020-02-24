@@ -146,7 +146,7 @@ protected: // Members
     void    parse();
     void    parseDict();
     void    parseComment();
-    void    parseCell();
+    void    parseCell(bool isInCutMode = false);
     void    parseTable();
     void    parseMeta( char c );
     void    parseRow( int TableId, int TableScope );
@@ -161,6 +161,7 @@ protected: // Data
     // All mork file data
     TableScopeMap mork_;
     MorkCells *currentCells_;
+    QMap<int, QMap<int, QPair<int, int>>> rowMappings;
 
     // Error status of last operation
     QString mErrorMessage;
@@ -174,6 +175,18 @@ protected: // Data
 
     // Indicates the entity that is being parsed
     enum { NPColumns, NPValues, NPRows } nowParsing_;
+};
+
+
+/**
+ * A mork parse for mail databases.
+ */
+class MailMorkParser : public MorkParser {
+public:
+    /**
+     * @return The number of unread emails in the mork file.
+     */
+    unsigned int getNumUnreadMessages();
 };
 
 #endif // __MorkParser_h__
