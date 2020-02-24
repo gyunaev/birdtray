@@ -185,6 +185,10 @@
         <translation>Uninstalling ${PRODUCT_NAME} has been aborted. Please try again later.</translation>
     </message>
     <message>
+        <source>SettingsLink</source>
+        <translation>${PRODUCT_NAME} settings</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>English</translation>
     </message>
