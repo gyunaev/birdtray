@@ -491,7 +491,12 @@ void DialogSettings::changeIcon(QToolButton *button)
         return;
     }
 
-    button->setIcon( test );
+    Settings* settings = BirdtrayApp::get()->getSettings();
+
+    // Force scale icon to the expected size
+    button->setIcon( test.scaled(
+            settings->mIconSize.width(), settings->mIconSize.height(),
+            Qt::KeepAspectRatio, Qt::SmoothTransformation) );
 }
 
 

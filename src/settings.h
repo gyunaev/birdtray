@@ -15,6 +15,10 @@ class QSettings;
 class Settings
 {
     public:
+
+        // Icon size constant
+        static constexpr int ICON_SIZE = 128;
+
         explicit Settings(bool verboseOutput);
         ~Settings();
 
