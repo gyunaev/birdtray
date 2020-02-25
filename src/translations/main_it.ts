@@ -375,7 +375,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Thunderbird window name pattern:</source>
-        <translation>Nome modello finestra  Thunderbird:</translation>
+        <translation>Nome modello finestra Thunderbird:</translation>
     </message>
     <message>
         <source>Minimum notification font size:</source>
