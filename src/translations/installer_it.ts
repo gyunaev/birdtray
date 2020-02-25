@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>ProgramGroupDescription</source>
-        <translation>Crea un gruppo di programmi ${PRODUCT_NAME} in Menu Start> Programmi.</translation>
+        <translation>Crea un gruppo di programmi ${PRODUCT_NAME} in Menu Start > Programmi.</translation>
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
