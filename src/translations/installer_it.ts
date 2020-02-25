@@ -122,15 +122,15 @@
     </message>
     <message>
         <source>StopBirdtrayUninstallError</source>
-        <translation>Impossibile chiudere ${PRODUCT_NAME}. Riprova o esci da $ {PRODUCT_NAME} manualmente per continuare con la disinstallazione.</translation>
+        <translation>Impossibile chiudere ${PRODUCT_NAME}. Riprova o esci da ${PRODUCT_NAME} manualmente per continuare con la disinstallazione.</translation>
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
-        <translation>L'impostazione di ${PRODUCT_NAME} è già in esecuzione. $\R$\nSi prega di chiudere tutte le istanze e fare clic su Riprova per continuare o Annulla per uscire.</translation>
+        <translation>L'impostazione di ${PRODUCT_NAME} è già in esecuzione. $\r$\nSi prega di chiudere tutte le istanze e fare clic su Riprova per continuare o Annulla per uscire.</translation>
     </message>
     <message>
         <source>UninstallAlreadyRunning</source>
-        <translation>La disinstallazione di ${PRODUCT_NAME} è già in esecuzione. $\R$\nChiudi tutte le istanze e fai clic su Riprova per continuare o Annulla per uscire.</translation>
+        <translation>La disinstallazione di ${PRODUCT_NAME} è già in esecuzione. $\r$\nChiudi tutte le istanze e fai clic su Riprova per continuare o Annulla per uscire.</translation>
     </message>
     <message>
         <source>BadInstallPath</source>
@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
-        <translation>Il percorso di installazione non è vuoto, ma non sembra contenere un'installazione precedente di ${PRODUCT_NAME}.Il contenuto verrà sovrascritto.</translation>
+        <translation>Il percorso di installazione non è vuoto, ma non sembra contenere un'installazione precedente di ${PRODUCT_NAME}. Il contenuto verrà sovrascritto.</translation>
     </message>
     <message>
         <source>CurrentUserOnly</source>
@@ -150,19 +150,19 @@
     </message>
     <message>
         <source>InstallFailed</source>
-        <translation>${PRODUCT_NAME} ${VERSION} non può essere installato completamente.$\R$\n\ Per favore, riavvia Windows ed esegui di nuovo il programma di installazione.</translation>
+        <translation>${PRODUCT_NAME} ${VERSION} non può essere installato completamente.$\r$\n\ Per favore, riavvia Windows ed esegui di nuovo il programma di installazione.</translation>
     </message>
     <message>
         <source>InstallFailedCauseUninstallerFailed</source>
-        <translation>${PRODUCT_NAME} non può essere completamente installato.$\R$\n\Riavvia Windows ed esegui nuovamente il programma di installazione.</translation>
+        <translation>${PRODUCT_NAME} non può essere completamente installato.$\r$\n\Riavvia Windows ed esegui nuovamente il programma di installazione.</translation>
     </message>
     <message>
         <source>UninstallFailed</source>
-        <translation>${PRODUCT_NAME} ${VERSION} non può essere disinstallato completamente.$\R$\nSi prega di riavviare Windows ed eseguire nuovamente il programma di disinstallazione.</translation>
+        <translation>${PRODUCT_NAME} ${VERSION} non può essere disinstallato completamente.$\r$\nSi prega di riavviare Windows ed eseguire nuovamente il programma di disinstallazione.</translation>
     </message>
     <message>
         <source>FileDeleteErrorDialog</source>
-        <translation>Errore durante l'eliminazione del file:$\r$\n$\r$\n$0$\r$\n$\r$\nFai clic su Riprova per riprovare oppure $\r$\nAnnulla per interrompere la disinstallazione.</translation>
+        <translation>Errore durante l'eliminazione del file:$\r$\n$\r$\n$0$\r$\n$\r$\nFai clic su Riprova per riprovare oppure$\r$\nAnnulla per interrompere la disinstallazione.</translation>
     </message>
     <message>
         <source>FileDeleteError</source>
@@ -170,11 +170,11 @@
     </message>
     <message>
         <source>Install64On32BitWarning</source>
-        <translation>Stai per installare la versione a 32 bit di ${PRODUCT_NAME} sul tuo Windows a 64 bit.È disponibile per il download una versione a 64 bit di ${PRODUCT_NAME}.</translation>
+        <translation>Stai per installare la versione a 32 bit di ${PRODUCT_NAME} sul tuo Windows a 64 bit. È disponibile per il download una versione a 64 bit di ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>Install32On64BitError</source>
-        <translation>Questo programma di installazione contiene la versione a 64 bit di ${PRODUCT_NAME}. Il computer esegue una versione a 32 bit di Windows, che non può eseguire programmi a 64 bit.Scarica il programma di installazione a 32 bit di ${PRODUCT_NAME}.</translation>
+        <translation>Questo programma di installazione contiene la versione a 64 bit di ${PRODUCT_NAME}. Il computer esegue una versione a 32 bit di Windows, che non può eseguire programmi a 64 bit. Scarica il programma di installazione a 32 bit di ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>UnsupportedWindowsVersionError</source>
