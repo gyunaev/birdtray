@@ -192,6 +192,10 @@
         <source>Lang_de</source>
         <translation>Tedesco</translation>
     </message>
+    <message>
+        <source>Lang_nl</source>
+        <translation>Olandese</translation>
+    </message>
 </context>
 </TS>
 
