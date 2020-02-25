@@ -196,6 +196,10 @@
         <source>Lang_nl</source>
         <translation>Olandese</translation>
     </message>
+    <message>
+        <source>Lang_it</source>
+        <translation>Italiano</translation>
+    </message>
 </context>
 </TS>
 
