@@ -208,6 +208,7 @@ VIAddVersionKey LegalCopyright ""
 !define MUI_PAGE_CUSTOMFUNCTION_PRE InstallerPagePre
 !insertmacro MUI_PAGE_INSTFILES
 
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW FinishPagePre
 !insertmacro MUI_PAGE_FINISH
 
 # === Uninstaller pages ===#
@@ -379,6 +380,27 @@ SectionGroupEnd
 
 Section "-Write Install Size" # Hidden section, write install size as the final step
     !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
+SectionEnd
+
+Section "-Check VC Installed" # Hidden section, check if the Visual Redistributable is installed
+    ${IsVisualRedistributableInstalled} $R0 ${ARCH}
+    ${if} $R0 != 1
+        DetailPrint "$(MissingVcRuntime)"
+        MessageBox MB_YESNO|MB_ICONQUESTION "$(MissingVcRuntime_Dialog)" /SD IDNO IDNO VCNotFound
+        ${OpenURL} "https://aka.ms/vs/16/release/vc_redist.${ARCH}.exe"
+        MessageBox MB_OK|MB_ICONQUESTION "$(MissingVcRuntime_Retry)"
+        ${IsVisualRedistributableInstalled} $R0 ${ARCH}
+        StrCmp $R0 1 0 +3
+            MessageBox MB_OK|MB_ICONINFORMATION "$(MissingVcRuntime_Found)"
+            Goto Done
+        MessageBox MB_OK|MB_ICONEXCLAMATION "$(MissingVcRuntime_StillNotFound)"
+        VCNotFound:
+        DetailPrint "$(MissingVcRuntime_UnableToRun)"
+        MessageBox MB_OK|MB_ICONEXCLAMATION "$(MissingVcRuntime_UnableToRunDialog)" /SD IDOK
+        SetErrorLevel 1157
+
+        Done:
+    ${endif}
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -628,6 +650,17 @@ FunctionEnd
 Function InstallerPagePre
     GetDlgItem $0 $HWNDPARENT 1
     SendMessage $0 ${BCM_SETSHIELD} 0 0 # Hide SHIELD (Windows Vista and above)
+FunctionEnd
+
+# Called when the finish page is shown
+Function FinishPagePre
+    !ifndef UNINSTALL_BUILDER
+    ${IsVisualRedistributableInstalled} $R0 ${ARCH}
+    ${if} $R0 != 1
+        SendMessage $mui.FinishPage.Run ${BM_SETCHECK} ${BST_UNCHECKED} 0 # uncheck 'run software'
+        ShowWindow $mui.FinishPage.Run 0 # hide the checkbox
+    ${endif}
+    !endif # UNINSTALL_BUILDER
 FunctionEnd
 
 Function .onInstFailed

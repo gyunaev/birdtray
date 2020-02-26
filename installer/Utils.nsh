@@ -212,6 +212,45 @@ FunctionEnd
 !define SelectSection '!insertmacro SelectSection'
 !define UnselectSection '!insertmacro UnselectSection'
 
+!ifndef UNINSTALL_BUILDER
+
+# Check if a Visual C++ Redistributable is installed.
+# $0 - ARCH: The path of the directory (x64 or x86).
+# Returns:
+# $0 - IS_INSTALLED: 1 (true) if a Visual C++ Redistributable is installed and 0 (false) if not.
+Function IsVisualRedistributableInstalled
+    Exch $0
+    ${if} ${RunningX64}
+        ReadRegDword $0 HKLM "SOFTWARE\Wow6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\$0" \
+            "Installed"
+    ${else}
+        ReadRegDword $0 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\$0" "Installed"
+    ${endif}
+    Exch $0
+FunctionEnd
+!macro IsVisualRedistributableInstalled VAR ARCH
+    Push ${ARCH}
+    Call IsVisualRedistributableInstalled
+    Pop ${VAR}
+!macroend
+!define IsVisualRedistributableInstalled "!insertmacro IsVisualRedistributableInstalled"
+
+
+# Open an url in a browser window.
+# $0 - URL: The url to open.
+Function OpenURL
+    Exch $0
+    Exec "rundll32 url.dll,FileProtocolHandler $0"
+    DetailPrint "$(OpenUrl)"
+    Pop $0
+FunctionEnd
+!macro OpenURL URL
+    Push ${URL}
+    Call OpenURL
+!macroend
+!define OpenURL "!insertmacro OpenURL"
+!endif # UNINSTALL_BUILDER
+
 # === Macros === #
 
 # Check that the program is suitable for the platform.

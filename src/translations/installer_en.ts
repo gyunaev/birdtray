@@ -189,6 +189,38 @@
         <translation>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</translation>
     </message>
     <message>
+        <source>OpenUrl</source>
+        <translation>Opening $0 in default browser...</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime</source>
+        <translation>Unable to find Visual C++ Runtime ${ARCH}.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Dialog</source>
+        <translation>The following required component was not found on this computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nDo you want to download the installer for the component?</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Retry</source>
+        <translation>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Found</source>
+        <translation>The required component was successfully detected on your computer.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_StillNotFound</source>
+        <translation>The required component was not found on your computer. Please search online for Visual C++ ${ARCH} downloads for Visual Studio 2015 and higher.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_UnableToRun</source>
+        <translation>${PRODUCT_NAME} will not be able to run.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_UnableToRunDialog</source>
+        <translation>${PRODUCT_NAME} will not be able to start because a required component is missing.</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>English</translation>
     </message>
