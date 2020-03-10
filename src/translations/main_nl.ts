@@ -546,6 +546,14 @@ Wilt u de accounts verwijderen?</translation>
         <translation>Negeer alle ongelezen e-mails die beschikbaar zijn als Birdtray opstart. Alleen nieuwe e-mails worden geteld door de ongelezen e-mail-aanduiding.</translation>
     </message>
     <message>
+        <source>Choose one or more MSF files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }

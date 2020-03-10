@@ -582,6 +582,14 @@ p, li { white-space: pre-wrap; }
         <translation>verstecke es, wenn es keine neuen Mails gibt.</translation>
     </message>
     <message>
+        <source>Choose one or more MSF files</source>
+        <translation>Wähle eine oder mehrere MSF Dateien</translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation>Mail Index (*.msf)</translation>
+    </message>
+    <message>
         <source>No new updates found</source>
         <translation>Keine neue Version gefunden</translation>
     </message>
