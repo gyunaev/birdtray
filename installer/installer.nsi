@@ -28,6 +28,7 @@ SetCompressor /SOLID lzma
 !include LogicLib.nsh
 !include WinVer.nsh
 !include StrFunc.nsh
+!include StdUtils.nsh
 !Include Utils.nsh
 # StrFunc.nsh requires priming the commands which actually get used later
 !ifdef UNINSTALL_BUILDER
@@ -43,6 +44,7 @@ Var currentUserString # Is "" for if the installation is for all users, else " (
 !ifdef UNINSTALL_BUILDER
 Var SemiSilentMode # Installer started uninstaller in semi-silent mode using /SS parameter.
 Var RunningFromInstaller # Installer started uninstaller using /uninstall parameter.
+Var RunningAsShellUser # Uninstaller restarted itself under the user of the running shell.
 !endif # UNINSTALL_BUILDER
 
 
@@ -653,8 +655,20 @@ Function un.onInit
         StrCpy $SemiSilentMode 0
     ${endif}
 
+    ${GetOptions} $R0 "/shelluser" $R1
+    ${ifnot} ${errors}
+        StrCpy $RunningAsShellUser 1
+    ${else}
+        StrCpy $RunningAsShellUser 0
+    ${endif}
+
     ${ifNot} ${UAC_IsInnerInstance}
     ${andIf} $RunningFromInstaller == 0
+        ${if} ${UAC_IsAdmin}
+        ${andif} $RunningAsShellUser = 0
+            ${StdUtils.ExecShellAsUser} $0 "$INSTDIR\${UNINSTALL_FILENAME}" "open" "/user $R0"
+            Quit
+        ${endif}
         !insertmacro CheckSingleInstance "$(UninstallAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 
