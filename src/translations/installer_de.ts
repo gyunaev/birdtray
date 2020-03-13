@@ -185,6 +185,10 @@
         <translation>${PRODUCT_NAME} Einstellungen</translation>
     </message>
     <message>
+        <source>UninstallRestartAsUserQuestion</source>
+        <translation>Das Deinstallationsprogramm wurde mit Administrator-Rechten gestartet, aber es scheint keine ${PRODUCT_NAME}-Installation beim Administrator vorhanden zu sein. Wollen Sie die Deinstallation als Nutzer ohne Administrator-Rechten neustarten?</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>Englisch</translation>
     </message>

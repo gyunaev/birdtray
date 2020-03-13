@@ -189,6 +189,10 @@
         <translation>${PRODUCT_NAME} settings</translation>
     </message>
     <message>
+        <source>UninstallRestartAsUserQuestion</source>
+        <translation>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>Engels</translation>
     </message>

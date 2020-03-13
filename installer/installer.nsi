@@ -44,7 +44,6 @@ Var currentUserString # Is "" for if the installation is for all users, else " (
 !ifdef UNINSTALL_BUILDER
 Var SemiSilentMode # Installer started uninstaller in semi-silent mode using /SS parameter.
 Var RunningFromInstaller # Installer started uninstaller using /uninstall parameter.
-Var RunningAsShellUser # Uninstaller restarted itself under the user of the running shell.
 !endif # UNINSTALL_BUILDER
 
 
@@ -127,6 +126,7 @@ Var RunningAsShellUser # Uninstaller restarted itself under the user of the runn
 !define MUI_UNICON ${MUI_ICON} # Same icon for installer and un-installer.
 !define MUI_UNABORTWARNING
 !define MUI_UNCONFIRMPAGE_TEXT_TOP "$(UninstallerConfirmation)"
+!define MUI_CUSTOMFUNCTION_UNGUIINIT "un.onGuiInitialisation"
 !endif # UNINSTALL_BUILDER
 
 # MultiUser config
@@ -655,27 +655,31 @@ Function un.onInit
         StrCpy $SemiSilentMode 0
     ${endif}
 
-    ${GetOptions} $R0 "/shelluser" $R1
-    ${ifnot} ${errors}
-        StrCpy $RunningAsShellUser 1
-    ${else}
-        StrCpy $RunningAsShellUser 0
-    ${endif}
+    # We always get the language, since the outer and inner instance might have different language
+    !insertmacro MUI_UNGETLANGUAGE
+FunctionEnd
 
+Function un.onGuiInitialisation
     ${ifNot} ${UAC_IsInnerInstance}
     ${andIf} $RunningFromInstaller == 0
         ${if} ${UAC_IsAdmin}
-        ${andif} $RunningAsShellUser = 0
-            ${StdUtils.ExecShellAsUser} $0 "$INSTDIR\${UNINSTALL_FILENAME}" "open" "/user $R0"
-            Quit
+            ReadRegStr $0 HKCU "${MULTIUSER_INSTALLMODE_INSTALL_REGISTRY_KEY_PATH}" \
+                "${MULTIUSER_INSTALLMODE_INSTDIR_REGISTRY_VALUENAME}"
+            ${GetParameters} $R0
+            ${GetOptions} $R0 "/currentuser" $R1
+            ${ifnot} ${errors}
+            ${andif} $0 == ""
+                MessageBox MB_YESNO|MB_ICONQUESTION "$(UninstallRestartAsUserQuestion)" /SD IDNO \
+                    IDNO Continue
+                ${StdUtils.ExecShellAsUser} $0 "$INSTDIR\${UNINSTALL_FILENAME}" "open" $R0
+                Quit
+                Continue:
+            ${endif}
         ${endif}
         !insertmacro CheckSingleInstance "$(UninstallAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 
     !insertmacro MULTIUSER_UNINIT
-
-    # We always get the language, since the outer and inner instance might have different language
-    !insertmacro MUI_UNGETLANGUAGE
 
     !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtrayUninstall)" "$(StopBirdtrayUninstallError)"
 FunctionEnd
