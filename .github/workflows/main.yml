@@ -34,7 +34,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ runner.temp }}/Qt
-          key: ${{ runner.os }}-Qt-${{ matrix.qt_version }}
+          key: ${{ runner.os }}-${{ matrix.arch }}-Qt-${{ matrix.qt_version }}
       - name: Install Qt ${{ matrix.qt_version }}
         uses: jurplel/install-qt-action@v2
         with:
