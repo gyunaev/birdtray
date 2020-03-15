@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Qt ${{ matrix.qt_version }}
-        uses: ouuan/install-qt-action@v2.3.1
+        uses: jurplel/install-qt-action@v2
         with:
           version: ${{ matrix.qt_version }}
           arch: ${{ matrix.qt_compile_suite }}
