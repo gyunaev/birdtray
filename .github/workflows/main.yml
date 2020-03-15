@@ -24,16 +24,24 @@ jobs:
             qt_version: 5.6
           - os: windows-latest
             qt_version: 5.9
-          # We only compile for the current architecture of the runner for linux
+          # We only compile for the current architecture of the runner for Linux
           - os: ubuntu-latest
             arch: x86
     steps:
       - uses: actions/checkout@v2
+      - name: Cache Qt ${{ matrix.qt_version }}
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ${{ runner.temp }}/Qt
+          key: ${{ runner.os }}-${{ matrix.arch }}-Qt-${{ matrix.qt_version }}
       - name: Install Qt ${{ matrix.qt_version }}
-        uses: ouuan/install-qt-action@v2.3.1
+        uses: jurplel/install-qt-action@v2
         with:
           version: ${{ matrix.qt_version }}
           arch: ${{ matrix.qt_compile_suite }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          dir: ${{ runner.temp }}/Qt
       - name: Install additional dependencies
         shell: bash
         env:
