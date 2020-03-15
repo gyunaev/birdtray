@@ -482,7 +482,7 @@ OpenSSL potrebbe non essere installato.</translation>
         <source>Error retrieving accounts:
 %1</source>
         <translation>Errore durante il recupero degli account:
- %1</translation>
+%1</translation>
     </message>
     <message>
         <source>Checking...</source>
@@ -782,7 +782,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
 %1</source>
         <translation>Errore durante l'avvio di Thunderbird, perché non è stato possibile collegarsi al programma di aggiornamento:
 
- %1</translation>
+%1</translation>
     </message>
     <message>
         <source>Ignore unread emails (now %1)</source>
