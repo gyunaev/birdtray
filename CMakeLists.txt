@@ -119,11 +119,13 @@ if(Qt5LinguistTools_FOUND)
             src/translations/main_en.ts
             src/translations/main_de.ts
             src/translations/main_nl.ts
+            src/translations/main_it.ts
             )
     set(DYN_TRANSLATION_FILES
             src/translations/dynamic_en.ts
             src/translations/dynamic_de.ts
             src/translations/dynamic_nl.ts
+            src/translations/dynamic_it.ts
             )
 
     set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
