@@ -12,7 +12,8 @@ OpenSSL potrebbe non essere installato.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Impossibile salvare il programma di installazione di Birdtray:</translation>
+        <translation>Impossibile salvare il programma di installazione di Birdtray:
+</translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
@@ -88,7 +89,7 @@ OpenSSL potrebbe non essere installato.</translation>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Errore durante l'apertura del database sqlite: %1</translation>
+        <translation>Errore durante l&apos;apertura del database sqlite: %1</translation>
     </message>
     <message>
         <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
@@ -99,7 +100,7 @@ OpenSSL potrebbe non essere installato.</translation>
     <name>DatabaseUnreadFixer</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Errore durante l'apertura del database sqlite: %1</translation>
+        <translation>Errore durante l&apos;apertura del database sqlite: %1</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
@@ -165,7 +166,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Email subject:</source>
-        <translation>Oggetto dell'email:</translation>
+        <translation>Oggetto dell&apos;email:</translation>
     </message>
     <message>
         <source>Email message text:</source>
@@ -200,7 +201,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se questa casella è selezionata, l'icona Birdtray mostrerà il numero di e-mail non lette.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Se è deselezionato, non verrà mostrato alcun conteggio e saprai delle e-mail non lette a causa dell'icona lampeggiante o diversa, a seconda delle tue impostazioni.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se questa casella è selezionata, l&apos;icona Birdtray mostrerà il numero di e-mail non lette.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Se è deselezionato, non verrà mostrato alcun conteggio e saprai delle e-mail non lette a causa dell&apos;icona lampeggiante o diversa, a seconda delle tue impostazioni.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Show unread count</source>
@@ -304,11 +305,11 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se abilitata, questa opzione aggiunge la &amp;quot;Ignora le e-mail attualmente non lette&amp;quot; azione al menu contestuale. Questa azione ti consente di ignorare le e-mail attualmente non lette. Birdtray avrebbe quindi fatto finta che non fossero rimaste e-mail non lette e avrebbe mostrato solo nuove e-mail oltre il conteggio ignorato.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Ad esempio, se c'erano 10 e-mail non lette e hai fatto clic su &amp;quot;Ignora&amp;quot;azione, Birdtray non mostrerà alcun indicatore e-mail non letto finché il conteggio e-mail non letto rimane a 10. Una volta ricevuta la nuova e-mail e hai 11 e-mail totali non lette, Birdtray mostrerà il nuovo conteggio e-mail come 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Se il conteggio e-mail non letto è inferiore ad email di &amp;quot;ignored&amp;quot; quantità, l'ignore si azzera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se abilitata, questa opzione aggiunge la &amp;quot;Ignora le e-mail attualmente non lette&amp;quot; azione al menu contestuale. Questa azione ti consente di ignorare le e-mail attualmente non lette. Birdtray avrebbe quindi fatto finta che non fossero rimaste e-mail non lette e avrebbe mostrato solo nuove e-mail oltre il conteggio ignorato.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Ad esempio, se c&apos;erano 10 e-mail non lette e hai fatto clic su &amp;quot;Ignora&amp;quot;azione, Birdtray non mostrerà alcun indicatore e-mail non letto finché il conteggio e-mail non letto rimane a 10. Una volta ricevuta la nuova e-mail e hai 11 e-mail totali non lette, Birdtray mostrerà il nuovo conteggio e-mail come 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Se il conteggio e-mail non letto è inferiore ad email di &amp;quot;ignored&amp;quot; quantità, l&apos;ignore si azzera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
-        <translation>Consenti di ignorare l'attuale contatore di e-mail non lette</translation>
+        <translation>Consenti di ignorare l&apos;attuale contatore di e-mail non lette</translation>
     </message>
     <message>
         <source>Hiding</source>
@@ -320,11 +321,11 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Start Thunderbird when Birdtray starts</source>
-        <translation>Avvia Thunderbird all'avvio di Birdtray</translation>
+        <translation>Avvia Thunderbird all&apos;avvio di Birdtray</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quando sia Thunderbird che Birdtray sono impostati per iniziare con il sistema operativo, di solito ciò comporta l'avvio di due copie di Thunderbird. Qui puoi aggiungere un ritardo prima dell'avvio di Thunderbird, per evitarlo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quando sia Thunderbird che Birdtray sono impostati per iniziare con il sistema operativo, di solito ciò comporta l&apos;avvio di due copie di Thunderbird. Qui puoi aggiungere un ritardo prima dell&apos;avvio di Thunderbird, per evitarlo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source> second delay</source>
@@ -344,7 +345,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation>Nascondi/mostra la finestra di Thunderbird quando si fa clic sull'icona nella barra delle applicazioni</translation>
+        <translation>Nascondi/mostra la finestra di Thunderbird quando si fa clic sull&apos;icona nella barra delle applicazioni</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
@@ -388,19 +389,19 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
-        <translation>Quando lampeggia, usa la transizione fade-in/fade-out (aumenta l'uso della CPU!)</translation>
+        <translation>Quando lampeggia, usa la transizione fade-in/fade-out (aumenta l&apos;uso della CPU!)</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation>Crea l'icona nella barra delle applicazioni</translation>
+        <translation>Crea l&apos;icona nella barra delle applicazioni</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts</source>
-        <translation>Verifica la presenza di nuovi aggiornamenti all'avvio di Birdtray</translation>
+        <translation>Verifica la presenza di nuovi aggiornamenti all&apos;avvio di Birdtray</translation>
     </message>
     <message>
         <source>Check for new updates on startup</source>
-        <translation>Verifica la presenza di nuovi aggiornamenti all'avvio</translation>
+        <translation>Verifica la presenza di nuovi aggiornamenti all&apos;avvio</translation>
     </message>
     <message>
         <source>Check for a new Birdtray version</source>
@@ -466,12 +467,12 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Error updating database</source>
-        <translation>Errore durante l'aggiornamento del database</translation>
+        <translation>Errore durante l&apos;aggiornamento del database</translation>
     </message>
     <message>
         <source>Error updating the database:
 %1</source>
-        <translation>Errore durante l'aggiornamento del database:
+        <translation>Errore durante l&apos;aggiornamento del database:
 %1</translation>
     </message>
     <message>
@@ -496,7 +497,7 @@ OpenSSL potrebbe non essere installato.</translation>
         <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
 
 Do you want to clear the accounts?</source>
-        <translation>Hai modificato il parser, ma il formato dell'account non è compatibile tra i parser e devi reimpostarli.
+        <translation>Hai modificato il parser, ma il formato dell&apos;account non è compatibile tra i parser e devi reimpostarli.
 
 Vuoi cancellare gli account?</translation>
     </message>
@@ -514,7 +515,7 @@ Vuoi cancellare gli account?</translation>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation>Impossibile caricare l'icona da questo file.</translation>
+        <translation>Impossibile caricare l&apos;icona da questo file.</translation>
     </message>
     <message>
         <source>Invalid Thunderbird directory</source>
@@ -534,11 +535,11 @@ Vuoi cancellare gli account?</translation>
     </message>
     <message>
         <source>Ignore unread emails at startup</source>
-        <translation>Ignora e-mail non lette all'avvio</translation>
+        <translation>Ignora e-mail non lette all&apos;avvio</translation>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translation>Ignora tutte le e-mail non lette presenti all'avvio di Birdtray. Solo le nuove e-mail verranno prese in considerazione dal contatore non lette.</translation>
+        <translation>Ignora tutte le e-mail non lette presenti all&apos;avvio di Birdtray. Solo le nuove e-mail verranno prese in considerazione dal contatore non lette.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
@@ -570,7 +571,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Liberation Sans&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; font-weight:600;&quot;&gt;Versione Birdtray [VERSION] compilato in data [DATE].&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Copyright (C) 2018 di George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-sizet:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Copyright (C) 2018 di George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Birdtray è un SOFTWARE GRATUITO, concesso in licenza con General Public License v3. Per chiarire ulteriormente, è possibile utilizzarlo per qualsiasi scopo, incluso commerciale, senza pagare nulla. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -578,11 +579,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Per quelli di voi che apprezzano il mio lavoro su Birdtray, che si sta sviluppando nel mio tempo libero, potete farlo qui: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Grazie per il continuo supporto!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source></translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Grazie per il continuo supporto!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>No new updates found</source>
         <translation>Nessun nuovo aggiornamento trovato</translation>
+    </message>
+    <message>
+        <source>Choose one or more MSF files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation type="unfinished">Indice di posta (*.msf)</translation>
     </message>
 </context>
 <context>
@@ -666,7 +675,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     <name>QCoreApplication</name>
     <message>
         <source>Cannot load default system tray icon.</source>
-        <translation>Impossibile caricare l'icona della barra delle applicazioni predefinita.</translation>
+        <translation>Impossibile caricare l&apos;icona della barra delle applicazioni predefinita.</translation>
     </message>
     <message>
         <source>Couldn&apos;t open file: </source>
@@ -702,7 +711,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>Error opening mork file.</source>
-        <translation>Errore durante l'apertura del file mork.</translation>
+        <translation>Errore durante l&apos;apertura del file mork.</translation>
     </message>
 </context>
 <context>
@@ -794,7 +803,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
-        <translation>Errore durante l'avvio di Thunderbird, perché non è stato possibile collegarsi al programma di aggiornamento:
+        <translation>Errore durante l&apos;avvio di Thunderbird, perché non è stato possibile collegarsi al programma di aggiornamento:
 
 %1</translation>
     </message>
@@ -806,7 +815,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
 
 %3</source>
-        <translation>Errore durante l'avvio di Thunderbird come &apos;%1 %2&apos;:
+        <translation>Errore durante l&apos;avvio di Thunderbird come &apos;%1 %2&apos;:
 
 %3</translation>
     </message>
@@ -823,7 +832,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     <name>UnreadMonitor</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Errore durante l'apertura del database sqlite: %1</translation>
+        <translation>Errore durante l&apos;apertura del database sqlite: %1</translation>
     </message>
     <message>
         <source>Folder %1 was not found in database.</source>

@@ -8,10 +8,6 @@
         <translatorcomment>This must be the name of one of the NSIS translation files at https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/ without the file extension.</translatorcomment>
         <translation>Italian</translation>
     </message>
-        <message>
-        <source>Lang_it</source>
-        <translation>Italiano</translation>
-    </message>
     <message>
         <source>BirdtraySectionDescription</source>
         <translation>Una notifica gratuita sulla barra delle applicazioni per la nuova posta di Thunderbird.</translation>
@@ -70,7 +66,7 @@
     </message>
     <message>
         <source>TranslationsDescription</source>
-        <translation>Seleziona traduzioni per ${PRODUCT_NAME}.${PRODUCT_NAME} sceglierà una traduzione in base alla lingua del sistema.</translation>
+        <translation>Seleziona traduzioni per ${PRODUCT_NAME}. ${PRODUCT_NAME} sceglierà una traduzione in base alla lingua del sistema.</translation>
     </message>
     <message>
         <source>UserSettingsSectionName</source>
@@ -185,6 +181,14 @@
         <translation>La disinstallazione di ${PRODUCT_NAME} è stata interrotta. Per favore riprova più tardi.</translation>
     </message>
     <message>
+        <source>SettingsLink</source>
+        <translation>${PRODUCT_NAME} settings</translation>
+    </message>
+    <message>
+        <source>UninstallRestartAsUserQuestion</source>
+        <translation>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>Inglese</translation>
     </message>
@@ -202,4 +206,3 @@
     </message>
 </context>
 </TS>
-

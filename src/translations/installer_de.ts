@@ -196,9 +196,13 @@
         <source>Lang_de</source>
         <translation>Deutsch</translation>
     </message>
-        <message>
+    <message>
         <source>Lang_nl</source>
         <translation>Niederländisch</translation>
+    </message>
+    <message>
+        <source>Lang_it</source>
+        <translation>Italienisch</translation>
     </message>
 </context>
 </TS>
