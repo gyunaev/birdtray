@@ -8,10 +8,6 @@
         <translatorcomment>This must be the name of one of the NSIS translation files at https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/ without the file extension.</translatorcomment>
         <translation>English</translation>
     </message>
-        <message>
-        <source>Lang_nl</source>
-        <translation>Dutch</translation>
-    </message>
     <message>
         <source>BirdtraySectionDescription</source>
         <translation>A free system tray notification for new mail for Thunderbird.</translation>
@@ -199,6 +195,14 @@
     <message>
         <source>Lang_de</source>
         <translation>German</translation>
+    </message>
+    <message>
+        <source>Lang_nl</source>
+        <translation>Dutch</translation>
+    </message>
+    <message>
+        <source>Lang_it</source>
+        <translation>Italian</translation>
     </message>
 </context>
 </TS>
