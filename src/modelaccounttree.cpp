@@ -110,6 +110,11 @@ void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
     if (uri.isEmpty()) {
         return;
     }
+    int existingIndex = mAccounts.indexOf(uri);
+    if (existingIndex != -1) {
+        editAccount(createIndex(existingIndex, 0), uri, color);
+        return;
+    }
     // Only this line changed
     beginInsertRows( QModelIndex(), mColors.size(), mColors.size() + 1 );
 
