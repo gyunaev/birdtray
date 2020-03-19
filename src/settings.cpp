@@ -49,7 +49,7 @@ Settings::Settings(bool verboseOutput)
     mShowUnreadEmailCount = true;
     ignoreStartUnreadCount = false;
     showDialogIfNoAccountsConfigured = true;
-    mThunderbirdWindowMatch = "- Mozilla Thunderbird";
+    mThunderbirdWindowMatch = " Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
     mUseMorkParser = true;
