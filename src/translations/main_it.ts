@@ -186,6 +186,13 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
@@ -593,6 +600,10 @@ p, li { white-space: pre-wrap; }
         <source>Mail Index (*.msf)</source>
         <translation type="unfinished">Indice di posta (*.msf)</translation>
     </message>
+    <message>
+        <source>Show log window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
@@ -711,7 +722,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>Error opening mork file.</source>
-        <translation>Errore durante l&apos;apertura del file mork.</translation>
+        <translation type="vanished">Errore durante l&apos;apertura del file mork.</translation>
     </message>
 </context>
 <context>
@@ -723,6 +734,12 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     <message>
         <source>Notification color</source>
         <translation>Colore di notifica</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

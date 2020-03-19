@@ -31,6 +31,7 @@
 #include <QtCore>
 #include <utility>
 
+#include "log.h"
 
 /**
  * An exception during parsing of a mork file.
@@ -777,7 +778,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     MorkParser p;
 
     if ( !p.open( filename ) )
-        Utils::fatal(QCoreApplication::tr("Error opening mork file."));
+        qFatal( "Error opening mork file." );
 
     for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
     {
@@ -830,7 +831,7 @@ unsigned int MailMorkParser::getNumUnreadMessages() {
                     if (correct) {
                         return static_cast<int>(value);
                     } else {
-                        Utils::debug("Incorrect Mork value: %s",
+                        Log::debug("Incorrect Mork value: %s",
                                 qPrintable(getValue(cells[colId])));
                     }
                 }

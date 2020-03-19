@@ -16,6 +16,7 @@
 #include "autoupdater.h"
 #include "mailaccountdialog.h"
 #include "birdtrayapp.h"
+#include "log.h"
 
 DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
@@ -52,6 +53,8 @@ DialogSettings::DialogSettings( QWidget *parent)
             this, &DialogSettings::onCheckUpdateButton );
     connect( app->getAutoUpdater(), &AutoUpdater::onCheckUpdateFinished,
             this, &DialogSettings::onCheckUpdateFinished );
+
+    connect( btnShowLogWindow, &QPushButton::clicked, this, &DialogSettings::onShowLogWindow );
 
     // Setup parameters
     leProfilePath->setText( QDir::toNativeSeparators(settings->mThunderbirdFolderPath) );
@@ -297,7 +300,7 @@ void DialogSettings::databaseUnreadsUpdate(int progresspercentage)
 
 void DialogSettings::databaseUnreadsFixed( QString errorMsg )
 {
-    Utils::debug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
+    Log::debug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
 
     mProgressFixer->close();
     delete mProgressFixer;
@@ -416,6 +419,11 @@ void DialogSettings::onCheckUpdateButton() {
     checkUpdateButton->setText(tr("Checking..."));
     checkUpdateButton->setEnabled(false);
     BirdtrayApp::get()->getAutoUpdater()->checkForUpdates();
+}
+
+void DialogSettings::onShowLogWindow()
+{
+    Log::showLogger();
 }
 
 void DialogSettings::buttonChangeIcon()

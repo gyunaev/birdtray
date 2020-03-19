@@ -69,6 +69,7 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         
         // Advanced buttons
         void    onCheckUpdateButton();
+        void    onShowLogWindow();
 
         // Icon change
         void    buttonChangeIcon();

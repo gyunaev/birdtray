@@ -183,6 +183,13 @@ OpenSSL might not be installed.</source>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
@@ -571,6 +578,10 @@ p, li { white-space: pre-wrap; }
         <source>No new updates found</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show log window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
@@ -685,10 +696,6 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Unexpected end of group.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Error opening mork file.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -698,6 +705,12 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Notification color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

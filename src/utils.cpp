@@ -192,27 +192,6 @@ std::wstring Utils::qToStdWString(const QString &str) {
 #endif
 }
 
-void Utils::debug(const char *fmt, ...)
-{
-    va_list vl;
-    char buf[8192];
-
-    if (!BirdtrayApp::get()->getSettings()->mVerboseOutput) {
-        return;
-    }
-
-    va_start( vl, fmt );
-    vsnprintf( buf, sizeof(buf) - 1, fmt, vl );
-    va_end( vl );
-
-    qDebug( "%s", buf );
-}
-
-void Utils::fatal(const QString &message) {
-    QMessageBox::critical(nullptr, QApplication::tr("Fatal"), message);
-    qFatal("%s", message.toUtf8().constData());
-}
-
 QStringList Utils::getThunderbirdProfilesPaths() {
 #if defined (OPT_THUNDERBIRD_PROFILE)
     return { OPT_THUNDERBIRD_PROFILE };

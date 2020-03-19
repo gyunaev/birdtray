@@ -186,6 +186,13 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
@@ -397,7 +404,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>opaque when new mail is present</source>
-        <translation>bij het ontvangen van nieuwe e-mail</translation>
+        <translation type="vanished">bij het ontvangen van nieuwe e-mail</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts</source>
@@ -551,7 +558,7 @@ Wilt u de accounts verwijderen?</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mail-index (*.msf)</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -589,12 +596,24 @@ p, li { white-space: pre-wrap; }
         <source>No new updates found</source>
         <translation>Geen updates beschikbaar</translation>
     </message>
+    <message>
+        <source>opaque when new mail is present,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hide it if no new mail is present.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show log window</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
     <message>
         <source>Mail Accounts</source>
-        <translation>E-mailaccounts</translation>
+        <translation type="vanished">E-mailaccounts</translation>
     </message>
     <message>
         <source>Thunderbird Profiles Directory</source>
@@ -610,15 +629,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Thunderbird Profile</source>
-        <translation>Thunderbird-profiel</translation>
+        <translation type="vanished">Thunderbird-profiel</translation>
     </message>
     <message>
         <source>Select theThunderbird profile, that contains the mail account which you want to monitor.</source>
-        <translation>Kies het Thunderbird-profiel met het e-mailaccount dat u wilt bijhouden.</translation>
+        <translation type="vanished">Kies het Thunderbird-profiel met het e-mailaccount dat u wilt bijhouden.</translation>
     </message>
     <message>
         <source>Selected Profile:</source>
-        <translation>Gekozen profiel:</translation>
+        <translation type="vanished">Gekozen profiel:</translation>
     </message>
     <message>
         <source>Select Accounts</source>
@@ -642,27 +661,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Invalid Thunderbird profile directory</source>
-        <translation>Ongeldige Thunderbird-profielmap</translation>
+        <translation type="vanished">Ongeldige Thunderbird-profielmap</translation>
     </message>
     <message>
         <source>Please enter the path to a valid directory.</source>
-        <translation>Geef het pad op van een geldige map.</translation>
+        <translation type="vanished">Geef het pad op van een geldige map.</translation>
     </message>
     <message>
         <source>The Thunderbird profile directory contains no profiles.</source>
-        <translation>De Thunderbird-profielmap bevat geen profielen.</translation>
+        <translation type="vanished">De Thunderbird-profielmap bevat geen profielen.</translation>
     </message>
     <message>
         <source>Invalid Thunderbird profile</source>
-        <translation>Ongeldig Thunderbird-profiel</translation>
+        <translation type="vanished">Ongeldig Thunderbird-profiel</translation>
     </message>
     <message>
         <source>Please select a valid Thunderbird profile.</source>
-        <translation>Kies een geldig Thunderbird-profiel.</translation>
+        <translation type="vanished">Kies een geldig Thunderbird-profiel.</translation>
     </message>
     <message>
         <source>The selected Thunderbird profile does not exist.</source>
-        <translation>Het gekozen Thunderbird-profiel bestaat niet.</translation>
+        <translation type="vanished">Het gekozen Thunderbird-profiel bestaat niet.</translation>
     </message>
     <message>
         <source>No folder selected</source>
@@ -677,6 +696,15 @@ Wilt u doorgaan?</translation>
     <message>
         <source>Email Folder</source>
         <translation>E-mailmap</translation>
+    </message>
+    <message>
+        <source>No mail profiles were found.
+Please make sure you selected the correct profiles directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (Profile)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -737,7 +765,7 @@ Wilt u doorgaan?</translation>
     </message>
     <message>
         <source>Error opening mork file.</source>
-        <translation>Het openen van het mork-bestand is mislukt.</translation>
+        <translation type="vanished">Het openen van het mork-bestand is mislukt.</translation>
     </message>
 </context>
 <context>
@@ -749,6 +777,12 @@ Wilt u doorgaan?</translation>
     <message>
         <source>Notification color</source>
         <translation>Meldingskleur</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

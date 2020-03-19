@@ -5,6 +5,7 @@
 
 #include "settings.h"
 #include "utils.h"
+#include "log.h"
 
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
@@ -213,7 +214,7 @@ void Settings::load()
         QString entry = "accounts/account" + QString::number( index );
         QString key = mSettings->value( entry + "URI", "" ).toString();
         while (key.isEmpty() && index < total) {
-            Utils::debug("Removing invalid account %d", index);
+            Log::debug("Removing invalid account %d", index);
             QString lastEntry = "accounts/account" + QString::number( total - 1 );
             if (index != total - 1) {
                 key = mSettings->value(lastEntry + "URI", "").toString();
@@ -266,7 +267,7 @@ bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arg
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Utils::fatal(QCoreApplication::tr("Cannot load default system tray icon."));
+            Log::fatal( QCoreApplication::tr("Cannot load default system tray icon.") );
         }
     }
     return mNotificationIcon;

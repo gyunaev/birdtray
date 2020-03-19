@@ -8,6 +8,7 @@
 #include "morkparser.h"
 #include "trayicon.h"
 #include "utils.h"
+#include "log.h"
 #include "databaseaccounts.h"
 #include "birdtrayapp.h"
 
@@ -142,9 +143,9 @@ bool UnreadMonitor::openDatabase()
     }
 
     for ( int id : mFolderColorMap.keys() )
-        Utils::debug("Color for ID %d: %s", id, qPrintable( mFolderColorMap[id].name() ) );
+        Log::debug("Color for ID %d: %s", id, qPrintable( mFolderColorMap[id].name() ) );
 
-    Utils::debug("List of all IDs: %s", qPrintable( mAllFolderIDs ) );
+    Log::debug("List of all IDs: %s", qPrintable( mAllFolderIDs ) );
 
     mDBWatcher.addPath( mSqliteDbFile );
 
@@ -154,7 +155,7 @@ bool UnreadMonitor::openDatabase()
 
 void UnreadMonitor::updateUnread()
 {
-    Utils::debug("Triggering the unread counter update");
+    Log::debug("Triggering the unread counter update");
 
     // We execute a single statement and then parse the groups and decide on colors.
     QColor chosenColor;
@@ -291,7 +292,7 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
         clearWarning(path);
     }
     int unread = static_cast<int>(parser.getNumUnreadMessages());
-    Utils::debug("Unread counter for %s: %d", qPrintable( path ), unread );
+    Log::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
 }
 

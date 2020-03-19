@@ -63,6 +63,7 @@ set(SOURCES
         src/dialogaddeditaccount.cpp
         src/dialogaddeditnewemail.cpp
         src/dialogsettings.cpp
+        src/dialoglogoutput.cpp
         src/modelaccounttree.cpp
         src/modelnewemails.cpp
         src/morkparser.cpp
@@ -72,6 +73,7 @@ set(SOURCES
         src/trayicon.cpp
         src/unreadmonitor.cpp
         src/utils.cpp
+        src/log.cpp
         src/windowtools.cpp
         src/autoupdater.cpp
         src/updatedialog.cpp
@@ -83,6 +85,7 @@ set(SOURCES
         src/dialogsettings.ui
         src/updatedialog.ui
         src/updatedownloaddialog.ui
+        src/dialoglogoutput.ui
         src/mailaccountdialog.ui)
 
 set(HEADERS
@@ -91,7 +94,9 @@ set(HEADERS
         src/databaseunreadfixer.h
         src/dialogaddeditaccount.h
         src/dialogaddeditnewemail.h
+        src/dialoglogoutput.h
         src/dialogsettings.h
+        src/log.h
         src/modelaccounttree.h
         src/modelnewemails.h
         src/morkparser.h

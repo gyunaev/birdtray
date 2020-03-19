@@ -3,6 +3,7 @@
 #include "birdtrayapp.h"
 #include "windowtools_x11.h"
 #include "utils.h"
+#include "log.h"
 
 /*
  * This code is mostly taken from xlibutil.cpp KDocker project, licensed under GPLv2 or higher.
@@ -372,7 +373,7 @@ bool WindowTools_X11::lookup()
     mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), true,
             BirdtrayApp::get()->getSettings()->mThunderbirdWindowMatch);
 
-    Utils::debug("Window ID found: %lX", mWinId );
+    Log::debug("Window ID found: %lX", mWinId );
 
     return mWinId != None;
 }
@@ -416,7 +417,7 @@ bool WindowTools_X11::hide()
         return false;
 
     if ( mHiddenStateCounter != 0 )
-        Utils::debug("Warning: trying to hide already hidden window");
+        Log::debug("Warning: trying to hide already hidden window");
 
     // Get screen number
     Display *display = QX11Info::display();
@@ -472,7 +473,7 @@ void WindowTools_X11::doHide()
     mHiddenStateCounter++;
 
     if ( mHiddenStateCounter == 2 )
-        Utils::debug("Window removed from taskbar");
+        Log::debug("Window removed from taskbar");
 }
 
 void WindowTools_X11::timerWindowState()

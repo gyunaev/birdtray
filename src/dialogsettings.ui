@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
+    <width>712</width>
     <height>432</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="tabBarAutoHide">
       <bool>false</bool>
@@ -911,14 +911,14 @@
             </item>
             <item>
              <widget class="QLabel" name="noUpdateIndicator">
+              <property name="visible">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>No new updates found</string>
               </property>
               <property name="textInteractionFlags">
                <set>Qt::NoTextInteraction</set>
-              </property>
-              <property name="visible">
-               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -934,6 +934,13 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnShowLogWindow">
+              <property name="text">
+               <string>Show log window</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -1068,6 +1075,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>browserAbout</tabstop>
  </tabstops>
  <resources>
+  <include location="resources.qrc"/>
   <include location="resources.qrc"/>
  </resources>
  <connections>
