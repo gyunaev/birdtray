@@ -17,6 +17,7 @@ static int registerExitReasonMetaType() Q_DECL_NOTHROW {
         // Don't translate the message, because it gets marked as vanished
         // by the lupdate tool on non-Windows platforms.
         Log::fatal("Failed to register ExitReason meta type.");
+        return 0; // to shut up warning
     }
 }
 
