@@ -12,18 +12,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Fehler beim Speichern der Birdtray Installationsdatei:
+        <translation>Fehler beim Speichern der Birdtray-Installationsdatei:
 </translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation>Fehler beim Herunterladen der Birdtray Installationsdatei:
+        <translation>Fehler beim Herunterladen der Birdtray-Installationsdatei:
 </translation>
     </message>
     <message>
         <source>Installer download failed</source>
-        <translation>Herunterladen der Installationsdatei fehlgeschlagen</translation>
+        <translation>Herunterladen der Installationsdatei ist fehlgeschlagen</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
@@ -35,18 +35,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translation>Das Birdtray Installationsprogramm konnte nicht gestartet werden.</translation>
+        <translation>Das Birdtray-Installationsprogramm konnte nicht gestartet werden.</translation>
     </message>
 </context>
 <context>
     <name>BirdtrayApp</name>
     <message>
         <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Ein freies Taskleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
+        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
     </message>
     <message>
         <source>Display the contents of the given mork database.</source>
-        <translation>Zeige den Inhalt der Mork-Datenbank an.</translation>
+        <translation>Den Inhalt der Mork-Datenbank anzeigen.</translation>
     </message>
     <message>
         <source>databaseFile</source>
@@ -54,7 +54,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translation>Dekodiere eine IMAP Utf7 Zeichenkette.</translation>
+        <translation>Eine IMAP-UTF-7-Zeichenkette dekodieren.</translation>
     </message>
     <message>
         <source>string</source>
@@ -62,11 +62,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Show the settings.</source>
-        <translation>Öffne die Einstellungen.</translation>
+        <translation>Die Einstellungen öffnen.</translation>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
-        <translation>Setze die Einstellungen auf die Standardwerte zurück.</translation>
+        <translation>Die Einstellungen auf die Standardwerte zurücksetzen.</translation>
     </message>
     <message>
         <source>Enable debugging output.</source>
@@ -74,37 +74,37 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
-        <translation>Toggelt das Thunderbird Fenster.</translation>
+        <translation>Das Thunderbird-Fenster umschalten.</translation>
     </message>
     <message>
         <source>Show the Thunderbird window.</source>
-        <translation>Zeight das Thunderbird Fenster.</translation>
+        <translation>Das Thunderbird-Fenster anzeigen.</translation>
     </message>
     <message>
         <source>Hide the Thunderbird window.</source>
-        <translation>Versteckt das Thunderbird Fenster.</translation>
+        <translation>Das Thunderbird-Fenster ausblenden.</translation>
     </message>
 </context>
 <context>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite Datenbank: %1</translation>
+        <translation>Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
     </message>
     <message>
         <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation>Kann nicht auf die Datenbank zugreifen. Diese Methode funktioniert nicht mehr, falls Sie Thunderbird 68 oder neuer verwenden. Benutzen Sie bitte den Mork-Parser.</translation>
+        <translation>Auf die Datenbank kann nicht zugreifen werden. Diese Methode funktioniert nicht mehr, falls Sie Thunderbird 68 oder neuer verwenden. Benutzen Sie bitte den Mork-Parser.</translation>
     </message>
 </context>
 <context>
     <name>DatabaseUnreadFixer</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite Datenbank: %1</translation>
+        <translation>Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation>Kann nicht von der Datenbank lesen.</translation>
+        <translation>Datenbank kann nicht abgefragt werden.</translation>
     </message>
 </context>
 <context>
@@ -123,19 +123,19 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Choose the MSF file</source>
-        <translation>Wähle die MSF Datei</translation>
+        <translation>Die MSF-Datei auswählen</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation>Mail Index (*.msf)</translation>
+        <translation>Mail-Index (*.msf)</translation>
     </message>
     <message>
         <source>Invalid MSF file</source>
-        <translation>Ungültige MSF Datei</translation>
+        <translation>Ungültige MSF-Datei</translation>
     </message>
     <message>
         <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation>Es muss eine gültige, nicht leere Thunderbird Index-Datei ausgewählt werden.</translation>
+        <translation>Es muss eine gültige, nicht leere Thunderbird-Index-Datei ausgewählt werden.</translation>
     </message>
     <message>
         <source>You must select an account.</source>
@@ -147,14 +147,14 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Please assign the message number text color</source>
-        <translation>Bitte wähle eine Farbe für die Anzeige der ungelesenen Mails</translation>
+        <translation>Bitte eine Farbe für die Anzeige der ungelesenen Nachrichten auswählen</translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
-        <translation>&quot;Neue Email&quot; Eintrag</translation>
+        <translation>&quot;Neue E-Mail&quot; Eintrag</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -170,7 +170,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Email message text:</source>
-        <translation>Email Text:</translation>
+        <translation>E-Mail-Text:</translation>
     </message>
     <message>
         <source>Email recipient:</source>
@@ -196,7 +196,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
-        <translation>Birdtray Einstellungen</translation>
+        <translation>Birdtray-Einstellungen</translation>
     </message>
     <message>
         <source>General</source>
@@ -204,7 +204,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>New Mail Notification</source>
-        <translation>Benachrichtigungen über neue Emails</translation>
+        <translation>Benachrichtigungen über neue E-Mails</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -212,11 +212,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Show unread count</source>
-        <translation>Zeige die Anzahl ungelesener Emails</translation>
+        <translation>Die Anzahl ungelesener E-Mails anzeigen</translation>
     </message>
     <message>
         <source>Different icon when unread:</source>
-        <translation>Anderes Icon bei ungelesenen Emails:</translation>
+        <translation>Anderes Symbol bei ungelesenen E-Mails:</translation>
     </message>
     <message>
         <source>Off</source>
@@ -228,11 +228,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translation>Icon (Strg-Klick zum Zurücksetzen):</translation>
+        <translation>Symbol (Strg-Klick zum Zurücksetzen):</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Benachrichtigungsfarbe wird benutzt, wenn es ungelesene Emails in mehreren überwachten Konten gibt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Benachrichtigungsfarbe wird benutzt, wenn es ungelesene E-Mails in mehreren überwachten Konten gibt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
@@ -240,7 +240,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies verändert die Schriftdicke, d.h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d.h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -268,11 +268,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Fix the unread message count</source>
-        <translation>Repariere die Anzahl der ungelesenen Emails</translation>
+        <translation>Die Anzahl der ungelesenen Nachrichten reparieren</translation>
     </message>
     <message>
         <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation>Nutze dieses Werkzeug, wenn Birdtray ungelesene Mails anzeigt, aber keine vorhanden sind:</translation>
+        <translation>Dieses Werkzeug benutzen, wenn Birdtray ungelesene Nachrichten anzeigt, aber keine vorhanden sind:</translation>
     </message>
     <message>
         <source>Fix</source>
@@ -284,11 +284,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Method to parse unread notifications:</source>
-        <translation>Methode zum Einlesen der Anzahl ungelesener Emails:</translation>
+        <translation>Methode zum Einlesen der Anzahl ungelesener Nachrichten:</translation>
     </message>
     <message>
         <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation>Bitte wählen Sie die Thunderbird Profildatenbank zur Überwachung aus</translation>
+        <translation>Bitte wählen Sie die Thunderbird-Profildatenbank zur Überwachung aus</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -316,7 +316,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
-        <translation>Erlaube das Ignorieren der momentanen ungelesenen Emails</translation>
+        <translation>Das Ignorieren der momentanen ungelesenen E-Mails erlauben</translation>
     </message>
     <message>
         <source>Hiding</source>
@@ -328,7 +328,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Start Thunderbird when Birdtray starts</source>
-        <translation>Starte Thunderbird wenn Birdtray startet</translation>
+        <translation>Wenn Birdtray startet, Thunderbird starten</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -344,27 +344,27 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>and hide it</source>
-        <translation>und verstecke es</translation>
+        <translation>und es ausblenden</translation>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
-        <translation>Schließe Thunderbird wenn Birdtray geschlossen wird</translation>
+        <translation>Thunderbird beenden, wenn Birdtray geschlossen wird</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation>Verstecke/Zeige das Thunderbird Fenster beim Klick auf das Taskleistensymbol</translation>
+        <translation>Das Thunderbird Fenster ausblenden/anzeigen, beim Klick auf das Systemleistensymbol</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
-        <translation>Verstecke das Thunderbird Fenster, wenn es minimiert wird</translation>
+        <translation>Das Thunderbird-Fenster ausblenden, wenn es minimiert wird</translation>
     </message>
     <message>
         <source>Show red X in tray icon if Thunderbird is not running</source>
-        <translation>Zeige ein rotes X im Taskleistensymbol, wenn Thunderbird nicht ausgeführt wird</translation>
+        <translation>Ein rotes X im Systemleistensymbol anzeigen, wenn Thunderbird nicht ausgeführt wird</translation>
     </message>
     <message>
         <source>Restart Thunderbird if it was closed</source>
-        <translation>Starte Thunderbird erneut, wenn es geschlossen wurde</translation>
+        <translation>Thunderbird erneut starten, wenn es geschlossen wurde</translation>
     </message>
     <message>
         <source>New Email</source>
@@ -450,7 +450,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Fix the unread messages?</source>
-        <translation>Repariere die Anzahl der ungelesenen Mails?</translation>
+        <translation>Die Anzahl der ungelesenen Nachrichten reparieren?</translation>
     </message>
     <message>
         <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
@@ -602,7 +602,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show log window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Protokollfenster anzeigen</translation>
     </message>
     <message>
         <source>Force index file re-read every</source>
@@ -610,7 +610,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> Sekunden</translation>
     </message>
 </context>
 <context>
@@ -621,7 +621,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Thunderbird Profiles Directory</source>
-        <translation>Verzeichnis der Thunderbird Profile</translation>
+        <translation>Verzeichnis der Thunderbird-Profile</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -778,7 +778,7 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>New Email Message</source>
-        <translation>Neue Email Nachricht</translation>
+        <translation>Neue E-Mail-Nachricht</translation>
     </message>
     <message>
         <source>5 minutes</source>
@@ -877,14 +877,14 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>Cannot query database: %1</source>
-        <translation>Kann die Datenbank nicht einlesen: %1</translation>
+        <translation>Die Datenbank kann nicht eingelesen werden: %1</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>Birdtray Update</source>
-        <translation>Birdtray Aktualisierung</translation>
+        <translation>Birdtray-Aktualisierung</translation>
     </message>
     <message>
         <source>Current version:</source>
@@ -923,11 +923,11 @@ Log file is written into file %2</source>
     <name>UpdateDownloadDialog</name>
     <message>
         <source>Birdtray Update</source>
-        <translation>Birdtray Aktualisierung</translation>
+        <translation>Birdtray-Aktualisierung</translation>
     </message>
     <message>
         <source>Downloading Birdtray update...</source>
-        <translation>Lade die Birdtray Aktualisierung herunter...</translation>
+        <translation>Die Birdtray-Aktualisierung wird heruntergeladen …</translation>
     </message>
     <message>
         <source>Background</source>
@@ -935,7 +935,7 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation>Lade die Birdtray Installationsdatei herunter...</translation>
+        <translation>Die Birdtray-Installationsdatei wird heruntergeladen …</translation>
     </message>
     <message>
         <source>Update and Restart</source>
@@ -943,11 +943,11 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
-        <translation>Download abgeschlossen. Soll Birdtray aktualisiert und neugestartet werden?</translation>
+        <translation>Übertragung abgeschlossen. Soll Birdtray aktualisiert und neugestartet werden?</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Lade die Birdtray Installationsdatei herunter... (%1 Mb / %2 Mb).</translation>
+        <translation>Die Birdtray-Installationsdatei wird heruntergeladen … (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
