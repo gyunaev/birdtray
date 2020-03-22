@@ -60,7 +60,9 @@ jobs:
             fi
             echo "::set-env name=CMAKE_PREFIX_PATH::$sqliteDir"
             echo "::add-path::$sqliteDir"
-            choco install -y $archParam sqlite --params \"/NoTools\"
+            choco install -y --force $archParam sqlite --params \"/NoTools\"
+            choco install -y --force $archParam openssl.light
+            echo "::add-path::C:\\Program Files\\OpenSSL"
             curl -sS https://www.sqlite.org/2019/sqlite-amalgamation-3300100.zip > sqlite-source.zip
             unzip -p sqlite-source.zip sqlite-amalgamation-3300100/sqlite3.h > $sqliteDir/sqlite3.h
             rm sqlite-source.zip
@@ -70,14 +72,124 @@ jobs:
             exit 1
           fi
       - name: Create build environment
-        run: cmake -E make_directory ${{runner.workspace}}/build
+        run: cmake -E make_directory ${{ runner.workspace }}/build
       - name: Configure CMake
         shell: bash
-        working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON
+        working-directory: ${{ runner.workspace }}/build
+        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON -DDONT_EXECUTE_INSTALLER=ON
       - name: Build
-        working-directory: ${{runner.workspace}}/build
+        working-directory: ${{ runner.workspace }}/build
         run: cmake --build . --config Release --target birdtray
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
+      - name: Check if this is a deployment build
+        id: check-deploy
+        shell: bash
+        run: |
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
+            echo ::set-output name=is_deploy::true
+            echo "Deployment build detected"
+          else
+            echo "Not a deployment build, skipping deploy steps"
+          fi
+      - name: Install installer dependencies
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        run: choco install -y nsis;
+      - name: Create installer
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        working-directory: ${{ runner.workspace }}/build
+        run: cmake --build . --config Release --target install
+      - name: Find installer
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        id: find_installer_file
+        shell: bash
+        run: |
+          installerFile=`find . -name "Birdtray-*.exe" -exec basename {} \;`
+          echo ::set-output name=installer_file::$installerFile
+          echo "Found installer: $installerFile"
+          mkdir installer/cache
+          mv installer/$installerFile installer/cache
+      - name: Cache installer
+        uses: actions/upload-artifact@v1
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        with:
+          name: installer-${{ runner.os }}-${{ matrix.arch }}-${{ github.sha }}
+          path: installer/cache/${{ steps.find_installer_file.outputs.installer_file }}
+
+  release:
+    name: Create Release
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') && contains(github.ref, '.')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Check if this is a deployment build
+        shell: bash
+        run: |
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Creating release ${{ github.ref }}..."
+          else
+            echo "Tag does not match: ${{ github.event.ref }}"
+            exit 1
+          fi
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Write upload url file
+        run: echo "${{ steps.create_release.outputs.upload_url }}" > upload_url.txt
+      - name: Cache upload url
+        uses: actions/upload-artifact@v1
+        with:
+          name: upload_url
+          path: upload_url.txt
+
+  deploy:
+    name: Deploy
+    needs: [build, release]
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x86, x64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Download installer
+        uses: actions/download-artifact@v1
+        with:
+          name: installer-${{ runner.os }}-${{ matrix.arch }}-${{ github.sha }}
+          path: installer
+      - name: Find installer
+        id: find_installer_file
+        shell: bash
+        run: |
+          value=`find installer -name "Birdtray-*.exe" -exec basename {} \;`
+          echo ::set-output name=installer_file::$value
+      - name: Fetch the upload url
+        uses: actions/download-artifact@v1
+        with:
+          name: upload_url
+      - name: Read the upload url
+        id: get_upload_url
+        shell: bash
+        run: |
+          value=`cat upload_url/upload_url.txt`
+          echo ::set-output name=upload_url::$value
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
+          asset_path: ./installer/${{ steps.find_installer_file.outputs.installer_file }}
+          asset_name: ${{ steps.find_installer_file.outputs.installer_file }}
+          asset_content_type: application/x-msdownload
