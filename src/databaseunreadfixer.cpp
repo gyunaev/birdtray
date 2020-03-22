@@ -6,6 +6,7 @@
 #include "sqlite_statement.h"
 #include "sqlite3.h"
 #include "utils.h"
+#include "log.h"
 
 DatabaseUnreadFixer::DatabaseUnreadFixer(const QString &databasePath )
     : QThread()
@@ -52,7 +53,7 @@ void DatabaseUnreadFixer::updateDatabase()
     }
 
     totalrows = stmtrows.columnInt64( 0 );
-    Utils::debug("total rows to change: %lld", totalrows );
+    Log::debug("total rows to change: %lld", totalrows );
 
     if ( totalrows == 0 )
     {
@@ -86,28 +87,28 @@ void DatabaseUnreadFixer::updateDatabase()
 
         if ( !document.isObject() )
         {
-            Utils::debug("No JSON for id %lld, skipped", id );
+            Log::debug("No JSON for id %lld, skipped", id );
             continue;
         }
 
         QJsonObject obj = document.object();
-        Utils::debug("Original JSON for %lld: %s",  id, qPrintable( document.toJson() ) );
+        Log::debug("Original JSON for %lld: %s",  id, qPrintable( document.toJson() ) );
         obj["59"] = true;
 
         SQLiteStatement ustmt;
         QStringList args;
         args << QJsonDocument( obj ).toJson() << QString::number(id);
 
-        Utils::debug("Modified JSON for %lld: %s",  id, qPrintable( QJsonDocument( obj ).toJson() ) );
+        Log::debug("Modified JSON for %lld: %s",  id, qPrintable( QJsonDocument( obj ).toJson() ) );
 
         if ( !ustmt.prepare( sqlitedb, "UPDATE messages SET jsonAttributes=? WHERE id=?", args )
              || ustmt.step() != SQLITE_DONE )
         {
-            Utils::debug("Error updating JSON for message id %lld", id );
+            Log::debug("Error updating JSON for message id %lld", id );
             continue;
         }
 
-        Utils::debug("Updated JSON for message id %lld", id );
+        Log::debug("Updated JSON for message id %lld", id );
     }
 
     emit done ("");

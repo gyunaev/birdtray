@@ -13,6 +13,7 @@
 #include "utils.h"
 #include "autoupdater.h"
 #include "birdtrayapp.h"
+#include "log.h"
 
 TrayIcon::TrayIcon(bool showSettings)
 {
@@ -115,7 +116,7 @@ UnreadMonitor* TrayIcon::getUnreadMonitor() const {
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 {
-    Utils::debug("unreadCounterUpdate %d", total );
+    Log::debug("unreadCounterUpdate %d", total );
     
     if (unreadEmailsAtStart == -1) {
         unreadEmailsAtStart = static_cast<long>(total);
@@ -470,7 +471,7 @@ void TrayIcon::showSettings()
 
         // Recalculate the delta
         enableBlinking( false );
-    
+
         if (unreadEmailsAtStart != -1
             && settings->ignoreStartUnreadCount != ignoreStartUnreadCountBefore) {
             if (!settings->ignoreStartUnreadCount) {
@@ -504,7 +505,7 @@ void TrayIcon::actionSnoozeFor()
     QAction * action = (QAction *) sender();
     mSnoozedUntil = QDateTime::currentDateTimeUtc().addSecs( action->data().toInt() );
 
-    Utils::debug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
+    Log::debug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
 
     // Unhide the unsnoozer
     mMenuUnsnooze->setVisible( true );
@@ -674,11 +675,11 @@ void TrayIcon::startThunderbird()
 
     if ( !BirdtrayApp::get()->getSettings()->getStartThunderbirdCmdline( executable, args ) )
     {
-        Utils::debug("Failed to get Thunderbird command-line" );
+        Log::debug("Failed to get Thunderbird command-line" );
         return;
     }
 
-    Utils::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
+    Log::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();

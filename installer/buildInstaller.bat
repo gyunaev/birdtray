@@ -12,12 +12,12 @@ if "%~1" == "/?" (
 )
 set "exePath=%~1"
 if not exist "%exePath%" (
-    echo Birdtray executable not found at %exePath% 1>&2
+    echo Birdtray executable not found at "%exePath%" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 set "libSqlitePath=%~2"
 if not exist "%libSqlitePath%" (
-    echo Sqlite library not found at %libSqlitePath% 1>&2
+    echo Sqlite library not found at "%libSqlitePath%" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 
@@ -28,11 +28,11 @@ for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libssl ^| fin
     set "openSSLPath=%~3\%%f"
 )
 if not exist "%openSSLCryptoPath%" (
-    echo OpenSSL crypto library not found at %~3\libcrypto*.dll 1>&2
+    echo OpenSSL crypto library not found at "%~3\libcrypto*.dll" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 if not exist "%openSSLPath%" (
-    echo OpenSSL library not found at %~3\libssl*.dll 1>&2
+    echo OpenSSL library not found at "%~3\libssl*.dll" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 
@@ -74,45 +74,45 @@ if not defined sevenZExe (
 
 rem  #### Create the deployment folder ####
 set "deploymentFolder=%~dp0winDeploy"
-echo Creating deployment folder at %deploymentFolder%...
+echo Creating deployment folder at "%deploymentFolder%"...
 rem  Clear the old deployment folder.
 if exist "%deploymentFolder%" (
     rmdir /s /q "%deploymentFolder%" 1>nul
     if exist "%deploymentFolder%" (
         rmdir /s /q "%deploymentFolder%" 1>nul
         if exist "%deploymentFolder%" (
-            echo Failed to delete the old deployment folder at %deploymentFolder% 1>&2
+            echo Failed to delete the old deployment folder at "%deploymentFolder%" 1>&2
             exit /b %ERROR_DIR_NOT_EMPTY%
         )
     )
 )
 mkdir "%deploymentFolder%"
 if errorLevel 1 (
-    echo Failed to delete the old deployment folder at %deploymentFolder% 1>&2
+    echo Failed to delete the old deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%exePath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the Birdtray executable from %exePath% 1>&2
-    echo to the deployment folder at %deploymentFolder% 1>&2
+    echo Failed to copy the Birdtray executable from "%exePath%" 1>&2
+    echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%libSqlitePath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the Sqlite library from %libSqlitePath% 1>&2
-    echo to the deployment folder at %deploymentFolder% 1>&2
+    echo Failed to copy the Sqlite library from "%libSqlitePath%" 1>&2
+    echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%openSSLCryptoPath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the OpenSSL crypto library from %openSSLCryptoPath% 1>&2
-    echo to the deployment folder at %deploymentFolder% 1>&2
+    echo Failed to copy the OpenSSL crypto library from "%openSSLCryptoPath%" 1>&2
+    echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%openSSLPath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the OpenSSL library from %openSSLPath% 1>&2
-    echo to the deployment folder at %deploymentFolder% 1>&2
+    echo Failed to copy the OpenSSL library from "%openSSLPath%" 1>&2
+    echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
 for /f "delims=" %%i in ("%exePath%") do (
@@ -120,7 +120,7 @@ for /f "delims=" %%i in ("%exePath%") do (
     set "translationDir=%%~di%%~pitranslations"
 )
 "%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
-        --no-angle --no-opengl-sw -no-svg "%deploymentFolder%\%exeFileName%"
+        --no-angle --no-opengl-sw "%deploymentFolder%\%exeFileName%"
 if errorLevel 1 (
     echo Failed to create deployment folder: windeployqt.exe failed 1>&2
     exit /b %errorLevel%
@@ -134,12 +134,12 @@ rem  Copy translations
 if exist "%translationDir%" (
     xcopy "%translationDir%" "%deploymentFolder%\translations" /q /y 1>nul
     if errorLevel 1 (
-        echo Failed to copy the translations from %translationDir% 1>&2
-        echo to the deployment folder at %deploymentFolder%\translations 1>&2
+        echo Failed to copy the translations from "%translationDir%" 1>&2
+        echo to the deployment folder at "%deploymentFolder%\translations" 1>&2
         exit /b %errorLevel%
     )
 ) else (
-    echo Warning: Did not find translations directory at %translationDir%
+    echo Warning: Did not find translations directory at "%translationDir%"
 )
 
 rem  #### Download the installer dependencies ####
@@ -151,7 +151,7 @@ if exist "%dependencyFolder%" (
     if exist "%dependencyFolder%" (
         rmdir /s /q "%dependencyFolder%" 1>nul
         if exist "%dependencyFolder%" (
-            echo Failed to delete the old nsis dependency folder at %dependencyFolder% 1>&2
+            echo Failed to delete the old nsis dependency folder at "%dependencyFolder%" 1>&2
             exit /b %ERROR_DIR_NOT_EMPTY%
         )
     )
@@ -177,27 +177,27 @@ if errorLevel 1 (
 del "%TEMP%\NsProcess.zip" /F
 xcopy "%TEMP%\NsProcess\nsProcess.nsh" "%dependencyFolder%\Include" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcess.nsh 1>&2
-    echo to the deployment folder at %dependencyFolder%\Include 1>&2
+    echo Failed to copy the NsProcess library from "%TEMP%\NsProcess\nsProcess.nsh" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Include" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%TEMP%\NsProcess\nsProcess.dll" "%dependencyFolder%\Plugins\x86-ansi" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcess.dll 1>&2
-    echo to the deployment folder at %dependencyFolder%\Plugins\x86-ansi 1>&2
+    echo Failed to copy the NsProcess library from "%TEMP%\NsProcess\nsProcess.dll" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-ansi" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%TEMP%\NsProcess\nsProcessW.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcessW.dll 1>&2
-    echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
+    echo Failed to copy the NsProcess library from "%TEMP%\NsProcess\nsProcessW.dll" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
     exit /b %errorLevel%
 )
 rmdir /s /q "%TEMP%\NsProcess" 1>nul
 rename "%dependencyFolder%\Plugins\x86-unicode\nsProcessW.dll" nsProcess.dll 1>nul
 if errorLevel 1 (
-    echo Failed to copy the NsProcess library from %TEMP%\NsProcess\nsProcessW.dll 1>&2
-    echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
+    echo Failed to copy the NsProcess library from "%TEMP%\NsProcess\nsProcessW.dll" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
     exit /b %errorLevel%
 )
 set "nsisXMLUrl=https://nsis.sourceforge.io/mediawiki/images/5/55/Xml.zip"
@@ -214,20 +214,20 @@ if errorLevel 1 (
 del "%TEMP%\nsisXML.zip" /F
 xcopy "%TEMP%\nsisXML\XML.nsh" "%dependencyFolder%\Include" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the nsisXML library from %TEMP%\nsisXML\XML.nsh 1>&2
-    echo to the deployment folder at %dependencyFolder%\Include 1>&2
+    echo Failed to copy the nsisXML library from "%TEMP%\nsisXML\XML.nsh" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Include" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%TEMP%\nsisXML\xml.dll" "%dependencyFolder%\Plugins\x86-ansi" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the nsisXML library from %TEMP%\nsisXML\xml.dll 1>&2
-    echo to the deployment folder at %dependencyFolder%\Plugins\x86-ansi 1>&2
+    echo Failed to copy the nsisXML library from "%TEMP%\nsisXML\xml.dll" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-ansi" 1>&2
     exit /b %errorLevel%
 )
 xcopy "%TEMP%\nsisXML\xml.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to copy the nsisXML library from %TEMP%\nsisXML\xml.dll 1>&2
-    echo to the deployment folder at %dependencyFolder%\Plugins\x86-unicode 1>&2
+    echo Failed to copy the nsisXML library from "%TEMP%\nsisXML\xml.dll" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
     exit /b %errorLevel%
 )
 rmdir /s /q "%TEMP%\nsisXML" 1>nul

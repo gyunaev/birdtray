@@ -53,6 +53,7 @@ class UnreadMonitor : public QThread
         void    getUnreadCount_SQLite( int & count, QColor& color );
         void    getUnreadCount_Mork( int & count, QColor& color );
         int     getMorkUnreadCount( const QString& path );
+        void    setForcedUpdateTimer();
     
         /**
          * Set a warning for a given path or for all paths, if no path is given.
@@ -96,6 +97,9 @@ class UnreadMonitor : public QThread
 
         // List of changed files (for MSF monitoring)
         QList<QString>      mChangedMSFfiles;
+
+        // This timer is used when force update is set, triggering such update
+        QTimer              mForceUpdateTimer;
 
         // Last reported unread
         int    mLastReportedUnread;

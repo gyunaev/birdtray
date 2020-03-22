@@ -15,6 +15,10 @@ class QSettings;
 class Settings
 {
     public:
+
+        // Icon size constant
+        static constexpr int ICON_SIZE = 128;
+
         explicit Settings(bool verboseOutput);
         ~Settings();
 
@@ -137,6 +141,9 @@ class Settings
 
         // Whether to spam debugging stuff
         bool    mVerboseOutput;
+
+        // If non-zero, specifies an interval in seconds for rereading index files even if they didn't change. 0 disables.
+        unsigned int    mIndexFilesRereadIntervalSec;
 
         // Load and save them
         void    save();

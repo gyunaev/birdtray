@@ -186,6 +186,13 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
@@ -582,8 +589,28 @@ p, li { white-space: pre-wrap; }
         <translation>verstecke es, wenn es keine neuen Mails gibt.</translation>
     </message>
     <message>
+        <source>Choose one or more MSF files</source>
+        <translation>Wähle eine oder mehrere MSF Dateien</translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation>Mail Index (*.msf)</translation>
+    </message>
+    <message>
         <source>No new updates found</source>
         <translation>Keine neue Version gefunden</translation>
+    </message>
+    <message>
+        <source>Show log window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force index file re-read every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> seconds</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -699,7 +726,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Error opening mork file.</source>
-        <translation>Fehler beim Öffnen der Mork-Datei.</translation>
+        <translation type="vanished">Fehler beim Öffnen der Mork-Datei.</translation>
     </message>
     <message>
         <source>Cannot load default system tray icon.</source>
@@ -715,6 +742,12 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     <message>
         <source>Notification color</source>
         <translation>Benachrichtigungsfarbe</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

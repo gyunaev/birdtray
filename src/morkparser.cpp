@@ -31,6 +31,7 @@
 #include <QtCore>
 #include <utility>
 
+#include "log.h"
 
 /**
  * An exception during parsing of a mork file.
@@ -317,7 +318,7 @@ inline void MorkParser::parseComment()
 //	=============================================================
 //	MorkParser::parseCell
 
-void MorkParser::parseCell()
+void MorkParser::parseCell(bool isInCutMode)
 {
     //bool bColumnOid = false;
     bool bValueOid = false;
@@ -430,8 +431,7 @@ void MorkParser::parseCell()
     }
     else
     {
-        if ( "" != Text )
-        {
+        if (!Text.isEmpty() && !(isInCutMode && (*currentCells_).contains(ColumnId))) {
             // Rows
             int ValueId = Text.toInt( 0, 16 );
 
@@ -553,6 +553,12 @@ inline void MorkParser::setCurrentRow( int TableScope, int TableId, int RowScope
     {
         RowScope = defaultScope_;
     }
+    
+    if (!TableId) {
+        QPair<int, int> rowMapping = rowMappings.value(abs(RowId)).value(RowScope, {0, 0});
+        TableScope = rowMapping.first;
+        TableId = rowMapping.second;
+    }
 
     if ( !TableScope )
     {
@@ -568,7 +574,7 @@ inline void MorkParser::setCurrentRow( int TableScope, int TableId, int RowScope
 void MorkParser::parseRow( int TableId, int TableScope )
 {
     QString TextId;
-    int Id = 0, Scope = 0;
+    int Id = 0, Scope = TableScope;
     nowParsing_ = NPRows;
 
     char cur = nextChar();
@@ -585,7 +591,11 @@ void MorkParser::parseRow( int TableId, int TableScope )
     }
 
     parseScopeId( TextId, &Id, &Scope );
+    bool cutMode = Id < 0;
     setCurrentRow( TableScope, TableId, Scope, Id );
+    if (cutMode) {
+        (*currentCells_).clear();
+    }
 
     // Parse the row
     while ( cur != ']' && cur )
@@ -595,7 +605,7 @@ void MorkParser::parseRow( int TableId, int TableScope )
             switch ( cur )
             {
             case '(':
-                parseCell();
+                parseCell(cutMode);
                 break;
             case '[':
                 parseMeta( ']' );
@@ -607,6 +617,9 @@ void MorkParser::parseRow( int TableId, int TableScope )
         }
 
         cur = nextChar();
+    }
+    if (TableId != 0) {
+        rowMappings[abs(Id)][Scope == 0 ? defaultScope_ : Scope] = {TableScope, TableId};
     }
 }
 
@@ -765,7 +778,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     MorkParser p;
 
     if ( !p.open( filename ) )
-        Utils::fatal(QCoreApplication::tr("Error opening mork file."));
+        qFatal( "Error opening mork file." );
 
     for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
     {
@@ -803,4 +816,27 @@ int MorkParser::dumpMorkFile( const QString& filename )
     }
 
     return EXIT_SUCCESS;
+}
+
+unsigned int MailMorkParser::getNumUnreadMessages() {
+    const MorkRowMap* rows = this->rows(0x9F, 1, 0x9F);
+    if (rows) {
+        for (MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++) {
+            MorkCells cells = rit.value();
+            for (int colId : cells.keys()) {
+                QString columnName = getColumn(colId);
+                if (columnName == "numNewMsgs") {
+                    bool correct;
+                    unsigned int value = getValue(cells[colId]).toInt(&correct, 16);
+                    if (correct) {
+                        return static_cast<int>(value);
+                    } else {
+                        Log::debug("Incorrect Mork value: %s",
+                                qPrintable(getValue(cells[colId])));
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }

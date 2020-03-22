@@ -5,6 +5,7 @@
 
 #include "settings.h"
 #include "utils.h"
+#include "log.h"
 
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
@@ -29,7 +30,7 @@ Settings::Settings(bool verboseOutput)
 #endif
 
     mVerboseOutput = verboseOutput;
-    mIconSize = QSize( 128, 128 );
+    mIconSize = QSize( ICON_SIZE, ICON_SIZE );
     mNotificationDefaultColor = QColor("#0000FF");
     mNotificationBorderColor = QColor("#FFFFFF");
     mNotificationBorderWidth = 15;
@@ -48,7 +49,7 @@ Settings::Settings(bool verboseOutput)
     mShowUnreadEmailCount = true;
     ignoreStartUnreadCount = false;
     showDialogIfNoAccountsConfigured = true;
-    mThunderbirdWindowMatch = "- Mozilla Thunderbird";
+    mThunderbirdWindowMatch = " Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
     mUseMorkParser = true;
@@ -58,6 +59,7 @@ Settings::Settings(bool verboseOutput)
     onlyShowIconOnUnreadMessages = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
+    mIndexFilesRereadIntervalSec = 0;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
 }
 
@@ -101,6 +103,7 @@ void Settings::save()
     mSettings->setValue(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup );
     mSettings->setValue("advanced/ignoreUpdateVersion", mIgnoreUpdateVersion );
     mSettings->setValue(ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY, onlyShowIconOnUnreadMessages );
+    mSettings->setValue("advanced/forcedRereadInterval", mIndexFilesRereadIntervalSec );
 
     // Convert the map into settings
     mSettings->setValue("accounts/count", mFolderNotificationColors.size() );
@@ -202,6 +205,7 @@ void Settings::load()
             ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY, onlyShowIconOnUnreadMessages ).toBool();
     mIgnoreUpdateVersion = mSettings->value(
             "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
+    mIndexFilesRereadIntervalSec = mSettings->value("advanced/forcedRereadInterval", mIndexFilesRereadIntervalSec ).toUInt();
 
     mFolderNotificationColors.clear();
 
@@ -213,7 +217,7 @@ void Settings::load()
         QString entry = "accounts/account" + QString::number( index );
         QString key = mSettings->value( entry + "URI", "" ).toString();
         while (key.isEmpty() && index < total) {
-            Utils::debug("Removing invalid account %d", index);
+            Log::debug("Removing invalid account %d", index);
             QString lastEntry = "accounts/account" + QString::number( total - 1 );
             if (index != total - 1) {
                 key = mSettings->value(lastEntry + "URI", "").toString();
@@ -266,7 +270,7 @@ bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arg
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Utils::fatal(QCoreApplication::tr("Cannot load default system tray icon."));
+            Log::fatal( QCoreApplication::tr("Cannot load default system tray icon.") );
         }
     }
     return mNotificationIcon;

@@ -8,6 +8,7 @@
 #include "morkparser.h"
 #include "trayicon.h"
 #include "utils.h"
+#include "log.h"
 #include "databaseaccounts.h"
 #include "birdtrayapp.h"
 
@@ -29,6 +30,17 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     mChangedMSFtimer.setSingleShot( true );
 
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
+
+    // Set up the forced update timer
+    mForceUpdateTimer.setSingleShot( false );
+    connect( &mForceUpdateTimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
+
+    // And activate it if settings specify so
+    if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
+    {
+        mForceUpdateTimer.setInterval( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec * 1000 );
+        mForceUpdateTimer.start();
+    }
 }
 
 UnreadMonitor::~UnreadMonitor() {
@@ -59,6 +71,15 @@ const QMap<QString, QString> &UnreadMonitor::getWarnings() const {
 
 void UnreadMonitor::slotSettingsChanged()
 {
+    // And activate it if settings specify so
+    if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
+    {
+        mForceUpdateTimer.setInterval( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec * 1000 );
+        mForceUpdateTimer.start();
+    }
+    else
+        mForceUpdateTimer.stop();
+
     // We reinitialize everything because the settings changed
     if ( mSqlitedb )
     {
@@ -142,9 +163,9 @@ bool UnreadMonitor::openDatabase()
     }
 
     for ( int id : mFolderColorMap.keys() )
-        Utils::debug("Color for ID %d: %s", id, qPrintable( mFolderColorMap[id].name() ) );
+        Log::debug("Color for ID %d: %s", id, qPrintable( mFolderColorMap[id].name() ) );
 
-    Utils::debug("List of all IDs: %s", qPrintable( mAllFolderIDs ) );
+    Log::debug("List of all IDs: %s", qPrintable( mAllFolderIDs ) );
 
     mDBWatcher.addPath( mSqliteDbFile );
 
@@ -154,7 +175,7 @@ bool UnreadMonitor::openDatabase()
 
 void UnreadMonitor::updateUnread()
 {
-    Utils::debug("Triggering the unread counter update");
+    Log::debug("Triggering the unread counter update");
 
     // We execute a single statement and then parse the groups and decide on colors.
     QColor chosenColor;
@@ -283,72 +304,21 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
 
 int UnreadMonitor::getMorkUnreadCount(const QString &path)
 {
-    MorkParser parser;
+    MailMorkParser parser;
     if (!parser.open(path)) {
         setWarning(tr("Unable to read from %1.").arg(QFileInfo(path).fileName()), path);
         return 0;
     } else {
         clearWarning(path);
     }
-    unsigned int unread = 0;
-
-    // First we parse the unreadChildren column (generic view)
-    const MorkRowMap * rows = parser.rows( 0x80, 0, 0x80 );
-
-    if ( rows )
-    {
-        for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
-        {
-            MorkCells cells = rit.value();
-
-            for ( int colid : cells.keys() )
-            {
-                QString columnName = parser.getColumn( colid );
-
-                if ( columnName == "unreadChildren" )
-                {
-                    bool correct;
-                    unsigned int value = parser.getValue(cells[colid ]).toUInt( &correct, 16 );
-
-                    if ( correct )
-                        unread += value;
-                    else
-                        Utils::debug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));                }
-            }
-        }
-    }
-    else
-    {
-        // Now parse the smart inbox
-        rows = parser.rows( 0x80, 0, 0x9F );
-
-        if ( rows )
-        {
-            for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
-            {
-                MorkCells cells = rit.value();
-
-                for ( int colid : cells.keys() )
-                {
-                    QString columnName = parser.getColumn( colid );
-
-                    if ( columnName == "numNewMsgs" )
-                    {
-                        bool correct;
-                        unsigned int value = parser.getValue(cells[colid ]).toInt( &correct, 16 );
-
-                        if ( correct )
-                            unread += value;
-                        else
-                            Utils::debug("Incorrect Mork value: %s", qPrintable( parser.getValue(cells[colid ]) ));
-                    }
-                }
-            }
-        }
-    }
-
-    Utils::debug("Unread counter for %s: %d", qPrintable( path ), unread );
+    int unread = static_cast<int>(parser.getNumUnreadMessages());
+    Log::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
+}
+
+void UnreadMonitor::setForcedUpdateTimer()
+{
+
 }
 
 void UnreadMonitor::setWarning(const QString &message, const QString &path) {

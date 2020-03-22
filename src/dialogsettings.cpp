@@ -16,6 +16,7 @@
 #include "autoupdater.h"
 #include "mailaccountdialog.h"
 #include "birdtrayapp.h"
+#include "log.h"
 
 DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
@@ -31,7 +32,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( buttonBox, &QDialogButtonBox::accepted, this, &DialogSettings::accept );
     connect( buttonBox, &QDialogButtonBox::rejected, this, &DialogSettings::reject );
     connect( btnBrowse, &QPushButton::clicked, this, &DialogSettings::browsePath );
-    connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
 
@@ -53,6 +53,8 @@ DialogSettings::DialogSettings( QWidget *parent)
             this, &DialogSettings::onCheckUpdateButton );
     connect( app->getAutoUpdater(), &AutoUpdater::onCheckUpdateFinished,
             this, &DialogSettings::onCheckUpdateFinished );
+
+    connect( btnShowLogWindow, &QPushButton::clicked, this, &DialogSettings::onShowLogWindow );
 
     // Setup parameters
     leProfilePath->setText( QDir::toNativeSeparators(settings->mThunderbirdFolderPath) );
@@ -81,6 +83,14 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
     ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
+
+    if ( settings->mIndexFilesRereadIntervalSec > 0 )
+    {
+        boxForceReread->setChecked( true );
+        spinForceRereadSeconds->setValue( settings->mIndexFilesRereadIntervalSec );
+    }
+    else
+        boxForceReread->setChecked( false );
 
     // Form the proper command-line (with escaped arguments if they contain spaces
     QString tbcmdline;
@@ -135,6 +145,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxParserSelection->addItem( tr("using global search database (wont work with 68+)"), false );
     boxParserSelection->addItem( tr("using Mork index files (recommended)"), true );
 
+    // Should not be called before boxParserSelection is set up
+    connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
     connect( boxParserSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(unreadParserChanged(int)) );
 
     if ( settings->mUseMorkParser )
@@ -202,6 +214,11 @@ void DialogSettings::accept()
         settings->mNotificationIconUnread = btnNotificationIconUnread->icon().pixmap( settings->mIconSize );
     else
         settings->mNotificationIconUnread = QPixmap();
+
+    if ( boxForceReread->isChecked() )
+        settings->mIndexFilesRereadIntervalSec = spinForceRereadSeconds->value();
+    else
+        settings->mIndexFilesRereadIntervalSec = 0;
 
     mModelNewEmails->applySettings();
     mAccountModel->applySettings();
@@ -296,7 +313,7 @@ void DialogSettings::databaseUnreadsUpdate(int progresspercentage)
 
 void DialogSettings::databaseUnreadsFixed( QString errorMsg )
 {
-    Utils::debug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
+    Log::debug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
 
     mProgressFixer->close();
     delete mProgressFixer;
@@ -333,6 +350,16 @@ void DialogSettings::accountAdd()
             return;
         }
         mAccountModel->addAccount(dlg.account(), dlg.color());
+    } else if (QGuiApplication::keyboardModifiers() & Qt::ShiftModifier &&
+               QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
+        QStringList files = QFileDialog::getOpenFileNames(
+                nullptr, tr("Choose one or more MSF files"), "", tr("Mail Index (*.msf)"));
+        if (files.isEmpty()) {
+            return;
+        }
+        for (const QString &file : files) {
+            mAccountModel->addAccount(file, btnNotificationColor->color());
+        }
     } else {
         MailAccountDialog accountDialog(this, btnNotificationColor->color());
         if (accountDialog.exec() != QDialog::Accepted) {
@@ -405,6 +432,11 @@ void DialogSettings::onCheckUpdateButton() {
     checkUpdateButton->setText(tr("Checking..."));
     checkUpdateButton->setEnabled(false);
     BirdtrayApp::get()->getAutoUpdater()->checkForUpdates();
+}
+
+void DialogSettings::onShowLogWindow()
+{
+    Log::showLogger();
 }
 
 void DialogSettings::buttonChangeIcon()
@@ -491,7 +523,12 @@ void DialogSettings::changeIcon(QToolButton *button)
         return;
     }
 
-    button->setIcon( test );
+    Settings* settings = BirdtrayApp::get()->getSettings();
+
+    // Force scale icon to the expected size
+    button->setIcon( test.scaled(
+            settings->mIconSize.width(), settings->mIconSize.height(),
+            Qt::KeepAspectRatio, Qt::SmoothTransformation) );
 }
 
 

@@ -183,6 +183,13 @@ OpenSSL might not be installed.</source>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
@@ -542,6 +549,14 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Choose one or more MSF files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -561,6 +576,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>No new updates found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show log window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force index file re-read every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -677,10 +704,6 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Unexpected end of group.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Error opening mork file.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -690,6 +713,12 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Notification color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

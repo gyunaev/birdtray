@@ -8,7 +8,7 @@ installer/uninstaller/*
 installer/winDeploy/**
 installer/nsisDependencies
 installer/BirdTray-*.exe
-installer/getArch.exe
+installer/GetExeArch.exe
 installer/makeUninstallList.exe
 installer/makeTranslationsList.exe
 installer/translations_list.nsh

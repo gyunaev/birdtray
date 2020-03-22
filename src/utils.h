@@ -45,15 +45,6 @@ class Utils
          */
         static std::wstring qToStdWString(const QString &str);
 
-        static void debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
-        
-        /**
-         * Displays the message to the user and exits.
-         *
-         * @param message The message to display to the user.
-         */
-        Q_NORETURN static void fatal(const QString &message);
-
         /**
          * @return A list of possible locations of the directory
          *         that contains the Thunderbird profiles.
