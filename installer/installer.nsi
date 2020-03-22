@@ -397,7 +397,7 @@ Section "-Check VC Installed" # Hidden section, check if the Visual Redistributa
         VCNotFound:
         DetailPrint "$(MissingVcRuntime_UnableToRun)"
         MessageBox MB_OK|MB_ICONEXCLAMATION "$(MissingVcRuntime_UnableToRunDialog)" /SD IDOK
-        SetErrorLevel 1157
+        SetErrorLevel 1157 # ERROR_DLL_NOT_FOUND
 
         Done:
     ${endif}
@@ -658,7 +658,7 @@ Function FinishPagePre
     ${IsVisualRedistributableInstalled} $R0 ${ARCH}
     ${if} $R0 != 1
         SendMessage $mui.FinishPage.Run ${BM_SETCHECK} ${BST_UNCHECKED} 0 # uncheck 'run software'
-        ShowWindow $mui.FinishPage.Run 0 # hide the checkbox
+        ShowWindow $mui.FinishPage.Run 0 # Hide the checkbox
     ${endif}
     !endif # UNINSTALL_BUILDER
 FunctionEnd

@@ -215,7 +215,7 @@ FunctionEnd
 !ifndef UNINSTALL_BUILDER
 
 # Check if a Visual C++ Redistributable is installed.
-# $0 - ARCH: The path of the directory (x64 or x86).
+# $0 - ARCH: The architecture of the C++ Redistributable (x64 or x86).
 # Returns:
 # $0 - IS_INSTALLED: 1 (true) if a Visual C++ Redistributable is installed and 0 (false) if not.
 Function IsVisualRedistributableInstalled
