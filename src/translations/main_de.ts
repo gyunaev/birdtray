@@ -604,6 +604,14 @@ p, li { white-space: pre-wrap; }
         <source>Show log window</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Force index file re-read every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>

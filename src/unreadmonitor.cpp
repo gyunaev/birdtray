@@ -30,6 +30,17 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     mChangedMSFtimer.setSingleShot( true );
 
     connect( &mChangedMSFtimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
+
+    // Set up the forced update timer
+    mForceUpdateTimer.setSingleShot( false );
+    connect( &mForceUpdateTimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
+
+    // And activate it if settings specify so
+    if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
+    {
+        mForceUpdateTimer.setInterval( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec * 1000 );
+        mForceUpdateTimer.start();
+    }
 }
 
 UnreadMonitor::~UnreadMonitor() {
@@ -60,6 +71,15 @@ const QMap<QString, QString> &UnreadMonitor::getWarnings() const {
 
 void UnreadMonitor::slotSettingsChanged()
 {
+    // And activate it if settings specify so
+    if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
+    {
+        mForceUpdateTimer.setInterval( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec * 1000 );
+        mForceUpdateTimer.start();
+    }
+    else
+        mForceUpdateTimer.stop();
+
     // We reinitialize everything because the settings changed
     if ( mSqlitedb )
     {
@@ -294,6 +314,11 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
     int unread = static_cast<int>(parser.getNumUnreadMessages());
     Log::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
+}
+
+void UnreadMonitor::setForcedUpdateTimer()
+{
+
 }
 
 void UnreadMonitor::setWarning(const QString &message, const QString &path) {

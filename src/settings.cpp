@@ -59,6 +59,7 @@ Settings::Settings(bool verboseOutput)
     onlyShowIconOnUnreadMessages = false;
     mUnreadOpacityLevel = 0.75;
     mNewEmailMenuEnabled = false;
+    mIndexFilesRereadIntervalSec = 0;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
 }
 
@@ -102,6 +103,7 @@ void Settings::save()
     mSettings->setValue(UPDATE_ON_STARTUP_KEY, mUpdateOnStartup );
     mSettings->setValue("advanced/ignoreUpdateVersion", mIgnoreUpdateVersion );
     mSettings->setValue(ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY, onlyShowIconOnUnreadMessages );
+    mSettings->setValue("advanced/forcedRereadInterval", mIndexFilesRereadIntervalSec );
 
     // Convert the map into settings
     mSettings->setValue("accounts/count", mFolderNotificationColors.size() );
@@ -203,6 +205,7 @@ void Settings::load()
             ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY, onlyShowIconOnUnreadMessages ).toBool();
     mIgnoreUpdateVersion = mSettings->value(
             "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
+    mIndexFilesRereadIntervalSec = mSettings->value("advanced/forcedRereadInterval", mIndexFilesRereadIntervalSec ).toUInt();
 
     mFolderNotificationColors.clear();
 

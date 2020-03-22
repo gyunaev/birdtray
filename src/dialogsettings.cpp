@@ -84,6 +84,14 @@ DialogSettings::DialogSettings( QWidget *parent)
     ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
 
+    if ( settings->mIndexFilesRereadIntervalSec > 0 )
+    {
+        boxForceReread->setChecked( true );
+        spinForceRereadSeconds->setValue( settings->mIndexFilesRereadIntervalSec );
+    }
+    else
+        boxForceReread->setChecked( false );
+
     // Form the proper command-line (with escaped arguments if they contain spaces
     QString tbcmdline;
     for ( QString a : settings->mThunderbirdCmdLine )
@@ -206,6 +214,11 @@ void DialogSettings::accept()
         settings->mNotificationIconUnread = btnNotificationIconUnread->icon().pixmap( settings->mIconSize );
     else
         settings->mNotificationIconUnread = QPixmap();
+
+    if ( boxForceReread->isChecked() )
+        settings->mIndexFilesRereadIntervalSec = spinForceRereadSeconds->value();
+    else
+        settings->mIndexFilesRereadIntervalSec = 0;
 
     mModelNewEmails->applySettings();
     mAccountModel->applySettings();

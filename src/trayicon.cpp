@@ -471,7 +471,7 @@ void TrayIcon::showSettings()
 
         // Recalculate the delta
         enableBlinking( false );
-    
+
         if (unreadEmailsAtStart != -1
             && settings->ignoreStartUnreadCount != ignoreStartUnreadCountBefore) {
             if (!settings->ignoreStartUnreadCount) {

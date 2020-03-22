@@ -944,6 +944,46 @@
             </item>
            </layout>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <widget class="QCheckBox" name="boxForceReread">
+              <property name="text">
+               <string>Force index file re-read every</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinForceRereadSeconds">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="suffix">
+               <string> seconds</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>3600</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>
@@ -1086,12 +1126,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>320</x>
-     <y>101</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>448</x>
-     <y>115</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
    </hints>
   </connection>
@@ -1102,12 +1142,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>150</x>
-     <y>302</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>384</x>
-     <y>294</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
    </hints>
   </connection>
@@ -1118,12 +1158,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>157</x>
-     <y>73</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>183</x>
-     <y>156</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1134,12 +1174,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>428</x>
-     <y>60</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>816</x>
-     <y>240</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1150,12 +1190,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>573</x>
-     <y>70</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>816</x>
-     <y>288</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1166,12 +1206,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>377</x>
-     <y>71</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>816</x>
-     <y>336</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1182,12 +1222,28 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>440</x>
-     <y>241</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>637</x>
-     <y>247</y>
+     <x>115</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boxForceReread</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinForceRereadSeconds</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>292</y>
     </hint>
    </hints>
   </connection>
