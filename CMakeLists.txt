@@ -179,20 +179,41 @@ endif()
 
 # Installation
 if(WIN32)
-    # Find ssl libraries
-    find_library(SSL_LIBRARY NAMES ssl)
-    get_filename_component(SSL_PATH ${SSL_LIBRARY} DIRECTORY)
-    if(SSL_LIBRARY)
-        STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
+    if(POLICY CMP0087)
+        cmake_policy(SET CMP0087 NEW)
     endif()
 
+    option(DONT_EXECUTE_INSTALLER "Only create the Windows installer but don't execute it" OFF)
+    set(INSTALL_ARG --install)
+    if (DONT_EXECUTE_INSTALLER)
+        set(INSTALL_ARG)
+    endif()
+
+    # Find ssl libraries
+    find_package(OpenSSL QUIET)
+    message("OPENSSL_SSL_LIBRARY: ${OPENSSL_SSL_LIBRARY}")
+    get_filename_component(SSL_PATH ${OPENSSL_SSL_LIBRARY} DIRECTORY)
+    if(SSL_PATH)
+        STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
+    else()
+        set(SSL_PATH "C:\\\\Program Files\\\\OpenSSL")
+    endif()
+    message("SSL_PATH: ${SSL_PATH}")
+
     # Create installer
-    STRING(REGEX REPLACE "/" "\\\\\\\\" BIRDTRAY_EXE ${CMAKE_BINARY_DIR}/birdtray.exe)
     STRING(REGEX REPLACE "/" "\\\\\\\\" SQLITE3_PATH ${SQLITE3_LIBRARY})
-    install(CODE "execute_process(
+    STRING(REGEX REPLACE ".lib$" ".dll" SQLITE3_PATH ${SQLITE3_PATH})
+    install(CODE "if(NOT POLICY CMP0087)
+            message(FATAL_ERROR \"The install target requires cmake 3.14 or newer\")
+        endif()
+        execute_process(
         COMMAND cmd /C buildInstaller.bat
-            \"${BIRDTRAY_EXE}\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" --install
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer)")
+            \"$<TARGET_FILE:birdtray>\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" ${INSTALL_ARG}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer
+        RESULT_VARIABLE INSTALL_RESULT)
+        if(NOT \${INSTALL_RESULT} EQUAL \"0\")
+            message(FATAL_ERROR \"Install command failed with exit code \${INSTALL_RESULT}\")
+        endif()")
 else()
     include(GNUInstallDirs)
     install(TARGETS birdtray RUNTIME DESTINATION bin)

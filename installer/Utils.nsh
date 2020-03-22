@@ -169,7 +169,7 @@ FunctionEnd
 !macro ValidPath VAR PATH BAD_CHARACTERS
     Push `${PATH}`
     Push `${BAD_CHARACTERS}`
-    call ValidPath
+    Call ValidPath
     Pop `${VAR}`
 !macroend
 !define ValidPath "!insertmacro ValidPath"
@@ -203,7 +203,7 @@ Function IsDirEmpty
 FunctionEnd
 !macro IsDirEmpty VAR DIR
     Push ${DIR}
-    call IsDirEmpty
+    Call IsDirEmpty
     Pop ${VAR}
 !macroend
 !define IsDirEmpty "!insertmacro IsDirEmpty"

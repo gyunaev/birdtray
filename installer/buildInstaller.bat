@@ -11,11 +11,13 @@ if "%~1" == "/?" (
     goto Usage
 )
 set "exePath=%~1"
+set "exePath=%exePath:/=\%"
 if not exist "%exePath%" (
     echo Birdtray executable not found at "%exePath%" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 set "libSqlitePath=%~2"
+set "libSqlitePath=%libSqlitePath:/=\%"
 if not exist "%libSqlitePath%" (
     echo Sqlite library not found at "%libSqlitePath%" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
@@ -88,14 +90,22 @@ if exist "%deploymentFolder%" (
 )
 mkdir "%deploymentFolder%"
 if errorLevel 1 (
-    echo Failed to delete the old deployment folder at "%deploymentFolder%" 1>&2
+    echo Failed to create deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
+)
+for /f "delims=" %%i in ("%exePath%") do (
+    set "exeFileName=%%~nxi"
+    set "translationDir=%%~di%%~pitranslations"
 )
 xcopy "%exePath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
     echo Failed to copy the Birdtray executable from "%exePath%" 1>&2
     echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
+)
+if not exist "%deploymentFolder%/%exeFileName%" (
+    echo Birdtray executable not found at "%exePath%" 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
 )
 xcopy "%libSqlitePath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
@@ -115,10 +125,6 @@ if errorLevel 1 (
     echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
-for /f "delims=" %%i in ("%exePath%") do (
-    set "exeFileName=%%~nxi"
-    set "translationDir=%%~di%%~pitranslations"
-)
 "%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
         --no-angle --no-opengl-sw "%deploymentFolder%\%exeFileName%"
 if errorLevel 1 (
@@ -131,6 +137,11 @@ if exist "%deploymentFolder%\imageformats" (
     )
 )
 rem  Copy translations
+if not exist "%translationDir%" (
+    if exist "%translationDir%\..\..\translations" (
+        set "translationDir=%translationDir%\..\..\translations"
+    )
+)
 if exist "%translationDir%" (
     xcopy "%translationDir%" "%deploymentFolder%\translations" /q /y 1>nul
     if errorLevel 1 (
