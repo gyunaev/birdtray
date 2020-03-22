@@ -126,7 +126,8 @@ if errorLevel 1 (
     exit /b %errorLevel%
 )
 if exist "%deploymentFolder%\imageformats" (
-    for /f %%F in ('dir "%deploymentFolder%\imageformats" /b /a-d ^| findstr /vile "qico.dll"') do (
+    for /f %%F in ('dir "%deploymentFolder%\imageformats" /b /a-d ^| findstr /vile "qico.dll"
+            ^| findstr /vile "qsvg.dll"') do (
         del "%deploymentFolder%\imageformats\%%F" 1>nul
     )
 )
