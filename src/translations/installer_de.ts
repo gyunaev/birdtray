@@ -189,6 +189,38 @@
         <translation>Das Deinstallationsprogramm wurde mit Administrator-Rechten gestartet, aber es scheint keine ${PRODUCT_NAME}-Installation beim Administrator vorhanden zu sein. Wollen Sie die Deinstallation als Nutzer ohne Administrator-Rechten neustarten?</translation>
     </message>
     <message>
+        <source>OpenUrl</source>
+        <translation>Öffne $0 im Standardbrowser...</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime</source>
+        <translation>Die Visual C++ Runtime ${ARCH} konnte nicht gefunden werden.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Dialog</source>
+        <translation>Die folgende benötigte Komponente wurde auf diesem Computer nicht gefunden:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nWollen Sie das Installationsprogramm für die Komponente herunterladen?</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Retry</source>
+        <translation>Starten Sie bitte das Installationsprogramm, nachdem es heruntergeladen wurde. Wenn die Installation abgeschlossen ist, klicken Sie bitte auf OK, um den Installationsstatus erneut zu überprüfen.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Found</source>
+        <translation>Die erforderliche Komponente wurde erfolgreich auf Ihrem Computer gefunden.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_StillNotFound</source>
+        <translation>Die erforderliche Komponente konnte nicht auf Ihrem Computer gefunden werden. Bitte suchen Sie Online nach Visual C++ ${ARCH} Downloads für Visual Studio 2015 und höher.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_UnableToRun</source>
+        <translation>${PRODUCT_NAME} wird nicht starten können.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_UnableToRunDialog</source>
+        <translation>${PRODUCT_NAME} wird nicht starten können, da eine erforderliche Komponente fehlt.</translation>
+    </message>
+    <message>
         <source>Lang_en</source>
         <translation>Englisch</translation>
     </message>
