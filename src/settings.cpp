@@ -8,6 +8,7 @@
 #include <QtCore/QStandardPaths>
 #include <QCoreApplication>
 #include <QMessageBox>
+#include <QScopedPointer>
 
 #include "settings.h"
 #include "utils.h"
@@ -177,7 +178,17 @@ void Settings::load()
         }
     }
 
-    fromQSettings();
+#ifdef Q_OS_WIN
+    QFileInfo applicationFilePath(qApp->applicationFilePath());
+    QFileInfo fileInfo(QDir(qApp->applicationDirPath()), QString("%1.ini").arg(applicationFilePath.baseName()));
+
+    // Portable
+    if (QFileInfo::exists(fileInfo.absoluteFilePath()))
+        fromQSettings( new QSettings(fileInfo.absoluteFilePath(), QSettings::IniFormat) );
+    else
+#endif
+        fromQSettings( new QSettings() );
+
     save();
 }
 
@@ -267,18 +278,9 @@ void Settings::fromJSON( const QJsonObject& settings )
     }
 }
 
-void Settings::fromQSettings()
+void Settings::fromQSettings( QSettings * psettings )
 {
-    QSettings settings;
-
-#ifdef Q_OS_WIN
-    QFileInfo applicationFilePath(qApp->applicationFilePath());
-    QFileInfo fileInfo(QDir(qApp->applicationDirPath()), QString("%1.ini").arg(applicationFilePath.baseName()));
-
-    // Portable
-    if (QFileInfo::exists(fileInfo.absoluteFilePath()))
-        settings = QSettings(fileInfo.absoluteFilePath(), QSettings::IniFormat);
-#endif
+    QSettings & settings = *psettings;
 
     if ( settings.contains( "common/notificationfont" ) )
         mNotificationFont.fromString( settings.value( "common/notificationfont", "" ).toString() );
@@ -372,9 +374,12 @@ void Settings::fromQSettings()
         QString entry = "newemail/id" + QString::number( index );
         mNewEmailData.push_back( Setting_NewEmail::fromByteArray( settings.value( entry, "" ).toByteArray() ) );
     }
+
     if (!settings.value(READ_INSTALL_CONFIG_KEY, false).toBool()) {
         loadInstallerConfiguration();
     }
+
+    delete psettings;
 }
 
 bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arguments )

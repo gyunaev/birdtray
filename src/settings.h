@@ -173,7 +173,7 @@ class Settings
         void    fromJSON( const QJsonObject& settings );
 
         // TODO: remove this on March 23, 2022
-        void    fromQSettings();
+        void    fromQSettings(QSettings * settings);
 
         // Notification icon
         QPixmap     mNotificationIcon;
