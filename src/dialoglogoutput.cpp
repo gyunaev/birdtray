@@ -8,6 +8,7 @@ DialogLogOutput::DialogLogOutput(QWidget *parent) :
 
     // Auto-delete this object when closed
     setAttribute( Qt::WA_DeleteOnClose );
+    logViewer->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
 DialogLogOutput::~DialogLogOutput()
