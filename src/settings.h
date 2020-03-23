@@ -169,14 +169,21 @@ class Settings
         void setNotificationIcon(const QPixmap& icon);
 
     private:
-        // Notification icon
-        QPixmap mNotificationIcon;
+        // Loading from either storage
+        void    fromJSON( const QJsonObject& settings );
 
-        QSettings *mSettings;
+        // TODO: remove this on March 23, 2022
+        void    fromQSettings();
+
+        // Notification icon
+        QPixmap     mNotificationIcon;
+
+        QString     pixmapToString( const QPixmap& pixmap );
+        QPixmap     pixmapFromString( const QString& data );
     
-        void    savePixmap( const QString& key, const QPixmap& pixmap );
-        QPixmap loadPixmap( const QString& key );
-    
+        // Settings filename
+        QString     mSettingsFilename;
+
         /**
          * At first start, load the configuration configured during installation of Birdtray.
          */
