@@ -205,8 +205,6 @@ void TrayIcon::updateIcon()
     if (settings->onlyShowIconOnUnreadMessages && unread == 0) {
         this->hide();
         return;
-    } else {
-        this->show();
     }
 
     QPixmap temp(settings->getNotificationIcon().size());
@@ -314,6 +312,7 @@ void TrayIcon::updateIcon()
         mLastDrawnIcon = temp.toImage();
         setIcon( temp );
     }
+    this->show();
 }
 
 void TrayIcon::enableBlinking(bool enabled)
