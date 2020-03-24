@@ -29,7 +29,7 @@ Settings::Settings(bool verboseOutput)
     if ( QFileInfo::exists(fileInfo.absoluteFilePath()) ) // Portable
         mSettingsFilename = fileInfo.absoluteFilePath();
     else
-        mSettingsFilename = QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) + QDir::separator() + "birdtray-config.json";
+        mSettingsFilename = QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) + "/birdtray-config.json";
 
     mVerboseOutput = verboseOutput;
     mIconSize = QSize( ICON_SIZE, ICON_SIZE );
