@@ -140,7 +140,7 @@ void Settings::save()
     // QSaveFile is an I/O device for writing text and binary files, without
     // losing existing data if the writing operation fails.
     QSaveFile file( mSettingsFilename );
-
+    QDir().mkpath(QFileInfo(mSettingsFilename).absolutePath())
     if ( !file.open(QIODevice::WriteOnly | QIODevice::Truncate) )
     {
         QMessageBox::critical( 0,
