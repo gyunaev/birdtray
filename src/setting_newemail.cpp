@@ -58,13 +58,6 @@ Setting_NewEmail Setting_NewEmail::fromByteArray(const QByteArray &str)
     return fromJSON( doc.object() );
 }
 
-QByteArray Setting_NewEmail::toByteArray() const
-{
-    QJsonDocument doc( toJSON() );
-    return doc.toBinaryData();
-}
-
-
 bool Setting_NewEmail::edit()
 {
     DialogAddEditNewEmail dlg;

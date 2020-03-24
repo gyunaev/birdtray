@@ -15,7 +15,6 @@ class Setting_NewEmail
 
         // Backward compatibility serialization
         static Setting_NewEmail fromByteArray( const QByteArray& str );
-        QByteArray toByteArray() const;
 
         // Editing via edit dialog
         bool    edit();
