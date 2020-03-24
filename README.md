@@ -81,13 +81,13 @@ Once you change settings, often you need to restart birdtray for the new setting
 *Birdtray configuration is stored on a per-user basis, where the location differs depending on environment, as follows:*
 
 #### Linux Package Installation
-`$HOME/.config/ulduzsoft/birdtray.conf`
+`$HOME/.config/birdtray-config.json`
 
 #### Linux Flatpak Installation
-`$HOME/.var/app/com.ulduzsoft.Birdtray/config/ulduzsoft/birdtray.conf`
+`$HOME/.var/app/com.ulduzsoft.Birdtray/config/ulduzsoft/birdtray-config.json`
 
 #### Windows Installation
-`HKEY_CURRENT_USER\Software\ulduzsoft\birdtray` (Windows registry)
+`%AppData%\Local\ulduzsoft\birdtray\birdtray-config.json`
 
 ## Troubleshooting
 
