@@ -31,6 +31,12 @@ Settings::Settings(bool verboseOutput)
     else
         mSettingsFilename = QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) + "/birdtray-config.json";
 
+    // Make sure the path exists, and create it if it does not
+    QDir apppath( QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) );
+
+    if ( !apppath.exists() )
+        apppath.mkpath( apppath.absolutePath() );
+
     mVerboseOutput = verboseOutput;
     mIconSize = QSize( ICON_SIZE, ICON_SIZE );
     mNotificationDefaultColor = QColor("#0000FF");
@@ -140,7 +146,7 @@ void Settings::save()
     // QSaveFile is an I/O device for writing text and binary files, without
     // losing existing data if the writing operation fails.
     QSaveFile file( mSettingsFilename );
-    QDir().mkpath(QFileInfo(mSettingsFilename).absolutePath())
+
     if ( !file.open(QIODevice::WriteOnly | QIODevice::Truncate) )
     {
         QMessageBox::critical( 0,
