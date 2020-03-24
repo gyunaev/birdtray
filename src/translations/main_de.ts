@@ -753,7 +753,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Could not save the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Einstellungen konnten nicht gespeichert werden</translation>
     </message>
     <message>
         <source>Could not save the settings into file %1:
