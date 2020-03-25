@@ -99,4 +99,7 @@ void Log::add(const QString &text)
     // Add it to the open log window, if any
     if ( !mDialog.isNull() )
         mDialog.data()->add( logline );
+
+    // Log message to stderr
+    qDebug( "%s", qPrintable(logline) );
 }
