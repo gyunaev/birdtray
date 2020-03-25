@@ -19,7 +19,7 @@ class Settings
         // Icon size constant
         static constexpr int ICON_SIZE = 128;
 
-        explicit Settings(bool verboseOutput);
+        Settings();
         ~Settings();
 
         // Desired icon size
@@ -138,9 +138,6 @@ class Settings
         // The original order of strings is stored in mFolderNotificationList (to show in UI)
         QMap< QString, QColor >   mFolderNotificationColors;
         QStringList               mFolderNotificationList;
-
-        // Whether to spam debugging stuff
-        bool    mVerboseOutput;
 
         // If non-zero, specifies an interval in seconds for rereading index files even if they didn't change. 0 disables.
         unsigned int    mIndexFilesRereadIntervalSec;

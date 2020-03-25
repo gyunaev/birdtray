@@ -62,7 +62,7 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv)
     ensureSystemTrayAvailable();
     
     // Load settings
-    settings = new Settings(commandLineParser.isSet("debug"));
+    settings = new Settings();
     if (commandLineParser.isSet("reset-settings")) {
         settings->save(); // Saving without loading will reset the values
     } else {
@@ -167,7 +167,6 @@ void BirdtrayApp::parseCmdArguments() {
             {{"s", SHOW_THUNDERBIRD_COMMAND}, tr("Show the Thunderbird window.")},
             {{"H", HIDE_THUNDERBIRD_COMMAND}, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
-            {{"d", "debug"}, tr("Enable debugging output.")},
     });
     commandLineParser.process(*this);
 }

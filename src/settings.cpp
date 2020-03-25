@@ -20,7 +20,7 @@
 #define ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY "advanced/onlyShowIconOnUnreadMessages"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
 
-Settings::Settings(bool verboseOutput)
+Settings::Settings()
 {
     // This adds support for portable apps which can carry config.json in the same directory
     QFileInfo applicationFilePath( qApp->applicationFilePath() );
@@ -37,7 +37,6 @@ Settings::Settings(bool verboseOutput)
     if ( !apppath.exists() )
         apppath.mkpath( apppath.absolutePath() );
 
-    mVerboseOutput = verboseOutput;
     mIconSize = QSize( ICON_SIZE, ICON_SIZE );
     mNotificationDefaultColor = QColor("#0000FF");
     mNotificationBorderColor = QColor("#FFFFFF");
