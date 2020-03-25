@@ -12,10 +12,10 @@ class Log
 {
     public:
         // Adds a log entry and terminates an app, writing the log buffer to log.txt
-        static void    fatal( const QString& str );
+        Q_NORETURN static void    fatal( const QString& str );
 
         // Adds a debug log entry
-        static void    debug( const char * fmt, ... );
+        static void    debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
 
         // Shows the logging widget
         static void    showLogger();
