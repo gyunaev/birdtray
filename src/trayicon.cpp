@@ -32,7 +32,7 @@ TrayIcon::TrayIcon(bool showSettings)
     mMenuIgnoreUnreads = 0;
     mThunderbirdProcess = 0;
 #ifdef Q_OS_WIN
-    mThunderbirdUpdaterProcess = ProcessHandle::create(Utils::getThunderbirdUpdaterName());
+    mThunderbirdUpdaterProcess = ProcessHandle::create("updater.exe");
     connect( mThunderbirdUpdaterProcess, &ProcessHandle::finished,
             this, &TrayIcon::tbUpdaterProcessFinished );
 #endif /* Q_OS_WIN */

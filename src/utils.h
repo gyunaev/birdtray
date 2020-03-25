@@ -23,11 +23,6 @@ class Utils
          * @return The version of Birdtray as a string.
          */
         static QString getBirdtrayVersion();
-        
-        /**
-         * @return The name of the Thunderbird updater executable.
-         */
-        static QString getThunderbirdUpdaterName();
 
         /**
          * Convert a std::wstring to a QString.
