@@ -721,6 +721,15 @@ Please make sure you selected the correct profiles directory.</source>
 Log file is written into file %2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Could not save the settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the settings into file %1:
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TrayIcon</name>

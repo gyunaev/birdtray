@@ -12,14 +12,8 @@ Setting_NewEmail::Setting_NewEmail()
 
 }
 
-Setting_NewEmail Setting_NewEmail::fromByteArray(const QByteArray &str)
+Setting_NewEmail Setting_NewEmail::fromJSON(const QJsonObject &obj)
 {
-    QJsonDocument doc = QJsonDocument::fromBinaryData( str );
-
-    if ( !doc.isObject() )
-        return Setting_NewEmail();
-
-    QJsonObject obj = doc.object();
     Setting_NewEmail newmail;
 
     if ( obj.contains( "to" ) )
@@ -35,7 +29,7 @@ Setting_NewEmail Setting_NewEmail::fromByteArray(const QByteArray &str)
     return newmail;
 }
 
-QByteArray Setting_NewEmail::toByteArray() const
+QJsonObject Setting_NewEmail::toJSON() const
 {
     // We use it this way to easily extend this in future while keeping current settings
     QJsonObject obj;
@@ -51,8 +45,17 @@ QByteArray Setting_NewEmail::toByteArray() const
 
     obj["name"] = mName;
 
-    QJsonDocument doc( obj );
-    return doc.toBinaryData();
+    return obj;
+}
+
+Setting_NewEmail Setting_NewEmail::fromByteArray(const QByteArray &str)
+{
+    QJsonDocument doc = QJsonDocument::fromBinaryData( str );
+
+    if ( !doc.isObject() )
+        return Setting_NewEmail();
+
+    return fromJSON( doc.object() );
 }
 
 bool Setting_NewEmail::edit()

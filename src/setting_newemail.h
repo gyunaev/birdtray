@@ -2,6 +2,7 @@
 #define SETTING_NEWEMAIL_H
 
 #include <QString>
+#include <QJsonObject>
 
 class Setting_NewEmail
 {
@@ -9,8 +10,11 @@ class Setting_NewEmail
         Setting_NewEmail();
 
         // Serialization
+        static Setting_NewEmail fromJSON( const QJsonObject& str );
+        QJsonObject toJSON() const;
+
+        // Backward compatibility serialization
         static Setting_NewEmail fromByteArray( const QByteArray& str );
-        QByteArray toByteArray() const;
 
         // Editing via edit dialog
         bool    edit();
