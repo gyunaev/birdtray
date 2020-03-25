@@ -279,7 +279,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Enable New Email submenu</source>
-        <translation>Das &quot;Neue E-Mail&quot;-Untermenü aktvieren</translation>
+        <translation>Das Untermenü &quot;Neue E-Mail&quot; aktvieren</translation>
     </message>
     <message>
         <source>Advanced</source>
