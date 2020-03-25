@@ -109,7 +109,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Email message text:</source>
-        <translation>E-Mail Text:</translation>
+        <translation>E-Mail-Text:</translation>
     </message>
     <message>
         <source>Email recipient:</source>
