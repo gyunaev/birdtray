@@ -4,11 +4,12 @@
 #include <QMutex>
 #include <QPointer>
 #include <QStringList>
+#include <QFile>
 
 class DialogLogOutput;
 
 // Logger
-class Log
+class Log final
 {
     public:
         // Adds a log entry and terminates an app, writing the log buffer to log.txt
@@ -19,6 +20,9 @@ class Log
 
         // Shows the logging widget
         static void    showLogger();
+
+        // Initializes log with/without a file output
+        static void    initialize( const QString& path = "" );
 
     private:
         // Only keep this number of last log lines in buffer
@@ -33,14 +37,15 @@ class Log
         void    add( const QString& text );
 
         // Internal stuff
-        Log();
-        ~Log();
+        Log()  = default;
+        ~Log() = default;
         Log( const Log& l) = delete;
         Log operator= ( const Log& l) = delete;
 
         // All historic log entries are stored here, guarded by mMutex
         QStringList     mEntries;
         QMutex          mMutex;
+        QFile           mOutputFile;
 
         // Auto-set to null when log dialog is closed
         QPointer<DialogLogOutput>   mDialog;
