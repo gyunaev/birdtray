@@ -56,11 +56,11 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv)
         return;
     }
     
-    // This also initializes log
+    Log::initialize(commandLineParser.value("log"));
+
     Log::debug( "Birdtray version %d.%d.%d started", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
 
     ensureSystemTrayAvailable();
-    
     // Load settings
     settings = new Settings();
     if (commandLineParser.isSet("reset-settings")) {
@@ -68,6 +68,7 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv)
     } else {
         settings->load();
     }
+
     if (!translationLoadedSuccessfully) {
         Log::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
     }
@@ -167,6 +168,7 @@ void BirdtrayApp::parseCmdArguments() {
             {{"s", SHOW_THUNDERBIRD_COMMAND}, tr("Show the Thunderbird window.")},
             {{"H", HIDE_THUNDERBIRD_COMMAND}, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
+            {{"l", "log"}, tr("Write log to a file."), tr("FILE")}
     });
     commandLineParser.process(*this);
 }
