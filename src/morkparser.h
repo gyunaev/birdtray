@@ -146,7 +146,7 @@ protected: // Members
     void    parse();
     void    parseDict();
     void    parseComment();
-    void    parseCell(bool isInCutMode = false);
+    void    parseCell(QList<int>* parsedIds = nullptr);
     void    parseTable();
     void    parseMeta( char c );
     void    parseRow( int TableId, int TableScope );
