@@ -5,13 +5,12 @@ project(Birdtray CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(SQLite3 REQUIRED)
 find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5Network CONFIG REQUIRED)
 find_package(Qt5LinguistTools CONFIG QUIET)
-set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
+set(REQUIRED_MODULES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
 
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
@@ -58,8 +57,6 @@ add_definitions(-DQT_DEPRECATED_WARNINGS)
 
 set(SOURCES
         src/colorbutton.cpp
-        src/databaseaccounts.cpp
-        src/databaseunreadfixer.cpp
         src/dialogaddeditaccount.cpp
         src/dialogaddeditnewemail.cpp
         src/dialogsettings.cpp
@@ -69,7 +66,6 @@ set(SOURCES
         src/morkparser.cpp
         src/setting_newemail.cpp
         src/settings.cpp
-        src/sqlite_statement.cpp
         src/trayicon.cpp
         src/unreadmonitor.cpp
         src/utils.cpp
@@ -91,7 +87,6 @@ set(SOURCES
 set(HEADERS
         src/colorbutton.h
         src/databaseaccounts.h
-        src/databaseunreadfixer.h
         src/dialogaddeditaccount.h
         src/dialogaddeditnewemail.h
         src/dialoglogoutput.h
@@ -102,7 +97,6 @@ set(HEADERS
         src/morkparser.h
         src/setting_newemail.h
         src/settings.h
-        src/sqlite_statement.h
         src/trayicon.h
         src/unreadmonitor.h
         src/utils.h
@@ -149,7 +143,7 @@ endif(Qt5LinguistTools_FOUND)
 add_library(birdtray_lib STATIC
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
         ${HEADERS} ${PLATFORM_HEADERS})
-target_include_directories(birdtray_lib PUBLIC ${SQLITE3_INCLUDE_DIRS} src)
+target_include_directories(birdtray_lib PUBLIC src)
 target_link_libraries(birdtray_lib PUBLIC ${REQUIRED_MODULES})
 
 add_executable(birdtray

@@ -7,8 +7,6 @@
 #include <QtWidgets/QTreeView>
 #include <QtWidgets/QStyledItemDelegate>
 
-#include "databaseaccounts.h"
-
 class ModelAccountTree : public QAbstractItemModel, public QStyledItemDelegate
 {
     public:

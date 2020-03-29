@@ -97,22 +97,22 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>De sqlite-databank kan niet worden geopend: %1</translation>
+        <translation type="vanished">De sqlite-databank kan niet worden geopend: %1</translation>
     </message>
     <message>
         <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation>Er is geen toegang tot de databank. Als u Thunderbird 68+ gebruikt, dan werkt deze methode niet meer. Gebruik de Mork-verwerker.</translation>
+        <translation type="vanished">Er is geen toegang tot de databank. Als u Thunderbird 68+ gebruikt, dan werkt deze methode niet meer. Gebruik de Mork-verwerker.</translation>
     </message>
 </context>
 <context>
     <name>DatabaseUnreadFixer</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>De sqlite-databank kan niet worden geopend: %1</translation>
+        <translation type="vanished">De sqlite-databank kan niet worden geopend: %1</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation>De databank kan niet worden opgevraagd.</translation>
+        <translation type="vanished">De databank kan niet worden opgevraagd.</translation>
     </message>
 </context>
 <context>
@@ -276,15 +276,15 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Fix the unread message count</source>
-        <translation>Ongelezen berichtaantal repareren</translation>
+        <translation type="vanished">Ongelezen berichtaantal repareren</translation>
     </message>
     <message>
         <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation>Gebruik dit hulpmiddel als het aantal ongelezen e-mails op het pictogram één of meer is, maar er geen ongelezen e-mails zijn:</translation>
+        <translation type="vanished">Gebruik dit hulpmiddel als het aantal ongelezen e-mails op het pictogram één of meer is, maar er geen ongelezen e-mails zijn:</translation>
     </message>
     <message>
         <source>Fix</source>
-        <translation>Repareren</translation>
+        <translation type="vanished">Repareren</translation>
     </message>
     <message>
         <source>Monitoring</source>
@@ -292,15 +292,15 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Method to parse unread notifications:</source>
-        <translation>Methode om ongelezen e-mails te verwerken:</translation>
+        <translation type="vanished">Methode om ongelezen e-mails te verwerken:</translation>
     </message>
     <message>
         <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation>Kies de databank van het bij te houden Thunderbird-profiel</translation>
+        <translation type="vanished">Kies de databank van het bij te houden Thunderbird-profiel</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation>Bladeren</translation>
+        <translation type="vanished">Bladeren</translation>
     </message>
     <message>
         <source>Accounts to monitor</source>
@@ -436,23 +436,23 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>using global search database (wont work with 68+)</source>
-        <translation>met behulp van de globale zoekdatabank (werkt niet met 68 en hoger)</translation>
+        <translation type="vanished">met behulp van de globale zoekdatabank (werkt niet met 68 en hoger)</translation>
     </message>
     <message>
         <source>using Mork index files (recommended)</source>
-        <translation>met behulp van Mork-indexbestanden (aanbevolen)</translation>
+        <translation type="vanished">met behulp van Mork-indexbestanden (aanbevolen)</translation>
     </message>
     <message>
         <source>Empty Thunderbird directory</source>
-        <translation>Lege Thunderbird-map</translation>
+        <translation type="vanished">Lege Thunderbird-map</translation>
     </message>
     <message>
         <source>You must specify a Thunderbird directory.</source>
-        <translation>Geef een Thunderbird map op.</translation>
+        <translation type="vanished">Geef een Thunderbird map op.</translation>
     </message>
     <message>
         <source>Choose the Thunderbird profile path</source>
-        <translation>Geef het Thunderbird-profielpad op</translation>
+        <translation type="vanished">Geef het Thunderbird-profielpad op</translation>
     </message>
     <message>
         <source>Version check failed</source>
@@ -466,42 +466,42 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Fix the unread messages?</source>
-        <translation>Wilt u de ongelezen berichten repareren?</translation>
+        <translation type="vanished">Wilt u de ongelezen berichten repareren?</translation>
     </message>
     <message>
         <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Gebruik deze optie alleen als u geen ongelezen berichten hebt, maar wél de &apos;nieuwe e-mail&apos;-aanduiding ziet.&lt;br&gt;Hiervoor dient u Thunderbird af te sluiten.&lt;br&gt;Het repareren kan tot wel 5 minuten duren.&lt;br&gt;&lt;br&gt;Kijk na of Thunderbird is afgesloten. Wilt u doorgaan?&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;Gebruik deze optie alleen als u geen ongelezen berichten hebt, maar wél de &apos;nieuwe e-mail&apos;-aanduiding ziet.&lt;br&gt;Hiervoor dient u Thunderbird af te sluiten.&lt;br&gt;Het repareren kan tot wel 5 minuten duren.&lt;br&gt;&lt;br&gt;Kijk na of Thunderbird is afgesloten. Wilt u doorgaan?&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Updating the database...</source>
-        <translation>Bezig met bijwerken van databank...</translation>
+        <translation type="vanished">Bezig met bijwerken van databank...</translation>
     </message>
     <message>
         <source>Database updated</source>
-        <translation>Databank bijgewerkt</translation>
+        <translation type="vanished">Databank bijgewerkt</translation>
     </message>
     <message>
         <source>Successfully updated the database.</source>
-        <translation>De databank is bijgewerkt.</translation>
+        <translation type="vanished">De databank is bijgewerkt.</translation>
     </message>
     <message>
         <source>Error updating database</source>
-        <translation>Bijwerken van databank mislukt</translation>
+        <translation type="vanished">Bijwerken van databank mislukt</translation>
     </message>
     <message>
         <source>Error updating the database:
 %1</source>
-        <translation>Het bijwerken van de databank is mislukt:
+        <translation type="vanished">Het bijwerken van de databank is mislukt:
 %1</translation>
     </message>
     <message>
         <source>Error retrieving accounts</source>
-        <translation>Ophalen van acccounts mislukt</translation>
+        <translation type="vanished">Ophalen van acccounts mislukt</translation>
     </message>
     <message>
         <source>Error retrieving accounts:
 %1</source>
-        <translation>Het ophalen van accounts is mislukt:
+        <translation type="vanished">Het ophalen van accounts is mislukt:
 %1</translation>
     </message>
     <message>
@@ -510,13 +510,13 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>WARNING: Parser changed</source>
-        <translation>WAARSCHUWING: verwerker aangepast</translation>
+        <translation type="vanished">WAARSCHUWING: verwerker aangepast</translation>
     </message>
     <message>
         <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
 
 Do you want to clear the accounts?</source>
-        <translation>U heeft de verwerker aangepast, maar het accountformaat is niet compatibel tussen deze verwerkers. U dient ze opnieuw in te stellen.
+        <translation type="vanished">U heeft de verwerker aangepast, maar het accountformaat is niet compatibel tussen deze verwerkers. U dient ze opnieuw in te stellen.
 
 Wilt u de accounts verwijderen?</translation>
     </message>
@@ -538,11 +538,11 @@ Wilt u de accounts verwijderen?</translation>
     </message>
     <message>
         <source>Invalid Thunderbird directory</source>
-        <translation>Ongeldige Thunderbird-map</translation>
+        <translation type="vanished">Ongeldige Thunderbird-map</translation>
     </message>
     <message>
         <source>Valid Thunderbird directory must contain the file %1.</source>
-        <translation>Een geldige Thunderbird-map bevat het bestand &apos;%1&apos;.</translation>
+        <translation type="vanished">Een geldige Thunderbird-map bevat het bestand &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
@@ -921,15 +921,15 @@ Log file is written into file %2</source>
     <name>UnreadMonitor</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Het openen van de sqlite-databank is mislukt: %1</translation>
+        <translation type="vanished">Het openen van de sqlite-databank is mislukt: %1</translation>
     </message>
     <message>
         <source>Folder %1 was not found in database.</source>
-        <translation>De map &apos;%1&apos; is niet aangetroffen in de databank.</translation>
+        <translation type="vanished">De map &apos;%1&apos; is niet aangetroffen in de databank.</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation>De databank kan niet worden doorzocht.</translation>
+        <translation type="vanished">De databank kan niet worden doorzocht.</translation>
     </message>
     <message>
         <source>Unable to watch %1 for changes.</source>
@@ -941,7 +941,7 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>Cannot query database: %1</source>
-        <translation>Het doorzoeken van de databank is mislukt: %1</translation>
+        <translation type="vanished">Het doorzoeken van de databank is mislukt: %1</translation>
     </message>
 </context>
 <context>

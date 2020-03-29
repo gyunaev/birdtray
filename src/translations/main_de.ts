@@ -97,22 +97,22 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <name>DatabaseAccounts</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
+        <translation type="vanished">Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
     </message>
     <message>
         <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation>Auf die Datenbank kann nicht zugreifen werden. Diese Methode funktioniert nicht mehr, falls Sie Thunderbird 68 oder neuer verwenden. Benutzen Sie bitte den Mork-Parser.</translation>
+        <translation type="vanished">Auf die Datenbank kann nicht zugreifen werden. Diese Methode funktioniert nicht mehr, falls Sie Thunderbird 68 oder neuer verwenden. Benutzen Sie bitte den Mork-Parser.</translation>
     </message>
 </context>
 <context>
     <name>DatabaseUnreadFixer</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
+        <translation type="vanished">Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation>Datenbank kann nicht abgefragt werden.</translation>
+        <translation type="vanished">Datenbank kann nicht abgefragt werden.</translation>
     </message>
 </context>
 <context>
@@ -276,15 +276,15 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Fix the unread message count</source>
-        <translation>Die Anzahl der ungelesenen Nachrichten reparieren</translation>
+        <translation type="vanished">Die Anzahl der ungelesenen Nachrichten reparieren</translation>
     </message>
     <message>
         <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation>Dieses Werkzeug benutzen, wenn Birdtray ungelesene Nachrichten anzeigt, aber keine vorhanden sind:</translation>
+        <translation type="vanished">Dieses Werkzeug benutzen, wenn Birdtray ungelesene Nachrichten anzeigt, aber keine vorhanden sind:</translation>
     </message>
     <message>
         <source>Fix</source>
-        <translation>Reparieren</translation>
+        <translation type="vanished">Reparieren</translation>
     </message>
     <message>
         <source>Monitoring</source>
@@ -292,15 +292,15 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Method to parse unread notifications:</source>
-        <translation>Methode zum Einlesen der Anzahl ungelesener Nachrichten:</translation>
+        <translation type="vanished">Methode zum Einlesen der Anzahl ungelesener Nachrichten:</translation>
     </message>
     <message>
         <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation>Bitte wählen Sie die Thunderbird-Profildatenbank zur Überwachung aus</translation>
+        <translation type="vanished">Bitte wählen Sie die Thunderbird-Profildatenbank zur Überwachung aus</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation>Durchsuchen</translation>
+        <translation type="vanished">Durchsuchen</translation>
     </message>
     <message>
         <source>Accounts to monitor</source>
@@ -432,19 +432,19 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>using global search database (wont work with 68+)</source>
-        <translation>Globale Suchdatenbank (wird nicht mit 68+ funktionieren)</translation>
+        <translation type="vanished">Globale Suchdatenbank (wird nicht mit 68+ funktionieren)</translation>
     </message>
     <message>
         <source>using Mork index files (recommended)</source>
-        <translation>Mork-Index-Dateien (empfohlen)</translation>
+        <translation type="vanished">Mork-Index-Dateien (empfohlen)</translation>
     </message>
     <message>
         <source>Empty Thunderbird directory</source>
-        <translation>Leeres Thunderbird-Verzeichnis</translation>
+        <translation type="vanished">Leeres Thunderbird-Verzeichnis</translation>
     </message>
     <message>
         <source>Choose the Thunderbird profile path</source>
-        <translation>Den Thunderbird- Profilpfad auswählen</translation>
+        <translation type="vanished">Den Thunderbird- Profilpfad auswählen</translation>
     </message>
     <message>
         <source>Version check failed</source>
@@ -458,46 +458,46 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Fix the unread messages?</source>
-        <translation>Die Anzahl der ungelesenen Nachrichten reparieren?</translation>
+        <translation type="vanished">Die Anzahl der ungelesenen Nachrichten reparieren?</translation>
     </message>
     <message>
         <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Diese Option sollte genutzt werden, wenn es keine ungelesenen E-Mails gibt, aber Birdtray trotzdem eine Anzahl anzeigt.&lt;br&gt;Um das Werkzeug zu nutzen, muss Thunderbird geschlossen werden.&lt;br&gt;Die Reparatur kann bis zu fünf Minuten dauern.&lt;br&gt;&lt;br&gt;Bitte bestätigen Sie, dass Thunderbird geschlossen wurde und Sie fortfahren möchten.&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;Diese Option sollte genutzt werden, wenn es keine ungelesenen E-Mails gibt, aber Birdtray trotzdem eine Anzahl anzeigt.&lt;br&gt;Um das Werkzeug zu nutzen, muss Thunderbird geschlossen werden.&lt;br&gt;Die Reparatur kann bis zu fünf Minuten dauern.&lt;br&gt;&lt;br&gt;Bitte bestätigen Sie, dass Thunderbird geschlossen wurde und Sie fortfahren möchten.&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Updating the database...</source>
-        <translation>Datenbank wird aktualisiert …</translation>
+        <translation type="vanished">Datenbank wird aktualisiert …</translation>
     </message>
     <message>
         <source>Database updated</source>
-        <translation>Datenbank aktualisiert</translation>
+        <translation type="vanished">Datenbank aktualisiert</translation>
     </message>
     <message>
         <source>You must specify a Thunderbird directory.</source>
-        <translation>Es muss ein Thunderbird-Verzeichnis angegeben werden.</translation>
+        <translation type="vanished">Es muss ein Thunderbird-Verzeichnis angegeben werden.</translation>
     </message>
     <message>
         <source>Successfully updated the database.</source>
-        <translation>Die Datenbank wurde erfolgreich aktualisiert.</translation>
+        <translation type="vanished">Die Datenbank wurde erfolgreich aktualisiert.</translation>
     </message>
     <message>
         <source>Error updating database</source>
-        <translation>Fehler beim Aktualisieren der Datenbank</translation>
+        <translation type="vanished">Fehler beim Aktualisieren der Datenbank</translation>
     </message>
     <message>
         <source>Error updating the database:
 %1</source>
-        <translation>Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten:
+        <translation type="vanished">Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten:
 %1</translation>
     </message>
     <message>
         <source>Error retrieving accounts</source>
-        <translation>Fehler beim Abfragen der Konten</translation>
+        <translation type="vanished">Fehler beim Abfragen der Konten</translation>
     </message>
     <message>
         <source>Error retrieving accounts:
 %1</source>
-        <translation>Beim Abfragen der Konten ist ein Fehler aufgetreten:
+        <translation type="vanished">Beim Abfragen der Konten ist ein Fehler aufgetreten:
 %1</translation>
     </message>
     <message>
@@ -506,13 +506,13 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>WARNING: Parser changed</source>
-        <translation>ACHTUNG: Einlesemethode verändert</translation>
+        <translation type="vanished">ACHTUNG: Einlesemethode verändert</translation>
     </message>
     <message>
         <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
 
 Do you want to clear the accounts?</source>
-        <translation>Die Einlesemethode wurde verändert. Das Format der Konten ist nicht mit der neuen Methode kompatibel und muss neu eingerichtet werden.
+        <translation type="vanished">Die Einlesemethode wurde verändert. Das Format der Konten ist nicht mit der neuen Methode kompatibel und muss neu eingerichtet werden.
 
 Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
     </message>
@@ -534,11 +534,11 @@ Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
     </message>
     <message>
         <source>Valid Thunderbird directory must contain the file %1.</source>
-        <translation>Ein gültiges Thunderbird-Verzeichnis muss die Datei %1 enthalten.</translation>
+        <translation type="vanished">Ein gültiges Thunderbird-Verzeichnis muss die Datei %1 enthalten.</translation>
     </message>
     <message>
         <source>Invalid Thunderbird directory</source>
-        <translation>Ungültiges Thunderbird-Verzeichnis</translation>
+        <translation type="vanished">Ungültiges Thunderbird-Verzeichnis</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
@@ -881,15 +881,15 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     <name>UnreadMonitor</name>
     <message>
         <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
+        <translation type="vanished">Fehler beim Öffnen der Sqlite-Datenbank: %1</translation>
     </message>
     <message>
         <source>Folder %1 was not found in database.</source>
-        <translation>Der Ordner %1 konnte nicht in der Datenbank gefunden werden.</translation>
+        <translation type="vanished">Der Ordner %1 konnte nicht in der Datenbank gefunden werden.</translation>
     </message>
     <message>
         <source>Cannot query database.</source>
-        <translation>Datenbank kann nicht abgefragt werden.</translation>
+        <translation type="vanished">Datenbank kann nicht abgefragt werden.</translation>
     </message>
     <message>
         <source>Unable to watch %1 for changes.</source>
@@ -901,7 +901,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Cannot query database: %1</source>
-        <translation>Die Datenbank kann nicht eingelesen werden: %1</translation>
+        <translation type="vanished">Die Datenbank kann nicht eingelesen werden: %1</translation>
     </message>
 </context>
 <context>

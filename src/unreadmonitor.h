@@ -9,7 +9,6 @@
 #include <QStringList>
 #include <QFileSystemWatcher>
 
-struct sqlite3;
 class TrayIcon;
 
 class UnreadMonitor : public QThread
@@ -48,9 +47,6 @@ class UnreadMonitor : public QThread
         void    updateUnread();
 
     private:
-        bool    openDatabase();
-
-        void    getUnreadCount_SQLite( int & count, QColor& color );
         void    getUnreadCount_Mork( int & count, QColor& color );
         int     getMorkUnreadCount( const QString& path );
         void    setForcedUpdateTimer();
@@ -73,9 +69,6 @@ class UnreadMonitor : public QThread
         void clearWarning(const QString &path = QString());
 
     private:
-        QString         mSqliteDbFile;
-        sqlite3 *       mSqlitedb;
-
         // The list of all folder IDs which we monitor
         QString         mAllFolderIDs;
 

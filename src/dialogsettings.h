@@ -28,8 +28,6 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
     public slots:
         void    accept() override;
-        void    browsePath();
-        void    profilePathChanged();
         
         /**
          * Called once the update check finished.
@@ -39,18 +37,9 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          */
         void    onCheckUpdateFinished(bool foundUpdate, const QString &errorString);
 
-        // Calls the database fixer running in a DatabaseFixer thread
-        // Receives databaseUnreadsFixed() once fixed
-        void    fixDatabaseUnreads();
-        void    databaseUnreadsUpdate( int progresspercentage );
-        void    databaseUnreadsFixed(QString errorMsg);
-
         // Tab activation (to refresh accounts)
         // Calls the account query running in a DatabaseAccounts thread
         void    activateTab(int tabIndex );
-
-        // Receives accountsAvailable()
-        void    accountsAvailable(QString errorMsg);
 
         // Account buttons
         /**
@@ -81,40 +70,9 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          */
         void onBorderWidthChanged(int value);
 
-        // Parser changed
-        void    unreadParserChanged( int curr );
-
     private:
         void    changeIcon(QToolButton * button );
         
-        /**
-         * Update the account list from the selected sql database.
-         */
-        void    updateAccountList();
-        
-        /**
-         * Validate the profile path.
-         *
-         * @param profilePath The profile path.
-         * @return true, if the path is valid, false otherwise.
-         */
-        bool    isProfilePathValid(const QString& profilePath) const;
-        
-        /**
-         * Check if the given profile path is valid and display a dialog, if it's not.
-         *
-         * @param profilePath The profile path.
-         * @return true, if the path is valid, false otherwise.
-         */
-        bool    reportIfProfilePathValid(const QString& profilePath) const;
-        bool    isMorkParserSelected() const;
-    
-        QPalette mPaletteOk;
-        QPalette mPaletteError;
-
-        // For database fixer
-        QProgressDialog * mProgressFixer;
-
         // List of all accounts
         QList<DatabaseAccounts::Account>    mAccounts;
 
