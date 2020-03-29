@@ -31,13 +31,9 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const {
     if (index.row() >= 0 && index.row() < mAccounts.size() && index.column() == 0) {
         switch (role) {
         case Qt::DisplayRole: {
-            QString account = mAccounts[index.row()];
-            if (!account.endsWith(".msf")) {
-                return Utils::decodeIMAPutf7(account);
-            }
-            QFileInfo fileInfo(account);
-            QString folderName = Utils::getMailFolderName(fileInfo);
-            QString accountName = Utils::getMailAccountName(fileInfo);
+            QFileInfo accountMorkFile(mAccounts[index.row()]);
+            QString folderName = Utils::getMailFolderName(accountMorkFile);
+            QString accountName = Utils::getMailAccountName(accountMorkFile);
             return accountName + " [" + folderName + "]";
         }
         case Qt::ToolTipRole: {

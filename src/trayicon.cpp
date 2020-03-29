@@ -289,14 +289,9 @@ void TrayIcon::updateIcon()
             if (path.isNull()) {
                 continue;
             }
-            QString name;
-            if (path.endsWith(".msf")) {
-                QFileInfo accountInfo(path);
-                name = Utils::getMailAccountName(accountInfo)
-                       + " [" + Utils::getMailFolderName(accountInfo) + "]";
-            } else {
-                name = Utils::decodeIMAPutf7(path);
-            }
+            QFileInfo accountMorkFile(path);
+            QString name = Utils::getMailAccountName(accountMorkFile)
+                           + " [" + Utils::getMailFolderName(accountMorkFile) + "]";
             const QString &warning = warningsIterator.value();
             toolTip << name + ": " + warning;
         }
