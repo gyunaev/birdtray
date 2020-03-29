@@ -56,7 +56,6 @@ add_definitions(-DQT_DEPRECATED_WARNINGS)
 
 set(SOURCES
         src/colorbutton.cpp
-        src/dialogaddeditaccount.cpp
         src/dialogaddeditnewemail.cpp
         src/dialogsettings.cpp
         src/dialoglogoutput.cpp
@@ -75,7 +74,6 @@ set(SOURCES
         src/updatedownloaddialog.cpp
         src/mailaccountdialog.cpp
         src/birdtrayapp.cpp
-        src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
         src/dialogsettings.ui
         src/updatedialog.ui
@@ -85,8 +83,6 @@ set(SOURCES
 
 set(HEADERS
         src/colorbutton.h
-        src/databaseaccounts.h
-        src/dialogaddeditaccount.h
         src/dialogaddeditnewemail.h
         src/dialoglogoutput.h
         src/dialogsettings.h

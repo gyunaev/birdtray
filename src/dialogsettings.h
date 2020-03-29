@@ -6,7 +6,6 @@
 #include <QPalette>
 #include <QtCore/QStringListModel>
 
-#include "databaseaccounts.h"
 #include "ui_dialogsettings.h"
 
 #ifdef Q_OS_WIN
@@ -72,9 +71,6 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
 
     private:
         void    changeIcon(QToolButton * button );
-        
-        // List of all accounts
-        QList<DatabaseAccounts::Account>    mAccounts;
 
         // Model to show the accounts
         ModelAccountTree    *   mAccountModel;

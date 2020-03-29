@@ -9,8 +9,6 @@
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
 #include "modelnewemails.h"
-#include "databaseaccounts.h"
-#include "dialogaddeditaccount.h"
 #include "utils.h"
 #include "autoupdater.h"
 #include "mailaccountdialog.h"
