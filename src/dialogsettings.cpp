@@ -325,6 +325,7 @@ void DialogSettings::onTranslatorsDialog() {
     translatorsList.replace("# Active maintainers", "# " + tr("Active maintainers"))
                    .replace("# Contributors", "# " + tr("Contributors"));
     QDialog translatorsDialog;
+    translatorsDialog.resize(400, 300);
     translatorsDialog.setWindowTitle(tr("Translators"));
     QHBoxLayout layout(&translatorsDialog);
     QTextBrowser content(&translatorsDialog);
