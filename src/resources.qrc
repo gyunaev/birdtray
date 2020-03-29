@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>res/thunderbird.png</file>
         <file>res/birdtray.ico</file>
+        <file>res/translators.md</file>
     </qresource>
 </RCC>

@@ -71,6 +71,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          * @param value The new border width.
          */
         void onBorderWidthChanged(int value);
+        
+        /**
+         * Show the translators dialog.
+         */
+        static void onTranslatorsDialog();
 
     private:
         void    changeIcon(QToolButton * button );

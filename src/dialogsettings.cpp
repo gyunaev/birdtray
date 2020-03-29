@@ -47,6 +47,7 @@ DialogSettings::DialogSettings( QWidget *parent)
             this, &DialogSettings::onCheckUpdateFinished );
 
     connect( btnShowLogWindow, &QPushButton::clicked, this, &DialogSettings::onShowLogWindow );
+    connect( translatorsButton, &QPushButton::clicked, &DialogSettings::onTranslatorsDialog );
 
     // Setup parameters
     btnNotificationColor->setColor( settings->mNotificationDefaultColor );
@@ -315,6 +316,29 @@ void DialogSettings::buttonChangeUnreadIcon()
 void DialogSettings::onBorderWidthChanged(int value) {
     borderWidthLabel->setText(value == 0 ? tr("None") : QString::number(value) + '%');
 }
+
+void DialogSettings::onTranslatorsDialog() {
+    QFile translatorsListFile(":/res/translators.md");
+    translatorsListFile.open(QFile::ReadOnly);
+    QString translatorsList = QTextStream(&translatorsListFile).readAll();
+    translatorsListFile.close();
+    translatorsList.replace("# Active maintainers", "# " + tr("Active maintainers"))
+                   .replace("# Contributors", "# " + tr("Contributors"));
+    QDialog translatorsDialog;
+    translatorsDialog.setWindowTitle(tr("Translators"));
+    QHBoxLayout layout(&translatorsDialog);
+    QTextBrowser content(&translatorsDialog);
+    content.setOpenExternalLinks(true);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    content.setMarkdown(Utils::formatGithubMarkdown(translatorsList));
+#else
+    content.setText(Utils::addGithubMentionLinksToMarkdown(translatorsList));
+#endif
+    layout.addWidget(&content);
+    translatorsDialog.setLayout(&layout);
+    translatorsDialog.exec();
+}
+
 
 void DialogSettings::changeIcon(QToolButton *button)
 {
