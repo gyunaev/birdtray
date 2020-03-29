@@ -10,6 +10,6 @@ namespace DatabaseAccounts
         QString uri;
         qint64  id;
     };
-};
+}
 
 #endif // DATABASEACCOUNTS_H
