@@ -59,7 +59,6 @@ TEST(UtilsTest, formatGithubMarkdown_links) {
                               "markdown links with a textual representation.";
 #endif
         EXPECT_STREQ(qPrintable(Utils::formatGithubMarkdown(caseData[0])), expected) << message;
-        
     }
 }
 
