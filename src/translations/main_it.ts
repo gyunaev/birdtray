@@ -69,10 +69,6 @@ OpenSSL potrebbe non essere installato.</translation>
         <translation>Ripristina le impostazioni predefinite.</translation>
     </message>
     <message>
-        <source>Enable debugging output.</source>
-        <translation type="vanished">Abilita output di debug.</translation>
-    </message>
-    <message>
         <source>Toggle the Thunderbird window.</source>
         <translation>Attiva/disattiva la finestra di Thunderbird.</translation>
     </message>
@@ -91,71 +87,6 @@ OpenSSL potrebbe non essere installato.</translation>
     <message>
         <source>FILE</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseAccounts</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="vanished">Errore durante l&apos;apertura del database sqlite: %1</translation>
-    </message>
-    <message>
-        <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation type="vanished">Impossibile accedere al database. Se stai usando Thunderbird 68+, questo metodo non funziona più. Si prega di utilizzare il parser Mork.</translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseUnreadFixer</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="vanished">Errore durante l&apos;apertura del database sqlite: %1</translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation type="vanished">Impossibile interrogare il database.</translation>
-    </message>
-</context>
-<context>
-    <name>DialogAddEditAccount</name>
-    <message>
-        <source>Folder:</source>
-        <translation>Cartella:</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Sfoglia</translation>
-    </message>
-    <message>
-        <source>Notification text color:</source>
-        <translation>Colore testo notifica:</translation>
-    </message>
-    <message>
-        <source>Choose the MSF file</source>
-        <translation>Scegli il file MSF</translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation>Indice di posta (*.msf)</translation>
-    </message>
-    <message>
-        <source>Invalid MSF file</source>
-        <translation>File MSF non valido</translation>
-    </message>
-    <message>
-        <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation>È necessario specificare un file di indice Thunderbird valido e non vuoto.</translation>
-    </message>
-    <message>
-        <source>No account selected</source>
-        <translation>Nessun account selezionato</translation>
-    </message>
-    <message>
-        <source>You must select an account.</source>
-        <translation>Devi selezionare un account.</translation>
-    </message>
-    <message>
-        <source>Please assign the message number text color</source>
-        <translation>Si prega di assegnare il colore del testo del numero del messaggio</translation>
     </message>
 </context>
 <context>
@@ -275,32 +206,8 @@ OpenSSL potrebbe non essere installato.</translation>
         <translation>Nessuno</translation>
     </message>
     <message>
-        <source>Fix the unread message count</source>
-        <translation type="vanished">Correggi il conteggio dei messaggi non letti</translation>
-    </message>
-    <message>
-        <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation type="vanished">Utilizzare questo strumento se il contatore non letto è diverso da zero e non ci sono messaggi non letti nelle cartelle:</translation>
-    </message>
-    <message>
-        <source>Fix</source>
-        <translation type="vanished">Aggiusta</translation>
-    </message>
-    <message>
         <source>Monitoring</source>
         <translation>Monitoraggio</translation>
-    </message>
-    <message>
-        <source>Method to parse unread notifications:</source>
-        <translation type="vanished">Metodo per analizzare le notifiche non lette:</translation>
-    </message>
-    <message>
-        <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation type="vanished">Scegli il database dei profili Thunderbird da monitorare</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="vanished">Sfoglia</translation>
     </message>
     <message>
         <source>Accounts to monitor</source>
@@ -431,26 +338,6 @@ OpenSSL potrebbe non essere installato.</translation>
         <translation>Informazioni su</translation>
     </message>
     <message>
-        <source>using global search database (wont work with 68+)</source>
-        <translation type="vanished">utilizzando il database di ricerca globale (non funzionerà con 68+)</translation>
-    </message>
-    <message>
-        <source>using Mork index files (recommended)</source>
-        <translation type="vanished">utilizzando i file di indice di Mork (consigliato)</translation>
-    </message>
-    <message>
-        <source>Empty Thunderbird directory</source>
-        <translation type="vanished">Directory vuota di Thunderbird</translation>
-    </message>
-    <message>
-        <source>You must specify a Thunderbird directory.</source>
-        <translation type="vanished">È necessario specificare una directory Thunderbird.</translation>
-    </message>
-    <message>
-        <source>Choose the Thunderbird profile path</source>
-        <translation type="vanished">Scegli il percorso del profilo Thunderbird</translation>
-    </message>
-    <message>
         <source>Version check failed</source>
         <translation>Verifica della versione non riuscita</translation>
     </message>
@@ -461,60 +348,8 @@ OpenSSL potrebbe non essere installato.</translation>
 </translation>
     </message>
     <message>
-        <source>Fix the unread messages?</source>
-        <translation type="vanished">Risolvi i messaggi non letti?</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;Questa opzione dovrebbe essere utilizzata se non si hanno messaggi non letti, ma si vede ancora il nuovo contatore e-mail.&lt;br&gt;Per utilizzare questa opzione, è obbligatorio chiudere Thunderbird.&lt;br&gt;La riparazione può richiedere fino a cinque minuti.&lt;br&gt;&lt;br&gt;Confermi che Thunderbird è chiuso e vuoi procedere?&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Updating the database...</source>
-        <translation type="vanished">Aggiornamento del database...</translation>
-    </message>
-    <message>
-        <source>Database updated</source>
-        <translation type="vanished">Database aggiornato</translation>
-    </message>
-    <message>
-        <source>Successfully updated the database.</source>
-        <translation type="vanished">Database aggiornato correttamente.</translation>
-    </message>
-    <message>
-        <source>Error updating database</source>
-        <translation type="vanished">Errore durante l&apos;aggiornamento del database</translation>
-    </message>
-    <message>
-        <source>Error updating the database:
-%1</source>
-        <translation type="vanished">Errore durante l&apos;aggiornamento del database:
-%1</translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts</source>
-        <translation type="vanished">Errore durante il recupero degli account</translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts:
-%1</source>
-        <translation type="vanished">Errore durante il recupero degli account:
-%1</translation>
-    </message>
-    <message>
         <source>Checking...</source>
         <translation>Controllo...</translation>
-    </message>
-    <message>
-        <source>WARNING: Parser changed</source>
-        <translation type="vanished">Il parser è cambiato</translation>
-    </message>
-    <message>
-        <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
-
-Do you want to clear the accounts?</source>
-        <translation type="vanished">Hai modificato il parser, ma il formato dell&apos;account non è compatibile tra i parser e devi reimpostarli.
-
-Vuoi cancellare gli account?</translation>
     </message>
     <message>
         <source>Choose the new icon</source>
@@ -531,14 +366,6 @@ Vuoi cancellare gli account?</translation>
     <message>
         <source>Could not load the icon from this file.</source>
         <translation>Impossibile caricare l&apos;icona da questo file.</translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird directory</source>
-        <translation type="vanished">Directory Thunderbird non valida</translation>
-    </message>
-    <message>
-        <source>Valid Thunderbird directory must contain the file %1.</source>
-        <translation type="vanished">La directory Thunderbird valida deve contenere il file %1.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
@@ -736,10 +563,6 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Unexpected end of group.</source>
         <translation>Termine inaspettato del gruppo.</translation>
     </message>
-    <message>
-        <source>Error opening mork file.</source>
-        <translation type="vanished">Errore durante l&apos;apertura del file mork.</translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -877,28 +700,12 @@ Log file is written into file %2</source>
 <context>
     <name>UnreadMonitor</name>
     <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="vanished">Errore durante l&apos;apertura del database sqlite: %1</translation>
-    </message>
-    <message>
-        <source>Folder %1 was not found in database.</source>
-        <translation type="vanished">La cartella %1 non è stata trovata nel database.</translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation type="vanished">Impossibile interrogare il database.</translation>
-    </message>
-    <message>
         <source>Unable to watch %1 for changes.</source>
         <translation>Impossibile guardare %1 per le modifiche.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
         <translation>Impossibile leggere da %1.</translation>
-    </message>
-    <message>
-        <source>Cannot query database: %1</source>
-        <translation type="vanished">Impossibile eseguire una query sul database: %1</translation>
     </message>
 </context>
 <context>

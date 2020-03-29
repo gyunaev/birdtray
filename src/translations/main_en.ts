@@ -87,49 +87,6 @@ OpenSSL might not be installed.</source>
     </message>
 </context>
 <context>
-    <name>DialogAddEditAccount</name>
-    <message>
-        <source>Folder:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notification text color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose the MSF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid MSF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No account selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must select an account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please assign the message number text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
