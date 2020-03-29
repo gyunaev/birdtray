@@ -332,7 +332,7 @@ void DialogSettings::onTranslatorsDialog() {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     content.setMarkdown(Utils::formatGithubMarkdown(translatorsList));
 #else
-    content.setText(Utils::addGithubMentionLinksToMarkdown(translatorsList));
+    content.setText(Utils::formatGithubMarkdown(translatorsList));
 #endif
     layout.addWidget(&content);
     translatorsDialog.setLayout(&layout);
