@@ -70,7 +70,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Enable debugging output.</source>
-        <translation>Aktiviert Debugging-Ausgaben.</translation>
+        <translation type="vanished">Aktiviert Debugging-Ausgaben.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
@@ -83,6 +83,14 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>Hide the Thunderbird window.</source>
         <translation>Das Thunderbird-Fenster ausblenden.</translation>
+    </message>
+    <message>
+        <source>Write log to a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FILE</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -760,6 +768,10 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
 %2</source>
         <translation>Die Einstellungen konnten nicht in %1 gespeichert werden:
 %2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

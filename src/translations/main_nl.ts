@@ -70,7 +70,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Enable debugging output.</source>
-        <translation>Schakel foutopsporing in.</translation>
+        <translation type="vanished">Schakel foutopsporing in.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
@@ -83,6 +83,14 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>Hide the Thunderbird window.</source>
         <translation>Verberg het Thunderbird-venster.</translation>
+    </message>
+    <message>
+        <source>Write log to a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FILE</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -799,6 +807,10 @@ Log file is written into file %2</source>
     <message>
         <source>Could not save the settings into file %1:
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open log file %s: %s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

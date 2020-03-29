@@ -70,7 +70,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Enable debugging output.</source>
-        <translation>Abilita output di debug.</translation>
+        <translation type="vanished">Abilita output di debug.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
@@ -83,6 +83,14 @@ OpenSSL potrebbe non essere installato.</translation>
     <message>
         <source>Hide the Thunderbird window.</source>
         <translation>Nascondi la finestra di Thunderbird.</translation>
+    </message>
+    <message>
+        <source>Write log to a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FILE</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -756,6 +764,10 @@ Log file is written into file %2</source>
     <message>
         <source>Could not save the settings into file %1:
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open log file %s: %s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
