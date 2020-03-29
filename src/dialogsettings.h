@@ -36,8 +36,11 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          */
         void    onCheckUpdateFinished(bool foundUpdate, const QString &errorString);
 
-        // Tab activation (to refresh accounts)
-        // Calls the account query running in a DatabaseAccounts thread
+        /**
+         * Called when the currently viewed tab changes
+         *
+         * @param tabIndex The index of the tab that is now displayed.
+         */
         void    activateTab(int tabIndex );
 
         // Account buttons

@@ -128,7 +128,7 @@ class Settings
         bool    mNewEmailMenuEnabled;
         QList< Setting_NewEmail >   mNewEmailData;
 
-        // Maps the folder URI or full path (for Mork) to the notification color.
+        // Maps the folder path to the notification color.
         // The original order of strings is stored in mFolderNotificationList (to show in UI)
         QMap< QString, QColor >   mFolderNotificationColors;
         QStringList               mFolderNotificationList;

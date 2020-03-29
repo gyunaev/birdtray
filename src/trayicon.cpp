@@ -1,10 +1,8 @@
 #include <QMenu>
 #include <QTimer>
-#include <QPixmap>
 #include <QPainter>
 #include <QProcess>
 #include <QMessageBox>
-#include <QFontMetrics>
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"

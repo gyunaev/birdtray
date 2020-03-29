@@ -3,12 +3,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QFileInfo>
 #include <QSaveFile>
 #include <QtCore/QStandardPaths>
 #include <QCoreApplication>
 #include <QMessageBox>
-#include <QScopedPointer>
 
 #include "settings.h"
 #include "utils.h"

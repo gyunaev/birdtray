@@ -1,8 +1,6 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QMessageBox>
-#include <QFile>
-#include <QDir>
 #include <QtWidgets/QListView>
 #include <QtCore/QStandardPaths>
 

@@ -4,7 +4,6 @@
 #include "unreadmonitor.h"
 #include "morkparser.h"
 #include "trayicon.h"
-#include "utils.h"
 #include "log.h"
 #include "birdtrayapp.h"
 
@@ -173,11 +172,6 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
     int unread = static_cast<int>(parser.getNumUnreadMessages());
     Log::debug("Unread counter for %s: %d", qPrintable( path ), unread );
     return unread;
-}
-
-void UnreadMonitor::setForcedUpdateTimer()
-{
-
 }
 
 void UnreadMonitor::setWarning(const QString &message, const QString &path) {
