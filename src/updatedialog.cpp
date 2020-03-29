@@ -31,7 +31,6 @@ UpdateDialog::~UpdateDialog() {
 void UpdateDialog::show(const QString &newVersion, const QString &changelog,
                         qulonglong estimatedSize) {
     ui->newVersionLabel->setText(newVersion);
-    ui->newVersionLabel->setText(newVersion);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     ui->changelogLabel->setMarkdown(Utils::formatGithubMarkdown(changelog));
 #else
