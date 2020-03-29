@@ -268,3 +268,15 @@ QString Utils::getMailAccountName(const QFileInfo &morkFile) {
     return name;
 }
 
+QString Utils::formatGithubMarkdown(const QString& markdown) {
+    QString input = markdown;
+    static QRegularExpression githubMentionRegex(R"(((?<![^\s\n]))@(\S+))");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    return input.replace(githubMentionRegex, R"(\1[@\2](https://github.com/\2))");
+#else
+    static QRegularExpression markdownLinksRegex(R"(\[(.+?)\]\((\S+?)\))");
+    return input.replace(githubMentionRegex, R"(@\1\2 (https://github.com/\2))")
+                .replace(markdownLinksRegex, R"(\1 (\2))");
+#endif
+}
+
