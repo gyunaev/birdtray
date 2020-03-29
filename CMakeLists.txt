@@ -185,24 +185,19 @@ if(WIN32)
 
     # Find ssl libraries
     find_package(OpenSSL QUIET)
-    message("OPENSSL_SSL_LIBRARY: ${OPENSSL_SSL_LIBRARY}")
     get_filename_component(SSL_PATH ${OPENSSL_SSL_LIBRARY} DIRECTORY)
     if(SSL_PATH)
         STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
     else()
         set(SSL_PATH "C:\\\\Program Files\\\\OpenSSL")
     endif()
-    message("SSL_PATH: ${SSL_PATH}")
 
     # Create installer
-    STRING(REGEX REPLACE "/" "\\\\\\\\" SQLITE3_PATH ${SQLITE3_LIBRARY})
-    STRING(REGEX REPLACE ".lib$" ".dll" SQLITE3_PATH ${SQLITE3_PATH})
     install(CODE "if(NOT POLICY CMP0087)
             message(FATAL_ERROR \"The install target requires cmake 3.14 or newer\")
         endif()
         execute_process(
-        COMMAND cmd /C buildInstaller.bat
-            \"$<TARGET_FILE:birdtray>\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" ${INSTALL_ARG}
+        COMMAND cmd /C buildInstaller.bat \"$<TARGET_FILE:birdtray>\" \"${SSL_PATH}\" ${INSTALL_ARG}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer
         RESULT_VARIABLE INSTALL_RESULT)
         if(NOT \${INSTALL_RESULT} EQUAL \"0\")
