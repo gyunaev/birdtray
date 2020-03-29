@@ -112,11 +112,11 @@ void Settings::save()
     // Store the account map
     QJsonArray accounts;
 
-    for ( QString uri : mFolderNotificationList )
+    for ( const QString& path : mFolderNotificationList )
     {
         QJsonObject ac;
-        ac[ "color" ] = mFolderNotificationColors[uri].name();
-        ac[ "uri" ] = uri;
+        ac[ "color" ] = mFolderNotificationColors[path].name();
+        ac[ "uri" ] = path;
 
         accounts.push_back( ac );
     }
@@ -247,16 +247,16 @@ void Settings::fromJSON( const QJsonObject& settings )
     // Convert the map into settings
     if ( settings["accounts"].isArray() )
     {
-        for ( const QJsonValue& a : settings["accounts"].toArray() )
+        for ( const QJsonValueRef& a : settings["accounts"].toArray() )
         {
-            QString uri = a.toObject().value("uri").toString();
+            QString path = a.toObject().value("uri").toString();
             QString color = a.toObject().value("color").toString();
 
-            if ( uri.isEmpty() )
+            if ( path.isEmpty() )
                 continue;
 
-            mFolderNotificationColors[ uri ] = QColor( color );
-            mFolderNotificationList.push_back( uri );
+            mFolderNotificationColors[ path ] = QColor( color );
+            mFolderNotificationList.push_back( path );
         }
     }
 
@@ -267,7 +267,7 @@ void Settings::fromJSON( const QJsonObject& settings )
 
     if ( settings["newemails"].isArray() )
     {
-        for ( const QJsonValue& a : settings["newemails"].toArray() )
+        for ( const QJsonValueRef& a : settings["newemails"].toArray() )
             mNewEmailData.push_back( Setting_NewEmail::fromJSON( a.toObject() ) );
     }
 

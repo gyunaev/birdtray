@@ -13,9 +13,9 @@ ModelAccountTree::ModelAccountTree(QObject* parent, QTreeView* treeView)
         : QAbstractItemModel(parent), QStyledItemDelegate(parent) {
     Settings* settings = BirdtrayApp::get()->getSettings();
     // Get the current settings in proper(stored) order
-    for (const QString& uri : settings->mFolderNotificationList) {
-        mAccounts.push_back(uri);
-        mColors.push_back(settings->mFolderNotificationColors[uri]);
+    for (const QString& path : settings->mFolderNotificationList) {
+        mAccounts.push_back(path);
+        mColors.push_back(settings->mFolderNotificationColors[path]);
     }
     treeView->setModel(this);
     treeView->setItemDelegateForColumn(1, this);
@@ -105,39 +105,39 @@ void ModelAccountTree::paint(QPainter* painter, const QStyleOptionViewItem &opti
     }
 }
 
-void ModelAccountTree::addAccount(const QString &uri, const QColor &color)
+void ModelAccountTree::addAccount(const QString &path, const QColor &color)
 {
-    if (uri.isEmpty()) {
+    if (path.isEmpty()) {
         return;
     }
-    int existingIndex = mAccounts.indexOf(uri);
+    int existingIndex = mAccounts.indexOf(path);
     if (existingIndex != -1) {
-        editAccount(createIndex(existingIndex, 0), uri, color);
+        editAccount(createIndex(existingIndex, 0), path, color);
         return;
     }
     // Only this line changed
     beginInsertRows( QModelIndex(), mColors.size(), mColors.size() + 1 );
 
-    mAccounts.push_back( uri );
+    mAccounts.push_back( path );
     mColors.push_back( color );
 
     endInsertRows();
 }
 
-void ModelAccountTree::editAccount(const QModelIndex &idx, const QString &uri, const QColor &color)
+void ModelAccountTree::editAccount(const QModelIndex &idx, const QString &path, const QColor &color)
 {
-    if (uri.isEmpty()) {
+    if (path.isEmpty()) {
         return;
     }
-    mAccounts[ idx.row() ] = uri;
+    mAccounts[ idx.row() ] = path;
     mColors[ idx.row() ] = color;
 
     emit dataChanged( createIndex( idx.row(), 0 ),  createIndex( idx.row(), 1 ) );
 }
 
-void ModelAccountTree::getAccount(const QModelIndex &idx, QString &uri, QColor &color)
+void ModelAccountTree::getAccount(const QModelIndex &idx, QString &path, QColor &color)
 {
-    uri = mAccounts[ idx.row() ];
+    path = mAccounts[ idx.row() ];
     color = mColors[ idx.row() ];
 }
 

@@ -242,12 +242,12 @@ void DialogSettings::accountEditIndex(const QModelIndex &index)
     if (!index.isValid()) {
         return;
     }
-    QString uri;
+    QString path;
     QColor color;
-    mAccountModel->getAccount(index, uri, color);
+    mAccountModel->getAccount(index, path, color);
     color = QColorDialog::getColor(color, this);
     if (color.isValid()) {
-        mAccountModel->editAccount(index, uri, color);
+        mAccountModel->editAccount(index, path, color);
     }
 }
 
