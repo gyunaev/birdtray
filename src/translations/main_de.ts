@@ -82,18 +82,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Write log to a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreibe Birdtrays Protokoll in eine Datei.</translation>
     </message>
     <message>
         <source>FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>datei</translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
-        <translation>&quot;Neue E-Mail&quot; Eintrag</translation>
+        <translation>&quot;Neue E-Mail&quot;-Eintrag</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -610,7 +610,7 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
     </message>
     <message>
         <source>Failed to open log file %s: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
     </message>
 </context>
 <context>
