@@ -449,19 +449,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Translations are powered by the community:</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Übersetzungen werden von Freiwilligen bereitgestellt:</translation>
     </message>
     <message>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Übersetzer</translation>
     </message>
     <message>
         <source>Active maintainers</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktive Übersetzer</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitwirkende</translation>
     </message>
 </context>
 <context>
