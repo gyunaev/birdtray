@@ -318,7 +318,7 @@ inline void MorkParser::parseComment()
 //	=============================================================
 //	MorkParser::parseCell
 
-void MorkParser::parseCell(bool isInCutMode)
+void MorkParser::parseCell(QList<int>* parsedIds)
 {
     //bool bColumnOid = false;
     bool bValueOid = false;
@@ -413,7 +413,12 @@ void MorkParser::parseCell(bool isInCutMode)
 
     // Apply column and text
     int ColumnId = Column.toInt( 0, 16 );
-
+    if (parsedIds != nullptr) {
+        if (parsedIds->contains(ColumnId)) {
+            return;
+        }
+        parsedIds->append(ColumnId);
+    }
     if ( NPRows != nowParsing_ )
     {
         // Dicts
@@ -431,7 +436,7 @@ void MorkParser::parseCell(bool isInCutMode)
     }
     else
     {
-        if (!Text.isEmpty() && !(isInCutMode && (*currentCells_).contains(ColumnId))) {
+        if (!Text.isEmpty()) {
             // Rows
             int ValueId = Text.toInt( 0, 16 );
 
@@ -596,7 +601,8 @@ void MorkParser::parseRow( int TableId, int TableScope )
     if (cutMode) {
         (*currentCells_).clear();
     }
-
+    
+    QList<int> parsedCellIds;
     // Parse the row
     while ( cur != ']' && cur )
     {
@@ -605,7 +611,7 @@ void MorkParser::parseRow( int TableId, int TableScope )
             switch ( cur )
             {
             case '(':
-                parseCell(cutMode);
+                parseCell(&parsedCellIds);
                 break;
             case '[':
                 parseMeta( ']' );
