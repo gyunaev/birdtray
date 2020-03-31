@@ -82,18 +82,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Write log to a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreibe Birdtrays Protokoll in eine Datei.</translation>
     </message>
     <message>
         <source>FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>datei</translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
-        <translation>Neue-E-Mail Eintrag</translation>
+        <translation>&quot;Neue E-Mail&quot;-Eintrag</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -128,7 +128,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <name>DialogLogOutput</name>
     <message>
         <source>Debug log viewer</source>
-        <translation>Fehlerprotokollbetrachter</translation>
+        <translation>Protokollanzeige</translation>
     </message>
 </context>
 <context>
@@ -144,10 +144,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>New Mail Notification</source>
         <translation>Benachrichtigungen über neue E-Mails</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, wird die Anzahl der ungelesenen E-Mails im Birdtray-Symbol angezeigt.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Wenn die Option deaktiviert ist, wird keine Anzahl angezeigt. Sie werden dann, abhängig von Ihren Einstellungen, nur noch durch das blinkende oder geänderte Symbol auf neue E-Mails aufmerksam gemacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Show unread count</source>
@@ -226,10 +222,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion »Ungelesene E-Mails ignorieren« hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende Emails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion »Ignorieren«, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Wenn die Anzahl der ungelesenen E-Mails weniger wird als die ursprünglich ignorierte Anzahl wird die Anzahl ignorierter E-Mails auf null zurückgesetzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Allow ignoring the current unread email counter</source>
         <translation>Das Ignorieren der momentanen ungelesenen E-Mails erlauben</translation>
     </message>
@@ -259,7 +251,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>and hide it</source>
-        <translation>und es ausblenden</translation>
+        <translation>und ausblenden</translation>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
@@ -267,7 +259,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation>Das Thunderbird Fenster ausblenden/anzeigen, beim Klick auf das Systemleistensymbol</translation>
+        <translation>Das Thunderbird Fenster beim Klick auf das Systemleistensymbol ausblenden/anzeigen</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
@@ -287,7 +279,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Enable New Email submenu</source>
-        <translation>Das Neue-E-Mail-Untermenü aktvieren</translation>
+        <translation>Das Untermenü &quot;Neue E-Mail&quot; aktvieren</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -315,15 +307,15 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation>Die Transparenz des Taskleistensymbols festlegen auf</translation>
+        <translation>Die Transparenz des Systemleistensymbols festlegen auf</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts</source>
-        <translation>Bei Birdtray-Start auf Aktualisierungen prüfen</translation>
+        <translation>Beim Start von Birdtray nach Aktualisierungen suchen</translation>
     </message>
     <message>
         <source>Check for new updates on startup</source>
-        <translation>Beim Systemstart auf Aktualisierungen prüfen</translation>
+        <translation>Beim Start auf Aktualisierungen prüfen</translation>
     </message>
     <message>
         <source>Check for a new Birdtray version</source>
@@ -349,7 +341,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Checking...</source>
-        <translation>Überprüfung läuft …</translation>
+        <translation>Überprüfung läuft…</translation>
     </message>
     <message>
         <source>Choose the new icon</source>
@@ -397,7 +389,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Liberation Sans&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; font-weight:600;&quot;&gt;Birdtray-Version [VERSION], kompiliert am [DATE].&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Urheberrecht (C) 2018 bei George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Urheberrecht (C) 2018 von George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Birdtray ist eine FREIE SOFTWARE, welche unter der General Public License v3 lizenziert ist. Sie können Birtray also für jeden Zweck, auch für kommerzielle Zwecke, verwenden, ohne etwas zu bezahlen.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -413,15 +405,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translation>Alle ungelesenen E-Mails ignorieren, die beim Starten von Birdtray bereits vorhanden sind. Nur neue E-Mail werden bei der Berechnung der Anzahl ungelesener E-Mail beachtet.</translation>
+        <translation>Alle ungelesenen E-Mails ignorieren, die beim Starten von Birdtray bereits vorhanden sind. Nur neue E-Mails werden bei der Berechnung der Anzahl ungelesener E-Mails beachtet.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translation>beim Eingang neuer Mails,</translation>
+        <translation>beim Eingang neuer Mails.</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translation>ausblenden, wenn es keine neuen Mails gibt.</translation>
+        <translation>Ausblenden, wenn es keine neuen Mails gibt.</translation>
     </message>
     <message>
         <source>Choose one or more MSF files</source>
@@ -446,6 +438,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source> seconds</source>
         <translation> Sekunden</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, wird die Anzahl der ungelesenen E-Mails im Birdtray-Symbol angezeigt.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Option deaktiviert ist, wird keine Anzahl angezeigt. Sie werden dann, abhängig von Ihren Einstellungen, nur noch durch das blinkende oder geänderte Symbol auf neue E-Mails aufmerksam gemacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion &quot;Ungelesene E-Mails ignorieren&quot; hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende E-Mails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion &quot;Ignorieren&quot;, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Anzahl der ungelesenen E-Mails weniger wird als die ursprünglich ignorierte Anzahl, wird die Anzahl ignorierter E-Mails auf null zurückgesetzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
@@ -492,7 +492,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
-        <translation>Wenn mehrere Ordner überwacht werden, wird die Standard-Benachrichtigungsfarbe benutzt, um die Summe aller ungelesenen E-Mail anzuzeigen.</translation>
+        <translation>Wenn mehrere Ordner überwacht werden, wird die Standard-Benachrichtigungsfarbe benutzt, um die Summe aller ungelesenen E-Mails anzuzeigen.</translation>
     </message>
     <message>
         <source>Choose the Thunderbird profiles path</source>
@@ -538,7 +538,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Die Leiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
+        <translation>Die Systemleiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
     </message>
 </context>
 <context>
@@ -577,7 +577,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Cannot load default system tray icon.</source>
-        <translation>Das Standardleistensymbol konnte nicht geladen werden.</translation>
+        <translation>Das Standard-Systemleistensymbol konnte nicht geladen werden.</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
 Log file is written into file %2</source>
         <translation>Schwerwiegender Fehler: %1
 
-Protokolldatei wurde in Datei »%2« geschrieben</translation>
+Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
     </message>
     <message>
         <source>Could not save the settings</source>
@@ -610,7 +610,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Failed to open log file %s: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
     </message>
 </context>
 <context>
@@ -677,7 +677,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation>Einstellungen …</translation>
+        <translation>Einstellungen…</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -709,7 +709,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Warning: %1</source>
-        <translation>Achtung: %1</translation>
+        <translation>Warnung: %1</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
@@ -774,7 +774,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Downloading Birdtray update...</source>
-        <translation>Die Birdtray-Aktualisierung wird heruntergeladen …</translation>
+        <translation>Die Birdtray-Aktualisierung wird heruntergeladen…</translation>
     </message>
     <message>
         <source>Background</source>
@@ -782,7 +782,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation>Die Birdtray-Installationsdatei wird heruntergeladen …</translation>
+        <translation>Die Birdtray-Installationsdatei wird heruntergeladen…</translation>
     </message>
     <message>
         <source>Update and Restart</source>
@@ -794,7 +794,7 @@ Protokolldatei wurde in Datei »%2« geschrieben</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Die Birdtray-Installationsdatei wird heruntergeladen … (%1 Mb / %2 Mb).</translation>
+        <translation>Die Birdtray-Installationsdatei wird heruntergeladen… (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
