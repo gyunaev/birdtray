@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
         arch: [x86, x64]
-        qt_version: [5.6, 5.9, 5.13.2]
+        qt_version: [5.6, 5.9, 5.14.1]
         include:
           - os: windows-latest
             arch: x86

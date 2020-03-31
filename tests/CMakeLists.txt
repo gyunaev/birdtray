@@ -9,6 +9,7 @@ endif()
 
 set(TESTS
         src/test_morkparser.cpp
+        src/test_utils.cpp
         )
 
 add_executable(tests src/TestResources.cpp src/TestResources.h ${TESTS})
