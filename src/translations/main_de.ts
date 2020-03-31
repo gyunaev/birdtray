@@ -447,6 +447,22 @@ p, li { white-space: pre-wrap; }
         <source> seconds</source>
         <translation> Sekunden</translation>
     </message>
+    <message>
+        <source>Translations are powered by the community:</source>
+        <translation>Die Übersetzungen werden von Freiwilligen bereitgestellt:</translation>
+    </message>
+    <message>
+        <source>Translators</source>
+        <translation>Übersetzer</translation>
+    </message>
+    <message>
+        <source>Active maintainers</source>
+        <translation>Aktive Übersetzer</translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation>Mitwirkende</translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
