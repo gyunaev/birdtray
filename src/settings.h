@@ -54,9 +54,6 @@ class Settings
         // Opacity level for the tray icon when unread email is present (0.0-1.0)
         double          mUnreadOpacityLevel;
 
-        // Path to Thunderbird folder
-        QString mThunderbirdFolderPath;
-
         // The command to start Thunderbird. The first element is the executable to launch.
         QStringList mThunderbirdCmdLine;
 
@@ -89,9 +86,6 @@ class Settings
 
         // Whether to monitor Thunderbird running
         bool    mMonitorThunderbirdWindow;
-
-        // Whether to use Mork parser for new mail scanning; if false, sqlite is used
-        bool    mUseMorkParser;
 
         // Whether to use alpha transition when blinking
         bool    mBlinkingUseAlphaTransition;
@@ -134,7 +128,7 @@ class Settings
         bool    mNewEmailMenuEnabled;
         QList< Setting_NewEmail >   mNewEmailData;
 
-        // Maps the folder URI or full path (for Mork) to the notification color.
+        // Maps the folder path to the notification color.
         // The original order of strings is stored in mFolderNotificationList (to show in UI)
         QMap< QString, QColor >   mFolderNotificationColors;
         QStringList               mFolderNotificationList;

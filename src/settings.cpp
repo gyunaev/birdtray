@@ -3,12 +3,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QFileInfo>
 #include <QSaveFile>
 #include <QtCore/QStandardPaths>
 #include <QCoreApplication>
 #include <QMessageBox>
-#include <QScopedPointer>
 
 #include "settings.h"
 #include "utils.h"
@@ -59,7 +57,6 @@ Settings::Settings()
     mThunderbirdWindowMatch = " Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
-    mUseMorkParser = true;
     mWatchFileTimeout = 150;
     mBlinkingUseAlphaTransition = false;
     mUpdateOnStartup = false;
@@ -82,7 +79,6 @@ void Settings::save()
     out[ "common/defaultcolor" ] = mNotificationDefaultColor.name();
     out[ BORDER_COLOR_KEY ] = mNotificationBorderColor.name();
     out[ BORDER_WIDTH_KEY ] = static_cast<int>( mNotificationBorderWidth );
-    out[ "common/profilepath" ] = mThunderbirdFolderPath;
     out[ "common/blinkspeed" ] = static_cast<int>( mBlinkSpeed );
     out[ "common/showhidethunderbird" ] = mShowHideThunderbird;
     out[ "common/launchthunderbird" ] = mLaunchThunderbird;
@@ -101,7 +97,6 @@ void Settings::save()
 
     out[ "advanced/tbcmdline" ] = QJsonArray::fromStringList( mThunderbirdCmdLine );
     out[ "advanced/tbwindowmatch" ] = mThunderbirdWindowMatch;
-    out[ "advanced/unreadmorkparser" ] = mUseMorkParser;
     out[ "advanced/notificationfontminsize" ] = static_cast<int>( mNotificationMinimumFontSize );
     out[ "advanced/notificationfontmaxsize" ] = static_cast<int>( mNotificationMaximumFontSize );
     out[ "advanced/watchfiletimeout" ] = static_cast<int>( mWatchFileTimeout );
@@ -115,11 +110,11 @@ void Settings::save()
     // Store the account map
     QJsonArray accounts;
 
-    for ( QString uri : mFolderNotificationList )
+    for ( const QString& path : mFolderNotificationList )
     {
         QJsonObject ac;
-        ac[ "color" ] = mFolderNotificationColors[uri].name();
-        ac[ "uri" ] = uri;
+        ac[ "color" ] = mFolderNotificationColors[path].name();
+        ac[ "uri" ] = path;
 
         accounts.push_back( ac );
     }
@@ -214,7 +209,6 @@ void Settings::fromJSON( const QJsonObject& settings )
     if ( settings.contains( "common/defaultcolor") )
         mNotificationBorderWidth = settings.value( BORDER_WIDTH_KEY ).toInt();
 
-    mThunderbirdFolderPath = settings.value("common/profilepath" ).toString();
     mBlinkSpeed = settings.value("common/blinkspeed").toInt();
     mShowHideThunderbird = settings.value("common/showhidethunderbird").toBool();
     mLaunchThunderbird = settings.value("common/launchthunderbird").toBool();
@@ -234,7 +228,6 @@ void Settings::fromJSON( const QJsonObject& settings )
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch").toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize").toInt();
     mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize").toInt();
-    mUseMorkParser = settings.value("advanced/unreadmorkparser").toBool();
     mWatchFileTimeout = settings.value("advanced/watchfiletimeout").toInt();
     mBlinkingUseAlphaTransition = settings.value("advanced/blinkingusealpha").toBool();
     mUnreadOpacityLevel = settings.value("advanced/unreadopacitylevel").toDouble();
@@ -252,16 +245,16 @@ void Settings::fromJSON( const QJsonObject& settings )
     // Convert the map into settings
     if ( settings["accounts"].isArray() )
     {
-        for ( const QJsonValue& a : settings["accounts"].toArray() )
+        for ( const QJsonValueRef& a : settings["accounts"].toArray() )
         {
-            QString uri = a.toObject().value("uri").toString();
+            QString path = a.toObject().value("uri").toString();
             QString color = a.toObject().value("color").toString();
 
-            if ( uri.isEmpty() )
+            if ( path.isEmpty() )
                 continue;
 
-            mFolderNotificationColors[ uri ] = QColor( color );
-            mFolderNotificationList.push_back( uri );
+            mFolderNotificationColors[ path ] = QColor( color );
+            mFolderNotificationList.push_back( path );
         }
     }
 
@@ -272,7 +265,7 @@ void Settings::fromJSON( const QJsonObject& settings )
 
     if ( settings["newemails"].isArray() )
     {
-        for ( const QJsonValue& a : settings["newemails"].toArray() )
+        for ( const QJsonValueRef& a : settings["newemails"].toArray() )
             mNewEmailData.push_back( Setting_NewEmail::fromJSON( a.toObject() ) );
     }
 
@@ -302,8 +295,6 @@ void Settings::fromQSettings( QSettings * psettings )
     mNotificationBorderWidth = settings.value( // Disable border on existing installations
             BORDER_WIDTH_KEY, settings.value("common/defaultcolor").isNull() ?
                               0 : mNotificationBorderWidth).toUInt();
-    mThunderbirdFolderPath = settings.value(
-            "common/profilepath", mThunderbirdFolderPath ).toString();
     mBlinkSpeed = settings.value("common/blinkspeed", mBlinkSpeed ).toInt();
     mShowHideThunderbird = settings.value(
             "common/showhidethunderbird", mShowHideThunderbird ).toBool();
@@ -341,7 +332,6 @@ void Settings::fromQSettings( QSettings * psettings )
             "advanced/notificationfontminsize", mNotificationMinimumFontSize ).toInt();
     mNotificationMaximumFontSize = settings.value(
             "advanced/notificationfontmaxsize", mNotificationMaximumFontSize ).toInt();
-    mUseMorkParser = settings.value("advanced/unreadmorkparser", mUseMorkParser ).toBool();
     mWatchFileTimeout = settings.value("advanced/watchfiletimeout", mWatchFileTimeout ).toUInt();
     mBlinkingUseAlphaTransition = settings.value(
             "advanced/blinkingusealpha", mBlinkingUseAlphaTransition ).toBool();

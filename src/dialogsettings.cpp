@@ -1,17 +1,12 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QMessageBox>
-#include <QFile>
-#include <QDir>
 #include <QtWidgets/QListView>
 #include <QtCore/QStandardPaths>
 
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
 #include "modelnewemails.h"
-#include "databaseaccounts.h"
-#include "dialogaddeditaccount.h"
-#include "databaseunreadfixer.h"
 #include "utils.h"
 #include "autoupdater.h"
 #include "mailaccountdialog.h"
@@ -22,7 +17,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     : QDialog(parent), Ui::DialogSettings()
 {
     setupUi(this);
-    mProgressFixer = 0;
     BirdtrayApp* app = BirdtrayApp::get();
     Settings* settings = app->getSettings();
 
@@ -31,8 +25,6 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     connect( buttonBox, &QDialogButtonBox::accepted, this, &DialogSettings::accept );
     connect( buttonBox, &QDialogButtonBox::rejected, this, &DialogSettings::reject );
-    connect( btnBrowse, &QPushButton::clicked, this, &DialogSettings::browsePath );
-    connect( btnFixUnreadCount, &QPushButton::clicked, this, &DialogSettings::fixDatabaseUnreads );
     connect( tabWidget, &QTabWidget::currentChanged, this, &DialogSettings::activateTab );
 
     connect( btnNotificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
@@ -57,7 +49,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnShowLogWindow, &QPushButton::clicked, this, &DialogSettings::onShowLogWindow );
 
     // Setup parameters
-    leProfilePath->setText( QDir::toNativeSeparators(settings->mThunderbirdFolderPath) );
     btnNotificationColor->setColor( settings->mNotificationDefaultColor );
     borderColorButton->setColor(settings->mNotificationBorderColor);
     borderWidthSlider->setValue(static_cast<int>(settings->mNotificationBorderWidth) * 2);
@@ -110,10 +101,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     if ( settings->mLaunchThunderbird )
         boxStopThunderbirdOnExit->setChecked( settings->mExitThunderbirdWhenQuit );
 
-    // Prepare the error palette
-    mPaletteError = mPaletteOk = leProfilePath->palette();
-    mPaletteError.setColor(QPalette::Text, Qt::red);
-
     // Accounts tab
     mAccountModel = new ModelAccountTree(this, treeAccounts);
     treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -140,44 +127,12 @@ DialogSettings::DialogSettings( QWidget *parent)
     }
     else
         boxNotificationIconUnread->setChecked( false );
-
-    // Parsers
-    boxParserSelection->addItem( tr("using global search database (wont work with 68+)"), false );
-    boxParserSelection->addItem( tr("using Mork index files (recommended)"), true );
-
-    // Should not be called before boxParserSelection is set up
-    connect( leProfilePath, &QLineEdit::textChanged, this, &DialogSettings::profilePathChanged );
-    connect( boxParserSelection, SIGNAL(currentIndexChanged(int)), this, SLOT(unreadParserChanged(int)) );
-
-    if ( settings->mUseMorkParser )
-        boxParserSelection->setCurrentIndex( 1 );
-    else
-        boxParserSelection->setCurrentIndex( 0 );
-
-    profilePathChanged();
 }
 
 void DialogSettings::accept()
 {
-    // Validate the profile path if we use database parser
-    if ( !isMorkParserSelected() )
-    {
-        QString profilePath = leProfilePath->text();
-
-        if ( profilePath.isEmpty() )
-        {
-            QMessageBox::critical(nullptr, tr("Empty Thunderbird directory"),
-                                  tr("You must specify a Thunderbird directory."));
-            return;
-        }
-        if (!reportIfProfilePathValid(profilePath)) {
-            return;
-        }
-    }
-    
     BirdtrayApp* app = BirdtrayApp::get();
     Settings* settings = app->getSettings();
-    settings->mThunderbirdFolderPath = leProfilePath->text();
     settings->mNotificationDefaultColor = btnNotificationColor->color();
     settings->mNotificationBorderColor = borderColorButton->color();
     // A width of 100 is way to much, nobody will want to go beyond 50.
@@ -201,7 +156,6 @@ void DialogSettings::accept()
     settings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
     settings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
     settings->mUpdateOnStartup = checkUpdateOnStartup->isChecked();
-    settings->mUseMorkParser = isMorkParserSelected();
     settings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
     settings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
     settings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
@@ -226,44 +180,6 @@ void DialogSettings::accept()
     QDialog::accept();
 }
 
-void DialogSettings::browsePath()
-{
-    QString path = leProfilePath->text();
-    if (path.isNull() || path.isEmpty()) {
-        path = Utils::expandPath(THUNDERBIRD_PROFILES_PATH);
-    }
-    QString directory = QFileDialog::getExistingDirectory(
-            nullptr, tr("Choose the Thunderbird profile path"),
-            path, QFileDialog::ShowDirsOnly );
-
-    if (directory.isEmpty() || !reportIfProfilePathValid(directory)) {
-        return;
-    }
-
-    leProfilePath->setText( QDir::toNativeSeparators(directory) );
-}
-
-
-void DialogSettings::profilePathChanged()
-{
-    bool valid = isProfilePathValid(leProfilePath->text());
-
-    if ( !isMorkParserSelected() )
-    {
-        groupAccounts->setEnabled( valid );
-        btnFixUnreadCount->setEnabled( valid );
-    }
-
-    if ( valid ) {
-        leProfilePath->setPalette( mPaletteOk );
-        updateAccountList();
-    } else {
-        leProfilePath->setPalette(mPaletteError);
-        mAccounts.clear();
-    }
-
-}
-
 void DialogSettings::onCheckUpdateFinished(bool foundUpdate, const QString &errorString) {
     if (checkUpdateButton->isEnabled()) {
         return; // We received an error that was not initiated by us. Ignore it.
@@ -280,78 +196,11 @@ void DialogSettings::onCheckUpdateFinished(bool foundUpdate, const QString &erro
     }
 }
 
-void DialogSettings::fixDatabaseUnreads()
-{
-    if ( QMessageBox::question( 0,
-                           tr("Fix the unread messages?"),
-                           tr("<html>This option should be used if you have no unread messages, but still see the new email counter.<br>"
-                              "To use this option, it is mandatory to shut down Thunderbird.<br>"
-                              "Fixing may take up to five minutes.<br><br>"
-                              "Please confirm that Thunderbird is shut down, and you want to proceed?</html>") ) ==  QMessageBox::No )
-        return;
-
-    mProgressFixer = new QProgressDialog();
-    mProgressFixer->setLabelText( tr("Updating the database...") );
-    mProgressFixer->setCancelButton( 0 );
-    mProgressFixer->setMinimum( 0 );
-    mProgressFixer->setMaximum( 100 );
-    mProgressFixer->setWindowModality(Qt::WindowModal);
-    mProgressFixer->show();
-
-    DatabaseUnreadFixer * fixer = new DatabaseUnreadFixer(
-            DatabaseAccounts::getDatabasePath(leProfilePath->text()));
-    connect( fixer, &DatabaseUnreadFixer::done, this, &DialogSettings::databaseUnreadsFixed );
-    connect( fixer, &DatabaseUnreadFixer::progress, this, &DialogSettings::databaseUnreadsUpdate );
-
-    fixer->start();
-}
-
-void DialogSettings::databaseUnreadsUpdate(int progresspercentage)
-{
-    mProgressFixer->setValue( progresspercentage );
-}
-
-void DialogSettings::databaseUnreadsFixed( QString errorMsg )
-{
-    Log::debug("Done updating the database, error: '%s'", qPrintable( errorMsg ) );
-
-    mProgressFixer->close();
-    delete mProgressFixer;
-    mProgressFixer = 0;
-
-    if (errorMsg.isEmpty()) {
-        QMessageBox::information(nullptr, tr("Database updated"),
-                                 tr("Successfully updated the database."));
-    } else {
-        QMessageBox::critical(nullptr, tr("Error updating database"),
-                              tr("Error updating the database:\n%1").arg(errorMsg));
-    }
-}
-
-void DialogSettings::accountsAvailable( QString errorMsg )
-{
-    if ( !errorMsg.isEmpty() )
-    {
-        QMessageBox::critical(nullptr, tr("Error retrieving accounts"),
-                              tr("Error retrieving accounts:\n%1").arg(errorMsg));
-        return;
-    }
-
-    DatabaseAccounts * dba = (DatabaseAccounts *) sender();
-    mAccounts = dba->accounts();
-}
-
 void DialogSettings::accountAdd()
 {
-    if (!isMorkParserSelected()) {
-        DialogAddEditAccount dlg(isMorkParserSelected());
-        dlg.setCurrent(mAccounts, "", btnNotificationColor->color());
-        if (dlg.exec() != QDialog::Accepted) {
-            return;
-        }
-        mAccountModel->addAccount(dlg.account(), dlg.color());
-    } else if (QGuiApplication::keyboardModifiers() & Qt::ShiftModifier &&
-               QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
+    if ( QGuiApplication::keyboardModifiers() & Qt::ShiftModifier &&
+               QGuiApplication::keyboardModifiers() & Qt::ControlModifier )
+    {
         QStringList files = QFileDialog::getOpenFileNames(
                 nullptr, tr("Choose one or more MSF files"), "", tr("Mail Index (*.msf)"));
         if (files.isEmpty()) {
@@ -360,7 +209,9 @@ void DialogSettings::accountAdd()
         for (const QString &file : files) {
             mAccountModel->addAccount(file, btnNotificationColor->color());
         }
-    } else {
+    }
+    else
+    {
         MailAccountDialog accountDialog(this, btnNotificationColor->color());
         if (accountDialog.exec() != QDialog::Accepted) {
             return;
@@ -374,6 +225,7 @@ void DialogSettings::accountAdd()
             mAccountModel->addAccount(path, color);
         }
     }
+
     treeAccounts->setCurrentIndex(mAccountModel->index(mAccountModel->rowCount() - 1, 0));
 }
 
@@ -388,12 +240,12 @@ void DialogSettings::accountEditIndex(const QModelIndex &index)
     if (!index.isValid()) {
         return;
     }
-    QString uri;
+    QString path;
     QColor color;
-    mAccountModel->getAccount(index, uri, color);
+    mAccountModel->getAccount(index, path, color);
     color = QColorDialog::getColor(color, this);
     if (color.isValid()) {
-        mAccountModel->editAccount(index, uri, color);
+        mAccountModel->editAccount(index, path, color);
     }
 }
 
@@ -464,46 +316,6 @@ void DialogSettings::onBorderWidthChanged(int value) {
     borderWidthLabel->setText(value == 0 ? tr("None") : QString::number(value) + '%');
 }
 
-void DialogSettings::unreadParserChanged(int curr)
-{
-    if ( curr == 1 )
-    {
-        // Mork parser
-
-        // Fix Unread is useless in this mode
-        btnFixUnreadCount->setEnabled( false );
-
-        // Enable account group
-        groupAccounts->setEnabled( true );
-
-        // Hide the thunderbird path as well
-        groupThunderbirdProfilePath->hide();
-    }
-    else
-    {
-        btnFixUnreadCount->setEnabled( true );
-
-        // Show the thunderbird path
-        groupThunderbirdProfilePath->show();
-
-        // Trigger hiding/showing the account group
-        profilePathChanged();
-    }
-
-    // Did we change comparing to settings?
-    if (mAccountModel->rowCount() != 0 &&
-        isMorkParserSelected() != BirdtrayApp::get()->getSettings()->mUseMorkParser) {
-        if ( QMessageBox::question( 0,
-                               tr("WARNING: Parser changed"),
-                               tr("You have changed the parser, but the account format is not compatible "
-                                  "between parsers, and you need to re-set them up.\n\nDo you want to clear the accounts?") )
-                == QMessageBox::Yes )
-        {
-            mAccountModel->clear();
-        }
-    }
-}
-
 void DialogSettings::changeIcon(QToolButton *button)
 {
     QString e = QFileDialog::getOpenFileName( 0,
@@ -531,48 +343,10 @@ void DialogSettings::changeIcon(QToolButton *button)
             Qt::KeepAspectRatio, Qt::SmoothTransformation) );
 }
 
-
-void DialogSettings::updateAccountList() {
-    if (isMorkParserSelected()) {
-        return;
-    }
-    DatabaseAccounts * dba = new DatabaseAccounts(
-            DatabaseAccounts::getDatabasePath(leProfilePath->text()));
-    connect( dba, &DatabaseAccounts::done, this, &DialogSettings::accountsAvailable );
-    dba->start();
-}
-
-void DialogSettings::activateTab(int tabIndex) {
+void DialogSettings::activateTab(int tabIndex)
+{
     // #1 is the Accounts tab
-    if (tabIndex == 1) {
-        updateAccountList();
-    } else if (tabIndex == 4) {
+    if (tabIndex == 4) {
         noUpdateIndicator->hide();
     }
-}
-
-bool DialogSettings::isProfilePathValid(const QString& profilePath) const
-{
-    if ( profilePath.isEmpty() )
-        return false;
-    
-    QString databasePath = DatabaseAccounts::getDatabasePath(profilePath);
-    return QFile::exists(databasePath);
-}
-
-bool DialogSettings::reportIfProfilePathValid(const QString &profilePath) const {
-    if (isProfilePathValid(profilePath)) {
-        return true;
-    }
-    if (!profilePath.isEmpty()) {
-        const QString name = QFileInfo(DatabaseAccounts::getDatabasePath(profilePath)).fileName();
-        QMessageBox::critical(nullptr, tr("Invalid Thunderbird directory"),
-                tr("Valid Thunderbird directory must contain the file %1.").arg(name));
-    }
-    return false;
-}
-
-bool DialogSettings::isMorkParserSelected() const
-{
-    return boxParserSelection->currentIndex() == 1;
 }
