@@ -7,9 +7,6 @@
 class Utils
 {
     public:
-        // Decodes IMAP UTF7 data
-        static QString  decodeIMAPutf7( const QString& param );
-    
         /**
          * Expand the path as a shell would do. This will expand variables and ~/.
          * This function will also remove wrapping quotes.

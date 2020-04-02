@@ -53,14 +53,6 @@ OpenSSL potrebbe non essere installato.</translation>
         <translation>databaseFile</translation>
     </message>
     <message>
-        <source>Decode an IMAP Utf7 string.</source>
-        <translation>Decodifica una stringa IMAP Utf7.</translation>
-    </message>
-    <message>
-        <source>string</source>
-        <translation>stringa</translation>
-    </message>
-    <message>
         <source>Show the settings.</source>
         <translation>Mostra le impostazioni.</translation>
     </message>

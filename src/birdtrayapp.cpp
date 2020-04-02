@@ -46,12 +46,6 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv)
         QTimer::singleShot(0, [=]() { exit(MorkParser::dumpMorkFile(morkPath)); });
         return;
     }
-    QString imapString = commandLineParser.value("decode");
-    if (!imapString.isEmpty()) {
-        printf("Decoded: %s\n", qPrintable(Utils::decodeIMAPutf7(imapString)));
-        QTimer::singleShot(0, &BirdtrayApp::quit);
-        return;
-    }
     
     if (!startSingleInstanceServer()) {
         QTimer::singleShot(0, &BirdtrayApp::quit);
@@ -164,7 +158,6 @@ void BirdtrayApp::parseCmdArguments() {
     commandLineParser.addOptions({
             {"dump-mork", tr("Display the contents of the given mork database."),
              tr("databaseFile")},
-            {"decode", tr("Decode an IMAP Utf7 string."), tr("string")},
             {SETTINGS_COMMAND, tr("Show the settings.")},
             {{"t", TOGGLE_THUNDERBIRD_COMMAND}, tr("Toggle the Thunderbird window.")},
             {{"s", SHOW_THUNDERBIRD_COMMAND}, tr("Show the Thunderbird window.")},
