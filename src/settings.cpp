@@ -379,7 +379,7 @@ void Settings::fromQSettings( QSettings * psettings )
     delete psettings;
     if (!profilePath.isNull() && std::any_of(mFolderNotificationColors.keyBegin(),
             mFolderNotificationColors.keyEnd(),
-            [](const QString &path) {return !path.endsWith(".msf");})) {
+            [](const QString &path) { return !path.endsWith(".msf"); })) {
         bool foundMigrationProblem = false;
         QDir profileDir(profilePath);
         for (const QString &path : mFolderNotificationColors.keys()) {
