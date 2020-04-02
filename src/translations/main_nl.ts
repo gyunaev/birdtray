@@ -578,6 +578,18 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Unexpected end of group.</source>
         <translation>Onverwacht groepseinde.</translation>
     </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sqlite based accounts migrated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
