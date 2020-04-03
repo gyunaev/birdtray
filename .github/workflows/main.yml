@@ -28,7 +28,8 @@ jobs:
           - os: ubuntu-latest
             arch: x86
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Cache Qt ${{ matrix.qt_version }}
         id: cache-qt
         uses: actions/cache@v1
@@ -112,7 +113,7 @@ jobs:
   release:
     name: Create Release
     needs: build
-    if: github.event_name == 'push' && contains(github.ref, '.')
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') && contains(github.ref, '.')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
