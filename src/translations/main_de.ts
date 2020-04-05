@@ -53,14 +53,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>datenbankDatei</translation>
     </message>
     <message>
-        <source>Decode an IMAP Utf7 string.</source>
-        <translation>Eine IMAP-UTF-7-Zeichenkette dekodieren.</translation>
-    </message>
-    <message>
-        <source>string</source>
-        <translation>zeichenkette</translation>
-    </message>
-    <message>
         <source>Show the settings.</source>
         <translation>Die Einstellungen öffnen.</translation>
     </message>

@@ -50,14 +50,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Decode an IMAP Utf7 string.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>string</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show the settings.</source>
         <translation type="unfinished"></translation>
     </message>
