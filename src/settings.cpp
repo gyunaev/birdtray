@@ -116,7 +116,7 @@ void Settings::save()
     {
         QJsonObject ac;
         ac[ "color" ] = mFolderNotificationColors[path].name();
-        ac[ "uri" ] = path;
+        ac[ "path" ] = path;
 
         accounts.push_back( ac );
     }
@@ -249,7 +249,7 @@ void Settings::fromJSON( const QJsonObject& settings )
     {
         for ( const QJsonValueRef& a : settings["accounts"].toArray() )
         {
-            QString path = a.toObject().value("uri").toString();
+            QString path = a.toObject().value("path").toString();
             QString color = a.toObject().value("color").toString();
 
             if ( path.isEmpty() )
