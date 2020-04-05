@@ -344,7 +344,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
+        <source>Images (*.png *.svg *.svgz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

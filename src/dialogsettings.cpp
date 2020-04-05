@@ -3,6 +3,8 @@
 #include <QMessageBox>
 #include <QtWidgets/QListView>
 #include <QtCore/QStandardPaths>
+#include <QtSvg/QSvgRenderer>
+#include <QPainter>
 
 #include "dialogsettings.h"
 #include "modelaccounttree.h"
@@ -346,26 +348,50 @@ void DialogSettings::changeIcon(QToolButton *button)
     QString e = QFileDialog::getOpenFileName( 0,
                                               tr("Choose the new icon"),
                                               "",
-                                              tr("Images (*.png *.svg)") );
+                                              tr("Images (*.png *.svg *.svgz)") );
 
     if ( e.isEmpty() )
         return;
 
-    QPixmap test;
-
-    if ( !test.load( e ) )
-    {
-        QMessageBox::critical(nullptr, tr("Invalid icon"),
-                              tr("Could not load the icon from this file."));
-        return;
-    }
-
     Settings* settings = BirdtrayApp::get()->getSettings();
 
+    QPixmap test;
+
+    if (e.endsWith(".svg", Qt::CaseInsensitive) ||
+            e.endsWith(".svgz", Qt::CaseInsensitive))
+    {
+        QImage image(settings->mIconSize.width(), settings->mIconSize.height(), QImage::Format_ARGB32);
+        image.fill(QColor(255, 255, 255, 0));
+
+        QSvgRenderer svg;
+        if (! svg.load(e) )
+        {
+            QMessageBox::critical(nullptr, tr("Invalid icon"),
+                                  tr("Could not load the icon from this file."));
+            return;
+        }
+
+        QPainter painter(&image);
+        svg.render(&painter);
+
+        test = QPixmap::fromImage(image);
+    }
+    else
+    {
+
+        if ( !test.load( e ) )
+        {
+            QMessageBox::critical(nullptr, tr("Invalid icon"),
+                                  tr("Could not load the icon from this file."));
+            return;
+        }
+
+        test = test.scaled(settings->mIconSize.width(), settings->mIconSize.height(),
+                    Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    }
+
     // Force scale icon to the expected size
-    button->setIcon( test.scaled(
-            settings->mIconSize.width(), settings->mIconSize.height(),
-            Qt::KeepAspectRatio, Qt::SmoothTransformation) );
+    button->setIcon(test);
 }
 
 void DialogSettings::activateTab(int tabIndex)

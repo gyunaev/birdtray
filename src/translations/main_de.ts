@@ -348,8 +348,8 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Ein neues Symbol auswählen</translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
-        <translation>Bilder (*.png *.svg)</translation>
+        <source>Images (*.png *.svg *.svgz)</source>
+        <translation>Bilder (*.png *.svg *.svgz)</translation>
     </message>
     <message>
         <source>Invalid icon</source>
