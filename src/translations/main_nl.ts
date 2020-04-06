@@ -53,6 +53,14 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>databankbestand</translation>
     </message>
     <message>
+        <source>Decode an IMAP Utf7 string.</source>
+        <translation>Decodeer een IMAP-Utf7-string.</translation>
+    </message>
+    <message>
+        <source>string</source>
+        <translation>string</translation>
+    </message>
+    <message>
         <source>Show the settings.</source>
         <translation>Toon het instellingenvenster.</translation>
     </message>
