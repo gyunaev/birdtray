@@ -348,8 +348,8 @@ OpenSSL potrebbe non essere installato.</translation>
         <translation>Scegli la nuova icona</translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
-        <translation>Immagini (*.png *.svg)</translation>
+        <source>Images (*.png *.svg *.svgz)</source>
+        <translation>Immagini (*.png *.svg *.svgz)</translation>
     </message>
     <message>
         <source>Invalid icon</source>

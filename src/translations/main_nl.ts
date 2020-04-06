@@ -348,8 +348,8 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Kies het nieuwe pictogram</translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
-        <translation>Afbeeldingen (*.png *.svg)</translation>
+        <source>Images (*.png *.svg *.svgz)</source>
+        <translation>Afbeeldingen (*.png *.svg *.svgz)</translation>
     </message>
     <message>
         <source>Invalid icon</source>
