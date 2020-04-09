@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRun</source>
-        <translation>${PRODUCT_NAME}kan niet worden gestart.</translation>
+        <translation>${PRODUCT_NAME} kan niet worden gestart.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRunDialog</source>
