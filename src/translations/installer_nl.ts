@@ -194,7 +194,7 @@
     </message>
     <message>
         <source>MissingVcRuntime</source>
-        <translation>Visual C++ Runtime ${ARCH} ontbreekt</translation>
+        <translation>Visual C++ Runtime ${ARCH} ontbreekt.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Dialog</source>
