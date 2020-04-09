@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.0" language="nl_NL">
 <context>
     <name>AutoUpdater</name>
     <message>
@@ -82,11 +82,11 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Write log to a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla een logboek op.</translation>
     </message>
     <message>
         <source>FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>BESTAND</translation>
     </message>
 </context>
 <context>
@@ -128,7 +128,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <name>DialogLogOutput</name>
     <message>
         <source>Debug log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Foutopsporingslogboek</translation>
     </message>
 </context>
 <context>
@@ -377,11 +377,11 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Choose one or more MSF files</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer één of meerdere MSF-bestanden</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation type="unfinished">Mail-index (*.msf)</translation>
+        <translation>Mail-index (*.msf)</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -421,47 +421,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translation type="unfinished"></translation>
+        <translation>ondoorzichtig als er nieuwe e-mails zijn;</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translation type="unfinished"></translation>
+        <translation>verbergen als er geen nieuwe e-mails zijn.</translation>
     </message>
     <message>
         <source>Show log window</source>
-        <translation type="unfinished"></translation>
+        <translation>Logboek tonen</translation>
     </message>
     <message>
         <source>Force index file re-read every</source>
-        <translation type="unfinished"></translation>
+        <translation>Indexbestand opnieuw uitlezen, elke</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> seconden</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om het aantal ongelezen e-mails te tonen op het Birdtray-pictogram.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als u dit niet aankruist, dan kunt u alleen zien dat er ongelezen e-mails zijn aan het knipperende of anders uitziende pictogram (afhankelijk van uw instellingen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: als er 10 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als het aantal ongelezen e-mails lager wordt dan het aantal &amp;quot;genegeerde&amp;quot;, dan wordt de teller op 0 gezet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
-        <translation type="unfinished"></translation>
+        <translation>Birdtray wordt vertaald door de gemeenschap:</translation>
     </message>
     <message>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertalers</translation>
     </message>
     <message>
         <source>Active maintainers</source>
-        <translation type="unfinished"></translation>
+        <translation>Actieve beheerders</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijdragers</translation>
     </message>
 </context>
 <context>
@@ -515,11 +515,12 @@ Wilt u doorgaan?</translation>
     <message>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen e-mailprofielen aangetroffen.
+Zorg ervoor dat u de juiste profielenmap heeft gekozen.</translation>
     </message>
     <message>
         <source>%1 (Profile)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (profiel)</translation>
     </message>
 </context>
 <context>
@@ -580,15 +581,15 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker, maar enkele ingestelde e-mailmappen zijn niet aangetroffen.</translation>
     </message>
     <message>
         <source>Sqlite based accounts migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Op Sqlite gebaseerde accounts zijn gemigreerd</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker. Controleer of alle accounts juist zijn gemigreerd.</translation>
     </message>
 </context>
 <context>
@@ -605,20 +606,23 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Fatal error: %1
 
 Log file is written into file %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatale fout: %1
+
+Het logboek is opgeslagen als %2</translation>
     </message>
     <message>
         <source>Could not save the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan instellingen niet opslaan</translation>
     </message>
     <message>
         <source>Could not save the settings into file %1:
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>De instellingen kunnen niet worden opgeslagen in %1:
+%2</translation>
     </message>
     <message>
         <source>Failed to open log file %s: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Het logboek &apos;%s&apos; kan niet worden geopend: %s</translation>
     </message>
 </context>
 <context>
