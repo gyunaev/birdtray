@@ -13,21 +13,31 @@ Log * Log::mLog;
 
 void Log::initialize(const QString& path )
 {
-    if (mLog != nullptr) {
+    if (mLog != nullptr)
         Log::fatal("Attempt to initialize initialized log");
-    }
 
     Log * self = g();
 
-    if (path == "") {
+    if ( path.isEmpty() )
         return;
-    }
 
     QMutexLocker l( &(self->mMutex) );
-    self->mOutputFile.setFileName(path);
-    if (!self->mOutputFile.open(QIODevice::OpenModeFlag::Append)) {
+    bool opened = false;
+
+    if ( path == "stderr" )
+    {
+        opened = self->mOutputFile.open( stderr, QIODevice::OpenModeFlag::WriteOnly );
+    }
+    else
+    {
+        self->mOutputFile.setFileName( path );
+        opened = self->mOutputFile.open(QIODevice::OpenModeFlag::WriteOnly);
+    }
+
+    if ( !opened )
+    {
         l.unlock();
-        Log::fatal(QObject::tr("Failed to open log file %s").arg(path));
+        Log::fatal( QObject::tr("Failed to open log file %s: %s").arg(path).arg(self->mOutputFile.errorString()) );
     }
 }
 
@@ -45,6 +55,7 @@ void Log::fatal( const QString& str )
     QMessageBox::critical(nullptr, QApplication::tr("Fatal"), QObject::tr("Fatal error: %1\n\nLog file is written into file %2") .arg(str) .arg(file.fileName()));
 
     self->mMutex.lock();
+
     if ( file.isOpen() )
     {
         QByteArray writedata = self->mEntries.join("\r\n").toUtf8();
@@ -112,9 +123,6 @@ void Log::add(const QString &text)
     if ( !mDialog.isNull() )
         mDialog.data()->add( logline );
 
-    // Log message to stderr
-    qDebug( "%s", qPrintable(logline) );
-    
     // if log file is open, append to log file
     if (mOutputFile.isOpen()) {
         mOutputFile.write( (logline + "\r\n").toUtf8() );

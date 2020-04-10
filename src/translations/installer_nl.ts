@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.0" language="nl_NL">
 <context>
     <name>WindowsInstaller</name>
     <message>
@@ -18,11 +18,11 @@
     </message>
     <message>
         <source>WinIntegrationGroupDescription</source>
-        <translation>Kies hoe u dit programma wilt integreren met Windows.</translation>
+        <translation>Geef aan hoe u dit programma wilt integreren met Windows.</translation>
     </message>
     <message>
         <source>AutoRunSectionName</source>
-        <translation>Autotmatisch opstarten</translation>
+        <translation>Automatisch opstarten</translation>
     </message>
     <message>
         <source>AutoRunDescription</source>
@@ -42,7 +42,7 @@
     </message>
     <message>
         <source>ProgramGroupDescription</source>
-        <translation>Maak een ${PRODUCT_NAME}-programmagroep aan onder Menu Start &gt; Programma&apos;s.</translation>
+        <translation>Maak een ${PRODUCT_NAME}-programmagroep aan onder Menu Start --&gt; Programma&apos;s.</translation>
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
@@ -182,43 +182,43 @@
     </message>
     <message>
         <source>SettingsLink</source>
-        <translation>${PRODUCT_NAME} settings</translation>
+        <translation>${PRODUCT_NAME}-instellingen</translation>
     </message>
     <message>
         <source>UninstallRestartAsUserQuestion</source>
-        <translation>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</translation>
+        <translation>De deïnstallatie is gestart met administratorrechten, maar er is geen ${PRODUCT_NAME}-installatie aangetroffen op het administratoraccount. Wilt u de deïnstallatie opnieuw starten zonder administratorrechten?</translation>
     </message>
     <message>
         <source>OpenUrl</source>
-        <translation>Opening $0 in default browser...</translation>
+        <translation>Bezig met openen van $0...</translation>
     </message>
     <message>
         <source>MissingVcRuntime</source>
-        <translation>Unable to find Visual C++ Runtime ${ARCH}.</translation>
+        <translation>Visual C++ Runtime ${ARCH} ontbreekt.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Dialog</source>
-        <translation>The following required component was not found on this computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nDo you want to download the installer for the component?</translation>
+        <translation>Het volgende vereiste onderdeel is niet aangetroffen op uw computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nWilt u de installatiewizard van dit onderdeel downloaden?</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Retry</source>
-        <translation>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</translation>
+        <translation>Draai, na het downloaden, de installatiewizard. Zodra de installatie is afgerond, kunt u op Oké klikken om de installatiestatus nogmaals te controleren.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Found</source>
-        <translation>The required component was successfully detected on your computer.</translation>
+        <translation>Het vereiste onderdeel is aangetroffen op uw computer.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_StillNotFound</source>
-        <translation>The required component was not found on your computer. Please search online for Visual C++ ${ARCH} downloads for Visual Studio 2015 and higher.</translation>
+        <translation>Het vereiste onderdeel is nog steeds niet aangetroffen op uw computer. Zoek op internet naar Visual C++ ${ARCH}-downloads voor Visual Studio 2015 of nieuwer.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRun</source>
-        <translation>${PRODUCT_NAME} will not be able to run.</translation>
+        <translation>${PRODUCT_NAME} kan niet worden gestart.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRunDialog</source>
-        <translation>${PRODUCT_NAME} will not be able to start because a required component is missing.</translation>
+        <translation>${PRODUCT_NAME} kan niet worden gestart omdat er een vereist onderdeel ontbreekt.</translation>
     </message>
     <message>
         <source>Lang_en</source>
@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>Lang_it</source>
-        <translation>Italian</translation>
+        <translation>Italiaans</translation>
     </message>
 </context>
 </TS>

@@ -2,8 +2,6 @@
 
 Birdtray is a free system tray notification for new mail for Thunderbird. It supports Linux and Windows (credit for adding and maintaining Windows support goes to @Abestanis). Patches to support other platforms are welcome.
 
-For those of you using Thunderbird 68+, the sqlite-based parser will no longer work. Please switch to Mork parser.
-
 ## Features
 
 - Shows the unread email counter in the Thunderbird system tray icon;
@@ -12,7 +10,7 @@ For those of you using Thunderbird 68+, the sqlite-based parser will no longer w
 
 - You can snooze new mail notifications for a specific time period;
 
-- Birdtray checks the unread e-mail status directly by reading the Thunderbird email search database. This means it does not need any extensions, and thus is immune to any future extension API changes in Thunderbird;
+- Birdtray checks the unread e-mail status directly by reading the Thunderbird email mork database. This means it does not need any extensions, and thus is immune to any future extension API changes in Thunderbird;
 
 - Starting from version 0.2 if you click on Birdtray icon, it can hide the Thunderbird window, and restore it. There is also context menu for that (this currently only works on Linux);
 
@@ -36,13 +34,12 @@ To build Birdtray from source, you would need the following components:
 - A C++ compiler
 - Cmake
 - Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
-- sqlite3 (i.e. libsqlite3-dev or libsqlite3-devel)
 
 On Debian you need to install the following packages: ``qt5-default libsqlite3-dev libqt5x11extras5-dev qttools5-dev libx11-xcb-dev``
 
-On OpenSuSE you need to install ``libqt5-qtbase-devel libqt5-qtx11extras-devel sqlite3-devel``
+On OpenSuSE you need to install ``libqt5-qtbase-devel libqt5-qtx11extras-devel libqt5-qtsvg-devel``
 
-On Fedora (30 or later) you need to install ``libsqlite3x-devel qt5-qtbase-devel qt5-qtx11extras-devel``
+On Fedora (30 or later) you need to install ``qt5-qtbase-devel qt5-qtx11extras-devel qt5-qtsvg-devel``
 
 To build, please do the following:
 
@@ -91,7 +88,9 @@ Once you change settings, often you need to restart birdtray for the new setting
 
 ## Troubleshooting
 
-If you have lots of unread messages shown, and you are using global search database to look for unread messages, it may be because the database is corrupt or too old. You may delete the file global-messages-db.sqlite and restart Thunderbird which would rebuild this file. This will also help if "search" function in Thunderbird finds emails which no longer exist.
+If Birdtray shows the wrong number of unread messages, it can be caused by a corrupt mork file.
+This can often be fixed by using the `Repair` functionality in Thunderbird
+in the mail folder settings.
 
 ## Submitting bugs and feature requests
 

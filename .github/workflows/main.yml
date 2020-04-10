@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
         arch: [x86, x64]
-        qt_version: [5.6, 5.9, 5.13.2]
+        qt_version: [5.6, 5.9, 5.14.1]
         include:
           - os: windows-latest
             arch: x86
@@ -28,7 +28,8 @@ jobs:
           - os: ubuntu-latest
             arch: x86
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Cache Qt ${{ matrix.qt_version }}
         id: cache-qt
         uses: actions/cache@v1
@@ -49,24 +50,16 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update -qq;
-            sudo apt install -qq libsqlite3-dev libx11-dev
+            sudo apt install -qq libx11-dev
           elif [ "$RUNNER_OS" == "Windows" ]; then
-            export sqliteDir=C:\\ProgramData\\chocolatey\\lib\\SQLite\\tools
             if [ "$ARCH" == "x86" ]; then
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
               export archParam="--forcex86"
             else
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A x64"
             fi
-            echo "::set-env name=CMAKE_PREFIX_PATH::$sqliteDir"
-            echo "::add-path::$sqliteDir"
-            choco install -y --force $archParam sqlite --params \"/NoTools\"
             choco install -y --force $archParam openssl.light
             echo "::add-path::C:\\Program Files\\OpenSSL"
-            curl -sS https://www.sqlite.org/2019/sqlite-amalgamation-3300100.zip > sqlite-source.zip
-            unzip -p sqlite-source.zip sqlite-amalgamation-3300100/sqlite3.h > $sqliteDir/sqlite3.h
-            rm sqlite-source.zip
-            echo '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\vcvarsall.bat" '$ARCH' && LIB /DEF:'$sqliteDir'\\sqlite3.def /OUT:'$sqliteDir'\\sqlite3.lib /MACHINE:'$ARCH' || exit /b 1' | cmd
           else
             echo "$RUNNER_OS not supported"
             exit 1
@@ -87,7 +80,7 @@ jobs:
         id: check-deploy
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
             echo ::set-output name=is_deploy::true
             echo "Deployment build detected"
           else
@@ -120,7 +113,7 @@ jobs:
   release:
     name: Create Release
     needs: build
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') && contains(github.ref, '.')
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') && contains(github.ref, '.')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -128,7 +121,7 @@ jobs:
       - name: Check if this is a deployment build
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Creating release ${{ github.ref }}..."
           else
             echo "Tag does not match: ${{ github.event.ref }}"

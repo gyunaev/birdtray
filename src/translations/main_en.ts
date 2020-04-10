@@ -66,10 +66,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable debugging output.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle the Thunderbird window.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,69 +77,12 @@ OpenSSL might not be installed.</source>
         <source>Hide the Thunderbird window.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>DatabaseAccounts</name>
     <message>
-        <source>Error opening sqlite database: %1</source>
+        <source>Write log to a file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseUnreadFixer</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogAddEditAccount</name>
-    <message>
-        <source>Folder:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notification text color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose the MSF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid MSF file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No account selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must select an account.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please assign the message number text color</source>
+        <source>FILE</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -204,10 +143,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show unread count</source>
         <translation type="unfinished"></translation>
     </message>
@@ -264,31 +199,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fix the unread message count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Monitoring</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Method to parse unread notifications:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -305,10 +216,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -420,26 +327,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>using global search database (wont work with 68+)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>using Mork index files (recommended)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Empty Thunderbird directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You must specify a Thunderbird directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose the Thunderbird profile path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Version check failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -449,55 +336,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fix the unread messages?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updating the database...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Database updated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Successfully updated the database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error updating database</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error updating the database:
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts:
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Checking...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WARNING: Parser changed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
-
-Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -505,7 +344,7 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
+        <source>Images (*.png *.svg *.svgz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -514,14 +353,6 @@ Do you want to clear the accounts?</source>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Valid Thunderbird directory must contain the file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -557,6 +388,46 @@ Do you want to clear the accounts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>No new updates found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show log window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force index file re-read every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translations are powered by the community:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active maintainers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -572,22 +443,6 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;For those of you who appreciate my work on Birdtray, which is being developed in my free time, you can do it here: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Thank you for your continuous support!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No new updates found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show log window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force index file re-read every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -704,6 +559,18 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Unexpected end of group.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sqlite based accounts migrated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -728,6 +595,10 @@ Log file is written into file %2</source>
     <message>
         <source>Could not save the settings into file %1:
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open log file %s: %s</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -833,27 +704,11 @@ Log file is written into file %2</source>
 <context>
     <name>UnreadMonitor</name>
     <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folder %1 was not found in database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unable to watch %1 for changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot query database: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

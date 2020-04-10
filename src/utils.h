@@ -70,6 +70,18 @@ class Utils
          * @return The mail account name.
          */
         static QString getMailAccountName(const QFileInfo &morkFile);
+        
+        /**
+         * Format a Github markdown string:
+         *
+         * - Add links to the Github account pages for "@name" mentions.
+         * - for old Qt versions without markdown support, change links
+         *   from `[text](url)` to `text (url)`.
+         *
+         * @param markdown The markdown string.
+         * @return A reference to the new markdown string with t the links.
+         */
+        static QString formatGithubMarkdown(const QString& markdown);
 };
 
 #endif // UTILS_H
