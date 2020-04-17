@@ -78,7 +78,7 @@ jobs:
         run: cmake --build . --config Release --target run_tests
       - name: Validate desktop file
         working-directory: ${{ github.workspace }}
-        if: runner.os == Linux
+        if: runner.os == 'Linux'
         shell: bash
         run: |
           output=$(desktop-file-validate src/res/com.ulduzsoft.Birdtray.desktop)
