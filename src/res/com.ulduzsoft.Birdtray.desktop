@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Birdtray
 Keywords=Email;E-mail;Newsgroup;Feed;RSS
 Keywords[ast]=Corréu;Corréu-e;Noticies;Discusiones;Mensaxes;Canales;RSS
@@ -28,5 +27,5 @@ Terminal=false
 X-MultipleArgs=false
 Type=Application
 Icon=com.ulduzsoft.Birdtray
-Categories=Application;Network;Email;
+Categories=Network;Email;
 StartupNotify=true
