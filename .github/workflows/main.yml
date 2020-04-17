@@ -76,10 +76,16 @@ jobs:
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
-      - name: Verify desktop file
+      - name: Validate desktop file
         working-directory: ${{ github.workspace }}
-        if: ${{ runner.os }} == Linux
-        run: desktop-file-validate src/res/com.ulduzsoft.Birdtray.desktop
+        if: runner.os == Linux
+        shell: bash
+        run: |
+          output=$(desktop-file-validate src/res/com.ulduzsoft.Birdtray.desktop)
+          if [ ! -z "$output" ]; then
+            echo "$output";
+            exit 1;
+          fi
       - name: Check if this is a deployment build
         id: check-deploy
         shell: bash
