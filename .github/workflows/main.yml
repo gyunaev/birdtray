@@ -50,7 +50,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update -qq;
-            sudo apt install -qq libx11-dev
+            sudo apt install -qq libx11-dev qt5-qtsvg-devel desktop-file-utils
           elif [ "$RUNNER_OS" == "Windows" ]; then
             if [ "$ARCH" == "x86" ]; then
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
@@ -76,6 +76,10 @@ jobs:
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
+      - name: Verify desktop file
+        working-directory: ${{ github.workspace }}
+        if: ${{ runner.os }} == Linux
+        run: desktop-file-validate src/res/com.ulduzsoft.Birdtray.desktop
       - name: Check if this is a deployment build
         id: check-deploy
         shell: bash
