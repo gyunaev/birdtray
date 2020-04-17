@@ -50,7 +50,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update -qq;
-            sudo apt install -qq libx11-dev qt5-qtsvg-devel desktop-file-utils
+            sudo apt install -qq libx11-dev libqt5svg5-dev libx11-xcb-dev desktop-file-utils
           elif [ "$RUNNER_OS" == "Windows" ]; then
             if [ "$ARCH" == "x86" ]; then
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
