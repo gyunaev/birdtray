@@ -1,5 +1,5 @@
 Name:         birdtray
-Version:      1.7.0
+Version:      1.8.0
 Release:      1%{?dist}
 Epoch:        0
 License:      GPLv3
