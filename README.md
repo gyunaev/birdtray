@@ -35,7 +35,7 @@ To build Birdtray from source, you would need the following components:
 - Cmake
 - Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
 
-On Debian you need to install the following packages: ``qt5-default libqt5x11extras5-dev qttools5-dev libqt5svg5-dev``
+On Debian you need to install the following packages: ``qt5-default libqt5x11extras5-dev qttools5-dev libqt5svg5-dev libx11-xcb-dev``
 
 On OpenSuSE you need to install ``libqt5-qtbase-devel libqt5-qtx11extras-devel libqt5-qtsvg-devel``
 
