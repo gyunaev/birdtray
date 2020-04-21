@@ -2,6 +2,7 @@
 * @Vistaus
 * @albanobattistella
 * @Abestanis
+* @igorruckert
 
 # Contributors
 * @to-ba
