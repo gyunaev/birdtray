@@ -114,7 +114,7 @@
     </message>
     <message>
         <source>StopBirdtrayUninstall</source>
-        <translation>$ {PRODUCT_NAME} в данный момент работает. Нажмите OK, чтобы остановить $ {PRODUCT_NAME}, чтобы продолжить удаление.</translation>
+        <translation>${PRODUCT_NAME} в данный момент работает. Нажмите OK, чтобы остановить ${PRODUCT_NAME}, чтобы продолжить удаление.</translation>
     </message>
     <message>
         <source>StopBirdtrayUninstallError</source>
