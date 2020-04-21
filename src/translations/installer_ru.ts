@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
-        <translation>Путь установки не является пустым, но, похоже, он не содержит предыдущую установку $ {PRODUCT_NAME}. Содержимое будет перезаписано</translation>
+        <translation>Путь установки не является пустым, но, похоже, он не содержит предыдущую установку ${PRODUCT_NAME}. Содержимое будет перезаписано.</translation>
     </message>
     <message>
         <source>CurrentUserOnly</source>
