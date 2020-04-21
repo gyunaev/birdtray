@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>AutoRunSectionName</source>
-        <translation>Автозапуск.</translation>
+        <translation>Автозагрузка</translation>
     </message>
     <message>
         <source>AutoRunDescription</source>
@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>AutoCheckUpdateSectionName</source>
-        <translation>Автоматическая проверка обновлений.</translation>
+        <translation>Автоматическая проверка обновлений</translation>
     </message>
     <message>
         <source>AutoCheckUpdateDescription</source>
