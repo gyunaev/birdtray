@@ -186,7 +186,7 @@
     </message>
     <message>
         <source>UninstallRestartAsUserQuestion</source>
-        <translation>Деинсталлятор запускается с правами администратора, но для администратора, похоже, нет установки $ {PRODUCT_NAME}. Вы хотите перезапустить программу удаления без прав администратора?</translation>
+        <translation>Деинсталлятор запускается с правами администратора, но для администратора, похоже, нет установки ${PRODUCT_NAME}. Вы хотите перезапустить программу удаления без прав администратора?</translation>
     </message>
     <message>
         <source>OpenUrl</source>
