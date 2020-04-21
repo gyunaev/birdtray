@@ -6,7 +6,8 @@
     <message>
         <source>No ssl configuration!
 OpenSSL might not be installed.</source>
-        <translation>SSL не настроен! Вероятно OpenSSL не установлен.</translation>
+        <translation>SSL не настроен!
+Вероятно OpenSSL не установлен.</translation>
     </message>
     <message>
         <source>Failed to save the Birdtray installer:
