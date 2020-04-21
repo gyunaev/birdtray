@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>InstallPathContainsPreviousVersion</source>
-        <translation>Путь установки сожержит предыдущую версию ${PRODUCT_NAME} , которая будет обновлена</translation>
+        <translation>Путь установки сожержит предыдущую версию ${PRODUCT_NAME}, которая будет обновлена.</translation>
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
