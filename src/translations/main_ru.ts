@@ -18,7 +18,7 @@ OpenSSL might not be installed.</source>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation>Ошибка загрузки утановщика Birdtray:
+        <translation>Ошибка загрузки установщика Birdtray:
 </translation>
     </message>
     <message>
@@ -66,7 +66,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
-        <translation>Сброс настройек до значений по умолчанию.</translation>
+        <translation>Сброс настроек до значений по умолчанию.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
@@ -151,7 +151,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Different icon when unread:</source>
-        <translation>Другая иконка при непрочитанных:</translation>
+        <translation>Другой значок при непрочитанных:</translation>
     </message>
     <message>
         <source>Off</source>
@@ -163,7 +163,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translation>Иконка (Ctrl-click для сброса):</translation>
+        <translation>Значок (Ctrl-click для сброса):</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -279,7 +279,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Enable New Email submenu</source>
-        <translation>Включить подменю Новое электронное письмо</translation>
+        <translation>Включить подменю Новое письмо</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -303,7 +303,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
-        <translation>При мигании используйтся переход постепенного появления / постепенного исчезновения (увеличивает использование CPU!)</translation>
+        <translation>При мигании используйтся переход постепенного появления / постепенного исчезновения (увеличивает нагрузку на CPU!)</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
@@ -345,7 +345,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Choose the new icon</source>
-        <translation>Выберите новую иконку</translation>
+        <translation>Выберите новый значок</translation>
     </message>
     <message>
         <source>Images (*.png *.svg *.svgz)</source>
@@ -353,11 +353,11 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Invalid icon</source>
-        <translation>Неправильная иконка</translation>
+        <translation>Неправильный значок</translation>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation>Не загружается иконка из файла.</translation>
+        <translation>Не загружается значок из файла.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
@@ -377,7 +377,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translation>непрозрачный при наличии новой почты,</translation>
+        <translation>непрозрачной при наличии новой почты,</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
@@ -389,7 +389,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation>Индексный файл почты (* .msf)</translation>
+        <translation>Индексный файл почты (*.msf)</translation>
     </message>
     <message>
         <source>No new updates found</source>
@@ -442,7 +442,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Birdtray is FREE SOFTWARE, which is licensed under General Public License v3. To clarify further, you can use it for any purpose, including commercial, without paying anything. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;To ask for help, request a feature or report a bug use the &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;Github project page&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;To ask for help, request a feature or report a bug use the &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;Страница проекта на Github&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;For those of you who appreciate my work on Birdtray, which is being developed in my free time, you can do it here: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -545,7 +545,7 @@ Please make sure you selected the correct profiles directory.</source>
     <name>QCoreApplication</name>
     <message>
         <source>Cannot load default system tray icon.</source>
-        <translation>Невозможно загрузить значок в системном трее по умолчанию.</translation>
+        <translation>Невозможно загрузить значок по умолчанию в системном трее.</translation>
     </message>
     <message>
         <source>Couldn&apos;t open file: </source>
