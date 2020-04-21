@@ -42,7 +42,7 @@
     </message>
     <message>
         <source>ProgramGroupDescription</source>
-        <translation>Создана группа программ $ {PRODUCT_NAME} в меню «Пуск»&gt; «Программы».</translation>
+        <translation>Создана группа программ ${PRODUCT_NAME} в меню «Пуск»&gt; «Программы».</translation>
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
