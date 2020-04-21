@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>StopBirdtrayUninstallError</source>
-        <translation>Не удалось закрыть $ {PRODUCT_NAME}. Повторите попытку или выйдите из $ {PRODUCT_NAME} вручную, чтобы продолжить удаление.</translation>
+        <translation>Не удалось закрыть ${PRODUCT_NAME}. Повторите попытку или выйдите из ${PRODUCT_NAME} вручную, чтобы продолжить удаление.</translation>
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
