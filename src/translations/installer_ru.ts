@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>StopBirdtray</source>
-        <translation>${PRODUCT_NAME} уже запущен. Нажмите OK, чтобы остановить $ {PRODUCT_NAME} и продолжить установку.</translation>
+        <translation>${PRODUCT_NAME} уже запущен. Нажмите OK, чтобы остановить ${PRODUCT_NAME} и продолжить установку.</translation>
     </message>
     <message>
         <source>StoppingBirdtray</source>
