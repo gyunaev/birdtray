@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>UninstallerAborted</source>
-        <translation>Удаление $ {PRODUCT_NAME} было прервано. Пожалуйста, попробуйте позже.</translation>
+        <translation>Удаление ${PRODUCT_NAME} было прервано. Пожалуйста, попробуйте позже.</translation>
     </message>
     <message>
         <source>SettingsLink</source>
