@@ -38,27 +38,27 @@
     </message>
     <message>
         <source>ProgramGroupSectionName</source>
-        <translation>Program Group Entry</translation>
+        <translation>Создать программную группу</translation>
     </message>
     <message>
         <source>ProgramGroupDescription</source>
-        <translation>Создана группа программ ${PRODUCT_NAME} в меню «Пуск»&gt; «Программы».</translation>
+        <translation>Создана программная группа ${PRODUCT_NAME} в меню «Пуск»&gt; «Программы».</translation>
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
-        <translation>Значёк на рабочий стол.</translation>
+        <translation>Значок на рабочий стол.</translation>
     </message>
     <message>
         <source>DesktopEntryDescription</source>
-        <translation>Создать значёк ${PRODUCT_NAME} на Рабочем столе.</translation>
+        <translation>Создать значок ${PRODUCT_NAME} на Рабочем столе.</translation>
     </message>
     <message>
         <source>StartMenuSectionName</source>
-        <translation>Start Menu Entry</translation>
+        <translation>Создать ссылку в меню Пуск</translation>
     </message>
     <message>
         <source>StartMenuDescription</source>
-        <translation>Создать иконку для ${PRODUCT_NAME} в меню Пуск.</translation>
+        <translation>Создать значок для ${PRODUCT_NAME} в меню Пуск.</translation>
     </message>
     <message>
         <source>TranslationsSectionName</source>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>UninstallPreviousVersionError</source>
-        <translation>Не удалось удалить старую установку $ {PRODUCT_NAME}! Продолжение удалит ВСЕ в $3.</translation>
+        <translation>Не удалось удалить старую установку ${PRODUCT_NAME}! Продолжение удалит ВСЕ в $3.</translation>
     </message>
     <message>
         <source>UninstallExecutionError</source>
@@ -114,7 +114,7 @@
     </message>
     <message>
         <source>StopBirdtrayUninstall</source>
-        <translation>${PRODUCT_NAME} в данный момент работает. Нажмите OK, чтобы остановить ${PRODUCT_NAME}, чтобы продолжить удаление.</translation>
+        <translation>${PRODUCT_NAME} в данный момент работает. Нажмите OK для остановки ${PRODUCT_NAME}, чтобы продолжить удаление.</translation>
     </message>
     <message>
         <source>StopBirdtrayUninstallError</source>
@@ -122,11 +122,11 @@
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
-        <translation>Установка ${PRODUCT_NAME} уже запущена.$\r$\nЗакройте все его экземпляры и нажмите «Повторить», чтобы продолжить, или «Отмена», чтобы выйти.</translation>
+        <translation>Установка ${PRODUCT_NAME} уже запущена.$\r$\nЗакройте все её экземпляры и нажмите «Повторить», чтобы продолжить установку, или «Отмена», чтобы выйти из установки.</translation>
     </message>
     <message>
         <source>UninstallAlreadyRunning</source>
-        <translation>Удаление ${PRODUCT_NAME} уже щапущено.$\r$\n Закройте все его экземпляры и нажмите «Повторить», чтобы продолжить, или «Отмена», чтобы выйти.</translation>
+        <translation>Удаление ${PRODUCT_NAME} уже запущено.$\r$\n Закройте все его экземпляры и нажмите «Повторить», чтобы продолжить удаление, или «Отмена», чтобы прервать удаление.</translation>
     </message>
     <message>
         <source>BadInstallPath</source>
@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>InstallPathContainsPreviousVersion</source>
-        <translation>Путь установки сожержит предыдущую версию ${PRODUCT_NAME}, которая будет обновлена.</translation>
+        <translation>Путь установки содержит предыдущую версию ${PRODUCT_NAME}, которая будет обновлена.</translation>
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
@@ -146,11 +146,11 @@
     </message>
     <message>
         <source>InstallFailed</source>
-        <translation>${PRODUCT_NAME} ${VERSION} не был полностью установлен.$\r$\n\Пожалуйста, перезапустите Windows и запустите установку снова</translation>
+        <translation>${PRODUCT_NAME} ${VERSION} не был полностью установлен.$\r$\n\Пожалуйста, перезапустите Windows и запустите установку снова.</translation>
     </message>
     <message>
         <source>InstallFailedCauseUninstallerFailed</source>
-        <translation>${PRODUCT_NAME} был не полностью установлен.$\r$\n\Пожалуйста, перезапустите Windows и запустите установку снова</translation>
+        <translation>${PRODUCT_NAME} был не полностью установлен.$\r$\n\Пожалуйста, перезапустите Windows и запустите установку снова.</translation>
     </message>
     <message>
         <source>UninstallFailed</source>
@@ -166,11 +166,11 @@
     </message>
     <message>
         <source>Install64On32BitWarning</source>
-        <translation>Вы устанавливаете 32-разрядную версию ${PRODUCT_NAME} на Вашей 64-разрядной Windows. Доступна 64-разрядная версия ${PRODUCT_NAME} для загрузки</translation>
+        <translation>Вы устанавливаете 32-разрядную версию ${PRODUCT_NAME} на Вашей 64-разрядной Windows. Доступна 64-разрядная версия ${PRODUCT_NAME} для загрузки.</translation>
     </message>
     <message>
         <source>Install32On64BitError</source>
-        <translation>Установщик содержит 64-разрядную версию ${PRODUCT_NAME}. На Вашем компьютере устновлена 32-разрядная версия Windows, которая не может запускать 64-разрядные программы. Пожалуйста, загрузите 32-разрядныйустановщик ${PRODUCT_NAME}</translation>
+        <translation>Установщик содержит 64-разрядную версию ${PRODUCT_NAME}. На Вашем компьютере устновлена 32-разрядная версия Windows, которая не может запускать 64-разрядные программы. Пожалуйста, загрузите 32-разрядныйустановщик ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>UnsupportedWindowsVersionError</source>
@@ -190,11 +190,11 @@
     </message>
     <message>
         <source>OpenUrl</source>
-        <translation>Открытие $ 0 в браузере по умолчанию...</translation>
+        <translation>Открытие $0 в браузере по умолчанию...</translation>
     </message>
     <message>
         <source>MissingVcRuntime</source>
-        <translation>Не обнаружен Visual C++ Runtime ${ARCH}</translation>
+        <translation>Не обнаружен Visual C++ Runtime ${ARCH}.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Dialog</source>
@@ -206,19 +206,19 @@
     </message>
     <message>
         <source>MissingVcRuntime_Found</source>
-        <translation>Требуемый компонент был успешно обнаружен на вашем компьютере</translation>
+        <translation>Требуемый компонент уже установлен на вашем компьютере</translation>
     </message>
     <message>
         <source>MissingVcRuntime_StillNotFound</source>
-        <translation>Необходимый компонент не найден на вашем компьютере. Поищите в Интернете файлы для загрузки Visual C ++ $ {ARCH} для Visual Studio 2015 и выше.</translation>
+        <translation>Необходимый компонент не найден на вашем компьютере. Поищите в Интернете файлы для загрузки Visual C++ ${ARCH} для Visual Studio 2015 и выше.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRun</source>
-        <translation>$ {PRODUCT_NAME} не сможет работать.</translation>
+        <translation>${PRODUCT_NAME} не сможет работать.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRunDialog</source>
-        <translation>$ {PRODUCT_NAME} не сможет запуститься, потому что отсутствует обязательный компонент.</translation>
+        <translation>${PRODUCT_NAME} не сможет запуститься, потому что отсутствует обязательный компонент.</translation>
     </message>
     <message>
         <source>Lang_en</source>
