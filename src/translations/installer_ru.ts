@@ -66,7 +66,7 @@
     </message>
     <message>
         <source>TranslationsDescription</source>
-        <translation>Выберите переводы для $ {PRODUCT_NAME}. $ {PRODUCT_NAME} выберет перевод на основе языка системы.</translation>
+        <translation>Выберите переводы для ${PRODUCT_NAME}. ${PRODUCT_NAME} выберет перевод на основе языка системы.</translation>
     </message>
     <message>
         <source>UserSettingsSectionName</source>
