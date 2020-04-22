@@ -183,7 +183,7 @@ QTreeWidgetItemIterator MailAccountDialog::iterateCheckedAccountItems() const {
 
 QStringList MailAccountDialog::getMailFoldersFor(const QString &profileDirPath) {
     QDir profileDir(profileDirPath);
-    QStringList mailFolders = profileDir.entryList({"*Mail"}, QDir::Dirs);
+    QStringList mailFolders = profileDir.entryList({"*Mail", "ExQuilla"}, QDir::Dirs);
     std::transform(mailFolders.begin(), mailFolders.end(), mailFolders.begin(),
             [=](const QString &folder) { return profileDir.absoluteFilePath(folder); });
     return mailFolders;

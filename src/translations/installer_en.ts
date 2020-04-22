@@ -236,5 +236,9 @@
         <source>Lang_it</source>
         <translation>Italian</translation>
     </message>
+    <message>
+        <source>Lang_ru</source>
+        <translation>Russian</translation>
+    </message>
 </context>
 </TS>
