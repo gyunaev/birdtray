@@ -26,7 +26,7 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
 
     // Set up the forced update timer
     mForceUpdateTimer.setSingleShot( false );
-    connect( &mForceUpdateTimer, &QTimer::timeout, this, &UnreadMonitor::updateUnread );
+    connect( &mForceUpdateTimer, &QTimer::timeout, this, &UnreadMonitor::forceUpdateUnread );
 
     // And activate it if settings specify so
     if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
@@ -103,6 +103,12 @@ void UnreadMonitor::updateUnread()
         mLastReportedUnread = total;
         mLastColor = chosenColor;
     }
+}
+
+void UnreadMonitor::forceUpdateUnread()
+{
+    mChangedMSFfiles = BirdtrayApp::get()->getSettings()->mFolderNotificationColors.keys();
+    updateUnread();
 }
 
 void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)

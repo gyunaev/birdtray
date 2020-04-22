@@ -46,6 +46,9 @@ class UnreadMonitor : public QThread
         void    watchedFileChanges( const QString& filechanged );
         void    updateUnread();
 
+        // This one forces rereading Mork files
+        void    forceUpdateUnread();
+
     private:
         void    getUnreadCount_Mork( int & count, QColor& color );
         int     getMorkUnreadCount( const QString& path );
