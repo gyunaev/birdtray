@@ -302,10 +302,6 @@ Section "${PRODUCT_NAME}" SectionBirdTray
 
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMajor" ${VERSION_MAJOR}
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMinor" ${VERSION_MINOR}
-    ${if} ${silent} # MUI doesn't write language in silent mode
-        WriteRegStr "${MUI_LANGDLL_REGISTRY_ROOT}" "${MUI_LANGDLL_REGISTRY_KEY}" \
-            "${MUI_LANGDLL_REGISTRY_VALUENAME}" $LANGUAGE
-    ${endif}
 
     File /r /x translations "${DIST_DIR}\*"
 
