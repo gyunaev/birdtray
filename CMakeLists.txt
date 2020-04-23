@@ -124,7 +124,7 @@ if(Qt5LinguistTools_FOUND)
             src/translations/dynamic_nl.ts
             src/translations/dynamic_it.ts
             src/translations/dynamic_ru.ts
-            scr/translations/dynamic_pt.ts
+            src/translations/dynamic_pt.ts
             )
 
     set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
