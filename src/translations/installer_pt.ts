@@ -237,6 +237,10 @@
         <translation>Italiano</translation>
     </message>
     <message>
+        <source>Lang_ru</source>
+        <translation>Russo</translation>
+    </message>
+    <message>
         <source>Lang_pt</source>
         <translation>Português</translation>
     </message>

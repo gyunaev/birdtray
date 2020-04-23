@@ -240,5 +240,9 @@
         <source>Lang_ru</source>
         <translation>Русский</translation>
     </message>
+    <message>
+        <source>Lang_pt</source>
+        <translation>Португа́льский</translation>
+    </message>
 </context>
 </TS>
