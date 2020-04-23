@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.1.0)
 
+if(POLICY CMP0092)
+    cmake_policy(SET CMP0092 NEW)
+endif()
+
 project(Birdtray CXX)
 
 set(CMAKE_CXX_STANDARD 11)
