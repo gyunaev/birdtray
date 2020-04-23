@@ -54,6 +54,10 @@ endif(WIN32)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
+if(${CMAKE_VERSION} VERSION_LESS "3.8.0")
+    # AUTO_UIC places generated header files in CMAKE_CURRENT_BINARY_DIR before 3.8.0.
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
 
 set(SOURCES
         src/colorbutton.cpp
