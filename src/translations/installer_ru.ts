@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
-        <translation>Значок на рабочий стол.</translation>
+        <translation>Значок на рабочий стол</translation>
     </message>
     <message>
         <source>DesktopEntryDescription</source>
@@ -206,7 +206,7 @@
     </message>
     <message>
         <source>MissingVcRuntime_Found</source>
-        <translation>Требуемый компонент уже установлен на вашем компьютере</translation>
+        <translation>Требуемый компонент уже установлен на вашем компьютере.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_StillNotFound</source>
@@ -239,6 +239,10 @@
     <message>
         <source>Lang_ru</source>
         <translation>Русский</translation>
+    </message>
+    <message>
+        <source>Lang_pt</source>
+        <translation>Португа́льский</translation>
     </message>
 </context>
 </TS>
