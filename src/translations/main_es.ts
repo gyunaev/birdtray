@@ -54,7 +54,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translation>Descodificar una cadena Utf7 de IMAP</translation>
+        <translation>Descodificar una cadena Utf7 de IMAP.</translation>
     </message>
     <message>
         <source>string</source>
