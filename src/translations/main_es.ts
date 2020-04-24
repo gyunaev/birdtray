@@ -730,7 +730,7 @@ El fichero de registro fue escrito en el archivo %2</translation>
     <name>UnreadMonitor</name>
     <message>
         <source>Unable to watch %1 for changes.</source>
-        <translation>Incapaz de mirar %1 para cambios</translation>
+        <translation>Incapaz de mirar %1 para cambios.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
