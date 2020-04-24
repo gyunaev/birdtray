@@ -538,7 +538,7 @@ Por favor, aseguresé que ha seleccionado el directorio de perfiles correcto</tr
     </message>
     <message>
         <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Lo sentimos, la bandeja del sistema no puede ser controlado a través de este complemento en su sistema operativo</translation>
+        <translation>Lo sentimos, la bandeja del sistema no puede ser controlado a través de este complemento en su sistema operativo.</translation>
     </message>
 </context>
 <context>
