@@ -547,7 +547,7 @@ Por favor, aseguresé que ha seleccionado el directorio de perfiles correcto</tr
     </message>
     <message>
         <source>Couldn&apos;t open file: </source>
-        <translation>No se pudo abrir el fichero:</translation>
+        <translation>No se pudo abrir el fichero: </translation>
     </message>
     <message>
         <source>Unsupported version.</source>
