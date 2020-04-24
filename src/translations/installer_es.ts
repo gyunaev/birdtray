@@ -26,7 +26,7 @@
     </message>
     <message>
         <source>AutoRunDescription</source>
-        <translation>Empezar automáticamente ${PRODUCT_NAME} después del arranque</translation>
+        <translation>Empezar automáticamente ${PRODUCT_NAME} después del arranque.</translation>
     </message>
     <message>
         <source>AutoCheckUpdateSectionName</source>
