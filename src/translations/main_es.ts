@@ -377,7 +377,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translation>opaco cuando haya nuevos correos</translation>
+        <translation>opaco cuando haya nuevos correos,</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
