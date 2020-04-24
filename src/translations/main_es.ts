@@ -804,7 +804,7 @@ El fichero de registro fue escrito en el archivo %2</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Descargando instalador de Birdtray...  (%1 Mb / %2 Mb).</translation>
+        <translation>Descargando instalador de Birdtray... (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
