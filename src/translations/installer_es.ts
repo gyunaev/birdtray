@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
-        <translation>La configuracíon de ${PRODUCT_NAME} está en ejecución. $\r$\nPor favor, cierre todas las instancias y pulse Reintentar para continuar, o Cancelar para salir.</translation>
+        <translation>La configuracíon de ${PRODUCT_NAME} está en ejecución.$\r$\nPor favor, cierre todas las instancias y pulse Reintentar para continuar, o Cancelar para salir.</translation>
     </message>
     <message>
         <source>UninstallAlreadyRunning</source>
