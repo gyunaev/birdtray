@@ -583,7 +583,7 @@ Por favor, aseguresé que ha seleccionado el directorio de perfiles correcto</tr
     </message>
     <message>
         <source>Sqlite based accounts migrated</source>
-        <translation>Cuentas basadas en Sqlite cambiadas.</translation>
+        <translation>Cuentas basadas en Sqlite cambiadas</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
