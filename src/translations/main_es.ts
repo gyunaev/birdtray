@@ -27,7 +27,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
-        <translation>Redireccionamiento inválido:</translation>
+        <translation>Redireccionamiento inválido: </translation>
     </message>
     <message>
         <source>Update failed</source>
