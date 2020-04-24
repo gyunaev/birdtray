@@ -33,7 +33,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translation>Fallo al iniciar el instaldor de Birdtray</translation>
+        <translation>Fallo al iniciar el instaldor de Birdtray.</translation>
     </message>
 </context>
 <context>
