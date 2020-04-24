@@ -46,7 +46,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Display the contents of the given mork database.</source>
-        <translation>Mostrar el contenido de la base de datos de mork</translation>
+        <translation>Mostrar el contenido de la base de datos de mork.</translation>
     </message>
     <message>
         <source>databaseFile</source>
