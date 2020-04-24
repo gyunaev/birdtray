@@ -736,7 +736,7 @@ El fichero de registro fue escrito en el archivo %2</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
-        <translation>Incapaz de leer desde %1</translation>
+        <translation>Incapaz de leer desde %1.</translation>
     </message>
 </context>
 <context>
