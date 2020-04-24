@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
-        <translation>El directorio de instalación no está vacio, pero no parece que contenga una versión previa de ${PRODUCT_NAME}. El contenido será sobreescrito</translation>
+        <translation>El directorio de instalación no está vacio, pero no parece que contenga una versión previa de ${PRODUCT_NAME}. El contenido será sobreescrito.</translation>
     </message>
     <message>
         <source>CurrentUserOnly</source>
