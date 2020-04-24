@@ -10,7 +10,7 @@
     </message>
     <message>
         <source>BirdtraySectionDescription</source>
-        <translation>Sistema Libre de notificación para nuevos correos de Thunderbird</translation>
+        <translation>Sistema Libre de notificación para nuevos correos de Thunderbird.</translation>
     </message>
     <message>
         <source>WinIntegrationSectionName</source>
