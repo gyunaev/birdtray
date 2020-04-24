@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>BadInstallPath</source>
-        <translation>El direccitorio de instalación no debe contener $\r$\n ${BAD_PATH_CHARS}.</translation>
+        <translation>El direccitorio de instalación no debe contener$\r$\n${BAD_PATH_CHARS}.</translation>
     </message>
     <message>
         <source>InstallPathContainsPreviousVersion</source>
