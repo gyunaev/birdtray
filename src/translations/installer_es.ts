@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>UninstallAlreadyRunning</source>
-        <translation>La desinstalación de ${PRODUCT_NAME} está en ejecución. $\r$\nPor favor, cierre todas las instancias y pulse Reintentar para continuar, o Cancelar para salir.</translation>
+        <translation>La desinstalación de ${PRODUCT_NAME} está en ejecución.$\r$\nPor favor, cierre todas las instancias y pulse Reintentar para continuar, o Cancelar para salir.</translation>
     </message>
     <message>
         <source>BadInstallPath</source>
