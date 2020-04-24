@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>FileDeleteErrorDialog</source>
-        <translation>Error eleminando el fichero:$\r$\n$\r$\n$0$\r$\n$\r$\nPulse Reintentar para volver a probar, o $\r$\nCancelar para parar la desinstalación.</translation>
+        <translation>Error eleminando el fichero:$\r$\n$\r$\n$0$\r$\n$\r$\nPulse Reintentar para volver a probar, o$\r$\nCancelar para parar la desinstalación.</translation>
     </message>
     <message>
         <source>FileDeleteError</source>
