@@ -498,7 +498,7 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Select the mail accounts you want to monitor.</source>
-        <translation>Seleccione las cuentas de correo que quiere controlar</translation>
+        <translation>Seleccione las cuentas de correo que quiere controlar.</translation>
     </message>
     <message>
         <source>Email Folder</source>
