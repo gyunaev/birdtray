@@ -12,7 +12,8 @@ OpenSLL podría no estar instalado.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Fallo al salvar el instalador de Birdtray:</translation>
+        <translation>Fallo al salvar el instalador de Birdtray:
+</translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
