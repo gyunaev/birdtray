@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>InstallPathContainsPreviousVersion</source>
-        <translation>El directorio de instalación contiene una versión previa instalada de ${PRODUCT_NAME}, que será reemplazada</translation>
+        <translation>El directorio de instalación contiene una versión previa instalada de ${PRODUCT_NAME}, que será reemplazada.</translation>
     </message>
     <message>
         <source>InstallPathNotEmpty</source>
