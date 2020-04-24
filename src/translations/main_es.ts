@@ -357,7 +357,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation>No se puede cargar el icono de este fichero</translation>
+        <translation>No se puede cargar el icono de este fichero.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
