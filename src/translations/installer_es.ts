@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>UserSettingsDescription</source>
-        <translation>Tus  preferencias y configuraciones hechas con ${PRODUCT_NAME}.</translation>
+        <translation>Tus preferencias y configuraciones hechas con ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>LicenseStartMenuLinkName</source>
