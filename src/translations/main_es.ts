@@ -520,7 +520,7 @@ Do you want to continue?</source>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
         <translation>No se han encontrado perfiles de correo
-Por favor, aseguresé que ha seleccionado el directorio de perfiles correcto</translation>
+Por favor, aseguresé que ha seleccionado el directorio de perfiles correcto.</translation>
     </message>
 </context>
 <context>
