@@ -109,7 +109,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Email message text:</source>
-        <translation>Texto del mensaje del correo</translation>
+        <translation>Texto del mensaje del correo:</translation>
     </message>
     <message>
         <source>Email recipient:</source>
