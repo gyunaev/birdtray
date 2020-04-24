@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>WinIntegrationGroupDescription</source>
-        <translation>Seleccionar cómo integrar el programa en Windows</translation>
+        <translation>Seleccionar cómo integrar el programa en Windows.</translation>
     </message>
     <message>
         <source>AutoRunSectionName</source>
