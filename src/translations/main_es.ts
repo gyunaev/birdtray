@@ -121,7 +121,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>The name cannot be empty.</source>
-        <translation>El nombre no puede estar vacío</translation>
+        <translation>El nombre no puede estar vacío.</translation>
     </message>
 </context>
 <context>
