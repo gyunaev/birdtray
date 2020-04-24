@@ -42,7 +42,7 @@ OpenSLL podría no estar instalado.</translation>
     <name>BirdtrayApp</name>
     <message>
         <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Un sistema libre de notificación para la bandeja el sistema para nuevos correos de Thunderbird </translation>
+        <translation>Un sistema libre de notificación para la bandeja el sistema para nuevos correos de Thunderbird</translation>
     </message>
     <message>
         <source>Display the contents of the given mork database.</source>
