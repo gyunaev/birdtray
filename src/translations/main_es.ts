@@ -381,7 +381,7 @@ OpenSLL podría no estar instalado.</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translation>ocultar si no hay nuevos correos</translation>
+        <translation>ocultar si no hay nuevos correos.</translation>
     </message>
     <message>
         <source>Choose one or more MSF files</source>
