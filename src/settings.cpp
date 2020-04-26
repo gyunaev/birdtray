@@ -108,6 +108,7 @@ void Settings::save()
     out[ "advanced/ignoreUpdateVersion" ] = mIgnoreUpdateVersion;
     out[ ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY ] = onlyShowIconOnUnreadMessages;
     out[ "advanced/forcedRereadInterval" ] = static_cast<int>( mIndexFilesRereadIntervalSec );
+    out[ "advanced/runProcessOnChange" ] = mProcessRunOnCountChange;
 
     // Store the account map
     QJsonArray accounts;
@@ -237,6 +238,7 @@ void Settings::fromJSON( const QJsonObject& settings )
     onlyShowIconOnUnreadMessages = settings.value(ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY).toBool();
     mIgnoreUpdateVersion = settings.value("advanced/ignoreUpdateVersion").toString();
     mIndexFilesRereadIntervalSec = settings.value("advanced/forcedRereadInterval").toInt();
+    mProcessRunOnCountChange = settings.value( "advanced/runProcessOnChange" ).toString();
 
     QStringList thunderbirdCommand = settings.value("advanced/tbcmdline").toVariant().toStringList();
     if ( !thunderbirdCommand.isEmpty() && !thunderbirdCommand[0].isEmpty() )
