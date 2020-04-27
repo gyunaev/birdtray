@@ -4,8 +4,8 @@
 <context>
     <name>WindowsInstaller</name>
     <message>
-        <source>Lang_es</source>
-        <translatorcomment>By Roberto Planchuelo Tejeiro</translatorcomment>
+        <source>__LANGUAGE_NAME__</source>
+        <translatorcomment>This must be the name of one of the NSIS translation files at https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/ without the file extension.</translatorcomment>
         <translation>Spanish</translation>
     </message>
     <message>
