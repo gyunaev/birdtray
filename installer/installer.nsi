@@ -68,7 +68,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define UNINSTALL_REG_PATH \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}$currentUserString"
 !define USER_REG_PATH "Software\ulduzsoft"
-!define USER_SETTINGS_REG_PATH "${USER_REG_PATH}\${PRODUCT_NAME}"
+!define USER_SETTINGS_PATH_ROOT "$LOCALAPPDATA"
+!define USER_SETTINGS_PATH "${USER_SETTINGS_PATH_ROOT}\ulduzsoft\birdtray\birdtray-config.json"
 !define DEFAULT_INSTALL_PATH "$PROGRAMFILES\${PRODUCT_NAME}"
 !define UNINSTALL_FILENAME "uninstall.exe"
 !define UNINSTALL_BUILDER_FILE "uninstall_builder.exe"
@@ -255,12 +256,31 @@ Section "${PRODUCT_NAME}" SectionBirdTray
     ${if} $0 != ""
         DetailPrint "$(UninstallPreviousVersion)"
         !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtray)" "$(StopBirdtrayError)"
+
+        # Save the config file.  TODO: Remove this after 1.8.1
+        Rename "${USER_SETTINGS_PATH}" "$TEMP\birdtray-config.json"
+
         ClearErrors
         ${if} $0 == "AllUsers"
             Call RunUninstaller
         ${else}
             !insertmacro UAC_AsUser_Call Function RunUninstaller ${UAC_SYNCREGISTERS}
         ${endif}
+
+        # Put the config file back.  TODO: Remove this block after 1.8.1
+        StrCpy $4 "0"
+        ${if} ${errors}
+            StrCpy $4 "1"
+        ${endif}
+        ${if} ${FileExists} "$TEMP\birdtray-config.json"
+            CreateDirectory "${USER_SETTINGS_PATH_ROOT}\ulduzsoft\birdtray"
+            Rename "$TEMP\birdtray-config.json" "${USER_SETTINGS_PATH}"
+        ${endif}
+        ClearErrors
+        ${if} $4 == "1"
+            SetErrors
+        ${endif}
+
         ${if} ${errors} # Stay in installer
             MessageBox MB_OKCANCEL|MB_ICONSTOP "$(UninstallPreviousVersionError)" \
                 /SD IDCANCEL IDOK Ignore
@@ -302,10 +322,6 @@ Section "${PRODUCT_NAME}" SectionBirdTray
 
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMajor" ${VERSION_MAJOR}
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMinor" ${VERSION_MINOR}
-    ${if} ${silent} # MUI doesn't write language in silent mode
-        WriteRegStr "${MUI_LANGDLL_REGISTRY_ROOT}" "${MUI_LANGDLL_REGISTRY_KEY}" \
-            "${MUI_LANGDLL_REGISTRY_VALUENAME}" $LANGUAGE
-    ${endif}
 
     File /r /x translations "${DIST_DIR}\*"
 
@@ -358,9 +374,9 @@ SectionEnd
 SectionGroupEnd
 
 Section "$(AutoCheckUpdateSectionName)" SectionAutoCheckUpdate
+    # TODO: Write directly to the settings JSON
     ${StrCase} $0 "${COMPANY_NAME}" "L"
     ${StrCase} $1 "${PRODUCT_NAME}" "L"
-    DeleteRegValue HKCU "${USER_SETTINGS_REG_PATH}" "hasReadInstallConfig"
     CreateDirectory "$LOCALAPPDATA\$0"
     CreateDirectory "$LOCALAPPDATA\$0\$1"
     FileOpen $2 "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}" a
@@ -440,8 +456,6 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     ${UnStrCase} $0 "${COMPANY_NAME}" "L"
     ${UnStrCase} $1 "${PRODUCT_NAME}" "L"
     !insertmacro DeleteRetryAbort "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}"
-    RMDir /r "$LOCALAPPDATA\$0\$1"
-    RMDir /r "$LOCALAPPDATA\$0"
 
     # Clean up "AutoRun"
     DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" "${PRODUCT_NAME}"
@@ -460,8 +474,15 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
 SectionEnd
 
 Section /o "un.$(UserSettingsSectionName)" UNSectionUserSettings
-    DeleteRegKey HKCU "${USER_SETTINGS_REG_PATH}"
-    DeleteRegKey /ifempty HKCU "${USER_REG_PATH}"
+    Delete "${USER_SETTINGS_PATH}"
+    ${GetParent} "${USER_SETTINGS_PATH}" $R0
+    ${do}
+        RMDir $R0
+        ${if} ${errors}
+            ${break}
+        ${endif}
+        ${GetParent} $R0 $R0
+    ${LoopUntil} $R0 == "${USER_SETTINGS_PATH_ROOT}"
 SectionEnd
 
 Section -un.Post UNSectionSystem

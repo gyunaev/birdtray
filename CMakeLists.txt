@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.1.0)
 
+if(POLICY CMP0092)
+    cmake_policy(SET CMP0092 NEW)
+endif()
+
 project(Birdtray CXX)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -54,6 +58,10 @@ endif(WIN32)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
+if(${CMAKE_VERSION} VERSION_LESS "3.8.0")
+    # AUTO_UIC places generated header files in CMAKE_CURRENT_BINARY_DIR before 3.8.0.
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
 
 set(SOURCES
         src/colorbutton.cpp
@@ -115,12 +123,16 @@ if(Qt5LinguistTools_FOUND)
             src/translations/main_de.ts
             src/translations/main_nl.ts
             src/translations/main_it.ts
+            src/translations/main_ru.ts
+            src/translations/main_pt.ts
             )
     set(DYN_TRANSLATION_FILES
             src/translations/dynamic_en.ts
             src/translations/dynamic_de.ts
             src/translations/dynamic_nl.ts
             src/translations/dynamic_it.ts
+            src/translations/dynamic_ru.ts
+            src/translations/dynamic_pt.ts
             )
 
     set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION

@@ -236,5 +236,13 @@
         <source>Lang_it</source>
         <translation>Italian</translation>
     </message>
+    <message>
+        <source>Lang_ru</source>
+        <translation>Russian</translation>
+    </message>
+    <message>
+        <source>Lang_pt</source>
+        <translation>Portugees</translation>
+    </message>
 </context>
 </TS>
