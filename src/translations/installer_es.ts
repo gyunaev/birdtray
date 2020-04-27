@@ -236,10 +236,17 @@
         <source>Lang_it</source>
         <translation>Italiano</translation>
     </message>
-        <message>
+    <message>
+        <source>Lang_ru</source>
+        <translation>Ruso</translation>
+    </message>
+    <message>
+        <source>Lang_pt</source>
+        <translation>Portugués</translation>
+    </message>
+    <message>
         <source>Lang_es</source>
         <translation>Español</translation>
     </message>
-
 </context>
 </TS>
