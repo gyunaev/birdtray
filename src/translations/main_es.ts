@@ -7,7 +7,7 @@
         <source>No ssl configuration!
 OpenSSL might not be installed.</source>
         <translation>¡SSL no configurado!
-OpenSLL podría no estar instalado.</translation>
+OpenSSL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Failed to save the Birdtray installer:
