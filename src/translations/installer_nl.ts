@@ -244,5 +244,9 @@
         <source>Lang_pt</source>
         <translation>Portugees</translation>
     </message>
+    <message>
+        <source>Lang_es</source>
+        <translation>Spaans</translation>
+    </message>
 </context>
 </TS>
