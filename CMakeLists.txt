@@ -1,17 +1,20 @@
 cmake_minimum_required(VERSION 3.1.0)
 
+if(POLICY CMP0092)
+    cmake_policy(SET CMP0092 NEW)
+endif()
+
 project(Birdtray CXX)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(SQLite3 REQUIRED)
 find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5Network CONFIG REQUIRED)
+find_package(Qt5Svg CONFIG REQUIRED)
 find_package(Qt5LinguistTools CONFIG QUIET)
-set(REQUIRED_MODULES ${SQLITE3_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
+set(REQUIRED_MODULES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network Qt5::Svg)
 
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
@@ -55,49 +58,49 @@ endif(WIN32)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
+if(${CMAKE_VERSION} VERSION_LESS "3.8.0")
+    # AUTO_UIC places generated header files in CMAKE_CURRENT_BINARY_DIR before 3.8.0.
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
 
 set(SOURCES
         src/colorbutton.cpp
-        src/databaseaccounts.cpp
-        src/databaseunreadfixer.cpp
-        src/dialogaddeditaccount.cpp
         src/dialogaddeditnewemail.cpp
         src/dialogsettings.cpp
+        src/dialoglogoutput.cpp
         src/modelaccounttree.cpp
         src/modelnewemails.cpp
         src/morkparser.cpp
         src/setting_newemail.cpp
         src/settings.cpp
-        src/sqlite_statement.cpp
         src/trayicon.cpp
         src/unreadmonitor.cpp
         src/utils.cpp
+        src/log.cpp
         src/windowtools.cpp
         src/autoupdater.cpp
         src/updatedialog.cpp
         src/updatedownloaddialog.cpp
         src/mailaccountdialog.cpp
         src/birdtrayapp.cpp
-        src/dialogaddeditaccount.ui
         src/dialogaddeditnewemail.ui
         src/dialogsettings.ui
         src/updatedialog.ui
         src/updatedownloaddialog.ui
+        src/dialoglogoutput.ui
         src/mailaccountdialog.ui)
 
 set(HEADERS
         src/colorbutton.h
-        src/databaseaccounts.h
-        src/databaseunreadfixer.h
-        src/dialogaddeditaccount.h
         src/dialogaddeditnewemail.h
+        src/dialoglogoutput.h
         src/dialogsettings.h
+        src/log.h
         src/modelaccounttree.h
         src/modelnewemails.h
         src/morkparser.h
         src/setting_newemail.h
         src/settings.h
-        src/sqlite_statement.h
         src/trayicon.h
         src/unreadmonitor.h
         src/utils.h
@@ -119,11 +122,19 @@ if(Qt5LinguistTools_FOUND)
             src/translations/main_en.ts
             src/translations/main_de.ts
             src/translations/main_nl.ts
+            src/translations/main_it.ts
+            src/translations/main_ru.ts
+            src/translations/main_pt.ts
+            src/translations/main_es.ts
             )
     set(DYN_TRANSLATION_FILES
             src/translations/dynamic_en.ts
             src/translations/dynamic_de.ts
             src/translations/dynamic_nl.ts
+            src/translations/dynamic_it.ts
+            src/translations/dynamic_ru.ts
+            src/translations/dynamic_pt.ts
+            src/translations/dynamic_es.ts
             )
 
     set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
@@ -142,7 +153,7 @@ endif(Qt5LinguistTools_FOUND)
 add_library(birdtray_lib STATIC
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
         ${HEADERS} ${PLATFORM_HEADERS})
-target_include_directories(birdtray_lib PUBLIC ${SQLITE3_INCLUDE_DIRS} src)
+target_include_directories(birdtray_lib PUBLIC src)
 target_link_libraries(birdtray_lib PUBLIC ${REQUIRED_MODULES})
 
 add_executable(birdtray
@@ -172,20 +183,36 @@ endif()
 
 # Installation
 if(WIN32)
+    if(POLICY CMP0087)
+        cmake_policy(SET CMP0087 NEW)
+    endif()
+
+    option(DONT_EXECUTE_INSTALLER "Only create the Windows installer but don't execute it" OFF)
+    set(INSTALL_ARG --install)
+    if (DONT_EXECUTE_INSTALLER)
+        set(INSTALL_ARG)
+    endif()
+
     # Find ssl libraries
-    find_library(SSL_LIBRARY NAMES ssl)
-    get_filename_component(SSL_PATH ${SSL_LIBRARY} DIRECTORY)
-    if(SSL_LIBRARY)
+    find_package(OpenSSL QUIET)
+    get_filename_component(SSL_PATH ${OPENSSL_SSL_LIBRARY} DIRECTORY)
+    if(SSL_PATH)
         STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
+    else()
+        set(SSL_PATH "C:\\\\Program Files\\\\OpenSSL")
     endif()
 
     # Create installer
-    STRING(REGEX REPLACE "/" "\\\\\\\\" BIRDTRAY_EXE ${CMAKE_BINARY_DIR}/birdtray.exe)
-    STRING(REGEX REPLACE "/" "\\\\\\\\" SQLITE3_PATH ${SQLITE3_LIBRARY})
-    install(CODE "execute_process(
-        COMMAND cmd /C buildInstaller.bat
-            \"${BIRDTRAY_EXE}\" \"${SQLITE3_PATH}\" \"${SSL_PATH}\" --install
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer)")
+    install(CODE "if(NOT POLICY CMP0087)
+            message(FATAL_ERROR \"The install target requires cmake 3.14 or newer\")
+        endif()
+        execute_process(
+        COMMAND cmd /C buildInstaller.bat \"$<TARGET_FILE:birdtray>\" \"${SSL_PATH}\" ${INSTALL_ARG}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/installer
+        RESULT_VARIABLE INSTALL_RESULT)
+        if(NOT \${INSTALL_RESULT} EQUAL \"0\")
+            message(FATAL_ERROR \"Install command failed with exit code \${INSTALL_RESULT}\")
+        endif()")
 else()
     include(GNUInstallDirs)
     install(TARGETS birdtray RUNTIME DESTINATION bin)

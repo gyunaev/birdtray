@@ -28,6 +28,7 @@ SetCompressor /SOLID lzma
 !include LogicLib.nsh
 !include WinVer.nsh
 !include StrFunc.nsh
+!include StdUtils.nsh
 !Include Utils.nsh
 # StrFunc.nsh requires priming the commands which actually get used later
 !ifdef UNINSTALL_BUILDER
@@ -67,7 +68,8 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define UNINSTALL_REG_PATH \
         "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}$currentUserString"
 !define USER_REG_PATH "Software\ulduzsoft"
-!define USER_SETTINGS_REG_PATH "${USER_REG_PATH}\${PRODUCT_NAME}"
+!define USER_SETTINGS_PATH_ROOT "$LOCALAPPDATA"
+!define USER_SETTINGS_PATH "${USER_SETTINGS_PATH_ROOT}\ulduzsoft\birdtray\birdtray-config.json"
 !define DEFAULT_INSTALL_PATH "$PROGRAMFILES\${PRODUCT_NAME}"
 !define UNINSTALL_FILENAME "uninstall.exe"
 !define UNINSTALL_BUILDER_FILE "uninstall_builder.exe"
@@ -125,6 +127,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define MUI_UNICON ${MUI_ICON} # Same icon for installer and un-installer.
 !define MUI_UNABORTWARNING
 !define MUI_UNCONFIRMPAGE_TEXT_TOP "$(UninstallerConfirmation)"
+!define MUI_CUSTOMFUNCTION_UNGUIINIT "un.onGuiInitialisation"
 !endif # UNINSTALL_BUILDER
 
 # MultiUser config
@@ -206,6 +209,7 @@ VIAddVersionKey LegalCopyright ""
 !define MUI_PAGE_CUSTOMFUNCTION_PRE InstallerPagePre
 !insertmacro MUI_PAGE_INSTFILES
 
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW FinishPagePre
 !insertmacro MUI_PAGE_FINISH
 
 # === Uninstaller pages ===#
@@ -252,12 +256,31 @@ Section "${PRODUCT_NAME}" SectionBirdTray
     ${if} $0 != ""
         DetailPrint "$(UninstallPreviousVersion)"
         !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtray)" "$(StopBirdtrayError)"
+
+        # Save the config file.  TODO: Remove this after 1.8.1
+        Rename "${USER_SETTINGS_PATH}" "$TEMP\birdtray-config.json"
+
         ClearErrors
         ${if} $0 == "AllUsers"
             Call RunUninstaller
         ${else}
             !insertmacro UAC_AsUser_Call Function RunUninstaller ${UAC_SYNCREGISTERS}
         ${endif}
+
+        # Put the config file back.  TODO: Remove this block after 1.8.1
+        StrCpy $4 "0"
+        ${if} ${errors}
+            StrCpy $4 "1"
+        ${endif}
+        ${if} ${FileExists} "$TEMP\birdtray-config.json"
+            CreateDirectory "${USER_SETTINGS_PATH_ROOT}\ulduzsoft\birdtray"
+            Rename "$TEMP\birdtray-config.json" "${USER_SETTINGS_PATH}"
+        ${endif}
+        ClearErrors
+        ${if} $4 == "1"
+            SetErrors
+        ${endif}
+
         ${if} ${errors} # Stay in installer
             MessageBox MB_OKCANCEL|MB_ICONSTOP "$(UninstallPreviousVersionError)" \
                 /SD IDCANCEL IDOK Ignore
@@ -299,10 +322,6 @@ Section "${PRODUCT_NAME}" SectionBirdTray
 
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMajor" ${VERSION_MAJOR}
     WriteRegDWORD SHCTX "${UNINSTALL_REG_PATH}" "VersionMinor" ${VERSION_MINOR}
-    ${if} ${silent} # MUI doesn't write language in silent mode
-        WriteRegStr "${MUI_LANGDLL_REGISTRY_ROOT}" "${MUI_LANGDLL_REGISTRY_KEY}" \
-            "${MUI_LANGDLL_REGISTRY_VALUENAME}" $LANGUAGE
-    ${endif}
 
     File /r /x translations "${DIST_DIR}\*"
 
@@ -355,9 +374,9 @@ SectionEnd
 SectionGroupEnd
 
 Section "$(AutoCheckUpdateSectionName)" SectionAutoCheckUpdate
+    # TODO: Write directly to the settings JSON
     ${StrCase} $0 "${COMPANY_NAME}" "L"
     ${StrCase} $1 "${PRODUCT_NAME}" "L"
-    DeleteRegValue HKCU "${USER_SETTINGS_REG_PATH}" "hasReadInstallConfig"
     CreateDirectory "$LOCALAPPDATA\$0"
     CreateDirectory "$LOCALAPPDATA\$0\$1"
     FileOpen $2 "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}" a
@@ -377,6 +396,27 @@ SectionGroupEnd
 
 Section "-Write Install Size" # Hidden section, write install size as the final step
     !insertmacro MULTIUSER_RegistryAddInstallSizeInfo
+SectionEnd
+
+Section "-Check VC Installed" # Hidden section, check if the Visual Redistributable is installed
+    ${IsVisualRedistributableInstalled} $R0 ${ARCH}
+    ${if} $R0 != 1
+        DetailPrint "$(MissingVcRuntime)"
+        MessageBox MB_YESNO|MB_ICONQUESTION "$(MissingVcRuntime_Dialog)" /SD IDNO IDNO VCNotFound
+        ${OpenURL} "https://aka.ms/vs/16/release/vc_redist.${ARCH}.exe"
+        MessageBox MB_OK|MB_ICONQUESTION "$(MissingVcRuntime_Retry)"
+        ${IsVisualRedistributableInstalled} $R0 ${ARCH}
+        StrCmp $R0 1 0 +3
+            MessageBox MB_OK|MB_ICONINFORMATION "$(MissingVcRuntime_Found)"
+            Goto Done
+        MessageBox MB_OK|MB_ICONEXCLAMATION "$(MissingVcRuntime_StillNotFound)"
+        VCNotFound:
+        DetailPrint "$(MissingVcRuntime_UnableToRun)"
+        MessageBox MB_OK|MB_ICONEXCLAMATION "$(MissingVcRuntime_UnableToRunDialog)" /SD IDOK
+        SetErrorLevel 1157 # ERROR_DLL_NOT_FOUND
+
+        Done:
+    ${endif}
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -416,8 +456,6 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
     ${UnStrCase} $0 "${COMPANY_NAME}" "L"
     ${UnStrCase} $1 "${PRODUCT_NAME}" "L"
     !insertmacro DeleteRetryAbort "$LOCALAPPDATA\$0\$1\${INSTALL_CONFIG_FILE}"
-    RMDir /r "$LOCALAPPDATA\$0\$1"
-    RMDir /r "$LOCALAPPDATA\$0"
 
     # Clean up "AutoRun"
     DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Run" "${PRODUCT_NAME}"
@@ -436,8 +474,15 @@ Section "un.${PRODUCT_NAME}" UNSectionBirdTray
 SectionEnd
 
 Section /o "un.$(UserSettingsSectionName)" UNSectionUserSettings
-    DeleteRegKey HKCU "${USER_SETTINGS_REG_PATH}"
-    DeleteRegKey /ifempty HKCU "${USER_REG_PATH}"
+    Delete "${USER_SETTINGS_PATH}"
+    ${GetParent} "${USER_SETTINGS_PATH}" $R0
+    ${do}
+        RMDir $R0
+        ${if} ${errors}
+            ${break}
+        ${endif}
+        ${GetParent} $R0 $R0
+    ${LoopUntil} $R0 == "${USER_SETTINGS_PATH_ROOT}"
 SectionEnd
 
 Section -un.Post UNSectionSystem
@@ -628,6 +673,17 @@ Function InstallerPagePre
     SendMessage $0 ${BCM_SETSHIELD} 0 0 # Hide SHIELD (Windows Vista and above)
 FunctionEnd
 
+# Called when the finish page is shown
+Function FinishPagePre
+    !ifndef UNINSTALL_BUILDER
+    ${IsVisualRedistributableInstalled} $R0 ${ARCH}
+    ${if} $R0 != 1
+        SendMessage $mui.FinishPage.Run ${BM_SETCHECK} ${BST_UNCHECKED} 0 # uncheck 'run software'
+        ShowWindow $mui.FinishPage.Run 0 # Hide the checkbox
+    ${endif}
+    !endif # UNINSTALL_BUILDER
+FunctionEnd
+
 Function .onInstFailed
     MessageBox MB_ICONSTOP "$(InstallFailed)" /SD IDOK
 FunctionEnd
@@ -653,15 +709,31 @@ Function un.onInit
         StrCpy $SemiSilentMode 0
     ${endif}
 
+    # We always get the language, since the outer and inner instance might have different language
+    !insertmacro MUI_UNGETLANGUAGE
+FunctionEnd
+
+Function un.onGuiInitialisation
     ${ifNot} ${UAC_IsInnerInstance}
     ${andIf} $RunningFromInstaller == 0
+        ${if} ${UAC_IsAdmin}
+            ReadRegStr $0 HKCU "${MULTIUSER_INSTALLMODE_INSTALL_REGISTRY_KEY_PATH}" \
+                "${MULTIUSER_INSTALLMODE_INSTDIR_REGISTRY_VALUENAME}"
+            ${GetParameters} $R0
+            ${GetOptions} $R0 "/currentuser" $R1
+            ${ifnot} ${errors}
+            ${andif} $0 == ""
+                MessageBox MB_YESNO|MB_ICONQUESTION "$(UninstallRestartAsUserQuestion)" /SD IDNO \
+                    IDNO Continue
+                ${StdUtils.ExecShellAsUser} $0 "$INSTDIR\${UNINSTALL_FILENAME}" "open" $R0
+                Quit
+                Continue:
+            ${endif}
+        ${endif}
         !insertmacro CheckSingleInstance "$(UninstallAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 
     !insertmacro MULTIUSER_UNINIT
-
-    # We always get the language, since the outer and inner instance might have different language
-    !insertmacro MUI_UNGETLANGUAGE
 
     !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtrayUninstall)" "$(StopBirdtrayUninstallError)"
 FunctionEnd

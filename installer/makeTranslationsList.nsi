@@ -1,3 +1,4 @@
+Unicode true
 SetCompress off
 Name "makeTranslationsList"
 OutFile "makeTranslationsList.exe"

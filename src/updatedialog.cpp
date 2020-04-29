@@ -31,7 +31,11 @@ UpdateDialog::~UpdateDialog() {
 void UpdateDialog::show(const QString &newVersion, const QString &changelog,
                         qulonglong estimatedSize) {
     ui->newVersionLabel->setText(newVersion);
-    ui->changelogLabel->setText(changelog);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    ui->changelogLabel->setMarkdown(Utils::formatGithubMarkdown(changelog));
+#else
+    ui->changelogLabel->setText(Utils::formatGithubMarkdown(changelog));
+#endif
     if (estimatedSize == (qulonglong) -1) {
         downloadButton->setText(tr("Download"));
     } else {

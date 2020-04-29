@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.0" language="nl_NL">
 <context>
     <name>WindowsInstaller</name>
     <message>
         <source>__LANGUAGE_NAME__</source>
         <translatorcomment>This must be the name of one of the NSIS translation files at https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/ without the file extension.</translatorcomment>
         <translation>Dutch</translation>
-    </message>
-        <message>
-        <source>Lang_nl</source>
-        <translation>Nederlands</translation>
     </message>
     <message>
         <source>BirdtraySectionDescription</source>
@@ -22,11 +18,11 @@
     </message>
     <message>
         <source>WinIntegrationGroupDescription</source>
-        <translation>Kies hoe u dit programma wilt integreren met Windows.</translation>
+        <translation>Geef aan hoe u dit programma wilt integreren met Windows.</translation>
     </message>
     <message>
         <source>AutoRunSectionName</source>
-        <translation>Autotmatisch opstarten</translation>
+        <translation>Automatisch opstarten</translation>
     </message>
     <message>
         <source>AutoRunDescription</source>
@@ -46,7 +42,7 @@
     </message>
     <message>
         <source>ProgramGroupDescription</source>
-        <translation>Maak een ${PRODUCT_NAME}-programmagroep aan onder Menu Start &gt; Programma&apos;s.</translation>
+        <translation>Maak een ${PRODUCT_NAME}-programmagroep aan onder Menu Start --&gt; Programma&apos;s.</translation>
     </message>
     <message>
         <source>DesktopEntrySectionName</source>
@@ -186,7 +182,43 @@
     </message>
     <message>
         <source>SettingsLink</source>
-        <translation>${PRODUCT_NAME} settings</translation>
+        <translation>${PRODUCT_NAME}-instellingen</translation>
+    </message>
+    <message>
+        <source>UninstallRestartAsUserQuestion</source>
+        <translation>De deïnstallatie is gestart met administratorrechten, maar er is geen ${PRODUCT_NAME}-installatie aangetroffen op het administratoraccount. Wilt u de deïnstallatie opnieuw starten zonder administratorrechten?</translation>
+    </message>
+    <message>
+        <source>OpenUrl</source>
+        <translation>Bezig met openen van $0...</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime</source>
+        <translation>Visual C++ Runtime ${ARCH} ontbreekt.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Dialog</source>
+        <translation>Het volgende vereiste onderdeel is niet aangetroffen op uw computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nWilt u de installatiewizard van dit onderdeel downloaden?</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Retry</source>
+        <translation>Draai, na het downloaden, de installatiewizard. Zodra de installatie is afgerond, kunt u op Oké klikken om de installatiestatus nogmaals te controleren.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_Found</source>
+        <translation>Het vereiste onderdeel is aangetroffen op uw computer.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_StillNotFound</source>
+        <translation>Het vereiste onderdeel is nog steeds niet aangetroffen op uw computer. Zoek op internet naar Visual C++ ${ARCH}-downloads voor Visual Studio 2015 of nieuwer.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_UnableToRun</source>
+        <translation>${PRODUCT_NAME} kan niet worden gestart.</translation>
+    </message>
+    <message>
+        <source>MissingVcRuntime_UnableToRunDialog</source>
+        <translation>${PRODUCT_NAME} kan niet worden gestart omdat er een vereist onderdeel ontbreekt.</translation>
     </message>
     <message>
         <source>Lang_en</source>
@@ -195,6 +227,26 @@
     <message>
         <source>Lang_de</source>
         <translation>Duits</translation>
+    </message>
+    <message>
+        <source>Lang_nl</source>
+        <translation>Nederlands</translation>
+    </message>
+    <message>
+        <source>Lang_it</source>
+        <translation>Italiaans</translation>
+    </message>
+    <message>
+        <source>Lang_ru</source>
+        <translation>Russisch</translation>
+    </message>
+    <message>
+        <source>Lang_pt</source>
+        <translation>Portugees</translation>
+    </message>
+    <message>
+        <source>Lang_es</source>
+        <translation>Spaans</translation>
     </message>
 </context>
 </TS>

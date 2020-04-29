@@ -31,6 +31,7 @@
 #include <QtCore>
 #include <utility>
 
+#include "log.h"
 
 /**
  * An exception during parsing of a mork file.
@@ -317,7 +318,7 @@ inline void MorkParser::parseComment()
 //	=============================================================
 //	MorkParser::parseCell
 
-void MorkParser::parseCell(bool isInCutMode)
+void MorkParser::parseCell(QList<int>* parsedIds)
 {
     //bool bColumnOid = false;
     bool bValueOid = false;
@@ -412,7 +413,12 @@ void MorkParser::parseCell(bool isInCutMode)
 
     // Apply column and text
     int ColumnId = Column.toInt( 0, 16 );
-
+    if (parsedIds != nullptr) {
+        if (parsedIds->contains(ColumnId)) {
+            return;
+        }
+        parsedIds->append(ColumnId);
+    }
     if ( NPRows != nowParsing_ )
     {
         // Dicts
@@ -430,7 +436,7 @@ void MorkParser::parseCell(bool isInCutMode)
     }
     else
     {
-        if (!Text.isEmpty() && !(isInCutMode && (*currentCells_).contains(ColumnId))) {
+        if (!Text.isEmpty()) {
             // Rows
             int ValueId = Text.toInt( 0, 16 );
 
@@ -595,7 +601,8 @@ void MorkParser::parseRow( int TableId, int TableScope )
     if (cutMode) {
         (*currentCells_).clear();
     }
-
+    
+    QList<int> parsedCellIds;
     // Parse the row
     while ( cur != ']' && cur )
     {
@@ -604,7 +611,7 @@ void MorkParser::parseRow( int TableId, int TableScope )
             switch ( cur )
             {
             case '(':
-                parseCell(cutMode);
+                parseCell(&parsedCellIds);
                 break;
             case '[':
                 parseMeta( ']' );
@@ -777,7 +784,7 @@ int MorkParser::dumpMorkFile( const QString& filename )
     MorkParser p;
 
     if ( !p.open( filename ) )
-        Utils::fatal(QCoreApplication::tr("Error opening mork file."));
+        qFatal( "Error opening mork file." );
 
     for ( TableScopeMap::iterator tit = p.mork_.begin(); tit != p.mork_.end(); ++tit )
     {
@@ -818,60 +825,24 @@ int MorkParser::dumpMorkFile( const QString& filename )
 }
 
 unsigned int MailMorkParser::getNumUnreadMessages() {
-    unsigned int unread = 0;
-    
-    // First we parse the unreadChildren column (generic view)
-    const MorkRowMap * rows = this->rows( 0x80, 0, 0x80 );
-
-    if ( rows )
-    {
-        for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
-        {
+    const MorkRowMap* rows = this->rows(0x9F, 1, 0x9F);
+    if (rows) {
+        for (MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++) {
             MorkCells cells = rit.value();
-
-            for ( int colid : cells.keys() )
-            {
-                QString columnName = getColumn( colid );
-
-                if ( columnName == "unreadChildren" )
-                {
+            for (int colId : cells.keys()) {
+                QString columnName = getColumn(colId);
+                if (columnName == "numNewMsgs") {
                     bool correct;
-                    unsigned int value = getValue(cells[colid ]).toUInt( &correct, 16 );
-
-                    if ( correct )
-                        unread += value;
-                    else
-                        Utils::debug("Incorrect Mork value: %s", qPrintable( getValue(cells[colid ]) ));                }
-            }
-        }
-    }
-    else
-    {
-        // Now parse the smart inbox
-        rows = this->rows( 0x9F, 1, 0x9F );
-        if ( rows )
-        {
-            for ( MorkRowMap::const_iterator rit = rows->begin(); rit != rows->cend(); rit++ )
-            {
-                MorkCells cells = rit.value();
-                
-                for ( int colid : cells.keys() )
-                {
-                    QString columnName = getColumn( colid );
-                    
-                    if ( columnName == "numNewMsgs" )
-                    {
-                        bool correct;
-                        unsigned int value = getValue(cells[colid ]).toInt( &correct, 16 );
-                        
-                        if ( correct )
-                            unread += value;
-                        else
-                            Utils::debug("Incorrect Mork value: %s", qPrintable( getValue(cells[colid ]) ));
+                    unsigned int value = getValue(cells[colId]).toInt(&correct, 16);
+                    if (correct) {
+                        return static_cast<int>(value);
+                    } else {
+                        Log::debug("Incorrect Mork value: %s",
+                                qPrintable(getValue(cells[colId])));
                     }
                 }
             }
         }
     }
-    return unread;
+    return 0;
 }

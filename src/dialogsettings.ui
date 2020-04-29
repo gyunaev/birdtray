@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
+    <width>712</width>
     <height>432</height>
    </rect>
   </property>
@@ -84,7 +84,7 @@
             <item>
              <widget class="QCheckBox" name="boxShowUnreadCount">
               <property name="whatsThis">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Show unread count</string>
@@ -263,41 +263,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_3">
-         <property name="title">
-          <string>Fix the unread message count</string>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnFixUnreadCount">
-            <property name="text">
-             <string>Fix</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
         <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -317,49 +282,6 @@
        <string>Monitoring</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_10">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QLabel" name="label_12">
-           <property name="text">
-            <string>Method to parse unread notifications:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="boxParserSelection"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupThunderbirdProfilePath">
-         <property name="title">
-          <string/>
-         </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Please choose the Thunderbird profile database to monitor</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="leProfilePath"/>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="btnBrowse">
-            <property name="text">
-             <string>Browse</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
        <item>
         <widget class="QGroupBox" name="groupAccounts">
          <property name="title">
@@ -429,7 +351,7 @@
             <item>
              <widget class="QCheckBox" name="boxAllowSuppression">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Allow ignoring the current unread email counter</string>
@@ -911,19 +833,66 @@
             </item>
             <item>
              <widget class="QLabel" name="noUpdateIndicator">
+              <property name="visible">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>No new updates found</string>
               </property>
               <property name="textInteractionFlags">
                <set>Qt::NoTextInteraction</set>
               </property>
-              <property name="visible">
-               <bool>false</bool>
-              </property>
              </widget>
             </item>
             <item>
              <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnShowLogWindow">
+              <property name="text">
+               <string>Show log window</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <widget class="QCheckBox" name="boxForceReread">
+              <property name="text">
+               <string>Force index file re-read every</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinForceRereadSeconds">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="suffix">
+               <string> seconds</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>3600</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -984,6 +953,37 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <widget class="QLabel" name="translationLabel">
+           <property name="text">
+            <string>Translations are powered by the community:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="translatorsButton">
+           <property name="text">
+            <string>Translators</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -1033,10 +1033,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>boxShowUnreadCount</tabstop>
   <tabstop>boxNotificationIconUnread</tabstop>
   <tabstop>btnNotificationIconUnread</tabstop>
-  <tabstop>btnFixUnreadCount</tabstop>
-  <tabstop>boxParserSelection</tabstop>
-  <tabstop>btnBrowse</tabstop>
-  <tabstop>leProfilePath</tabstop>
   <tabstop>treeAccounts</tabstop>
   <tabstop>btnAccountAdd</tabstop>
   <tabstop>btnAccountEdit</tabstop>
@@ -1069,6 +1065,7 @@ p, li { white-space: pre-wrap; }
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1078,12 +1075,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>320</x>
-     <y>101</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>448</x>
-     <y>115</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
    </hints>
   </connection>
@@ -1094,12 +1091,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>150</x>
-     <y>302</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>384</x>
-     <y>294</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
    </hints>
   </connection>
@@ -1110,12 +1107,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>157</x>
-     <y>73</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>183</x>
-     <y>156</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1126,12 +1123,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>428</x>
-     <y>60</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>816</x>
-     <y>240</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1142,12 +1139,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>573</x>
-     <y>70</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>816</x>
-     <y>288</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1158,12 +1155,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>377</x>
-     <y>71</y>
+     <x>103</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>816</x>
-     <y>336</y>
+     <x>115</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -1174,12 +1171,28 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>440</x>
-     <y>241</y>
+     <x>115</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>637</x>
-     <y>247</y>
+     <x>115</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boxForceReread</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinForceRereadSeconds</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>292</y>
     </hint>
    </hints>
   </connection>

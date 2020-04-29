@@ -12,18 +12,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Fehler beim Speichern der Birdtray Installationsdatei:
+        <translation>Fehler beim Speichern der Birdtray-Installationsdatei:
 </translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation>Fehler beim Herunterladen der Birdtray Installationsdatei:
+        <translation>Fehler beim Herunterladen der Birdtray-Installationsdatei:
 </translation>
     </message>
     <message>
         <source>Installer download failed</source>
-        <translation>Herunterladen der Installationsdatei fehlgeschlagen</translation>
+        <translation>Herunterladen der Installationsdatei ist fehlgeschlagen</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
@@ -35,18 +35,18 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translation>Das Birdtray Installationsprogramm konnte nicht gestartet werden.</translation>
+        <translation>Das Birdtray-Installationsprogramm konnte nicht gestartet werden.</translation>
     </message>
 </context>
 <context>
     <name>BirdtrayApp</name>
     <message>
         <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Ein freies Taskleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
+        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
     </message>
     <message>
         <source>Display the contents of the given mork database.</source>
-        <translation>Zeige den Inhalt der Mork-Datenbank an.</translation>
+        <translation>Den Inhalt der Mork-Datenbank anzeigen.</translation>
     </message>
     <message>
         <source>databaseFile</source>
@@ -54,7 +54,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translation>Dekodiere eine IMAP Utf7 Zeichenkette.</translation>
+        <translation>Eine IMAP-UTF-7-Zeichenkette dekodieren.</translation>
     </message>
     <message>
         <source>string</source>
@@ -62,99 +62,38 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Show the settings.</source>
-        <translation>Öffne die Einstellungen.</translation>
+        <translation>Die Einstellungen öffnen.</translation>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
-        <translation>Setze die Einstellungen auf die Standardwerte zurück.</translation>
-    </message>
-    <message>
-        <source>Enable debugging output.</source>
-        <translation>Aktiviert Debugging-Ausgaben.</translation>
+        <translation>Die Einstellungen auf die Standardwerte zurücksetzen.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
-        <translation>Toggelt das Thunderbird Fenster.</translation>
+        <translation>Das Thunderbird-Fenster umschalten.</translation>
     </message>
     <message>
         <source>Show the Thunderbird window.</source>
-        <translation>Zeight das Thunderbird Fenster.</translation>
+        <translation>Das Thunderbird-Fenster anzeigen.</translation>
     </message>
     <message>
         <source>Hide the Thunderbird window.</source>
-        <translation>Versteckt das Thunderbird Fenster.</translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseAccounts</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite Datenbank: %1</translation>
+        <translation>Das Thunderbird-Fenster ausblenden.</translation>
     </message>
     <message>
-        <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation>Kann nicht auf die Datenbank zugreifen. Diese Methode funktioniert nicht mehr, falls Sie Thunderbird 68 oder neuer verwenden. Benutzen Sie bitte den Mork-Parser.</translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseUnreadFixer</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite Datenbank: %1</translation>
+        <source>Write log to a file.</source>
+        <translation>Schreibe Birdtrays Protokoll in eine Datei.</translation>
     </message>
     <message>
-        <source>Cannot query database.</source>
-        <translation>Kann nicht von der Datenbank lesen.</translation>
-    </message>
-</context>
-<context>
-    <name>DialogAddEditAccount</name>
-    <message>
-        <source>Folder:</source>
-        <translation>Ordner:</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Durchsuchen</translation>
-    </message>
-    <message>
-        <source>Notification text color:</source>
-        <translation>Benachrichtigungstextfarbe:</translation>
-    </message>
-    <message>
-        <source>Choose the MSF file</source>
-        <translation>Wähle die MSF Datei</translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation>Mail Index (*.msf)</translation>
-    </message>
-    <message>
-        <source>Invalid MSF file</source>
-        <translation>Ungültige MSF Datei</translation>
-    </message>
-    <message>
-        <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation>Es muss eine gültige, nicht leere Thunderbird Index-Datei ausgewählt werden.</translation>
-    </message>
-    <message>
-        <source>You must select an account.</source>
-        <translation>Es muss ein Konto ausgewählt werden.</translation>
-    </message>
-    <message>
-        <source>No account selected</source>
-        <translation>Kein Konto ausgewählt</translation>
-    </message>
-    <message>
-        <source>Please assign the message number text color</source>
-        <translation>Bitte wähle eine Farbe für die Anzeige der ungelesenen Mails</translation>
+        <source>FILE</source>
+        <translation>datei</translation>
     </message>
 </context>
 <context>
     <name>DialogAddEditNewEmail</name>
     <message>
         <source>&quot;New Email&quot; Entry</source>
-        <translation>&quot;Neue Email&quot; Eintrag</translation>
+        <translation>&quot;Neue E-Mail&quot;-Eintrag</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -170,7 +109,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Email message text:</source>
-        <translation>Email Text:</translation>
+        <translation>E-Mail-Text:</translation>
     </message>
     <message>
         <source>Email recipient:</source>
@@ -186,10 +125,17 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation>Protokollanzeige</translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
-        <translation>Birdtray Einstellungen</translation>
+        <translation>Birdtray-Einstellungen</translation>
     </message>
     <message>
         <source>General</source>
@@ -197,19 +143,15 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>New Mail Notification</source>
-        <translation>Benachrichtigungen über neue Emails</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, wird die Anzahl der ungelesenen Emails im  Birdtray Icon angezeigt.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Wenn die Option deaktiviert ist, wird keine Anzahl angezeigt. Sie werden dann, abhängig von Ihren Einstellungen, nur noch durch das blinkende oder geänderte Icon auf neue Emails aufmerksam gemacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>Benachrichtigungen über neue E-Mails</translation>
     </message>
     <message>
         <source>Show unread count</source>
-        <translation>Zeige die Anzahl ungelesener Emails</translation>
+        <translation>Die Anzahl ungelesener E-Mails anzeigen</translation>
     </message>
     <message>
         <source>Different icon when unread:</source>
-        <translation>Anderes Icon bei ungelesenen Emails:</translation>
+        <translation>Anderes Symbol bei ungelesenen E-Mails:</translation>
     </message>
     <message>
         <source>Off</source>
@@ -221,11 +163,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translation>Icon (Strg-Klick zum Zurücksetzen):</translation>
+        <translation>Symbol (Strg-Klick zum Zurücksetzen):</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Benachrichtigungsfarbe wird benutzt, wenn es ungelesene Emails in mehreren überwachten Konten gibt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Benachrichtigungsfarbe wird benutzt, wenn es ungelesene E-Mails in mehreren überwachten Konten gibt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
@@ -233,7 +175,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies verändert die Schriftdicke, d.h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d. h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -260,32 +202,8 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Keine</translation>
     </message>
     <message>
-        <source>Fix the unread message count</source>
-        <translation>Repariere die Anzahl der ungelesenen Emails</translation>
-    </message>
-    <message>
-        <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation>Nutze dieses Werkzeug, wenn Birdtray ungelesene Mails anzeigt, aber keine vorhanden sind:</translation>
-    </message>
-    <message>
-        <source>Fix</source>
-        <translation>Reparieren</translation>
-    </message>
-    <message>
         <source>Monitoring</source>
         <translation>Überwachung</translation>
-    </message>
-    <message>
-        <source>Method to parse unread notifications:</source>
-        <translation>Methode zum Einlesen der Anzahl ungelesener Emails:</translation>
-    </message>
-    <message>
-        <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation>Bitte wählen Sie die Thunderbird Profildatenbank zur Überwachung aus</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Durchsuchen</translation>
     </message>
     <message>
         <source>Accounts to monitor</source>
@@ -304,12 +222,8 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Entfernen</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die &amp;quot;Ignoriere ungelesene Emails&amp;quot; Aktion hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen Emails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene Emails und zeigt  nur noch neu hinzukommende Emails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Gibt es zum Beispiel gerade 10 ungelesene Emails und Sie klicken auf die &amp;quot;Ignorier&amp;quot;-Aktion, wird Birdtray keinen Indikator für ungelesene Emails anzeigen, solange die Anzahl der ungelesenen Emails bei 10 bleibt. Sobald eine neue Email empfangen wird und es somit 11 ungelesene Emails gibt, zeigt Birdtray eine ungelesene Email an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Wenn die Anzahl der ungelesenen Emails weniger wird als die ursprünglich ignorierte Anzah,l wird die Anzahl ignorierter Mails auf null zurückgesetzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Allow ignoring the current unread email counter</source>
-        <translation>Erlaube das Ignorieren der momentanen ungelesenen Emails</translation>
+        <translation>Das Ignorieren der momentanen ungelesenen E-Mails erlauben</translation>
     </message>
     <message>
         <source>Hiding</source>
@@ -321,11 +235,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Start Thunderbird when Birdtray starts</source>
-        <translation>Starte Thunderbird wenn Birdtray startet</translation>
+        <translation>Wenn Birdtray startet, Thunderbird starten</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn sowohl Thunderbird als auch Birdtray beim Hochfahren gestartet werden, führt das  meist dazu, dass zwei Thunderbird-Instanzen gestartet werden. Hiermit kann eine Verzögerung vor dem Start von Thunderbird eingerichtet werden, um das zu verhindern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn sowohl Thunderbird als auch Birdtray beim Hochfahren gestartet werden, führt das meist dazu, dass zwei Thunderbird-Instanzen gestartet werden. Hiermit kann eine Verzögerung vor dem Start von Thunderbird eingerichtet werden, um das zu verhindern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source> second delay</source>
@@ -337,35 +251,35 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>and hide it</source>
-        <translation>und verstecke es</translation>
+        <translation>und ausblenden</translation>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
-        <translation>Schließe Thunderbird wenn Birdtray geschlossen wird</translation>
+        <translation>Thunderbird beenden, wenn Birdtray geschlossen wird</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation>Verstecke/Zeige das Thunderbird Fenster beim Klick auf das Taskleistensymbol</translation>
+        <translation>Das Thunderbird Fenster beim Klick auf das Systemleistensymbol ausblenden/anzeigen</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
-        <translation>Verstecke das Thunderbird Fenster, wenn es minimiert wird</translation>
+        <translation>Das Thunderbird-Fenster ausblenden, wenn es minimiert wird</translation>
     </message>
     <message>
         <source>Show red X in tray icon if Thunderbird is not running</source>
-        <translation>Zeige ein rotes X im Taskleistensymbol, wenn Thunderbird nicht ausgeführt wird</translation>
+        <translation>Ein rotes X im Systemleistensymbol anzeigen, wenn Thunderbird nicht ausgeführt wird</translation>
     </message>
     <message>
         <source>Restart Thunderbird if it was closed</source>
-        <translation>Starte Thunderbird erneut, wenn es geschlossen wurde</translation>
+        <translation>Thunderbird erneut starten, wenn es geschlossen wurde</translation>
     </message>
     <message>
         <source>New Email</source>
-        <translation>Neue Email</translation>
+        <translation>Neue E-Mail</translation>
     </message>
     <message>
         <source>Enable New Email submenu</source>
-        <translation>Aktiviere das &quot;Neue Email&quot;-Untermenü</translation>
+        <translation>Das Untermenü &quot;Neue E-Mail&quot; aktvieren</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -373,7 +287,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Please do not change these settings unless you understand what you&apos;re doing.</source>
-        <translation>Bitte ändern Sie diese Einstellungen nur wenn Sie wissen was Sie tun.</translation>
+        <translation>Bitte ändern Sie diese Einstellungen nur, wenn Sie wissen was Sie tun.</translation>
     </message>
     <message>
         <source>Thunderbird window name pattern:</source>
@@ -389,23 +303,23 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
-        <translation>Benutze Ein- und Ausblendeanimationen beim Blinken (Erhöht die CPU-Belastung!)</translation>
+        <translation>Ein- und Ausblendeanimationen beim Blinken benutzen (erhöht die CPU-Belastung!)</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation>Setze die Transparenz des Taskleistensymbols auf</translation>
+        <translation>Die Transparenz des Systemleistensymbols festlegen auf</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts</source>
-        <translation>Suche nach Aktualisierungen, wenn Birdtray startet</translation>
+        <translation>Beim Start von Birdtray nach Aktualisierungen suchen</translation>
     </message>
     <message>
         <source>Check for new updates on startup</source>
-        <translation>Suche beim Starten nach Aktualisierungen</translation>
+        <translation>Beim Start auf Aktualisierungen prüfen</translation>
     </message>
     <message>
         <source>Check for a new Birdtray version</source>
-        <translation>Suche nach einer neuen Version von Birdtray</translation>
+        <translation>Nach einer neuen Version von Birdtray suchen</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -416,122 +330,42 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Über</translation>
     </message>
     <message>
-        <source>using global search database (wont work with 68+)</source>
-        <translation>Globale Such-Datenbank (wird nicht mit 68+ funktionieren)</translation>
-    </message>
-    <message>
-        <source>using Mork index files (recommended)</source>
-        <translation>Mork Index-Dateien (empfohlen)</translation>
-    </message>
-    <message>
-        <source>Empty Thunderbird directory</source>
-        <translation>Leeres Thunderbird Verzeichnis</translation>
-    </message>
-    <message>
-        <source>Choose the Thunderbird profile path</source>
-        <translation>Wähle den Thunderbird Profil-Pfad</translation>
-    </message>
-    <message>
         <source>Version check failed</source>
-        <translation>Updateprüfung fehlgeschlagen</translation>
+        <translation>Versionsprüfung ist fehlgeschlagen</translation>
     </message>
     <message>
         <source>Failed to check for a new Birdtray version:
 </source>
-        <translation>Fehler beim Überprüfen auf eine neue Birdtray Version:
+        <translation>Fehler beim Überprüfen auf eine neue Birdtray-Version:
 </translation>
     </message>
     <message>
-        <source>Fix the unread messages?</source>
-        <translation>Repariere die Anzahl der ungelesenen Mails?</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Diese Option sollte genutzt werden, wenn es keine ungelesenen Emails git, aber Birdtray trotzdem eine Anzahl anzeigt.&lt;br&gt;Um das Tool zu nutzen, muss Thunderbird geschlossen werden.&lt;br&gt;Die Reparatur kann bis zu fünf Minuten dauern.&lt;br&gt;&lt;br&gt;Bitte bestätigen Sie, dass Thunderbird geschlossen wurde und Sie fortfahren möchten.&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Updating the database...</source>
-        <translation>Aktualisierung der Datenbank...</translation>
-    </message>
-    <message>
-        <source>Database updated</source>
-        <translation>Datenbank aktualisiert</translation>
-    </message>
-    <message>
-        <source>You must specify a Thunderbird directory.</source>
-        <translation>Es muss ein Thunderbird-Verzeichnis angegeben werden.</translation>
-    </message>
-    <message>
-        <source>Successfully updated the database.</source>
-        <translation>Die Datenbank wurde erfolgreich aktualisiert.</translation>
-    </message>
-    <message>
-        <source>Error updating database</source>
-        <translation>Fehler beim Aktualisieren der Datenbank</translation>
-    </message>
-    <message>
-        <source>Error updating the database:
-%1</source>
-        <translation>Beim Aktualisieren der Datenbank ist ein Fehler aufgetreten:
-%1</translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts</source>
-        <translation>Fehler beim Abfragen der Konten</translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts:
-%1</source>
-        <translation>Beim Abfragen der Konten ist ein Fehler aufgetreten:
-%1</translation>
-    </message>
-    <message>
         <source>Checking...</source>
-        <translation>Suche...</translation>
-    </message>
-    <message>
-        <source>WARNING: Parser changed</source>
-        <translation>WARNUNG: Einlesemethode verändert</translation>
-    </message>
-    <message>
-        <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
-
-Do you want to clear the accounts?</source>
-        <translation>Die  Einlesemethode wurde verändert. Das Format der Konten ist nicht mit der neuen Methode kompatibel und muss neu eingerichtet werden.
-
-Sollen die Informationen über bestehende Konten gelöscht werden?</translation>
+        <translation>Überprüfung läuft…</translation>
     </message>
     <message>
         <source>Choose the new icon</source>
-        <translation>Wähle ein neues Icon</translation>
+        <translation>Ein neues Symbol auswählen</translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
-        <translation>Bilder (*.png *.svg)</translation>
+        <source>Images (*.png *.svg *.svgz)</source>
+        <translation>Bilder (*.png *.svg *.svgz)</translation>
     </message>
     <message>
         <source>Invalid icon</source>
-        <translation>Ungültiges Icon</translation>
+        <translation>Ungültiges Symbol</translation>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation>Es konnte kein Icon von der Datei geladen werden.</translation>
-    </message>
-    <message>
-        <source>Valid Thunderbird directory must contain the file %1.</source>
-        <translation>Ein gültiges Thunderbird-Verzeichnis muss die Datei %1 enthalten.</translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird directory</source>
-        <translation>Ungültiges Thunderbird-Verzeichnis</translation>
+        <translation>Es konnte kein Symbol von der Datei geladen werden.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
-        <translation>Thunderbird Kommandozeile:</translation>
+        <translation>Thunderbird-Befehlszeile:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies ist die komplette Kommandozeile (mit Argumenten), welche zum Starten von Thunderbird genutzt wird. Argumente müssen mit Leerzeichen getrennt werden, allerdings sind Leerzeichen in Anführungszeichen erlaubt. Z.B.: &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies ist die komplette Befehlszeile (mit Argumenten), welche zum Starten von Thunderbird genutzt wird. Argumente müssen mit Leerzeichen getrennt werden, allerdings sind Leerzeichen in Anführungszeichen erlaubt. Z. B.: &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -553,13 +387,13 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Liberation Sans&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; font-weight:600;&quot;&gt;Birdtray Version [VERSION], kompiliert am [DATE].&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; font-weight:600;&quot;&gt;Birdtray-Version [VERSION], kompiliert am [DATE].&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Copyright (C) 2018 by George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Urheberrecht (C) 2018 von George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Birdtray ist eine FREIE SOFTWARE, welche unter der General Public License v3 lizenziert ist. Sie können Birtray also für jeden Zweck, auch für kommerzielle Zwecke, verwenden, ohne etwas zu bezahlen.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Für Hilfe, um Verbesserungen vorzuschlagen oder um Fehler zu melden nutzen Sie bitte die &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;Github Projektseite&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Für Hilfe, um Verbesserungen vorzuschlagen oder um Fehler zu melden nutzen Sie bitte die &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;Github-Projektseite&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt;&quot;&gt;Diejenigen, die meine Arbeit an Birdtray wertschätzen, die ich in meiner freien Zeit mache, können mich hier unterstützen: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -567,34 +401,78 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ignore unread emails at startup</source>
-        <translation>Ignoriere ungelesene Emails, die beim Starten bereits vorhanden sind</translation>
+        <translation>Ungelesene E-Mails ignorieren, die beim Starten bereits vorhanden sind</translation>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translation>Ignoriere alle ungelesenen Emails, die beim Starten von Birdtray bereits vorhanden sind. Nur neue Emails werden bei der Berechnung der Anzahl ungelesener Emails beachtet.</translation>
+        <translation>Alle ungelesenen E-Mails ignorieren, die beim Starten von Birdtray bereits vorhanden sind. Nur neue E-Mails werden bei der Berechnung der Anzahl ungelesener E-Mails beachtet.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translation>beim Eingang neuer Mails,</translation>
+        <translation>beim Eingang neuer Mails.</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translation>verstecke es, wenn es keine neuen Mails gibt.</translation>
+        <translation>Ausblenden, wenn es keine neuen Mails gibt.</translation>
+    </message>
+    <message>
+        <source>Choose one or more MSF files</source>
+        <translation>Eine oder mehrere MSF-Dateien auswählen</translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation>Mail-Index (*.msf)</translation>
     </message>
     <message>
         <source>No new updates found</source>
         <translation>Keine neue Version gefunden</translation>
+    </message>
+    <message>
+        <source>Show log window</source>
+        <translation>Protokollfenster anzeigen</translation>
+    </message>
+    <message>
+        <source>Force index file re-read every</source>
+        <translation>Das erneute Lesen der Indexdatei erzwingen. Alle</translation>
+    </message>
+    <message>
+        <source> seconds</source>
+        <translation> Sekunden</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, wird die Anzahl der ungelesenen E-Mails im Birdtray-Symbol angezeigt.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Option deaktiviert ist, wird keine Anzahl angezeigt. Sie werden dann, abhängig von Ihren Einstellungen, nur noch durch das blinkende oder geänderte Symbol auf neue E-Mails aufmerksam gemacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion &quot;Ungelesene E-Mails ignorieren&quot; hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende E-Mails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion &quot;Ignorieren&quot;, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Anzahl der ungelesenen E-Mails weniger wird als die ursprünglich ignorierte Anzahl, wird die Anzahl ignorierter E-Mails auf null zurückgesetzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Translations are powered by the community:</source>
+        <translation>Die Übersetzungen werden von Freiwilligen bereitgestellt:</translation>
+    </message>
+    <message>
+        <source>Translators</source>
+        <translation>Übersetzer</translation>
+    </message>
+    <message>
+        <source>Active maintainers</source>
+        <translation>Aktive Übersetzer</translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation>Mitwirkende</translation>
     </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
     <message>
         <source>Select the directory that contains the Thunderbird profiles.</source>
-        <translation>Wählen Sie bitte das Verzeichnis aus, das die Thunderbird Profile enthält.</translation>
+        <translation>Wählen Sie bitte das Verzeichnis aus, das die Thunderbird-Profile enthält.</translation>
     </message>
     <message>
         <source>Thunderbird Profiles Directory</source>
-        <translation>Verzeichnis der Thunderbird Profile</translation>
+        <translation>Verzeichnis der Thunderbird-Profile</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -606,7 +484,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select the mail accounts you want to monitor.</source>
-        <translation>Wählen Sie die Email Konten aus, die Sie überwachen wollen.</translation>
+        <translation>Wählen Sie die E-Mail-Konten aus, die Sie überwachen wollen.</translation>
     </message>
     <message>
         <source>Notification Color</source>
@@ -614,11 +492,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
-        <translation>Wenn mehrere Ordner überwacht werden, wird die Standard Benachrichtigungsfarbe benutzt, um die Summe aller ungelesenen Emails anzuzeigen.</translation>
+        <translation>Wenn mehrere Ordner überwacht werden, wird die Standard-Benachrichtigungsfarbe benutzt, um die Summe aller ungelesenen E-Mails anzuzeigen.</translation>
     </message>
     <message>
         <source>Choose the Thunderbird profiles path</source>
-        <translation>Wähle das Verzeichnis der Thunderbird Profile</translation>
+        <translation>Das Verzeichnis der Thunderbird-Profile auswählen</translation>
     </message>
     <message>
         <source>No folder selected</source>
@@ -627,12 +505,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>No mail folder was selected to monitor.
 Do you want to continue?</source>
-        <translation>Es wurde kein Email-Ordner zur Überwachung ausgewählt.
+        <translation>Es wurde kein E-Mail-Ordner zur Überwachung ausgewählt.
 Wollen Sie fortfahren?</translation>
     </message>
     <message>
         <source>Email Folder</source>
-        <translation>Email Ordner</translation>
+        <translation>E-Mail-Ordner</translation>
     </message>
     <message>
         <source>%1 (Profile)</source>
@@ -641,7 +519,7 @@ Wollen Sie fortfahren?</translation>
     <message>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
-        <translation>Es wurden keine Mail Ordner gefunden.
+        <translation>Es wurden keine E-Mail-Profile gefunden.
 Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgewählt haben.</translation>
     </message>
 </context>
@@ -660,14 +538,14 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Die Taskleiste kann leider auf Ihrem System nicht durch dieses Add-on kontrolliert werden.</translation>
+        <translation>Die Systemleiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
     </message>
 </context>
 <context>
     <name>QCoreApplication</name>
     <message>
         <source>Couldn&apos;t open file: </source>
-        <translation>Konnte die Datei nicht öffnen: </translation>
+        <translation>Die Datei konnte nicht geöffnet werden: </translation>
     </message>
     <message>
         <source>Unsupported version.</source>
@@ -698,12 +576,20 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
         <translation>Unerwartetes Gruppenende.</translation>
     </message>
     <message>
-        <source>Error opening mork file.</source>
-        <translation>Fehler beim Öffnen der Mork-Datei.</translation>
+        <source>Cannot load default system tray icon.</source>
+        <translation>Das Standard-Systemleistensymbol konnte nicht geladen werden.</translation>
     </message>
     <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>Das Standard-Taskleistenicon konnte nicht geladen werden.</translation>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
+    </message>
+    <message>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Sqlite basierende Konten migriert</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
     </message>
 </context>
 <context>
@@ -716,6 +602,28 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
         <source>Notification color</source>
         <translation>Benachrichtigungsfarbe</translation>
     </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Schwerwiegender Fehler: %1
+
+Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
+    </message>
+    <message>
+        <source>Could not save the settings</source>
+        <translation>Die Einstellungen konnten nicht gespeichert werden</translation>
+    </message>
+    <message>
+        <source>Could not save the settings into file %1:
+%2</source>
+        <translation>Die Einstellungen konnten nicht in %1 gespeichert werden:
+%2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
+    </message>
 </context>
 <context>
     <name>TrayIcon</name>
@@ -725,19 +633,19 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>You have not yet configured any email folders to monitor. Would you like to do it now?</source>
-        <translation>Es wurden  noch keine Email-Ordner zur Überwachung eingestellt. Wollen Sie das jetzt tun?</translation>
+        <translation>Es wurden noch keine E-Mail-Ordner zur Überwachung eingestellt. Wollen Sie das jetzt tun?</translation>
     </message>
     <message>
         <source>Show Thunderbird</source>
-        <translation>Zeige Thunderbird</translation>
+        <translation>Thunderbird anzeigen</translation>
     </message>
     <message>
         <source>Hide Thunderbird</source>
-        <translation>Verstecke Thunderbird</translation>
+        <translation>Thunderbird ausblenden</translation>
     </message>
     <message>
         <source>New Email</source>
-        <translation>Neue Email</translation>
+        <translation>Neue E-Mail</translation>
     </message>
     <message>
         <source>Blank</source>
@@ -745,7 +653,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>New Email Message</source>
-        <translation>Neue Email Nachricht</translation>
+        <translation>Neue E-Mail-Nachricht</translation>
     </message>
     <message>
         <source>5 minutes</source>
@@ -769,7 +677,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Snooze for ...</source>
-        <translation>Schlummern für ...</translation>
+        <translation>Schlummern für …</translation>
     </message>
     <message>
         <source>Unsnooze</source>
@@ -777,11 +685,11 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Ignore unread emails</source>
-        <translation>Ignoriere ungelesene Emails</translation>
+        <translation>Ungelesene E-Mails ignorieren</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation>Einstellungen...</translation>
+        <translation>Einstellungen…</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -789,7 +697,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Cannot start Thunderbird</source>
-        <translation>Kann Thunderbird nicht starten</translation>
+        <translation>Thunderbird kann nicht gestartent werden</translation>
     </message>
     <message>
         <source>Error starting Thunderbird, because we could not attach to the updater:
@@ -801,7 +709,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Ignore unread emails (now %1)</source>
-        <translation>Ignoriere ungelesene Emails (momentan %1)</translation>
+        <translation>Ungelesene E-Mails ignorieren (momentan %1)</translation>
     </message>
     <message>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
@@ -823,35 +731,19 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
 <context>
     <name>UnreadMonitor</name>
     <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation>Fehler beim Öffnen der Sqlite Datenbank: %1</translation>
-    </message>
-    <message>
-        <source>Folder %1 was not found in database.</source>
-        <translation>Der Ordner %1 konnte nicht in der Datenbank gefunden werden.</translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation>Kann nicht von der Datenbank lesen.</translation>
-    </message>
-    <message>
         <source>Unable to watch %1 for changes.</source>
-        <translation>Kann %1 nicht auf Änderungen überwachen.</translation>
+        <translation>%1 kann nicht auf Änderungen überwacht werden.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
-        <translation>Kann nicht von %1 lesen</translation>
-    </message>
-    <message>
-        <source>Cannot query database: %1</source>
-        <translation>Kann die Datenbank nicht einlesen: %1</translation>
+        <translation>Von %1 kann nicht gelesen werden.</translation>
     </message>
 </context>
 <context>
     <name>UpdateDialog</name>
     <message>
         <source>Birdtray Update</source>
-        <translation>Birdtray Aktualisierung</translation>
+        <translation>Birdtray-Aktualisierung</translation>
     </message>
     <message>
         <source>Current version:</source>
@@ -875,7 +767,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Ignore this version</source>
-        <translation>Ignoriere diese Version</translation>
+        <translation>Diese Version ignorieren</translation>
     </message>
     <message>
         <source>Update and Restart</source>
@@ -890,11 +782,11 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     <name>UpdateDownloadDialog</name>
     <message>
         <source>Birdtray Update</source>
-        <translation>Birdtray Aktualisierung</translation>
+        <translation>Birdtray-Aktualisierung</translation>
     </message>
     <message>
         <source>Downloading Birdtray update...</source>
-        <translation>Lade die Birdtray Aktualisierung herunter...</translation>
+        <translation>Die Birdtray-Aktualisierung wird heruntergeladen…</translation>
     </message>
     <message>
         <source>Background</source>
@@ -902,7 +794,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation>Lade die Birdtray Installationsdatei herunter...</translation>
+        <translation>Die Birdtray-Installationsdatei wird heruntergeladen…</translation>
     </message>
     <message>
         <source>Update and Restart</source>
@@ -910,11 +802,11 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
-        <translation>Download abgeschlossen. Soll Birdtray aktualisiert und neugestartet werden?</translation>
+        <translation>Übertragung abgeschlossen. Soll Birdtray aktualisiert und neugestartet werden?</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Lade die Birdtray Installationsdatei herunter... (%1 Mb / %2 Mb).</translation>
+        <translation>Die Birdtray-Installationsdatei wird heruntergeladen… (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>

@@ -23,11 +23,6 @@ class Utils
          * @return The version of Birdtray as a string.
          */
         static QString getBirdtrayVersion();
-        
-        /**
-         * @return The name of the Thunderbird updater executable.
-         */
-        static QString getThunderbirdUpdaterName();
 
         /**
          * Convert a std::wstring to a QString.
@@ -44,15 +39,6 @@ class Utils
          * @return The std::wstring with the contents of the original string.
          */
         static std::wstring qToStdWString(const QString &str);
-
-        static void debug( const char * fmt, ... ) Q_ATTRIBUTE_FORMAT_PRINTF(1, 2);
-        
-        /**
-         * Displays the message to the user and exits.
-         *
-         * @param message The message to display to the user.
-         */
-        Q_NORETURN static void fatal(const QString &message);
 
         /**
          * @return A list of possible locations of the directory
@@ -84,6 +70,18 @@ class Utils
          * @return The mail account name.
          */
         static QString getMailAccountName(const QFileInfo &morkFile);
+        
+        /**
+         * Format a Github markdown string:
+         *
+         * - Add links to the Github account pages for "@name" mentions.
+         * - for old Qt versions without markdown support, change links
+         *   from `[text](url)` to `text (url)`.
+         *
+         * @param markdown The markdown string.
+         * @return A reference to the new markdown string with t the links.
+         */
+        static QString formatGithubMarkdown(const QString& markdown);
 };
 
 #endif // UTILS_H

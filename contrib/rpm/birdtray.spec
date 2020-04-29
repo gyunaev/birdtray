@@ -1,18 +1,16 @@
 Name:         birdtray
-Version:      1.7.0
+Version:      1.8.1
 Release:      1%{?dist}
 Epoch:        0
 License:      GPLv3
 Group:        System Environment/Shells
-Source0:      https://github.com/gyunaev/%{name}/archive/RELEASE_%{version}.tar.gz
+Source0:      https://github.com/gyunaev/%{name}/archive/%{version}.tar.gz
 URL:          https://github.com/gyunaev/birdtray
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: cmake3 gcc-c++ desktop-file-utils
-BuildRequires: sqlite-devel qt5-qtbase-devel qt5-qtx11extras-devel
+BuildRequires: sqlite-devel qt5-qtbase-devel qt5-qtx11extras-devel qt5-qtsvg-devel qt5-linguist
 %if 0%{?fedora} || 0%{?rhel} > 7
 Recommends:    qt5-qttranslations
 %endif
-
 
 Summary: Birdtray is a free system tray notification for new mail for Thunderbird
 
@@ -20,7 +18,7 @@ Summary: Birdtray is a free system tray notification for new mail for Thunderbir
 Birdtray is a system tray new mail notification for Thunderbird, which does not require extensions.
 
 %prep
-%setup -q -n %{name}-RELEASE_%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 mkdir %{_target_platform}

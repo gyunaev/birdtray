@@ -1,10 +1,8 @@
 #include <QMenu>
 #include <QTimer>
-#include <QPixmap>
 #include <QPainter>
 #include <QProcess>
 #include <QMessageBox>
-#include <QFontMetrics>
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
@@ -13,6 +11,7 @@
 #include "utils.h"
 #include "autoupdater.h"
 #include "birdtrayapp.h"
+#include "log.h"
 
 TrayIcon::TrayIcon(bool showSettings)
 {
@@ -31,7 +30,7 @@ TrayIcon::TrayIcon(bool showSettings)
     mMenuIgnoreUnreads = 0;
     mThunderbirdProcess = 0;
 #ifdef Q_OS_WIN
-    mThunderbirdUpdaterProcess = ProcessHandle::create(Utils::getThunderbirdUpdaterName());
+    mThunderbirdUpdaterProcess = ProcessHandle::create("updater.exe");
     connect( mThunderbirdUpdaterProcess, &ProcessHandle::finished,
             this, &TrayIcon::tbUpdaterProcessFinished );
 #endif /* Q_OS_WIN */
@@ -115,7 +114,7 @@ UnreadMonitor* TrayIcon::getUnreadMonitor() const {
 
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 {
-    Utils::debug("unreadCounterUpdate %d", total );
+    Log::debug("unreadCounterUpdate %d", total );
     
     if (unreadEmailsAtStart == -1) {
         unreadEmailsAtStart = static_cast<long>(total);
@@ -204,8 +203,6 @@ void TrayIcon::updateIcon()
     if (settings->onlyShowIconOnUnreadMessages && unread == 0) {
         this->hide();
         return;
-    } else {
-        this->show();
     }
 
     QPixmap temp(settings->getNotificationIcon().size());
@@ -290,14 +287,9 @@ void TrayIcon::updateIcon()
             if (path.isNull()) {
                 continue;
             }
-            QString name;
-            if (path.endsWith(".msf")) {
-                QFileInfo accountInfo(path);
-                name = Utils::getMailAccountName(accountInfo)
-                       + " [" + Utils::getMailFolderName(accountInfo) + "]";
-            } else {
-                name = Utils::decodeIMAPutf7(path);
-            }
+            QFileInfo accountMorkFile(path);
+            QString name = Utils::getMailAccountName(accountMorkFile)
+                           + " [" + Utils::getMailFolderName(accountMorkFile) + "]";
             const QString &warning = warningsIterator.value();
             toolTip << name + ": " + warning;
         }
@@ -313,6 +305,7 @@ void TrayIcon::updateIcon()
         mLastDrawnIcon = temp.toImage();
         setIcon( temp );
     }
+    this->show();
 }
 
 void TrayIcon::enableBlinking(bool enabled)
@@ -470,7 +463,7 @@ void TrayIcon::showSettings()
 
         // Recalculate the delta
         enableBlinking( false );
-    
+
         if (unreadEmailsAtStart != -1
             && settings->ignoreStartUnreadCount != ignoreStartUnreadCountBefore) {
             if (!settings->ignoreStartUnreadCount) {
@@ -504,7 +497,7 @@ void TrayIcon::actionSnoozeFor()
     QAction * action = (QAction *) sender();
     mSnoozedUntil = QDateTime::currentDateTimeUtc().addSecs( action->data().toInt() );
 
-    Utils::debug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
+    Log::debug( "Snoozed until %s UTC", qPrintable(mSnoozedUntil.toString() ) );
 
     // Unhide the unsnoozer
     mMenuUnsnooze->setVisible( true );
@@ -674,11 +667,11 @@ void TrayIcon::startThunderbird()
 
     if ( !BirdtrayApp::get()->getSettings()->getStartThunderbirdCmdline( executable, args ) )
     {
-        Utils::debug("Failed to get Thunderbird command-line" );
+        Log::debug("Failed to get Thunderbird command-line" );
         return;
     }
 
-    Utils::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
+    Log::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
 
     if ( mThunderbirdProcess )
         mThunderbirdProcess->deleteLater();

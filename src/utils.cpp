@@ -166,16 +166,6 @@ QString Utils::getBirdtrayVersion() {
     return QString("%1.%2.%3").arg(VERSION_MAJOR).arg(VERSION_MINOR).arg(VERSION_PATCH);
 }
 
-QString Utils::getThunderbirdUpdaterName() {
-#ifdef Q_OS_WIN
-    return "updater.exe";
-#elif defined(Q_OS_MAC)
-    return "updater.app";
-#else
-    return "updater";
-#endif
-}
-
 QString Utils::stdWToQString(const std::wstring &str) {
 #ifdef _MSC_VER
     return QString::fromUtf16((const ushort*) str.c_str());
@@ -190,27 +180,6 @@ std::wstring Utils::qToStdWString(const QString &str) {
 #else
     return str.toStdWString();
 #endif
-}
-
-void Utils::debug(const char *fmt, ...)
-{
-    va_list vl;
-    char buf[8192];
-
-    if (!BirdtrayApp::get()->getSettings()->mVerboseOutput) {
-        return;
-    }
-
-    va_start( vl, fmt );
-    vsnprintf( buf, sizeof(buf) - 1, fmt, vl );
-    va_end( vl );
-
-    qDebug( "%s", buf );
-}
-
-void Utils::fatal(const QString &message) {
-    QMessageBox::critical(nullptr, QApplication::tr("Fatal"), message);
-    qFatal("%s", message.toUtf8().constData());
 }
 
 QStringList Utils::getThunderbirdProfilesPaths() {
@@ -279,10 +248,16 @@ QStringList Utils::splitCommandLine(const QString &src)
 QString Utils::getMailFolderName(const QFileInfo &morkFile) {
     QString dirName;
     QDir parentDir = morkFile.dir();
-    QString name = QCoreApplication::translate(
-            "EmailFolders", morkFile.completeBaseName().toUtf8().constData());
+    QString morkBaseName = morkFile.completeBaseName();
+    if (morkBaseName == "INBOX") {
+        morkBaseName = "Inbox";
+    }
+    QString name = QCoreApplication::translate("EmailFolders", morkBaseName.toUtf8().constData());
     while ((dirName = parentDir.dirName()).endsWith(".sbd")) {
         dirName.chop(4);
+        if (dirName == "INBOX") {
+            dirName = "Inbox";
+        }
         name = QCoreApplication::translate(
                 "EmailFolders", dirName.toUtf8().constData()) + '/' + name;
         parentDir.cdUp();
@@ -297,5 +272,17 @@ QString Utils::getMailAccountName(const QFileInfo &morkFile) {
         parentDir.cdUp();
     }
     return name;
+}
+
+QString Utils::formatGithubMarkdown(const QString& markdown) {
+    QString input = markdown;
+    static QRegularExpression githubMentionRegex(R"(((?<![^\s\n]))@(\S+))");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    return input.replace(githubMentionRegex, R"(\1[@\2](https://github.com/\2))");
+#else
+    static QRegularExpression markdownLinksRegex(R"(\[(.+?)\]\((\S+?)\))");
+    return input.replace(githubMentionRegex, R"(@\1\2 (https://github.com/\2))")
+                .replace(markdownLinksRegex, R"(\1 (\2))");
+#endif
 }
 

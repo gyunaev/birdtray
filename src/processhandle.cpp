@@ -5,6 +5,7 @@
 #include <QtCore/QFileInfo>
 #include "processhandle.h"
 #include "utils.h"
+#include "log.h"
 
 #define WAIT_TIME_SECONDS 100
 
@@ -15,7 +16,7 @@ static int registerExitReasonMetaType() Q_DECL_NOTHROW {
     } catch (...) {
         // Don't translate the message, because it gets marked as vanished
         // by the lupdate tool on non-Windows platforms.
-        Utils::fatal("Failed to register ExitReason meta type.");
+        Log::fatal("Failed to register ExitReason meta type.");
     }
 }
 

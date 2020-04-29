@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
         arch: [x86, x64]
-        qt_version: [5.6, 5.9, 5.13.2]
+        qt_version: [5.6, 5.9, 5.14.1]
         include:
           - os: windows-latest
             arch: x86
@@ -24,16 +24,25 @@ jobs:
             qt_version: 5.6
           - os: windows-latest
             qt_version: 5.9
-          # We only compile for the current architecture of the runner for linux
+          # We only compile for the current architecture of the runner for Linux
           - os: ubuntu-latest
             arch: x86
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Cache Qt ${{ matrix.qt_version }}
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ${{ runner.temp }}/Qt
+          key: ${{ runner.os }}-${{ matrix.arch }}-Qt-${{ matrix.qt_version }}
       - name: Install Qt ${{ matrix.qt_version }}
-        uses: ouuan/install-qt-action@v2.3.1
+        uses: jurplel/install-qt-action@v2
         with:
           version: ${{ matrix.qt_version }}
           arch: ${{ matrix.qt_compile_suite }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          dir: ${{ runner.temp }}/Qt
       - name: Install additional dependencies
         shell: bash
         env:
@@ -41,35 +50,149 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update -qq;
-            sudo apt install -qq libsqlite3-dev libx11-dev
+            sudo apt install -qq libx11-dev libqt5svg5-dev libx11-xcb-dev desktop-file-utils
           elif [ "$RUNNER_OS" == "Windows" ]; then
-            export sqliteDir=C:\\ProgramData\\chocolatey\\lib\\SQLite\\tools
             if [ "$ARCH" == "x86" ]; then
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
               export archParam="--forcex86"
             else
               echo "::set-env name=CMAKE_PLATFORM_ARG::-A x64"
             fi
-            echo "::set-env name=CMAKE_PREFIX_PATH::$sqliteDir"
-            echo "::add-path::$sqliteDir"
-            choco install -y $archParam sqlite --params \"/NoTools\"
-            curl -sS https://www.sqlite.org/2019/sqlite-amalgamation-3300100.zip > sqlite-source.zip
-            unzip -p sqlite-source.zip sqlite-amalgamation-3300100/sqlite3.h > $sqliteDir/sqlite3.h
-            rm sqlite-source.zip
-            echo '"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\vcvarsall.bat" '$ARCH' && LIB /DEF:'$sqliteDir'\\sqlite3.def /OUT:'$sqliteDir'\\sqlite3.lib /MACHINE:'$ARCH' || exit /b 1' | cmd
+            choco install -y --force $archParam openssl.light
+            echo "::add-path::C:\\Program Files\\OpenSSL"
           else
             echo "$RUNNER_OS not supported"
             exit 1
           fi
       - name: Create build environment
-        run: cmake -E make_directory ${{runner.workspace}}/build
+        run: cmake -E make_directory ${{ runner.workspace }}/build
       - name: Configure CMake
         shell: bash
-        working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON
+        working-directory: ${{ runner.workspace }}/build
+        run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON -DDONT_EXECUTE_INSTALLER=ON
       - name: Build
-        working-directory: ${{runner.workspace}}/build
+        working-directory: ${{ runner.workspace }}/build
         run: cmake --build . --config Release --target birdtray
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
+      - name: Validate desktop file
+        working-directory: ${{ github.workspace }}
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          output=$(desktop-file-validate src/res/com.ulduzsoft.Birdtray.desktop)
+          if [ ! -z "$output" ]; then
+            echo "$output";
+            exit 1;
+          fi
+      - name: Check if this is a deployment build
+        id: check-deploy
+        shell: bash
+        run: |
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
+            echo ::set-output name=is_deploy::true
+            echo "Deployment build detected"
+          else
+            echo "Not a deployment build, skipping deploy steps"
+          fi
+      - name: Install installer dependencies
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        run: choco install -y nsis;
+      - name: Create installer
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        working-directory: ${{ runner.workspace }}/build
+        run: cmake --build . --config Release --target install
+      - name: Find installer
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        id: find_installer_file
+        shell: bash
+        run: |
+          installerFile=`find . -name "Birdtray-*.exe" -exec basename {} \;`
+          echo ::set-output name=installer_file::$installerFile
+          echo "Found installer: $installerFile"
+          mkdir installer/cache
+          mv installer/$installerFile installer/cache
+      - name: Cache installer
+        uses: actions/upload-artifact@v1
+        if: steps.check-deploy.outputs.is_deploy == 'true'
+        with:
+          name: installer-${{ runner.os }}-${{ matrix.arch }}-${{ github.sha }}
+          path: installer/cache/${{ steps.find_installer_file.outputs.installer_file }}
+
+  release:
+    name: Create Release
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') && contains(github.ref, '.')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Check if this is a deployment build
+        shell: bash
+        run: |
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Creating release ${{ github.ref }}..."
+          else
+            echo "Tag does not match: ${{ github.event.ref }}"
+            exit 1
+          fi
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Write upload url file
+        run: echo "${{ steps.create_release.outputs.upload_url }}" > upload_url.txt
+      - name: Cache upload url
+        uses: actions/upload-artifact@v1
+        with:
+          name: upload_url
+          path: upload_url.txt
+
+  deploy:
+    name: Deploy
+    needs: [build, release]
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x86, x64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Download installer
+        uses: actions/download-artifact@v1
+        with:
+          name: installer-${{ runner.os }}-${{ matrix.arch }}-${{ github.sha }}
+          path: installer
+      - name: Find installer
+        id: find_installer_file
+        shell: bash
+        run: |
+          value=`find installer -name "Birdtray-*.exe" -exec basename {} \;`
+          echo ::set-output name=installer_file::$value
+      - name: Fetch the upload url
+        uses: actions/download-artifact@v1
+        with:
+          name: upload_url
+      - name: Read the upload url
+        id: get_upload_url
+        shell: bash
+        run: |
+          value=`cat upload_url/upload_url.txt`
+          echo ::set-output name=upload_url::$value
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
+          asset_path: ./installer/${{ steps.find_installer_file.outputs.installer_file }}
+          asset_name: ${{ steps.find_installer_file.outputs.installer_file }}
+          asset_content_type: application/x-msdownload

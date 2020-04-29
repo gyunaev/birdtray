@@ -11,32 +11,27 @@ if "%~1" == "/?" (
     goto Usage
 )
 set "exePath=%~1"
+set "exePath=%exePath:/=\%"
 if not exist "%exePath%" (
     echo Birdtray executable not found at "%exePath%" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
-set "libSqlitePath=%~2"
-if not exist "%libSqlitePath%" (
-    echo Sqlite library not found at "%libSqlitePath%" 1>&2
-    exit /b %ERROR_FILE_NOT_FOUND%
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~2" 2^>nul ^| findstr libcrypto ^| findstr .dll` ) do (
+    set "openSSLCryptoPath=%~2\%%f"
 )
-
-for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libcrypto ^| findstr .dll` ) do (
-    set "openSSLCryptoPath=%~3\%%f"
-)
-for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~3" 2^>nul ^| findstr libssl ^| findstr .dll`) do (
-    set "openSSLPath=%~3\%%f"
+for /F "tokens=* USEBACKQ" %%f in (`dir /b "%~2" 2^>nul ^| findstr libssl ^| findstr .dll`) do (
+    set "openSSLPath=%~2\%%f"
 )
 if not exist "%openSSLCryptoPath%" (
-    echo OpenSSL crypto library not found at "%~3\libcrypto*.dll" 1>&2
+    echo OpenSSL crypto library not found at "%~2\libcrypto*.dll" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 if not exist "%openSSLPath%" (
-    echo OpenSSL library not found at "%~3\libssl*.dll" 1>&2
+    echo OpenSSL library not found at "%~2\libssl*.dll" 1>&2
     exit /b %ERROR_FILE_NOT_FOUND%
 )
 
-if "%~4" == "--install" (
+if "%~3" == "--install" (
     set "installAfterBuild=1"
 )
 
@@ -88,8 +83,12 @@ if exist "%deploymentFolder%" (
 )
 mkdir "%deploymentFolder%"
 if errorLevel 1 (
-    echo Failed to delete the old deployment folder at "%deploymentFolder%" 1>&2
+    echo Failed to create deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
+)
+for /f "delims=" %%i in ("%exePath%") do (
+    set "exeFileName=%%~nxi"
+    set "translationDir=%%~di%%~pitranslations"
 )
 xcopy "%exePath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
@@ -97,11 +96,9 @@ if errorLevel 1 (
     echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
-xcopy "%libSqlitePath%" "%deploymentFolder%" /q /y 1>nul
-if errorLevel 1 (
-    echo Failed to copy the Sqlite library from "%libSqlitePath%" 1>&2
-    echo to the deployment folder at "%deploymentFolder%" 1>&2
-    exit /b %errorLevel%
+if not exist "%deploymentFolder%/%exeFileName%" (
+    echo Birdtray executable not found at "%exePath%" 1>&2
+    exit /b %ERROR_FILE_NOT_FOUND%
 )
 xcopy "%openSSLCryptoPath%" "%deploymentFolder%" /q /y 1>nul
 if errorLevel 1 (
@@ -115,10 +112,6 @@ if errorLevel 1 (
     echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
-for /f "delims=" %%i in ("%exePath%") do (
-    set "exeFileName=%%~nxi"
-    set "translationDir=%%~di%%~pitranslations"
-)
 "%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
         --no-angle --no-opengl-sw "%deploymentFolder%\%exeFileName%"
 if errorLevel 1 (
@@ -126,11 +119,17 @@ if errorLevel 1 (
     exit /b %errorLevel%
 )
 if exist "%deploymentFolder%\imageformats" (
-    for /f %%F in ('dir "%deploymentFolder%\imageformats" /b /a-d ^| findstr /vile "qico.dll"') do (
+    for /f %%F in ('dir "%deploymentFolder%\imageformats" /b /a-d ^| findstr /vile "qico.dll"
+            ^| findstr /vile "qsvg.dll"') do (
         del "%deploymentFolder%\imageformats\%%F" 1>nul
     )
 )
 rem  Copy translations
+if not exist "%translationDir%" (
+    if exist "%translationDir%\..\..\translations" (
+        set "translationDir=%translationDir%\..\..\translations"
+    )
+)
 if exist "%translationDir%" (
     xcopy "%translationDir%" "%deploymentFolder%\translations" /q /y 1>nul
     if errorLevel 1 (
@@ -260,10 +259,9 @@ goto :eof
 
 : Usage
 echo Creates the Birdtray installer. - Usage:
-echo buildInstaller.bat exePath libSqlitePath openSSLPath [--install]
+echo buildInstaller.bat exePath openSSLPath [--install]
 echo:
 echo exePath:       The path to the birdtray.exe to include in the installer
-echo libSqlitePath: The path to the libsqlite.dll that was used to compile the Birdtray exe
 echo openSSLPath:   The path to the OpenSSL directory containing libcrypto*.dll and libssl*.dll
 echo --install:     Optional parameter. If specified, executes the generated installer.
 echo:

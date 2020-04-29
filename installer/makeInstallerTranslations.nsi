@@ -3,13 +3,15 @@
 !addincludedir nsisDependencies\Include
 !addincludedir .
 
+#Unicode true # TODO: xml plugin does not support unicode, maybe use http://wiz0u.free.fr/prog/nsisXML/
+SetCompress off
+
 !include XML.nsh
 !include LogicLib.nsh
 !include StrFunc.nsh
 !Include StrUtils.nsh
 ${StrCase}
 
-SetCompress off
 Name "makeTranslationsList"
 OutFile "${INSTALLER_TRANSLATIONS_BUILDER_FILE}"
 SilentInstall silent

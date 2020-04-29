@@ -9,7 +9,6 @@
 #include <QStringList>
 #include <QFileSystemWatcher>
 
-struct sqlite3;
 class TrayIcon;
 
 class UnreadMonitor : public QThread
@@ -47,10 +46,10 @@ class UnreadMonitor : public QThread
         void    watchedFileChanges( const QString& filechanged );
         void    updateUnread();
 
-    private:
-        bool    openDatabase();
+        // This one forces rereading Mork files
+        void    forceUpdateUnread();
 
-        void    getUnreadCount_SQLite( int & count, QColor& color );
+    private:
         void    getUnreadCount_Mork( int & count, QColor& color );
         int     getMorkUnreadCount( const QString& path );
     
@@ -67,20 +66,11 @@ class UnreadMonitor : public QThread
          * Reset the warning if there was one for the given watched path.
          * Or reset the global warning for all paths, if no path is given.
          *
-         * @param path
+         * @param path The path to the watched mork file.
          */
         void clearWarning(const QString &path = QString());
 
     private:
-        QString         mSqliteDbFile;
-        sqlite3 *       mSqlitedb;
-
-        // The list of all folder IDs which we monitor
-        QString         mAllFolderIDs;
-
-        // Maps the database folder ID to the notification color
-        QMap< qint64, QColor > mFolderColorMap;
-
         // Maps the Mork files to unread counts
         QMap< QString, quint32 >  mMorkUnreadCounts;
 
@@ -96,6 +86,9 @@ class UnreadMonitor : public QThread
 
         // List of changed files (for MSF monitoring)
         QList<QString>      mChangedMSFfiles;
+
+        // This timer is used when force update is set, triggering such update
+        QTimer              mForceUpdateTimer;
 
         // Last reported unread
         int    mLastReportedUnread;

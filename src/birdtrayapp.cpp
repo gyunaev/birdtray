@@ -1,5 +1,7 @@
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QThread>
+
 #include "birdtrayapp.h"
 #ifdef Q_OS_WIN
 #  include "birdtrayeventfilter.h"
@@ -7,6 +9,8 @@
 #include "utils.h"
 #include "morkparser.h"
 #include "windowtools.h"
+#include "version.h"
+#include "log.h"
 
 #define SINGLE_INSTANCE_SERVER_NAME "birdtray.ulduzsoft.single.instance.server.socket"
 #define TOGGLE_THUNDERBIRD_COMMAND "toggle-tb"
@@ -15,7 +19,8 @@
 #define SETTINGS_COMMAND "settings"
 
 
-BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
+BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv)
+{
     QApplication::setWindowIcon(QIcon(QString::fromUtf8(":/res/birdtray.ico")));
     QCoreApplication::setOrganizationName("ulduzsoft");
     QCoreApplication::setOrganizationDomain("ulduzsoft.com");
@@ -53,17 +58,21 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv) {
         return;
     }
     
+    Log::initialize(commandLineParser.value("log"));
+
+    Log::debug( "Birdtray version %d.%d.%d started", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
+
     ensureSystemTrayAvailable();
-    
     // Load settings
-    settings = new Settings(commandLineParser.isSet("debug"));
+    settings = new Settings();
     if (commandLineParser.isSet("reset-settings")) {
         settings->save(); // Saving without loading will reset the values
     } else {
         settings->load();
     }
+
     if (!translationLoadedSuccessfully) {
-        Utils::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
+        Log::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
     }
     autoUpdater = new AutoUpdater();
     trayIcon = new TrayIcon(commandLineParser.isSet("settings"));
@@ -99,7 +108,7 @@ TrayIcon* BirdtrayApp::getTrayIcon() const {
 bool BirdtrayApp::event(QEvent* event) {
     if (event->type() == QEvent::LocaleChange) {
         if (!loadTranslations()) {
-            Utils::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
+            Log::debug("Failed to load translation for %s", qPrintable(QLocale::system().name()));
         }
         return true;
     }
@@ -161,7 +170,7 @@ void BirdtrayApp::parseCmdArguments() {
             {{"s", SHOW_THUNDERBIRD_COMMAND}, tr("Show the Thunderbird window.")},
             {{"H", HIDE_THUNDERBIRD_COMMAND}, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
-            {{"d", "debug"}, tr("Enable debugging output.")},
+            {{"l", "log"}, tr("Write log to a file."), tr("FILE")}
     });
     commandLineParser.process(*this);
 }
@@ -255,8 +264,8 @@ void BirdtrayApp::ensureSystemTrayAvailable() {
         }
         passed++;
         if (passed > 120) {
-            Utils::fatal(QApplication::tr("Sorry, system tray cannot be controlled "
-                                          "through this add-on on your operating system."));
+            Log::fatal( QApplication::tr("Sorry, system tray cannot be controlled "
+                                          "through this add-on on your operating system.") );
         }
         QThread::msleep(500);
     }

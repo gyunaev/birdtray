@@ -19,7 +19,7 @@ class Settings
         // Icon size constant
         static constexpr int ICON_SIZE = 128;
 
-        explicit Settings(bool verboseOutput);
+        Settings();
         ~Settings();
 
         // Desired icon size
@@ -54,9 +54,6 @@ class Settings
         // Opacity level for the tray icon when unread email is present (0.0-1.0)
         double          mUnreadOpacityLevel;
 
-        // Path to Thunderbird folder
-        QString mThunderbirdFolderPath;
-
         // The command to start Thunderbird. The first element is the executable to launch.
         QStringList mThunderbirdCmdLine;
 
@@ -89,9 +86,6 @@ class Settings
 
         // Whether to monitor Thunderbird running
         bool    mMonitorThunderbirdWindow;
-
-        // Whether to use Mork parser for new mail scanning; if false, sqlite is used
-        bool    mUseMorkParser;
 
         // Whether to use alpha transition when blinking
         bool    mBlinkingUseAlphaTransition;
@@ -134,13 +128,13 @@ class Settings
         bool    mNewEmailMenuEnabled;
         QList< Setting_NewEmail >   mNewEmailData;
 
-        // Maps the folder URI or full path (for Mork) to the notification color.
+        // Maps the folder path to the notification color.
         // The original order of strings is stored in mFolderNotificationList (to show in UI)
         QMap< QString, QColor >   mFolderNotificationColors;
         QStringList               mFolderNotificationList;
 
-        // Whether to spam debugging stuff
-        bool    mVerboseOutput;
+        // If non-zero, specifies an interval in seconds for rereading index files even if they didn't change. 0 disables.
+        unsigned int    mIndexFilesRereadIntervalSec;
 
         // Load and save them
         void    save();
@@ -166,14 +160,21 @@ class Settings
         void setNotificationIcon(const QPixmap& icon);
 
     private:
-        // Notification icon
-        QPixmap mNotificationIcon;
+        // Loading from either storage
+        void    fromJSON( const QJsonObject& settings );
 
-        QSettings *mSettings;
+        // TODO: remove this on March 23, 2022
+        void    fromQSettings(QSettings * settings);
+
+        // Notification icon
+        QPixmap     mNotificationIcon;
+
+        QString     pixmapToString( const QPixmap& pixmap );
+        QPixmap     pixmapFromString( const QString& data );
     
-        void    savePixmap( const QString& key, const QPixmap& pixmap );
-        QPixmap loadPixmap( const QString& key );
-    
+        // Settings filename
+        QString     mSettingsFilename;
+
         /**
          * At first start, load the configuration configured during installation of Birdtray.
          */

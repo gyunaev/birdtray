@@ -169,7 +169,7 @@ FunctionEnd
 !macro ValidPath VAR PATH BAD_CHARACTERS
     Push `${PATH}`
     Push `${BAD_CHARACTERS}`
-    call ValidPath
+    Call ValidPath
     Pop `${VAR}`
 !macroend
 !define ValidPath "!insertmacro ValidPath"
@@ -203,7 +203,7 @@ Function IsDirEmpty
 FunctionEnd
 !macro IsDirEmpty VAR DIR
     Push ${DIR}
-    call IsDirEmpty
+    Call IsDirEmpty
     Pop ${VAR}
 !macroend
 !define IsDirEmpty "!insertmacro IsDirEmpty"
@@ -211,6 +211,45 @@ FunctionEnd
 # Helper defines for Sections.nsh
 !define SelectSection '!insertmacro SelectSection'
 !define UnselectSection '!insertmacro UnselectSection'
+
+!ifndef UNINSTALL_BUILDER
+
+# Check if a Visual C++ Redistributable is installed.
+# $0 - ARCH: The architecture of the C++ Redistributable (x64 or x86).
+# Returns:
+# $0 - IS_INSTALLED: 1 (true) if a Visual C++ Redistributable is installed and 0 (false) if not.
+Function IsVisualRedistributableInstalled
+    Exch $0
+    ${if} ${RunningX64}
+        ReadRegDword $0 HKLM "SOFTWARE\Wow6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\$0" \
+            "Installed"
+    ${else}
+        ReadRegDword $0 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\$0" "Installed"
+    ${endif}
+    Exch $0
+FunctionEnd
+!macro IsVisualRedistributableInstalled VAR ARCH
+    Push ${ARCH}
+    Call IsVisualRedistributableInstalled
+    Pop ${VAR}
+!macroend
+!define IsVisualRedistributableInstalled "!insertmacro IsVisualRedistributableInstalled"
+
+
+# Open an url in a browser window.
+# $0 - URL: The url to open.
+Function OpenURL
+    Exch $0
+    Exec "rundll32 url.dll,FileProtocolHandler $0"
+    DetailPrint "$(OpenUrl)"
+    Pop $0
+FunctionEnd
+!macro OpenURL URL
+    Push ${URL}
+    Call OpenURL
+!macroend
+!define OpenURL "!insertmacro OpenURL"
+!endif # UNINSTALL_BUILDER
 
 # === Macros === #
 

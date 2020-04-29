@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.0" language="nl_NL">
 <context>
     <name>AutoUpdater</name>
     <message>
@@ -69,10 +69,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Zet de instellingen terug op hun standaardwaarden.</translation>
     </message>
     <message>
-        <source>Enable debugging output.</source>
-        <translation>Schakel foutopsporing in.</translation>
-    </message>
-    <message>
         <source>Toggle the Thunderbird window.</source>
         <translation>Toon/Verberg het Thunderbird-venster.</translation>
     </message>
@@ -84,70 +80,13 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <source>Hide the Thunderbird window.</source>
         <translation>Verberg het Thunderbird-venster.</translation>
     </message>
-</context>
-<context>
-    <name>DatabaseAccounts</name>
     <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation>De sqlite-databank kan niet worden geopend: %1</translation>
+        <source>Write log to a file.</source>
+        <translation>Sla een logboek op.</translation>
     </message>
     <message>
-        <source>Cannot access the database. If you&apos;re using Thunderbird 68+, this method no longer works. Please use the Mork parser.</source>
-        <translation>Er is geen toegang tot de databank. Als u Thunderbird 68+ gebruikt, dan werkt deze methode niet meer. Gebruik de Mork-verwerker.</translation>
-    </message>
-</context>
-<context>
-    <name>DatabaseUnreadFixer</name>
-    <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation>De sqlite-databank kan niet worden geopend: %1</translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation>De databank kan niet worden opgevraagd.</translation>
-    </message>
-</context>
-<context>
-    <name>DialogAddEditAccount</name>
-    <message>
-        <source>Folder:</source>
-        <translation>Map:</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Bladeren</translation>
-    </message>
-    <message>
-        <source>Notification text color:</source>
-        <translation>Kleur van meldingstekst:</translation>
-    </message>
-    <message>
-        <source>Choose the MSF file</source>
-        <translation>Kies het MSF-bestand</translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation>Mail-index (*.msf)</translation>
-    </message>
-    <message>
-        <source>Invalid MSF file</source>
-        <translation>Ongeldig MSF-bestand</translation>
-    </message>
-    <message>
-        <source>You must specify a valid, non-empty Thunderbird index file.</source>
-        <translation>Geef een geldig, niet-blanco Thunderbird-indexbestand op.</translation>
-    </message>
-    <message>
-        <source>No account selected</source>
-        <translation>Geen account gekozen</translation>
-    </message>
-    <message>
-        <source>You must select an account.</source>
-        <translation>Kies een account.</translation>
-    </message>
-    <message>
-        <source>Please assign the message number text color</source>
-        <translation>Wijs de berichtgetal-tekstkleur toe</translation>
+        <source>FILE</source>
+        <translation>BESTAND</translation>
     </message>
 </context>
 <context>
@@ -186,6 +125,13 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
 </context>
 <context>
+    <name>DialogLogOutput</name>
+    <message>
+        <source>Debug log viewer</source>
+        <translation>Foutopsporingslogboek</translation>
+    </message>
+</context>
+<context>
     <name>DialogSettings</name>
     <message>
         <source>Birdtray Settings</source>
@@ -198,10 +144,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>New Mail Notification</source>
         <translation>Melding bij nieuwe e-mail</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vink dit aan om het aantal ongelezen e-mails te tonen op het Birdtray-pictogram.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Als u dit niet aavinkt, dan wordt er geen aantal getoond en kunt alleen aan het knipperende of aangepaste pictogram (afhankelijk van uw instellingen) zien dat er ongelezen e-mails zijn.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Show unread count</source>
@@ -260,32 +202,8 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Geen</translation>
     </message>
     <message>
-        <source>Fix the unread message count</source>
-        <translation>Ongelezen berichtaantal repareren</translation>
-    </message>
-    <message>
-        <source>Use this tool if your unread counter is non-zero and there are no unread messages in your folders:</source>
-        <translation>Gebruik dit hulpmiddel als het aantal ongelezen e-mails op het pictogram één of meer is, maar er geen ongelezen e-mails zijn:</translation>
-    </message>
-    <message>
-        <source>Fix</source>
-        <translation>Repareren</translation>
-    </message>
-    <message>
         <source>Monitoring</source>
         <translation>Bijhouden</translation>
-    </message>
-    <message>
-        <source>Method to parse unread notifications:</source>
-        <translation>Methode om ongelezen e-mails te verwerken:</translation>
-    </message>
-    <message>
-        <source>Please choose the Thunderbird profile database to monitor</source>
-        <translation>Kies de databank van het bij te houden Thunderbird-profiel</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation>Bladeren</translation>
     </message>
     <message>
         <source>Accounts to monitor</source>
@@ -302,10 +220,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>Remove</source>
         <translation>Verwijderen</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Schakel dit in om de optie &amp;quot;Momenteel ongelezen e-mails negeren&amp;quot; aan het rechtermuisknopmenu. Met deze actie negeert u de e-mails die momenteel ongelezen zijn. Birdtray doet dan net alsof er geen ongelezen e-mails meer zijn, en begint opnieuw te tellen als er weer nieuwe e-mails binnenkomen. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Voorbeeld: er zijn 10 ongelezen e-mails en u hebt op &amp;quot;Negeren&amp;quot; geklikt: Birdtray toont geen ongelezen e-mail-aanduiding zolang het aantal ongelezen e-mails 10 blijft. Zodra er een nieuwe e-mail binnenkomt en u dus feitelijk 11 ongelezen e-mails heeft, toont Birdtray een aanduiding voor 1 ongelezen e-mail.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Als het aantal ongelezen e-mails verlaagd, dan wordt de aanduiding teruggezet op 0.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
@@ -396,10 +310,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Systeemvakpictogram doorzichtig maken</translation>
     </message>
     <message>
-        <source>opaque when new mail is present</source>
-        <translation>bij het ontvangen van nieuwe e-mail</translation>
-    </message>
-    <message>
         <source>Check for new updates when Birdtray starts</source>
         <translation>Controleren op updates tijdens opstarten</translation>
     </message>
@@ -420,26 +330,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Over</translation>
     </message>
     <message>
-        <source>using global search database (wont work with 68+)</source>
-        <translation>met behulp van de globale zoekdatabank (werkt niet met 68 en hoger)</translation>
-    </message>
-    <message>
-        <source>using Mork index files (recommended)</source>
-        <translation>met behulp van Mork-indexbestanden (aanbevolen)</translation>
-    </message>
-    <message>
-        <source>Empty Thunderbird directory</source>
-        <translation>Lege Thunderbird-map</translation>
-    </message>
-    <message>
-        <source>You must specify a Thunderbird directory.</source>
-        <translation>Geef een Thunderbird map op.</translation>
-    </message>
-    <message>
-        <source>Choose the Thunderbird profile path</source>
-        <translation>Geef het Thunderbird-profielpad op</translation>
-    </message>
-    <message>
         <source>Version check failed</source>
         <translation>Versiecontrole mislukt</translation>
     </message>
@@ -450,68 +340,16 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
 </translation>
     </message>
     <message>
-        <source>Fix the unread messages?</source>
-        <translation>Wilt u de ongelezen berichten repareren?</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;This option should be used if you have no unread messages, but still see the new email counter.&lt;br&gt;To use this option, it is mandatory to shut down Thunderbird.&lt;br&gt;Fixing may take up to five minutes.&lt;br&gt;&lt;br&gt;Please confirm that Thunderbird is shut down, and you want to proceed?&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Gebruik deze optie alleen als u geen ongelezen berichten hebt, maar wél de &apos;nieuwe e-mail&apos;-aanduiding ziet.&lt;br&gt;Hiervoor dient u Thunderbird af te sluiten.&lt;br&gt;Het repareren kan tot wel 5 minuten duren.&lt;br&gt;&lt;br&gt;Kijk na of Thunderbird is afgesloten. Wilt u doorgaan?&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Updating the database...</source>
-        <translation>Bezig met bijwerken van databank...</translation>
-    </message>
-    <message>
-        <source>Database updated</source>
-        <translation>Databank bijgewerkt</translation>
-    </message>
-    <message>
-        <source>Successfully updated the database.</source>
-        <translation>De databank is bijgewerkt.</translation>
-    </message>
-    <message>
-        <source>Error updating database</source>
-        <translation>Bijwerken van databank mislukt</translation>
-    </message>
-    <message>
-        <source>Error updating the database:
-%1</source>
-        <translation>Het bijwerken van de databank is mislukt:
-%1</translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts</source>
-        <translation>Ophalen van acccounts mislukt</translation>
-    </message>
-    <message>
-        <source>Error retrieving accounts:
-%1</source>
-        <translation>Het ophalen van accounts is mislukt:
-%1</translation>
-    </message>
-    <message>
         <source>Checking...</source>
         <translation>Bezig met controleren...</translation>
-    </message>
-    <message>
-        <source>WARNING: Parser changed</source>
-        <translation>WAARSCHUWING: verwerker aangepast</translation>
-    </message>
-    <message>
-        <source>You have changed the parser, but the account format is not compatible between parsers, and you need to re-set them up.
-
-Do you want to clear the accounts?</source>
-        <translation>U heeft de verwerker aangepast, maar het accountformaat is niet compatibel tussen deze verwerkers. U dient ze opnieuw in te stellen.
-
-Wilt u de accounts verwijderen?</translation>
     </message>
     <message>
         <source>Choose the new icon</source>
         <translation>Kies het nieuwe pictogram</translation>
     </message>
     <message>
-        <source>Images (*.png *.svg)</source>
-        <translation>Afbeeldingen (*.png *.svg)</translation>
+        <source>Images (*.png *.svg *.svgz)</source>
+        <translation>Afbeeldingen (*.png *.svg *.svgz)</translation>
     </message>
     <message>
         <source>Invalid icon</source>
@@ -520,14 +358,6 @@ Wilt u de accounts verwijderen?</translation>
     <message>
         <source>Could not load the icon from this file.</source>
         <translation>Het pictogram kan niet worden geladen uit dit bestand.</translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird directory</source>
-        <translation>Ongeldige Thunderbird-map</translation>
-    </message>
-    <message>
-        <source>Valid Thunderbird directory must contain the file %1.</source>
-        <translation>Een geldige Thunderbird-map bevat het bestand &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
@@ -544,6 +374,14 @@ Wilt u de accounts verwijderen?</translation>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Negeer alle ongelezen e-mails die beschikbaar zijn als Birdtray opstart. Alleen nieuwe e-mails worden geteld door de ongelezen e-mail-aanduiding.</translation>
+    </message>
+    <message>
+        <source>Choose one or more MSF files</source>
+        <translation>Selecteer één of meerdere MSF-bestanden</translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation>Mail-index (*.msf)</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -581,13 +419,53 @@ p, li { white-space: pre-wrap; }
         <source>No new updates found</source>
         <translation>Geen updates beschikbaar</translation>
     </message>
+    <message>
+        <source>opaque when new mail is present,</source>
+        <translation>ondoorzichtig als er nieuwe e-mails zijn;</translation>
+    </message>
+    <message>
+        <source>hide it if no new mail is present.</source>
+        <translation>verbergen als er geen nieuwe e-mails zijn.</translation>
+    </message>
+    <message>
+        <source>Show log window</source>
+        <translation>Logboek tonen</translation>
+    </message>
+    <message>
+        <source>Force index file re-read every</source>
+        <translation>Indexbestand opnieuw uitlezen, elke</translation>
+    </message>
+    <message>
+        <source> seconds</source>
+        <translation> seconden</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om het aantal ongelezen e-mails te tonen op het Birdtray-pictogram.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als u dit niet aankruist, dan kunt u alleen zien dat er ongelezen e-mails zijn aan het knipperende of anders uitziende pictogram (afhankelijk van uw instellingen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 10 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als het aantal ongelezen e-mails lager wordt dan het aantal &amp;quot;genegeerde&amp;quot;, dan wordt de teller op 0 gezet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Translations are powered by the community:</source>
+        <translation>Birdtray wordt vertaald door de gemeenschap:</translation>
+    </message>
+    <message>
+        <source>Translators</source>
+        <translation>Vertalers</translation>
+    </message>
+    <message>
+        <source>Active maintainers</source>
+        <translation>Actieve beheerders</translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation>Bijdragers</translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
-    <message>
-        <source>Mail Accounts</source>
-        <translation>E-mailaccounts</translation>
-    </message>
     <message>
         <source>Thunderbird Profiles Directory</source>
         <translation>Thunderbird-profielenmap</translation>
@@ -599,18 +477,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Browse</source>
         <translation>Bladeren</translation>
-    </message>
-    <message>
-        <source>Thunderbird Profile</source>
-        <translation>Thunderbird-profiel</translation>
-    </message>
-    <message>
-        <source>Select theThunderbird profile, that contains the mail account which you want to monitor.</source>
-        <translation>Kies het Thunderbird-profiel met het e-mailaccount dat u wilt bijhouden.</translation>
-    </message>
-    <message>
-        <source>Selected Profile:</source>
-        <translation>Gekozen profiel:</translation>
     </message>
     <message>
         <source>Select Accounts</source>
@@ -633,30 +499,6 @@ p, li { white-space: pre-wrap; }
         <translation>Kies het Thunderbird-profielenpad</translation>
     </message>
     <message>
-        <source>Invalid Thunderbird profile directory</source>
-        <translation>Ongeldige Thunderbird-profielmap</translation>
-    </message>
-    <message>
-        <source>Please enter the path to a valid directory.</source>
-        <translation>Geef het pad op van een geldige map.</translation>
-    </message>
-    <message>
-        <source>The Thunderbird profile directory contains no profiles.</source>
-        <translation>De Thunderbird-profielmap bevat geen profielen.</translation>
-    </message>
-    <message>
-        <source>Invalid Thunderbird profile</source>
-        <translation>Ongeldig Thunderbird-profiel</translation>
-    </message>
-    <message>
-        <source>Please select a valid Thunderbird profile.</source>
-        <translation>Kies een geldig Thunderbird-profiel.</translation>
-    </message>
-    <message>
-        <source>The selected Thunderbird profile does not exist.</source>
-        <translation>Het gekozen Thunderbird-profiel bestaat niet.</translation>
-    </message>
-    <message>
         <source>No folder selected</source>
         <translation>Geen map gekozen</translation>
     </message>
@@ -669,6 +511,16 @@ Wilt u doorgaan?</translation>
     <message>
         <source>Email Folder</source>
         <translation>E-mailmap</translation>
+    </message>
+    <message>
+        <source>No mail profiles were found.
+Please make sure you selected the correct profiles directory.</source>
+        <translation>Geen e-mailprofielen aangetroffen.
+Zorg ervoor dat u de juiste profielenmap heeft gekozen.</translation>
+    </message>
+    <message>
+        <source>%1 (Profile)</source>
+        <translation>%1 (profiel)</translation>
     </message>
 </context>
 <context>
@@ -728,8 +580,16 @@ Wilt u doorgaan?</translation>
         <translation>Onverwacht groepseinde.</translation>
     </message>
     <message>
-        <source>Error opening mork file.</source>
-        <translation>Het openen van het mork-bestand is mislukt.</translation>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker, maar enkele ingestelde e-mailmappen zijn niet aangetroffen.</translation>
+    </message>
+    <message>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Op Sqlite gebaseerde accounts zijn gemigreerd</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker. Controleer of alle accounts juist zijn gemigreerd.</translation>
     </message>
 </context>
 <context>
@@ -741,6 +601,28 @@ Wilt u doorgaan?</translation>
     <message>
         <source>Notification color</source>
         <translation>Meldingskleur</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Fatale fout: %1
+
+Het logboek is opgeslagen als %2</translation>
+    </message>
+    <message>
+        <source>Could not save the settings</source>
+        <translation>Kan instellingen niet opslaan</translation>
+    </message>
+    <message>
+        <source>Could not save the settings into file %1:
+%2</source>
+        <translation>De instellingen kunnen niet worden opgeslagen in %1:
+%2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Het logboek &apos;%s&apos; kan niet worden geopend: %s</translation>
     </message>
 </context>
 <context>
@@ -849,28 +731,12 @@ Wilt u doorgaan?</translation>
 <context>
     <name>UnreadMonitor</name>
     <message>
-        <source>Error opening sqlite database: %1</source>
-        <translation>Het openen van de sqlite-databank is mislukt: %1</translation>
-    </message>
-    <message>
-        <source>Folder %1 was not found in database.</source>
-        <translation>De map &apos;%1&apos; is niet aangetroffen in de databank.</translation>
-    </message>
-    <message>
-        <source>Cannot query database.</source>
-        <translation>De databank kan niet worden doorzocht.</translation>
-    </message>
-    <message>
         <source>Unable to watch %1 for changes.</source>
         <translation>&apos;%1&apos; kan niet worden bijgehouden.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
         <translation>&apos;%1&apos; kan niet worden uitgelezen.</translation>
-    </message>
-    <message>
-        <source>Cannot query database: %1</source>
-        <translation>Het doorzoeken van de databank is mislukt: %1</translation>
     </message>
 </context>
 <context>

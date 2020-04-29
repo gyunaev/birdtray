@@ -19,7 +19,7 @@
 
 #define LATEST_VERSION_INFO_URL "https://api.github.com/repos/gyunaev/birdtray/releases/latest"
 #define GENERIC_DOWNLOAD_URL "https://github.com/gyunaev/birdtray/releases/latest"
-#define VERSION_TAG_REGEX "^(RELEASE_)?(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?$"
+#define VERSION_TAG_REGEX R"(^(RELEASE_|v)?(?<major>\d+)\.(?<minor>\d+)(\.(?<patch>\d+))?$)"
 
 AutoUpdater::AutoUpdater(QObject* parent) :
         QObject(parent),

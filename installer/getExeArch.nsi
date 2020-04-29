@@ -2,6 +2,7 @@
 !include LogicLib.nsh
 !define SCS_64BIT_BINARY 6
 
+Unicode true
 SetCompress off
 Name "getExeArch"
 OutFile "GetExeArch.exe"
