@@ -7,6 +7,7 @@ Group:        System Environment/Shells
 Source0:      https://github.com/gyunaev/%{name}/archive/%{version}.tar.gz
 URL:          https://github.com/gyunaev/birdtray
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: cmake3 gcc-c++ desktop-file-utils
 BuildRequires: sqlite-devel qt5-qtbase-devel qt5-qtx11extras-devel qt5-qtsvg-devel qt5-linguist
 %if 0%{?fedora} || 0%{?rhel} > 7
 Recommends:    qt5-qttranslations
