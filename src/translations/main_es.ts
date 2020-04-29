@@ -467,12 +467,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MailAccountDialog</name>
     <message>
-        <source>Elegir la ruta de perfiles de Thunderbird</source>
-        <translation type=""></translation>
-    </message>
-    <message>
         <source>No folder selected</source>
-        <translation type="Niguna carpeta seleccionada"></translation>
+        <translation>Niguna carpeta seleccionada</translation>
     </message>
     <message>
         <source>No mail folder was selected to monitor.
@@ -521,6 +517,10 @@ Do you want to continue?</source>
 Please make sure you selected the correct profiles directory.</source>
         <translation>No se han encontrado perfiles de correo
 Por favor, asegúrese que ha seleccionado el directorio de perfiles correcto.</translation>
+    </message>
+    <message>
+        <source>Choose the Thunderbird profiles path</source>
+        <translation>Elegir la ruta de perfiles de Thunderbird</translation>
     </message>
 </context>
 <context>
