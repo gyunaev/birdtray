@@ -9,10 +9,9 @@ URL:          https://github.com/gyunaev/birdtray
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: cmake3 gcc-c++ desktop-file-utils
 BuildRequires: sqlite-devel qt5-qtbase-devel qt5-qtx11extras-devel qt5-qtsvg-devel qt5-linguist
-
-#%if 0%{?fedora} || 0%{?rhel} >= 8
-#Recommends:      thunderbird
-#%{endif}
+%if 0%{?fedora} || 0%{?rhel} > 7
+Recommends:    qt5-qttranslations
+%endif
 
 Summary: Birdtray is a free system tray notification for new mail for Thunderbird
 
