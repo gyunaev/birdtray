@@ -649,7 +649,7 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>Blank</source>
-        <translation>Пустой</translation>
+        <translation>Пустое</translation>
     </message>
     <message>
         <source>New Email Message</source>
