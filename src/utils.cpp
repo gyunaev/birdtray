@@ -248,10 +248,16 @@ QStringList Utils::splitCommandLine(const QString &src)
 QString Utils::getMailFolderName(const QFileInfo &morkFile) {
     QString dirName;
     QDir parentDir = morkFile.dir();
-    QString name = QCoreApplication::translate(
-            "EmailFolders", morkFile.completeBaseName().toUtf8().constData());
+    QString morkBaseName = morkFile.completeBaseName();
+    if (morkBaseName == "INBOX") {
+        morkBaseName = "Inbox";
+    }
+    QString name = QCoreApplication::translate("EmailFolders", morkBaseName.toUtf8().constData());
     while ((dirName = parentDir.dirName()).endsWith(".sbd")) {
         dirName.chop(4);
+        if (dirName == "INBOX") {
+            dirName = "Inbox";
+        }
         name = QCoreApplication::translate(
                 "EmailFolders", dirName.toUtf8().constData()) + '/' + name;
         parentDir.cdUp();

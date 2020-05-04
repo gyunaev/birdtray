@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.1" language="es_ES">
 <context>
     <name>EmailFolders</name>
     <message>
         <source>Inbox</source>
-        <translation>Входящие</translation>
+        <translation>Bandeja de entrada</translation>
     </message>
     <message>
         <source>Archives</source>
-        <translation>Архивы</translation>
+        <translation>Archivados</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Черновики</translation>
+        <translation>Borradores</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Отправленные</translation>
+        <translation>Enviados</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Шаблоны</translation>
+        <translation>Plantillas</translation>
     </message>
     <message>
         <source>Junk</source>
-        <translation>Спам</translation>
+        <translation>No deseados</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Удалённые</translation>
+        <translation>Papelera</translation>
     </message>
     <message>
         <source>Unsent Messages</source>
-        <translation>Исходящие</translation>
+        <translation>Bandeja de salida</translation>
     </message>
 </context>
 </TS>

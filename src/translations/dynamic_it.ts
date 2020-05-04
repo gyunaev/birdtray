@@ -4,7 +4,7 @@
 <context>
     <name>EmailFolders</name>
     <message>
-        <source>INBOX</source>
+        <source>Inbox</source>
         <translation>In Arrivo</translation>
     </message>
     <message>
