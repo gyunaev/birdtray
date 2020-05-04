@@ -123,14 +123,13 @@ DialogSettings::DialogSettings( QWidget *parent)
 
     // Icon
     btnNotificationIcon->setIcon( settings->getNotificationIcon() );
-
-    if ( !settings->mNotificationIconUnread.isNull() )
-    {
-        boxNotificationIconUnread->setChecked( true );
-        btnNotificationIconUnread->setIcon( settings->mNotificationIconUnread );
+    if (!settings->mNotificationIconUnread.isNull()) {
+        boxNotificationIconUnread->setChecked(true);
+        btnNotificationIconUnread->setIcon(settings->mNotificationIconUnread);
+    } else {
+        boxNotificationIconUnread->setChecked(false);
+        btnNotificationIconUnread->setDisabled(true);
     }
-    else
-        boxNotificationIconUnread->setChecked( false );
 }
 
 void DialogSettings::accept()
