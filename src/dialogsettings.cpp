@@ -57,7 +57,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     borderWidthSlider->setValue(static_cast<int>(settings->mNotificationBorderWidth) * 2);
     notificationFont->setCurrentFont( settings->mNotificationFont );
     notificationFontWeight->setValue( settings->mNotificationFontWeight * 2 );
-    sliderBlinkingSpeed->setValue( settings->mBlinkSpeed );
+    sliderBlinkingSpeed->setValue( settings->mBlinkSpeed == 0 ?
+            0 : sliderBlinkingSpeed->maximum() + 1 - static_cast<int>(settings->mBlinkSpeed) );
     boxLaunchThunderbirdAtStart->setChecked( settings->mLaunchThunderbird );
     boxShowHideThunderbird->setChecked( settings->mShowHideThunderbird );
     boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
@@ -141,7 +142,8 @@ void DialogSettings::accept()
     // A width of 100 is way to much, nobody will want to go beyond 50.
     settings->mNotificationBorderWidth = qRound(borderWidthSlider->value() / 2.0);
     settings->mNotificationFont = notificationFont->currentFont();
-    settings->mBlinkSpeed = sliderBlinkingSpeed->value();
+    settings->mBlinkSpeed = sliderBlinkingSpeed->value() == 0 ?
+            0 : sliderBlinkingSpeed->maximum() + 1 - sliderBlinkingSpeed->value();
     settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
     settings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
     settings->mThunderbirdCmdLine = Utils::splitCommandLine( leThunderbirdCmdLine->text() );
