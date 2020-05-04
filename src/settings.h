@@ -171,9 +171,6 @@ class Settings
 
         // Notification icon
         QPixmap     mNotificationIcon;
-
-        QString     pixmapToString( const QPixmap& pixmap );
-        QPixmap     pixmapFromString( const QString& data );
     
         // Settings filename
         QString     mSettingsFilename;

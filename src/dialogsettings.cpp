@@ -358,8 +358,7 @@ void DialogSettings::changeIcon(QToolButton *button)
         return;
 
     Settings* settings = BirdtrayApp::get()->getSettings();
-
-    QPixmap test;
+    QPixmap icon;
 
     if (e.endsWith(".svg", Qt::CaseInsensitive) ||
             e.endsWith(".svgz", Qt::CaseInsensitive))
@@ -378,24 +377,20 @@ void DialogSettings::changeIcon(QToolButton *button)
         QPainter painter(&image);
         svg.render(&painter);
 
-        test = QPixmap::fromImage(image);
+        icon = QPixmap::fromImage(image);
     }
     else
     {
-
-        if ( !test.load( e ) )
-        {
+        if (!icon.load( e ) || Utils::pixmapToString(icon).isEmpty()) {
             QMessageBox::critical(nullptr, tr("Invalid icon"),
                                   tr("Could not load the icon from this file."));
             return;
         }
-
-        test = test.scaled(settings->mIconSize.width(), settings->mIconSize.height(),
+        // Force scale icon to the expected size
+        icon = icon.scaled(settings->mIconSize.width(), settings->mIconSize.height(),
                     Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
-
-    // Force scale icon to the expected size
-    button->setIcon(test);
+    button->setIcon(icon);
 }
 
 void DialogSettings::activateTab(int tabIndex)

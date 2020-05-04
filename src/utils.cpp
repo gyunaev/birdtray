@@ -4,8 +4,8 @@
 
 #include <QApplication>
 #include <QTextCodec>
-#include <QtWidgets/QMessageBox>
 #include <QtCore/QDir>
+#include <QtCore/QBuffer>
 
 #if defined (Q_OS_WIN)
 #  include <windows.h>
@@ -287,3 +287,19 @@ QString Utils::formatGithubMarkdown(const QString& markdown) {
 #endif
 }
 
+QString Utils::pixmapToString(const QPixmap &pixmap) {
+    QByteArray iconData;
+    QBuffer buffer(&iconData);
+    buffer.open(QIODevice::WriteOnly);
+    pixmap.save(&buffer, "PNG");
+    buffer.close();
+    return QString::fromLatin1(iconData.toBase64());
+}
+
+QPixmap Utils::pixmapFromString(const QString &data) {
+    QPixmap pixmap;
+    if (!data.isEmpty()) {
+        pixmap.loadFromData(QByteArray::fromBase64(data.toLatin1()), "PNG");
+    }
+    return pixmap;
+}
