@@ -136,6 +136,9 @@ class Settings
         // If non-zero, specifies an interval in seconds for rereading index files even if they didn't change. 0 disables.
         unsigned int    mIndexFilesRereadIntervalSec;
 
+        // When the number of unread emails changes, birdtray can start this process
+        QString                   mProcessRunOnCountChange;
+
         // Load and save them
         void    save();
         void    load();
