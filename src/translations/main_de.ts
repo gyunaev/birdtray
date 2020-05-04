@@ -463,6 +463,10 @@ p, li { white-space: pre-wrap; }
         <source>Contributors</source>
         <translation>Mitwirkende</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wähle E-Mail Ordner zur Überwachung aus.&lt;br/&gt;&lt;br/&gt;Wenn der Dialog Ihren E-Mail Ordner nicht anzeigt, klicken Sie &lt;i&gt;Strg + Shift&lt;/i&gt; um einen Dateiauswahlsdialog zu öffnen, mit dem jede mork-Datei hinzugefügt werden kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>
