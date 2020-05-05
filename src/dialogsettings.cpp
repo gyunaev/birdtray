@@ -120,6 +120,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     QString origabout = browserAbout->toHtml();
     origabout.replace( "[VERSION]", Utils::getBirdtrayVersion() );
     origabout.replace( "[DATE]", QString("%1 %2").arg(__DATE__) .arg(__TIME__) );
+    origabout.replace( "[QT_VERSION]", QT_VERSION_STR );
     browserAbout->setText( origabout );
 
     // Icon
