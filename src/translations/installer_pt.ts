@@ -248,5 +248,9 @@
         <source>Lang_es</source>
         <translation>Espanhol</translation>
     </message>
+    <message>
+        <source>Lang_sv</source>
+        <translation>Sueco</translation>
+    </message>
 </context>
 </TS>
