@@ -381,9 +381,15 @@ void DialogSettings::changeIcon(QToolButton *button)
     }
     else
     {
-        if (!icon.load( e ) || Utils::pixmapToString(icon).isEmpty()) {
+        if (!icon.load( e )) {
             QMessageBox::critical(nullptr, tr("Invalid icon"),
                                   tr("Could not load the icon from this file."));
+            return;
+        }
+        if (Utils::pixmapToString(icon).isEmpty()) {
+            QMessageBox::critical(nullptr, tr("Invalid icon"),
+                    tr("Could not load the icon from this file. Try loading the icon in an image "
+                       "editing tool and saving it in a different format."));
             return;
         }
         // Force scale icon to the expected size
