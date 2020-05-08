@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>Lang_sv</source>
-        <translation>шведский</translation>
+        <translation>Шведский</translation>
     </message>
 </context>
 </TS>
