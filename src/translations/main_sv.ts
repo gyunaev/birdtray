@@ -86,7 +86,7 @@ OpenSSL kanske inte är installerad.</translation>
     </message>
     <message>
         <source>FILE</source>
-        <translation></translation>
+        <translation>FIL</translation>
     </message>
 </context>
 <context>
