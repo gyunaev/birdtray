@@ -303,7 +303,7 @@ OpenSSL kanske inte är installerad.</translation>
     </message>
     <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
-        <translation>Använd in-/uttoning vid blinkning (ökad cpu-belastning)</translation>
+        <translation>Använd in-/uttoning vid blinkning (ökad CPU-belastning)</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
