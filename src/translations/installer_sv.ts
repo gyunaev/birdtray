@@ -186,7 +186,7 @@
     </message>
     <message>
         <source>UninstallRestartAsUserQuestion</source>
-        <translation>Avinstallationen har startats med administratörsbehörighet men det verkar inte finnas någon ${PRODUCT_NAME}-installation för administratören.Vill du starta om avinstallationen utan administratörsbehörighet?</translation>
+        <translation>Avinstallationen har startats med administratörsbehörighet men det verkar inte finnas någon ${PRODUCT_NAME}-installation för administratören. Vill du starta om avinstallationen utan administratörsbehörighet?</translation>
     </message>
     <message>
         <source>OpenUrl</source>
