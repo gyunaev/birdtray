@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QProcess>
 #include <QMessageBox>
+#include <QPainterPath>
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
