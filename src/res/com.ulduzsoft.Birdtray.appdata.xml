@@ -11,9 +11,9 @@
       Birdtray is a system tray new mail notification for Thunderbird, which does not require extensions
     </p>
     <p>Features:</p>
-​    <ul>
+    <ul>
       <li>Shows the unread email counter in the Thunderbird system tray icon.</li>
-​      <li>Optionally can animate the Thunderbird system tray icon if new mail is received.</li>
+      <li>Optionally can animate the Thunderbird system tray icon if new mail is received.</li>
       <li>You can snooze new mail notifications for a specific time period.</li>
       <li>Birdtray checks the unread e-mail status directly by reading the Thunderbird email search database. This means it does not need any extensions, and thus is immune to any future extension API changes in Thunderbird</li>
       <li>It can hide the Thunderbird window, and restore it. There is also context menu for that.</li>
@@ -41,7 +41,7 @@
   <launchable type="desktop-id">com.ulduzsoft.Birdtray.desktop</launchable>
 
   <releases>
-      <release date="2020-04-23" version="1.8.1" urgency="medium"/>
+      <release date="2020-04-29" version="1.8.1" urgency="medium"/>
       <release date="2020-04-18" version="1.8.0" urgency="medium"/>
       <release date="2019-12-03" version="1.7.0" urgency="medium"/>
       <release date="2019-05-21" version="1.6" urgency="medium"/>

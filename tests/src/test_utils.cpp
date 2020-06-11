@@ -28,6 +28,10 @@ TEST(UtilsTest, formatGithubMarkdown_mentions) {
              "[@test1me](https://github.com/test1me)", "@test1me (https://github.com/test1me)",
              "Expected formatGithubMarkdown to add a link to the Github account "
              "if the name contains non-alphabetical letters."},
+            {"(@test1me)",
+             "([@test1me](https://github.com/test1me))", "(@test1me (https://github.com/test1me))",
+             "Expected formatGithubMarkdown to add a link to the Github account "
+             "if the name contains non-alphabetical letters."},
     };
     for (auto &caseData : cases) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
@@ -48,6 +52,7 @@ TEST(UtilsTest, formatGithubMarkdown_links) {
             {"stuff\n[text](url)", "stuff\ntext (url)"},
             {"sun[day](url)more", "sunday (url)more"}, // Not the best, but doesn't need to be
             {"[text] (url)", "[text] (url)"},
+            {"([text](url))", "(text (url))"},
     };
     for (auto &caseData : cases) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)

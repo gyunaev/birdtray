@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QProcess>
 #include <QMessageBox>
+#include <QPainterPath>
 #include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
@@ -129,6 +130,23 @@ void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
         }
     }
     
+    // Execute the hook process
+    if ( !BirdtrayApp::get()->getSettings()->mProcessRunOnCountChange.isEmpty() )
+    {
+        QString cmdline = BirdtrayApp::get()->getSettings()->mProcessRunOnCountChange;
+
+        // Replace the %NEW% with the new unread count
+        cmdline.replace( "%NEW%", QString::number( total ) );
+
+        // Replace the %OLD% with the old unread count
+        cmdline.replace( "%OLD%", QString::number( mUnreadCounter ) );
+
+        if ( !QProcess::startDetached( cmdline ) )
+            Log::debug( "Failed to execute hook command %s", qPrintable( cmdline ) );
+        else
+            Log::debug( "Executing hook command %s", qPrintable( cmdline ) );
+    }
+
     mUnreadCounter = total;
     mUnreadColor = color;
 

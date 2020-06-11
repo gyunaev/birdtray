@@ -244,5 +244,13 @@
         <source>Lang_pt</source>
         <translation>Португа́льский</translation>
     </message>
+    <message>
+        <source>Lang_es</source>
+        <translation>Испанский язык</translation>
+    </message>
+    <message>
+        <source>Lang_sv</source>
+        <translation>Шведский</translation>
+    </message>
 </context>
 </TS>

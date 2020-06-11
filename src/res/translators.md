@@ -4,6 +4,8 @@
 * @Abestanis
 * @igorruckert
 * @KOV70
+* @eson57
 
 # Contributors
 * @to-ba
+* @rplanchuelo

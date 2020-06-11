@@ -248,10 +248,16 @@ QStringList Utils::splitCommandLine(const QString &src)
 QString Utils::getMailFolderName(const QFileInfo &morkFile) {
     QString dirName;
     QDir parentDir = morkFile.dir();
-    QString name = QCoreApplication::translate(
-            "EmailFolders", morkFile.completeBaseName().toUtf8().constData());
+    QString morkBaseName = morkFile.completeBaseName();
+    if (morkBaseName == "INBOX") {
+        morkBaseName = "Inbox";
+    }
+    QString name = QCoreApplication::translate("EmailFolders", morkBaseName.toUtf8().constData());
     while ((dirName = parentDir.dirName()).endsWith(".sbd")) {
         dirName.chop(4);
+        if (dirName == "INBOX") {
+            dirName = "Inbox";
+        }
         name = QCoreApplication::translate(
                 "EmailFolders", dirName.toUtf8().constData()) + '/' + name;
         parentDir.cdUp();
@@ -270,12 +276,13 @@ QString Utils::getMailAccountName(const QFileInfo &morkFile) {
 
 QString Utils::formatGithubMarkdown(const QString& markdown) {
     QString input = markdown;
-    static QRegularExpression githubMentionRegex(R"(((?<![^\s\n]))@(\S+))");
+    static QRegularExpression githubMentionRegex(
+            R"((?<!\w)@([a-z\d\-]+))", QRegularExpression::CaseInsensitiveOption);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    return input.replace(githubMentionRegex, R"(\1[@\2](https://github.com/\2))");
+    return input.replace(githubMentionRegex, R"([@\1](https://github.com/\1))");
 #else
     static QRegularExpression markdownLinksRegex(R"(\[(.+?)\]\((\S+?)\))");
-    return input.replace(githubMentionRegex, R"(@\1\2 (https://github.com/\2))")
+    return input.replace(githubMentionRegex, R"(@\1 (https://github.com/\1))")
                 .replace(markdownLinksRegex, R"(\1 (\2))");
 #endif
 }

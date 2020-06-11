@@ -57,7 +57,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     borderWidthSlider->setValue(static_cast<int>(settings->mNotificationBorderWidth) * 2);
     notificationFont->setCurrentFont( settings->mNotificationFont );
     notificationFontWeight->setValue( settings->mNotificationFontWeight * 2 );
-    sliderBlinkingSpeed->setValue( settings->mBlinkSpeed );
+    sliderBlinkingSpeed->setValue( settings->mBlinkSpeed == 0 ?
+            0 : sliderBlinkingSpeed->maximum() + 1 - static_cast<int>(settings->mBlinkSpeed) );
     boxLaunchThunderbirdAtStart->setChecked( settings->mLaunchThunderbird );
     boxShowHideThunderbird->setChecked( settings->mShowHideThunderbird );
     boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
@@ -77,6 +78,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
     ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
+    leProcessRunOnCountChange->setText( settings->mProcessRunOnCountChange );
 
     if ( settings->mIndexFilesRereadIntervalSec > 0 )
     {
@@ -118,18 +120,18 @@ DialogSettings::DialogSettings( QWidget *parent)
     QString origabout = browserAbout->toHtml();
     origabout.replace( "[VERSION]", Utils::getBirdtrayVersion() );
     origabout.replace( "[DATE]", QString("%1 %2").arg(__DATE__) .arg(__TIME__) );
+    origabout.replace( "[QT_VERSION]", QT_VERSION_STR );
     browserAbout->setText( origabout );
 
     // Icon
     btnNotificationIcon->setIcon( settings->getNotificationIcon() );
-
-    if ( !settings->mNotificationIconUnread.isNull() )
-    {
-        boxNotificationIconUnread->setChecked( true );
-        btnNotificationIconUnread->setIcon( settings->mNotificationIconUnread );
+    if (!settings->mNotificationIconUnread.isNull()) {
+        boxNotificationIconUnread->setChecked(true);
+        btnNotificationIconUnread->setIcon(settings->mNotificationIconUnread);
+    } else {
+        boxNotificationIconUnread->setChecked(false);
+        btnNotificationIconUnread->setDisabled(true);
     }
-    else
-        boxNotificationIconUnread->setChecked( false );
 }
 
 void DialogSettings::accept()
@@ -141,7 +143,8 @@ void DialogSettings::accept()
     // A width of 100 is way to much, nobody will want to go beyond 50.
     settings->mNotificationBorderWidth = qRound(borderWidthSlider->value() / 2.0);
     settings->mNotificationFont = notificationFont->currentFont();
-    settings->mBlinkSpeed = sliderBlinkingSpeed->value();
+    settings->mBlinkSpeed = sliderBlinkingSpeed->value() == 0 ?
+            0 : sliderBlinkingSpeed->maximum() + 1 - sliderBlinkingSpeed->value();
     settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
     settings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
     settings->mThunderbirdCmdLine = Utils::splitCommandLine( leThunderbirdCmdLine->text() );
@@ -164,6 +167,7 @@ void DialogSettings::accept()
     settings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
     settings->ignoreStartUnreadCount = ignoreStartupMailCountBox->isChecked();
     settings->onlyShowIconOnUnreadMessages = onlyShowIconOnNewMail->isChecked();
+    settings->mProcessRunOnCountChange = leProcessRunOnCountChange->text();
 
     settings->setNotificationIcon(btnNotificationIcon->icon().pixmap( settings->mIconSize ));
 

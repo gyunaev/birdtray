@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.1" language="sv">
 <context>
     <name>EmailFolders</name>
     <message>
         <source>Inbox</source>
-        <translation>Входящие</translation>
+        <translation>Inkorgen</translation>
     </message>
     <message>
         <source>Archives</source>
-        <translation>Архивы</translation>
+        <translation>Arkiv</translation>
     </message>
     <message>
         <source>Drafts</source>
-        <translation>Черновики</translation>
+        <translation>Utkast</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Отправленные</translation>
+        <translation>Skickat</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation>Шаблоны</translation>
+        <translation>Mallar</translation>
     </message>
     <message>
         <source>Junk</source>
-        <translation>Спам</translation>
+        <translation>Skräp</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>Удалённые</translation>
+        <translation>Papperskorgen</translation>
     </message>
     <message>
         <source>Unsent Messages</source>
-        <translation>Исходящие</translation>
+        <translation>Utkorgen</translation>
     </message>
 </context>
 </TS>
