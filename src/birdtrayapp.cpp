@@ -62,7 +62,6 @@ BirdtrayApp::BirdtrayApp(int &argc, char** argv) : QApplication(argc, argv)
 
     Log::debug( "Birdtray version %d.%d.%d started", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
 
-    ensureSystemTrayAvailable();
     // Load settings
     settings = new Settings();
     if (commandLineParser.isSet("reset-settings")) {
@@ -253,20 +252,5 @@ void BirdtrayApp::onSecondInstanceCommand(QLocalSocket* clientSocket) {
         trayIcon->hideThunderbird();
     } else if (line == SETTINGS_COMMAND) {
         trayIcon->showSettings();
-    }
-}
-
-void BirdtrayApp::ensureSystemTrayAvailable() {
-    int passed = 0;
-    while (!QSystemTrayIcon::isSystemTrayAvailable()) {
-        if (passed == 0) {
-            qDebug("Waiting for system tray to become available");
-        }
-        passed++;
-        if (passed > 120) {
-            Log::fatal( QApplication::tr("Sorry, system tray cannot be controlled "
-                                          "through this add-on on your operating system.") );
-        }
-        QThread::msleep(500);
     }
 }

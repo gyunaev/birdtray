@@ -154,10 +154,6 @@ private:
      */
     void onSecondInstanceCommand(QLocalSocket* clientSocket);
     
-    /**
-     * Wait for the system tray to become available and exit if it doesn't within 60 seconds.
-     */
-    static void ensureSystemTrayAvailable();
 };
 
 
