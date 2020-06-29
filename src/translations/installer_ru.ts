@@ -242,11 +242,11 @@
     </message>
     <message>
         <source>Lang_pt</source>
-        <translation>Португа́льский</translation>
+        <translation>Португальский</translation>
     </message>
     <message>
         <source>Lang_es</source>
-        <translation>Испанский язык</translation>
+        <translation>Испанский</translation>
     </message>
     <message>
         <source>Lang_sv</source>
