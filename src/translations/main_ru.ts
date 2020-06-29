@@ -507,6 +507,10 @@ p, li { white-space: pre-wrap; }
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если не пусто, данная команда будет вызываться каждый раз, когда изменяется счетчик непрочитанных сообщений (в том числе, когда он становится равным нулю). Она вызывается через оболочку, как есть, с заменой% NEW% на новое непрочитанное значение счетчика, а% OLD% заменяется старым непрочитанным значением счетчика (которое может совпадать с новым). &lt;/p&gt;&lt;p&gt;Большинству пользователей эта функциональность не нужна и она должна быть пустой.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MailAccountDialog</name>

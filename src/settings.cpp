@@ -135,10 +135,10 @@ void Settings::save()
     if ( !newemaildata.isEmpty() )
         out[ "newemails" ] = newemaildata;
 
-    if ( !mNotificationIconUnread.isNull() )
-        out[ "common/notificationiconunread" ] = pixmapToString( mNotificationIconUnread );
-
-    out[ "common/notificationicon" ] = pixmapToString( mNotificationIcon );
+    if ( !mNotificationIconUnread.isNull() ) {
+        out[ "common/notificationiconunread" ] = Utils::pixmapToString( mNotificationIconUnread );
+    }
+    out[ "common/notificationicon" ] = Utils::pixmapToString( mNotificationIcon );
 
     // QSaveFile is an I/O device for writing text and binary files, without
     // losing existing data if the writing operation fails.
@@ -200,8 +200,10 @@ void Settings::fromJSON( const QJsonObject& settings )
     if ( settings.contains( "common/notificationfont" ) )
         mNotificationFont.fromString( settings.value( "common/notificationfont" ).toString() );
 
-    mNotificationIcon = pixmapFromString( settings.value( "common/notificationicon" ).toString() );
-    mNotificationIconUnread = pixmapFromString(settings.value( "common/notificationiconunread" ).toString() );
+    mNotificationIcon = Utils::pixmapFromString(
+            settings.value("common/notificationicon").toString());
+    mNotificationIconUnread = Utils::pixmapFromString(
+            settings.value("common/notificationiconunread").toString());
 
     (void) getNotificationIcon(); // Load the default
 
@@ -287,8 +289,10 @@ void Settings::fromQSettings( QSettings * psettings )
     if ( settings.contains( "common/notificationfont" ) )
         mNotificationFont.fromString( settings.value( "common/notificationfont", "" ).toString() );
 
-    mNotificationIcon = pixmapFromString( settings.value("common/notificationicon","").toString() );
-    mNotificationIconUnread = pixmapFromString( settings.value("common/notificationiconunread","").toString() );
+    mNotificationIcon = Utils::pixmapFromString(
+            settings.value("common/notificationicon", "").toString());
+    mNotificationIconUnread = Utils::pixmapFromString(
+            settings.value("common/notificationiconunread", "").toString());
 
     (void) getNotificationIcon(); // Load the default
 
@@ -484,32 +488,6 @@ const QPixmap &Settings::getNotificationIcon() {
 
 void Settings::setNotificationIcon(const QPixmap& icon) {
     mNotificationIcon = icon;
-}
-
-QString Settings::pixmapToString(const QPixmap &pixmap)
-{
-    // Store the notification icon in the icondata buffer
-    QByteArray icondata;
-    QBuffer buffer(&icondata);
-    buffer.open(QIODevice::WriteOnly);
-    pixmap.save(&buffer, "PNG");
-    buffer.close();
-
-    return QString::fromLatin1( icondata.toBase64() );
-}
-
-QPixmap Settings::pixmapFromString(const QString &data)
-{
-    QPixmap pix;
-
-    if ( !data.isEmpty() )
-    {
-        pix = QPixmap( mIconSize );
-        pix.loadFromData( QByteArray::fromBase64( data.toLatin1() ), "PNG" );
-        pix.detach();
-    }
-
-    return pix;
 }
 
 void Settings::loadInstallerConfiguration() {
