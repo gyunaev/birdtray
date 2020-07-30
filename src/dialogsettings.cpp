@@ -79,6 +79,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
     leProcessRunOnCountChange->setText( settings->mProcessRunOnCountChange );
+    boxIgnoreEmailsOnMinimize->setChecked(settings->mForceIgnoreUnreadEmailsOnMinimize);
 
     if ( settings->mIndexFilesRereadIntervalSec > 0 )
     {
@@ -153,6 +154,7 @@ void DialogSettings::accept()
     settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
     settings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
     settings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
+    settings->mForceIgnoreUnreadEmailsOnMinimize = boxIgnoreEmailsOnMinimize->isChecked();
 
     settings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
     settings->mNotificationMinimumFontSize = spinMinimumFontSize->value();

@@ -101,6 +101,9 @@ class Settings
 
         // Whether to show the unread email count
         bool    mShowUnreadEmailCount;
+
+        // Whether to ignore all currently unread emails if Thunderbird is hidden by Birdtray
+        bool    mForceIgnoreUnreadEmailsOnMinimize;
         
         /**
          * Ignore the total number of unread emails that are present at startup.

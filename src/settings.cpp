@@ -67,6 +67,7 @@ Settings::Settings()
     mNewEmailMenuEnabled = false;
     mIndexFilesRereadIntervalSec = 0;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
+    mForceIgnoreUnreadEmailsOnMinimize = false;
 }
 
 Settings::~Settings()
@@ -96,6 +97,7 @@ void Settings::save()
     out[ "common/showunreademailcount" ] = mShowUnreadEmailCount;
     out[ "common/ignoreStartUnreadCount" ] = ignoreStartUnreadCount;
     out[ "common/showDialogIfNoAccountsConfigured"  ] = showDialogIfNoAccountsConfigured;
+    out[ "common/forceIgnoreUnreadEmailsOnMinimize"  ] = mForceIgnoreUnreadEmailsOnMinimize;
 
     out[ "advanced/tbcmdline" ] = QJsonArray::fromStringList( mThunderbirdCmdLine );
     out[ "advanced/tbwindowmatch" ] = mThunderbirdWindowMatch;
@@ -229,6 +231,7 @@ void Settings::fromJSON( const QJsonObject& settings )
     mShowUnreadEmailCount = settings.value("common/showunreademailcount").toBool();
     ignoreStartUnreadCount = settings.value("common/ignoreStartUnreadCount").toBool();
     showDialogIfNoAccountsConfigured = settings.value("common/showDialogIfNoAccountsConfigured").toBool();
+    mForceIgnoreUnreadEmailsOnMinimize = settings.value( "common/forceIgnoreUnreadEmailsOnMinimize" ).toBool();
 
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch").toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize").toInt();
