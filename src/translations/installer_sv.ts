@@ -252,5 +252,9 @@
         <source>Lang_sv</source>
         <translation>Svenska</translation>
     </message>
+	<message>
+		<source>Lang_pl</source>
+		<translation>Polska</translation>
+	</message>
 </context>
 </TS>

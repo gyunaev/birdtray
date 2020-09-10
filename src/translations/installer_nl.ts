@@ -252,5 +252,9 @@
         <source>Lang_sv</source>
         <translation>Zweeds</translation>
     </message>
+	<message>
+		<source>Lang_pl</source>
+		<translation>Pools</translation>
+	</message>
 </context>
 </TS>
