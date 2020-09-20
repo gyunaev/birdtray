@@ -252,5 +252,9 @@
         <source>Lang_sv</source>
         <translation>Swedish</translation>
     </message>
+    <message>
+        <source>Lang_tr</source>
+        <translation>Turkish</translation>
+    </message>
 </context>
 </TS>
