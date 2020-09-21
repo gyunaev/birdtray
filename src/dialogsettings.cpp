@@ -79,6 +79,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
     leProcessRunOnCountChange->setText( settings->mProcessRunOnCountChange );
+    boxIgnoreEmailsOnMinimize->setChecked(settings->mForceIgnoreUnreadEmailsOnMinimize);
 
     if ( settings->mIndexFilesRereadIntervalSec > 0 )
     {
@@ -153,6 +154,7 @@ void DialogSettings::accept()
     settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
     settings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
     settings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
+    settings->mForceIgnoreUnreadEmailsOnMinimize = boxIgnoreEmailsOnMinimize->isChecked();
 
     settings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
     settings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
@@ -358,8 +360,7 @@ void DialogSettings::changeIcon(QToolButton *button)
         return;
 
     Settings* settings = BirdtrayApp::get()->getSettings();
-
-    QPixmap test;
+    QPixmap icon;
 
     if (e.endsWith(".svg", Qt::CaseInsensitive) ||
             e.endsWith(".svgz", Qt::CaseInsensitive))
@@ -378,24 +379,26 @@ void DialogSettings::changeIcon(QToolButton *button)
         QPainter painter(&image);
         svg.render(&painter);
 
-        test = QPixmap::fromImage(image);
+        icon = QPixmap::fromImage(image);
     }
     else
     {
-
-        if ( !test.load( e ) )
-        {
+        if (!icon.load( e )) {
             QMessageBox::critical(nullptr, tr("Invalid icon"),
                                   tr("Could not load the icon from this file."));
             return;
         }
-
-        test = test.scaled(settings->mIconSize.width(), settings->mIconSize.height(),
+        if (Utils::pixmapToString(icon).isEmpty()) {
+            QMessageBox::critical(nullptr, tr("Invalid icon"),
+                    tr("Could not load the icon from this file. Try loading the icon in an image "
+                       "editing tool and saving it in a different format."));
+            return;
+        }
+        // Force scale icon to the expected size
+        icon = icon.scaled(settings->mIconSize.width(), settings->mIconSize.height(),
                     Qt::KeepAspectRatio, Qt::SmoothTransformation);
     }
-
-    // Force scale icon to the expected size
-    button->setIcon(test);
+    button->setIcon(icon);
 }
 
 void DialogSettings::activateTab(int tabIndex)

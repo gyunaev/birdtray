@@ -82,6 +82,22 @@ class Utils
          * @return A reference to the new markdown string with t the links.
          */
         static QString formatGithubMarkdown(const QString& markdown);
+    
+        /**
+         * Convert a pixmap to a base64 encoded string.
+         *
+         * @param pixmap The pixmap to convert.
+         * @return The base64 encoded image data.
+         */
+        static QString pixmapToString(const QPixmap &pixmap);
+
+        /**
+         * Convert a base64 encoded png into a pixmap.
+         *
+         * @param data The base64 encoded image data.
+         * @return The pixmap representing the data.
+         */
+        static QPixmap pixmapFromString(const QString &data);
 };
 
 #endif // UTILS_H

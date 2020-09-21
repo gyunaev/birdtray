@@ -13,7 +13,7 @@ assignees: ''
 **OS**: <!-- Your operating system and it's version. For Windows, please specify if it is 64 or 32 bit. For Linux, please also include your distribution name and version. -->
 **Birdtray version**: <!-- The version of Birdtray, can be found in the "About" tab of the preferences. -->
 **Thunderbird version**: <!-- The Thunderbird version. -->
-**Birdtray origin**: <!-- How did you install Birdtray? Possible options could be: "From source", "From installer" or "From package manager" -->
+**Birdtray origin**: <!-- How did you install Birdtray? Possible options could be: "From source", "From installer" or "From package manager". Please note that if the issue happens in a packaged version, you should submit a bug report to the package maintainer. We do not build deb/rpm/flatpac packages and we do not know what version it was based on, and what has been included. Such bug reports will not be accepted. -->
 **Qt version**: _NA_ <!-- Only fill this, if you compiled Birdtray yourself. -->
 
 **Description**

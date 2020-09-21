@@ -792,6 +792,9 @@ void TrayIcon::onAutoUpdateCheckFinished(bool foundUpdate, const QString &errorM
 
 void TrayIcon::hideThunderbird()
 {
+    if ( BirdtrayApp::get()->getSettings()->mForceIgnoreUnreadEmailsOnMinimize )
+        actionIgnoreEmails();
+
     mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
     mWinTools->hide();
 }
