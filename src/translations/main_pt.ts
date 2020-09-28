@@ -448,10 +448,6 @@ OpenSSL não deve estar instalado.</translation>
         <translation>Não foi possível carregar o ícone deste arquivo. Tente carregar o ícone em uma ferramenta de edição de imagens e salve-o em um formato diferente.</translation>
     </message>
     <message>
-        <source>CheckBox</source>
-        <translation>Caixa de Marcação</translation>
-    </message>
-    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }

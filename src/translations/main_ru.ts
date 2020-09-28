@@ -448,10 +448,6 @@ OpenSSL might not be installed.</source>
         <translation>Не удалось загрузить значок из этого файла. Попробуйте загрузить значок в инструмент редактирования изображений и сохранить его в другом формате.</translation>
     </message>
     <message>
-        <source>CheckBox</source>
-        <translation>Галочка</translation>
-    </message>
-    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
