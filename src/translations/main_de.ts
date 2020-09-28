@@ -433,11 +433,11 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Befehl bei Änderung ungelesener E-Mails:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der voherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -485,7 +485,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignoriere alle momentan ungelesenen E-Mails, wenn Thunderbird über das Birdtray Symbol augeblendet wird</translation>
     </message>
 </context>
 <context>
