@@ -720,7 +720,7 @@ Log dosyası %2 dosyasına yazıldı</translation>
     </message>
     <message>
         <source>Ignore unread emails (now %1)</source>
-        <translation>Okunmamış e-postaları yoksay (şimdi%1)</translation>
+        <translation>Okunmamış e-postaları yoksay (şimdi %1)</translation>
     </message>
     <message>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
