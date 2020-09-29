@@ -390,7 +390,7 @@ tuşunu basılı tutarak tıklayın):</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation>Posta Dizini (* .msf)</translation>
+        <translation>Posta Dizini (*.msf)</translation>
     </message>
     <message>
         <source>No new updates found</source>
