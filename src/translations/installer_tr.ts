@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>StopBirdtrayUninstallError</source>
-        <translation>${PRODUCT_NAME} kapatılamadı. Kaldırma işlemine devam etmek için lütfen $ {PRODUCT_NAME} ürününü manuel olarak silin.</translation>
+        <translation>${PRODUCT_NAME} kapatılamadı. Kaldırma işlemine devam etmek için lütfen ${PRODUCT_NAME} ürününü manuel olarak silin.</translation>
     </message>
     <message>
         <source>SetupAlreadyRunning</source>
