@@ -805,7 +805,7 @@ Log dosyası %2 dosyasına yazıldı</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation></translation>
+        <translation>Birdtray yükleyicisi indiriliyor ...</translation>
     </message>
     <message>
         <source>Update and Restart</source>
@@ -817,7 +817,7 @@ Log dosyası %2 dosyasına yazıldı</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Birdtray yükleyici indiriliyor... (%1 Mb / %2 Mb).</translation>
+        <translation>Birdtray yükleyicisi indiriliyor... (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
