@@ -76,7 +76,9 @@ jobs:
         working-directory: ${{ runner.workspace }}/build
         run: cmake --build . --config Release --target birdtray
       - name: Remove build problem matchers
-        run: echo "::remove-matcher owner=linguist::"
+        run: |
+          echo "::remove-matcher owner=linguist::"
+          echo "::remove-matcher owner=linguist-old::"
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
