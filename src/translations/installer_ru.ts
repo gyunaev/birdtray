@@ -254,7 +254,7 @@
     </message>
     <message>
         <source>Lang_tr</source>
-        <translation>турецкий</translation>
+        <translation>Турецкий</translation>
     </message>
 </context>
 </TS>
