@@ -70,9 +70,13 @@ jobs:
         shell: bash
         working-directory: ${{ runner.workspace }}/build
         run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON -DDONT_EXECUTE_INSTALLER=ON
+      - name: Register build problem matchers
+        run: echo "::add-matcher::.github/problem-matchers/linguist.json"
       - name: Build
         working-directory: ${{ runner.workspace }}/build
         run: cmake --build . --config Release --target birdtray
+      - name: Remove build problem matchers
+        run: echo "::remove-matcher owner=linguist::"
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
