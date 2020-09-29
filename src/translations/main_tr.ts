@@ -163,7 +163,8 @@ OpenSSL yüklenmemiş olabilir.</translation>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translation>Simge (sıfırlamak için Ctrl tuşunu basılı tutarak tıklayın):</translation>
+        <translation>Simge (sıfırlamak için Ctrl
+tuşunu basılı tutarak tıklayın):</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
