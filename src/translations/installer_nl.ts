@@ -252,5 +252,9 @@
         <source>Lang_sv</source>
         <translation>Zweeds</translation>
     </message>
+    <message>
+        <source>Lang_tr</source>
+        <translation>Turks</translation>
+    </message>
 </context>
 </TS>
