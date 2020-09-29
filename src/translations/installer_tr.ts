@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>MissingVcRuntime_StillNotFound</source>
-        <translation>Gerekli bileşen bilgisayarınızda bulunamadı. Lütfen Visual Studio 2015 ve üzeri için Visual C ++ $ {ARCH} indirmeleri için çevrimiçi arama yapın.</translation>
+        <translation>Gerekli bileşen bilgisayarınızda bulunamadı. Lütfen Visual Studio 2015 ve üzeri için Visual C++ ${ARCH} indirmeleri için çevrimiçi arama yapın.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRun</source>
