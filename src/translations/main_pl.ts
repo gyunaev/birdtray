@@ -386,7 +386,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation">Indeks poczty (*.msf)</translation>
+        <translation>Indeks poczty (*.msf)</translation>
     </message>
     <message>
         <source>No new updates found</source>
