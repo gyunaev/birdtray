@@ -253,6 +253,10 @@
         <translation>Zweeds</translation>
     </message>
 	<message>
+        <source>Lang_tr</source>
+        <translation>Turks</translation>
+    </message>
+	<message>
 		<source>Lang_pl</source>
 		<translation>Pools</translation>
 	</message>

@@ -253,6 +253,10 @@
         <translation>szwedzki</translation>
     </message>
 	<message>
+        <source>Lang_tr</source>
+        <translation>turecki</translation>
+    </message>
+	<message>
 		<source>Lang_pl</source>
 		<translation>polski</translation>
 	</message>
