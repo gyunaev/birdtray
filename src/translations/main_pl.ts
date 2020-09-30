@@ -593,7 +593,7 @@ Upewnij się, że wybrałeś poprawny folder.</translation>
     </message>
     <message>
         <source>Format error.</source>
-        <translation">Błąd formatu</translation>
+        <translation>Błąd formatu</translation>
     </message>
     <message>
         <source>Unexpected end of group.</source>
