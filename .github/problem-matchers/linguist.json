@@ -1,0 +1,31 @@
+{
+  "__comment": "Matches warnings and errors from the linguist tools",
+  "problemMatcher": [
+    {
+      "owner": "linguist-old",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^Parse error at\\s+(.*):(\\d+):(\\d+):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        }
+      ]
+    },
+    {
+      "owner": "linguist",
+      "pattern": [
+        {
+          "regexp": "^(?:lrelease|lupdate)\\s+(warning|error):(?:.*)at\\s+(.*):(\\d+):(\\d+):\\s+(.*)$",
+          "severity": 1,
+          "file": 2,
+          "line": 3,
+          "column": 4,
+          "message": 5
+        }
+      ]
+    }
+  ]
+}
