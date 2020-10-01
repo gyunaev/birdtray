@@ -47,4 +47,6 @@ jobs:
       - name: Lint the translations
         run: |
           .github/scripts/checkTranslation.py src/translations/dynamic_*[!e][!n].ts src/translations/main_*[!e][!n].ts
+          ret=$?
           .github/scripts/checkTranslation.py src/translations/installer_*[!e][!n].ts -p '(?P<match>\d+)' '(?P<match>\$\{.*?\})' '(?P<match>\$\\[rn])' '(?P<match>\$\d+)'
+          exit $(( $ret + $? ))

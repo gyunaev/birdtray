@@ -2,6 +2,7 @@
 
 import os
 import re
+import sys
 from glob import iglob
 from html.parser import HTMLParser
 
@@ -445,7 +446,9 @@ def processFile(translationFile, formatSpecifierRegexes, specialPatterns, global
         translationFile, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
     parser.setContentHandler(handler)
     parser.parse(translationFile)
-    print(f'Found {handler.getNumWarnings()} warning(s) and {handler.getNumErrors()} error(s)')
+    numErrors = handler.getNumErrors()
+    print(f'Found {handler.getNumWarnings()} warning(s) and {numErrors} error(s)')
+    return numErrors
 
 
 def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
@@ -453,9 +456,12 @@ def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
         warningId for warningId in warnings.split(',')])
     formatSpecifierRegexes = [re.compile(regex) for regex in formatSpecifierRegexes]
     specialPatterns = [re.compile(regex) for regex in specialPatterns]
+    numErrors = 0
     for pathSpec in translationFiles:
         for path in iglob(pathSpec, recursive=True):
-            processFile(path, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
+            numErrors += processFile(
+                path, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
+    return 0 if numErrors == 0 else 1
 
 
 def parseCmd():
@@ -482,5 +488,5 @@ def parseCmd():
 
 if __name__ == '__main__':
     _args = parseCmd()
-    main(_args.translationFiles, _args.formatSpecifierRegex, _args.specialPatterns,
-         _args.ignoreWarning)
+    sys.exit(main(_args.translationFiles, _args.formatSpecifierRegex, _args.specialPatterns,
+                  _args.ignoreWarning))
