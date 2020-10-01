@@ -1,0 +1,50 @@
+name: Check the translations
+
+on:
+  push:
+    paths:
+      - 'src/translations/**.ts'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Prepare the installer translations
+        shell: python
+        run: |
+          import os
+          import re
+
+          from glob import iglob
+          from xml.etree import ElementTree
+
+          SOURCE_PATTERN = re.compile(r'^\s+<source>(?P<name>.*)</source>$')
+          sourceXml = ElementTree.parse(os.path.join('src', 'translations', 'installer_en.ts'))
+          sourceMap = {message.find('source').text: message.find('translation').text
+                       for message in sourceXml.findall('context/message')}
+          for translation in iglob(os.path.join('src', 'translations', 'installer_*[!en].ts')):
+              originalTranslation = translation + '.tmp'
+              os.rename(translation, originalTranslation)
+              with open(originalTranslation, encoding='utf-8') as originalTranslationFile:
+                  with open(translation, 'w', encoding='utf-8') as translationFile:
+                      for line in originalTranslationFile:
+                          match = SOURCE_PATTERN.match(line)
+                          if not match:
+                              translationFile.write(line)
+                              continue
+                          sourceId = match.group('name')
+                          source = sourceMap.get(sourceId)
+                          if source is None:
+                              translationFile.write(line)
+                              continue
+                          translationFile.write(line.replace(sourceId, source))
+              os.remove(originalTranslation)
+      - name: Lint the translations
+        run: |
+          .github/scripts/checkTranslation.py src/translations/dynamic_*[!e][!n].ts src/translations/main_*[!e][!n].ts
+          .github/scripts/checkTranslation.py src/translations/installer_*[!e][!n].ts -p '(?P<match>\d+)' '(?P<match>\$\{.*?\})' '(?P<match>\$\\[rn])' '(?P<match>\$\d+)'
