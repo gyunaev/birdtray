@@ -12,7 +12,7 @@ from xml.sax.handler import ContentHandler
 
 
 class GithubActionsLogger:
-    """ A logger that logs messages in the GitHub Actions format """
+    """ A logger that logs messages in the GitHub Actions format. """
 
     def __init__(self, filePath):
         """
@@ -204,7 +204,6 @@ class HTMLComparer(HTMLParser):
 
         :param tag: The name of the element.
         :param attrs: The attributes of the element.
-        :return:
         """
         if self._doCompare:
             try:
@@ -644,7 +643,7 @@ def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
 
 def parseCmd():
     """
-    Parse the command line
+    Parse the command line.
 
     :return: The parsed arguments.
     """
