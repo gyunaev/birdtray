@@ -59,7 +59,7 @@ class Utils
          * Get the mail folder name from the mork path.
          *
          * @param morkPath The file info for a msf file.
-         * @return The mail folder name.
+         * @return The mail folder name or a null string.
          */
         static QString getMailFolderName(const QFileInfo &morkFile);
         
@@ -67,7 +67,7 @@ class Utils
          * Get the mil account name from a mork path
          *
          * @param morkPath The file info for a msf file.
-         * @return The mail account name.
+         * @return The mail account name or a null string.
          */
         static QString getMailAccountName(const QFileInfo &morkFile);
         
