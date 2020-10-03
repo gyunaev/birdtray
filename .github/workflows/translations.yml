@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'src/translations/**.ts'
+  pull_request:
+    paths:
+      - 'src/translations/**.ts'
 
 jobs:
   check:
