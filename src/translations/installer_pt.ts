@@ -186,7 +186,7 @@
     </message>
     <message>
         <source>UninstallRestartAsUserQuestion</source>
-        <translation>O desinstalador foi iniciado com privilégios de administrador, mas parece que não há instalação do {PRODUCT_NAME} para o administrador. Deseja reiniciar o desinstalador sem privilégios de administrador?</translation>
+        <translation>O desinstalador foi iniciado com privilégios de administrador, mas parece que não há instalação do ${PRODUCT_NAME} para o administrador. Deseja reiniciar o desinstalador sem privilégios de administrador?</translation>
     </message>
     <message>
         <source>OpenUrl</source>
@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>MissingVcRuntime_StillNotFound</source>
-        <translation>O componente necessário não foi encontrado no seu computador. Por favor, pesquise por downloads do Visual C++ {ARCH} para o Visual Studio 2015 ou superior.</translation>
+        <translation>O componente necessário não foi encontrado no seu computador. Por favor, pesquise por downloads do Visual C++ ${ARCH} para o Visual Studio 2015 ou superior.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRun</source>
