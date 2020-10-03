@@ -306,8 +306,14 @@ void TrayIcon::updateIcon()
                 continue;
             }
             QFileInfo accountMorkFile(path);
-            QString name = Utils::getMailAccountName(accountMorkFile)
-                           + " [" + Utils::getMailFolderName(accountMorkFile) + "]";
+            QString accountName = Utils::getMailAccountName(accountMorkFile);
+            QString mailFolderName = Utils::getMailFolderName(accountMorkFile);
+            QString name;
+            if (accountName.isNull() || mailFolderName.isNull()) {
+                name = path;
+            } else {
+                name = accountName + " [" + mailFolderName + "]";
+            }
             const QString &warning = warningsIterator.value();
             toolTip << name + ": " + warning;
         }
