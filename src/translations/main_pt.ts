@@ -433,23 +433,23 @@ OpenSSL não deve estar instalado.</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando para mudar não lida:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se não estiver vazio, este comando será invocado sempre que o contador não lido mudar (inclusive quando se tornar zero). Ele é invocado via shell, no estado em que se encontra, com %NEW% substituído pelo novo valor de contagem de não lido e %OLD% substituído pelo antigo valor de contagem não lido (que pode ser igual ao novo).&lt;/p&gt;&lt;p&gt;A maioria dos usuários não precisa dessa funcionalidade e deve deixá-la vazia.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selecione as pastas de mensagens para monitorar.&lt;br/&gt;&lt;br/&gt;Se o diálogo não exibir a sua pasta, pressione &lt;i&gt;Ctrl + Shift&lt;/i&gt; para abrir a caixa de seleção de arquivo, que permite você adicionar qualquer arquivo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível carregar o ícone deste arquivo. Tente carregar o ícone em uma ferramenta de edição de imagens e salve-o em um formato diferente.</translation>
     </message>
     <message>
         <source>CheckBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Caixa de Marcação</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -485,7 +485,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Ao clicar no ícone do Birdtray para ocultar o Thunderbird, redefine o ícone, ignorando todos os e-mails não lidos no momento</translation>
     </message>
 </context>
 <context>
