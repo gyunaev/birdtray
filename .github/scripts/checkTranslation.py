@@ -12,22 +12,49 @@ from xml.sax.handler import ContentHandler
 
 
 class GithubActionsLogger:
+    """ A logger that logs messages in the GitHub Actions format """
 
     def __init__(self, filePath):
+        """
+        :param filePath: The path of the file that the logs belong to.
+        """
         super().__init__()
         self._filePath = filePath
 
     def log(self, message, severity, line, column):
+        """
+        Log the message with the specified severity.
+
+        :param message: The message to log.
+        :param severity: The severity to log.
+        :param line: The line number in the file the message belongs to.
+        :param column: The column number in the line the message belongs to.
+        """
         print(f'::{severity} file={self._filePath},line={line},col={column + 1}::{message}')
 
     def warning(self, message, line, column):
+        """
+        Log a warning message.
+
+        :param message: The message to log.
+        :param line: The line number in the file the message belongs to.
+        :param column: The column number in the line the message belongs to.
+        """
         self.log(message, 'warning', line, column)
 
     def error(self, message, line, column):
+        """
+        Log an error message.
+
+        :param message: The message to log.
+        :param line: The line number in the file the message belongs to.
+        :param column: The column number in the line the message belongs to.
+        """
         self.log(message, 'error', line, column)
 
 
 class Logger:
+    """ A logger that handles logging warnings and errors. """
     WARNING_MESSAGES = {
         'unfinished_translation': 'Unfinished translation',
         'unfinished_missing_attr': 'Unfinished translation without \'type="unfinished"\' attribute',
@@ -77,6 +104,10 @@ class Logger:
     }
 
     def __init__(self, filePath, globalFilter=None):
+        """
+        :param filePath: The path of the file that the logs belong to.
+        :param globalFilter: A warning filter tat is always active.
+        """
         super().__init__()
         self._ghLogger = GithubActionsLogger(filePath)
         self._warningCount = self._errorCount = 0
@@ -84,6 +115,13 @@ class Logger:
         self._localFilter = set()
 
     def warning(self, warningId, position, **kwargs):
+        """
+        Log a warning message.
+
+        :param warningId: The id of the warning.
+        :param position: The line and column in the file this warning belongs to.
+        :param kwargs: Formatting arguments for the warning message.
+        """
         if self._isFiltered(warningId):
             return
         self._warningCount += 1
@@ -91,6 +129,13 @@ class Logger:
             self.WARNING_MESSAGES[warningId].format(**kwargs) + f' ({warningId})', *position)
 
     def error(self, errorId, position, **kwargs):
+        """
+        Log an error message.
+
+        :param errorId: The id of the error.
+        :param position: The line and column in the file this error belongs to.
+        :param kwargs: Formatting arguments for the error message.
+        """
         if self._isFiltered(errorId):
             return
         self._errorCount += 1
@@ -98,24 +143,46 @@ class Logger:
             self.ERROR_MESSAGES[errorId].format(**kwargs) + f' ({errorId})', *position)
 
     def getNumWarnings(self):
+        """
+        :return: The total number of warnings generated.
+        """
         return self._warningCount
 
     def getNumErrors(self):
+        """
+        :return: The total number of errors messages generated.
+        """
         return self._errorCount
 
     def addLocalFilter(self, filterId):
+        """
+        Add the specific warning or error id to the local filter.
+        warnings in the filter won't be displayed.
+
+        :param filterId: The error or warning id to filter.
+        """
         self._localFilter.add(filterId)
 
     def clearLocalFilters(self):
+        """ Clear the local warning and error filter. """
         self._localFilter.clear()
 
     def _isFiltered(self, filterId):
+        """
+        :param filterId: The error or warning id.
+        :return: Whether or not the id is filtered out.
+        """
         return filterId in self._globalFilter | self._localFilter
 
 
 class HTMLComparer(HTMLParser):
+    """ A HTML parser that can compare tow HTML inputs. """
 
     def __init__(self, logger, basePosition):
+        """
+        :param logger: The logger to use to display warnings and errors.
+        :param basePosition: the start line and column of the html input in the source file.
+        """
         super().__init__()
         self._logger = logger
         self._basePosition = basePosition
@@ -124,17 +191,29 @@ class HTMLComparer(HTMLParser):
         self._sourceEndElements = []
 
     def error(self, message):
-        self._logger.error('html_invalid', self.getPosition(), message=message)
+        """
+        Handle a HTML parsing error.
+
+        :param message: The error message.
+        """
+        self._logger.error('html_invalid', self._getPosition(), message=message)
 
     def handle_starttag(self, tag, attrs):
+        """
+        Handle an opening HTML element.
+
+        :param tag: The name of the element.
+        :param attrs: The attributes of the element.
+        :return:
+        """
         if self._doCompare:
             try:
                 sourceTag, sourceAttributes = self._sourceStartElements.pop(0)
             except IndexError:
-                self._logger.warning('html_element_unbalanced', self.getPosition(), element=tag)
+                self._logger.warning('html_element_unbalanced', self._getPosition(), element=tag)
                 raise ValueError('Unbalanced html element')
             if sourceTag != tag:
-                self._logger.warning('html_element_diff', self.getPosition(),
+                self._logger.warning('html_element_diff', self._getPosition(),
                                      sourceElement=sourceTag, element=tag)
                 raise ValueError('Different html element')
             for name, value in sourceAttributes:
@@ -144,27 +223,32 @@ class HTMLComparer(HTMLParser):
                         break
                 else:
                     self._logger.warning(
-                        'html_attr_missing', self.getPosition(), element=tag, attribute=name)
+                        'html_attr_missing', self._getPosition(), element=tag, attribute=name)
                     continue
                 if value != attribute[1]:
-                    self._logger.warning('html_attr_diff', self.getPosition(), element=tag,
+                    self._logger.warning('html_attr_diff', self._getPosition(), element=tag,
                                          attribute=name, value=attribute[1], sourceValue=value)
             for name, _ in attrs:
                 self._logger.warning(
-                    'html_attr_unbalanced', self.getPosition(), element=tag, attribute=name)
+                    'html_attr_unbalanced', self._getPosition(), element=tag, attribute=name)
 
         else:
             self._sourceStartElements.append((tag, attrs))
 
     def handle_endtag(self, tag):
+        """
+        Handle a closing HTML element.
+
+        :param tag: The name of the element.
+        """
         if self._doCompare:
             try:
                 sourceTag = self._sourceEndElements.pop(0)
             except IndexError:
-                self._logger.warning('html_element_unbalanced', self.getPosition(), element=tag)
+                self._logger.warning('html_element_unbalanced', self._getPosition(), element=tag)
                 raise ValueError('Unbalanced html element')
             if sourceTag != tag:
-                self._logger.warning('html_element_diff', self.getPosition(),
+                self._logger.warning('html_element_diff', self._getPosition(),
                                      sourceElement=sourceTag, element=tag)
                 raise ValueError('Different html element')
 
@@ -172,6 +256,11 @@ class HTMLComparer(HTMLParser):
             self._sourceEndElements.append(tag)
 
     def compare(self, html):
+        """
+        Compare the previously read HTML with the new one.
+
+        :param html: The new HTML string.
+        """
         self.reset()
         self._doCompare = True
         try:
@@ -179,7 +268,10 @@ class HTMLComparer(HTMLParser):
         except ValueError:
             pass
 
-    def getPosition(self):
+    def _getPosition(self):
+        """
+        :return: The current position of the HTML parser in respect to the translation file.
+        """
         line, column = self._basePosition
         htmlLine, htmlColumn = self.getpos()
         if htmlLine > 1:
@@ -188,10 +280,20 @@ class HTMLComparer(HTMLParser):
 
 
 class TranslationHandler(ContentHandler):
+    """ Linter for a Qt language translation file. """
     FILTER_REGEX = re.compile(r'checkTranslation\signore:\s*(?P<filters>.+?)(\s|$)')
     SENTENCE_ENDING_PUNCTUATIONS = '.,!?:;…	¡¿։'
 
     def __init__(self, filePath, formatSpecifierRegexes, specialPatterns, globalWarningFilter):
+        """
+        Initialize the linter.
+
+        :param filePath: The path of the translation file.
+        :param formatSpecifierRegexes: A list of regexes for matching format specifiers.
+        :param specialPatterns: A list of regexes for matching patterns
+                                which must be equal in the source and translation.
+        :param globalWarningFilter: A warning and error filter for the whole file.
+        """
         super().__init__()
         self._locator = None
         self._filePath = filePath
@@ -214,6 +316,12 @@ class TranslationHandler(ContentHandler):
         self._locator = locator
 
     def startElement(self, name, attrs):
+        """
+        Handle the start of an xml element in the translation file.
+
+        :param name: The name of the element.
+        :param attrs: The attributes of the element.
+        """
         self._currentElement = name
         if self._lastData != self._levelCharacters * self._level and \
                 (self._level != 0 or self._lastData != '\n'):
@@ -248,6 +356,11 @@ class TranslationHandler(ContentHandler):
             self._messageChildren.append(name)
 
     def endElement(self, name):
+        """
+        Handle the end of an xml element.
+
+        :param name: The name of the element.
+        """
         self._currentElement = None
         self._level -= 1
         if name not in ['source', 'translation', 'translatorcomment'] and \
@@ -283,6 +396,11 @@ class TranslationHandler(ContentHandler):
             self._checkHtml()
 
     def characters(self, data):
+        """
+        Handle contents of xml elements.
+
+        :param data: The content of the current element.
+        """
         self._lastData = data
         if self._currentElement == 'source':
             if self._sourcePos is None:
@@ -307,22 +425,47 @@ class TranslationHandler(ContentHandler):
                     index += len(filterId) + 1
 
     def getNumWarnings(self):
+        """
+        :return: The total amount of warnings emitted so far.
+        """
         return self._logger.getNumWarnings()
 
     def getNumErrors(self):
+        """
+        :return: The total amount of errors emitted so far.
+        """
         return self._logger.getNumErrors()
 
     def warning(self, warningId, position=None, **kwargs):
+        """
+        Emit a warning.
+
+        :param warningId: The id of the warning.
+        :param position: The position of the warning. Defaults to the current parser position.
+        :param kwargs: Formatting arguments for the warning message.
+        """
         if position is None:
             position = self._locator.getLineNumber(), self._locator.getColumnNumber()
         self._logger.warning(warningId, position, **kwargs)
 
     def error(self, errorId, position=None, **kwargs):
+        """
+        Emit an error.
+
+        :param errorId: The id of the error.
+        :param position: The position of the error. Defaults to the current parser position.
+        :param kwargs: Formatting arguments for the error message.
+        """
         if position is None:
             position = self._locator.getLineNumber(), self._locator.getColumnNumber()
         self._logger.error(errorId, position, **kwargs)
 
     def _checkUnfinished(self):
+        """
+        Check for problems with unfinished translations.
+
+        :return: True, if the translation is unfinished, False otherwise.
+        """
         translationType = None if self._translationAttributes is None else \
             self._translationAttributes.get('type')
         if translationType == 'unfinished':
@@ -341,6 +484,7 @@ class TranslationHandler(ContentHandler):
         return False
 
     def _checkWhitespaces(self):
+        """ Check for problems with whitespaces. """
         if '  ' in self._translation and '  ' not in self._source:
             index = 0
             while True:
@@ -364,6 +508,7 @@ class TranslationHandler(ContentHandler):
                 self._translation, len(self._translation), self._translationPos))
 
     def _checkNewlines(self):
+        """ Check for problems with newlines. """
         reportedMissingNewline = False
         if self._source.startswith('\n'):
             if not self._translation.startswith('\n'):
@@ -383,6 +528,7 @@ class TranslationHandler(ContentHandler):
             self.warning('newline_missing_in_translation', self._translationPos)
 
     def _checkFormatSpecifiers(self):
+        """ Check for problems with format specifiers. """
         for formatSpecifierRegex in self._formatSpecifierRegexes:
             sourceSpecifiers = set(formatSpecifierRegex.findall(self._source))
             translationSpecifiers = set(formatSpecifierRegex.findall(self._translation))
@@ -396,6 +542,7 @@ class TranslationHandler(ContentHandler):
                         self._translationPos), specifier=specifier)
 
     def _checkPunctuation(self):
+        """ Check for problems with punctuations. """
         if self._source == '' or self._translation == '':
             return
         lastSourceChar = self._source[-1]
@@ -412,6 +559,7 @@ class TranslationHandler(ContentHandler):
                     self._translationPos), punctuation=lastSourceChar, actual=lastTranslationChar)
 
     def _checkSpecialPatterns(self):
+        """ Check for problems with special patterns. """
         for pattern in self._specialPatterns:
             for sourceMatch in pattern.finditer(self._source):
                 text = sourceMatch.group('match')
@@ -420,6 +568,7 @@ class TranslationHandler(ContentHandler):
                                pattern=sourceMatch.group('match'))
 
     def _checkHtml(self):
+        """ Check for problems with html in translations. """
         if '<html>' not in self._source or '</html>' not in self._source:
             return
         parser = HTMLComparer(self._logger, self._translationPos)
@@ -428,6 +577,15 @@ class TranslationHandler(ContentHandler):
 
     @staticmethod
     def _calculatePosition(string, index, filePos):
+        """
+        Calculate the position in the translation file given the start location
+        of the xml element and an index into it's content.
+
+        :param string: The content of the xml element.
+        :param index: The index into that content.
+        :param filePos: The start position of the content of the xml element.
+        :return: The file position of the index in the xml element.
+        """
         lineNo, column = filePos
         for line in string.split('\n'):
             length = len(line)
@@ -440,6 +598,16 @@ class TranslationHandler(ContentHandler):
 
 
 def processFile(translationFile, formatSpecifierRegexes, specialPatterns, globalWarningFilter):
+    """
+    Process a translation file and generate warnings and errors.
+
+    :param translationFile: The path to the translation file.
+    :param formatSpecifierRegexes: A list of regexes for matching format specifiers.
+    :param specialPatterns: A list of regexes for matching patterns
+                            which must be equal in the source and translation.
+    :param globalWarningFilter: A warning and error filter for the whole file.
+    :return: The number of errors emitted.
+    """
     print(f'Processing {translationFile}...')
     parser = make_parser()
     handler = TranslationHandler(
@@ -452,6 +620,16 @@ def processFile(translationFile, formatSpecifierRegexes, specialPatterns, global
 
 
 def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
+    """
+    Lint all given translation files.
+
+    :param translationFiles: A list of globs for translation files.
+    :param formatSpecifierRegexes: A list of regexes for matching format specifiers.
+    :param specialPatterns: A list of regexes for matching patterns
+                            which must be equal in the source and translation.
+    :param warnings: A warning and error filter for the whole file.
+    :return: 1, if errors were found, 0 otherwise.
+    """
     globalWarningFilter = set() if warnings is None else set([
         warningId for warningId in warnings.split(',')])
     formatSpecifierRegexes = [re.compile(regex) for regex in formatSpecifierRegexes]
