@@ -14,7 +14,55 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Prepare the installer translations
+      - name: Installer translations special checks
+        shell: python
+        run: |
+          import os
+          import sys
+
+          from glob import iglob
+          from xml.etree import ElementTree
+          from subprocess import check_output
+
+          svnUrl = 'svn://svn.code.sf.net/p/nsis/code/NSIS/trunk/Contrib/Language files'
+          languageNameFiles = check_output(['svn', 'list', svnUrl]).decode('utf-8')[:-1].split('\n')
+          languageNames = set([os.path.splitext(file)[0] for file in languageNameFiles])
+          translations = {}
+          haveError = False
+          for installerTranslation in iglob(os.path.join('src', 'translations', 'installer_*.ts')):
+              language = os.path.splitext(os.path.basename(installerTranslation))[0][10:]
+              translations[language] = installerTranslation
+          for translationFilePath in translations.values():
+              translation = ElementTree.parse(translationFilePath)
+              languageNameElement = translation.find(
+                  'context/message/source[.=\'__LANGUAGE_NAME__\']/../translation')
+              if languageNameElement is None:
+                  print(f'::error file={translationFilePath},line=1,col=1::' +
+                        f'Missing required entry __LANGUAGE_NAME__')
+                  haveError = True
+              elif languageNameElement.text not in languageNames:
+                  languageName = languageNameElement.text
+                  with open(translationFilePath) as translationFile:
+                      for lineNumber, line in enumerate(translationFile):
+                          if f'<translation>{languageName}</translation>' in line:
+                              lineNumber += 1
+                              break
+                      else:
+                          lineNumber = 1
+                  languageNamesString = '", "'.join(languageNames)
+                  print(f'::error file={translationFilePath},line={lineNumber},col=1::' +
+                        f'Invalid __LANGUAGE_NAME__: "{languageName}" is not in the list of ' +
+                        f'possible language names: ["{languageNamesString}"]')
+                  haveError = True
+              for language in translations:
+                  languageNameSource = 'Lang_' + language
+                  languageNameElement = translation.find(
+                      f'context/message/source[.=\'{languageNameSource}\']')
+                  if languageNameElement is None:
+                      print(f'::warning file={translationFilePath},line=1,col=1::' +
+                            f'Missing language name "{languageNameSource}"')
+          sys.exit(1 if haveError else 0)
+      - name: Prepare the installer translations for linting
         shell: python
         run: |
           import os
