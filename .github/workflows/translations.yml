@@ -49,7 +49,7 @@ jobs:
                               break
                       else:
                           lineNumber = 1
-                  languageNamesString = '", "'.join(languageNames)
+                  languageNamesString = '", "'.join(sorted(languageNames))
                   print(f'::error file={translationFilePath},line={lineNumber},col=1::' +
                         f'Invalid __LANGUAGE_NAME__: "{languageName}" is not in the list of ' +
                         f'possible language names: ["{languageNamesString}"]')
