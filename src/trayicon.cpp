@@ -314,7 +314,6 @@ void TrayIcon::updateIcon()
             } else {
                 name = accountName + " [" + mailFolderName + "]";
             }
-            
             const QString &warning = warningsIterator.value();
             toolTip << name + ": " + warning;
         }
