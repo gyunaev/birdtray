@@ -417,7 +417,10 @@ bool WindowTools_X11::hide()
         return false;
 
     if ( mHiddenStateCounter != 0 )
-        Log::debug("Warning: trying to hide already hidden window (counter %d)", mHiddenStateCounter );
+    {
+        Log::debug("Warning: trying to hide already hidden window (counter %d), ignored", mHiddenStateCounter );
+        return false;
+    }
 
     // Get screen number
     Display *display = QX11Info::display();
@@ -457,6 +460,15 @@ bool WindowTools_X11::isValid()
 
 void WindowTools_X11::doHide()
 {
+    // This function may end up being called more than two times because isHidden() not only checks the counter,
+    // but also checks the active window. Depending on window manager, the counter may get to 2 much faster than
+    // window manager removes the window from an active window. This would result in multiple calls to doHide().
+    if ( mHiddenStateCounter == 2 )
+    {
+        Log::debug("Window already should be removed from taskbar");
+        return;
+    }
+
     Display *display = QX11Info::display();
     long screen = DefaultScreen(display);
 
@@ -471,7 +483,7 @@ void WindowTools_X11::doHide()
     XWithdrawWindow(display, mWinId, screen );
 
     // Increase the counter but do not exceed 2
-    mHiddenStateCounter = qMax( mHiddenStateCounter + 1, 2 );
+    mHiddenStateCounter++;
 
     if ( mHiddenStateCounter == 2 )
         Log::debug("Window removed from taskbar");
