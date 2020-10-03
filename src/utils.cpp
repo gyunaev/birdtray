@@ -260,7 +260,9 @@ QString Utils::getMailFolderName(const QFileInfo &morkFile) {
         }
         name = QCoreApplication::translate(
                 "EmailFolders", dirName.toUtf8().constData()) + '/' + name;
-        parentDir.cdUp();
+        if (!parentDir.cdUp()) {
+            return QString();
+        }
     }
     return name;
 }
@@ -269,7 +271,9 @@ QString Utils::getMailAccountName(const QFileInfo &morkFile) {
     QDir parentDir = morkFile.dir();
     QString name;
     while ((name = parentDir.dirName()).endsWith(".sbd")) {
-        parentDir.cdUp();
+        if (!parentDir.cdUp()) {
+            return QString();
+        }
     }
     return name;
 }

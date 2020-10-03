@@ -34,6 +34,12 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const {
             QFileInfo accountMorkFile(mAccounts[index.row()]);
             QString folderName = Utils::getMailFolderName(accountMorkFile);
             QString accountName = Utils::getMailAccountName(accountMorkFile);
+            if (accountName.isNull()) {
+                accountName = accountMorkFile.fileName();
+            }
+            if (folderName.isNull()) {
+                return accountName;
+            }
             return accountName + " [" + folderName + "]";
         }
         case Qt::ToolTipRole: {
