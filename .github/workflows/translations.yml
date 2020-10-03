@@ -78,7 +78,7 @@ jobs:
           sourceXml = ElementTree.parse(os.path.join('src', 'translations', 'installer_en.ts'))
           sourceMap = {message.find('source').text: message.find('translation').text
                        for message in sourceXml.findall('context/message')}
-          for translation in iglob(os.path.join('src', 'translations', 'installer_*[!en].ts')):
+          for translation in iglob(os.path.join('src', 'translations', 'installer_*[!e][!n].ts')):
               originalTranslation = translation + '.tmp'
               os.rename(translation, originalTranslation)
               with open(originalTranslation, encoding='utf-8') as originalTranslationFile:
