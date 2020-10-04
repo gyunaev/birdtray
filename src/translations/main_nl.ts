@@ -704,8 +704,8 @@ Het logboek is opgeslagen als %2</translation>
     <message>
         <source>Snooze for ...</source>
         <translation>Onderdrukken:</translation>
-    </message>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
+    </message>
     <message>
         <source>Unsnooze</source>
         <translation>Niet meer onderdrukken</translation>
