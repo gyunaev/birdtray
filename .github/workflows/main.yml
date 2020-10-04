@@ -53,13 +53,13 @@ jobs:
             sudo apt install -qq libx11-dev libqt5svg5-dev libx11-xcb-dev desktop-file-utils
           elif [ "$RUNNER_OS" == "Windows" ]; then
             if [ "$ARCH" == "x86" ]; then
-              echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
+              echo "CMAKE_PLATFORM_ARG=-A Win32" >> $GITHUB_ENV
               export archParam="--forcex86"
             else
-              echo "::set-env name=CMAKE_PLATFORM_ARG::-A x64"
+              echo "CMAKE_PLATFORM_ARG=-A x64" >> $GITHUB_ENV
             fi
             choco install -y --force $archParam openssl.light
-            echo "::add-path::C:\\Program Files\\OpenSSL"
+            echo "C:\\Program Files\\OpenSSL" >> $GITHUB_PATH
           else
             echo "$RUNNER_OS not supported"
             exit 1
