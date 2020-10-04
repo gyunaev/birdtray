@@ -288,6 +288,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>Please do not change these settings unless you understand what you&apos;re doing.</source>
         <translation>Pas deze instellingen alleen aan als u weet wat u doet!</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Thunderbird window name pattern:</source>
@@ -390,6 +391,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>opaque when new mail is present,</source>
         <translation>ondoorzichtig als er nieuwe e-mails zijn;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
@@ -413,7 +415,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 10 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als het aantal ongelezen e-mails lager wordt dan het aantal &amp;quot;genegeerde&amp;quot;, dan wordt de teller op 0 gezet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 11 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als het aantal ongelezen e-mails lager wordt dan het aantal &amp;quot;genegeerde&amp;quot;, dan wordt de teller op 0 gezet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
@@ -433,23 +435,23 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongelezen wijziging-opdracht:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als dit niet leeggelaten wordt, dan wordt de opdracht aangeroepen telkens als de ongelezenteller verandert (inclusief als deze de nul bereikt). Deze wordt aangeroepen via de shell waar %NEW% vervangen wordt door de huidige ongelezen waarde en %OLD% door de vorige (welke dezelfde kan zijn als de huidige).&lt;/p&gt;&lt;p&gt;De meeste gebruikers hebben deze functionaliteit niet nodig dienen het vak leeg te laten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selecteer de e-mailmappen die u wilt bijhouden.&lt;br/&gt;&lt;br/&gt;Als het venster een map niet toont, &lt;i&gt;gebruik dan Ctrl + Shift + klik&lt;/i&gt; om een bestandsselectievenster te openen zodat u een mork-bestand kunt toevoegen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het pictogram kan niet worden geladen uit het bestand. Open het in een afbeeldingsbewerker en sla het op als een ander bestandsformaat.</translation>
     </message>
     <message>
         <source>CheckBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Aankruisvakje</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -485,7 +487,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel het pictogram door alle ongelezen e-mails te negeren door te klikken op het Birdtray-pictogram</translation>
     </message>
 </context>
 <context>
@@ -702,6 +704,7 @@ Het logboek is opgeslagen als %2</translation>
     <message>
         <source>Snooze for ...</source>
         <translation>Onderdrukken:</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Unsnooze</source>
@@ -830,7 +833,7 @@ Het logboek is opgeslagen als %2</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Bezig met downloaden van Birdtray-installatiewizard... (%1 mb/%2 mb)</translation>
+        <translation>Bezig met downloaden van Birdtray-installatiewizard... (%1 mb/%2 mb).</translation>
     </message>
 </context>
 </TS>
