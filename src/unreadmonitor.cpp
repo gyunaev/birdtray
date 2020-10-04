@@ -10,6 +10,7 @@
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     : QThread( 0 ), mChangedMSFtimer(this)
 {
+    moveToThread( this );
     mLastReportedUnread = 0;
 
     // We get notification once Mork files have been modified.
