@@ -450,10 +450,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Het pictogram kan niet worden geladen uit het bestand. Open het in een afbeeldingsbewerker en sla het op als een ander bestandsformaat.</translation>
     </message>
     <message>
-        <source>CheckBox</source>
-        <translation>Aankruisvakje</translation>
-    </message>
-    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
