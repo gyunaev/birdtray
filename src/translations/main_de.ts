@@ -377,6 +377,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>beim Eingang neuer Mails.</translation>
     </message>
     <message>
