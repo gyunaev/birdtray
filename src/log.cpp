@@ -49,14 +49,14 @@ void Log::fatal( const QString& str )
     self->add( str );
 
     // Write the whole log buffer into a file log.txt
-    QFile file( QStandardPaths::writableLocation( QStandardPaths::TempLocation ) + QDir::separator() + "log.txt" );
+    QFile file( QStandardPaths::writableLocation( QStandardPaths::TempLocation ) + QDir::separator() + "birdtray-log.txt" );
 
     // Show the dialog
     QMessageBox::critical(nullptr, QApplication::tr("Fatal"), QObject::tr("Fatal error: %1\n\nLog file is written into file %2") .arg(str) .arg(file.fileName()));
 
     self->mMutex.lock();
 
-    if ( file.isOpen() )
+    if ( file.open(QFile::WriteOnly) )
     {
         QByteArray writedata = self->mEntries.join("\r\n").toUtf8();
         file.write( writedata );
