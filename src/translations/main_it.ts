@@ -405,7 +405,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>secondi</translation>
+        <translation> secondi</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -421,7 +421,7 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Translators</source>
-        <translation></translation>
+        <translation>Traduttori</translation>
     </message>
     <message>
         <source>Active maintainers</source>
@@ -626,7 +626,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Fatal error: %1
 
 Log file is written into file %2</source>
-        <translation>Il file di registro viene scritto nel file %2 </source></translation>
+        <translation>Il file di registro viene scritto nel file %2</translation>
     </message>
     <message>
         <source>Could not save the settings</source>
