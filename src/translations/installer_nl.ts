@@ -252,13 +252,13 @@
         <source>Lang_sv</source>
         <translation>Zweeds</translation>
     </message>
-	<message>
+    <message>
         <source>Lang_tr</source>
         <translation>Turks</translation>
     </message>
-	<message>
-		<source>Lang_pl</source>
-		<translation>Pools</translation>
-	</message>
+    <message>
+        <source>Lang_pl</source>
+        <translation>Pools</translation>
+    </message>
 </context>
 </TS>

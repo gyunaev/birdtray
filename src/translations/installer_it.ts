@@ -252,13 +252,13 @@
         <source>Lang_sv</source>
         <translation>Svedese</translation>
     </message>
-	<message>
+    <message>
         <source>Lang_tr</source>
         <translation>Turco</translation>
     </message>
-	<message>
-		<source>Lang_pl</source>
-		<translation>Polacca</translation>
-	</message>
+    <message>
+        <source>Lang_pl</source>
+        <translation>Polacca</translation>
+    </message>
 </context>
 </TS>
