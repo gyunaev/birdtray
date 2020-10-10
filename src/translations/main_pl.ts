@@ -241,7 +241,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source> second delay</source>
-        <translation>sekundowym opóźnieniem</translation>
+        <translation> sekundowym opóźnieniem</translation>
     </message>
     <message>
         <source>with a </source>
