@@ -12,7 +12,8 @@ OpenSSL może nie być zainstalowane.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Nie można zapisać instalatora Birdtray:</translation>
+        <translation>Nie można zapisać instalatora Birdtray:
+</translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
