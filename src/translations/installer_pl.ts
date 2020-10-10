@@ -182,7 +182,7 @@
     </message>
     <message>
         <source>SettingsLink</source>
-        <translation>$ustawienia {PRODUCT_NAME}</translation>
+        <translation>ustawienia ${PRODUCT_NAME}</translation>
     </message>
     <message>
         <source>UninstallRestartAsUserQuestion</source>
