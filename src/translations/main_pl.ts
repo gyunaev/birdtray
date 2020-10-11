@@ -151,7 +151,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Different icon when unread:</source>
-        <translation>Inna ikona przy wiadomościach nieprzeczytanych</translation>
+        <translation>Inna ikona przy wiadomościach nieprzeczytanych:</translation>
     </message>
     <message>
         <source>Off</source>
