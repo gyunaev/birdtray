@@ -768,7 +768,7 @@ plik log został zapisany %2</translation>
     </message>
     <message>
         <source>Current version:</source>
-        <translation>Bieżąca wersja</translation>
+        <translation>Bieżąca wersja:</translation>
     </message>
     <message>
         <source>A new version of Birdtray is available.</source>
