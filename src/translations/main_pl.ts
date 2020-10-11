@@ -577,7 +577,7 @@ Upewnij się, że wybrałeś poprawny folder.</translation>
     </message>
     <message>
         <source>Unsupported version.</source>
-        <translation>Niewspierana wersja</translation>
+        <translation>Niewspierana wersja.</translation>
     </message>
     <message>
         <source>Invalid format.</source>
