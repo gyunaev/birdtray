@@ -187,7 +187,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Bold:</source>
-        <translation>Pogrubienie</translation>
+        <translation>Pogrubienie:</translation>
     </message>
     <message>
         <source>Notification border color:</source>
