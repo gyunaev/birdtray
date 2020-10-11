@@ -182,43 +182,43 @@
     </message>
     <message>
         <source>SettingsLink</source>
-        <translation>${PRODUCT_NAME} settings</translation>
+        <translation>${PRODUCT_NAME} impostazioni</translation>
     </message>
     <message>
         <source>UninstallRestartAsUserQuestion</source>
-        <translation>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</translation>
+        <translation>Il programma di disinstallazione viene avviato con i privilegi di amministratore ma sembra che non ci sia alcuna installazione di ${PRODUCT_NAME} per l'amministratore. Vuoi riavviare il programma di disinstallazione senza i privilegi di amministratore?</translation>
     </message>
     <message>
         <source>OpenUrl</source>
-        <translation>Opening $0 in default browser...</translation>
+        <translation>Apertura di $0 nel browser predefinito ...</translation>
     </message>
     <message>
         <source>MissingVcRuntime</source>
-        <translation>Unable to find Visual C++ Runtime ${ARCH}.</translation>
+        <translation>Impossibile trovare Visual C++ Runtime ${ARCH}.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Dialog</source>
-        <translation>The following required component was not found on this computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nDo you want to download the installer for the component?</translation>
+        <translation>Il seguente componente richiesto non è stato trovato su questo computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nVuoi scaricare il programma di installazione per il componente?</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Retry</source>
-        <translation>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</translation>
+        <translation>Una volta completato il download, eseguire il programma di installazione scaricato. Al termine del programma di installazione, premere OK per verificare nuovamente lo stato dell'installazione.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_Found</source>
-        <translation>The required component was successfully detected on your computer.</translation>
+        <translation>Il componente richiesto è stato rilevato con successo sul tuo computer.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_StillNotFound</source>
-        <translation>The required component was not found on your computer. Please search online for Visual C++ ${ARCH} downloads for Visual Studio 2015 and higher.</translation>
+        <translation>Il componente richiesto non è stato trovato sul tuo computer. Si prega di cercare online Visual C++ ${ARCH} e scaricare per Visual Studio 2015 e versioni successive.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRun</source>
-        <translation>${PRODUCT_NAME} will not be able to run.</translation>
+        <translation>${PRODUCT_NAME} non sarà in grado di funzionare.</translation>
     </message>
     <message>
         <source>MissingVcRuntime_UnableToRunDialog</source>
-        <translation>${PRODUCT_NAME} will not be able to start because a required component is missing.</translation>
+        <translation>${PRODUCT_NAME} non sarà possibile avviare perché manca un componente richiesto.</translation>
     </message>
     <message>
         <source>Lang_en</source>
