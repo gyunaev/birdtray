@@ -54,7 +54,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translation>Dekoduj ciągi znaków IMAP Utf7</translation>
+        <translation>Dekoduj ciągi znaków IMAP Utf7.</translation>
     </message>
     <message>
         <source>string</source>
