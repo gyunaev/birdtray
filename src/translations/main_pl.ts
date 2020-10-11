@@ -336,7 +336,8 @@ OpenSSL może nie być zainstalowane.</translation>
     <message>
         <source>Failed to check for a new Birdtray version:
 </source>
-        <translation>Nie udało się sprawdzić aktualizacji Birdtray</translation>
+        <translation>Nie udało się sprawdzić aktualizacji Birdtray
+</translation>
     </message>
     <message>
         <source>Checking...</source>
