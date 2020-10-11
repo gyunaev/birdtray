@@ -62,7 +62,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Show the settings.</source>
-        <translation>Pokaż ustawienia</translation>
+        <translation>Pokaż ustawienia.</translation>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
