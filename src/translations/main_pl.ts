@@ -18,7 +18,8 @@ OpenSSL może nie być zainstalowane.</translation>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation>Nie można pobrać instalatora Birdtray:</translation>
+        <translation>Nie można pobrać instalatora Birdtray:
+</translation>
     </message>
     <message>
         <source>Installer download failed</source>
