@@ -23,7 +23,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Installer download failed</source>
-        <translation>Pobieranie instalatora nie powiodło się.</translation>
+        <translation>Pobieranie instalatora nie powiodło się</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
