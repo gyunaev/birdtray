@@ -522,7 +522,7 @@ Czy chcesz kontynuować?</translation>
     </message>
     <message>
         <source>Select the mail accounts you want to monitor.</source>
-        <translation>Wybierz konta, które chcesz monitorować</translation>
+        <translation>Wybierz konta, które chcesz monitorować.</translation>
     </message>
     <message>
         <source>Email Folder</source>
