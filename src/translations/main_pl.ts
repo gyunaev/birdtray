@@ -585,7 +585,7 @@ Upewnij się, że wybrałeś poprawny folder.</translation>
     </message>
     <message>
         <source>Parsing error.</source>
-        <translation>Błąd analizy składniowej</translation>
+        <translation>Błąd analizy składniowej.</translation>
     </message>
     <message>
         <source>Unexpected EOF.</source>
