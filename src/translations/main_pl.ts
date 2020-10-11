@@ -27,7 +27,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
-        <translation>Nieprawidłowe przekierowanie:</translation>
+        <translation>Nieprawidłowe przekierowanie: </translation>
     </message>
     <message>
         <source>Update failed</source>
