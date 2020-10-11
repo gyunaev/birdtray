@@ -753,7 +753,7 @@ plik log został zapisany %2</translation>
     <name>UnreadMonitor</name>
     <message>
         <source>Unable to watch %1 for changes.</source>
-        <translation>Nie można sprawdzić zmian w %1</translation>
+        <translation>Nie można sprawdzić zmian w %1.</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
