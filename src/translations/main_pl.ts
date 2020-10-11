@@ -307,7 +307,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation>Zmień ikonę w tacce na w </translation>
+        <translation>Zmień ikonę w tacce na w</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts</source>
