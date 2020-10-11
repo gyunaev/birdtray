@@ -815,7 +815,7 @@ plik log został zapisany %2</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation>Pobieranie instalatora Birdtray</translation>
+        <translation>Pobieranie instalatora Birdtray...</translation>
     </message>
     <message>
         <source>Update and Restart</source>
