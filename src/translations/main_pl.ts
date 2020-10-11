@@ -417,7 +417,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Active maintainers</source>
-        <translation>Aktywni opiekunowie:</translation>
+        <translation>Aktywni opiekunowie</translation>
     </message>
     <message>
         <source>Contributors</source>
