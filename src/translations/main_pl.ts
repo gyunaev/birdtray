@@ -691,7 +691,7 @@ plik log został zapisany %2</translation>
     </message>
     <message>
         <source>1 hour</source>
-        <translation>godzina</translation>
+        <translation>1 godzina</translation>
     </message>
     <message>
         <source>4 hours</source>
