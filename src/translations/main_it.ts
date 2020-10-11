@@ -624,7 +624,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>Fatal error: %1
-
+            
 Log file is written into file %2</source>
         <translation>Il file di registro viene scritto nel file %2</translation>
     </message>
@@ -635,7 +635,8 @@ Log file is written into file %2</source>
     <message>
         <source>Could not save the settings into file %1:
 %2</source>
-        <translation>Impossibile salvare le impostazioni nel file %1:</translation>
+        <translation>Impossibile salvare le impostazioni nel file %1:
+%2</translation>
     </message>
     <message>
         <source>Failed to open log file %s: %s</source>
