@@ -807,7 +807,7 @@ plik log został zapisany %2</translation>
     </message>
     <message>
         <source>Downloading Birdtray update...</source>
-        <translation>Pobieranie aktualizacji Birdtray</translation>
+        <translation>Pobieranie aktualizacji Birdtray...</translation>
     </message>
     <message>
         <source>Background</source>
