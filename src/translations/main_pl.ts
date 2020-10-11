@@ -66,7 +66,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
-        <translation>Przywróć ustawienia domyślne</translation>
+        <translation>Przywróć ustawienia domyślne.</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
