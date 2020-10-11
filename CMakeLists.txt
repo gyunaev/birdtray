@@ -139,7 +139,7 @@ if(Qt5LinguistTools_FOUND)
             src/translations/dynamic_pt.ts
             src/translations/dynamic_es.ts
             src/translations/dynamic_sv.ts
-            src/translations/main_tr.ts
+            src/translations/dynamic_tr.ts
             src/translations/dynamic_pl.ts
             )
 
