@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>AutoCheckUpdateSectionName</source>
-        <translation>Automatyczne sprawdzanie aktualizacji.</translation>
+        <translation>Automatyczne sprawdzanie aktualizacji</translation>
     </message>
     <message>
         <source>AutoCheckUpdateDescription</source>
