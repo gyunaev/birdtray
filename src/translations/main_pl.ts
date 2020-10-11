@@ -589,7 +589,7 @@ Upewnij się, że wybrałeś poprawny folder.</translation>
     </message>
     <message>
         <source>Unexpected EOF.</source>
-        <translation>Niespodziewany koniec pliku (EOF)</translation>
+        <translation>Niespodziewany koniec pliku (EOF).</translation>
     </message>
     <message>
         <source>Invalid comment.</source>
