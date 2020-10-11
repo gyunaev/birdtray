@@ -256,5 +256,9 @@
         <source>Lang_tr</source>
         <translation>Türkisch</translation>
     </message>
+    <message>
+        <source>Lang_pl</source>
+        <translation>Polnisch</translation>
+    </message>
 </context>
 </TS>
