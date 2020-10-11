@@ -127,8 +127,8 @@ if(Qt5LinguistTools_FOUND)
             src/translations/main_pt.ts
             src/translations/main_es.ts
             src/translations/main_sv.ts
-			      src/translations/main_tr.ts
-			      src/translations/main_pl.ts
+            src/translations/main_tr.ts
+            src/translations/main_pl.ts
             )
     set(DYN_TRANSLATION_FILES
             src/translations/dynamic_en.ts
