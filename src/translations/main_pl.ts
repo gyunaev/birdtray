@@ -501,7 +501,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>No mail folder was selected to monitor.
 Do you want to continue?</source>
-        <translation>Nie wybrano żadnego monitorowanego folderu. Czy chcesz kontynuować?</translation>
+        <translation>Nie wybrano żadnego monitorowanego folderu.
+Czy chcesz kontynuować?</translation>
     </message>
     <message>
         <source>Select Accounts</source>
