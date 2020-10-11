@@ -171,7 +171,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
-        <translation>Kolor dla wielu powiadomień</translation>
+        <translation>Kolor dla wielu powiadomień:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
