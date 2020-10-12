@@ -626,7 +626,9 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Fatal error: %1
             
 Log file is written into file %2</source>
-        <translation>Il file di registro viene scritto nel file %2</translation>
+        <translation>Errore irreversibile: %1</translation>
+        
+Il file di registro è stato scritto nel file %2</translation>        
     </message>
     <message>
         <source>Could not save the settings</source>
