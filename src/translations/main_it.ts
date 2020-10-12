@@ -624,6 +624,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>Fatal error: %1
+
 Log file is written into file %2</source>
         <translation>Errore irreversibile: %1
         
