@@ -96,7 +96,7 @@ jobs:
         id: check-deploy
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
             echo ::set-output name=is_deploy::true
             echo "Deployment build detected"
           else
@@ -137,7 +137,7 @@ jobs:
       - name: Check if this is a deployment build
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Creating release ${{ github.ref }}..."
           else
             echo "Tag does not match: ${{ github.event.ref }}"
