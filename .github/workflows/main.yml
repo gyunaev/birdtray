@@ -129,7 +129,7 @@ jobs:
   release:
     name: Create Release
     needs: build
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') && contains(github.ref, '.')
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') && contains(github.ref, '.')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
