@@ -82,11 +82,11 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Write log to a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrivi il log in un file.</translation>
     </message>
     <message>
         <source>FILE</source>
-        <translation type="unfinished"></translation>
+        <translation>FILE</translation>
     </message>
 </context>
 <context>
@@ -128,7 +128,7 @@ OpenSSL potrebbe non essere installato.</translation>
     <name>DialogLogOutput</name>
     <message>
         <source>Debug log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizzatore del registro di debug</translation>
     </message>
 </context>
 <context>
@@ -389,67 +389,67 @@ OpenSSL potrebbe non essere installato.</translation>
     </message>
     <message>
         <source>Choose one or more MSF files</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli uno o più file MSF</translation>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation type="unfinished">Indice di posta (*.msf)</translation>
+        <translation>Indice di posta (*.msf)</translation>
     </message>
     <message>
         <source>Show log window</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra la finestra dI log</translation>
     </message>
     <message>
         <source>Force index file re-read every</source>
-        <translation type="unfinished"></translation>
+        <translation>Forza la rilettura del indice file ogni</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> secondi</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se questa casella è selezionata, l'icona Birdtray mostrerà il numero di e-mail non lette.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Se è deselezionato, non verrà visualizzato alcun conteggio e conoscerai solo le email non lette a causa dell'icona lampeggiante o diversa, a seconda delle tue impostazioni.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se attivata, questa opzione aggiunge il &amp;quot;Ignora le email attualmente non lette&amp;quot; azione nel menu contestuale. Questa azione ti consente di ignorare le e-mail attualmente non lette. Birdtray fingerebbe quindi che non siano rimaste email non lette e mostrerebbe solo le nuove email nel conteggio ignorato.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Ad esempio, se c'erano 10 e-mail non lette e hai fatto clic su &amp;quot;Ignora&amp;quot; azione, Birdtray non mostrerà alcun indicatore di e-mail non lette fino a quando il conteggio delle e-mail non lette rimane a 10. Una volta ricevuta la nuova e-mail e il totale di 11 e-mail non lette, Birdtray mostrerà il conteggio delle nuove e-mail come 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;ISe il conteggio delle e-mail non lette è inferiore a &amp;quot;ignored&amp;quot; in totale, l'ignora si azzera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
-        <translation type="unfinished"></translation>
+        <translation>Le traduzioni sono fornite dalla community:</translation>
     </message>
     <message>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduttori</translation>
     </message>
     <message>
         <source>Active maintainers</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenitori attivi</translation>
     </message>
     <message>
         <source>Contributors</source>
-        <translation type="unfinished"></translation>
+        <translation>Contributori</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica non letta cmd:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se non è vuoto, questo comando verrà richiamato ogni volta che il contatore non letto cambia (anche quando diventa zero).Viene richiamato tramite shell, così com'è, con %NEW% sostituito dal nuovo valore di conteggio non letto e %OLD% sostituito con il vecchio valore di conteggio non letto (che potrebbe essere uguale al nuovo).&lt;/p&gt;&lt;p&gt;La maggior parte degli utenti non&apos; necessita di questa funzionalità e dovrebbe lasciarla vuota.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Seleziona le cartelle di posta da guardare.&lt;br/&gt;&lt;br/&gt;Se la finestra di dialogo non&apos; mostra la tua cartella, &lt;i&gt;Ctrl + Shift click&lt;/i&gt;per aprire una finestra di dialogo per la selezione dei file che permette di aggiungere qualsiasi file mork.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile caricare l'icona da questo file. Prova a caricare l'icona in uno strumento di modifica delle immagini e a salvarla in un formato diverso.</translation>
     </message>
     <message>
         <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Quando si fa clic sull'icona Birdtray per nascondere Thunderbird, reimpostare l'icona ignorando tutte le e-mail attualmente non lette</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -601,15 +601,15 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hai configurato il monitoraggio di una o più cartelle di posta utilizzando il parser Sqlite. Questo metodo è stato rimosso. Le tue configurazioni sono state migrate al parser Mork, ma non è stato possibile trovare alcune cartelle di posta configurate.</translation>
     </message>
     <message>
         <source>Sqlite based accounts migrated</source>
-        <translation type="unfinished"></translation>
+        <translation>Account basati su sqlite migrati</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hai configurato il monitoraggio di uno o più account di posta utilizzando il parser Sqlite. Questo metodo è stato rimosso. Le tue configurazioni sono state migrate al parser Mork. Verifica che tutti gli account siano stati mappati correttamente.</translation>
     </message>
 </context>
 <context>
@@ -626,20 +626,23 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
         <source>Fatal error: %1
 
 Log file is written into file %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore irreversibile: %1
+
+Il file di registro è stato scritto nel file %2</translation>        
     </message>
     <message>
         <source>Could not save the settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile salvare le impostazioni</translation>
     </message>
     <message>
         <source>Could not save the settings into file %1:
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile salvare le impostazioni nel file %1:
+%2</translation>
     </message>
     <message>
         <source>Failed to open log file %s: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire il file di registro %s: %s</translation>
     </message>
 </context>
 <context>
