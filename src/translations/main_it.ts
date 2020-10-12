@@ -627,6 +627,7 @@ Assicurati di aver selezionato la directory corretta dei profili.</translation>
 
 Log file is written into file %2</source>
         <translation>Errore irreversibile: %1
+
 Il file di registro è stato scritto nel file %2</translation>        
     </message>
     <message>
