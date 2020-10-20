@@ -257,28 +257,11 @@ Section "${PRODUCT_NAME}" SectionBirdTray
         DetailPrint "$(UninstallPreviousVersion)"
         !insertmacro STOP_PROCESS ${EXE_NAME} "$(StopBirdtray)" "$(StopBirdtrayError)"
 
-        # Save the config file.  TODO: Remove this after 1.8.1
-        Rename "${USER_SETTINGS_PATH}" "$TEMP\birdtray-config.json"
-
         ClearErrors
         ${if} $0 == "AllUsers"
             Call RunUninstaller
         ${else}
             !insertmacro UAC_AsUser_Call Function RunUninstaller ${UAC_SYNCREGISTERS}
-        ${endif}
-
-        # Put the config file back.  TODO: Remove this block after 1.8.1
-        StrCpy $4 "0"
-        ${if} ${errors}
-            StrCpy $4 "1"
-        ${endif}
-        ${if} ${FileExists} "$TEMP\birdtray-config.json"
-            CreateDirectory "${USER_SETTINGS_PATH_ROOT}\ulduzsoft\birdtray"
-            Rename "$TEMP\birdtray-config.json" "${USER_SETTINGS_PATH}"
-        ${endif}
-        ClearErrors
-        ${if} $4 == "1"
-            SetErrors
         ${endif}
 
         ${if} ${errors} # Stay in installer
