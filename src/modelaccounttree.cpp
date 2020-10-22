@@ -90,9 +90,9 @@ QVariant ModelAccountTree::headerData(int section, Qt::Orientation , int role) c
     if ( role == Qt::DisplayRole )
     {
         if (section == 0) {
-            return QObject::tr("Account");
+            return QCoreApplication::translate("ModelAccountTree", "Account");
         } else {
-            return QObject::tr("Notification color");
+            return QCoreApplication::translate("ModelAccountTree", "Notification color");
         }
     }
 

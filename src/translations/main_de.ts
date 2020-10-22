@@ -41,10 +41,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
 <context>
     <name>BirdtrayApp</name>
     <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
-    </message>
-    <message>
         <source>Display the contents of the given mork database.</source>
         <translation>Den Inhalt der Mork-Datenbank anzeigen.</translation>
     </message>
@@ -85,8 +81,16 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Schreibe Birdtrays Protokoll in eine Datei.</translation>
     </message>
     <message>
-        <source>FILE</source>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird.</translation>
+    </message>
+    <message>
+        <source>file</source>
         <translation>datei</translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
+        <translation>Die Systemleiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
     </message>
 </context>
 <context>
@@ -172,10 +176,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>Multiple notification color:</source>
         <translation>Farbe bei mehreren Benachrichtigungen:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d. h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -310,16 +310,8 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Die Transparenz des Systemleistensymbols festlegen auf</translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
-        <translation>Beim Start von Birdtray nach Aktualisierungen suchen</translation>
-    </message>
-    <message>
         <source>Check for new updates on startup</source>
         <translation>Beim Start auf Aktualisierungen prüfen</translation>
-    </message>
-    <message>
-        <source>Check for a new Birdtray version</source>
-        <translation>Nach einer neuen Version von Birdtray suchen</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -437,10 +429,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Befehl bei Änderung ungelesener E-Mails:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der voherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wähle E-Mail Ordner zur Überwachung aus.&lt;br/&gt;&lt;br/&gt;Wenn der Dialog Ihren E-Mail Ordner nicht anzeigt, klicken Sie &lt;i&gt;Strg + Shift&lt;/i&gt; um einen Dateiauswahlsdialog zu öffnen, mit dem jede mork-Datei hinzugefügt werden kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -483,6 +471,41 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
         <translation>Ignoriere alle momentan ungelesenen E-Mails, wenn Thunderbird über das Birdtray Symbol augeblendet wird</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d. h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der voherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Check for new updates when Birdtray starts.</source>
+        <translation>Beim Start von Birdtray nach Aktualisierungen suchen.</translation>
+    </message>
+    <message>
+        <source>Check for a new Birdtray version.</source>
+        <translation>Nach einer neuen Version von Birdtray suchen.</translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Fatal</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Schwerwiegender Fehler: %1
+
+Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
     </message>
 </context>
 <context>
@@ -545,6 +568,17 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation>Konto</translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation>Benachrichtigungsfarbe</translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -552,18 +586,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation>Fatal</translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Die Systemleiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation>Die Datei konnte nicht geöffnet werden: </translation>
@@ -596,41 +619,9 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
         <source>Unexpected end of group.</source>
         <translation>Unerwartetes Gruppenende.</translation>
     </message>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>Das Standard-Systemleistensymbol konnte nicht geladen werden.</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation>Sqlite basierende Konten migriert</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation>Konto</translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation>Benachrichtigungsfarbe</translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation>Schwerwiegender Fehler: %1
-
-Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation>Die Einstellungen konnten nicht gespeichert werden</translation>
@@ -642,8 +633,20 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
 %2</translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Sqlite basierende Konten migriert</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
+        <translation>Das Standard-Systemleistensymbol konnte nicht geladen werden.</translation>
     </message>
 </context>
 <context>
@@ -791,12 +794,12 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
         <translation>Diese Version ignorieren</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Aktualisieren und Neustarten</translation>
-    </message>
-    <message>
         <source>ca. %1 Mb</source>
         <translation>ca. %1 Mb</translation>
+    </message>
+    <message>
+        <source>Update and restart</source>
+        <translation>Aktualisieren und Neustarten</translation>
     </message>
 </context>
 <context>
@@ -816,10 +819,6 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
     <message>
         <source>Downloading Birdtray installer...</source>
         <translation>Die Birdtray-Installationsdatei wird heruntergeladen…</translation>
-    </message>
-    <message>
-        <source>Update and Restart</source>
-        <translation>Aktualisieren und Neustarten</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>

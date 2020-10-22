@@ -41,10 +41,6 @@ OpenSSL podría no estar instalado.</translation>
 <context>
     <name>BirdtrayApp</name>
     <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Un sistema libre de notificación para la bandeja el sistema para nuevos correos de Thunderbird</translation>
-    </message>
-    <message>
         <source>Display the contents of the given mork database.</source>
         <translation>Mostrar el contenido de la base de datos de mork.</translation>
     </message>
@@ -85,8 +81,16 @@ OpenSSL podría no estar instalado.</translation>
         <translation>Escribir el registro en un fichero.</translation>
     </message>
     <message>
-        <source>FILE</source>
-        <translation>FICHERO</translation>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>Un sistema libre de notificación para la bandeja el sistema para nuevos correos de Thunderbird.</translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation>fichero</translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
+        <translation>Lo sentimos, la bandeja del sistema no puede ser controlado a través de este complemento en su sistema operativo.</translation>
     </message>
 </context>
 <context>
@@ -172,10 +176,6 @@ OpenSSL podría no estar instalado.</translation>
     <message>
         <source>Multiple notification color:</source>
         <translation>Color de notificación múltiple:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambia el grosor de la fuente, por ejemplo, la hace negrita.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -310,16 +310,8 @@ OpenSSL podría no estar instalado.</translation>
         <translation>Mostrar el icono de la bandeja del sistema</translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
-        <translation>Comprobar actualizaciones cuando bridtray se inicie</translation>
-    </message>
-    <message>
         <source>Check for new updates on startup</source>
         <translation>Comprobar actualizaciones en el arranque</translation>
-    </message>
-    <message>
-        <source>Check for a new Birdtray version</source>
-        <translation>Comprobar si existe una nueva versión de Birdtray</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -440,10 +432,6 @@ OpenSSL podría no estar instalado.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -482,6 +470,41 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Para aquellos que aprecian mi trabajo en Birdtray, que ha sido desarrollado en mi tiempo libre, puede hacerlo aquí: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;¡Gracias por su apoyo continuo!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambia el grosor de la fuente, por ejemplo, la hace negrita.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for new updates when Birdtray starts.</source>
+        <translation>Comprobar actualizaciones cuando bridtray se inicie.</translation>
+    </message>
+    <message>
+        <source>Check for a new Birdtray version.</source>
+        <translation>Comprobar si existe una nueva versión de Birdtray.</translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Fallo al abrir el fichero de registro %s: %s</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Fatal</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Error fatal: %1
+
+El fichero de registro fue escrito en el archivo %2</translation>
     </message>
 </context>
 <context>
@@ -544,6 +567,17 @@ Por favor, asegúrese que ha seleccionado el directorio de perfiles correcto.</t
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation>Cuenta</translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation>Color de notificación</translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -551,22 +585,7 @@ Por favor, asegúrese que ha seleccionado el directorio de perfiles correcto.</t
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation>Fatal</translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Lo sentimos, la bandeja del sistema no puede ser controlado a través de este complemento en su sistema operativo.</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>No se pudo leer el icono de la bandeja del sistema por defecto.</translation>
-    </message>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation>No se pudo abrir el fichero: </translation>
@@ -599,37 +618,9 @@ Por favor, asegúrese que ha seleccionado el directorio de perfiles correcto.</t
         <source>Unexpected end of group.</source>
         <translation>Fin de grupo inesperado.</translation>
     </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Tenía configurado el control de una o más carpetas de correos usando el analizador de Sqlite. Este método ha sido eliminado. Tus configuraciones han sido cambiadas al analizador Mork, pero algunas carpetas de correo configurada podría no ser encontrada.</translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation>Cuentas basadas en Sqlite cambiadas</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Tenía configurado el control de una o más carpetas de correos usando el analizador de Sqlite. Este método ha sido eliminado. Por favor, verifique si todas sus cuentas fueron correctamente mapeadas.</translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation>Cuenta</translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation>Color de notificación</translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation>Error fatal: %1
-
-El fichero de registro fue escrito en el archivo %2</translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation>No se pudieron grabar las configuraciones</translation>
@@ -641,8 +632,20 @@ El fichero de registro fue escrito en el archivo %2</translation>
 %2</translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Fallo al abrir el fichero de registro %s: %s</translation>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Cuentas basadas en Sqlite cambiadas</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Tenía configurado el control de una o más carpetas de correos usando el analizador de Sqlite. Este método ha sido eliminado. Tus configuraciones han sido cambiadas al analizador Mork, pero algunas carpetas de correo configurada podría no ser encontrada.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Tenía configurado el control de una o más carpetas de correos usando el analizador de Sqlite. Este método ha sido eliminado. Por favor, verifique si todas sus cuentas fueron correctamente mapeadas.</translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
+        <translation>No se pudo leer el icono de la bandeja del sistema por defecto.</translation>
     </message>
 </context>
 <context>
