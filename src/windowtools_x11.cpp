@@ -367,8 +367,11 @@ WindowTools_X11::~WindowTools_X11()
 
 bool WindowTools_X11::lookup()
 {
+    if ( QX11Info::appRootWindow() == 0 )
+        return false;
+
     if ( isValid() )
-        return mWinId;
+        return true;
 
     mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), true,
             BirdtrayApp::get()->getSettings()->mThunderbirdWindowMatch);
