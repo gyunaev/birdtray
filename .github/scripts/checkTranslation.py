@@ -641,11 +641,12 @@ def processFile(translationFile, formatSpecifierRegexes, specialPatterns, global
     return numErrors
 
 
-def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
+def main(translationFiles, excludeList, formatSpecifierRegexes, specialPatterns, warnings):
     """
     Lint all given translation files.
 
     :param translationFiles: A list of globs for translation files.
+    :param excludeList: A list of globs for excluded translation files.
     :param formatSpecifierRegexes: A list of regexes for matching format specifiers.
     :param specialPatterns: A list of regexes for matching patterns
                             which must be equal in the source and translation.
@@ -657,10 +658,12 @@ def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
     formatSpecifierRegexes = [re.compile(regex) for regex in formatSpecifierRegexes]
     specialPatterns = [re.compile(regex) for regex in specialPatterns]
     numErrors = 0
+    excludedPaths = set(path for excludePattern in excludeList for path in iglob(excludePattern))
     for pathSpec in translationFiles:
         for path in iglob(pathSpec, recursive=True):
-            numErrors += processFile(
-                path, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
+            if path not in excludedPaths:
+                numErrors += processFile(
+                    path, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
     return 0 if numErrors == 0 else 1
 
 
@@ -677,6 +680,8 @@ def parseCmd():
     parser.add_argument('-r', '--formatSpecifierRegex', nargs=ZERO_OR_MORE,
                         default=[r'(?<!%)(?P<formatSpecifier>%(?:\d+|[diuoxXfFeEgGaAcspn]))'],
                         help='Regex for format specifiers')
+    parser.add_argument('-e', '--exclude', nargs=ZERO_OR_MORE, default=[],
+                        help='Paths to exclude from the check')
     parser.add_argument('-p', '--specialPatterns', nargs=ZERO_OR_MORE,
                         default=[r'(?P<match>\s\(\*\.\S+(?:\s\*\.\w+)*\))', r'(?P<match>\d+)'],
                         help='Regex for special patterns that must be present '
@@ -688,5 +693,5 @@ def parseCmd():
 
 if __name__ == '__main__':
     _args = parseCmd()
-    sys.exit(main(_args.translationFiles, _args.formatSpecifierRegex, _args.specialPatterns,
-                  _args.ignoreWarning))
+    sys.exit(main(_args.translationFiles, _args.exclude, _args.formatSpecifierRegex,
+                  _args.specialPatterns, _args.ignoreWarning))
