@@ -11,48 +11,6 @@ from xml.sax import make_parser, SAXParseException
 from xml.sax.handler import ContentHandler
 
 
-class GithubActionsLogger:
-    """ A logger that logs messages in the GitHub Actions format. """
-
-    def __init__(self, filePath):
-        """
-        :param filePath: The path of the file that the logs belong to.
-        """
-        super().__init__()
-        self._filePath = filePath
-
-    def log(self, message, severity, line, column):
-        """
-        Log the message with the specified severity.
-
-        :param message: The message to log.
-        :param severity: The severity to log.
-        :param line: The line number in the file the message belongs to.
-        :param column: The column number in the line the message belongs to.
-        """
-        print(f'::{severity} file={self._filePath},line={line},col={column + 1}::{message}')
-
-    def warning(self, message, line, column):
-        """
-        Log a warning message.
-
-        :param message: The message to log.
-        :param line: The line number in the file the message belongs to.
-        :param column: The column number in the line the message belongs to.
-        """
-        self.log(message, 'warning', line, column)
-
-    def error(self, message, line, column):
-        """
-        Log an error message.
-
-        :param message: The message to log.
-        :param line: The line number in the file the message belongs to.
-        :param column: The column number in the line the message belongs to.
-        """
-        self.log(message, 'error', line, column)
-
-
 class Logger:
     """ A logger that handles logging warnings and errors. """
     WARNING_MESSAGES = {
@@ -111,10 +69,21 @@ class Logger:
         :param globalFilter: A warning filter tat is always active.
         """
         super().__init__()
-        self._ghLogger = GithubActionsLogger(filePath)
+        self._filePath = filePath
         self._warningCount = self._errorCount = 0
         self._globalFilter = set() if globalFilter is None else globalFilter
         self._localFilter = set()
+
+    def log(self, message, severity, line, column):
+        """
+        Log the message with the specified severity.
+
+        :param message: The message to log.
+        :param severity: The severity to log.
+        :param line: The line number in the file the message belongs to.
+        :param column: The column number in the line the message belongs to.
+        """
+        print(f'[{severity}] {self._filePath}:{line}:{column + 1}: {message}')
 
     def warning(self, warningId, position, **kwargs):
         """
@@ -127,8 +96,8 @@ class Logger:
         if self._isFiltered(warningId):
             return
         self._warningCount += 1
-        self._ghLogger.warning(
-            self.WARNING_MESSAGES[warningId].format(**kwargs) + f' ({warningId})', *position)
+        message = self.WARNING_MESSAGES[warningId].format(**kwargs) + f' ({warningId})'
+        self.log(message, 'warning', *position)
 
     def error(self, errorId, position, **kwargs):
         """
@@ -141,8 +110,8 @@ class Logger:
         if self._isFiltered(errorId):
             return
         self._errorCount += 1
-        self._ghLogger.error(
-            self.ERROR_MESSAGES[errorId].format(**kwargs) + f' ({errorId})', *position)
+        message = self.ERROR_MESSAGES[errorId].format(**kwargs) + f' ({errorId})'
+        self.log(message, 'error', *position)
 
     def getNumWarnings(self):
         """
