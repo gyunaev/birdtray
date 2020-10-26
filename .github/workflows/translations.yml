@@ -68,6 +68,7 @@ jobs:
       - name: Lint the translations
         run: |
           set +e
+          echo "::add-matcher::.github/problem-matchers/translations.json"
           .github/scripts/checkTranslation.py src/translations/dynamic_*.ts src/translations/main_*.ts -e src/translations/*_en.ts -i unfinished_translation
           ret=$?
           .github/scripts/checkTranslation.py src/translations/installer_*.ts -e src/translations/*_en.ts -p '(?P<match>\d+)' '(?P<match>\$\{.*?\})' '(?P<match>\$\\[rn])' '(?P<match>\$\d+)'
