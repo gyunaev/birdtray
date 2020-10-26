@@ -793,12 +793,12 @@ Por favor, asegúrese que ha seleccionado el directorio de perfiles correcto.</t
         <translation>Ignorar esta versión</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Actualizar y reiniciar</translation>
-    </message>
-    <message>
         <source>ca. %1 Mb</source>
         <translation>ca. %1 Mb</translation>
+    </message>
+    <message>
+        <source>Update and restart</source>
+        <translation>Actualizar y reiniciar</translation>
     </message>
 </context>
 <context>
@@ -818,10 +818,6 @@ Por favor, asegúrese que ha seleccionado el directorio de perfiles correcto.</t
     <message>
         <source>Downloading Birdtray installer...</source>
         <translation>Descargando instalador de Bridtray...</translation>
-    </message>
-    <message>
-        <source>Update and Restart</source>
-        <translation>Actualizar y reiniciar</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
