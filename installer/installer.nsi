@@ -1,11 +1,8 @@
-# This script relies on NSIS 3.0, with the nsProcess and NsisMultiUser plugin.
-
-# If uncommented, this script will build an intermediate uninstall_builder.exe
-# which generates an uninstaller when run. This extra step allows us to sign the
-# uninstaller. See also: http://nsis.sourceforge.net/Signing_an_Uninstaller
-# NOTE: This variable is automatically defined during the build process,
-# there is no need to uncomment this to generate the uninstaller.
-#!define UNINSTALL_BUILDER
+# This script creates the Birdtray installer for Windows. It requires on NSIS 3.06 or higher.
+!if "${NSIS_PACKEDVERSION}" < 0x3006000
+  !error "NSIS 3.06 or higher is required to build this installer!"
+!endif
+Unicode true
 
 # If uncommented, installs the licence in the installation directory.
 !define INSTALL_LICENSE
@@ -15,7 +12,6 @@
 !addincludedir nsisDependencies\Include
 !addincludedir .
 
-Unicode true
 !ifndef UNINSTALL_BUILDER
 SetCompressor /SOLID lzma
 !endif # UNINSTALL_BUILDER
