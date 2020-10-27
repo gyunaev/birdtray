@@ -578,9 +578,9 @@ class TranslationHandler(ContentHandler):
     @staticmethod
     def _escapeText(text):
         """
-        Escape the text so it can be printed without messing uo the error or warning format.
-        :param text: THe text to escape.
-        :return: THe escaped text.
+        Escape the text so it can be printed without messing up the error or warning format.
+        :param text: The text to escape.
+        :return: The escaped text.
         """
         return text.replace('\n', '\\n').replace('\t', '\\t')
 
