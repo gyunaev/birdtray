@@ -1,7 +1,8 @@
 !include LogicLib.nsh
 !include x64.nsh
 !include nsProcess.nsh
-!include StrUtils.nsh
+!include StrFunc.nsh
+${StrLoc}
 
 !define ERROR_ALREADY_EXISTS 0x000000b7
 !define ERROR_ACCESS_DENIED 0x5
@@ -132,7 +133,7 @@ Function StrContainsAnyOf
     StrCpy $R2 $STR_CAO_CHARACTERS 1 $R1
     StrCmp $R2 '' end
     IntOp $R1 $R1 + 1
-    ${StrContains} $R0 $R2 $STR_CAO_STRING
+    ${StrLoc} $R0 $STR_CAO_STRING $R2 ">"
     ${if} $R0 != ""
         StrCpy $STR_CAO_RETURN_VAR 1
         goto end
