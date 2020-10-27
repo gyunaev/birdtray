@@ -502,16 +502,14 @@ Function .onInit
         Quit
     !endif
 
-    !insertmacro CheckMinWinVer ${MIN_WINDOWS_VER}
-    ${ifNot} ${UAC_IsInnerInstance}
-        !insertmacro CheckPlatform ${Arch}
-        !insertmacro CheckSingleInstance "$(SetupAlreadyRunning)" "Global" "${SETUP_MUTEX}"
-    ${endif}
-
     !insertmacro MULTIUSER_INIT
-
-    ${if} $IsInnerInstance == 0
+    ${ifNot} ${UAC_IsInnerInstance}
         !insertmacro MUI_LANGDLL_DISPLAY
+!ifndef UNINSTALL_BUILDER
+        !insertmacro CheckMinWinVer ${MIN_WINDOWS_VER}
+        !insertmacro CheckPlatform ${Arch}
+!endif # UNINSTALL_BUILDER
+        !insertmacro CheckSingleInstance "$(SetupAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 FunctionEnd
 

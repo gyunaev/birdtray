@@ -249,7 +249,6 @@ FunctionEnd
     Call OpenURL
 !macroend
 !define OpenURL "!insertmacro OpenURL"
-!endif # UNINSTALL_BUILDER
 
 # === Macros === #
 
@@ -279,6 +278,7 @@ FunctionEnd
         Quit
     ${endif}
 !macroend
+!endif # UNINSTALL_BUILDER
 
 # Check if a registry key exists.
 # ROOT: The registry root key.
