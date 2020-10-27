@@ -4,10 +4,6 @@
 !endif
 Unicode true
 
-# If uncommented, installs the licence in the installation directory.
-!define INSTALL_LICENSE
-
-!addplugindir /x86-ansi nsisDependencies\Plugins\x86-ansi
 !addplugindir /x86-unicode nsisDependencies\Plugins\x86-unicode
 !addincludedir nsisDependencies\Include
 !addincludedir .
@@ -83,7 +79,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define BAD_PATH_CHARS '?%*:|"<>!;'
 !define SETUP_MUTEX "${COMPANY_NAME} ${PRODUCT_NAME} Setup Mutex" # Don't change this
 
-# === Automatic configuration based on the birdtray executable === #
+# === Automatic configuration based on the Birdtray executable === #
 # Version
 !getdllversion "${DIST_DIR}\${EXE_NAME}" VERSION_
 !define VERSION_MAJOR ${VERSION_1}
@@ -304,9 +300,7 @@ Section "${PRODUCT_NAME}" SectionBirdTray
 
     File /r /x translations "${DIST_DIR}\*"
 
-    !ifdef INSTALL_LICENSE
-        File "${LICENSE_PATH}"
-    !endif # INSTALL_LICENSE
+    File "${LICENSE_PATH}"
 
     !endif # UNINSTALL_BUILDER
 SectionEnd
@@ -322,10 +316,8 @@ Section "$(ProgramGroupSectionName)" SectionProgramGroup
     CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(SettingsLink).lnk" "$INSTDIR\${EXE_NAME}" \
         "--settings"
 
-    !ifdef INSTALL_LICENSE
-        CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(LicenseStartMenuLinkName).lnk" \
-            "$INSTDIR\${LICENSE_FILE}"
-    !endif
+    CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(LicenseStartMenuLinkName).lnk" \
+        "$INSTDIR\${LICENSE_FILE}"
     ${if} $MultiUser.InstallMode == "AllUsers"
         CreateShortCut "$SMPROGRAMS\$startMenuFolder\Uninstall.lnk" \
             "$INSTDIR\${UNINSTALL_FILENAME}" "/allusers"
