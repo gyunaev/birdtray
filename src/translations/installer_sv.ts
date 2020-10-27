@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
-        <translation>Avinstallerar föregående version av ${PRODUCT_NAME}.</translation>
+        <translation>Avinstallerar föregående version av ${PRODUCT_NAME}...</translation>
     </message>
     <message>
         <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Closing process ${EXE_NAME}...</source>
-        <translation>Stänger processen ${EXE_NAME}.</translation>
+        <translation>Stänger processen ${EXE_NAME}...</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>
@@ -135,8 +135,8 @@ Stäng alla instanser av det och klicka Försök igen för att fortsätta, eller
     <message>
         <source>The install path must not contain any of:
 ${BAD_PATH_CHARS}</source>
-        <translation>Installationssökvägen får inte innehålla något av följande tecken
-${BAD_PATH_CHARS}.</translation>
+        <translation>Installationssökvägen får inte innehålla något av följande tecken:
+${BAD_PATH_CHARS}</translation>
     </message>
     <message>
         <source>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</source>

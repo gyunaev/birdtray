@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
-        <translation>${PRODUCT_NAME} ürününün önceki sürümü kaldırılıyor</translation>
+        <translation>${PRODUCT_NAME} ürününün önceki sürümü kaldırılıyor...</translation>
     </message>
     <message>
         <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Closing process ${EXE_NAME}...</source>
-        <translation>${EXE_NAME} işlemi kapatılıyor</translation>
+        <translation>${EXE_NAME} işlemi kapatılıyor...</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>
@@ -135,8 +135,8 @@ Lütfen bunun tüm örneklerini kapatın ve devam etmek için Yeniden Dene&apos;
     <message>
         <source>The install path must not contain any of:
 ${BAD_PATH_CHARS}</source>
-        <translation>Yükleme yolu şu karakterleri içermemelidir
-${BAD_PATH_CHARS}.</translation>
+        <translation>Yükleme yolu şu karakterleri içermemelidir:
+${BAD_PATH_CHARS}</translation>
     </message>
     <message>
         <source>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</source>
@@ -282,7 +282,7 @@ Bileşen için yükleyiciyi indirmek istiyor musunuz?</translation>
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
-	<message>
+    <message>
         <source>Polish</source>
         <translation>Lehçe</translation>
     </message>

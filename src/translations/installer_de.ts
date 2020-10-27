@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
-        <translation>Vorherige ${PRODUCT_NAME}-Version wird deinstalliert</translation>
+        <translation>Vorherige ${PRODUCT_NAME}-Version wird deinstalliert...</translation>
     </message>
     <message>
         <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Closing process ${EXE_NAME}...</source>
-        <translation>Prozess ${EXE_NAME} wird angehalten</translation>
+        <translation>Prozess ${EXE_NAME} wird angehalten...</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>

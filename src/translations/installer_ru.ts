@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
-        <translation>Удаление предыдущей версии ${PRODUCT_NAME}</translation>
+        <translation>Удаление предыдущей версии ${PRODUCT_NAME}...</translation>
     </message>
     <message>
         <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Closing process ${EXE_NAME}...</source>
-        <translation>Завершить процесс ${EXE_NAME}</translation>
+        <translation>Завершить процесс ${EXE_NAME}...</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>
@@ -135,7 +135,7 @@ Please, close all instances of it and click Retry to continue, or Cancel to exit
     <message>
         <source>The install path must not contain any of:
 ${BAD_PATH_CHARS}</source>
-        <translation>Путь установки не должен содержать
+        <translation>Путь установки не должен содержать:
 ${BAD_PATH_CHARS}</translation>
     </message>
     <message>
