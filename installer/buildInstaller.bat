@@ -220,20 +220,13 @@ if errorLevel 1 (
     exit /b %errorLevel%
 )
 rmdir /s /q "%TEMP%\nsArray" 1>nul
-set "nsisXMLUrl=http://wiz0u.free.fr/prog/nsisXML/latest.php"
-"%curlExe%" --silent --output "%TEMP%\nsisXML.zip" "%nsisXMLUrl%" 1>nul
+echo xcopy "%~dp0nsis\deps\nsisXML.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
+xcopy "%~dp0deps\nsisXML.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
 if errorLevel 1 (
-    echo Failed to download nsisXML 1>&2
-    exit /b %errorLevel%
-)
-"%sevenZExe%" e "%TEMP%\nsisXML.zip" -y -o"%dependencyFolder%\Plugins\x86-unicode" ^
-        -i!"binU\*.dll" 1>nul
-if errorLevel 1 (
-    echo Failed to extract the nsisXML library from "%TEMP%\nsisXML.zip:binU\*.dll" 1>&2
+    echo Failed to copy the nsisXML library from "%~dp0deps\nsisXML.dll" 1>&2
     echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
     exit /b %errorLevel%
 )
-del "%TEMP%\nsisXML.zip" /F
 
 rem  #### Create the actual installer ####
 echo Creating the installer...
