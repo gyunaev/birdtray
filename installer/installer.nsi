@@ -1,4 +1,4 @@
-# This script creates the Birdtray installer for Windows. It requires on NSIS 3.06 or higher.
+# This script creates the Birdtray installer for Windows.
 !if "${NSIS_PACKEDVERSION}" < 0x3006000
   !error "NSIS 3.06 or higher is required to build this installer!"
 !endif
