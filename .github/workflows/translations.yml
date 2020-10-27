@@ -103,6 +103,17 @@ jobs:
           for installerTranslation in iglob(os.path.join('src', 'translations', 'installer_*.ts')):
               language = os.path.splitext(os.path.basename(installerTranslation))[0][10:]
               translations[language] = installerTranslation
+          baseTranslationFile = os.path.join('src', 'translations', 'installer_en.ts')
+          baseTranslation = ElementTree.parse(baseTranslationFile)
+          sourceKeys = [source.text for source in baseTranslation.findall('context/message/source')]
+          for language in translations:
+              languageNameId = 'Lang_' + language
+              languageNameElement = baseTranslation.find(
+                  f'context/message/translation[.=\'{languageNameId}\']')
+              if languageNameElement is None:
+                  haveError = True
+                  print(f'::error file={baseTranslationFile},line=1,col=1::' +
+                        f'Missing translation for language name "{languageNameId}"')
           for translationFilePath in translations.values():
               translation = ElementTree.parse(translationFilePath)
               languageNameElement = translation.find(
@@ -125,13 +136,11 @@ jobs:
                         f'Invalid __LANGUAGE_NAME__: "{languageName}" is not in the list of ' +
                         f'possible language names: ["{languageNamesString}"]')
                   haveError = True
-              for language in translations:
-                  languageNameSource = 'Lang_' + language
-                  languageNameElement = translation.find(
-                      f'context/message/source[.=\'{languageNameSource}\']')
-                  if languageNameElement is None:
+              for sourceKey in sourceKeys:
+                  if next((source for source in translation.iterfind(f'context/message/source')
+                           if source.text == sourceKey), None) is None:
                       print(f'::warning file={translationFilePath},line=1,col=1::' +
-                            f'Missing language name "{languageNameSource}"')
+                            f'Missing translation for source "{sourceKey}"')
           sys.exit(1 if haveError else 0)
       - name: Lint the translations
         run: |
