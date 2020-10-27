@@ -73,8 +73,12 @@ Function ParseMessageNode
         nsisXML::select "$R0/translation"
         ${if} $2 != 0
             nsisXML::getText
-            nsisXML::release $2
             Push $3
+            nsisXML::getAttribute "type"
+            nsisXML::release $2
+            ${if} "$3" == "unfinished"
+                StrCpy $1 0
+            ${endif}
         ${else}
             Push $2
         ${endif}
