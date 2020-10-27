@@ -46,7 +46,7 @@ void UpdateDownloadDialog::onDownloadComplete() {
     taskBarButton->progress()->setRange(0, 100);
     taskBarButton->progress()->setValue(100);
 #endif
-    actionButton->setText(tr("Update and Restart"));
+    actionButton->setText( QCoreApplication::translate("UpdateDialog", "Update and restart"));
     ui->label->setText(tr("Download finished. Restart and update Birdtray?"));
     show();
     raise();

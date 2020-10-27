@@ -39,7 +39,7 @@ void UpdateDialog::show(const QString &newVersion, const QString &changelog,
     if (estimatedSize == (qulonglong) -1) {
         downloadButton->setText(tr("Download"));
     } else {
-        downloadButton->setText(tr("Update and Restart"));
+        downloadButton->setText(tr("Update and restart"));
     }
     if (estimatedSize == 0 || estimatedSize == (qulonglong) -1) {
         ui->estimatedSizeDescLabel->hide();

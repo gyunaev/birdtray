@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
-        <translation>Desinstalando versão anterior do ${PRODUCT_NAME}</translation>
+        <translation>Desinstalando versão anterior do ${PRODUCT_NAME}...</translation>
     </message>
     <message>
         <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Closing process ${EXE_NAME}...</source>
-        <translation>Encerrando processo ${EXE_NAME}</translation>
+        <translation>Encerrando processo ${EXE_NAME}...</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>
@@ -136,7 +136,7 @@ Por favor, feche todas as instâncias e clique em Repetir para continuar, ou Can
         <source>The install path must not contain any of:
 ${BAD_PATH_CHARS}</source>
         <translation>O caminho de instalação não pode conter os seguintes caracteres:
-${BAD_PATH_CHARS}.</translation>
+${BAD_PATH_CHARS}</translation>
     </message>
     <message>
         <source>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</source>

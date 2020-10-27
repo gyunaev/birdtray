@@ -148,9 +148,9 @@ void Settings::save()
 
     if ( !file.open(QIODevice::WriteOnly | QIODevice::Truncate) )
     {
-        QMessageBox::critical( 0,
-                               QObject::tr("Could not save the settings"),
-                               QObject::tr("Could not save the settings into file %1:\n%2").arg( file.fileName() ) .arg( file.errorString() ) );
+        QMessageBox::critical(nullptr, tr("Could not save the settings"),
+                tr("Could not save the settings into file %1:\n%2")
+                        .arg(file.fileName()).arg(file.errorString()));
         return;
     }
 
@@ -449,14 +449,14 @@ void Settings::fromQSettings( QSettings * psettings )
         }
         if (foundMigrationProblem) {
             QMessageBox::warning(nullptr,
-                    QCoreApplication::tr("Sqlite based accounts migrated"), QCoreApplication::tr(
+                    tr("Sqlite based accounts migrated"), tr(
                             "You had configured monitoring of one or more mail folders using "
                             "the Sqlite parser. This method has been removed. Your configurations "
                             "has been migrated to the Mork parser, but some configured mail "
                             "folders could not be found."));
         } else {
             QMessageBox::information(nullptr,
-                    QCoreApplication::tr("Sqlite based accounts migrated"), QCoreApplication::tr(
+                    tr("Sqlite based accounts migrated"), tr(
                             "You had configured monitoring of one or more mail accounts using "
                             "the Sqlite parser. This method has been removed. Your configurations "
                             "has been migrated to the Mork parser. Please verify that all accounts "
@@ -483,7 +483,7 @@ bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arg
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Log::fatal( QCoreApplication::tr("Cannot load default system tray icon.") );
+            Log::fatal( tr("Cannot load default system tray icon.") );
         }
     }
     return mNotificationIcon;
