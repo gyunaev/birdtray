@@ -180,12 +180,6 @@ if errorLevel 1 (
     echo to the deployment folder at "%dependencyFolder%\Include" 1>&2
     exit /b %errorLevel%
 )
-xcopy "%TEMP%\NsProcess\nsProcess.dll" "%dependencyFolder%\Plugins\x86-ansi" /q /y 1>nul
-if errorLevel 1 (
-    echo Failed to copy the NsProcess library from "%TEMP%\NsProcess\nsProcess.dll" 1>&2
-    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-ansi" 1>&2
-    exit /b %errorLevel%
-)
 xcopy "%TEMP%\NsProcess\nsProcessW.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
 if errorLevel 1 (
     echo Failed to copy the NsProcess library from "%TEMP%\NsProcess\nsProcessW.dll" 1>&2
@@ -199,37 +193,47 @@ if errorLevel 1 (
     echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
     exit /b %errorLevel%
 )
-set "nsisXMLUrl=https://nsis.sourceforge.io/mediawiki/images/5/55/Xml.zip"
+set "nsArrayUrl=https://nsis.sourceforge.io/mediawiki/images/9/97/NsArray.zip"
+"%curlExe%" --silent --output "%TEMP%\nsArray.zip" "%nsArrayUrl%" 1>nul
+if errorLevel 1 (
+    echo Failed to download nsArray 1>&2
+    exit /b %errorLevel%
+)
+"%sevenZExe%" x -y -o"%TEMP%\nsArray" "%TEMP%\nsArray.zip" 1>nul
+if errorLevel 1 (
+    echo Failed to extract nsArray 1>&2
+    exit /b %errorLevel%
+)
+del "%TEMP%\nsArray.zip" /F
+xcopy "%TEMP%\nsArray\Include\nsArray.nsh" "%dependencyFolder%\Include" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the nsArray library from "%TEMP%\nsArray\Include\nsArray.nsh" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Include" 1>&2
+    exit /b %errorLevel%
+)
+xcopy "%TEMP%\nsArray\Plugins\x86-unicode\nsArray.dll" ^
+        "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
+if errorLevel 1 (
+    echo Failed to copy the nsArray library from 1>&2
+    echo "%TEMP%\nsArray\Plugins\x86-unicode\nsArray.dll" 1>&2
+    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
+    exit /b %errorLevel%
+)
+rmdir /s /q "%TEMP%\nsArray" 1>nul
+set "nsisXMLUrl=http://wiz0u.free.fr/prog/nsisXML/latest.php"
 "%curlExe%" --silent --output "%TEMP%\nsisXML.zip" "%nsisXMLUrl%" 1>nul
 if errorLevel 1 (
     echo Failed to download nsisXML 1>&2
     exit /b %errorLevel%
 )
-"%sevenZExe%" e -y -o"%TEMP%\nsisXML" "%TEMP%\nsisXML.zip" 1>nul
+"%sevenZExe%" e "%TEMP%\nsisXML.zip" -y -o"%dependencyFolder%\Plugins\x86-unicode" ^
+        -i!"binU\*.dll" 1>nul
 if errorLevel 1 (
-    echo Failed to extract nsisXML 1>&2
-    exit /b %errorLevel%
-)
-del "%TEMP%\nsisXML.zip" /F
-xcopy "%TEMP%\nsisXML\XML.nsh" "%dependencyFolder%\Include" /q /y 1>nul
-if errorLevel 1 (
-    echo Failed to copy the nsisXML library from "%TEMP%\nsisXML\XML.nsh" 1>&2
-    echo to the deployment folder at "%dependencyFolder%\Include" 1>&2
-    exit /b %errorLevel%
-)
-xcopy "%TEMP%\nsisXML\xml.dll" "%dependencyFolder%\Plugins\x86-ansi" /q /y 1>nul
-if errorLevel 1 (
-    echo Failed to copy the nsisXML library from "%TEMP%\nsisXML\xml.dll" 1>&2
-    echo to the deployment folder at "%dependencyFolder%\Plugins\x86-ansi" 1>&2
-    exit /b %errorLevel%
-)
-xcopy "%TEMP%\nsisXML\xml.dll" "%dependencyFolder%\Plugins\x86-unicode" /q /y 1>nul
-if errorLevel 1 (
-    echo Failed to copy the nsisXML library from "%TEMP%\nsisXML\xml.dll" 1>&2
+    echo Failed to extract the nsisXML library from "%TEMP%\nsisXML.zip:binU\*.dll" 1>&2
     echo to the deployment folder at "%dependencyFolder%\Plugins\x86-unicode" 1>&2
     exit /b %errorLevel%
 )
-rmdir /s /q "%TEMP%\nsisXML" 1>nul
+del "%TEMP%\nsisXML.zip" /F
 
 rem  #### Create the actual installer ####
 echo Creating the installer...
@@ -267,5 +271,5 @@ echo --install:     Optional parameter. If specified, executes the generated ins
 echo:
 echo The following programs must be on the PATH: windeployqt, makensis, g++, git, curl and 7z.
 echo The script also searches for translations in translations subdirectory
-echo of the directory containing the birdtray executable.
+echo of the directory containing the Birdtray executable.
 goto :eof
