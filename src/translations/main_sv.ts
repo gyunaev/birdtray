@@ -41,10 +41,6 @@ OpenSSL kanske inte är installerad.</translation>
 <context>
     <name>BirdtrayApp</name>
     <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>En fri systemfältsavisering för ny e-post i Thunderbird</translation>
-    </message>
-    <message>
         <source>Display the contents of the given mork database.</source>
         <translation>Visa innehållet i den givna mork-databasen.</translation>
     </message>
@@ -85,8 +81,16 @@ OpenSSL kanske inte är installerad.</translation>
         <translation>Skriv loggen till en fil.</translation>
     </message>
     <message>
-        <source>FILE</source>
-        <translation>FIL</translation>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>En fri systemfältsavisering för ny e-post i Thunderbird.</translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation>fil</translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
+        <translation>Systemfältet kan tyvärr inte kontrolleras genom detta tillägg, i ditt operativsystem.</translation>
     </message>
 </context>
 <context>
@@ -172,10 +176,6 @@ OpenSSL kanske inte är installerad.</translation>
     <message>
         <source>Multiple notification color:</source>
         <translation>Fleraviseringsfärg:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Detta ändrar teckentjockleken, gör teckensnittet fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -310,16 +310,8 @@ OpenSSL kanske inte är installerad.</translation>
         <translation>Gör systemfältsikonen</translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
-        <translation>Sök efter uppdateringar när Birdtray startas</translation>
-    </message>
-    <message>
         <source>Check for new updates on startup</source>
         <translation>Sök efter uppdateringar vid uppstart</translation>
-    </message>
-    <message>
-        <source>Check for a new Birdtray version</source>
-        <translation>Sök efter ny Birdtray-version</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -440,10 +432,6 @@ OpenSSL kanske inte är installerad.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -482,6 +470,41 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Ni som uppskattar mitt arbete med Birdtray, som utvecklas på min fritid, kan göra det här: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Tack för ert kontinuerliga stöd!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Detta ändrar teckentjockleken, gör teckensnittet fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for new updates when Birdtray starts.</source>
+        <translation>Sök efter uppdateringar när Birdtray startas.</translation>
+    </message>
+    <message>
+        <source>Check for a new Birdtray version.</source>
+        <translation>Sök efter ny Birdtray-version.</translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Kunde inte öppna loggfilen %s: %s</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Ödesdigert</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Ödesdigert fel: %1
+
+Loggen har skrivits i filen %2</translation>
     </message>
 </context>
 <context>
@@ -544,6 +567,17 @@ Tillse att du har valt rätt profilmapp.</translation>
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation>Konto</translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation>Aviseringsfärg</translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -551,22 +585,7 @@ Tillse att du har valt rätt profilmapp.</translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation>Ödesdigert</translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Systemfältet kan tyvärr inte kontrolleras genom detta tillägg, i ditt operativsystem.</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>Kan inte läsa in ordinarie systemfältsikon.</translation>
-    </message>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation>Kunde inte öppna filen: </translation>
@@ -599,37 +618,9 @@ Tillse att du har valt rätt profilmapp.</translation>
         <source>Unexpected end of group.</source>
         <translation>Oväntad &quot;end of group&quot;.</translation>
     </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Du hade konfigurerat övervakning av en eller flera e-postmappar med sqlite-tolken. Den metoden har tagits bort. Dina konfigurationer har migrerats till Mork-tolken, men några konfigurerade e-postmappar gick inte att hitta.</translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation>Sqlite-baserade konton migrerade</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Du hade konfigurerat övervakning av en eller flera e-postmappar med sqlite-tolken. Den metoden har tagits bort. Dina konfigurationer har migrerats till Mork-tolken. Kontrollera att alla konton har mappats korrekt.</translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation>Konto</translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation>Aviseringsfärg</translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation>Ödesdigert fel: %1
-
-Loggen har skrivits i filen %2</translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation>Kunde inte spara inställningarna</translation>
@@ -641,8 +632,20 @@ Loggen har skrivits i filen %2</translation>
 %2</translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Kunde inte öppna loggfilen %s: %s</translation>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Sqlite-baserade konton migrerade</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Du hade konfigurerat övervakning av en eller flera e-postmappar med sqlite-tolken. Den metoden har tagits bort. Dina konfigurationer har migrerats till Mork-tolken, men några konfigurerade e-postmappar gick inte att hitta.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Du hade konfigurerat övervakning av en eller flera e-postmappar med sqlite-tolken. Den metoden har tagits bort. Dina konfigurationer har migrerats till Mork-tolken. Kontrollera att alla konton har mappats korrekt.</translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
+        <translation>Kan inte läsa in ordinarie systemfältsikon.</translation>
     </message>
 </context>
 <context>
@@ -790,12 +793,12 @@ Loggen har skrivits i filen %2</translation>
         <translation>Ignorera denna version</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Uppdatera och starta om</translation>
-    </message>
-    <message>
         <source>ca. %1 Mb</source>
         <translation>ca: %1 Mb</translation>
+    </message>
+    <message>
+        <source>Update and restart</source>
+        <translation>Uppdatera och starta om</translation>
     </message>
 </context>
 <context>
@@ -815,10 +818,6 @@ Loggen har skrivits i filen %2</translation>
     <message>
         <source>Downloading Birdtray installer...</source>
         <translation>Laddar ner Birdtray-installerare...</translation>
-    </message>
-    <message>
-        <source>Update and Restart</source>
-        <translation>Uppdatera och starta om</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>

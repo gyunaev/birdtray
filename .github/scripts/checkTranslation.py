@@ -7,50 +7,8 @@ from glob import iglob
 from html.parser import HTMLParser
 
 from argparse import ArgumentParser, ZERO_OR_MORE, ONE_OR_MORE
-from xml.sax import make_parser
+from xml.sax import make_parser, SAXParseException
 from xml.sax.handler import ContentHandler
-
-
-class GithubActionsLogger:
-    """ A logger that logs messages in the GitHub Actions format. """
-
-    def __init__(self, filePath):
-        """
-        :param filePath: The path of the file that the logs belong to.
-        """
-        super().__init__()
-        self._filePath = filePath
-
-    def log(self, message, severity, line, column):
-        """
-        Log the message with the specified severity.
-
-        :param message: The message to log.
-        :param severity: The severity to log.
-        :param line: The line number in the file the message belongs to.
-        :param column: The column number in the line the message belongs to.
-        """
-        print(f'::{severity} file={self._filePath},line={line},col={column + 1}::{message}')
-
-    def warning(self, message, line, column):
-        """
-        Log a warning message.
-
-        :param message: The message to log.
-        :param line: The line number in the file the message belongs to.
-        :param column: The column number in the line the message belongs to.
-        """
-        self.log(message, 'warning', line, column)
-
-    def error(self, message, line, column):
-        """
-        Log an error message.
-
-        :param message: The message to log.
-        :param line: The line number in the file the message belongs to.
-        :param column: The column number in the line the message belongs to.
-        """
-        self.log(message, 'error', line, column)
 
 
 class Logger:
@@ -71,7 +29,6 @@ class Logger:
         'newline_start_tr_diff': 'Translation starts with a newline but source does not',
         'newline_end_src_diff': 'Source ends with a newline but translation does not',
         'newline_end_tr_diff': 'Translation ends with a newline but source does not',
-        'format_specifier_missing': 'Translation is missing the format specifier "{specifier}"',
         'punctuation_end_differ': 'Translation ends with different punctuation than the source: '
                                   'Expected "{punctuation}", got "{actual}"',
         'filter_invalid': 'Invalid filter id specified: "{filterId}"',
@@ -88,6 +45,7 @@ class Logger:
                                    'indentation: Expected "{expected}", got "{actual}"',
         'indentation_wrong_end': 'The end of the "{name}" element has an unexpected '
                                  'indentation: Expected "{expected}", got "{actual}"',
+        'unexpected_text': 'Unexpected text found, check last closing tag: {text}',
     }
     ERROR_MESSAGES = {
         'missing_language_attr': 'Missing "language" attribute',
@@ -95,12 +53,14 @@ class Logger:
                                   'Filename does not end in "{language}"',
         'missing_source': '"message" element is missing required "source" child',
         'missing_translation': '"message" element is missing required "translation" child',
+        'format_specifier_missing': 'Translation is missing the format specifier "{specifier}"',
         'format_specifier_unbalanced': 'Translation references a format specifier "{specifier}" '
                                        'which does not exist in the source',
         'special_pattern_missing': 'The following text was expected to be present in the '
                                    'translation, but was not found: "{pattern}"',
         'duplicate_element': 'Duplicated element in message: "{name}"',
         'html_invalid': 'The html is not valid: {message}',
+        'xml_invalid': 'The xml is not valid: {message}',
     }
 
     def __init__(self, filePath, globalFilter=None):
@@ -109,10 +69,21 @@ class Logger:
         :param globalFilter: A warning filter tat is always active.
         """
         super().__init__()
-        self._ghLogger = GithubActionsLogger(filePath)
+        self._filePath = filePath
         self._warningCount = self._errorCount = 0
         self._globalFilter = set() if globalFilter is None else globalFilter
         self._localFilter = set()
+
+    def log(self, message, severity, line, column):
+        """
+        Log the message with the specified severity.
+
+        :param message: The message to log.
+        :param severity: The severity to log.
+        :param line: The line number in the file the message belongs to.
+        :param column: The column number in the line the message belongs to.
+        """
+        print(f'[{severity}] {self._filePath}:{line}:{column + 1}: {message}')
 
     def warning(self, warningId, position, **kwargs):
         """
@@ -125,8 +96,8 @@ class Logger:
         if self._isFiltered(warningId):
             return
         self._warningCount += 1
-        self._ghLogger.warning(
-            self.WARNING_MESSAGES[warningId].format(**kwargs) + f' ({warningId})', *position)
+        message = self.WARNING_MESSAGES[warningId].format(**kwargs) + f' ({warningId})'
+        self.log(message, 'warning', *position)
 
     def error(self, errorId, position, **kwargs):
         """
@@ -139,8 +110,8 @@ class Logger:
         if self._isFiltered(errorId):
             return
         self._errorCount += 1
-        self._ghLogger.error(
-            self.ERROR_MESSAGES[errorId].format(**kwargs) + f' ({errorId})', *position)
+        message = self.ERROR_MESSAGES[errorId].format(**kwargs) + f' ({errorId})'
+        self.log(message, 'error', *position)
 
     def getNumWarnings(self):
         """
@@ -299,7 +270,7 @@ class TranslationHandler(ContentHandler):
         self._logger = Logger(filePath, globalWarningFilter)
         self._level = -1
         self._levelCharacters = ' ' * 4
-        self._currentElement = None
+        self._elementStack = [None]
         self._lastData = ''
         self._translationAttributes = None
         self._source = None
@@ -321,11 +292,11 @@ class TranslationHandler(ContentHandler):
         :param name: The name of the element.
         :param attrs: The attributes of the element.
         """
-        self._currentElement = name
+        self._elementStack.append(name)
         if self._lastData != self._levelCharacters * self._level and \
                 (self._level != 0 or self._lastData != '\n'):
-            self.warning('indentation_wrong_start', actual=repr(self._lastData)[1:-1],
-                         expected=repr(self._levelCharacters * self._level)[1:-1], name=name)
+            self.warning('indentation_wrong_start', actual=self._escapeText(self._lastData),
+                         expected=self._escapeText(self._levelCharacters * self._level), name=name)
         self._level += 1
         if name == 'message':
             self._source = None
@@ -337,7 +308,7 @@ class TranslationHandler(ContentHandler):
             self._logger.clearLocalFilters()
         elif name == 'source':
             self._source = ''
-        elif self._currentElement == 'translation':
+        elif self._currentElement() == 'translation':
             self._translationAttributes = attrs
             self._translation = ''
         elif name == 'TS':
@@ -348,9 +319,9 @@ class TranslationHandler(ContentHandler):
                 language = languageAttribute[:2].lower()
                 if not os.path.splitext(os.path.basename(self._filePath))[0] \
                         .endswith('_' + language):
-                    self.error('language_attr_mismatch', language=language)
+                    self.error('language_attr_mismatch', language=self._escapeText(language))
         if name in self._messageChildren:
-            self.error('duplicate_element', name=name)
+            self.error('duplicate_element', name=self._escapeText(name))
         else:
             self._messageChildren.append(name)
 
@@ -360,14 +331,15 @@ class TranslationHandler(ContentHandler):
 
         :param name: The name of the element.
         """
-        self._currentElement = None
+        lastName = self._elementStack.pop()
+        assert lastName == name  # The parser should throw an exception and not call endElement.
         self._level -= 1
         if name not in ['source', 'translation', 'translatorcomment'] and \
                 self._lastData != self._levelCharacters * self._level and \
                 all(char.isspace() for char in self._lastData) and \
                 (self._level > 0 or self._lastData != '\n'):
-            self.warning('indentation_wrong_end', actual=repr(self._lastData)[1:-1],
-                         expected=repr(self._levelCharacters * self._level)[1:-1], name=name)
+            self.warning('indentation_wrong_end', actual=self._escapeText(self._lastData),
+                         expected=self._escapeText(self._levelCharacters * self._level), name=name)
         if name == 'source':
             if self._sourcePos is None:
                 self._sourcePos = self._locator.getLineNumber(), self._locator.getColumnNumber()
@@ -401,16 +373,16 @@ class TranslationHandler(ContentHandler):
         :param data: The content of the current element.
         """
         self._lastData = data
-        if self._currentElement == 'source':
+        if self._currentElement() == 'source':
             if self._sourcePos is None:
                 self._sourcePos = self._locator.getLineNumber(), self._locator.getColumnNumber()
             self._source += data
-        elif self._currentElement == 'translation':
+        elif self._currentElement() == 'translation':
             if self._translationPos is None:
                 self._translationPos = \
                     self._locator.getLineNumber(), self._locator.getColumnNumber()
             self._translation += data
-        elif self._currentElement == 'translatorcomment':
+        elif self._currentElement() == 'translatorcomment':
             filterMatch = self.FILTER_REGEX.search(data)
             if filterMatch:
                 index = filterMatch.start('filters')
@@ -420,8 +392,12 @@ class TranslationHandler(ContentHandler):
                     else:
                         position = (self._locator.getLineNumber(),
                                     self._locator.getColumnNumber() + index)
-                        self.warning('filter_invalid', position, filterId=filterId)
+                        self.warning(
+                            'filter_invalid', position, filterId=self._escapeText(filterId))
                     index += len(filterId) + 1
+        elif self._currentElement() in ['message', 'context', 'TS'] \
+                and not data.isspace() and data != '':
+            self.warning('unexpected_text', text=self._escapeText(data))
 
     def getNumWarnings(self):
         """
@@ -533,12 +509,12 @@ class TranslationHandler(ContentHandler):
             translationSpecifiers = set(formatSpecifierRegex.findall(self._translation))
             for specifier in sourceSpecifiers ^ translationSpecifiers:
                 if specifier in sourceSpecifiers:
-                    self.warning('format_specifier_missing',
-                                 self._translationPos, specifier=specifier)
+                    self.error('format_specifier_missing',
+                               self._translationPos, specifier=self._escapeText(specifier))
                 else:
                     self.error('format_specifier_unbalanced', self._calculatePosition(
                         self._translation, self._translation.index(specifier),
-                        self._translationPos), specifier=specifier)
+                        self._translationPos), specifier=self._escapeText(specifier))
 
     def _checkPunctuation(self):
         """ Check for problems with punctuations. """
@@ -554,8 +530,9 @@ class TranslationHandler(ContentHandler):
                     self._translation.endswith('…')) and \
                     not (lastSourceChar == '…' and self._translation.endswith('...')):
                 self.warning('punctuation_end_differ', self._calculatePosition(
-                    self._translation, len(self._translation) - 1,
-                    self._translationPos), punctuation=lastSourceChar, actual=lastTranslationChar)
+                    self._translation, len(self._translation) - 1, self._translationPos),
+                             punctuation=self._escapeText(lastSourceChar),
+                             actual=self._escapeText(lastTranslationChar))
 
     def _checkSpecialPatterns(self):
         """ Check for problems with special patterns. """
@@ -564,7 +541,7 @@ class TranslationHandler(ContentHandler):
                 text = sourceMatch.group('match')
                 if text not in self._translation:
                     self.error('special_pattern_missing', self._translationPos,
-                               pattern=sourceMatch.group('match'))
+                               pattern=self._escapeText(sourceMatch.group('match')))
 
     def _checkHtml(self):
         """ Check for problems with html in translations. """
@@ -573,6 +550,9 @@ class TranslationHandler(ContentHandler):
         parser = HTMLComparer(self._logger, self._translationPos)
         parser.feed(self._source)
         parser.compare(self._translation)
+
+    def _currentElement(self):
+        return self._elementStack[-1]
 
     @staticmethod
     def _calculatePosition(string, index, filePos):
@@ -595,6 +575,15 @@ class TranslationHandler(ContentHandler):
             column = 0
         raise ValueError('Index is not in string')
 
+    @staticmethod
+    def _escapeText(text):
+        """
+        Escape the text so it can be printed without messing up the error or warning format.
+        :param text: The text to escape.
+        :return: The escaped text.
+        """
+        return text.replace('\n', '\\n').replace('\t', '\\t')
+
 
 def processFile(translationFile, formatSpecifierRegexes, specialPatterns, globalWarningFilter):
     """
@@ -612,17 +601,21 @@ def processFile(translationFile, formatSpecifierRegexes, specialPatterns, global
     handler = TranslationHandler(
         translationFile, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
     parser.setContentHandler(handler)
-    parser.parse(translationFile)
+    try:
+        parser.parse(translationFile)
+    except SAXParseException as error:
+        handler.error('xml_invalid', message=str(error))
     numErrors = handler.getNumErrors()
     print(f'Found {handler.getNumWarnings()} warning(s) and {numErrors} error(s)')
     return numErrors
 
 
-def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
+def main(translationFiles, excludeList, formatSpecifierRegexes, specialPatterns, warnings):
     """
     Lint all given translation files.
 
     :param translationFiles: A list of globs for translation files.
+    :param excludeList: A list of globs for excluded translation files.
     :param formatSpecifierRegexes: A list of regexes for matching format specifiers.
     :param specialPatterns: A list of regexes for matching patterns
                             which must be equal in the source and translation.
@@ -634,10 +627,12 @@ def main(translationFiles, formatSpecifierRegexes, specialPatterns, warnings):
     formatSpecifierRegexes = [re.compile(regex) for regex in formatSpecifierRegexes]
     specialPatterns = [re.compile(regex) for regex in specialPatterns]
     numErrors = 0
+    excludedPaths = set(path for excludePattern in excludeList for path in iglob(excludePattern))
     for pathSpec in translationFiles:
         for path in iglob(pathSpec, recursive=True):
-            numErrors += processFile(
-                path, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
+            if path not in excludedPaths:
+                numErrors += processFile(
+                    path, formatSpecifierRegexes, specialPatterns, globalWarningFilter)
     return 0 if numErrors == 0 else 1
 
 
@@ -654,6 +649,8 @@ def parseCmd():
     parser.add_argument('-r', '--formatSpecifierRegex', nargs=ZERO_OR_MORE,
                         default=[r'(?<!%)(?P<formatSpecifier>%(?:\d+|[diuoxXfFeEgGaAcspn]))'],
                         help='Regex for format specifiers')
+    parser.add_argument('-e', '--exclude', nargs=ZERO_OR_MORE, default=[],
+                        help='Paths to exclude from the check')
     parser.add_argument('-p', '--specialPatterns', nargs=ZERO_OR_MORE,
                         default=[r'(?P<match>\s\(\*\.\S+(?:\s\*\.\w+)*\))', r'(?P<match>\d+)'],
                         help='Regex for special patterns that must be present '
@@ -665,5 +662,5 @@ def parseCmd():
 
 if __name__ == '__main__':
     _args = parseCmd()
-    sys.exit(main(_args.translationFiles, _args.formatSpecifierRegex, _args.specialPatterns,
-                  _args.ignoreWarning))
+    sys.exit(main(_args.translationFiles, _args.exclude, _args.formatSpecifierRegex,
+                  _args.specialPatterns, _args.ignoreWarning))

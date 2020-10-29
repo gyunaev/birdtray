@@ -1,8 +1,9 @@
+Unicode true
 !include FileFunc.nsh
 !include LogicLib.nsh
+!include Log.nsh
 !define SCS_64BIT_BINARY 6
 
-Unicode true
 SetCompress off
 Name "getExeArch"
 OutFile "GetExeArch.exe"
@@ -33,29 +34,23 @@ FunctionEnd
 !define TrimQuotes `!insertmacro _TrimQuotes`
 
 Section
+    ${InitLog}
     ${GetParameters} $0
     ${TrimQuotes} $0 $0
     GetFullPathName $0 $0
     IfFileExists "$0" ExeExists
-        MessageBox MB_ICONSTOP "Given executable file does not exist: $0"
-        setErrorLevel 2
-        Quit
+        ${Fatal} "Given executable file does not exist: $0"
     ExeExists:
     StrCpy $1 0
     System::Call "kernel32::GetBinaryType(t r0, *i .r1) i.r2"
-    ${If} $2 == 0
-        MessageBox MB_ABORTRETRYIGNORE|MB_ICONSTOP \
-            "Unable to determine executable type of $0: GetBinaryType FAILED (return code: $2)" \
-             IDRETRY ExeExists IDIGNORE IgnoreError
-        setErrorLevel 2
-        Quit
-        IgnoreError:
-    ${EndIf}
+    ${if} $2 == 0
+        ${Fatal} "Unable to determine executable type of $0: GetBinaryType FAILED (return code: $2)"
+    ${endIf}
     FileOpen $0 "$EXEDIR\arch.nsh" w
-    ${If} $1 == ${SCS_64BIT_BINARY}
+    ${if} $1 == ${SCS_64BIT_BINARY}
         FileWrite $0 '!define ARCH "x64"'
-    ${Else}
+    ${else}
         FileWrite $0 '!define ARCH "x86"'
-    ${EndIf}
+    ${endIf}
     FileClose $0
 SectionEnd

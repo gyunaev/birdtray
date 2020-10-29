@@ -1,21 +1,13 @@
-# This script relies on NSIS 3.0, with the nsProcess and NsisMultiUser plugin.
+# This script creates the Birdtray installer for Windows.
+!if "${NSIS_PACKEDVERSION}" < 0x3006000
+  !error "NSIS 3.06 or higher is required to build this installer!"
+!endif
+Unicode true
 
-# If uncommented, this script will build an intermediate uninstall_builder.exe
-# which generates an uninstaller when run. This extra step allows us to sign the
-# uninstaller. See also: http://nsis.sourceforge.net/Signing_an_Uninstaller
-# NOTE: This variable is automatically defined during the build process,
-# there is no need to uncomment this to generate the uninstaller.
-#!define UNINSTALL_BUILDER
-
-# If uncommented, installs the licence in the installation directory.
-!define INSTALL_LICENSE
-
-!addplugindir /x86-ansi nsisDependencies\Plugins\x86-ansi
 !addplugindir /x86-unicode nsisDependencies\Plugins\x86-unicode
 !addincludedir nsisDependencies\Include
 !addincludedir .
 
-Unicode true
 !ifndef UNINSTALL_BUILDER
 SetCompressor /SOLID lzma
 !endif # UNINSTALL_BUILDER
@@ -87,7 +79,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define BAD_PATH_CHARS '?%*:|"<>!;'
 !define SETUP_MUTEX "${COMPANY_NAME} ${PRODUCT_NAME} Setup Mutex" # Don't change this
 
-# === Automatic configuration based on the birdtray executable === #
+# === Automatic configuration based on the Birdtray executable === #
 # Version
 !getdllversion "${DIST_DIR}\${EXE_NAME}" VERSION_
 !define VERSION_MAJOR ${VERSION_1}
@@ -308,9 +300,7 @@ Section "${PRODUCT_NAME}" SectionBirdTray
 
     File /r /x translations "${DIST_DIR}\*"
 
-    !ifdef INSTALL_LICENSE
-        File "${LICENSE_PATH}"
-    !endif # INSTALL_LICENSE
+    File "${LICENSE_PATH}"
 
     !endif # UNINSTALL_BUILDER
 SectionEnd
@@ -326,10 +316,8 @@ Section "$(ProgramGroupSectionName)" SectionProgramGroup
     CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(SettingsLink).lnk" "$INSTDIR\${EXE_NAME}" \
         "--settings"
 
-    !ifdef INSTALL_LICENSE
-        CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(LicenseStartMenuLinkName).lnk" \
-            "$INSTDIR\${LICENSE_FILE}"
-    !endif
+    CreateShortCut "$SMPROGRAMS\$startMenuFolder\$(LicenseStartMenuLinkName).lnk" \
+        "$INSTDIR\${LICENSE_FILE}"
     ${if} $MultiUser.InstallMode == "AllUsers"
         CreateShortCut "$SMPROGRAMS\$startMenuFolder\Uninstall.lnk" \
             "$INSTDIR\${UNINSTALL_FILENAME}" "/allusers"
@@ -514,16 +502,14 @@ Function .onInit
         Quit
     !endif
 
-    !insertmacro CheckMinWinVer ${MIN_WINDOWS_VER}
-    ${ifNot} ${UAC_IsInnerInstance}
-        !insertmacro CheckPlatform ${Arch}
-        !insertmacro CheckSingleInstance "$(SetupAlreadyRunning)" "Global" "${SETUP_MUTEX}"
-    ${endif}
-
     !insertmacro MULTIUSER_INIT
-
-    ${if} $IsInnerInstance == 0
+    ${ifNot} ${UAC_IsInnerInstance}
         !insertmacro MUI_LANGDLL_DISPLAY
+!ifndef UNINSTALL_BUILDER
+        !insertmacro CheckMinWinVer ${MIN_WINDOWS_VER}
+        !insertmacro CheckPlatform ${Arch}
+!endif # UNINSTALL_BUILDER
+        !insertmacro CheckSingleInstance "$(SetupAlreadyRunning)" "Global" "${SETUP_MUTEX}"
     ${endif}
 FunctionEnd
 

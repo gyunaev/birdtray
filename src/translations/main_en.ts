@@ -38,7 +38,7 @@ OpenSSL might not be installed.</source>
 <context>
     <name>BirdtrayApp</name>
     <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -82,7 +82,11 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FILE</source>
+        <source>file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -171,7 +175,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -307,7 +311,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
+        <source>Check for new updates when Birdtray starts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -315,7 +319,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Check for a new Birdtray version</source>
+        <source>Check for a new Birdtray version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -432,10 +436,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -463,6 +463,27 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;For those of you who appreciate my work on Birdtray, which is being developed in my free time, you can do it here: &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Thank you for your continuous support!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -524,6 +545,17 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -531,22 +563,7 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation type="unfinished"></translation>
@@ -579,35 +596,9 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Unexpected end of group.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation type="unfinished"></translation>
@@ -618,7 +609,19 @@ Log file is written into file %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
+        <source>Sqlite based accounts migrated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -763,11 +766,11 @@ Log file is written into file %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update and Restart</source>
+        <source>ca. %1 Mb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ca. %1 Mb</source>
+        <source>Update and restart</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -787,10 +790,6 @@ Log file is written into file %2</source>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update and Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
