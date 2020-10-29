@@ -267,6 +267,10 @@ void BirdtrayApp::ensureSystemTrayAvailable() {
             Log::fatal( QApplication::tr("Sorry, system tray cannot be controlled "
                                           "through this add-on on your operating system.") );
         }
+
+        // Let the Qt event loop recognize the tray appearing
+        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents );
+
         QThread::msleep(500);
     }
 }
