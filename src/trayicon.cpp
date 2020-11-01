@@ -142,7 +142,7 @@ void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
         // Replace the %OLD% with the old unread count
         cmdline.replace( "%OLD%", QString::number( mUnreadCounter ) );
 
-        if ( !QProcess::startDetached( cmdline ) )
+        if ( !QProcess::startDetached( cmdline, {} ) ) // FIXME: Arguments
             Log::debug( "Failed to execute hook command %s", qPrintable( cmdline ) );
         else
             Log::debug( "Executing hook command %s", qPrintable( cmdline ) );
