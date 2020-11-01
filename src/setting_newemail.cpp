@@ -50,12 +50,20 @@ QJsonObject Setting_NewEmail::toJSON() const
 
 Setting_NewEmail Setting_NewEmail::fromByteArray(const QByteArray &str)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+    QCborParserError parserError;
+    QCborValue object = QCborValue::fromCbor(str, &parserError);
+    if (parserError.error != QCborError::NoError) {
+        return Setting_NewEmail();
+    }
+    return fromJSON(object.toJsonValue().toObject());
+#else
+    // QJsonDocument is deprecated since Qt 5.15
     QJsonDocument doc = QJsonDocument::fromBinaryData( str );
-
     if ( !doc.isObject() )
         return Setting_NewEmail();
-
     return fromJSON( doc.object() );
+#endif
 }
 
 bool Setting_NewEmail::edit()
