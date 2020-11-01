@@ -6,7 +6,9 @@
 #include <QUrl>
 #include <QFile>
 QT_WARNING_PUSH
-QT_WARNING_DISABLE_DEPRECATED
+#ifdef QT_WARNING_DISABLE_DEPRECATED
+  QT_WARNING_DISABLE_DEPRECATED
+#endif
 #include <QNetworkAccessManager>
 QT_WARNING_POP
 #include "updatedialog.h"
