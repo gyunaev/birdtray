@@ -14,7 +14,10 @@
 #include "birdtrayapp.h"
 #include "log.h"
 
-TrayIcon::TrayIcon(bool showSettings)
+#define UPDATE_RETRY_MS 3600000
+
+
+TrayIcon::TrayIcon(bool showSettings) : updateRetryTimer(this)
 {
     mBlinkingIconOpacity = 1.0;
     mBlinkingDelta = 0.0;
@@ -39,7 +42,11 @@ TrayIcon::TrayIcon(bool showSettings)
     mThunderbirdWindowExisted = false;
     mThunderbirdWindowHide = false;
     connect(QApplication::instance(), &QApplication::aboutToQuit, this, &TrayIcon::onQuit);
-
+    updateRetryTimer.setInterval(UPDATE_RETRY_MS);
+    updateRetryTimer.setSingleShot(true);
+    connect(&updateRetryTimer, &QTimer::timeout,
+            BirdtrayApp::get()->getAutoUpdater(), &AutoUpdater::checkForUpdates);
+    
     Settings* settings = BirdtrayApp::get()->getSettings();
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs(settings->mLaunchThunderbirdDelay);
 
@@ -94,10 +101,6 @@ TrayIcon::~TrayIcon() {
 #ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess->deleteLater();
 #endif /* Q_OS_WIN */
-    if (networkConnectivityManager != nullptr) {
-        networkConnectivityManager->deleteLater();
-        networkConnectivityManager = nullptr;
-    }
     if (mUnreadMonitor != nullptr) {
         if (mUnreadMonitor->isRunning()) {
             mUnreadMonitor->quit();
@@ -760,26 +763,11 @@ void TrayIcon::onQuit() {
 
 void TrayIcon::onAutoUpdateCheckFinished(bool foundUpdate, const QString &errorMessage) {
     Q_UNUSED(foundUpdate)
-    AutoUpdater* autoUpdater = BirdtrayApp::get()->getAutoUpdater();
     if (errorMessage.isNull()) {
-        disconnect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,
+        disconnect(BirdtrayApp::get()->getAutoUpdater(), &AutoUpdater::onCheckUpdateFinished,
                    this, &TrayIcon::onAutoUpdateCheckFinished);
-    } else if (networkConnectivityManager == nullptr) {
-        networkConnectivityManager = new QNetworkConfigurationManager();
-        networkConnectivityManager->updateConfigurations();
-        auto callback = [=](const QNetworkConfiguration &config) {
-            if (config.state() == QNetworkConfiguration::Active) {
-                if (networkConnectivityManager != nullptr) {
-                    networkConnectivityManager->deleteLater();
-                    networkConnectivityManager = nullptr;
-                }
-                autoUpdater->checkForUpdates();
-            }
-        };
-        connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationChanged,
-                this, callback);
-        connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationAdded,
-                this, callback);
+    } else if (!updateRetryTimer.isActive()) {
+        updateRetryTimer.start();
     }
 }
 

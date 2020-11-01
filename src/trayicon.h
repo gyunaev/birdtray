@@ -220,11 +220,8 @@ class TrayIcon : public QSystemTrayIcon
         // A reference to a Thunderbird updater process.
         ProcessHandle* mThunderbirdUpdaterProcess;
 #endif /* Q_OS_WIN */
-        
-        /**
-         * A manager to check for network connectivity.
-         */
-        QNetworkConfigurationManager* networkConnectivityManager = nullptr;
+        // A timer that is used to retry for automatic update checks if they fail.
+        QTimer updateRetryTimer;
         
         /**
          * Whether we have received data about unread emails yet.
