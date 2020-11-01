@@ -692,10 +692,7 @@ void TrayIcon::startThunderbird()
 
     mThunderbirdProcess = new QProcess();
     connect( mThunderbirdProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(tbProcessFinished(int,QProcess::ExitStatus)) );
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     connect( mThunderbirdProcess, &QProcess::errorOccurred, this, &TrayIcon::tbProcessError );
-#endif
 
     mThunderbirdProcess->start(executable, args);
 }
