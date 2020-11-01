@@ -229,7 +229,7 @@ void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
             if (downloadProcessDialog->exec() == QDialog::Rejected
                 || downloadProcessDialog->wasCanceled()) {
                 installerFile.remove();
-            } else if (!QProcess::startDetached(installerFile.fileName())) {
+            } else if (!QProcess::startDetached(installerFile.fileName(), {})) {
                 QMessageBox::critical(
                         nullptr, tr("Update failed"),
                         tr("Failed to start the Birdtray installer."),

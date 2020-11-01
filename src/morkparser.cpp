@@ -650,7 +650,7 @@ void MorkParser::parseGroup()
     QString endAbort = "@$$}~abort~" + id + "}@";
 
     // Find the end of this group
-    int ofst = morkData_.indexOf( endAbort, morkPos_ );
+    int ofst = morkData_.indexOf( endAbort.toUtf8(), morkPos_ );
 
     if ( ofst != -1 )
     {
@@ -660,7 +660,7 @@ void MorkParser::parseGroup()
     }
 
     // Now look up for success
-    ofst = morkData_.indexOf( endCommit, morkPos_ );
+    ofst = morkData_.indexOf( endCommit.toUtf8(), morkPos_ );
 
     if (ofst == -1) {
         throw MorkParserException(QCoreApplication::translate(
