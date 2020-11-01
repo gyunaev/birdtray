@@ -1,11 +1,14 @@
 #ifndef AUTO_UPDATER_H
 #define AUTO_UPDATER_H
 
-#include <QNetworkAccessManager>
 #include <QRegularExpression>
 #include <QtWidgets/QProgressDialog>
 #include <QUrl>
 #include <QFile>
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_DEPRECATED
+#include <QNetworkAccessManager>
+QT_WARNING_POP
 #include "updatedialog.h"
 #include "updatedownloaddialog.h"
 
