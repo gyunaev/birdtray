@@ -7,7 +7,6 @@
 #include <QImage>
 #include <QProcess>
 #include <QSystemTrayIcon>
-#include <QtNetwork/QNetworkConfigurationManager>
 #ifdef Q_OS_WIN
 #  include "processhandle.h"
 #endif /* Q_OS_WIN */
