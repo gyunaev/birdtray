@@ -26,10 +26,6 @@ OpenSSL yüklenmemiş olabilir.</translation>
         <translation>Yükleyici indirilemedi</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Geçersiz yönlendirme: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Güncelleştirme başarısız</translation>
     </message>

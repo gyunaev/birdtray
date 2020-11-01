@@ -26,10 +26,6 @@ OpenSSL może nie być zainstalowane.</translation>
         <translation>Pobieranie instalatora nie powiodło się</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Nieprawidłowe przekierowanie: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Aktualizacja nieudana</translation>
     </message>

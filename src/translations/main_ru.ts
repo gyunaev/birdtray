@@ -26,10 +26,6 @@ OpenSSL might not be installed.</source>
         <translation>Ошибка загрузки установщика</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Ошибка перенаправления: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Ошибка обновления</translation>
     </message>

@@ -23,10 +23,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation type="unfinished"></translation>
     </message>
