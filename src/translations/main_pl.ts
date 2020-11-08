@@ -90,7 +90,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
-        <translation>Niestety, tacka systemowa nie oże być kontrolowana przez to rozszerzenie w tym systemie operacyjnym.</translation>
+        <translation>Niestety, tacka systemowa nie może być kontrolowana przez to rozszerzenie w tym systemie operacyjnym.</translation>
     </message>
 </context>
 <context>
@@ -167,7 +167,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translation>Ikona (Ctrl-klik aby zresetować):</translation>
+        <translation>Ikona (Ctrl+klik aby zresetować):</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -251,7 +251,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>and hide it</source>
-        <translation>i schowaj</translation>
+        <translation>i schowaj go</translation>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
@@ -389,7 +389,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Show log window</source>
-        <translation>Pokaż ono logu</translation>
+        <translation>Pokaż okno logu</translation>
     </message>
     <message>
         <source>Force index file re-read every</source>
