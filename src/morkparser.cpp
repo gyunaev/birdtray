@@ -113,7 +113,7 @@ bool MorkParser::open( const QString &path )
 //	=============================================================
 //	MorkParser::error
 
-inline QString MorkParser::errorMsg()
+QString MorkParser::errorMsg()
 {
     return mErrorMessage;
 }
