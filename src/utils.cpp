@@ -198,6 +198,10 @@ QStringList Utils::getDefaultThunderbirdCommand() {
 #if defined (OPT_THUNDERBIRD_CMDLINE)
     return Utils::splitCommandLine( OPT_THUNDERBIRD_CMDLINE );
 #elif defined (Q_OS_WIN)
+    if (QFile::exists(Utils::expandPath(
+            R"("%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe")"))) {
+        return {R"("%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe")"};
+    }
     return {R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")"};
 #else
     return { "/usr/bin/thunderbird" };

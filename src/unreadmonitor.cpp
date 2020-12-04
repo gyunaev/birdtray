@@ -171,6 +171,7 @@ int UnreadMonitor::getMorkUnreadCount(const QString &path)
 {
     MailMorkParser parser;
     if (!parser.open(path)) {
+        Log::debug("Unable to parser mork file %s: %s", qPrintable( path ), qPrintable(parser.errorMsg()));
         setWarning(tr("Unable to read from %1.").arg(QFileInfo(path).fileName()), path);
         return 0;
     } else {

@@ -89,10 +89,11 @@ Once you change settings, often you need to restart birdtray for the new setting
 ## Troubleshooting
 
 If Birdtray shows the wrong number of unread messages, it can be caused by a corrupt mork file.
-This can often be fixed by using the `Repair` functionality in Thunderbird
-in the mail folder settings.
+This can often be fixed by using the `Repair` functionality in Thunderbird in the mail folder settings.
 
 Generally Birdtray expects a spec-compliant desktop manager. If you're using a barebone or non-standard/light/simple desktop manager, it is very likely that some features of Birdtray will not work properly. Most likely candidates are hiding and restoring Thunderbird window(s) - including their position and state. But sometimes even a system tray icon isn't shown. Linux Mint with Cinnamon seem to be one particularly troublesome distro which reports many issues.
+
+Working with Wayland: at this moment Birdtray partially works with Wayland - email monitoring functionality works, but show/hide does not. Please track the issue https://github.com/gyunaev/birdtray/issues/426 to see the current status. Please do not report Wayland-related issues unless you built Birdtray from source yourself.
 
 ## Submitting bugs and feature requests
 
