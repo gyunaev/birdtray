@@ -142,6 +142,9 @@ class Settings
         // When the number of unread emails changes, Birdtray can start this process
         QString                   mProcessRunOnCountChange;
 
+        // Whether to support non-compliant NetWM WMs by ignoring NETWM hints
+        bool                      mIgnoreNETWMhints;
+
         // Load and save them
         void    save();
         void    load();

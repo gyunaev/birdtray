@@ -68,6 +68,7 @@ Settings::Settings()
     mIndexFilesRereadIntervalSec = 0;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
     mForceIgnoreUnreadEmailsOnMinimize = false;
+    mIgnoreNETWMhints = false;
 }
 
 Settings::~Settings()
@@ -111,6 +112,7 @@ void Settings::save()
     out[ ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY ] = onlyShowIconOnUnreadMessages;
     out[ "advanced/forcedRereadInterval" ] = static_cast<int>( mIndexFilesRereadIntervalSec );
     out[ "advanced/runProcessOnChange" ] = mProcessRunOnCountChange;
+    out[ "advanced/ignoreNetWMhints" ] = mIgnoreNETWMhints;
 
     // Store the account map
     QJsonArray accounts;
@@ -244,6 +246,7 @@ void Settings::fromJSON( const QJsonObject& settings )
     mIgnoreUpdateVersion = settings.value("advanced/ignoreUpdateVersion").toString();
     mIndexFilesRereadIntervalSec = settings.value("advanced/forcedRereadInterval").toInt();
     mProcessRunOnCountChange = settings.value( "advanced/runProcessOnChange" ).toString();
+    mIgnoreNETWMhints = settings.value( "advanced/ignoreNetWMhints").toBool();
 
     QStringList thunderbirdCommand = settings.value("advanced/tbcmdline").toVariant().toStringList();
     if ( !thunderbirdCommand.isEmpty() && !thunderbirdCommand[0].isEmpty() )

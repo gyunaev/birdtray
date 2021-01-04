@@ -373,7 +373,7 @@ bool WindowTools_X11::lookup()
     if ( isValid() )
         return true;
 
-    mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), true,
+    mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), ! BirdtrayApp::get()->getSettings()->mIgnoreNETWMhints,
             BirdtrayApp::get()->getSettings()->mThunderbirdWindowMatch);
 
     Log::debug("Window ID found: %lX", mWinId );

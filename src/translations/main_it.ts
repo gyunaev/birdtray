@@ -487,6 +487,14 @@ p, li { white-space: pre-wrap; }
         <source>Check for a new Birdtray version.</source>
         <translation>Cerca una nuova versione di Birdtray.</translation>
     </message>
+    <message>
+        <source>Support non-NETWM compliant WMs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

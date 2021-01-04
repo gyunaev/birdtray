@@ -80,6 +80,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
     leProcessRunOnCountChange->setText( settings->mProcessRunOnCountChange );
     boxIgnoreEmailsOnMinimize->setChecked(settings->mForceIgnoreUnreadEmailsOnMinimize);
+    boxSupportNonNetwmCompliant->setChecked( settings->mIgnoreNETWMhints );
 
     if ( settings->mIndexFilesRereadIntervalSec > 0 )
     {
@@ -170,6 +171,7 @@ void DialogSettings::accept()
     settings->ignoreStartUnreadCount = ignoreStartupMailCountBox->isChecked();
     settings->onlyShowIconOnUnreadMessages = onlyShowIconOnNewMail->isChecked();
     settings->mProcessRunOnCountChange = leProcessRunOnCountChange->text();
+    settings->mIgnoreNETWMhints = boxSupportNonNetwmCompliant->isChecked();
 
     settings->setNotificationIcon(btnNotificationIcon->icon().pixmap( settings->mIconSize ));
 
