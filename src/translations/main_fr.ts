@@ -12,12 +12,14 @@ OpenSSL ne semble pas installé.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Impossible de sauvegarder le programme d'installation de Birdtray :</translation>
+        <translation>Impossible de sauvegarder le programme d'installation de Birdtray :
+</translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation>Impossible de télécharger le programme d'installation de Birdtray :</translation>
+        <translation>Impossible de télécharger le programme d'installation de Birdtray :
+</translation>
     </message>
     <message>
         <source>Installer download failed</source>
@@ -25,7 +27,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Invalid redirect: </source>
-        <translation>Redirection invalide :</translation>
+        <translation>Redirection invalide : </translation>
     </message>
     <message>
         <source>Update failed</source>
@@ -338,7 +340,8 @@ OpenSSL ne semble pas installé.</translation>
     <message>
         <source>Failed to check for a new Birdtray version:
 </source>
-        <translation>La vérification des mises à jour de Birdtray a échoué :</translation>
+        <translation>La vérification des mises à jour de Birdtray a échoué :
+</translation>
     </message>
     <message>
         <source>Checking...</source>
@@ -593,7 +596,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
-        <translation>Impossible d'ouvrir le fichier</translation>
+        <translation>Impossible d'ouvrir le fichier : </translation>
     </message>
     <message>
         <source>Unsupported version.</source>
@@ -697,11 +700,11 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>1 hour</source>
-        <translation></translation>
+        <translation>1 heure</translation>
     </message>
     <message>
         <source>4 hours</source>
-        <translation>1 heure</translation>
+        <translation>4 heures</translation>
     </message>
     <message>
         <source>Snooze for ...</source>
@@ -830,7 +833,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Téléchargement du programme d'installation... (%1 Mb / %2 Mb)</translation>
+        <translation>Téléchargement du programme d'installation... (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>
