@@ -17,7 +17,6 @@ class UnreadMonitor : public QThread
 
     public:
         UnreadMonitor( TrayIcon * parent );
-        virtual ~UnreadMonitor();
 
         // Thread run function
         virtual void run() override;

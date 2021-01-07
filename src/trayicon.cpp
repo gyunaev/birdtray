@@ -100,6 +100,10 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager = nullptr;
     }
     if (mUnreadMonitor != nullptr) {
+        if (mUnreadMonitor->isRunning()) {
+            mUnreadMonitor->quit();
+            mUnreadMonitor->wait();
+        }
         mUnreadMonitor->deleteLater();
         mUnreadMonitor = nullptr;
     }

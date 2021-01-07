@@ -37,13 +37,6 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     }
 }
 
-UnreadMonitor::~UnreadMonitor() {
-    if (isRunning()) {
-        quit();
-        wait();
-    }
-}
-
 void UnreadMonitor::run()
 {
     // Start it as soon as thread starts its event loop
