@@ -251,6 +251,10 @@ Czy chcesz pobrać jego instalator?</translation>
         <translation>angielski</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>francuski</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>niemiecki</translation>
     </message>

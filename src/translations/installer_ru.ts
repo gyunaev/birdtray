@@ -251,6 +251,10 @@ Visual C++ Runtime ${ARCH}
         <translation>Английский</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>Французский</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>Немецкий</translation>
     </message>
