@@ -91,15 +91,6 @@ private:
     void onInstallerDownloadFinished(QNetworkReply* result);
     
     /**
-     * Resolve a redirect url while downloading the installer.
-     * Blocks redirect loops.
-     *
-     * @param redirectUrl The new redirect url.
-     * @return The resolved url to redirect to or an invalid url, if the redirect is not valid.
-     */
-    QUrl resolveRedirectDownloadUrl(const QUrl &redirectUrl) const;
-    
-    /**
      * Check if the first version is greater than the second version
      * according to semantic versioning.
      *

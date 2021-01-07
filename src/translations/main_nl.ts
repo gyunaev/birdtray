@@ -26,10 +26,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Downloaden mislukt</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Ongeldige doorverwijzing: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Update mislukt</translation>
     </message>

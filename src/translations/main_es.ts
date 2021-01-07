@@ -26,10 +26,6 @@ OpenSSL podría no estar instalado.</translation>
         <translation>La descarga del instaldor ha fallado</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Redireccionamiento inválido: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>La actualización ha fallado</translation>
     </message>

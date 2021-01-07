@@ -26,10 +26,6 @@ OpenSSL potrebbe non essere installato.</translation>
         <translation>Download del programma di installazione non riuscito</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Reindirizzamento non valido: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Aggiornamento non riuscito</translation>
     </message>

@@ -26,10 +26,6 @@ OpenSSL kanske inte är installerad.</translation>
         <translation>Kunde inte ladda ner installationsprogrammet</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Ogiltig omdirigering: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Uppdatering misslyckades</translation>
     </message>

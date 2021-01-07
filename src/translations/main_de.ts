@@ -26,10 +26,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Herunterladen der Installationsdatei ist fehlgeschlagen</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Ungültige Weiterleitung: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Aktualisierung fehlgeschlagen</translation>
     </message>
