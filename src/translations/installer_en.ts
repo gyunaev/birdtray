@@ -238,6 +238,10 @@ Do you want to download the installer for the component?</source>
         <translation>Lang_en</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>Lang_fr</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>Lang_de</translation>
     </message>

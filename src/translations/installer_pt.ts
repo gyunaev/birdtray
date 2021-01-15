@@ -251,6 +251,10 @@ Deseja baixar o instalador para o componente?</translation>
         <translation>Inglês</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>Francês</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>Alemão</translation>
     </message>

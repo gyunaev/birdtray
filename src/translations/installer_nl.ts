@@ -251,6 +251,10 @@ Wilt u de installatiewizard van dit onderdeel downloaden?</translation>
         <translation>Engels</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>Frans</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>Duits</translation>
     </message>

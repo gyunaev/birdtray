@@ -251,6 +251,10 @@ Vill du hämta installationsprogrammet för komponenten?</translation>
         <translation>Engelska</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>Franska</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>Tyska</translation>
     </message>

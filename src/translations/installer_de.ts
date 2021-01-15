@@ -251,6 +251,10 @@ Wollen Sie das Installationsprogramm für die Komponente herunterladen?</transla
         <translation>Englisch</translation>
     </message>
     <message>
+        <source>French</source>
+        <translation>Französisch</translation>
+    </message>
+    <message>
         <source>German</source>
         <translation>Deutsch</translation>
     </message>
