@@ -316,9 +316,10 @@ class TranslationHandler(ContentHandler):
             if languageAttribute is None:
                 self.error('missing_language_attr')
             else:
-                language = languageAttribute[:2].lower()
-                if not os.path.splitext(os.path.basename(self._filePath))[0] \
-                        .endswith('_' + language):
+                language = languageAttribute.lower()
+                fileName = os.path.splitext(os.path.basename(self._filePath))[0]
+                if not fileName.endswith('_' + language[:2]) and \
+                        not fileName.endswith('_' + language):
                     self.error('language_attr_mismatch', language=self._escapeText(language))
         if name in self._messageChildren:
             self.error('duplicate_element', name=self._escapeText(name))
