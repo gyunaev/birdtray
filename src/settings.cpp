@@ -54,7 +54,9 @@ Settings::Settings()
     mAllowSuppressingUnreads = false;
     mLaunchThunderbirdDelay = 0;
     mShowUnreadEmailCount = true;
-    ignoreStartUnreadCount = false;
+    ignoreUnreadCountOnStart = false;
+    ignoreUnreadCountOnShow = false;
+    ignoreUnreadCountOnHide = false;
     showDialogIfNoAccountsConfigured = true;
     mThunderbirdWindowMatch = " Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
@@ -67,7 +69,6 @@ Settings::Settings()
     mNewEmailMenuEnabled = false;
     mIndexFilesRereadIntervalSec = 0;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
-    mForceIgnoreUnreadEmailsOnMinimize = false;
     mIgnoreNETWMhints = false;
 }
 
@@ -96,9 +97,10 @@ void Settings::save()
     out[ "common/allowsuppressingunread" ] = mAllowSuppressingUnreads;
     out[ "common/launchthunderbirddelay" ] = mLaunchThunderbirdDelay;
     out[ "common/showunreademailcount" ] = mShowUnreadEmailCount;
-    out[ "common/ignoreStartUnreadCount" ] = ignoreStartUnreadCount;
+    out[ "common/ignoreStartUnreadCount" ] = ignoreUnreadCountOnStart;
+    out[ "common/ignoreShowUnreadCount" ] = ignoreUnreadCountOnShow;
+    out[ "common/forceIgnoreUnreadEmailsOnMinimize" ] = ignoreUnreadCountOnHide;
     out[ "common/showDialogIfNoAccountsConfigured"  ] = showDialogIfNoAccountsConfigured;
-    out[ "common/forceIgnoreUnreadEmailsOnMinimize"  ] = mForceIgnoreUnreadEmailsOnMinimize;
 
     out[ "advanced/tbcmdline" ] = QJsonArray::fromStringList( mThunderbirdCmdLine );
     out[ "advanced/tbwindowmatch" ] = mThunderbirdWindowMatch;
@@ -231,9 +233,13 @@ void Settings::fromJSON( const QJsonObject& settings )
     mAllowSuppressingUnreads = settings.value("common/allowsuppressingunread").toBool();
     mLaunchThunderbirdDelay = settings.value("common/launchthunderbirddelay").toInt();
     mShowUnreadEmailCount = settings.value("common/showunreademailcount").toBool();
-    ignoreStartUnreadCount = settings.value("common/ignoreStartUnreadCount").toBool();
+    ignoreUnreadCountOnStart = mAllowSuppressingUnreads &&
+            settings.value("common/ignoreStartUnreadCount").toBool();
+    ignoreUnreadCountOnShow = mAllowSuppressingUnreads &&
+            settings.value("common/ignoreShowUnreadCount").toBool();
+    ignoreUnreadCountOnHide = mAllowSuppressingUnreads &&
+            settings.value("common/forceIgnoreUnreadEmailsOnMinimize").toBool();
     showDialogIfNoAccountsConfigured = settings.value("common/showDialogIfNoAccountsConfigured").toBool();
-    mForceIgnoreUnreadEmailsOnMinimize = settings.value( "common/forceIgnoreUnreadEmailsOnMinimize" ).toBool();
 
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch").toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize").toInt();
@@ -329,8 +335,12 @@ void Settings::fromQSettings( QSettings * psettings )
             "common/launchthunderbirddelay", mLaunchThunderbirdDelay ).toInt();
     mShowUnreadEmailCount = settings.value(
             "common/showunreademailcount", mShowUnreadEmailCount ).toBool();
-    ignoreStartUnreadCount = settings.value(
-            "common/ignoreStartUnreadCount", ignoreStartUnreadCount).toBool();
+    ignoreUnreadCountOnStart = mAllowSuppressingUnreads && settings.value(
+            "common/ignoreStartUnreadCount", ignoreUnreadCountOnStart).toBool();
+    ignoreUnreadCountOnShow = mAllowSuppressingUnreads && settings.value(
+            "common/ignoreShowUnreadCount", ignoreUnreadCountOnShow).toBool();
+    ignoreUnreadCountOnHide = mAllowSuppressingUnreads && settings.value(
+            "common/forceIgnoreUnreadEmailsOnMinimize", ignoreUnreadCountOnHide).toBool();
     showDialogIfNoAccountsConfigured = settings.value(
             "common/showDialogIfNoAccountsConfigured", showDialogIfNoAccountsConfigured).toBool();
 

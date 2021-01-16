@@ -12,22 +12,18 @@ OpenSSL ne semble pas installé.</translation>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translation>Impossible de sauvegarder le programme d'installation de Birdtray :
+        <translation>Impossible de sauvegarder le programme d&apos;installation de Birdtray :
 </translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translation>Impossible de télécharger le programme d'installation de Birdtray :
+        <translation>Impossible de télécharger le programme d&apos;installation de Birdtray :
 </translation>
     </message>
     <message>
         <source>Installer download failed</source>
-        <translation>Le téléchargement du programme d'installation a échoué</translation>
-    </message>
-    <message>
-        <source>Invalid redirect: </source>
-        <translation>Redirection invalide : </translation>
+        <translation>Le téléchargement du programme d&apos;installation a échoué</translation>
     </message>
     <message>
         <source>Update failed</source>
@@ -35,7 +31,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translation>Le lancement du programme d'installation a échoué.</translation>
+        <translation>Le lancement du programme d&apos;installation a échoué.</translation>
     </message>
 </context>
 <context>
@@ -90,7 +86,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
-        <translation>Désolé, cette extension ne peut pas contrôler la barre de notification sur ce système d'exploitation.</translation>
+        <translation>Désolé, cette extension ne peut pas contrôler la barre de notification sur ce système d&apos;exploitation.</translation>
     </message>
 </context>
 <context>
@@ -171,7 +167,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Couleur utilisée lorsqu'il y a des mails non lus sur plusieurs comptes surveillés.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&gt;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Couleur utilisée lorsqu&apos;il y a des mails non lus sur plusieurs comptes surveillés.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
@@ -227,7 +223,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
-        <translation>Permettre d'ignorer le nombre de mails non lus actuel</translation>
+        <translation>Permettre d&apos;ignorer le nombre de mails non lus actuel</translation>
     </message>
     <message>
         <source>Hiding</source>
@@ -243,7 +239,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Lorsque Thunderbird et Birdtray sont paramétrés pour démarrer automatiquement, il arrive que Thunderbird soit lancé deux fois. Vous pouvez ajouter ici un délai avant le lancement de Thunderbird, pour l'éviter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Lorsque Thunderbird et Birdtray sont paramétrés pour démarrer automatiquement, il arrive que Thunderbird soit lancé deux fois. Vous pouvez ajouter ici un délai avant le lancement de Thunderbird, pour l&apos;éviter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source> second delay</source>
@@ -259,11 +255,11 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
-        <translation>Fermer Thunderbird à l'arrêt de Birdtray</translation>
+        <translation>Fermer Thunderbird à l&apos;arrêt de Birdtray</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation>Cacher/afficher la fenêtre Thunderbird en cliquant sur l'icône de notification</translation>
+        <translation>Cacher/afficher la fenêtre Thunderbird en cliquant sur l&apos;icône de notification</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
@@ -271,11 +267,11 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Show red X in tray icon if Thunderbird is not running</source>
-        <translation>Affichier un X rouge dans le barre de notification si Thunderbird n'est pas lancé</translation>
+        <translation>Affichier un X rouge dans le barre de notification si Thunderbird n&apos;est pas lancé</translation>
     </message>
     <message>
         <source>Restart Thunderbird if it was closed</source>
-        <translation>Relancer Thunderbird s'il a été fermé</translation>
+        <translation>Relancer Thunderbird s&apos;il a été fermé</translation>
     </message>
     <message>
         <source>New Email</source>
@@ -311,7 +307,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation>Afficher d'icône dans la barre de notification</translation>
+        <translation>Afficher d&apos;icône dans la barre de notification</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts.</source>
@@ -361,7 +357,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translation>Impossible de récupérer l'icône dans ce fichier.</translation>
+        <translation>Impossible de récupérer l&apos;icône dans ce fichier.</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
@@ -370,10 +366,6 @@ OpenSSL ne semble pas installé.</translation>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Indiquez ici la commande complète (avec les arguments) à utiliser pour lancer Thunderbird. Utilisez des espaces pour séparer les arguments. Les espaces entre quotes sont autorisées. Par exemple &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; fonctionnera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Ignorer les mails non lus au démarrage</translation>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
@@ -385,7 +377,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translation>cacher si aucun nouveau mail n'est présent.</translation>
+        <translation>cacher si aucun nouveau mail n&apos;est présent.</translation>
     </message>
     <message>
         <source>Choose one or more MSF files</source>
@@ -405,7 +397,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Force index file re-read every</source>
-        <translation>Forcer la lecture du fichier d'index toutes les</translation>
+        <translation>Forcer la lecture du fichier d&apos;index toutes les</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -429,27 +421,19 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si cette case est cochée, l'icône de Birdtray affichera le nombre de mails non lus.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Sinon, aucun compte ne sera affiché, et vous ne saurez seulement qu'il y a des mails non lus, grâce à l'icône clignotante ou différente, selon vos paramètres.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si activée, cette option ajoute le choix &amp;quot;Ignorer les mails actuellement non lus&amp;quot; Ce choix permet d'ignorer les mails qui n'ont pas encore été lus. Birdtray annoncera alors qu'il ne reste aucun mail non lu, et n'affichera que le nombre de mails en plus du nombre de mails ignorés.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Par exemple, s'il y a 10 mails non lus, et si vous cliquez sur &amp;quot;Ignorer&amp;quot;, Birdtray n'affichera rien, tant que le nombre de mails non lus restera à 10. Si vous recevez un nouveau mail, et donc que vous avez 11 mails non lus au total, Birdtray affichera 1 nouveau mail.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Si le compteur de mails non lus redescend sous le nombre d'&amp;quot;ignorés&amp;quot; amount, le compteur repasse à zéro.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si cette case est cochée, l&apos;icône de Birdtray affichera le nombre de mails non lus.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Sinon, aucun compte ne sera affiché, et vous ne saurez seulement qu&apos;il y a des mails non lus, grâce à l&apos;icône clignotante ou différente, selon vos paramètres.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation>Lors d'un changement du nombre de non lus :</translation>
+        <translation>Lors d&apos;un changement du nombre de non lus :</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sélectionnez les répertoires de mails à surveiller.&lt;br/&gt;&lt;br/&gt;Si vous ne voyez pas votre répertoire, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; ouvrirz une boîte de dialogue permettant d'ajouter des fichiers mork.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sélectionnez les répertoires de mails à surveiller.&lt;br/&gt;&lt;br/&gt;Si vous ne voyez pas votre répertoire, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; ouvrirz une boîte de dialogue permettant d&apos;ajouter des fichiers mork.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation>Impossible de récupérer l'icône dans ce fichier. Essayez d'ouvrir l'icône dans un éditeur d'images et de la sauvegarder dans un autre format.</translation>
-    </message>
-    <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation>En cliquant sur l'icône Birdtray pour cacher Thunderbird, réinitialiser l'icône en ignorant tous les mails actuellement non lus</translation>
+        <translation>Impossible de récupérer l&apos;icône dans ce fichier. Essayez d&apos;ouvrir l&apos;icône dans un éditeur d&apos;images et de la sauvegarder dans un autre format.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -477,7 +461,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Birdtray est un LOGICIEL LIBRE, sous licence General Public License v3. Plus précisément, toute utilisation, même commerciale, est autorisée, et ce gratuitement. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Si vous avez besoin d'aide, d'une fonctionnalité, ou de remonter un bug, utilisez la &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;page Github du projet&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Si vous avez besoin d&apos;aide, d&apos;une fonctionnalité, ou de remonter un bug, utilisez la &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;page Github du projet&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Si vous aimez mon travail sur Birdtray, qui est développé pendant mon temps libre, vous pouvez aller ici : &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -493,14 +477,30 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si votre gestionnaire de bureau n'est pas totalement compatible NETWM, vous pourriez avoir besoin de cocher cette case pour pouvoir trouver la fenêtre Thunderbird, et ainsi pouvoir la réduire et la cacher.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&gt;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si votre gestionnaire de bureau n&apos;est pas totalement compatible NETWM, vous pourriez avoir besoin de cocher cette case pour pouvoir trouver la fenêtre Thunderbird, et ainsi pouvoir la réduire et la cacher.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si activée, cette option ajoute le choix &amp;quot;Ignorer les mails actuellement non lus&amp;quot; Ce choix permet d&apos;ignorer les mails qui n&apos;ont pas encore été lus. Birdtray annoncera alors qu&apos;il ne reste aucun mail non lu, et n&apos;affichera que le nombre de mails en plus du nombre de mails ignorés.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Par exemple, s&apos;il y a 10 mails non lus, et si vous cliquez sur &amp;quot;Ignorer&amp;quot;, Birdtray n&apos;affichera rien, tant que le nombre de mails non lus restera à 10. Si vous recevez un nouveau mail, et donc que vous avez 11 mails non lus au total, Birdtray affichera 1 nouveau mail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>Log</name>
     <message>
         <source>Failed to open log file %s: %s</source>
-        <translation>Impossible d'ouvrir le fichier journal %s : %s</translation>
+        <translation>Impossible d&apos;ouvrir le fichier journal %s : %s</translation>
     </message>
     <message>
         <source>Fatal</source>
@@ -528,7 +528,7 @@ Le journal a été écrit dans le fichier %2</translation>
     <message>
         <source>No mail folder was selected to monitor.
 Do you want to continue?</source>
-        <translation>Aucun répertoire n'a été sélectionné.
+        <translation>Aucun répertoire n&apos;a été sélectionné.
 Voulez-vous continuer ?</translation>
     </message>
     <message>
@@ -571,7 +571,7 @@ Voulez-vous continuer ?</translation>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
         <translation>Aucun compte mail trouvé.
-Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
+Assurez-vous d&apos;avoir sélectionné le bon répertoire.</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
-        <translation>Impossible d'ouvrir le fichier : </translation>
+        <translation>Impossible d&apos;ouvrir le fichier : </translation>
     </message>
     <message>
         <source>Unsupported version.</source>
@@ -608,7 +608,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>Parsing error.</source>
-        <translation>Erreur d'analyse.</translation>
+        <translation>Erreur d&apos;analyse.</translation>
     </message>
     <message>
         <source>Unexpected EOF.</source>
@@ -645,15 +645,15 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Vous avez configuré la surveillance d'un ou plusieurs réperoires via l'analyseur sqlite. Cette méthode a été supprimée. Vos paramétres ont été migrés vers l'analyseur mork, mais certains répertoires n'ont pas été retrouvés.</translation>
+        <translation>Vous avez configuré la surveillance d&apos;un ou plusieurs réperoires via l&apos;analyseur sqlite. Cette méthode a été supprimée. Vos paramétres ont été migrés vers l&apos;analyseur mork, mais certains répertoires n&apos;ont pas été retrouvés.</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Vous avez configuré la surveillance d'un ou plusieurs réperoires via l'analyseur sqlite. Cette méthode a été supprimée. Vos paramétres ont été migrés vers l'analyseur mork. Veuillez vérifier que tous les comptes ont correctement été migrés.</translation>
+        <translation>Vous avez configuré la surveillance d&apos;un ou plusieurs réperoires via l&apos;analyseur sqlite. Cette méthode a été supprimée. Vos paramétres ont été migrés vers l&apos;analyseur mork. Veuillez vérifier que tous les comptes ont correctement été migrés.</translation>
     </message>
     <message>
         <source>Cannot load default system tray icon.</source>
-        <translation>Impossible de charger l'icône de notification par défaut.</translation>
+        <translation>Impossible de charger l&apos;icône de notification par défaut.</translation>
     </message>
 </context>
 <context>
@@ -664,7 +664,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>You have not yet configured any email folders to monitor. Would you like to do it now?</source>
-        <translation>Vous n'avez pas encore confguré de répertoires mail à surveiller. Voulez-vous le faire maintenant ?</translation>
+        <translation>Vous n&apos;avez pas encore confguré de répertoires mail à surveiller. Voulez-vous le faire maintenant ?</translation>
     </message>
     <message>
         <source>Show Thunderbird</source>
@@ -746,7 +746,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
         <source>Error starting Thunderbird as &apos;%1 %2&apos;:
 
 %3</source>
-        <translation>>Erreur lors du démarrage de Thunderbird en tant que &apos;%1 %2&apos;:
+        <translation>&gt;Erreur lors du démarrage de Thunderbird en tant que &apos;%1 %2&apos;:
 
 %3</translation>
     </message>
@@ -825,7 +825,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation>Téléchargement du programme d'installation...</translation>
+        <translation>Téléchargement du programme d&apos;installation...</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
@@ -833,7 +833,7 @@ Assurez-vous d'avoir sélectionné le bon répertoire.</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Téléchargement du programme d'installation... (%1 Mb / %2 Mb).</translation>
+        <translation>Téléchargement du programme d&apos;installation... (%1 Mb / %2 Mb).</translation>
     </message>
 </context>
 </TS>

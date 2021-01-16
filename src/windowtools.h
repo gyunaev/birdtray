@@ -29,6 +29,17 @@ class WindowTools : public QObject
         // Return true if Thunderbird window is valid (hidden or shown)
         virtual bool    isValid() = 0;
 
+    signals:
+        /**
+         * Called when the Thunderbird window is hidden.
+         */
+        void onWindowHidden();
+    
+        /**
+         * Called when the Thunderbird window is shown.
+         */
+        void onWindowShown();
+        
     protected:
         WindowTools();
         virtual ~WindowTools();
