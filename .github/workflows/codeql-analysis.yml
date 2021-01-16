@@ -25,17 +25,21 @@ jobs:
       with:
         languages: ${{ matrix.language }}
     - name: Install additional dependencies
+      if: matrix.language == 'cpp'
       shell: bash
       run: |
         sudo apt-get update -qq;
         sudo apt install -qq qt5-default libqt5x11extras5-dev qttools5-dev libx11-dev libqt5svg5-dev libx11-xcb-dev
     - name: Create build environment
+      if: matrix.language == 'cpp'
       run: cmake -E make_directory ${{ runner.workspace }}/build
     - name: Configure CMake
+      if: matrix.language == 'cpp'
       shell: bash
       working-directory: ${{ runner.workspace }}/build
       run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Release
     - name: Build
+      if: matrix.language == 'cpp'
       working-directory: ${{ runner.workspace }}/build
       run: cmake --build . --config Release --target birdtray
     - name: Perform CodeQL Analysis
