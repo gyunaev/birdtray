@@ -117,10 +117,10 @@ void Settings::save()
     // Store the account map
     QJsonArray accounts;
 
-    for ( const QString& path : mFolderNotificationList )
+    for ( const QString& path : watchedMorkFiles.orderedKeys() )
     {
         QJsonObject ac;
-        ac[ "color" ] = mFolderNotificationColors[path].name();
+        ac[ "color" ] = watchedMorkFiles[path].name();
         ac[ "path" ] = path;
 
         accounts.push_back( ac );
@@ -252,7 +252,7 @@ void Settings::fromJSON( const QJsonObject& settings )
     if ( !thunderbirdCommand.isEmpty() && !thunderbirdCommand[0].isEmpty() )
         mThunderbirdCmdLine = thunderbirdCommand;
 
-    mFolderNotificationColors.clear();
+    watchedMorkFiles.clear();
 
     // Convert the map into settings
     if ( settings["accounts"].isArray() )
@@ -265,8 +265,7 @@ void Settings::fromJSON( const QJsonObject& settings )
             if ( path.isEmpty() )
                 continue;
 
-            mFolderNotificationColors[ path ] = QColor( color );
-            mFolderNotificationList.push_back( path );
+            watchedMorkFiles[ path ] = QColor( color );
         }
     }
 
@@ -358,7 +357,7 @@ void Settings::fromQSettings( QSettings * psettings )
             "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
     mIndexFilesRereadIntervalSec = settings.value("advanced/forcedRereadInterval", mIndexFilesRereadIntervalSec ).toUInt();
 
-    mFolderNotificationColors.clear();
+    watchedMorkFiles.clear();
 
     // Convert the map into settings
     int total = settings.value("accounts/count", 0 ).toInt();
@@ -368,8 +367,7 @@ void Settings::fromQSettings( QSettings * psettings )
         QString entry = "accounts/account" + QString::number( index );
         QString key = settings.value( entry + "URI", "" ).toString();
 
-        mFolderNotificationColors[ key ] = QColor( settings.value( entry + "Color", "" ).toString() );
-        mFolderNotificationList.push_back( key );
+        watchedMorkFiles[ key ] = QColor( settings.value( entry + "Color", "" ).toString() );
     }
 
     // Load new email data from settings
@@ -389,12 +387,13 @@ void Settings::fromQSettings( QSettings * psettings )
     }
     QString profilePath = psettings->value("common/profilepath").toString();
     delete psettings;
-    if (!profilePath.isNull() && std::any_of(mFolderNotificationColors.keyBegin(),
-            mFolderNotificationColors.keyEnd(),
+    const QStringList watchedMorkFilePaths = watchedMorkFiles.orderedKeys();
+    if (!profilePath.isNull() && std::any_of(watchedMorkFilePaths.begin(),
+            watchedMorkFilePaths.end(),
             [](const QString &path) { return !path.endsWith(".msf"); })) {
         bool foundMigrationProblem = false;
         QDir profileDir(profilePath);
-        for (const QString &path : mFolderNotificationColors.keys()) {
+        for (const QString &path : watchedMorkFilePaths) {
             if (path.endsWith(".msf")) {
                 continue;
             }
@@ -442,13 +441,11 @@ void Settings::fromQSettings( QSettings * psettings )
             for (const QString &mockFile: mockFiles) {
                 if (!QFile::exists(mockFile)) {
                     foundMigrationProblem = true;
-                } else if (!mFolderNotificationColors.contains(mockFile)) {
-                    mFolderNotificationColors[mockFile] = mFolderNotificationColors[path];
-                    mFolderNotificationList.append(mockFile);
+                } else if (!watchedMorkFiles.orderedKeys().contains(mockFile)) {
+                    watchedMorkFiles[mockFile] = watchedMorkFiles[path];
                 }
             }
-            mFolderNotificationColors.remove(path);
-            mFolderNotificationList.removeAll(path);
+            watchedMorkFiles.remove(path);
         }
         if (foundMigrationProblem) {
             QMessageBox::warning(nullptr,

@@ -9,6 +9,7 @@
 #include <QSettings>
 
 #include "setting_newemail.h"
+#include "utils.h"
 
 class QSettings;
 
@@ -131,10 +132,11 @@ class Settings
         bool    mNewEmailMenuEnabled;
         QList< Setting_NewEmail >   mNewEmailData;
 
-        // Maps the folder path to the notification color.
-        // The original order of strings is stored in mFolderNotificationList (to show in UI)
-        QMap< QString, QColor >   mFolderNotificationColors;
-        QStringList               mFolderNotificationList;
+        /**
+         * A mapping of watched mork files to their notification color
+         * in the order the user added them.
+         */
+        OrderedMap<QString, QColor> watchedMorkFiles;
 
         // If non-zero, specifies an interval in seconds for rereading index files even if they didn't change. 0 disables.
         unsigned int    mIndexFilesRereadIntervalSec;

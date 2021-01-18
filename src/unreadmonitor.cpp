@@ -52,10 +52,11 @@ const QMap<QString, QString> &UnreadMonitor::getWarnings() const {
 
 void UnreadMonitor::slotSettingsChanged()
 {
+    Settings* settings = BirdtrayApp::get()->getSettings();
     // And activate it if settings specify so
-    if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
+    if ( settings->mIndexFilesRereadIntervalSec > 0 )
     {
-        mForceUpdateTimer.setInterval( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec * 1000 );
+        mForceUpdateTimer.setInterval( settings->mIndexFilesRereadIntervalSec * 1000 );
         mForceUpdateTimer.start();
     }
     else
@@ -64,7 +65,7 @@ void UnreadMonitor::slotSettingsChanged()
     // We reinitialize everything because the settings changed
     mMorkUnreadCounts.clear();
 
-    QStringList accountsList = BirdtrayApp::get()->getSettings()->mFolderNotificationList;
+    const QStringList &accountsList = settings->watchedMorkFiles.orderedKeys();
     for (const QString &path : warnings.keys()) {
         if (!accountsList.contains(path)) {
             clearWarning(path);
@@ -101,7 +102,7 @@ void UnreadMonitor::updateUnread()
 
 void UnreadMonitor::forceUpdateUnread()
 {
-    mChangedMSFfiles = BirdtrayApp::get()->getSettings()->mFolderNotificationColors.keys();
+    mChangedMSFfiles = BirdtrayApp::get()->getSettings()->watchedMorkFiles.orderedKeys();
     updateUnread();
 }
 
@@ -123,7 +124,7 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
     if ( rescanall )
     {
         mMorkUnreadCounts.clear();
-        for (const QString &path : settings->mFolderNotificationColors.keys()) {
+        for (const QString &path : settings->watchedMorkFiles.orderedKeys()) {
             mMorkUnreadCounts[path] = getMorkUnreadCount(path);
             if (!mDBWatcher.files().contains(path) && !mDBWatcher.addPath(path)) {
                 setWarning(tr("Unable to watch %1 for changes.")
@@ -148,11 +149,11 @@ void UnreadMonitor::getUnreadCount_Mork(int &count, QColor &color)
             count += mMorkUnreadCounts[ tpath ];
 
             if ( chosenColor.isValid() ) {
-                if (chosenColor != settings->mFolderNotificationColors[tpath]) {
+                if (chosenColor != settings->watchedMorkFiles[tpath]) {
                     chosenColor = settings->mNotificationDefaultColor;
                 }
             } else {
-                chosenColor = settings->mFolderNotificationColors[ tpath ];
+                chosenColor = settings->watchedMorkFiles[tpath];
             }
         }
     }
