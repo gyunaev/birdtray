@@ -96,7 +96,7 @@ TEST(UtilsTest, orderedMapOrder) {
                     << "Expected the orderedKeys attribute of the OrderedMap to contain "
                        "the same number of keys as the list of unique key-value pairs";
     for (size_t i = 0; i < numUniqueValues; i++) {
-        EXPECT_EQ(values[i][0], orderedKeys[i])
+        EXPECT_EQ(values[i][0], orderedKeys[(int) i])
                         << "Expected the keys in the orderedKeys attribute of the "
                            "OrderedMap to be in the order they where inserted.";
     }
