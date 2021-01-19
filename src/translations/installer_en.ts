@@ -279,7 +279,7 @@ Do you want to download the installer for the component?</source>
     </message>
     <message>
         <source>Chinese (Simplified)</source>
-        <translation>Lang_zh_CN</translation>
+        <translation>Lang_zh_cn</translation>
     </message>
 </context>
 </TS>
