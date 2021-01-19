@@ -34,7 +34,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translation>启动birdtray安装文件失败。</translation>
+        <translation>启动Birdtray安装文件失败。</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
 </context>
@@ -262,11 +262,11 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Start Thunderbird when Birdtray starts</source>
-        <translation>启动birdtray时自动启动Thunderbird</translation>
+        <translation>启动Birdtray时自动启动Thunderbird</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When both Thunderbird and Birdtray are set to start with the operating system, this usually results in two copies of Thunderbird being launched. Here you can add a delay before Thunderbird is launched, to prevent this.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;当同时设置Thunderbird和birdtray自启动时，可能会同时启动两个Thunderbird实例。您可以为birdtray启动Thunderbird设置一个延迟时间来避免这点。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;当同时设置Thunderbird和Birdtray自启动时，可能会同时启动两个Thunderbird实例。您可以为Birdtray启动Thunderbird设置一个延迟时间来避免这点。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source> second delay</source>
@@ -282,7 +282,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Terminate Thunderbird when quitting Birdtray</source>
-        <translation>退出birdtray时结束Thunderbird</translation>
+        <translation>退出Birdtray时结束Thunderbird</translation>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
@@ -341,7 +341,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts.</source>
-        <translation>当birdtray启动时检查是否有新版本。</translation>
+        <translation>当Birdtray启动时检查是否有新版本。</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
@@ -408,7 +408,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translation>birdtray启动时忽略当前的未读邮件，未读计数将仅计算新收到的邮件。</translation>
+        <translation>Birdtray启动时忽略当前的未读邮件，未读计数将仅计算新收到的邮件。</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
@@ -468,7 +468,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如果启用此项,将添加“忽略当前未读”到托盘图标菜单，此操作允许您忽略当前未读邮件。您执行此操作后，birdtray将认为当前没有未读邮件，并且仅对新到达的邮件进行提示。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;例如，如果您当前有10封未读邮件，然后您点击“忽略当前未读”菜单，birdtray将指示没有未读邮件（如图标不会闪烁），但未读计数保持10不变。一旦您收到新的邮件，未读邮件数变为11，birdtray将以1封新邮件的通知方式通知。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;当实际未读邮件数低于被“忽略”的未读数时，被“忽略”的邮件数重置为0。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如果启用此项,将添加“忽略当前未读”到托盘图标菜单，此操作允许您忽略当前未读邮件。您执行此操作后，Birdtray将认为当前没有未读邮件，并且仅对新到达的邮件进行提示。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;例如，如果您当前有10封未读邮件，然后您点击“忽略当前未读”菜单，Birdtray将指示没有未读邮件（如图标不会闪烁），但未读计数保持10不变。一旦您收到新的邮件，未读邮件数变为11，Birdtray将以1封新邮件的通知方式通知。&lt;/p&gt;&lt;p&gt;&lt;br/&gt;当实际未读邮件数低于被“忽略”的未读数时，被“忽略”的邮件数重置为0。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
@@ -508,7 +508,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Noto Sans&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;birdtray[VERSION]，编译于[DATE]，使用 Qt [QT_VERSION]。&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Birdtray[VERSION]，编译于[DATE]，使用 Qt [QT_VERSION]。&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Copyright (C) 2018 by George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -712,7 +712,7 @@ Please make sure you selected the correct profiles directory.</source>
     <name>TrayIcon</name>
     <message>
         <source>Would you like to set up Birdtray?</source>
-        <translation>您要对birdtray进行配置吗？</translation>
+        <translation>您要对Birdtray进行配置吗？</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
