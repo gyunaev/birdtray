@@ -774,7 +774,7 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Settings...</source>
-        <translation>设置</translation>
+        <translation>设置...</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
