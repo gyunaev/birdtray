@@ -65,13 +65,13 @@ TrayIcon::TrayIcon(bool showSettings)
         doAutoUpdateCheck();
     }
     
-    if (settings->mFolderNotificationList.isEmpty()) {
+    if (settings->watchedMorkFiles.isEmpty()) {
         unreadEmailsAtStart = 0;
     }
     
     // If the settings are not yet configure, pop up the message
     if (!showSettings && settings->showDialogIfNoAccountsConfigured
-        && settings->mFolderNotificationColors.isEmpty()) {
+        && settings->watchedMorkFiles.isEmpty()) {
         QMessageBox questionDialog(QMessageBox::Question, tr("Would you like to set up Birdtray?"),
                 tr("You have not yet configured any email folders to monitor. "
                    "Would you like to do it now?"), QMessageBox::Yes | QMessageBox::No);
