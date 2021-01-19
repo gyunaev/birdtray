@@ -277,5 +277,9 @@ Do you want to download the installer for the component?</source>
         <source>Polish</source>
         <translation>Lang_pl</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Lang_zh_CN</translation>
+    </message>
 </context>
 </TS>

@@ -290,5 +290,9 @@ Wilt u de installatiewizard van dit onderdeel downloaden?</translation>
         <source>Polish</source>
         <translation>Pools</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Chinees (vereenvoudigd)</translation>
+    </message>
 </context>
 </TS>

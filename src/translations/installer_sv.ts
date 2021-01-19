@@ -290,5 +290,9 @@ Vill du hämta installationsprogrammet för komponenten?</translation>
         <source>Polish</source>
         <translation>Polska</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Kinesiska (förenklad)</translation>
+    </message>
 </context>
 </TS>

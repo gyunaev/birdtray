@@ -290,5 +290,9 @@ Bileşen için yükleyiciyi indirmek istiyor musunuz?</translation>
         <source>Polish</source>
         <translation>Lehçe</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Çince (Basitleştirilmiş)</translation>
+    </message>
 </context>
 </TS>

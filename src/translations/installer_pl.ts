@@ -290,5 +290,9 @@ Czy chcesz pobrać jego instalator?</translation>
         <source>Polish</source>
         <translation>polski</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Chiński (uproszczony)</translation>
+    </message>
 </context>
 </TS>

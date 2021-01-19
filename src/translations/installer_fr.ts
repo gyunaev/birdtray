@@ -290,5 +290,9 @@ Voulez-vous télécharger le programme d'installation correspondant ?</translati
         <source>Polish</source>
         <translation>Polonais</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Chinois (simplifié)</translation>
+    </message>
 </context>
 </TS>

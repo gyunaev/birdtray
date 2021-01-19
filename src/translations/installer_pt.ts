@@ -290,5 +290,9 @@ Deseja baixar o instalador para o componente?</translation>
         <source>Polish</source>
         <translation>Polaca</translation>
     </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Chinês (Simplificado)</translation>
+    </message>
 </context>
 </TS>
