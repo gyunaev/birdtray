@@ -92,7 +92,7 @@ TEST(UtilsTest, orderedMapOrder) {
         map[valuePair[0]] = valuePair[1];
     }
     const QList<int> &orderedKeys = map.orderedKeys();
-    EXPECT_EQ(numUniqueValues, orderedKeys.size())
+    EXPECT_EQ(numUniqueValues, (size_t) orderedKeys.size())
                     << "Expected the orderedKeys attribute of the OrderedMap to contain "
                        "the same number of keys as the list of unique key-value pairs";
     for (size_t i = 0; i < numUniqueValues; i++) {
@@ -102,7 +102,7 @@ TEST(UtilsTest, orderedMapOrder) {
     }
     map.remove(3);
     numUniqueValues--;
-    EXPECT_EQ(numUniqueValues, orderedKeys.size())
+    EXPECT_EQ(numUniqueValues, (size_t) orderedKeys.size())
                     << "Expected removing an element from the OrderedMap "
                        "to also remove one element from the orderedKeys attribute";
     EXPECT_FALSE(std::any_of(orderedKeys.begin(), orderedKeys.end(),
@@ -115,7 +115,7 @@ TEST(UtilsTest, orderedMapOrder) {
     EXPECT_EQ(indexBefore, indexAfter)
                     << "Expected overwriting an element from the OrderedMap "
                        "to not change it's index in the orderedKeys attribute";
-    EXPECT_EQ(numUniqueValues, orderedKeys.size())
+    EXPECT_EQ(numUniqueValues, (size_t) orderedKeys.size())
                     << "Expected overwriting an element from the OrderedMap "
                        "not to add a new element to the orderedKeys attribute";
 }
