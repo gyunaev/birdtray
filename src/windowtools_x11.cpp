@@ -411,6 +411,7 @@ bool WindowTools_X11::show()
     XSetInputFocus(display, mWinId, RevertToParent, CurrentTime);
 
     mHiddenStateCounter = 0;
+    emit onWindowShown();
     return true;
 }
 
@@ -488,8 +489,10 @@ void WindowTools_X11::doHide()
     // Increase the counter but do not exceed 2
     mHiddenStateCounter++;
 
-    if ( mHiddenStateCounter == 2 )
+    if ( mHiddenStateCounter == 2 ) {
         Log::debug("Window removed from taskbar");
+        emit onWindowHidden();
+    }
 }
 
 void WindowTools_X11::timerWindowState()

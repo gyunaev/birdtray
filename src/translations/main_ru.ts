@@ -356,10 +356,6 @@ OpenSSL might not be installed.</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Это полная командная строка (с аргументами), которая будет использоваться для запуска Thunderbird. Аргументы разделены пробелами, но допускаются пробелы в кавычках, т.е. &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; будет работать.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Игнорировать непрочитанные письма при запуске</translation>
-    </message>
-    <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Игнорировать все непрочитанные письма, которые присутствуют при запуске Birdtray. Только новые письма будут учтены счётчиком непрочитанных сообщений.</translation>
     </message>
@@ -416,10 +412,6 @@ OpenSSL might not be installed.</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если этот флажок установлен, значок Birdtray будет отображать количество непрочитанных писем.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Если этот флажок снят, счетчик не будет отображаться, и вы будете знать о непрочитанных письмах из-за мигания или другого значка, в зависимости от ваших настроек.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если этот параметр включен, этот параметр добавляет &amp;quot;Игнорировать непрочитанные в настоящий момент электронные письма&amp;quot; действие в контекстном меню. Это действие позволяет вам игнорировать электронные письма, которые в данный момент не прочитаны. После этого Birdtray будет делать вид, что не осталось непрочитанных писем, и будет показывать только новые письма.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Например, если было 10 непрочитанных писем, и вы нажали &amp;quot;Игнорировать&amp;quot; В этом случае Birdtray не будет показывать индикатор непрочитанных сообщений, если количество непрочитанных сообщений остается на уровне 10. После получения нового сообщения и наличия у вас всего 11 непрочитанных сообщений Birdtray будет отображать количество новых сообщений как 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Если количество непрочитанных писем ниже значения &amp;quot;игнорирования&amp;quot;, игнорирование сбрасывается до нуля.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Unread change cmd:</source>
         <translation>Выполнить при изменении:</translation>
     </message>
@@ -464,10 +456,6 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Спасибо за вашу постоянную поддержку!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation>При нажатии на значок Birdtray для скрытия Thunderbird, значок обновится, игнорируя все непрочитанные в настоящее время электронные письма</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Это изменяет толщину шрифта, то есть делает шрифт жирным.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -490,6 +478,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если этот параметр включен, этот параметр добавляет &amp;quot;Игнорировать непрочитанные в настоящий момент электронные письма&amp;quot; действие в контекстном меню. Это действие позволяет вам игнорировать электронные письма, которые в данный момент не прочитаны. После этого Birdtray будет делать вид, что не осталось непрочитанных писем, и будет показывать только новые письма.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Например, если было 10 непрочитанных писем, и вы нажали &amp;quot;Игнорировать&amp;quot; В этом случае Birdtray не будет показывать индикатор непрочитанных сообщений, если количество непрочитанных сообщений остается на уровне 10. После получения нового сообщения и наличия у вас всего 11 непрочитанных сообщений Birdtray будет отображать количество новых сообщений как 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>

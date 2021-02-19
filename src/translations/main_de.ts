@@ -356,10 +356,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies ist die komplette Befehlszeile (mit Argumenten), welche zum Starten von Thunderbird genutzt wird. Argumente müssen mit Leerzeichen getrennt werden, allerdings sind Leerzeichen in Anführungszeichen erlaubt. Z. B.: &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Ungelesene E-Mails ignorieren, die beim Starten bereits vorhanden sind</translation>
-    </message>
-    <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Alle ungelesenen E-Mails ignorieren, die beim Starten von Birdtray bereits vorhanden sind. Nur neue E-Mails werden bei der Berechnung der Anzahl ungelesener E-Mails beachtet.</translation>
     </message>
@@ -399,10 +395,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, wird die Anzahl der ungelesenen E-Mails im Birdtray-Symbol angezeigt.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Option deaktiviert ist, wird keine Anzahl angezeigt. Sie werden dann, abhängig von Ihren Einstellungen, nur noch durch das blinkende oder geänderte Symbol auf neue E-Mails aufmerksam gemacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion &quot;Ungelesene E-Mails ignorieren&quot; hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende E-Mails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion &quot;Ignorieren&quot;, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Anzahl der ungelesenen E-Mails weniger wird als die ursprünglich ignorierte Anzahl, wird die Anzahl ignorierter E-Mails auf null zurückgesetzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
@@ -465,10 +457,6 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Vielen Dank für Ihre Unterstützung!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation>Ignoriere alle momentan ungelesenen E-Mails, wenn Thunderbird über das Birdtray Symbol augeblendet wird</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d. h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -486,11 +474,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Support non-NETWM compliant WMs</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterstütze nicht NETWM konforme Fenstermanager</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ist Ihr Desktop-Manager nicht komplett NETWM konform, müssen Sie diesen Auswahlkasten gegebenenfalls aktivieren, damit Birdtray das Fenster von Thunderbird erkennen, minimieren und verstecken kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation>Beim Start</translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation>Beim Verstecken von Thunderbird</translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation>Beim Anzeigen von Thunderbird</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion &quot;Ungelesene E-Mails ignorieren&quot; hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende E-Mails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion &quot;Ignorieren&quot;, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>

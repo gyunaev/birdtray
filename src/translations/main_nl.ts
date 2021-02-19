@@ -357,10 +357,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;De volledige opdrachtregel (met argumenten) welke worden gebruikt om Thunderbird op te starten. Argumenten dienen spatiegescheiden te zijn, maar spaties tussen dubbele aanhalingstekens zijn toegestaan. Voorbeeld: &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Ongelezen e-mails negeren bij opstarten</translation>
-    </message>
-    <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Negeer alle ongelezen e-mails die beschikbaar zijn als Birdtray opstart. Alleen nieuwe e-mails worden geteld door de ongelezen e-mail-aanduiding.</translation>
     </message>
@@ -400,10 +396,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om het aantal ongelezen e-mails te tonen op het Birdtray-pictogram.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als u dit niet aankruist, dan kunt u alleen zien dat er ongelezen e-mails zijn aan het knipperende of anders uitziende pictogram (afhankelijk van uw instellingen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 11 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als het aantal ongelezen e-mails lager wordt dan het aantal &amp;quot;genegeerde&amp;quot;, dan wordt de teller op 0 gezet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
@@ -466,10 +458,6 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Bedankt voor uw ondersteuning!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation>Herstel het pictogram door alle ongelezen e-mails te negeren door te klikken op het Birdtray-pictogram</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dit past de dikte van het lettertype aan - maak het bijv. vetgedrukt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -492,6 +480,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 11 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
