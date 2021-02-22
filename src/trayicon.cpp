@@ -333,10 +333,11 @@ void TrayIcon::enableBlinking(bool enabled)
 
         // If we are using the alpha transition, we have to update icon more often
         if (settings->mBlinkingUseAlphaTransition) {
-            mBlinkingDelta = settings->mBlinkSpeed / 100.0;
-            mBlinkingTimeout = 100;
+            mBlinkingDelta = std::min(1.0, (2.0 / settings->mBlinkSpeed));
+            mBlinkingTimeout = settings->mBlinkSpeed == 1 ? 50 : 100;
         } else {
-            // The blinking speed slider is a value from 0 to 30, so we make it 50x
+            // The blinking speed slider is a value from 0 to 30,
+            // so we make it 50x so the maximum is 1500 ms.
             mBlinkingDelta = 0;
             mBlinkingTimeout = settings->mBlinkSpeed * 50;
         }
