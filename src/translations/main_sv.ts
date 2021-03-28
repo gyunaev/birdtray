@@ -413,15 +413,15 @@ OpenSSL kanske inte är installerad.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Välj e-postmappar för övervakning.&lt;br/&gt;&lt;br/&gt;Om dialogen inte visar din mapp, tryck &lt;i&gt;Ctrl + Shift click&lt;/i&gt; för att öppna en filvalsdialog som gör det möjligt att lägga till en mork-fil.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommando för oläst ändring:</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det gick inte att läsa in ikonen från den här filen. Prova att läsa in ikonen i ett bildredigeringsverktyg och spara den i ett annat format.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -461,7 +461,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Om det här kommandot inte är tomt anropas det varje gång räknaren för oläst e-post ändras (inklusive när det blir noll). Det anropas via skalet, som det är, med %NEW% ersatt av det nya räknevärdet för oläst och %OLD% ersatt med det gamla räknevärdet för oläst (som kan vara samma somdet nya).&lt;/p&gt;&lt;p&gt;De flesta användare behöver inte den här funktionen och bör lämna den tom.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts.</source>
@@ -473,23 +473,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Support non-NETWM compliant WMs</source>
-        <translation type="unfinished"></translation>
+        <translation>Stöd icke-NETWM-kompatibla WMs</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Om din skrivbordshanterare inte är helt NETWM-kompatibel kan du behöva markera den här kryssrutan så att den kan identifiera Thunderbird-fönstret och minimera och dölja det.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>At startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid uppstart</translation>
     </message>
     <message>
         <source>When hiding Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>När Thunderbird döljs</translation>
     </message>
     <message>
         <source>When showing Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>När Thunderbird visas</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
