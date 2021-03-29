@@ -473,23 +473,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Support non-NETWM compliant WMs</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержка WM, не совместимых с NETWM</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если ваш диспетчер рабочего стола не полностью совместим с NETWM, вам может потребоваться установить этот флажок, чтобы программа могла обнаруживать окно Thunderbird и имела возможность сворачивать и скрывать его.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>At startup</source>
-        <translation type="unfinished"></translation>
+        <translation>При запуске</translation>
     </message>
     <message>
         <source>When hiding Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>При скрытии Thunderbird</translation>
     </message>
     <message>
         <source>When showing Thunderbird</source>
-        <translation type="unfinished"></translation>
+        <translation>При показе Thunderbird</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
