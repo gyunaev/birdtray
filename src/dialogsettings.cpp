@@ -76,10 +76,12 @@ DialogSettings::DialogSettings( QWidget *parent)
     spinUnreadOpacityLevel->setValue( settings->mUnreadOpacityLevel * 100 );
     spinThunderbirdStartDelay->setValue( settings->mLaunchThunderbirdDelay );
     boxShowUnreadCount->setChecked( settings->mShowUnreadEmailCount );
-    ignoreStartupMailCountBox->setChecked(settings->ignoreStartUnreadCount);
+    ignoreMailCountOnStartupBox->setChecked(settings->ignoreUnreadCountOnStart);
+    ignoreMailCountOnShowBox->setChecked(settings->ignoreUnreadCountOnShow);
+    ignoreMailCountOnHideBox->setChecked(settings->ignoreUnreadCountOnHide);
     onlyShowIconOnNewMail->setChecked(settings->onlyShowIconOnUnreadMessages);
     leProcessRunOnCountChange->setText( settings->mProcessRunOnCountChange );
-    boxIgnoreEmailsOnMinimize->setChecked(settings->mForceIgnoreUnreadEmailsOnMinimize);
+    boxSupportNonNetwmCompliant->setChecked( settings->mIgnoreNETWMhints );
 
     if ( settings->mIndexFilesRereadIntervalSec > 0 )
     {
@@ -154,7 +156,6 @@ void DialogSettings::accept()
     settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));
     settings->mExitThunderbirdWhenQuit = boxStopThunderbirdOnExit->isChecked();
     settings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
-    settings->mForceIgnoreUnreadEmailsOnMinimize = boxIgnoreEmailsOnMinimize->isChecked();
 
     settings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
     settings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
@@ -167,9 +168,15 @@ void DialogSettings::accept()
     settings->mUnreadOpacityLevel = (double) spinUnreadOpacityLevel->value() / 100.0;
     settings->mLaunchThunderbirdDelay = spinThunderbirdStartDelay->value();
     settings->mShowUnreadEmailCount = boxShowUnreadCount->isChecked();
-    settings->ignoreStartUnreadCount = ignoreStartupMailCountBox->isChecked();
+    settings->ignoreUnreadCountOnStart = settings->mAllowSuppressingUnreads &&
+            ignoreMailCountOnStartupBox->isChecked();
+    settings->ignoreUnreadCountOnShow = settings->mAllowSuppressingUnreads &&
+            ignoreMailCountOnShowBox->isChecked();
+    settings->ignoreUnreadCountOnHide = settings->mAllowSuppressingUnreads &&
+            ignoreMailCountOnHideBox->isChecked();
     settings->onlyShowIconOnUnreadMessages = onlyShowIconOnNewMail->isChecked();
     settings->mProcessRunOnCountChange = leProcessRunOnCountChange->text();
+    settings->mIgnoreNETWMhints = boxSupportNonNetwmCompliant->isChecked();
 
     settings->setNotificationIcon(btnNotificationIcon->icon().pixmap( settings->mIconSize ));
 

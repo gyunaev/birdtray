@@ -114,11 +114,29 @@ class TrayIcon : public QSystemTrayIcon
          * @param errorMessage A message indicating an error during the check, or a null string.
          */
         void    onAutoUpdateCheckFinished(bool foundUpdate, const QString& errorMessage);
+        
+        /**
+         * Called when the Thunderbird window is shown.
+         */
+        void    onThunderbirdWindowShown();
+        
+        /**
+         * Called when the Thunderbird window is hidden.
+         */
+        void    onThunderbirdWindowHidden();
 
     private:
         void    createMenu();
         void    createUnreadCounterThread();
-        void    updateIgnoredUnreads();
+        
+        /**
+         * update the number of ignored mails.
+         *
+         * @param ignoredMails The new number of ignored mails.
+         * @param updateIcon Whether a change in the number of ignored mails
+         *                   should result in an update of the tray icon.
+         */
+        void    setIgnoredUnreadMails(unsigned int ignoredMails, bool updateIcon = true);
         
         /**
          * Do an automatic check for a new version of Birdtray.
@@ -144,11 +162,6 @@ class TrayIcon : public QSystemTrayIcon
         // Current unread messages count and color
         unsigned int    mUnreadCounter;
         QColor          mUnreadColor;
-        
-        /**
-         * The number of unread emails at Birdtray startup.
-         */
-        long            unreadEmailsAtStart = -1;
 
         // Show/hide Thunderbird menu item (we modify its text)
         QAction *       mMenuShowHideThunderbird;
@@ -179,8 +192,10 @@ class TrayIcon : public QSystemTrayIcon
         // If true, it will hide Thunderbird window as soon as its shown
         bool            mThunderbirdWindowHide;
 
-        // Number of suppressed unread emails, if nonzero
-        unsigned int    mIgnoredUnreadEmails;
+        /**
+         * The number of unread emails that Birdtray is ignoring.
+         */
+        unsigned int    ignoredUnreadEmails = 0;
 
         // Window tools (show/hide)
         WindowTools *   mWinTools;
@@ -210,6 +225,11 @@ class TrayIcon : public QSystemTrayIcon
          * A manager to check for network connectivity.
          */
         QNetworkConfigurationManager* networkConnectivityManager = nullptr;
+        
+        /**
+         * Whether we have received data about unread emails yet.
+         */
+        bool haveUnreadMailsData = false;
 };
 
 #endif // TRAYICON_H

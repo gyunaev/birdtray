@@ -1,6 +1,6 @@
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
+#include <QMap>
 #include <QString>
 #include <QtCore/QFileInfo>
 
@@ -59,7 +59,7 @@ class Utils
          * Get the mail folder name from the mork path.
          *
          * @param morkPath The file info for a msf file.
-         * @return The mail folder name.
+         * @return The mail folder name or a null string.
          */
         static QString getMailFolderName(const QFileInfo &morkFile);
         
@@ -67,7 +67,7 @@ class Utils
          * Get the mil account name from a mork path
          *
          * @param morkPath The file info for a msf file.
-         * @return The mail account name.
+         * @return The mail account name or a null string.
          */
         static QString getMailAccountName(const QFileInfo &morkFile);
         
@@ -100,4 +100,78 @@ class Utils
         static QPixmap pixmapFromString(const QString &data);
 };
 
-#endif // UTILS_H
+
+/**
+ * A map that keeps track of the insertion order it's elements.
+ *
+ * @tparam Key The type of the map keys.
+ * @tparam T The type of the element values.
+ */
+template<class Key, class T>
+class OrderedMap {
+public:
+    
+    /**
+     * Access an element of the map by it's key or create a new entry.
+     * @param key The key of the (new) element.
+     * @return The value stored in the map for the given key.
+     */
+    T &operator[](const Key &key) {
+        if (!storage.contains(key)) {
+            order.push_back(key);
+        }
+        return storage[key];
+    }
+    
+    /**
+     * Access an element of the map by it's key.
+     * @param key The key of the element.
+     * @return The value stored in the map for the given key.
+     */
+    T operator[](const Key &key) const {
+        return storage[key];
+    }
+    
+    /**
+     * @return The keys of all elements stored in the map in the order they were inserted.
+     */
+    const QList<Key> &orderedKeys() const {
+        return order;
+    }
+    
+    /**
+     * Clear all elements from the map.
+     */
+    void clear() {
+        storage.clear();
+        order.clear();
+    }
+    
+    /**
+     * Remove an element from the map.
+     *
+     * @param key The key of the element to remove.
+     */
+    void remove(Key key) {
+        storage.remove(key);
+        order.removeOne(key);
+    }
+    
+    /**
+     * @return Whether or not the map is empty.
+     */
+    bool isEmpty() const {
+        return storage.isEmpty();
+    }
+
+private:
+    /**
+     * A list storing the keys of the values in the map in insertion order.
+     */
+    QList<Key> order = {};
+    
+    /**
+     * The actual map that sores the key - value pairs.
+     */
+    QMap<Key, T> storage = {};
+};

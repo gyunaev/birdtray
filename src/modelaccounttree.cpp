@@ -13,9 +13,9 @@ ModelAccountTree::ModelAccountTree(QObject* parent, QTreeView* treeView)
         : QAbstractItemModel(parent), QStyledItemDelegate(parent) {
     Settings* settings = BirdtrayApp::get()->getSettings();
     // Get the current settings in proper(stored) order
-    for (const QString& path : settings->mFolderNotificationList) {
+    for (const QString& path : settings->watchedMorkFiles.orderedKeys()) {
         mAccounts.push_back(path);
-        mColors.push_back(settings->mFolderNotificationColors[path]);
+        mColors.push_back(settings->watchedMorkFiles[path]);
     }
     treeView->setModel(this);
     treeView->setItemDelegateForColumn(1, this);
@@ -34,6 +34,12 @@ QVariant ModelAccountTree::data(const QModelIndex &index, int role) const {
             QFileInfo accountMorkFile(mAccounts[index.row()]);
             QString folderName = Utils::getMailFolderName(accountMorkFile);
             QString accountName = Utils::getMailAccountName(accountMorkFile);
+            if (accountName.isNull()) {
+                accountName = accountMorkFile.fileName();
+            }
+            if (folderName.isNull()) {
+                return accountName;
+            }
             return accountName + " [" + folderName + "]";
         }
         case Qt::ToolTipRole: {
@@ -84,9 +90,9 @@ QVariant ModelAccountTree::headerData(int section, Qt::Orientation , int role) c
     if ( role == Qt::DisplayRole )
     {
         if (section == 0) {
-            return QObject::tr("Account");
+            return QCoreApplication::translate("ModelAccountTree", "Account");
         } else {
-            return QObject::tr("Notification color");
+            return QCoreApplication::translate("ModelAccountTree", "Notification color");
         }
     }
 
@@ -158,11 +164,8 @@ void ModelAccountTree::clear()
 
 void ModelAccountTree::applySettings() {
     Settings* settings = BirdtrayApp::get()->getSettings();
-    settings->mFolderNotificationColors.clear();
-    settings->mFolderNotificationList.clear();
-
+    settings->watchedMorkFiles.clear();
     for (int i = 0; i < mAccounts.size(); i++) {
-        settings->mFolderNotificationList.push_back(mAccounts[i]);
-        settings->mFolderNotificationColors[mAccounts[i]] = mColors[i];
+        settings->watchedMorkFiles[mAccounts[i]] = mColors[i];
     }
 }

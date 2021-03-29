@@ -198,6 +198,10 @@ QStringList Utils::getDefaultThunderbirdCommand() {
 #if defined (OPT_THUNDERBIRD_CMDLINE)
     return Utils::splitCommandLine( OPT_THUNDERBIRD_CMDLINE );
 #elif defined (Q_OS_WIN)
+    if (QFile::exists(Utils::expandPath(
+            R"("%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe")"))) {
+        return {R"("%ProgramFiles%\Mozilla Thunderbird\thunderbird.exe")"};
+    }
     return {R"("%ProgramFiles(x86)%\Mozilla Thunderbird\thunderbird.exe")"};
 #else
     return { "/usr/bin/thunderbird" };
@@ -260,7 +264,9 @@ QString Utils::getMailFolderName(const QFileInfo &morkFile) {
         }
         name = QCoreApplication::translate(
                 "EmailFolders", dirName.toUtf8().constData()) + '/' + name;
-        parentDir.cdUp();
+        if (!parentDir.cdUp()) {
+            return QString();
+        }
     }
     return name;
 }
@@ -269,7 +275,9 @@ QString Utils::getMailAccountName(const QFileInfo &morkFile) {
     QDir parentDir = morkFile.dir();
     QString name;
     while ((name = parentDir.dirName()).endsWith(".sbd")) {
-        parentDir.cdUp();
+        if (!parentDir.cdUp()) {
+            return QString();
+        }
     }
     return name;
 }

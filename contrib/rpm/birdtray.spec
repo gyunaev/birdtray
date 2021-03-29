@@ -1,10 +1,10 @@
 Name:         birdtray
-Version:      1.8.1
+Version:      1.9.0
 Release:      1%{?dist}
 Epoch:        0
 License:      GPLv3
 Group:        System Environment/Shells
-Source0:      https://github.com/gyunaev/%{name}/archive/%{version}.tar.gz
+Source0:      https://github.com/gyunaev/%{name}/archive/v%{version}.tar.gz
 URL:          https://github.com/gyunaev/birdtray
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: cmake3 gcc-c++ desktop-file-utils

@@ -120,6 +120,7 @@ set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 if(Qt5LinguistTools_FOUND)
     set(MAIN_TRANSLATION_FILES
             src/translations/main_en.ts
+            src/translations/main_fr.ts
             src/translations/main_de.ts
             src/translations/main_nl.ts
             src/translations/main_it.ts
@@ -128,9 +129,12 @@ if(Qt5LinguistTools_FOUND)
             src/translations/main_es.ts
             src/translations/main_sv.ts
             src/translations/main_tr.ts
+            src/translations/main_pl.ts
+            src/translations/main_zh_cn.ts
             )
     set(DYN_TRANSLATION_FILES
             src/translations/dynamic_en.ts
+            src/translations/dynamic_fr.ts
             src/translations/dynamic_de.ts
             src/translations/dynamic_nl.ts
             src/translations/dynamic_it.ts
@@ -139,6 +143,8 @@ if(Qt5LinguistTools_FOUND)
             src/translations/dynamic_es.ts
             src/translations/dynamic_sv.ts
             src/translations/dynamic_tr.ts
+            src/translations/dynamic_pl.ts
+            src/translations/dynamic_zh_cn.ts
             )
 
     set_source_files_properties(${MAIN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION

@@ -367,10 +367,13 @@ WindowTools_X11::~WindowTools_X11()
 
 bool WindowTools_X11::lookup()
 {
-    if ( isValid() )
-        return mWinId;
+    if ( QX11Info::appRootWindow() == 0 )
+        return false;
 
-    mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), true,
+    if ( isValid() )
+        return true;
+
+    mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), ! BirdtrayApp::get()->getSettings()->mIgnoreNETWMhints,
             BirdtrayApp::get()->getSettings()->mThunderbirdWindowMatch);
 
     Log::debug("Window ID found: %lX", mWinId );
@@ -408,6 +411,7 @@ bool WindowTools_X11::show()
     XSetInputFocus(display, mWinId, RevertToParent, CurrentTime);
 
     mHiddenStateCounter = 0;
+    emit onWindowShown();
     return true;
 }
 
@@ -417,7 +421,10 @@ bool WindowTools_X11::hide()
         return false;
 
     if ( mHiddenStateCounter != 0 )
-        Log::debug("Warning: trying to hide already hidden window");
+    {
+        Log::debug("Warning: trying to hide already hidden window (counter %d), ignored", mHiddenStateCounter );
+        return false;
+    }
 
     // Get screen number
     Display *display = QX11Info::display();
@@ -457,6 +464,15 @@ bool WindowTools_X11::isValid()
 
 void WindowTools_X11::doHide()
 {
+    // This function may end up being called more than two times because isHidden() not only checks the counter,
+    // but also checks the active window. Depending on window manager, the counter may get to 2 much faster than
+    // window manager removes the window from an active window. This would result in multiple calls to doHide().
+    if ( mHiddenStateCounter == 2 )
+    {
+        Log::debug("Window already should be removed from taskbar");
+        return;
+    }
+
     Display *display = QX11Info::display();
     long screen = DefaultScreen(display);
 
@@ -470,10 +486,13 @@ void WindowTools_X11::doHide()
     XSync(display, False);
     XWithdrawWindow(display, mWinId, screen );
 
+    // Increase the counter but do not exceed 2
     mHiddenStateCounter++;
 
-    if ( mHiddenStateCounter == 2 )
+    if ( mHiddenStateCounter == 2 ) {
         Log::debug("Window removed from taskbar");
+        emit onWindowHidden();
+    }
 }
 
 void WindowTools_X11::timerWindowState()

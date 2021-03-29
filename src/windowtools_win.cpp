@@ -123,14 +123,22 @@ bool WindowTools_Win::show() {
     if (IsIconic(this->thunderbirdWindow)) {
         ShowWindow(this->thunderbirdWindow, SW_RESTORE);
     }
-    return SetForegroundWindow(this->thunderbirdWindow) == TRUE;
+    if (SetForegroundWindow(this->thunderbirdWindow) == TRUE) {
+        emit onWindowShown();
+        return true;
+    }
+    return false;
 }
 
 bool WindowTools_Win::hide() {
     if (!checkWindow()) {
         return false;
     }
-    return ShowWindow(this->thunderbirdWindow, SW_HIDE) > 0;
+    if (ShowWindow(this->thunderbirdWindow, SW_HIDE) > 0) {
+        emit onWindowHidden();
+        return true;
+    }
+    return false;
 }
 
 bool WindowTools_Win::isHidden() {

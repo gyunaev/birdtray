@@ -54,7 +54,9 @@ Settings::Settings()
     mAllowSuppressingUnreads = false;
     mLaunchThunderbirdDelay = 0;
     mShowUnreadEmailCount = true;
-    ignoreStartUnreadCount = false;
+    ignoreUnreadCountOnStart = false;
+    ignoreUnreadCountOnShow = false;
+    ignoreUnreadCountOnHide = false;
     showDialogIfNoAccountsConfigured = true;
     mThunderbirdWindowMatch = " Mozilla Thunderbird";
     mNotificationMinimumFontSize = 4;
@@ -67,7 +69,7 @@ Settings::Settings()
     mNewEmailMenuEnabled = false;
     mIndexFilesRereadIntervalSec = 0;
     mThunderbirdCmdLine = Utils::getDefaultThunderbirdCommand();
-    mForceIgnoreUnreadEmailsOnMinimize = false;
+    mIgnoreNETWMhints = false;
 }
 
 Settings::~Settings()
@@ -95,9 +97,10 @@ void Settings::save()
     out[ "common/allowsuppressingunread" ] = mAllowSuppressingUnreads;
     out[ "common/launchthunderbirddelay" ] = mLaunchThunderbirdDelay;
     out[ "common/showunreademailcount" ] = mShowUnreadEmailCount;
-    out[ "common/ignoreStartUnreadCount" ] = ignoreStartUnreadCount;
+    out[ "common/ignoreStartUnreadCount" ] = ignoreUnreadCountOnStart;
+    out[ "common/ignoreShowUnreadCount" ] = ignoreUnreadCountOnShow;
+    out[ "common/forceIgnoreUnreadEmailsOnMinimize" ] = ignoreUnreadCountOnHide;
     out[ "common/showDialogIfNoAccountsConfigured"  ] = showDialogIfNoAccountsConfigured;
-    out[ "common/forceIgnoreUnreadEmailsOnMinimize"  ] = mForceIgnoreUnreadEmailsOnMinimize;
 
     out[ "advanced/tbcmdline" ] = QJsonArray::fromStringList( mThunderbirdCmdLine );
     out[ "advanced/tbwindowmatch" ] = mThunderbirdWindowMatch;
@@ -111,14 +114,15 @@ void Settings::save()
     out[ ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY ] = onlyShowIconOnUnreadMessages;
     out[ "advanced/forcedRereadInterval" ] = static_cast<int>( mIndexFilesRereadIntervalSec );
     out[ "advanced/runProcessOnChange" ] = mProcessRunOnCountChange;
+    out[ "advanced/ignoreNetWMhints" ] = mIgnoreNETWMhints;
 
     // Store the account map
     QJsonArray accounts;
 
-    for ( const QString& path : mFolderNotificationList )
+    for ( const QString& path : watchedMorkFiles.orderedKeys() )
     {
         QJsonObject ac;
-        ac[ "color" ] = mFolderNotificationColors[path].name();
+        ac[ "color" ] = watchedMorkFiles[path].name();
         ac[ "path" ] = path;
 
         accounts.push_back( ac );
@@ -148,9 +152,9 @@ void Settings::save()
 
     if ( !file.open(QIODevice::WriteOnly | QIODevice::Truncate) )
     {
-        QMessageBox::critical( 0,
-                               QObject::tr("Could not save the settings"),
-                               QObject::tr("Could not save the settings into file %1:\n%2").arg( file.fileName() ) .arg( file.errorString() ) );
+        QMessageBox::critical(nullptr, tr("Could not save the settings"),
+                tr("Could not save the settings into file %1:\n%2")
+                        .arg(file.fileName()).arg(file.errorString()));
         return;
     }
 
@@ -229,9 +233,13 @@ void Settings::fromJSON( const QJsonObject& settings )
     mAllowSuppressingUnreads = settings.value("common/allowsuppressingunread").toBool();
     mLaunchThunderbirdDelay = settings.value("common/launchthunderbirddelay").toInt();
     mShowUnreadEmailCount = settings.value("common/showunreademailcount").toBool();
-    ignoreStartUnreadCount = settings.value("common/ignoreStartUnreadCount").toBool();
+    ignoreUnreadCountOnStart = mAllowSuppressingUnreads &&
+            settings.value("common/ignoreStartUnreadCount").toBool();
+    ignoreUnreadCountOnShow = mAllowSuppressingUnreads &&
+            settings.value("common/ignoreShowUnreadCount").toBool();
+    ignoreUnreadCountOnHide = mAllowSuppressingUnreads &&
+            settings.value("common/forceIgnoreUnreadEmailsOnMinimize").toBool();
     showDialogIfNoAccountsConfigured = settings.value("common/showDialogIfNoAccountsConfigured").toBool();
-    mForceIgnoreUnreadEmailsOnMinimize = settings.value( "common/forceIgnoreUnreadEmailsOnMinimize" ).toBool();
 
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch").toString();
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize").toInt();
@@ -244,12 +252,13 @@ void Settings::fromJSON( const QJsonObject& settings )
     mIgnoreUpdateVersion = settings.value("advanced/ignoreUpdateVersion").toString();
     mIndexFilesRereadIntervalSec = settings.value("advanced/forcedRereadInterval").toInt();
     mProcessRunOnCountChange = settings.value( "advanced/runProcessOnChange" ).toString();
+    mIgnoreNETWMhints = settings.value( "advanced/ignoreNetWMhints").toBool();
 
     QStringList thunderbirdCommand = settings.value("advanced/tbcmdline").toVariant().toStringList();
     if ( !thunderbirdCommand.isEmpty() && !thunderbirdCommand[0].isEmpty() )
         mThunderbirdCmdLine = thunderbirdCommand;
 
-    mFolderNotificationColors.clear();
+    watchedMorkFiles.clear();
 
     // Convert the map into settings
     if ( settings["accounts"].isArray() )
@@ -262,8 +271,7 @@ void Settings::fromJSON( const QJsonObject& settings )
             if ( path.isEmpty() )
                 continue;
 
-            mFolderNotificationColors[ path ] = QColor( color );
-            mFolderNotificationList.push_back( path );
+            watchedMorkFiles[ path ] = QColor( color );
         }
     }
 
@@ -327,8 +335,12 @@ void Settings::fromQSettings( QSettings * psettings )
             "common/launchthunderbirddelay", mLaunchThunderbirdDelay ).toInt();
     mShowUnreadEmailCount = settings.value(
             "common/showunreademailcount", mShowUnreadEmailCount ).toBool();
-    ignoreStartUnreadCount = settings.value(
-            "common/ignoreStartUnreadCount", ignoreStartUnreadCount).toBool();
+    ignoreUnreadCountOnStart = mAllowSuppressingUnreads && settings.value(
+            "common/ignoreStartUnreadCount", ignoreUnreadCountOnStart).toBool();
+    ignoreUnreadCountOnShow = mAllowSuppressingUnreads && settings.value(
+            "common/ignoreShowUnreadCount", ignoreUnreadCountOnShow).toBool();
+    ignoreUnreadCountOnHide = mAllowSuppressingUnreads && settings.value(
+            "common/forceIgnoreUnreadEmailsOnMinimize", ignoreUnreadCountOnHide).toBool();
     showDialogIfNoAccountsConfigured = settings.value(
             "common/showDialogIfNoAccountsConfigured", showDialogIfNoAccountsConfigured).toBool();
 
@@ -355,7 +367,7 @@ void Settings::fromQSettings( QSettings * psettings )
             "advanced/ignoreUpdateVersion", mIgnoreUpdateVersion ).toString();
     mIndexFilesRereadIntervalSec = settings.value("advanced/forcedRereadInterval", mIndexFilesRereadIntervalSec ).toUInt();
 
-    mFolderNotificationColors.clear();
+    watchedMorkFiles.clear();
 
     // Convert the map into settings
     int total = settings.value("accounts/count", 0 ).toInt();
@@ -365,8 +377,7 @@ void Settings::fromQSettings( QSettings * psettings )
         QString entry = "accounts/account" + QString::number( index );
         QString key = settings.value( entry + "URI", "" ).toString();
 
-        mFolderNotificationColors[ key ] = QColor( settings.value( entry + "Color", "" ).toString() );
-        mFolderNotificationList.push_back( key );
+        watchedMorkFiles[ key ] = QColor( settings.value( entry + "Color", "" ).toString() );
     }
 
     // Load new email data from settings
@@ -386,12 +397,13 @@ void Settings::fromQSettings( QSettings * psettings )
     }
     QString profilePath = psettings->value("common/profilepath").toString();
     delete psettings;
-    if (!profilePath.isNull() && std::any_of(mFolderNotificationColors.keyBegin(),
-            mFolderNotificationColors.keyEnd(),
+    const QStringList watchedMorkFilePaths = watchedMorkFiles.orderedKeys();
+    if (!profilePath.isNull() && std::any_of(watchedMorkFilePaths.begin(),
+            watchedMorkFilePaths.end(),
             [](const QString &path) { return !path.endsWith(".msf"); })) {
         bool foundMigrationProblem = false;
         QDir profileDir(profilePath);
-        for (const QString &path : mFolderNotificationColors.keys()) {
+        for (const QString &path : watchedMorkFilePaths) {
             if (path.endsWith(".msf")) {
                 continue;
             }
@@ -439,24 +451,22 @@ void Settings::fromQSettings( QSettings * psettings )
             for (const QString &mockFile: mockFiles) {
                 if (!QFile::exists(mockFile)) {
                     foundMigrationProblem = true;
-                } else if (!mFolderNotificationColors.contains(mockFile)) {
-                    mFolderNotificationColors[mockFile] = mFolderNotificationColors[path];
-                    mFolderNotificationList.append(mockFile);
+                } else if (!watchedMorkFiles.orderedKeys().contains(mockFile)) {
+                    watchedMorkFiles[mockFile] = watchedMorkFiles[path];
                 }
             }
-            mFolderNotificationColors.remove(path);
-            mFolderNotificationList.removeAll(path);
+            watchedMorkFiles.remove(path);
         }
         if (foundMigrationProblem) {
             QMessageBox::warning(nullptr,
-                    QCoreApplication::tr("Sqlite based accounts migrated"), QCoreApplication::tr(
+                    tr("Sqlite based accounts migrated"), tr(
                             "You had configured monitoring of one or more mail folders using "
                             "the Sqlite parser. This method has been removed. Your configurations "
                             "has been migrated to the Mork parser, but some configured mail "
                             "folders could not be found."));
         } else {
             QMessageBox::information(nullptr,
-                    QCoreApplication::tr("Sqlite based accounts migrated"), QCoreApplication::tr(
+                    tr("Sqlite based accounts migrated"), tr(
                             "You had configured monitoring of one or more mail accounts using "
                             "the Sqlite parser. This method has been removed. Your configurations "
                             "has been migrated to the Mork parser. Please verify that all accounts "
@@ -483,7 +493,7 @@ bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arg
 const QPixmap &Settings::getNotificationIcon() {
     if (mNotificationIcon.isNull()) {
         if (!mNotificationIcon.load(":res/thunderbird.png")) {
-            Log::fatal( QCoreApplication::tr("Cannot load default system tray icon.") );
+            Log::fatal( tr("Cannot load default system tray icon.") );
         }
     }
     return mNotificationIcon;

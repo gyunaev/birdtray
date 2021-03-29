@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
         arch: [x86, x64]
-        qt_version: [5.6, 5.9, 5.14.1]
+        qt_version: [5.9, 5.14.1]
         include:
           - os: windows-latest
             arch: x86
@@ -20,8 +20,6 @@ jobs:
             qt_compile_suite: win64_msvc2017_64
         exclude:
           # We only want to test for the latest version of Qt on Windows
-          - os: windows-latest
-            qt_version: 5.6
           - os: windows-latest
             qt_version: 5.9
           # We only compile for the current architecture of the runner for Linux
@@ -53,13 +51,13 @@ jobs:
             sudo apt install -qq libx11-dev libqt5svg5-dev libx11-xcb-dev desktop-file-utils
           elif [ "$RUNNER_OS" == "Windows" ]; then
             if [ "$ARCH" == "x86" ]; then
-              echo "::set-env name=CMAKE_PLATFORM_ARG::-A Win32"
+              echo "CMAKE_PLATFORM_ARG=-A Win32" >> $GITHUB_ENV
               export archParam="--forcex86"
             else
-              echo "::set-env name=CMAKE_PLATFORM_ARG::-A x64"
+              echo "CMAKE_PLATFORM_ARG=-A x64" >> $GITHUB_ENV
             fi
             choco install -y --force $archParam openssl.light
-            echo "::add-path::C:\\Program Files\\OpenSSL"
+            echo "C:\\Program Files\\OpenSSL" >> $GITHUB_PATH
           else
             echo "$RUNNER_OS not supported"
             exit 1
@@ -70,9 +68,15 @@ jobs:
         shell: bash
         working-directory: ${{ runner.workspace }}/build
         run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON -DDONT_EXECUTE_INSTALLER=ON
+      - name: Register build problem matchers
+        run: echo "::add-matcher::.github/problem-matchers/linguist.json"
       - name: Build
         working-directory: ${{ runner.workspace }}/build
         run: cmake --build . --config Release --target birdtray
+      - name: Remove build problem matchers
+        run: |
+          echo "::remove-matcher owner=linguist::"
+          echo "::remove-matcher owner=linguist-old::"
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target run_tests
@@ -90,7 +94,7 @@ jobs:
         id: check-deploy
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ && "$RUNNER_OS" == "Windows" ]]; then
             echo ::set-output name=is_deploy::true
             echo "Deployment build detected"
           else
@@ -123,7 +127,7 @@ jobs:
   release:
     name: Create Release
     needs: build
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') && contains(github.ref, '.')
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/v') && contains(github.ref, '.')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -131,7 +135,7 @@ jobs:
       - name: Check if this is a deployment build
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Creating release ${{ github.ref }}..."
           else
             echo "Tag does not match: ${{ github.event.ref }}"

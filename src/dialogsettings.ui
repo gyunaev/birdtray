@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>4</number>
      </property>
      <property name="tabBarAutoHide">
       <bool>false</bool>
@@ -166,7 +166,7 @@
           <item row="0" column="4" colspan="2">
            <widget class="QSpinBox" name="notificationFontWeight">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="suffix">
              <string notr="true"> %</string>
@@ -349,36 +349,47 @@
             </item>
            </layout>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="boxAllowSuppression">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="title">
+          <string>Allow ignoring the current unread email counter</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_12">
-            <item>
-             <widget class="QCheckBox" name="checkBox">
-              <property name="text">
-               <string>CheckBox</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="boxAllowSuppression">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Allow ignoring the current unread email counter</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="ignoreStartupMailCountBox">
-              <property name="toolTip">
-               <string>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</string>
-              </property>
-              <property name="text">
-               <string>Ignore unread emails at startup</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QCheckBox" name="ignoreMailCountOnStartupBox">
+            <property name="toolTip">
+             <string>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</string>
+            </property>
+            <property name="text">
+             <string>At startup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="ignoreMailCountOnHideBox">
+            <property name="text">
+             <string>When hiding Thunderbird</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="ignoreMailCountOnShowBox">
+            <property name="text">
+             <string>When showing Thunderbird</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -395,10 +406,10 @@
          <item>
           <widget class="QLineEdit" name="leProcessRunOnCountChange">
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don't need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don't need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="whatsThis">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don't need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don't need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -564,16 +575,6 @@
              </spacer>
             </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="boxIgnoreEmailsOnMinimize">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
@@ -793,11 +794,25 @@
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="boxBlinkingUsesAlpha">
-            <property name="text">
-             <string>When blinking, use the fade-in/fade-out transition (increases CPU use!)</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QCheckBox" name="boxBlinkingUsesAlpha">
+              <property name="text">
+               <string>When blinking, use the fade-in/fade-out transition (increases CPU use!)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="boxSupportNonNetwmCompliant">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Support non-NETWM compliant WMs</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -855,7 +870,7 @@
             <item>
              <widget class="QCheckBox" name="checkUpdateOnStartup">
               <property name="toolTip">
-               <string>Check for new updates when Birdtray starts</string>
+               <string>Check for new updates when Birdtray starts.</string>
               </property>
               <property name="text">
                <string>Check for new updates on startup</string>
@@ -865,7 +880,7 @@
             <item>
              <widget class="QPushButton" name="checkUpdateButton">
               <property name="toolTip">
-               <string>Check for a new Birdtray version</string>
+               <string>Check for a new Birdtray version.</string>
               </property>
               <property name="text">
                <string>Check now</string>
@@ -1079,7 +1094,10 @@ p, li { white-space: pre-wrap; }
   <tabstop>btnAccountEdit</tabstop>
   <tabstop>btnAccountRemove</tabstop>
   <tabstop>boxAllowSuppression</tabstop>
-  <tabstop>ignoreStartupMailCountBox</tabstop>
+  <tabstop>ignoreMailCountOnStartupBox</tabstop>
+  <tabstop>ignoreMailCountOnHideBox</tabstop>
+  <tabstop>ignoreMailCountOnShowBox</tabstop>
+  <tabstop>leProcessRunOnCountChange</tabstop>
   <tabstop>boxLaunchThunderbirdAtStart</tabstop>
   <tabstop>spinThunderbirdStartDelay</tabstop>
   <tabstop>boxHideWindowAtStart</tabstop>
@@ -1098,11 +1116,16 @@ p, li { white-space: pre-wrap; }
   <tabstop>leThunderbirdWindowMatch</tabstop>
   <tabstop>spinMinimumFontSize</tabstop>
   <tabstop>boxBlinkingUsesAlpha</tabstop>
+  <tabstop>boxSupportNonNetwmCompliant</tabstop>
   <tabstop>spinUnreadOpacityLevel</tabstop>
   <tabstop>onlyShowIconOnNewMail</tabstop>
   <tabstop>checkUpdateOnStartup</tabstop>
   <tabstop>checkUpdateButton</tabstop>
+  <tabstop>btnShowLogWindow</tabstop>
+  <tabstop>boxForceReread</tabstop>
+  <tabstop>spinForceRereadSeconds</tabstop>
   <tabstop>browserAbout</tabstop>
+  <tabstop>translatorsButton</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
@@ -1234,22 +1257,6 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>330</x>
      <y>333</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>boxShowHideThunderbird</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>boxIgnoreEmailsOnMinimize</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>98</x>
-     <y>153</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>80</x>
-     <y>280</y>
     </hint>
    </hints>
   </connection>

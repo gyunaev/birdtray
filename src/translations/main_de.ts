@@ -26,10 +26,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Herunterladen der Installationsdatei ist fehlgeschlagen</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Ungültige Weiterleitung: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Aktualisierung fehlgeschlagen</translation>
     </message>
@@ -40,10 +36,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
 </context>
 <context>
     <name>BirdtrayApp</name>
-    <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird</translation>
-    </message>
     <message>
         <source>Display the contents of the given mork database.</source>
         <translation>Den Inhalt der Mork-Datenbank anzeigen.</translation>
@@ -85,8 +77,16 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Schreibe Birdtrays Protokoll in eine Datei.</translation>
     </message>
     <message>
-        <source>FILE</source>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird.</translation>
+    </message>
+    <message>
+        <source>file</source>
         <translation>datei</translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
+        <translation>Die Systemleiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
     </message>
 </context>
 <context>
@@ -172,10 +172,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     <message>
         <source>Multiple notification color:</source>
         <translation>Farbe bei mehreren Benachrichtigungen:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d. h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -310,16 +306,8 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Die Transparenz des Systemleistensymbols festlegen auf</translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
-        <translation>Beim Start von Birdtray nach Aktualisierungen suchen</translation>
-    </message>
-    <message>
         <source>Check for new updates on startup</source>
         <translation>Beim Start auf Aktualisierungen prüfen</translation>
-    </message>
-    <message>
-        <source>Check for a new Birdtray version</source>
-        <translation>Nach einer neuen Version von Birdtray suchen</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -368,15 +356,12 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dies ist die komplette Befehlszeile (mit Argumenten), welche zum Starten von Thunderbird genutzt wird. Argumente müssen mit Leerzeichen getrennt werden, allerdings sind Leerzeichen in Anführungszeichen erlaubt. Z. B.: &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Ungelesene E-Mails ignorieren, die beim Starten bereits vorhanden sind</translation>
-    </message>
-    <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Alle ungelesenen E-Mails ignorieren, die beim Starten von Birdtray bereits vorhanden sind. Nur neue E-Mails werden bei der Berechnung der Anzahl ungelesener E-Mails beachtet.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>beim Eingang neuer Mails.</translation>
     </message>
     <message>
@@ -412,10 +397,6 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, wird die Anzahl der ungelesenen E-Mails im Birdtray-Symbol angezeigt.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Option deaktiviert ist, wird keine Anzahl angezeigt. Sie werden dann, abhängig von Ihren Einstellungen, nur noch durch das blinkende oder geänderte Symbol auf neue E-Mails aufmerksam gemacht.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion &quot;Ungelesene E-Mails ignorieren&quot; hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende E-Mails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion &quot;Ignorieren&quot;, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Wenn die Anzahl der ungelesenen E-Mails weniger wird als die ursprünglich ignorierte Anzahl, wird die Anzahl ignorierter E-Mails auf null zurückgesetzt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Translations are powered by the community:</source>
         <translation>Die Übersetzungen werden von Freiwilligen bereitgestellt:</translation>
     </message>
@@ -436,20 +417,12 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
         <translation>Befehl bei Änderung ungelesener E-Mails:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der voherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wähle E-Mail Ordner zur Überwachung aus.&lt;br/&gt;&lt;br/&gt;Wenn der Dialog Ihren E-Mail Ordner nicht anzeigt, klicken Sie &lt;i&gt;Strg + Shift&lt;/i&gt; um einen Dateiauswahlsdialog zu öffnen, mit dem jede mork-Datei hinzugefügt werden kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
         <translation>Es konnte kein Symbol von der Datei geladen werden. Versuchen Sie, die Datei in einem Bildbearbeitungsprogramm zu öffnen und in einem anderen Format abzuspeichern.</translation>
-    </message>
-    <message>
-        <source>CheckBox</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -484,8 +457,63 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Vielen Dank für Ihre Unterstützung!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation>Ignoriere alle momentan ungelesenen E-Mails, wenn Thunderbird über das Birdtray Symbol augeblendet wird</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Das verändert die Schriftdicke, d. h. macht die Schrift fett.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der voherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Check for new updates when Birdtray starts.</source>
+        <translation>Beim Start von Birdtray nach Aktualisierungen suchen.</translation>
+    </message>
+    <message>
+        <source>Check for a new Birdtray version.</source>
+        <translation>Nach einer neuen Version von Birdtray suchen.</translation>
+    </message>
+    <message>
+        <source>Support non-NETWM compliant WMs</source>
+        <translation>Unterstütze nicht NETWM konforme Fenstermanager</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ist Ihr Desktop-Manager nicht komplett NETWM konform, müssen Sie diesen Auswahlkasten gegebenenfalls aktivieren, damit Birdtray das Fenster von Thunderbird erkennen, minimieren und verstecken kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation>Beim Start</translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation>Beim Verstecken von Thunderbird</translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation>Beim Anzeigen von Thunderbird</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn aktiviert fügt diese Option dem Kontextmenü die Aktion &quot;Ungelesene E-Mails ignorieren&quot; hinzu. Diese Aktion erlaubt das Ignorieren der momentanen ungelesenen E-Mails. Birdtray ignoriert dann alle zu dem Zeitpunkt ungelesene E-Mails und zeigt nur noch neu hinzukommende E-Mails an.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Gibt es zum Beispiel gerade 10 ungelesene E-Mails und Sie klicken auf die Aktion &quot;Ignorieren&quot;, wird Birdtray keinen Indikator für ungelesene E-Mails anzeigen, solange die Anzahl der ungelesenen E-Mails bei 10 bleibt. Sobald eine neue E-Mail empfangen wird und es somit 11 ungelesene E-Mails gibt, zeigt Birdtray eine ungelesene E-Mail an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Fatal</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Schwerwiegender Fehler: %1
+
+Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
     </message>
 </context>
 <context>
@@ -548,6 +576,17 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation>Konto</translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation>Benachrichtigungsfarbe</translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -555,18 +594,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation>Fatal</translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Die Systemleiste kann leider auf Ihrem System nicht durch dieses Add-on gesteuert werden.</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation>Die Datei konnte nicht geöffnet werden: </translation>
@@ -599,41 +627,9 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
         <source>Unexpected end of group.</source>
         <translation>Unerwartetes Gruppenende.</translation>
     </message>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>Das Standard-Systemleistensymbol konnte nicht geladen werden.</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation>Sqlite basierende Konten migriert</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation>Konto</translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation>Benachrichtigungsfarbe</translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation>Schwerwiegender Fehler: %1
-
-Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation>Die Einstellungen konnten nicht gespeichert werden</translation>
@@ -645,8 +641,20 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
 %2</translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Sqlite basierende Konten migriert</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
+        <translation>Das Standard-Systemleistensymbol konnte nicht geladen werden.</translation>
     </message>
 </context>
 <context>
@@ -794,12 +802,12 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
         <translation>Diese Version ignorieren</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Aktualisieren und Neustarten</translation>
-    </message>
-    <message>
         <source>ca. %1 Mb</source>
         <translation>ca. %1 Mb</translation>
+    </message>
+    <message>
+        <source>Update and restart</source>
+        <translation>Aktualisieren und Neustarten</translation>
     </message>
 </context>
 <context>
@@ -819,10 +827,6 @@ Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
     <message>
         <source>Downloading Birdtray installer...</source>
         <translation>Die Birdtray-Installationsdatei wird heruntergeladen…</translation>
-    </message>
-    <message>
-        <source>Update and Restart</source>
-        <translation>Aktualisieren und Neustarten</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>

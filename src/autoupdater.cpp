@@ -19,7 +19,7 @@
 
 #define LATEST_VERSION_INFO_URL "https://api.github.com/repos/gyunaev/birdtray/releases/latest"
 #define GENERIC_DOWNLOAD_URL "https://github.com/gyunaev/birdtray/releases/latest"
-#define VERSION_TAG_REGEX R"(^(RELEASE_|v)?(?<major>\d+)\.(?<minor>\d+)(\.(?<patch>\d+))?$)"
+#define VERSION_TAG_REGEX R"(^v(?<major>\d+)\.(?<minor>\d+)(\.(?<patch>\d+))?$)"
 
 AutoUpdater::AutoUpdater(QObject* parent) :
         QObject(parent),
@@ -143,7 +143,9 @@ void AutoUpdater::startDownload() {
             downloadProcessDialog->reset();
         }
         downloadProcessDialog->show();
-        QNetworkReply* reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
+        QNetworkRequest request(downloadUrl);
+        request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+        QNetworkReply* reply = networkAccessManager->get(request);
         connect(reply, &QNetworkReply::downloadProgress, this,
                 [=](qint64 bytesReceived, qint64 bytesTotal) {
                     AutoUpdater::onDownloadProgress(reply, bytesReceived, bytesTotal);
@@ -209,20 +211,7 @@ void AutoUpdater::onReleaseInfoRequestFinished(QNetworkReply* result) {
 }
 
 void AutoUpdater::onInstallerDownloadFinished(QNetworkReply* result) {
-    QVariant redirectionTarget = result->attribute(QNetworkRequest::RedirectionTargetAttribute);
-    if (!redirectionTarget.isNull()) {
-        QUrl newUrl = resolveRedirectDownloadUrl(redirectionTarget.toUrl());
-        if (newUrl.isValid()) {
-            downloadUrl = newUrl;
-            startDownload();
-            return;
-        } else {
-            QMessageBox::critical(
-                    nullptr, tr("Installer download failed"),
-                    tr("Failed to download the Birdtray installer:\n") + tr("Invalid redirect: ")
-                    + redirectionTarget.toString(), QMessageBox::StandardButton::Abort);
-        }
-    } else if (installerFile.write(result->readAll()) == -1) {
+    if (installerFile.write(result->readAll()) == -1) {
         QString errorMessage(tr("Failed to save the Birdtray installer:\n")
                              + installerFile.errorString());
         installerFile.remove();
@@ -267,19 +256,6 @@ void AutoUpdater::onDownloadProgress(QNetworkReply* result, qint64 bytesReceived
             downloadProcessDialog->onDownloadProgress(bytesReceived, bytesTotal);
         }
     }
-}
-
-QUrl AutoUpdater::resolveRedirectDownloadUrl(const QUrl &redirectUrl) const {
-    QUrl newUrl;
-    if (redirectUrl.isRelative()) {
-        newUrl = downloadUrl.resolved(redirectUrl);
-    } else {
-        newUrl = redirectUrl;
-    }
-    if (!newUrl.isEmpty() && newUrl != downloadUrl) {
-        return newUrl;
-    }
-    return QUrl();
 }
 
 bool AutoUpdater::versionGrater(const int (&version)[3], const int (&other)[3]) {

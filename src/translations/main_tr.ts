@@ -26,10 +26,6 @@ OpenSSL yüklenmemiş olabilir.</translation>
         <translation>Yükleyici indirilemedi</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Geçersiz yönlendirme: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Güncelleştirme başarısız</translation>
     </message>
@@ -40,10 +36,6 @@ OpenSSL yüklenmemiş olabilir.</translation>
 </context>
 <context>
     <name>BirdtrayApp</name>
-    <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Thunderbird&apos;den yeni postalar için ücretsiz bir sistem tepsisi bildirim programı</translation>
-    </message>
     <message>
         <source>Display the contents of the given mork database.</source>
         <translation>Verilen mork veritabanının içeriğini görüntüleyin.</translation>
@@ -85,8 +77,16 @@ OpenSSL yüklenmemiş olabilir.</translation>
         <translation>Log&apos;u bir dosyaya yazın.</translation>
     </message>
     <message>
-        <source>FILE</source>
-        <translation>DOSYA</translation>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>Thunderbird&apos;den yeni postalar için ücretsiz bir sistem tepsisi bildirim programı.</translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation>dosya</translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
+        <translation>Üzgünüz, sistem tepsisi işletim sisteminizdeki bu eklenti üzerinden kontrol edilemez.</translation>
     </message>
 </context>
 <context>
@@ -173,10 +173,6 @@ tuşunu basılı tutarak tıklayın):</translation>
     <message>
         <source>Multiple notification color:</source>
         <translation>Çoklu bildirim rengi:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -311,16 +307,8 @@ tuşunu basılı tutarak tıklayın):</translation>
         <translation>Sistem tepsisi simgesini yapın</translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
-        <translation>Birdtray başladığında yeni güncellemeleri kontrol edin</translation>
-    </message>
-    <message>
         <source>Check for new updates on startup</source>
         <translation>Başlangıçta yeni güncellemeleri kontrol edin</translation>
-    </message>
-    <message>
-        <source>Check for a new Birdtray version</source>
-        <translation>Yeni Birdtray sürümünü kontrol edin</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -367,10 +355,6 @@ tuşunu basılı tutarak tıklayın):</translation>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Başlangıçta okunmamış e-postaları yoksay</translation>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
@@ -429,16 +413,8 @@ tuşunu basılı tutarak tıklayın):</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unread change cmd:</source>
         <translation>Okunmamış değişiklik cmd&apos;si:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -449,7 +425,39 @@ tuşunu basılı tutarak tıklayın):</translation>
         <translation>Simge bu dosyadan yüklenemedi. Simgeyi bir görüntü düzenleme aracına yüklemeyi ve farklı bir formatta kaydetmeyi deneyin.</translation>
     </message>
     <message>
-        <source>CheckBox</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for new updates when Birdtray starts.</source>
+        <translation>Birdtray başladığında yeni güncellemeleri kontrol edin.</translation>
+    </message>
+    <message>
+        <source>Check for a new Birdtray version.</source>
+        <translation>Yeni Birdtray sürümünü kontrol edin.</translation>
+    </message>
+    <message>
+        <source>Support non-NETWM compliant WMs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -471,8 +479,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
-        <translation>Thunderbird&apos;ü gizlemek için Birdtray simgesine tıkladığınızda, şu anda okunmamış tüm e-postaları yok sayarak simgeyi sıfırlayın</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Log dosyası açılamadı %s: %s</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Kritik</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Kritik hata: %1
+
+Log dosyası %2 dosyasına yazıldı</translation>
     </message>
 </context>
 <context>
@@ -535,6 +562,17 @@ Lütfen doğru profiller dizinini seçtiğinizden emin olun.</translation>
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation>Hesap</translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation>Bildirim rengi</translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -542,22 +580,7 @@ Lütfen doğru profiller dizinini seçtiğinizden emin olun.</translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation>Kritik</translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Üzgünüz, sistem tepsisi işletim sisteminizdeki bu eklenti üzerinden kontrol edilemez.</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>Varsayılan sistem tepsisi simgesi yüklenemiyor.</translation>
-    </message>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation>Dosya açılamadı: </translation>
@@ -590,37 +613,9 @@ Lütfen doğru profiller dizinini seçtiğinizden emin olun.</translation>
         <source>Unexpected end of group.</source>
         <translation>Grubun beklenmedik sonu.</translation>
     </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Sqlite ayrıştırıcısını kullanarak bir veya daha fazla posta klasörünün izlenmesini yapılandırmıştınız. Bu yöntem kaldırılmıştır. Yapılandırmalarınız Mork ayrıştırıcısına taşındı, ancak yapılandırılmış bazı posta klasörleri bulunamadı.</translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation>Sqlite tabanlı hesaplar birleştirildi</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Sqlite ayrıştırıcısını kullanarak bir veya daha fazla posta hesabının izlenmesini yapılandırmıştınız. Bu yöntem kaldırılmıştır. Konfigürasyonlarınız Mork ayrıştırıcısına taşındı. Lütfen tüm hesapların doğru şekilde eşlendiğini doğrulayın.</translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation>Hesap</translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation>Bildirim rengi</translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation>Kritik hata: %1
-
-Log dosyası %2 dosyasına yazıldı</translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation>Ayarlar kaydedilemedi</translation>
@@ -632,8 +627,20 @@ Log dosyası %2 dosyasına yazıldı</translation>
 %2</translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Log dosyası açılamadı %s: %s</translation>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Sqlite tabanlı hesaplar birleştirildi</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>Sqlite ayrıştırıcısını kullanarak bir veya daha fazla posta klasörünün izlenmesini yapılandırmıştınız. Bu yöntem kaldırılmıştır. Yapılandırmalarınız Mork ayrıştırıcısına taşındı, ancak yapılandırılmış bazı posta klasörleri bulunamadı.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>Sqlite ayrıştırıcısını kullanarak bir veya daha fazla posta hesabının izlenmesini yapılandırmıştınız. Bu yöntem kaldırılmıştır. Konfigürasyonlarınız Mork ayrıştırıcısına taşındı. Lütfen tüm hesapların doğru şekilde eşlendiğini doğrulayın.</translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
+        <translation>Varsayılan sistem tepsisi simgesi yüklenemiyor.</translation>
     </message>
 </context>
 <context>
@@ -781,12 +788,12 @@ Log dosyası %2 dosyasına yazıldı</translation>
         <translation>Bu sürümü yok say</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Güncelle ve Yeniden Başlat</translation>
-    </message>
-    <message>
         <source>ca. %1 Mb</source>
         <translation>%1 Mb</translation>
+    </message>
+    <message>
+        <source>Update and restart</source>
+        <translation>Güncelle ve Yeniden Başlat</translation>
     </message>
 </context>
 <context>
@@ -806,10 +813,6 @@ Log dosyası %2 dosyasına yazıldı</translation>
     <message>
         <source>Downloading Birdtray installer...</source>
         <translation>Birdtray yükleyicisi indiriliyor ...</translation>
-    </message>
-    <message>
-        <source>Update and Restart</source>
-        <translation>Güncelle ve Yeniden Başlat</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>

@@ -154,6 +154,9 @@ void MailAccountDialog::loadAccounts(QTreeWidgetItem* profileTreeItem,
                 (void) msfFileIterator.next();
                 QFileInfo msfFile = msfFileIterator.fileInfo();
                 QString name = Utils::getMailFolderName(msfFile);
+                if (name.isNull()) {
+                    continue;
+                }
                 auto* folderItem = new QTreeWidgetItem(accountItem, {name});
                 if (QString::compare(
                         msfFile.completeBaseName(), "INBOX", Qt::CaseInsensitive) == 0) {

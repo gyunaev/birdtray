@@ -9,6 +9,7 @@
 #include <QSettings>
 
 #include "setting_newemail.h"
+#include "utils.h"
 
 class QSettings;
 
@@ -101,14 +102,21 @@ class Settings
 
         // Whether to show the unread email count
         bool    mShowUnreadEmailCount;
-
-        // Whether to ignore all currently unread emails if Thunderbird is hidden by Birdtray
-        bool    mForceIgnoreUnreadEmailsOnMinimize;
         
         /**
          * Ignore the total number of unread emails that are present at startup.
          */
-        bool    ignoreStartUnreadCount;
+        bool    ignoreUnreadCountOnStart;
+        
+        /**
+         * Ignore the number of unread emails when showing Thunderbird.
+         */
+        bool    ignoreUnreadCountOnShow;
+    
+        /**
+         * Ignore the number of unread emails when hiding Thunderbird.
+         */
+        bool    ignoreUnreadCountOnHide;
         
         /**
          * Enables or disabled the dialog on startup that shows if no accounts were configured.
@@ -131,16 +139,20 @@ class Settings
         bool    mNewEmailMenuEnabled;
         QList< Setting_NewEmail >   mNewEmailData;
 
-        // Maps the folder path to the notification color.
-        // The original order of strings is stored in mFolderNotificationList (to show in UI)
-        QMap< QString, QColor >   mFolderNotificationColors;
-        QStringList               mFolderNotificationList;
+        /**
+         * A mapping of watched mork files to their notification color
+         * in the order the user added them.
+         */
+        OrderedMap<QString, QColor> watchedMorkFiles;
 
         // If non-zero, specifies an interval in seconds for rereading index files even if they didn't change. 0 disables.
         unsigned int    mIndexFilesRereadIntervalSec;
 
-        // When the number of unread emails changes, birdtray can start this process
+        // When the number of unread emails changes, Birdtray can start this process
         QString                   mProcessRunOnCountChange;
+
+        // Whether to support non-compliant NetWM WMs by ignoring NETWM hints
+        bool                      mIgnoreNETWMhints;
 
         // Load and save them
         void    save();
@@ -166,6 +178,8 @@ class Settings
         void setNotificationIcon(const QPixmap& icon);
 
     private:
+        Q_DECLARE_TR_FUNCTIONS(Settings)
+    
         // Loading from either storage
         void    fromJSON( const QJsonObject& settings );
 

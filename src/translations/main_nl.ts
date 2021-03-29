@@ -26,10 +26,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Downloaden mislukt</translation>
     </message>
     <message>
-        <source>Invalid redirect: </source>
-        <translation>Ongeldige doorverwijzing: </translation>
-    </message>
-    <message>
         <source>Update failed</source>
         <translation>Update mislukt</translation>
     </message>
@@ -40,10 +36,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
 </context>
 <context>
     <name>BirdtrayApp</name>
-    <message>
-        <source>A free system tray notification for new mail for Thunderbird</source>
-        <translation>Een gratis systeemvakprogramma dat meldingen toont van Thunderbird</translation>
-    </message>
     <message>
         <source>Display the contents of the given mork database.</source>
         <translation>Bekijk de inhoud van de opgegeven mork-databank.</translation>
@@ -85,8 +77,16 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Sla een logboek op.</translation>
     </message>
     <message>
-        <source>FILE</source>
-        <translation>BESTAND</translation>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>Een gratis systeemvakprogramma dat meldingen toont van Thunderbird.</translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation>bestand</translation>
+    </message>
+    <message>
+        <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
+        <translation>Het systeemvak van uw besturingssysteem kan niet worden beheerd middels deze add-on.</translation>
     </message>
 </context>
 <context>
@@ -172,10 +172,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     <message>
         <source>Multiple notification color:</source>
         <translation>Meldingskleur meerdere accounts:</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dit past de dikte van het lettertype aan - maak het bijv. vetgedrukt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Blinking speed:</source>
@@ -287,6 +283,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Please do not change these settings unless you understand what you&apos;re doing.</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>Pas deze instellingen alleen aan als u weet wat u doet!</translation>
     </message>
     <message>
@@ -310,16 +307,8 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>Systeemvakpictogram doorzichtig maken</translation>
     </message>
     <message>
-        <source>Check for new updates when Birdtray starts</source>
-        <translation>Controleren op updates tijdens opstarten</translation>
-    </message>
-    <message>
         <source>Check for new updates on startup</source>
         <translation>Controleren op updates tijdens opstarten</translation>
-    </message>
-    <message>
-        <source>Check for a new Birdtray version</source>
-        <translation>Controleer of er een nieuwe Birdtray-versie beschikbaar is</translation>
     </message>
     <message>
         <source>Check now</source>
@@ -368,10 +357,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;De volledige opdrachtregel (met argumenten) welke worden gebruikt om Thunderbird op te starten. Argumenten dienen spatiegescheiden te zijn, maar spaties tussen dubbele aanhalingstekens zijn toegestaan. Voorbeeld: &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Ignore unread emails at startup</source>
-        <translation>Ongelezen e-mails negeren bij opstarten</translation>
-    </message>
-    <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
         <translation>Negeer alle ongelezen e-mails die beschikbaar zijn als Birdtray opstart. Alleen nieuwe e-mails worden geteld door de ongelezen e-mail-aanduiding.</translation>
     </message>
@@ -389,6 +374,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>ondoorzichtig als er nieuwe e-mails zijn;</translation>
     </message>
     <message>
@@ -412,10 +398,6 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om het aantal ongelezen e-mails te tonen op het Birdtray-pictogram.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als u dit niet aankruist, dan kunt u alleen zien dat er ongelezen e-mails zijn aan het knipperende of anders uitziende pictogram (afhankelijk van uw instellingen).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If the unread email count goes below the &amp;quot;ignored&amp;quot; amount, the ignore resets to zero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 10 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Als het aantal ongelezen e-mails lager wordt dan het aantal &amp;quot;genegeerde&amp;quot;, dan wordt de teller op 0 gezet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Translations are powered by the community:</source>
         <translation>Birdtray wordt vertaald door de gemeenschap:</translation>
     </message>
@@ -433,23 +415,15 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value, and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>Ongelezen wijziging-opdracht:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selecteer de e-mailmappen die u wilt bijhouden.&lt;br/&gt;&lt;br/&gt;Als het venster een map niet toont, &lt;i&gt;gebruik dan Ctrl + Shift + klik&lt;/i&gt; om een bestandsselectievenster te openen zodat u een mork-bestand kunt toevoegen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CheckBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Het pictogram kan niet worden geladen uit het bestand. Open het in een afbeeldingsbewerker en sla het op als een ander bestandsformaat.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -484,8 +458,63 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Bedankt voor uw ondersteuning!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>When clicking on Birdtray icon to hide Thunderbird, reset the icon by ignoring all currently unread emails</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes the font thickness, i.e. makes the font bold.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dit past de dikte van het lettertype aan - maak het bijv. vetgedrukt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als dit niet leeggelaten wordt, dan wordt de opdracht aangeroepen telkens als de ongelezenteller verandert (inclusief als deze de nul bereikt). Deze wordt aangeroepen via de shell waar %NEW% vervangen wordt door de huidige ongelezen waarde en %OLD% door de vorige (welke dezelfde kan zijn als de huidige).&lt;/p&gt;&lt;p&gt;De meeste gebruikers hebben deze functionaliteit niet nodig dienen het vak leeg te laten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Check for new updates when Birdtray starts.</source>
+        <translation>Controleren op updates tijdens opstarten.</translation>
+    </message>
+    <message>
+        <source>Check for a new Birdtray version.</source>
+        <translation>Controleer of er een nieuwe Birdtray-versie beschikbaar is.</translation>
+    </message>
+    <message>
+        <source>Support non-NETWM compliant WMs</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kruis dit aan om de optie &amp;quot;Huidige ongelezen e-mails negeren &amp;quot; toe te voegen aan het rechtermuisknopmenu. Birdtray doet dan alsof er geen ongelezen e-mails meer zijn totdat er nieuwe e-mails binnenkomen.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Voorbeeld: Als er 11 ongelezen e-mails zijn en u heeft de optie &amp;quot;Negeren&amp;quot; geactiveerd, dan toont Birdtray geen indicator zolang het aantal op 10 blijft. Zodra er weer nieuwe e-mails binnenkomen, toont Birdtray het aantal vanaf dan, beginnende bij 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>Log</name>
+    <message>
+        <source>Failed to open log file %s: %s</source>
+        <translation>Het logboek &apos;%s&apos; kan niet worden geopend: %s</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Onmogelijk</translation>
+    </message>
+    <message>
+        <source>Fatal error: %1
+
+Log file is written into file %2</source>
+        <translation>Fatale fout: %1
+
+Het logboek is opgeslagen als %2</translation>
     </message>
 </context>
 <context>
@@ -548,6 +577,17 @@ Zorg ervoor dat u de juiste profielenmap heeft gekozen.</translation>
     </message>
 </context>
 <context>
+    <name>ModelAccountTree</name>
+    <message>
+        <source>Account</source>
+        <translation>Account</translation>
+    </message>
+    <message>
+        <source>Notification color</source>
+        <translation>Meldingskleur</translation>
+    </message>
+</context>
+<context>
     <name>ModelNewEmails</name>
     <message>
         <source>Menu entry item</source>
@@ -555,22 +595,7 @@ Zorg ervoor dat u de juiste profielenmap heeft gekozen.</translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>Fatal</source>
-        <translation>Onmogelijk</translation>
-    </message>
-    <message>
-        <source>Sorry, system tray cannot be controlled through this add-on on your operating system.</source>
-        <translation>Het systeemvak van uw besturingssysteem kan niet worden beheerd middels deze add-on.</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <source>Cannot load default system tray icon.</source>
-        <translation>Het laden van het standaard systeemvakpictogram is mislukt.</translation>
-    </message>
+    <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
         <translation>Bestand kan niet worden geopend: </translation>
@@ -603,37 +628,9 @@ Zorg ervoor dat u de juiste profielenmap heeft gekozen.</translation>
         <source>Unexpected end of group.</source>
         <translation>Onverwacht groepseinde.</translation>
     </message>
-    <message>
-        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker, maar enkele ingestelde e-mailmappen zijn niet aangetroffen.</translation>
-    </message>
-    <message>
-        <source>Sqlite based accounts migrated</source>
-        <translation>Op Sqlite gebaseerde accounts zijn gemigreerd</translation>
-    </message>
-    <message>
-        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker. Controleer of alle accounts juist zijn gemigreerd.</translation>
-    </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Account</source>
-        <translation>Account</translation>
-    </message>
-    <message>
-        <source>Notification color</source>
-        <translation>Meldingskleur</translation>
-    </message>
-    <message>
-        <source>Fatal error: %1
-
-Log file is written into file %2</source>
-        <translation>Fatale fout: %1
-
-Het logboek is opgeslagen als %2</translation>
-    </message>
+    <name>Settings</name>
     <message>
         <source>Could not save the settings</source>
         <translation>Kan instellingen niet opslaan</translation>
@@ -645,8 +642,20 @@ Het logboek is opgeslagen als %2</translation>
 %2</translation>
     </message>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Het logboek &apos;%s&apos; kan niet worden geopend: %s</translation>
+        <source>Sqlite based accounts migrated</source>
+        <translation>Op Sqlite gebaseerde accounts zijn gemigreerd</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
+        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker, maar enkele ingestelde e-mailmappen zijn niet aangetroffen.</translation>
+    </message>
+    <message>
+        <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
+        <translation>U had ingesteld dat één of meerdere e-mailmappen bijgehouden moesten worden middels de Sqlite-verwerker, maar deze methode is verwijderd. Uw instellingen zijn gemigreerd naar de Mork-verwerker. Controleer of alle accounts juist zijn gemigreerd.</translation>
+    </message>
+    <message>
+        <source>Cannot load default system tray icon.</source>
+        <translation>Het laden van het standaard systeemvakpictogram is mislukt.</translation>
     </message>
 </context>
 <context>
@@ -701,6 +710,7 @@ Het logboek is opgeslagen als %2</translation>
     </message>
     <message>
         <source>Snooze for ...</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>Onderdrukken:</translation>
     </message>
     <message>
@@ -794,12 +804,12 @@ Het logboek is opgeslagen als %2</translation>
         <translation>Deze versie negeren</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Bijwerken en opnieuw starten</translation>
-    </message>
-    <message>
         <source>ca. %1 Mb</source>
         <translation>ca. %1 mb</translation>
+    </message>
+    <message>
+        <source>Update and restart</source>
+        <translation>Bijwerken en opnieuw starten</translation>
     </message>
 </context>
 <context>
@@ -821,16 +831,12 @@ Het logboek is opgeslagen als %2</translation>
         <translation>Bezig met downloaden van Birdtray-installatiewizard...</translation>
     </message>
     <message>
-        <source>Update and Restart</source>
-        <translation>Bijwerken en opnieuw starten</translation>
-    </message>
-    <message>
         <source>Download finished. Restart and update Birdtray?</source>
         <translation>Het downloaden is afgerond. Wilt u Birdtray opnieuw starten om bij te werken?</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Bezig met downloaden van Birdtray-installatiewizard... (%1 mb/%2 mb)</translation>
+        <translation>Bezig met downloaden van Birdtray-installatiewizard... (%1 mb/%2 mb).</translation>
     </message>
 </context>
 </TS>

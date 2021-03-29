@@ -9,252 +9,277 @@
         <translation>English</translation>
     </message>
     <message>
-        <source>BirdtraySectionDescription</source>
-        <translation>A free system tray notification for new mail for Thunderbird.</translation>
+        <source>A free system tray notification for new mail for Thunderbird.</source>
+        <translation>BirdtraySectionDescription</translation>
     </message>
     <message>
-        <source>WinIntegrationSectionName</source>
-        <translation>Windows integration</translation>
+        <source>Windows integration</source>
+        <translation>WinIntegrationSectionName</translation>
     </message>
     <message>
-        <source>WinIntegrationGroupDescription</source>
-        <translation>Select how to integrate the program in Windows.</translation>
+        <source>Select how to integrate the program in Windows.</source>
+        <translation>WinIntegrationGroupDescription</translation>
     </message>
     <message>
-        <source>AutoRunSectionName</source>
-        <translation>AutoRun</translation>
+        <source>AutoRun</source>
+        <translation>AutoRunSectionName</translation>
     </message>
     <message>
-        <source>AutoRunDescription</source>
-        <translation>Automatically start ${PRODUCT_NAME} after login.</translation>
+        <source>Automatically start ${PRODUCT_NAME} after login.</source>
+        <translation>AutoRunDescription</translation>
     </message>
     <message>
-        <source>AutoCheckUpdateSectionName</source>
-        <translation>Auto Update-Check</translation>
+        <source>Auto Update-Check</source>
+        <translation>AutoCheckUpdateSectionName</translation>
     </message>
     <message>
-        <source>AutoCheckUpdateDescription</source>
-        <translation>Automatically search for updates of ${PRODUCT_NAME} at startup.</translation>
+        <source>Automatically search for updates of ${PRODUCT_NAME} at startup.</source>
+        <translation>AutoCheckUpdateDescription</translation>
     </message>
     <message>
-        <source>ProgramGroupSectionName</source>
-        <translation>Program Group Entry</translation>
+        <source>Program Group Entry</source>
+        <translation>ProgramGroupSectionName</translation>
     </message>
     <message>
-        <source>ProgramGroupDescription</source>
-        <translation>Create a ${PRODUCT_NAME} program group under Start Menu > Programs.</translation>
+        <source>Create a ${PRODUCT_NAME} program group under Start Menu > Programs.</source>
+        <translation>ProgramGroupDescription</translation>
     </message>
     <message>
-        <source>DesktopEntrySectionName</source>
-        <translation>Desktop Entry</translation>
+        <source>Desktop Entry</source>
+        <translation>DesktopEntrySectionName</translation>
     </message>
     <message>
-        <source>DesktopEntryDescription</source>
-        <translation>Create a ${PRODUCT_NAME} icon on the Desktop.</translation>
+        <source>Create a ${PRODUCT_NAME} icon on the Desktop.</source>
+        <translation>DesktopEntryDescription</translation>
     </message>
     <message>
-        <source>StartMenuSectionName</source>
-        <translation>Start Menu Entry</translation>
+        <source>Start Menu Entry</source>
+        <translation>StartMenuSectionName</translation>
     </message>
     <message>
-        <source>StartMenuDescription</source>
-        <translation>Create a ${PRODUCT_NAME} icon in the Start Menu.</translation>
+        <source>Create a ${PRODUCT_NAME} icon in the Start Menu.</source>
+        <translation>StartMenuDescription</translation>
     </message>
     <message>
-        <source>TranslationsSectionName</source>
-        <translation>Translations</translation>
+        <source>Translations</source>
+        <translation>TranslationsSectionName</translation>
     </message>
     <message>
-        <source>TranslationsDescription</source>
-        <translation>Select translations for ${PRODUCT_NAME}. ${PRODUCT_NAME} will choose a translation based on the system language.</translation>
+        <source>Select translations for ${PRODUCT_NAME}. ${PRODUCT_NAME} will choose a translation based on the system language.</source>
+        <translation>TranslationsDescription</translation>
     </message>
     <message>
-        <source>UserSettingsSectionName</source>
-        <translation>${PRODUCT_NAME} User Settings</translation>
+        <source>${PRODUCT_NAME} User Settings</source>
+        <translation>UserSettingsSectionName</translation>
     </message>
     <message>
-        <source>UserSettingsDescription</source>
-        <translation>Your settings and configuration made within ${PRODUCT_NAME}.</translation>
+        <source>Your settings and configuration made within ${PRODUCT_NAME}.</source>
+        <translation>UserSettingsDescription</translation>
     </message>
     <message>
-        <source>LicenseStartMenuLinkName</source>
-        <translation>License Agreement</translation>
+        <source>License Agreement</source>
+        <translation>LicenseStartMenuLinkName</translation>
     </message>
     <message>
-        <source>FinishPageRunBirdtray</source>
-        <translation>Start ${PRODUCT_NAME}</translation>
+        <source>Start ${PRODUCT_NAME}</source>
+        <translation>FinishPageRunBirdtray</translation>
     </message>
     <message>
-        <source>UninstallerConfirmation</source>
-        <translation>Click uninstall to begin the process.</translation>
+        <source>Click uninstall to begin the process.</source>
+        <translation>UninstallerConfirmation</translation>
     </message>
     <message>
-        <source>UninstallPreviousVersion</source>
-        <translation>Uninstalling previous version of ${PRODUCT_NAME}</translation>
+        <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
+        <translation>UninstallPreviousVersion</translation>
     </message>
     <message>
-        <source>UninstallPreviousVersionError</source>
-        <translation>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</translation>
+        <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
+        <translation>UninstallPreviousVersionError</translation>
     </message>
     <message>
-        <source>UninstallExecutionError</source>
-        <translation>Error executing uninstaller.</translation>
+        <source>Error executing uninstaller.</source>
+        <translation>UninstallExecutionError</translation>
     </message>
     <message>
-        <source>StopBirdtray</source>
-        <translation>${PRODUCT_NAME} is currently running. Press OK to stop ${PRODUCT_NAME} to continue with the installation.</translation>
+        <source>${PRODUCT_NAME} is currently running. Press OK to stop ${PRODUCT_NAME} to continue with the installation.</source>
+        <translation>StopBirdtray</translation>
     </message>
     <message>
-        <source>StoppingBirdtray</source>
-        <translation>Closing process ${EXE_NAME}</translation>
+        <source>Closing process ${EXE_NAME}...</source>
+        <translation>StoppingBirdtray</translation>
     </message>
     <message>
-        <source>StopBirdtrayError</source>
-        <translation>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</translation>
+        <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>
+        <translation>StopBirdtrayError</translation>
     </message>
     <message>
-        <source>StopBirdtrayUninstall</source>
-        <translation>${PRODUCT_NAME} is currently running. Press OK to stop ${PRODUCT_NAME} to continue with the uninstall.</translation>
+        <source>${PRODUCT_NAME} is currently running. Press OK to stop ${PRODUCT_NAME} to continue with the uninstall.</source>
+        <translation>StopBirdtrayUninstall</translation>
     </message>
     <message>
-        <source>StopBirdtrayUninstallError</source>
-        <translation>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the uninstall.</translation>
+        <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the uninstall.</source>
+        <translation>StopBirdtrayUninstallError</translation>
     </message>
     <message>
-        <source>SetupAlreadyRunning</source>
-        <translation>The setup of ${PRODUCT_NAME} is already running.$\r$\nPlease, close all instances of it and click Retry to continue, or Cancel to exit.</translation>
+        <source>The setup of ${PRODUCT_NAME} is already running.
+Please, close all instances of it and click Retry to continue, or Cancel to exit.</source>
+        <translation>SetupAlreadyRunning</translation>
     </message>
     <message>
-        <source>UninstallAlreadyRunning</source>
-        <translation>The uninstall of ${PRODUCT_NAME} is already running.$\r$\n Please, close all instances of it and click Retry to continue, or Cancel to exit.</translation>
+        <source>The uninstall of ${PRODUCT_NAME} is already running.
+Please, close all instances of it and click Retry to continue, or Cancel to exit.</source>
+        <translation>UninstallAlreadyRunning</translation>
     </message>
     <message>
-        <source>BadInstallPath</source>
-        <translation>The install path must not contain any of$\r$\n${BAD_PATH_CHARS}.</translation>
+        <source>The install path must not contain any of:
+${BAD_PATH_CHARS}</source>
+        <translation>BadInstallPath</translation>
     </message>
     <message>
-        <source>InstallPathContainsPreviousVersion</source>
-        <translation>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</translation>
+        <source>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</source>
+        <translation>InstallPathContainsPreviousVersion</translation>
     </message>
     <message>
-        <source>InstallPathNotEmpty</source>
-        <translation>The install path is not empty, but it doesn't look like it contains a previous ${PRODUCT_NAME} installation. The content will get overwritten.</translation>
+        <source>The install path is not empty, but it doesn't look like it contains a previous ${PRODUCT_NAME} installation. The content will get overwritten.</source>
+        <translation>InstallPathNotEmpty</translation>
     </message>
     <message>
-        <source>CurrentUserOnly</source>
-        <translation>$0 (current user only)</translation>
+        <source>$0 (current user only)</source>
+        <translation>CurrentUserOnly</translation>
     </message>
     <message>
-        <source>InstallFailed</source>
-        <translation>${PRODUCT_NAME} ${VERSION} could not be fully installed.$\r$\n\Please, restart Windows and run the setup program again.</translation>
+        <source>${PRODUCT_NAME} ${VERSION} could not be fully installed.
+Please, restart Windows and run the setup program again.</source>
+        <translation>InstallFailed</translation>
     </message>
     <message>
-        <source>InstallFailedCauseUninstallerFailed</source>
-        <translation>${PRODUCT_NAME} could not be fully installed.$\r$\n\Please, restart Windows and run the setup program again.</translation>
+        <source>${PRODUCT_NAME} could not be fully installed.
+Please, restart Windows and run the setup program again.</source>
+        <translation>InstallFailedCauseUninstallerFailed</translation>
     </message>
     <message>
-        <source>UninstallFailed</source>
-        <translation>${PRODUCT_NAME} ${VERSION} could not be fully uninstalled.$\r$\nPlease, restart Windows and run the uninstaller again.</translation>
+        <source>${PRODUCT_NAME} ${VERSION} could not be fully uninstalled.
+Please, restart Windows and run the uninstaller again.</source>
+        <translation>UninstallFailed</translation>
     </message>
     <message>
-        <source>FileDeleteErrorDialog</source>
-        <translation>Error deleting file:$\r$\n$\r$\n$0$\r$\n$\r$\nClick Retry to try again, or$\r$\nCancel to stop the uninstall.</translation>
+        <source>Error deleting file:
+
+$0
+
+Click Retry to try again, or
+Cancel to stop the uninstall.</source>
+        <translation>FileDeleteErrorDialog</translation>
     </message>
     <message>
-        <source>FileDeleteError</source>
-        <translation>Error deleting file $0</translation>
+        <source>Error deleting file $0</source>
+        <translation>FileDeleteError</translation>
     </message>
     <message>
-        <source>Install64On32BitWarning</source>
-        <translation>You are about to install the 32-bit version of ${PRODUCT_NAME} on your 64-bit Windows. There is a 64-bit version of ${PRODUCT_NAME} available for download.</translation>
+        <source>You are about to install the 32-bit version of ${PRODUCT_NAME} on your 64-bit Windows. There is a 64-bit version of ${PRODUCT_NAME} available for download.</source>
+        <translation>Install64On32BitWarning</translation>
     </message>
     <message>
-        <source>Install32On64BitError</source>
-        <translation>This installer contains the 64-bit version of ${PRODUCT_NAME}. Your computer is running a 32-bit version of Windows, which can not execute 64-bit programs. Please download the 32-bit installer of ${PRODUCT_NAME}.</translation>
+        <source>This installer contains the 64-bit version of ${PRODUCT_NAME}. Your computer is running a 32-bit version of Windows, which can not execute 64-bit programs. Please download the 32-bit installer of ${PRODUCT_NAME}.</source>
+        <translation>Install32On64BitError</translation>
     </message>
     <message>
-        <source>UnsupportedWindowsVersionError</source>
-        <translation>This program requires at least Windows ${MIN_WINDOWS_VER}.</translation>
+        <source>This program requires at least Windows ${MIN_WINDOWS_VER}.</source>
+        <translation>UnsupportedWindowsVersionError</translation>
     </message>
     <message>
-        <source>UninstallerAborted</source>
-        <translation>Uninstalling ${PRODUCT_NAME} has been aborted. Please try again later.</translation>
+        <source>Uninstalling ${PRODUCT_NAME} has been aborted. Please try again later.</source>
+        <translation>UninstallerAborted</translation>
     </message>
     <message>
-        <source>SettingsLink</source>
-        <translation>${PRODUCT_NAME} settings</translation>
+        <source>${PRODUCT_NAME} settings</source>
+        <translation>SettingsLink</translation>
     </message>
     <message>
-        <source>UninstallRestartAsUserQuestion</source>
-        <translation>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</translation>
+        <source>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</source>
+        <translation>UninstallRestartAsUserQuestion</translation>
     </message>
     <message>
-        <source>OpenUrl</source>
-        <translation>Opening $0 in default browser...</translation>
+        <source>Opening $0 in default browser...</source>
+        <translation>OpenUrl</translation>
     </message>
     <message>
-        <source>MissingVcRuntime</source>
-        <translation>Unable to find Visual C++ Runtime ${ARCH}.</translation>
+        <source>Unable to find Visual C++ Runtime ${ARCH}.</source>
+        <translation>MissingVcRuntime</translation>
     </message>
     <message>
-        <source>MissingVcRuntime_Dialog</source>
-        <translation>The following required component was not found on this computer:$\r$\nVisual C++ Runtime ${ARCH}$\r$\nDo you want to download the installer for the component?</translation>
+        <source>The following required component was not found on this computer:
+Visual C++ Runtime ${ARCH}
+Do you want to download the installer for the component?</source>
+        <translation>MissingVcRuntime_Dialog</translation>
     </message>
     <message>
-        <source>MissingVcRuntime_Retry</source>
-        <translation>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</translation>
+        <source>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</source>
+        <translation>MissingVcRuntime_Retry</translation>
     </message>
     <message>
-        <source>MissingVcRuntime_Found</source>
-        <translation>The required component was successfully detected on your computer.</translation>
+        <source>The required component was successfully detected on your computer.</source>
+        <translation>MissingVcRuntime_Found</translation>
     </message>
     <message>
-        <source>MissingVcRuntime_StillNotFound</source>
-        <translation>The required component was not found on your computer. Please search online for Visual C++ ${ARCH} downloads for Visual Studio 2015 and higher.</translation>
+        <source>The required component was not found on your computer. Please search online for Visual C++ ${ARCH} downloads for Visual Studio 2015 and higher.</source>
+        <translation>MissingVcRuntime_StillNotFound</translation>
     </message>
     <message>
-        <source>MissingVcRuntime_UnableToRun</source>
-        <translation>${PRODUCT_NAME} will not be able to run.</translation>
+        <source>${PRODUCT_NAME} will not be able to run.</source>
+        <translation>MissingVcRuntime_UnableToRun</translation>
     </message>
     <message>
-        <source>MissingVcRuntime_UnableToRunDialog</source>
-        <translation>${PRODUCT_NAME} will not be able to start because a required component is missing.</translation>
+        <source>${PRODUCT_NAME} will not be able to start because a required component is missing.</source>
+        <translation>MissingVcRuntime_UnableToRunDialog</translation>
     </message>
     <message>
-        <source>Lang_en</source>
-        <translation>English</translation>
+        <source>English</source>
+        <translation>Lang_en</translation>
     </message>
     <message>
-        <source>Lang_de</source>
-        <translation>German</translation>
+        <source>French</source>
+        <translation>Lang_fr</translation>
     </message>
     <message>
-        <source>Lang_nl</source>
-        <translation>Dutch</translation>
+        <source>German</source>
+        <translation>Lang_de</translation>
     </message>
     <message>
-        <source>Lang_it</source>
-        <translation>Italian</translation>
+        <source>Dutch</source>
+        <translation>Lang_nl</translation>
     </message>
     <message>
-        <source>Lang_ru</source>
-        <translation>Russian</translation>
+        <source>Italian</source>
+        <translation>Lang_it</translation>
     </message>
     <message>
-        <source>Lang_pt</source>
-        <translation>Portugees</translation>
+        <source>Russian</source>
+        <translation>Lang_ru</translation>
     </message>
     <message>
-        <source>Lang_es</source>
-        <translation>Spanish</translation>
+        <source>Portugees</source>
+        <translation>Lang_pt</translation>
     </message>
     <message>
-        <source>Lang_sv</source>
-        <translation>Swedish</translation>
+        <source>Spanish</source>
+        <translation>Lang_es</translation>
     </message>
     <message>
-        <source>Lang_tr</source>
-        <translation>Turkish</translation>
+        <source>Swedish</source>
+        <translation>Lang_sv</translation>
+    </message>
+    <message>
+        <source>Turkish</source>
+        <translation>Lang_tr</translation>
+    </message>
+    <message>
+        <source>Polish</source>
+        <translation>Lang_pl</translation>
+    </message>
+    <message>
+        <source>Chinese (Simplified)</source>
+        <translation>Lang_zh_cn</translation>
     </message>
 </context>
 </TS>

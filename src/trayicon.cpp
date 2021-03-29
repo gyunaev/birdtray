@@ -20,7 +20,6 @@ TrayIcon::TrayIcon(bool showSettings)
     mBlinkingDelta = 0.0;
     mBlinkingTimeout = 0;
 
-    mIgnoredUnreadEmails = 0;
     mUnreadCounter = 0;
 
     // Context menu
@@ -45,6 +44,10 @@ TrayIcon::TrayIcon(bool showSettings)
     mThunderbirdStartTime = QDateTime::currentDateTime().addSecs(settings->mLaunchThunderbirdDelay);
 
     mWinTools = WindowTools::create();
+    if (mWinTools) {
+        connect(mWinTools, &WindowTools::onWindowShown, this, &TrayIcon::onThunderbirdWindowShown);
+        connect(mWinTools, &WindowTools::onWindowHidden, this, &TrayIcon::onThunderbirdWindowHidden);
+    }
     createMenu();
     createUnreadCounterThread();
 
@@ -65,13 +68,9 @@ TrayIcon::TrayIcon(bool showSettings)
         doAutoUpdateCheck();
     }
     
-    if (settings->mFolderNotificationList.isEmpty()) {
-        unreadEmailsAtStart = 0;
-    }
-    
     // If the settings are not yet configure, pop up the message
     if (!showSettings && settings->showDialogIfNoAccountsConfigured
-        && settings->mFolderNotificationColors.isEmpty()) {
+        && settings->watchedMorkFiles.isEmpty()) {
         QMessageBox questionDialog(QMessageBox::Question, tr("Would you like to set up Birdtray?"),
                 tr("You have not yet configured any email folders to monitor. "
                    "Would you like to do it now?"), QMessageBox::Yes | QMessageBox::No);
@@ -100,6 +99,10 @@ TrayIcon::~TrayIcon() {
         networkConnectivityManager = nullptr;
     }
     if (mUnreadMonitor != nullptr) {
+        if (mUnreadMonitor->isRunning()) {
+            mUnreadMonitor->quit();
+            mUnreadMonitor->wait();
+        }
         mUnreadMonitor->deleteLater();
         mUnreadMonitor = nullptr;
     }
@@ -116,24 +119,19 @@ UnreadMonitor* TrayIcon::getUnreadMonitor() const {
 void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 {
     Log::debug("unreadCounterUpdate %d", total );
-    
-    if (unreadEmailsAtStart == -1) {
-        unreadEmailsAtStart = static_cast<long>(total);
+    Settings* settings = BirdtrayApp::get()->getSettings();
+    if (settings->ignoreUnreadCountOnStart && !haveUnreadMailsData) {
+        // Ignore unread emails that are present at Birdtray startup.
+        setIgnoredUnreadMails(total, false);
     }
-    if (unreadEmailsAtStart != 0 && BirdtrayApp::get()->getSettings()->ignoreStartUnreadCount) {
-        // Ignore unread emails that were present at Birdtray startup.
-        if (static_cast<long>(total) > unreadEmailsAtStart) {
-            total = total - unreadEmailsAtStart;
-        } else {
-            unreadEmailsAtStart = static_cast<long>(total);
-            total = 0;
-        }
+    if (total < ignoredUnreadEmails) {
+        setIgnoredUnreadMails(total, false);
     }
     
     // Execute the hook process
-    if ( !BirdtrayApp::get()->getSettings()->mProcessRunOnCountChange.isEmpty() )
+    if ( !settings->mProcessRunOnCountChange.isEmpty() )
     {
-        QString cmdline = BirdtrayApp::get()->getSettings()->mProcessRunOnCountChange;
+        QString cmdline = settings->mProcessRunOnCountChange;
 
         // Replace the %NEW% with the new unread count
         cmdline.replace( "%NEW%", QString::number( total ) );
@@ -149,6 +147,7 @@ void TrayIcon::unreadCounterUpdate( unsigned int total, QColor color )
 
     mUnreadCounter = total;
     mUnreadColor = color;
+    haveUnreadMailsData = true;
 
     updateIcon();
 }
@@ -200,15 +199,8 @@ void TrayIcon::updateIcon()
     }
     else
     {
-        // If we have less unread than current count, reset the unread
-        if ( unread < mIgnoredUnreadEmails )
-        {
-            mIgnoredUnreadEmails = 0;
-            updateIgnoredUnreads();
-        }
-
-        // Apply the ignore
-        unread -= mIgnoredUnreadEmails;
+        // Subtract the ignored unread mails
+        unread -= ignoredUnreadEmails;
 
         // Are we blinking, and if not, should we be?
         if (unread > 0 && settings->mBlinkSpeed > 0 && mBlinkingTimeout == 0) {
@@ -306,8 +298,14 @@ void TrayIcon::updateIcon()
                 continue;
             }
             QFileInfo accountMorkFile(path);
-            QString name = Utils::getMailAccountName(accountMorkFile)
-                           + " [" + Utils::getMailFolderName(accountMorkFile) + "]";
+            QString accountName = Utils::getMailAccountName(accountMorkFile);
+            QString mailFolderName = Utils::getMailFolderName(accountMorkFile);
+            QString name;
+            if (accountName.isNull() || mailFolderName.isNull()) {
+                name = path;
+            } else {
+                name = accountName + " [" + mailFolderName + "]";
+            }
             const QString &warning = warningsIterator.value();
             toolTip << name + ": " + warning;
         }
@@ -335,10 +333,11 @@ void TrayIcon::enableBlinking(bool enabled)
 
         // If we are using the alpha transition, we have to update icon more often
         if (settings->mBlinkingUseAlphaTransition) {
-            mBlinkingDelta = settings->mBlinkSpeed / 100.0;
-            mBlinkingTimeout = 100;
+            mBlinkingDelta = std::min(1.0, (2.0 / settings->mBlinkSpeed));
+            mBlinkingTimeout = settings->mBlinkSpeed == 1 ? 50 : 100;
         } else {
-            // The blinking speed slider is a value from 0 to 30, so we make it 50x
+            // The blinking speed slider is a value from 0 to 30,
+            // so we make it 50x so the maximum is 1500 ms.
             mBlinkingDelta = 0;
             mBlinkingTimeout = settings->mBlinkSpeed * 50;
         }
@@ -466,7 +465,6 @@ void TrayIcon::showSettings()
         return;
     }
     Settings* settings = BirdtrayApp::get()->getSettings();
-    bool ignoreStartUnreadCountBefore = settings->ignoreStartUnreadCount;
     settingsDialog = new DialogSettings();
     connect(settingsDialog, &QDialog::finished, this, [=](int result) {
         settingsDialog->deleteLater();
@@ -475,21 +473,15 @@ void TrayIcon::showSettings()
             return;
         }
         settings->save();
+        if (!settings->mAllowSuppressingUnreads) {
+            setIgnoredUnreadMails(0, false);
+        }
 
         // Recreate menu
         createMenu();
 
         // Recalculate the delta
         enableBlinking( false );
-
-        if (unreadEmailsAtStart != -1
-            && settings->ignoreStartUnreadCount != ignoreStartUnreadCountBefore) {
-            if (!settings->ignoreStartUnreadCount) {
-                mUnreadCounter += unreadEmailsAtStart;
-            } else if (mUnreadCounter - unreadEmailsAtStart >= 0) {
-                mUnreadCounter -= unreadEmailsAtStart;
-            }
-        }
         updateIcon();
         // TODO: Update on thunderbird path setting change
 
@@ -563,8 +555,7 @@ void TrayIcon::actionNewEmail() {
 
 void TrayIcon::actionIgnoreEmails()
 {
-    mIgnoredUnreadEmails = mUnreadCounter;
-    updateIgnoredUnreads();
+    setIgnoredUnreadMails(mUnreadCounter);
 }
 
 void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason) {
@@ -650,11 +641,13 @@ void TrayIcon::createMenu()
     if (settings->mAllowSuppressingUnreads) {
         mMenuIgnoreUnreads = new QAction( tr("Ignore unread emails"), this );
         connect( mMenuIgnoreUnreads, &QAction::triggered, this, &TrayIcon::actionIgnoreEmails );
-
         mSystrayMenu->addAction( mMenuIgnoreUnreads );
+        // Force an update of the ignore unread mails menu entry text.
+        setIgnoredUnreadMails(ignoredUnreadEmails++, false);
     }
-    else
-        mMenuIgnoreUnreads = 0;
+    else {
+        mMenuIgnoreUnreads = nullptr;
+    }
 
     mSystrayMenu->addSeparator();
 
@@ -790,29 +783,46 @@ void TrayIcon::onAutoUpdateCheckFinished(bool foundUpdate, const QString &errorM
     }
 }
 
+void TrayIcon::onThunderbirdWindowShown() {
+    mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
+    if (haveUnreadMailsData && BirdtrayApp::get()->getSettings()->ignoreUnreadCountOnShow) {
+        setIgnoredUnreadMails(mUnreadCounter);
+    }
+}
+
+void TrayIcon::onThunderbirdWindowHidden() {
+    mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
+    if (haveUnreadMailsData && BirdtrayApp::get()->getSettings()->ignoreUnreadCountOnHide) {
+        setIgnoredUnreadMails(mUnreadCounter);
+    }
+}
+
 void TrayIcon::hideThunderbird()
 {
-    if ( BirdtrayApp::get()->getSettings()->mForceIgnoreUnreadEmailsOnMinimize )
-        actionIgnoreEmails();
-
-    mMenuShowHideThunderbird->setText( tr("Show Thunderbird") );
     mWinTools->hide();
 }
 
 void TrayIcon::showThunderbird()
 {
-    mMenuShowHideThunderbird->setText( tr("Hide Thunderbird") );
     mWinTools->show();
 }
 
-void TrayIcon::updateIgnoredUnreads()
-{
-    if ( mMenuIgnoreUnreads )
-    {
-        if ( mIgnoredUnreadEmails > 0 )
-            mMenuIgnoreUnreads->setText( tr("Ignore unread emails (now %1)") .arg( mIgnoredUnreadEmails ) );
-        else
-            mMenuIgnoreUnreads->setText( tr("Ignore unread emails") );
+void TrayIcon::setIgnoredUnreadMails(unsigned int ignoredMails, bool updateIcon) {
+    if (ignoredMails == ignoredUnreadEmails) {
+        return;
+    }
+    Log::debug("Setting ignored unread mails to %u", ignoredMails);
+    ignoredUnreadEmails = ignoredMails;
+    if (mMenuIgnoreUnreads) {
+        if (ignoredUnreadEmails > 0) {
+            mMenuIgnoreUnreads->setText(
+                    tr("Ignore unread emails (now %1)").arg(ignoredUnreadEmails));
+        } else {
+            mMenuIgnoreUnreads->setText(tr("Ignore unread emails"));
+        }
+    }
+    if (updateIcon) {
+        this->updateIcon();
     }
 }
 

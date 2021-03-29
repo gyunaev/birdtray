@@ -158,7 +158,7 @@ bool BirdtrayApp::loadTranslation(QTranslator &translator, QLocale &locale,
 
 void BirdtrayApp::parseCmdArguments() {
     commandLineParser.setApplicationDescription(
-            tr("A free system tray notification for new mail for Thunderbird"));
+            tr("A free system tray notification for new mail for Thunderbird."));
     commandLineParser.addHelpOption();
     commandLineParser.addVersionOption();
     commandLineParser.addOptions({
@@ -170,7 +170,7 @@ void BirdtrayApp::parseCmdArguments() {
             {{"s", SHOW_THUNDERBIRD_COMMAND}, tr("Show the Thunderbird window.")},
             {{"H", HIDE_THUNDERBIRD_COMMAND}, tr("Hide the Thunderbird window.")},
             {{"r", "reset-settings"}, tr("Reset the settings to the defaults.")},
-            {{"l", "log"}, tr("Write log to a file."), tr("FILE")}
+            {{"l", "log"}, tr("Write log to a file."), tr("file")}
     });
     commandLineParser.process(*this);
 }
@@ -264,9 +264,13 @@ void BirdtrayApp::ensureSystemTrayAvailable() {
         }
         passed++;
         if (passed > 120) {
-            Log::fatal( QApplication::tr("Sorry, system tray cannot be controlled "
-                                          "through this add-on on your operating system.") );
+            Log::fatal(tr("Sorry, the system tray cannot be controlled "
+                          "by this add-on on your operating system."));
         }
+
+        // Let the Qt event loop recognize the tray appearing
+        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents );
+
         QThread::msleep(500);
     }
 }
