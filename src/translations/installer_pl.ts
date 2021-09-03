@@ -294,5 +294,9 @@ Czy chcesz pobrać jego instalator?</translation>
         <source>Chinese (Simplified)</source>
         <translation>Chiński (uproszczony)</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>grecki</translation>
+    </message>
 </context>
 </TS>

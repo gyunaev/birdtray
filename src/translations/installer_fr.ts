@@ -294,5 +294,9 @@ Voulez-vous télécharger le programme d'installation correspondant ?</translati
         <source>Chinese (Simplified)</source>
         <translation>Chinois (simplifié)</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>Grec</translation>
+    </message>
 </context>
 </TS>

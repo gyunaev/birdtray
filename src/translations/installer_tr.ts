@@ -294,5 +294,9 @@ Bileşen için yükleyiciyi indirmek istiyor musunuz?</translation>
         <source>Chinese (Simplified)</source>
         <translation>Çince (Basitleştirilmiş)</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>Yunan</translation>
+    </message>
 </context>
 </TS>

@@ -294,5 +294,9 @@ Deseja baixar o instalador para o componente?</translation>
         <source>Chinese (Simplified)</source>
         <translation>Chinês (Simplificado)</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>Grego</translation>
+    </message>
 </context>
 </TS>
