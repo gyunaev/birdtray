@@ -530,6 +530,7 @@ Log file is written into file %2</source>
 Do you want to continue?</source>
         <translation>Δεν έχει επιλεγεί φάκελος αλληλογραφίας για εποπτεία.
 Θέλετε να συνεχίσετε;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Select Accounts</source>
@@ -661,10 +662,12 @@ Please make sure you selected the correct profiles directory.</source>
     <message>
         <source>Would you like to set up Birdtray?</source>
         <translation>Επιθυμείτε την ρύθμιση του Birdtray;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>You have not yet configured any email folders to monitor. Would you like to do it now?</source>
         <translation>Δεν έχετε διαμορφώσει ακόμα φακέλους αλληλογραφίας προς εποπτεία. Θέλετε να το πραγματοποιήσετε τώρα;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Show Thunderbird</source>
@@ -830,6 +833,7 @@ Please make sure you selected the correct profiles directory.</source>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
         <translation>Η λήψη ολοκληρώθηκε. Να γίνει επανεκκίνηση και ενημέρωση του Birdtray;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>

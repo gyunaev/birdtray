@@ -209,6 +209,7 @@ $0
     <message>
         <source>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</source>
         <translation>Το πρόγραμμα απεγκατάστασης εκτελέστηκε με δικαιώματα διαχειριστή αλλά φαίνεται ότι δεν υπάρχει κάποια εγκατάσταση του ${PRODUCT_NAME} για τον διαχειριστή. Επιθυμείτε την επανεκκίνηση του προγράμματος εγκατάστασης χωρίς δικαιώματα διαχειριστή;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Opening $0 in default browser...</source>
@@ -225,6 +226,7 @@ Do you want to download the installer for the component?</source>
         <translation>Το παρακάτω απαραίτητο συστατικό δεν βρέθηκε στον υπολογιστή:
 Περιβάλλον εκτέλεσης Visual C++ ${ARCH}
 Επιθυμείτε την λήψη του προγράμματος εγκατάστασης για το συστατικό αυτό;</translation>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</source>
