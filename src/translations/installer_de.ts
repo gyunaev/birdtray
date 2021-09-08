@@ -294,5 +294,9 @@ Wollen Sie das Installationsprogramm für die Komponente herunterladen?</transla
         <source>Chinese (Simplified)</source>
         <translation>Chinesisch (vereinfacht)</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>Griechisch</translation>
+    </message>
 </context>
 </TS>

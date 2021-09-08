@@ -294,5 +294,9 @@ Wilt u de installatiewizard van dit onderdeel downloaden?</translation>
         <source>Chinese (Simplified)</source>
         <translation>Chinees (vereenvoudigd)</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>Grieks</translation>
+    </message>
 </context>
 </TS>

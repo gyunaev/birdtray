@@ -281,5 +281,9 @@ Do you want to download the installer for the component?</source>
         <source>Chinese (Simplified)</source>
         <translation>Lang_zh_cn</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>Lang_el</translation>
+    </message>
 </context>
 </TS>

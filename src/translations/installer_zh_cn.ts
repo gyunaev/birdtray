@@ -330,5 +330,9 @@ Visual C++ Runtime ${ARCH}
         <source>Chinese (Simplified)</source>
         <translation>中文（简体）</translation>
     </message>
+    <message>
+        <source>Greek</source>
+        <translation>希腊语</translation>
+    </message>
 </context>
 </TS>
