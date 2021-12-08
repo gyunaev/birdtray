@@ -12,11 +12,11 @@ Birdtray is a free system tray notification for new mail for Thunderbird. It sup
 
 - Birdtray checks the unread e-mail status directly by reading the Thunderbird email mork database. This means it does not need any extensions, and thus is immune to any future extension API changes in Thunderbird;
 
-- Starting from version 0.2 if you click on Birdtray icon, it can hide the Thunderbird window, and restore it. There is also context menu for that (this currently only works on Linux);
+- Starting from version 0.2 if you click on Birdtray icon, it can hide the Thunderbird window, and restore it. There is also a context menu for that (this currently only works on Linux);
 
 - You can configure which accounts you want to check for unread emails on;
 
-- You can choose different font colors for different email accounts. This allows you, for example, to have blue unread count for personal emails, red unread count for work emails, and green unread count if both folders have unread mail.
+- You can choose different font colors for different email accounts. This allows you, for example, to have a blue unread count for personal emails, a red unread count for work emails, and a green unread count if both folders have unread mail.
 
 - Can launch Thunderbird when Birdtray starts, and terminate it when Birdtray quits (configurable).
 
@@ -32,7 +32,7 @@ Birdtray is a free system tray notification for new mail for Thunderbird. It sup
 To build Birdtray from source, you would need the following components:
 
 - A C++ compiler
-- Cmake
+- CMake
 - Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
 
 On Debian you need to install the following packages: ``qt5-default libqt5x11extras5-dev qttools5-dev libqt5svg5-dev libx11-xcb-dev``
@@ -64,18 +64,18 @@ It is recommended for Windows users to use the
 
 ## Usage
 
-Once started, Birdtray will show the Thunderbird icon in system tray.
+Once started, Birdtray will show the Thunderbird icon in the system tray.
 
-Right-click on this icon, and click Settings. Go to Monitoring tab ans select the Thunderbird MSF file for the mailbox you'd like to monitor. You can specify different notification colors for each mailbox. Birdtray will show the new email count using this color if only this folder has new mail. If more than one folder has new mail, the default color will be used.
+Right-click on this icon, and click Settings. Go to Monitoring tab and select the Thunderbird MSF file for the mailbox you'd like to monitor. You can specify different notification colors for each mailbox. Birdtray will show the new email count using this color if only this folder has new mail. If more than one folder has new mail, the default color will be used.
 
 Then select the font and default color (which will be used if more than one monitored folder has new mail).
 
-You can also enable birdtray to start Thunderbird when you start Birdtray, or enable show/hide Thunderbird when the system tray icon is clicked, in settings.
+You can also enable Birdtray to start Thunderbird when you start it, or enable show/hide Thunderbird when the system tray icon is clicked, in settings.
 
-Once you change settings, often you need to restart birdtray for the new settings to take effect.
+Once you change settings, often you need to restart Birdtray for the new settings to take effect.
 
 ### Configuration File Location
-*Birdtray configuration is stored on a per-user basis, where the location differs depending on environment, as follows:*
+*Birdtray configuration is stored on a per-user basis, where the location differs depending on the environment, as follows:*
 
 #### Linux Package Installation
 `$HOME/.config/birdtray-config.json`
@@ -91,13 +91,13 @@ Once you change settings, often you need to restart birdtray for the new setting
 If Birdtray shows the wrong number of unread messages, it can be caused by a corrupt mork file.
 This can often be fixed by using the `Repair` functionality in Thunderbird in the mail folder settings.
 
-Generally Birdtray expects a spec-compliant desktop manager. If you're using a barebone or non-standard/light/simple desktop manager, it is very likely that some features of Birdtray will not work properly. Most likely candidates are hiding and restoring Thunderbird window(s) - including their position and state. But sometimes even a system tray icon isn't shown. Linux Mint with Cinnamon seem to be one particularly troublesome distro which reports many issues.
+Generally, Birdtray expects a spec-compliant desktop manager. If you're using a barebone or non-standard/light/simple desktop manager, it is very likely that some features of Birdtray will not work properly. Most likely candidates are hiding and restoring Thunderbird window(s) - including their position and state. But sometimes even a system tray icon isn't shown. Linux Mint with Cinnamon seems to be one particularly troublesome distro which reports many issues.
 
-Working with Wayland: at this moment Birdtray partially works with Wayland - email monitoring functionality works, but show/hide does not. Please track the issue https://github.com/gyunaev/birdtray/issues/426 to see the current status. Please do not report Wayland-related issues unless you built Birdtray from source yourself.
+Working with Wayland: at this moment Birdtray partially works with Wayland - email monitoring functionality works, but show/hide does not. Please track the issue https://github.com/gyunaev/birdtray/issues/426 to see the current status. Please do not report Wayland-related issues unless you built Birdtray from the source yourself.
 
 ## Submitting bugs and feature requests
 
-Please use Github issue tracker. Please attach the log output, if relevant. It could be obtained from Settings -> Advanced (tab) -> Show Log Window (button) -> copy-paste from it into bug report.
+Please use the GitHub issue tracker. Please attach the log output, if relevant. It could be obtained from Settings -> Advanced (tab) -> Show Log Window (button) -> copy-paste from it into bug report.
 
 ### Translations
 
