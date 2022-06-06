@@ -239,8 +239,10 @@ else()
     install(FILES src/res/birdtray.svg
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps
             RENAME com.ulduzsoft.Birdtray.svg)
-    install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
-            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
+    if(Qt5LinguistTools_FOUND)
+        install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
+                DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
+    endif()
 endif()
 
 if(Qt5LinguistTools_FOUND)
