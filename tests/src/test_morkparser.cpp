@@ -16,7 +16,7 @@ TEST(MailMorkParser, correctUnreadCount) {
             std::make_pair("2_Unread_Unified.msf", 2),
             std::make_pair("2_Unread_Inbox_Duplicate_cells.msf", 2),
     };
-    for (const auto testCase : cases) {
+    for (const auto &testCase : cases) {
         MailMorkParser parser;
         QString path = TestResources::getAbsoluteResourcePath(std::get<0>(testCase));
         unsigned int expectedUnreadCount = std::get<1>(testCase);

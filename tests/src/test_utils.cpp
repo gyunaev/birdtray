@@ -4,6 +4,8 @@
 
 using namespace testing;
 
+#define ARRAY_SIZE(array) (sizeof(array) / sizeof((array)[0]))
+
 TEST(UtilsTest, formatGithubMarkdown_mentions) {
     const char* cases[][4] = {
             {"@test",
@@ -86,7 +88,7 @@ TEST(UtilsTest, orderedMapStorage) {
 
 TEST(UtilsTest, orderedMapOrder) {
     const int values[][2] = {{6, 2}, {3, 4}, {5, 5}, {1, 7}};
-    size_t numUniqueValues = GTEST_ARRAY_SIZE_(values);
+    size_t numUniqueValues = ARRAY_SIZE(values);
     OrderedMap<int, int> map;
     for (auto &valuePair : values) {
         map[valuePair[0]] = valuePair[1];
