@@ -5,7 +5,7 @@ if (NOT GTEST_FOUND)
     message("Unable to find GTest on the system, downloading it...")
     add_subdirectory(deps/GTest)
 endif()
-
+enable_testing()
 
 set(TESTS
         src/test_morkparser.cpp

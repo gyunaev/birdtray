@@ -79,7 +79,7 @@ jobs:
           echo "::remove-matcher owner=linguist-old::"
       - name: Tests
         working-directory: ${{runner.workspace}}/build
-        run: cmake --build . --config Release --target run_tests
+        run: cmake --build . --config Release --target tests && cmake --build . --config Release --target run_tests
       - name: Validate desktop file
         working-directory: ${{ github.workspace }}
         if: runner.os == 'Linux'
