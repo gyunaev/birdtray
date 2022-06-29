@@ -2,6 +2,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QTemporaryFile>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+#  include <QCborValue>
+#endif
 
 #include "setting_newemail.h"
 #include "dialogaddeditnewemail.h"
