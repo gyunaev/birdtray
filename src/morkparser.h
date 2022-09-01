@@ -54,6 +54,8 @@ const char MorkMagicHeader[] = "// <!-- <mdb:mork:z v=\"1.4\"/> -->";
 
 const char MorkDictColumnMeta[] = "<(a=c)>";
 
+const char MorkDbFolderInfoScope[] = "ns:msg:db:row:scope:dbfolderinfo:all";
+
 // Error codes
 enum MorkErrors
 {
