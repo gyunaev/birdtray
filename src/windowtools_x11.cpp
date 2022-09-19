@@ -192,6 +192,9 @@ static Window findWindow(Display *display, Window window, bool checkNormality, c
     Window *children;
     unsigned int num_child;
 
+    if ( window == 0 )
+	    return None;
+
     if (XQueryTree(display, window, &root, &parent, &children, &num_child) != 0) {
         for (unsigned int i = 0; i < num_child; i++) {
             if (analyzeWindow(display, children[i], ename) && !dockedWindows.contains(children[i])
