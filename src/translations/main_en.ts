@@ -58,10 +58,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reset the settings to the defaults.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle the Thunderbird window.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -71,6 +67,10 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Hide the Thunderbird window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the settings to the defaults.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -143,6 +143,10 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show unread count</source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,6 +211,10 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
@@ -219,7 +227,35 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Allow ignoring the current unread email counter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When hiding Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When showing Thunderbird</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unread change cmd:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -287,6 +323,10 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Thunderbird command line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Thunderbird window name pattern:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -299,11 +339,31 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Support non-NETWM compliant WMs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Make the system tray icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>opaque when new mail is present,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hide it if no new mail is present.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -323,67 +383,6 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Version check failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to check for a new Birdtray version:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Checking...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose the new icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Images (*.png *.svg *.svgz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not load the icon from this file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thunderbird command line:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>opaque when new mail is present,</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>hide it if no new mail is present.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose one or more MSF files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mail Index (*.msf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No new updates found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -400,59 +399,7 @@ OpenSSL might not be installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Translations are powered by the community:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Translators</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Active maintainers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contributors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unread change cmd:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Support non-NETWM compliant WMs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>At startup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>When hiding Thunderbird</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>When showing Thunderbird</source>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -474,7 +421,60 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>Translations are powered by the community:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version check failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to check for a new Birdtray version:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose one or more MSF files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail Index (*.msf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Checking...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active maintainers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the new icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images (*.png *.svg *.svgz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not load the icon from this file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -498,19 +498,6 @@ Log file is written into file %2</source>
 <context>
     <name>MailAccountDialog</name>
     <message>
-        <source>Choose the Thunderbird profiles path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No folder selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No mail folder was selected to monitor.
-Do you want to continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select Accounts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -531,6 +518,11 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>No mail profiles were found.
+Please make sure you selected the correct profiles directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Email Folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -543,12 +535,20 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 (Profile)</source>
+        <source>No folder selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No mail profiles were found.
-Please make sure you selected the correct profiles directory.</source>
+        <source>No mail folder was selected to monitor.
+Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the Thunderbird profiles path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 (Profile)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -644,6 +644,14 @@ Please make sure you selected the correct profiles directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Don&apos;t ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
@@ -708,6 +716,12 @@ Please make sure you selected the correct profiles directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Error starting Thunderbird as &apos;%1 %2&apos;:
+
+%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
@@ -715,20 +729,6 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Ignore unread emails (now %1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error starting Thunderbird as &apos;%1 %2&apos;:
-
-%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t ask again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -750,6 +750,10 @@ Please make sure you selected the correct profiles directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>New version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Current version:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -758,11 +762,11 @@ Please make sure you selected the correct profiles directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New version:</source>
+        <source>Download size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download size:</source>
+        <source>Update and restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -775,10 +779,6 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>ca. %1 Mb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update and restart</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
