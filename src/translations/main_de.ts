@@ -275,7 +275,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Enable New Email submenu</source>
-        <translation>Das Untermenü &quot;Neue E-Mail&quot; aktvieren</translation>
+        <translation>Das Untermenü &quot;Neue E-Mail&quot; aktivieren</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -283,7 +283,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>Please do not change these settings unless you understand what you&apos;re doing.</source>
-        <translation>Bitte ändern Sie diese Einstellungen nur, wenn Sie wissen was Sie tun.</translation>
+        <translation>Bitte ändern Sie diese Einstellungen nur, wenn Sie wissen, was Sie tun.</translation>
     </message>
     <message>
         <source>Thunderbird window name pattern:</source>
@@ -418,7 +418,7 @@ Möglicherweise ist OpenSSL nicht installiert.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select mail folders for watching.&lt;br/&gt;&lt;br/&gt;If the dialog doesn&apos;t show your folder, &lt;i&gt;Ctrl + Shift click&lt;/i&gt; to open a file selection dialog that allows adding any mork file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wähle E-Mail Ordner zur Überwachung aus.&lt;br/&gt;&lt;br/&gt;Wenn der Dialog Ihren E-Mail Ordner nicht anzeigt, klicken Sie &lt;i&gt;Strg + Shift&lt;/i&gt; um einen Dateiauswahlsdialog zu öffnen, mit dem jede mork-Datei hinzugefügt werden kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wähle E-Mail Ordner zur Überwachung aus.&lt;br/&gt;&lt;br/&gt;Wenn der Dialog Ihren E-Mailordner nicht anzeigt, klicken Sie &lt;i&gt;Strg + Shift&lt;/i&gt; um einen Dateiauswahldialog zu öffnen, mit dem jede mork-Datei hinzugefügt werden kann.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
@@ -448,7 +448,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Urheberrecht (C) 2018 von George Yunaev, &lt;/span&gt;&lt;a href=&quot;mailto:gyunaev@ulduzsoft.com&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;gyunaev@ulduzsoft.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Birdtray ist eine FREIE SOFTWARE, welche unter der General Public License v3 lizenziert ist. Sie können Birtray also für jeden Zweck, auch für kommerzielle Zwecke, verwenden, ohne etwas zu bezahlen.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Birdtray ist eine FREIE SOFTWARE, welche unter der General Public License v3 lizenziert ist. Sie können Birdtray also für jeden Zweck, auch für kommerzielle Zwecke, verwenden, ohne etwas zu bezahlen.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Für Hilfe, um Verbesserungen vorzuschlagen oder um Fehler zu melden nutzen Sie bitte die &lt;/span&gt;&lt;a href=&quot;https://github.com/gyunaev/birdtray&quot;&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;Github-Projektseite&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -462,7 +462,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not empty, this command will be invoked every time the unread counter changes (including when it becomes zero). It is invoked via shell, as-is, with %NEW% replaced by the new unread count value and %OLD% replaced with the old unread count value (which may be the same as new).&lt;/p&gt;&lt;p&gt;Most users don&apos;t need this functionality and should leave it empty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der voherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sofern angegeben, wird dieser Befehl jedes Mal ausgeführt, wenn sich die Anzahl ungelesener E-Mails ändert (auch bei Änderung auf null). Der Befehl wird wie angegeben vom System ausgeführt, wobei %NEW% mit der neuen und %OLD% mit der vorherigen Anzahl ungelesener E-Mails ersetzt wird (beide Werte können gleich sein).&lt;/p&gt;&lt;p&gt;Die meisten Nutzer werden diese Funktionalität nicht benötigen und sollten das Feld leer lassen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts.</source>
@@ -646,11 +646,11 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten Email-Ordner nicht gefunden werden.</translation>
+        <translation>Sie hatten die Überwachung von einem oder mehren E-Mailordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert, allerdings konnten eine paar der konfigurierten E-Mailordner nicht gefunden werden.</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Sie hatten die Überwachung von einem oder mehren Email-Ordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
+        <translation>Sie hatten die Überwachung von einem oder mehren E-Mailordnern mit der Sqlite Methode konfiguriert. Diese wurde entfernt. Ihre Konfiguration wurde zur Mork-Methode migriert. Bitte überprüfen Sie, dass alle Ordner richtig übernommen wurden.</translation>
     </message>
     <message>
         <source>Cannot load default system tray icon.</source>
@@ -729,7 +729,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Cannot start Thunderbird</source>
-        <translation>Thunderbird kann nicht gestartent werden</translation>
+        <translation>Thunderbird kann nicht gestartet werden</translation>
     </message>
     <message>
         <source>Error starting Thunderbird, because we could not attach to the updater:
@@ -830,7 +830,7 @@ Bitte stellen Sie sicher, dass Sie den richtigen Ordner mit den Profilen ausgew�
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
-        <translation>Übertragung abgeschlossen. Soll Birdtray aktualisiert und neugestartet werden?</translation>
+        <translation>Übertragung abgeschlossen. Soll Birdtray aktualisiert und neu gestartet werden?</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
