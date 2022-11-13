@@ -37,8 +37,8 @@ void Log::initialize(const QString& path )
     if ( !opened )
     {
         l.unlock();
-        Log::fatal(QCoreApplication::translate("Log", "Failed to open log file %s: %s")
-                .arg(path).arg(self->mOutputFile.errorString()));
+        Log::fatal(QCoreApplication::translate("Log", "Failed to open log file %1: %2")
+                .arg(path, self->mOutputFile.errorString()));
     }
 }
 

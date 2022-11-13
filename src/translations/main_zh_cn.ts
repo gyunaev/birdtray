@@ -540,10 +540,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>打开日志文件%s失败：%s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>错误</translation>
     </message>
@@ -554,6 +550,10 @@ Log file is written into file %2</source>
         <translation>严重错误：%1
 
 详情查看日志文件%2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>打开日志文件%1失败：%2</translation>
     </message>
 </context>
 <context>

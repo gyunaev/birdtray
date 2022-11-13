@@ -501,10 +501,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Het logboek &apos;%s&apos; kan niet worden geopend: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Onmogelijk</translation>
     </message>
@@ -515,6 +511,10 @@ Log file is written into file %2</source>
         <translation>Fatale fout: %1
 
 Het logboek is opgeslagen als %2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Het logboek &apos;%1&apos; kan niet worden geopend: %2</translation>
     </message>
 </context>
 <context>

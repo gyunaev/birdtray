@@ -499,10 +499,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Impossibile aprire il file di registro %s: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Fatale</translation>
     </message>
@@ -513,6 +509,10 @@ Log file is written into file %2</source>
         <translation>Errore irreversibile: %1
 
 Il file di registro è stato scritto nel file %2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Impossibile aprire il file di registro %1: %2</translation>
     </message>
 </context>
 <context>

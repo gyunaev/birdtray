@@ -486,10 +486,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Log dosyası açılamadı %s: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Kritik</translation>
     </message>
@@ -500,6 +496,10 @@ Log file is written into file %2</source>
         <translation>Kritik hata: %1
 
 Log dosyası %2 dosyasına yazıldı</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Log dosyası açılamadı %1: %2</translation>
     </message>
 </context>
 <context>

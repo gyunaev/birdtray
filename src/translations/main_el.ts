@@ -499,10 +499,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Αποτυχία φόρτωσης του αρχείου καταγραφών %s: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Μοιραίο</translation>
     </message>
@@ -513,6 +509,10 @@ Log file is written into file %2</source>
         <translation>Μοιραίο σφάλμα: %1
 
 Η καταγραφή αποθηκεύτηκε στο αρχείο: %2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Αποτυχία φόρτωσης του αρχείου καταγραφών %1: %2</translation>
     </message>
 </context>
 <context>

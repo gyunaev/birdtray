@@ -500,10 +500,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Die Protokolldatei %s konnte nicht geöffnet werden: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Fatal</translation>
     </message>
@@ -514,6 +510,10 @@ Log file is written into file %2</source>
         <translation>Schwerwiegender Fehler: %1
 
 Das Protokoll wurde in die Datei &quot;%2&quot; geschrieben</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Die Protokolldatei %1 konnte nicht geöffnet werden: %2</translation>
     </message>
 </context>
 <context>

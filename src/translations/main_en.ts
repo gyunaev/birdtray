@@ -481,10 +481,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation type="unfinished"></translation>
     </message>
@@ -492,6 +488,10 @@ p, li { white-space: pre-wrap; }
         <source>Fatal error: %1
 
 Log file is written into file %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

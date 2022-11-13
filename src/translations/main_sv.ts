@@ -499,10 +499,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Kunde inte öppna loggfilen %s: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Ödesdigert</translation>
     </message>
@@ -513,6 +509,10 @@ Log file is written into file %2</source>
         <translation>Ödesdigert fel: %1
 
 Loggen har skrivits i filen %2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Kunde inte öppna loggfilen %1: %2</translation>
     </message>
 </context>
 <context>

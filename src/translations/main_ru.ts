@@ -499,10 +499,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Log</name>
     <message>
-        <source>Failed to open log file %s: %s</source>
-        <translation>Не удалось открыть файл журнала %s: %s</translation>
-    </message>
-    <message>
         <source>Fatal</source>
         <translation>Фатальный</translation>
     </message>
@@ -513,6 +509,10 @@ Log file is written into file %2</source>
         <translation>Фатальная ошибка: %1
 
 Файл журнала записан в файл %2</translation>
+    </message>
+    <message>
+        <source>Failed to open log file %1: %2</source>
+        <translation>Не удалось открыть файл журнала %1: %2</translation>
     </message>
 </context>
 <context>
