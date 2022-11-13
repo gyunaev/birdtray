@@ -260,12 +260,14 @@ FunctionEnd
         !if ${PLATFORM} == x86
             MessageBox MB_OKCANCEL|MB_ICONINFORMATION \
                 "$(Install64On32BitWarning)" /SD IDOK IDOK Continue
+            ${OpenURL} ${URL_DOWNLOAD}
             Quit
             Continue:
         !endif
     ${else}
         !if ${PLATFORM} == x64
             MessageBox MB_ICONSTOP "$(Install32On64BitError)" /SD IDOK
+            ${OpenURL} ${URL_DOWNLOAD}
             Quit
         !endif
     ${endif}
