@@ -365,7 +365,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&quot;C:\Program Files\tb.exe&quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αυτή είναι η πλήρης γραμμή της εντολής (με τα ορίσματα) για την εκκίνηση του Thunderbird. Τα ορίσματα διαχωρίζονται με κενά, αλλά επιτρέπεται η χρήση κενών μέσα σε εισαγωγικά, π.χ.αυτή η εντολή &lt;span style=&quot; font-weight:600;&quot;&gt;&quot;C:\Program Files\tb.exe&quot; --profile test&lt;/span&gt; είναι έγκυρη.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αυτή είναι η πλήρης γραμμή της εντολής (με τα ορίσματα) για την εκκίνηση του Thunderbird. Τα ορίσματα διαχωρίζονται με κενά, αλλά επιτρέπεται η χρήση κενών μέσα σε εισαγωγικά, π.χ.αυτή η εντολή &lt;span style=&quot; font-weight:600;&quot;&gt;&quot;C:\Program Files\tb.exe&quot; --profile test&lt;/span&gt; είναι έγκυρη.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
@@ -493,7 +493,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &quot;Ignore currently unread emails&quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &quot;Ignore&quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αν είναι ενεργοποιημένο, αυτή η επιλογή προσθέτει την ενέργεια &quot;αγνόησή των τρεχόντων μη αναγνωσμένων μηνυμάτων&quot; στο σχετικό μενού. Αυτή η ενέργεια σας επιτρέπει να αγνοήσετε τα μη αναγνωσμένα μηνύματα. Το Birdtray δεν θα λάβει υπόψη τα υπάρχοντα μη αναγνωσμένα μηνύματα και θα εμφανίζει ότι υπάρχουν νέα μηνύματα για την αλληλογραφία που θα λαμβάνεται εφεξής.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Για παράδειγμα, αν υπήρχαν 10 μη αναγνωσμένα μηνύματα, και κάνετε κλικ στην ενέργεια &quot;αγνόησή&quot;, το Birdtray δεν θα εμφανίσει ότι υπάρχουν μη αναγνωσμένα μηνύματα όσο ο αριθμός των μη αναγνωσμένων μηνυμάτων παραμένει 10. Άπαξ και λάβετε ένα νέο μήνυμα και ο αριθμός των μη αναγνωσμένων γίνει 11, το Birdtray θα εμφανίσει ότι έχετε 1 μη αναγνωσμένο μήνυμα.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αν είναι ενεργοποιημένο, αυτή η επιλογή προσθέτει την ενέργεια &quot;αγνόησή των τρεχόντων μη αναγνωσμένων μηνυμάτων&quot; στο σχετικό μενού. Αυτή η ενέργεια σας επιτρέπει να αγνοήσετε τα μη αναγνωσμένα μηνύματα. Το Birdtray δεν θα λάβει υπόψη τα υπάρχοντα μη αναγνωσμένα μηνύματα και θα εμφανίζει ότι υπάρχουν νέα μηνύματα για την αλληλογραφία που θα λαμβάνεται εφεξής.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Για παράδειγμα, αν υπήρχαν 10 μη αναγνωσμένα μηνύματα, και κάνετε κλικ στην ενέργεια &quot;αγνόησή&quot;, το Birdtray δεν θα εμφανίσει ότι υπάρχουν μη αναγνωσμένα μηνύματα όσο ο αριθμός των μη αναγνωσμένων μηνυμάτων παραμένει 10. Άπαξ και λάβετε ένα νέο μήνυμα και ο αριθμός των μη αναγνωσμένων γίνει 11, το Birdtray θα εμφανίσει ότι έχετε 1 μη αναγνωσμένο μήνυμα.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -528,9 +536,9 @@ Log file is written into file %2</source>
     <message>
         <source>No mail folder was selected to monitor.
 Do you want to continue?</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>Δεν έχει επιλεγεί φάκελος αλληλογραφίας για εποπτεία.
 Θέλετε να συνεχίσετε;</translation>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
     </message>
     <message>
         <source>Select Accounts</source>
@@ -661,13 +669,13 @@ Please make sure you selected the correct profiles directory.</source>
     <name>TrayIcon</name>
     <message>
         <source>Would you like to set up Birdtray?</source>
-        <translation>Επιθυμείτε την ρύθμιση του Birdtray;</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
+        <translation>Επιθυμείτε την ρύθμιση του Birdtray;</translation>
     </message>
     <message>
         <source>You have not yet configured any email folders to monitor. Would you like to do it now?</source>
-        <translation>Δεν έχετε διαμορφώσει ακόμα φακέλους αλληλογραφίας προς εποπτεία. Θέλετε να το πραγματοποιήσετε τώρα;</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
+        <translation>Δεν έχετε διαμορφώσει ακόμα φακέλους αλληλογραφίας προς εποπτεία. Θέλετε να το πραγματοποιήσετε τώρα;</translation>
     </message>
     <message>
         <source>Show Thunderbird</source>
@@ -832,8 +840,8 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
-        <translation>Η λήψη ολοκληρώθηκε. Να γίνει επανεκκίνηση και ενημέρωση του Birdtray;</translation>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
+        <translation>Η λήψη ολοκληρώθηκε. Να γίνει επανεκκίνηση και ενημέρωση του Birdtray;</translation>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
