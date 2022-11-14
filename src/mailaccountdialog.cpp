@@ -109,7 +109,7 @@ void MailAccountDialog::loadProfiles() {
     QDir profilesDir(Utils::expandPath(profilesDirPath));
     bool foundAValidProfileDir = false;
     for (const QString &profileDirName: profilesDir.entryList(
-            QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot)) {
+            QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot | QDir::Filter::Hidden)) {
         const QString profileDir = profilesDir.absoluteFilePath(profileDirName);
         const QStringList mailFolders = getMailFoldersFor(profileDir);
         if (mailFolders.isEmpty()) {
@@ -136,7 +136,7 @@ void MailAccountDialog::loadAccounts(QTreeWidgetItem* profileTreeItem,
     for (const QString &mailDirPath : mailFolders) {
         QDir mailDir(mailDirPath);
         for (const QString &mailAccount : mailDir.entryList(
-                QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot)) {
+                QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot | QDir::Filter::Hidden)) {
             QString accountDirectoryPath = mailDir.absoluteFilePath(mailAccount);
             QDirIterator msfFileIterator(accountDirectoryPath, {"*.msf"},
                     QDir::Files, QDirIterator::Subdirectories);
@@ -186,7 +186,8 @@ QTreeWidgetItemIterator MailAccountDialog::iterateCheckedAccountItems() const {
 
 QStringList MailAccountDialog::getMailFoldersFor(const QString &profileDirPath) {
     QDir profileDir(profileDirPath);
-    QStringList mailFolders = profileDir.entryList({"*Mail", "ExQuilla"}, QDir::Dirs);
+    QStringList mailFolders = profileDir.entryList(
+            {"*Mail", "ExQuilla"}, QDir::Dirs | QDir::Hidden);
     std::transform(mailFolders.begin(), mailFolders.end(), mailFolders.begin(),
             [=](const QString &folder) { return profileDir.absoluteFilePath(folder); });
     return mailFolders;
