@@ -129,7 +129,7 @@ Bitte schließen Sie alle anderen Instanzen und klicken sie &quot;Wiederholen&qu
     <message>
         <source>The uninstall of ${PRODUCT_NAME} is already running.
 Please, close all instances of it and click Retry to continue, or Cancel to exit.</source>
-        <translation>Das Denstallationsprogramm von ${PRODUCT_NAME} wird bereits ausgeführt.
+        <translation>Das Deinstallationsprogramm von ${PRODUCT_NAME} wird bereits ausgeführt.
 Bitte schließen Sie alle anderen Instanzen und klicken sie &quot;Wiederholen&quot; um fortzufahren, oder &quot;Abbruch&quot; um die Deinstallation abzubrechen.</translation>
     </message>
     <message>
@@ -140,11 +140,11 @@ ${BAD_PATH_CHARS}</translation>
     </message>
     <message>
         <source>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</source>
-        <translation>Im Installationspfad wurde eine vorherig installierte ${PRODUCT_NAME}-Version gefunden, die ersetzt wird.</translation>
+        <translation>Im Installationspfad wurde eine bereits installierte ${PRODUCT_NAME}-Version gefunden, die ersetzt wird.</translation>
     </message>
     <message>
         <source>The install path is not empty, but it doesn't look like it contains a previous ${PRODUCT_NAME} installation. The content will get overwritten.</source>
-        <translation>Der Installationspfad ist nicht leer, aber scheint keine vorherig installierte ${PRODUCT_NAME}-Version zu beinhalten. Der Inhalt des Ordners wird Überschrieben.</translation>
+        <translation>Der Installationspfad ist nicht leer, aber scheint keine bereits installierte ${PRODUCT_NAME}-Version zu beinhalten. Der Inhalt des Ordners wird überschrieben.</translation>
     </message>
     <message>
         <source>$0 (current user only)</source>
@@ -188,7 +188,7 @@ Klicke &quot;Wiederholen&quot;, um es erneut zu versuchen, oder
     </message>
     <message>
         <source>You are about to install the 32-bit version of ${PRODUCT_NAME} on your 64-bit Windows. There is a 64-bit version of ${PRODUCT_NAME} available for download.</source>
-        <translation>Sie sind dabei, die 32-Bit-Version von ${PRODUCT_NAME} auf ihrem 64-Bit-Windows zu installieren. Es gibt eine 64-bit-${PRODUCT_NAME}-Version, die heruntergeladen werden kann.</translation>
+        <translation>Sie sind dabei, die 32-Bit-Version von ${PRODUCT_NAME} auf Ihrem 64-Bit-Windows zu installieren. Es gibt eine 64-bit-${PRODUCT_NAME}-Version, die heruntergeladen werden kann.</translation>
     </message>
     <message>
         <source>This installer contains the 64-bit version of ${PRODUCT_NAME}. Your computer is running a 32-bit version of Windows, which can not execute 64-bit programs. Please download the 32-bit installer of ${PRODUCT_NAME}.</source>
@@ -208,7 +208,7 @@ Klicke &quot;Wiederholen&quot;, um es erneut zu versuchen, oder
     </message>
     <message>
         <source>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</source>
-        <translation>Das Deinstallationsprogramm wurde mit Administrator-Rechten gestartet, aber es scheint keine ${PRODUCT_NAME}-Installation beim Administrator vorhanden zu sein. Wollen Sie die Deinstallation als Nutzer ohne Administrator-Rechten neustarten?</translation>
+        <translation>Das Deinstallationsprogramm wurde mit Administrator-Rechten gestartet, aber es scheint keine ${PRODUCT_NAME}-Installation beim Administrator vorhanden zu sein. Wollen Sie die Deinstallation als Nutzer ohne Administrator-Rechten neu starten?</translation>
     </message>
     <message>
         <source>Opening $0 in default browser...</source>
