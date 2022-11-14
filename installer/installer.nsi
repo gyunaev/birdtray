@@ -47,6 +47,7 @@ Var RunningFromInstaller # Installer started uninstaller using /uninstall parame
 !define URL_HELP_LINK "https://github.com/gyunaev/birdtray/wiki" # "Support Information" link
 !define URL_UPDATE_INFO "https://github.com/gyunaev/birdtray/releases" # "Product Updates" link
 !define URL_INFO_ABOUT "https://www.ulduzsoft.com/" # "Publisher" link
+!define URL_DOWNLOAD "https://github.com/gyunaev/birdtray/releases/latest"
 !define MIN_WINDOWS_VER "XP"
 
 # Paths
