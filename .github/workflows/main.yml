@@ -63,7 +63,9 @@ jobs:
         working-directory: ${{ runner.workspace }}/build
         run: cmake $GITHUB_WORKSPACE $CMAKE_PLATFORM_ARG -DCMAKE_BUILD_TYPE=Release -DCOMPILER_WARNINGS_AS_ERRORS=ON -DBUILD_WITH_TESTS=ON -DDONT_EXECUTE_INSTALLER=ON
       - name: Register build problem matchers
-        run: echo "::add-matcher::.github/problem-matchers/linguist.json"
+        run: |
+          echo "::add-matcher::.github/problem-matchers/linguist.json"
+          echo "::add-matcher::.github/problem-matchers/compiler.json"
       - name: Build
         working-directory: ${{ runner.workspace }}/build
         run: cmake --build . --config Release --target birdtray
@@ -71,6 +73,8 @@ jobs:
         run: |
           echo "::remove-matcher owner=linguist::"
           echo "::remove-matcher owner=linguist-old::"
+          echo "::remove-matcher owner=compiler-gcc::"
+          echo "::remove-matcher owner=compiler-msvc::"
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target tests && cmake --build . --config Release --target run_tests
