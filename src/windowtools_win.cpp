@@ -119,9 +119,10 @@ bool WindowTools_Win::show() {
     if (!checkWindow()) {
         return false;
     }
-    ShowWindow(this->thunderbirdWindow, SW_SHOW);
     if (IsIconic(this->thunderbirdWindow)) {
         ShowWindow(this->thunderbirdWindow, SW_RESTORE);
+    } else {
+        ShowWindow(this->thunderbirdWindow, SW_SHOW);
     }
     if (SetForegroundWindow(this->thunderbirdWindow) == TRUE) {
         emit onWindowShown();
