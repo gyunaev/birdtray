@@ -22,11 +22,17 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: cpp, python
+    - name: Install Qt ${{ matrix.qt_version }}
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: 5.14.1
+        cache: true
+        dir: ${{ runner.temp }}/Qt
     - name: Install additional dependencies
       shell: bash
       run: |
         sudo apt-get update -qq;
-        sudo apt install -qq qt5-default libqt5x11extras5-dev qttools5-dev libx11-dev libqt5svg5-dev libx11-xcb-dev
+        sudo apt install -qq libx11-dev libqt5svg5-dev libx11-xcb-dev
     - name: Create build environment
       run: cmake -E make_directory ${{ runner.workspace }}/build
     - name: Configure CMake
