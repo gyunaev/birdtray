@@ -131,10 +131,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Check if this is a deployment build
+        id: deploy_check
         shell: bash
         run: |
-          if [[ '${{ github.event.ref }}' =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Creating release ${{ github.ref }}..."
+          if [[ '${{ github.event.ref }}' =~ ^refs/tags/(v[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            echo "Creating release ${BASH_REMATCH[1]}..."
+            echo "version=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
           else
             echo "Tag does not match: ${{ github.event.ref }}"
             exit 1
@@ -152,7 +154,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          name: Release ${{ github.ref }}
+          name: Release ${{ steps.deploy_check.outputs.version }}
           draft: true
           artifacts: installer*/Birdtray-*.exe
           artifactContentType: application/x-msdownload
