@@ -139,62 +139,22 @@ jobs:
             echo "Tag does not match: ${{ github.event.ref }}"
             exit 1
           fi
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download installer (x86)
+        uses: actions/download-artifact@v3
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          name: installer-Windows-x86-${{ github.sha }}
+          path: installer-x86
+      - name: Download installer (x64)
+        uses: actions/download-artifact@v3
+        with:
+          name: installer-Windows-x64-${{ github.sha }}
+          path: installer-x64
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          name: Release ${{ github.ref }}
           draft: true
-          prerelease: false
-      - name: Write upload url file
-        run: echo "${{ steps.create_release.outputs.upload_url }}" > upload_url.txt
-      - name: Cache upload url
-        uses: actions/upload-artifact@v3
-        with:
-          name: upload_url
-          path: upload_url.txt
-
-  deploy:
-    name: Deploy
-    needs: [build, release]
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        arch: [x86, x64]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Download installer
-        uses: actions/download-artifact@v3
-        with:
-          name: installer-${{ runner.os }}-${{ matrix.arch }}-${{ github.sha }}
-          path: installer
-      - name: Find installer
-        id: find_installer_file
-        shell: bash
-        run: |
-          value=`find installer -name "Birdtray-*.exe" -exec basename {} \;`
-          echo "installer_file=$value" >> $GITHUB_OUTPUT
-      - name: Fetch the upload url
-        uses: actions/download-artifact@v3
-        with:
-          name: upload_url
-      - name: Read the upload url
-        id: get_upload_url
-        shell: bash
-        run: |
-          value=`cat upload_url/upload_url.txt`
-          echo "upload_url=$value" >> $GITHUB_OUTPUT
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
-          asset_path: ./installer/${{ steps.find_installer_file.outputs.installer_file }}
-          asset_name: ${{ steps.find_installer_file.outputs.installer_file }}
-          asset_content_type: application/x-msdownload
+          artifacts: installer*/Birdtray-*.exe
+          artifactContentType: application/x-msdownload
+          artifactErrorsFailBuild: true
+          generateReleaseNotes: true
