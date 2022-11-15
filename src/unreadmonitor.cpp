@@ -8,7 +8,7 @@
 #include "birdtrayapp.h"
 
 UnreadMonitor::UnreadMonitor( TrayIcon * parent )
-    : QThread( 0 ), mChangedMSFtimer(this)
+    : QThread( 0 ), mChangedMSFtimer(this), mForceUpdateTimer(this)
 {
     moveToThread( this );
     mLastReportedUnread = 0;
@@ -28,19 +28,20 @@ UnreadMonitor::UnreadMonitor( TrayIcon * parent )
     // Set up the forced update timer
     mForceUpdateTimer.setSingleShot( false );
     connect( &mForceUpdateTimer, &QTimer::timeout, this, &UnreadMonitor::forceUpdateUnread );
-
-    // And activate it if settings specify so
-    if ( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec > 0 )
-    {
-        mForceUpdateTimer.setInterval( BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec * 1000 );
-        mForceUpdateTimer.start();
-    }
 }
 
 void UnreadMonitor::run()
 {
     // Start it as soon as thread starts its event loop
     QTimer::singleShot( 0, [=](){ updateUnread(); } );
+    
+    // And activate the forced update timer if settings specify so
+    unsigned int rereadIntervalSec = BirdtrayApp::get()->getSettings()->mIndexFilesRereadIntervalSec;
+    if ( rereadIntervalSec > 0 )
+    {
+        mForceUpdateTimer.setInterval( static_cast<int>(rereadIntervalSec * 1000) );
+        mForceUpdateTimer.start();
+    }
 
     // Start the event loop
     exec();
