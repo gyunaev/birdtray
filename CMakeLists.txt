@@ -180,9 +180,11 @@ endif()
 option(COMPILER_WARNINGS_AS_ERRORS "Fail the build on compiler warnings" OFF)
 if(COMPILER_WARNINGS_AS_ERRORS)
     if(MSVC)
-        target_compile_options(birdtray_lib PUBLIC /W4 /WX)
+        target_compile_options(birdtray_lib PUBLIC /W4 /WX
+                /wd4996) # We ignore deprecated warnings for now
     else()
-        target_compile_options(birdtray_lib PUBLIC -Wall -Wextra -Wpedantic -Werror)
+        target_compile_options(birdtray_lib PUBLIC -Wall -Wextra -Wpedantic -Werror
+                -Wno-deprecated-declarations) # We ignore deprecated warnings for now
     endif()
 endif()
 
