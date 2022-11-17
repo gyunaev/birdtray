@@ -10,14 +10,14 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
         arch: [x86, x64]
-        qt_version: [5.9.9, 5.14.1]
+        qt_version: [5.9.9, 5.15.2]
         include:
           - os: windows-latest
             arch: x86
-            qt_compile_suite: win32_msvc2017
+            qt_compile_suite: win32_msvc2019
           - os: windows-latest
             arch: x64
-            qt_compile_suite: win64_msvc2017_64
+            qt_compile_suite: win64_msvc2019_64
         exclude:
           # We only want to test for the latest version of Qt on Windows
           - os: windows-latest
