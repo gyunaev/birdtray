@@ -499,6 +499,18 @@ p, li { white-space: pre-wrap; }
         <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>When detecting a change, wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> milliseconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>before updating the unread counter.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

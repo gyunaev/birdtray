@@ -500,6 +500,18 @@ p, li { white-space: pre-wrap; }
         <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
         <translation>Thunderbird mit einem Klick auf das Systemleistensymbol starten, wenn es geschlossen wurde</translation>
     </message>
+    <message>
+        <source>When detecting a change, wait</source>
+        <translation>Wenn eine Änderung erkannt wird, warte</translation>
+    </message>
+    <message>
+        <source> milliseconds</source>
+        <translation> Millisekunden</translation>
+    </message>
+    <message>
+        <source>before updating the unread counter.</source>
+        <translation> bevor die Anzahl ungelesener E-Mails aktualisiert wird.</translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

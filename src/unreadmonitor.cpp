@@ -62,6 +62,8 @@ void UnreadMonitor::slotSettingsChanged()
     }
     else
         mForceUpdateTimer.stop();
+    
+    mChangedMSFtimer.setInterval(static_cast<int>(settings->mWatchFileTimeout));
 
     // We reinitialize everything because the settings changed
     mMorkUnreadCounts.clear();
