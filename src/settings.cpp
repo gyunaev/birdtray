@@ -16,6 +16,8 @@
 
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
+#define START_CLOSED_THUNDERBIRD_KEY "common/startClosedThunderbird"
+#define HIDE_WHEN_STARTED_MANUALLY_KEY "common/hideWhenStartedManually"
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
 #define ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY "advanced/onlyShowIconOnUnreadMessages"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
@@ -51,6 +53,8 @@ Settings::Settings()
     mRestartThunderbird = false;
     mHideWhenStarted = false;
     mHideWhenRestarted = false;
+    startClosedThunderbird = false;
+    hideWhenStartedManually = false;
     mAllowSuppressingUnreads = false;
     mLaunchThunderbirdDelay = 0;
     mShowUnreadEmailCount = true;
@@ -94,6 +98,8 @@ void Settings::save()
     out[ "common/monitorthunderbirdwindow" ] = mMonitorThunderbirdWindow;
     out[ "common/hidewhenstarted" ] = mHideWhenStarted;
     out[ "common/hidewhenrestarted" ] = mHideWhenRestarted;
+    out[ START_CLOSED_THUNDERBIRD_KEY ] = startClosedThunderbird;
+    out[ HIDE_WHEN_STARTED_MANUALLY_KEY ] = hideWhenStartedManually;
     out[ "common/allowsuppressingunread" ] = mAllowSuppressingUnreads;
     out[ "common/launchthunderbirddelay" ] = mLaunchThunderbirdDelay;
     out[ "common/showunreademailcount" ] = mShowUnreadEmailCount;
@@ -230,6 +236,8 @@ void Settings::fromJSON( const QJsonObject& settings )
     mRestartThunderbird = settings.value("common/restartthunderbird").toBool();
     mHideWhenStarted = settings.value("common/hidewhenstarted").toBool();
     mHideWhenRestarted = settings.value("common/hidewhenrestarted").toBool();
+    startClosedThunderbird = settings.value(START_CLOSED_THUNDERBIRD_KEY).toBool();
+    hideWhenStartedManually = settings.value(HIDE_WHEN_STARTED_MANUALLY_KEY).toBool();
     mAllowSuppressingUnreads = settings.value("common/allowsuppressingunread").toBool();
     mLaunchThunderbirdDelay = settings.value("common/launchthunderbirddelay").toInt();
     mShowUnreadEmailCount = settings.value("common/showunreademailcount").toBool();
@@ -329,6 +337,8 @@ void Settings::fromQSettings( QSettings * psettings )
             "common/restartthunderbird", mRestartThunderbird ).toBool();
     mHideWhenStarted = settings.value("common/hidewhenstarted", mHideWhenStarted ).toBool();
     mHideWhenRestarted = settings.value("common/hidewhenrestarted", mHideWhenRestarted ).toBool();
+    startClosedThunderbird = settings.value(START_CLOSED_THUNDERBIRD_KEY, startClosedThunderbird ).toBool();
+    hideWhenStartedManually = settings.value(HIDE_WHEN_STARTED_MANUALLY_KEY, hideWhenStartedManually ).toBool();
     mAllowSuppressingUnreads = settings.value(
             "common/allowsuppressingunread", mAllowSuppressingUnreads ).toBool();
     mLaunchThunderbirdDelay = settings.value(

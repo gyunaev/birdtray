@@ -85,6 +85,12 @@ class Settings
         // Whether to hide Thunderbird window after restarting
         bool    mHideWhenRestarted;
 
+        // Whether to start Thunderbird if it is closed and the user clicks on the tray icon
+        bool    startClosedThunderbird;
+    
+        // Whether to hide Thunderbird window after starting it via the system tray icon
+        bool    hideWhenStartedManually;
+
         // Whether to monitor Thunderbird running
         bool    mMonitorThunderbirdWindow;
 

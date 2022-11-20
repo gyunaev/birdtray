@@ -495,6 +495,10 @@ p, li { white-space: pre-wrap; }
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Om det är aktiverat, lägger det här alternativet till &amp;quot;Ignorera för närvarande olästa e-postmeddelanden&amp;quot; i snabbmenyn. Den här åtgärden låter dig ignorera de e-postmeddelanden som för närvarande är olästa. Birdtray kommer då att låtsas att det inte finns några olästa e-postmeddelanden kvar och bara visa nya meddelanden som inkommer efter det ignorerade antalet.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Om det till exempel finns 10 olästa e-postmeddelanden och du klickar på &amp;quot;Ignorera&amp;quot;, visar Birdtray ingen oläst e-post så länge antalet olästa e-postmeddelanden ligger kvar på 10. När sedan ny e-post tas emot och du har totalt 11 olästa e-postmeddelanden, kommer Birdtray att visa 1 på räkneverket.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>
