@@ -576,6 +576,40 @@
             </item>
            </layout>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <widget class="QCheckBox" name="boxStartThunderbirdOnTrayIconClick">
+              <property name="text">
+               <string>Start Thunderbird by clicking on the tray icon if it was closed</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="boxHideWindowAfterManualStart">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>and hide it</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>
@@ -1107,6 +1141,8 @@ p, li { white-space: pre-wrap; }
   <tabstop>boxMonitorThunderbirdWindow</tabstop>
   <tabstop>boxRestartThunderbird</tabstop>
   <tabstop>boxHideWindowAtRestart</tabstop>
+  <tabstop>boxStartThunderbirdOnTrayIconClick</tabstop>
+  <tabstop>boxHideWindowAfterManualStart</tabstop>
   <tabstop>boxEnableNewEmail</tabstop>
   <tabstop>treeNewEmails</tabstop>
   <tabstop>btnNewEmailAdd</tabstop>
@@ -1139,12 +1175,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>134</x>
-     <y>104</y>
+     <x>119</x>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
-     <x>527</x>
-     <y>104</y>
+     <x>483</x>
+     <y>90</y>
     </hint>
    </hints>
   </connection>
@@ -1155,12 +1191,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>134</x>
-     <y>255</y>
+     <x>130</x>
+     <y>227</y>
     </hint>
     <hint type="destinationlabel">
-     <x>340</x>
-     <y>255</y>
+     <x>322</x>
+     <y>227</y>
     </hint>
    </hints>
   </connection>
@@ -1171,12 +1207,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>103</x>
-     <y>48</y>
+     <x>101</x>
+     <y>45</y>
     </hint>
     <hint type="destinationlabel">
-     <x>115</x>
-     <y>84</y>
+     <x>119</x>
+     <y>81</y>
     </hint>
    </hints>
   </connection>
@@ -1187,12 +1223,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>103</x>
-     <y>48</y>
+     <x>101</x>
+     <y>45</y>
     </hint>
     <hint type="destinationlabel">
-     <x>693</x>
-     <y>197</y>
+     <x>687</x>
+     <y>203</y>
     </hint>
    </hints>
   </connection>
@@ -1203,12 +1239,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>103</x>
-     <y>48</y>
+     <x>101</x>
+     <y>45</y>
     </hint>
     <hint type="destinationlabel">
-     <x>693</x>
-     <y>237</y>
+     <x>687</x>
+     <y>233</y>
     </hint>
    </hints>
   </connection>
@@ -1219,12 +1255,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>103</x>
-     <y>48</y>
+     <x>101</x>
+     <y>45</y>
     </hint>
     <hint type="destinationlabel">
-     <x>693</x>
-     <y>277</y>
+     <x>687</x>
+     <y>263</y>
     </hint>
    </hints>
   </connection>
@@ -1235,12 +1271,12 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>576</x>
-     <y>251</y>
+     <x>580</x>
+     <y>211</y>
     </hint>
     <hint type="destinationlabel">
-     <x>686</x>
-     <y>256</y>
+     <x>678</x>
+     <y>212</y>
     </hint>
    </hints>
   </connection>
@@ -1251,12 +1287,28 @@ p, li { white-space: pre-wrap; }
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>328</y>
+     <x>165</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>330</x>
-     <y>333</y>
+     <x>302</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boxStartThunderbirdOnTrayIconClick</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>boxHideWindowAfterManualStart</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>319</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>402</x>
+     <y>247</y>
     </hint>
    </hints>
   </connection>

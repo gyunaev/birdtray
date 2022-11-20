@@ -536,6 +536,10 @@ p, li { white-space: pre-wrap; }
         <source>When showing Thunderbird</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

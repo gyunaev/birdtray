@@ -495,10 +495,17 @@ void TrayIcon::actionActivate()
     if ( !mWinTools )
         return;
 
-    if ( mWinTools->isHidden() )
+    Settings* settings = BirdtrayApp::get()->getSettings();
+    if ( settings->startClosedThunderbird && !mWinTools->lookup() ) {
+        startThunderbird();
+        if (settings->hideWhenStartedManually) {
+            mThunderbirdWindowHide = true;
+        }
+    } else if ( mWinTools->isHidden() ) {
         showThunderbird();
-    else
+    } else {
         hideThunderbird();
+    }
 }
 
 void TrayIcon::actionSnoozeFor()
@@ -560,7 +567,8 @@ void TrayIcon::actionIgnoreEmails()
 
 void TrayIcon::actionSystrayIconActivated(QSystemTrayIcon::ActivationReason reason) {
     if (reason == QSystemTrayIcon::Trigger) {
-        if (BirdtrayApp::get()->getSettings()->mShowHideThunderbird) {
+        Settings* settings = BirdtrayApp::get()->getSettings();
+        if (settings->mShowHideThunderbird || (!mThunderbirdWindowExists && settings->startClosedThunderbird)) {
             actionActivate();
         }
     }

@@ -69,6 +69,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
     boxHideWindowAtStart->setChecked( settings->mHideWhenStarted );
     boxHideWindowAtRestart->setChecked( settings->mHideWhenRestarted );
+    boxStartThunderbirdOnTrayIconClick->setChecked( settings->startClosedThunderbird );
+    boxHideWindowAfterManualStart->setChecked( settings->hideWhenStartedManually );
     boxEnableNewEmail->setChecked( settings->mNewEmailMenuEnabled );
     boxBlinkingUsesAlpha->setChecked( settings->mBlinkingUseAlphaTransition );
     checkUpdateOnStartup->setChecked( settings->mUpdateOnStartup );
@@ -162,6 +164,8 @@ void DialogSettings::accept()
     settings->mRestartThunderbird = boxRestartThunderbird->isChecked();
     settings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
     settings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
+    settings->startClosedThunderbird = boxStartThunderbirdOnTrayIconClick->isChecked();
+    settings->hideWhenStartedManually = boxHideWindowAfterManualStart->isChecked();
     settings->mNewEmailMenuEnabled = boxEnableNewEmail->isChecked();
     settings->mBlinkingUseAlphaTransition = boxBlinkingUsesAlpha->isChecked();
     settings->mUpdateOnStartup = checkUpdateOnStartup->isChecked();

@@ -495,6 +495,10 @@ p, li { white-space: pre-wrap; }
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αυτή είναι η πλήρης γραμμή της εντολής (με τα ορίσματα) για την εκκίνηση του Thunderbird. Τα ορίσματα διαχωρίζονται με κενά, αλλά επιτρέπεται η χρήση κενών μέσα σε εισαγωγικά, π.χ.αυτή η εντολή &lt;span style=&quot; font-weight:600;&quot;&gt;&quot;C:\Program Files\tb.exe&quot; --profile test&lt;/span&gt; είναι έγκυρη.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
+    <message>
+        <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>
