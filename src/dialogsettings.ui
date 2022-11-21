@@ -996,6 +996,50 @@
             </item>
            </layout>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>When detecting a change, wait</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinWatchFileTimerMilliseconds">
+              <property name="suffix">
+               <string> milliseconds</string>
+              </property>
+              <property name="maximum">
+               <number>99999</number>
+              </property>
+              <property name="value">
+               <number>150</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>before updating the unread counter.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>
@@ -1160,6 +1204,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>btnShowLogWindow</tabstop>
   <tabstop>boxForceReread</tabstop>
   <tabstop>spinForceRereadSeconds</tabstop>
+  <tabstop>spinWatchFileTimerMilliseconds</tabstop>
   <tabstop>browserAbout</tabstop>
   <tabstop>translatorsButton</tabstop>
  </tabstops>

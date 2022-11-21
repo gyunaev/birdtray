@@ -92,6 +92,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     }
     else
         boxForceReread->setChecked( false );
+    spinWatchFileTimerMilliseconds->setValue( static_cast<int>(settings->mWatchFileTimeout) );
 
     // Form the proper command-line (with escaped arguments if they contain spaces
     QString tbcmdline;
@@ -193,6 +194,8 @@ void DialogSettings::accept()
         settings->mIndexFilesRereadIntervalSec = spinForceRereadSeconds->value();
     else
         settings->mIndexFilesRereadIntervalSec = 0;
+    
+    settings->mWatchFileTimeout = spinWatchFileTimerMilliseconds->value();
 
     mModelNewEmails->applySettings();
     mAccountModel->applySettings();
