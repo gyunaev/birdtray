@@ -57,7 +57,7 @@ OpenSSL might not be installed.</source>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
-        <translation>解码 UTF7 编码的 IMAP 字符串。</translation>
+        <translation>解析 UTF7 编码的 IMAP 字符串。</translation>
     </message>
     <message>
         <source>string</source>
