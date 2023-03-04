@@ -382,7 +382,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Images (*.png *.svg *.svgz)</source>
-        <translation>图像（*.png *.svg *.svgz）</translation>
+        <translation>图像 (*.png *.svg *.svgz)</translation>
     </message>
     <message>
         <source>Invalid icon</source>
@@ -423,7 +423,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Mail Index (*.msf)</source>
-        <translation>邮件摘要文件（*.msf）</translation>
+        <translation>邮件摘要文件 (*.msf)</translation>
     </message>
     <message>
         <source>No new updates found</source>
@@ -542,7 +542,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>When detecting a change, wait</source>
-        <translation>检测到改变时，等待</translation>
+        <translation>检测到变更时，等待</translation>
     </message>
     <message>
         <source> milliseconds</source>
@@ -550,6 +550,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>before updating the unread counter.</source>
+        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>后再更新未读邮件计数器。</translation>
     </message>
 </context>
@@ -658,6 +659,7 @@ Please make sure you selected the correct profiles directory.</source>
     <name>MorkParser</name>
     <message>
         <source>Couldn&apos;t open file: </source>
+        <translatorcomment>checkTranslation ignore: whitespace_end_src_diff</translatorcomment>
         <translation>无法打开文件：</translation>
     </message>
     <message>
