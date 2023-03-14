@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Archives</source>
-        <translation>存档</translation>
+        <translation>归档</translation>
     </message>
     <message>
         <source>Drafts</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Sent</source>
-        <translation>已发送</translation>
+        <translation>已发送消息</translation>
     </message>
     <message>
         <source>Templates</source>
@@ -25,15 +25,15 @@
     </message>
     <message>
         <source>Junk</source>
-        <translation>垃圾邮件</translation>
+        <translation>垃圾</translation>
     </message>
     <message>
         <source>Trash</source>
-        <translation>回收站</translation>
+        <translation>废件箱</translation>
     </message>
     <message>
         <source>Unsent Messages</source>
-        <translation>未发送</translation>
+        <translation>未发送消息</translation>
     </message>
 </context>
 </TS>
