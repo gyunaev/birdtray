@@ -298,5 +298,9 @@ Wollen Sie das Installationsprogramm für die Komponente herunterladen?</transla
         <source>Greek</source>
         <translation>Griechisch</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Lang_cs</translation>
+    </message>
 </context>
 </TS>

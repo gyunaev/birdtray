@@ -298,5 +298,9 @@ Bileşen için yükleyiciyi indirmek istiyor musunuz?</translation>
         <source>Greek</source>
         <translation>Yunan</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Lang_cs</translation>
+    </message>
 </context>
 </TS>

@@ -298,5 +298,9 @@ Deseja baixar o instalador para o componente?</translation>
         <source>Greek</source>
         <translation>Grego</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Lang_cs</translation>
+    </message>
 </context>
 </TS>

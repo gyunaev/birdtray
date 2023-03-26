@@ -298,5 +298,9 @@ Voulez-vous télécharger le programme d'installation correspondant ?</translati
         <source>Greek</source>
         <translation>Grec</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Lang_cs</translation>
+    </message>
 </context>
 </TS>
