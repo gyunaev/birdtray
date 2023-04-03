@@ -300,7 +300,7 @@ Vill du hämta installationsprogrammet för komponenten?</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Tjeckiska</translation>
     </message>
 </context>
 </TS>
