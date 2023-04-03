@@ -300,7 +300,7 @@ Bileşen için yükleyiciyi indirmek istiyor musunuz?</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Çek</translation>
     </message>
 </context>
 </TS>
