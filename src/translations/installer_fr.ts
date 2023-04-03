@@ -300,7 +300,7 @@ Voulez-vous télécharger le programme d'installation correspondant ?</translati
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Tchèque</translation>
     </message>
 </context>
 </TS>
