@@ -302,7 +302,7 @@ Do you want to download the installer for the component?</source>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Τσέχος</translation>
     </message>
 </context>
 </TS>
