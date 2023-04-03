@@ -300,7 +300,7 @@ Visual C++ Runtime ${ARCH}
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Checo</translation>
     </message>
 </context>
 </TS>
