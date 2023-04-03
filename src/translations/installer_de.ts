@@ -300,7 +300,7 @@ Wollen Sie das Installationsprogramm für die Komponente herunterladen?</transla
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Tschechisch</translation>
     </message>
 </context>
 </TS>
