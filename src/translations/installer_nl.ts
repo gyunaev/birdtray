@@ -300,7 +300,7 @@ Wilt u de installatiewizard van dit onderdeel downloaden?</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Tsjechisch</translation>
     </message>
 </context>
 </TS>
