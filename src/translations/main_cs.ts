@@ -445,7 +445,7 @@ OpenSSL možná není nainstalován.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your desktop manager is not fully NETWM compliant, you may need to check this checkbox so it can detect Thunderbird window and is able to minimise and hide it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokud váš správce plochy není plně kompatibilní s NETWM, možná budete muset zaškrtnout toto políčko, aby mohl detekovat okno Thunderbirdu a mohl jej minimalizovat a skrýt.&lt;/p&gt;&lt; /body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokud váš správce plochy není plně kompatibilní s NETWM, možná budete muset zaškrtnout toto políčko, aby mohl detekovat okno Thunderbirdu a mohl jej minimalizovat a skrýt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>At startup</source>
