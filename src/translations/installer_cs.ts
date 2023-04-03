@@ -177,7 +177,7 @@ Click Retry to try again, or
 Cancel to stop the uninstall.</source>
         <translation>Chyba při mazání souboru:
 
-0 $
+$0
 
 Klepněte na tlačítko Opakovat a zkuste to znovu, nebo
 Zrušením zastavíte odinstalaci.</translation>
