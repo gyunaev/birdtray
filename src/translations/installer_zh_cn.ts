@@ -336,7 +336,7 @@ Visual C++ Runtime ${ARCH}
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>捷克语</translation>
     </message>
 </context>
 </TS>
