@@ -1,172 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="cs">
 <context>
     <name>WindowsInstaller</name>
     <message>
         <source>__LANGUAGE_NAME__</source>
         <translatorcomment>This must be the name of one of the NSIS translation files at https://sourceforge.net/p/nsis/code/HEAD/tree/NSIS/trunk/Contrib/Language%20files/ without the file extension.</translatorcomment>
-        <translation>German</translation>
+        <translation>Czech</translation>
     </message>
     <message>
         <source>A free system tray notification for new mail for Thunderbird.</source>
-        <translation>Ein freies Systemleistenbenachrichtigungsprogramm für neue Mails von Thunderbird.</translation>
+        <translation>Upozornění na novou poštu v systémové liště pro Thunderbird.</translation>
     </message>
     <message>
         <source>Windows integration</source>
-        <translation>Windows-Integration</translation>
+        <translation>Integrace Windows</translation>
     </message>
     <message>
         <source>Select how to integrate the program in Windows.</source>
-        <translation>Auswählen, wie ${PRODUCT_NAME} in Windows integriert werden soll.</translation>
+        <translation>Vyberte způsob integrace programu do systému Windows.</translation>
     </message>
     <message>
         <source>AutoRun</source>
-        <translation>Autostart</translation>
+        <translation>Automatické spouštění</translation>
     </message>
     <message>
         <source>Automatically start ${PRODUCT_NAME} after login.</source>
-        <translation>${PRODUCT_NAME} automatisch nach dem Anmelden starten.</translation>
+        <translation>Automaticky spustit ${PRODUCT_NAME} po přihlášení.</translation>
     </message>
     <message>
         <source>Auto Update-Check</source>
-        <translation>Aktualisierungsüberprüfung</translation>
+        <translation>Automatická aktualizace – kontrola</translation>
     </message>
     <message>
         <source>Automatically search for updates of ${PRODUCT_NAME} at startup.</source>
-        <translation>Beim Starten von ${PRODUCT_NAME} automatisch nach Aktualisierungen suchen.</translation>
+        <translation>Automaticky vyhledat aktualizace ${PRODUCT_NAME} při spuštění.</translation>
     </message>
     <message>
         <source>Program Group Entry</source>
-        <translation>Programmgruppeneintrag</translation>
+        <translation>Vytvoření skupiny v programech</translation>
     </message>
     <message>
-        <source>Create a ${PRODUCT_NAME} program group under Start Menu > Programs.</source>
-        <translation>Erstellt eine ${PRODUCT_NAME}-Programmgruppe in der Programmliste des Startmenüs.</translation>
+        <source>Create a ${PRODUCT_NAME} program group under Start Menu &gt; Programs.</source>
+        <translation>V nabídce Start &gt; Programy vytvořte skupinu programů ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>Desktop Entry</source>
-        <translation>Desktop-Verknüpfung</translation>
+        <translation>Položka na ploše</translation>
     </message>
     <message>
         <source>Create a ${PRODUCT_NAME} icon on the Desktop.</source>
-        <translation>Erstellt eine ${PRODUCT_NAME} Verknüpfung auf dem Desktop.</translation>
+        <translation>Vytvořit ikonu ${PRODUCT_NAME} na ploše.</translation>
     </message>
     <message>
         <source>Start Menu Entry</source>
-        <translation>Startmenüverknüpfung</translation>
+        <translation>Nabídka Start</translation>
     </message>
     <message>
         <source>Create a ${PRODUCT_NAME} icon in the Start Menu.</source>
-        <translation>Erstellt eine ${PRODUCT_NAME}-Verknüpfung im Startmenü.</translation>
+        <translation>Vytvořte ikonu ${PRODUCT_NAME} v nabídce Start.</translation>
     </message>
     <message>
         <source>Translations</source>
-        <translation>Anzeigesprachen</translation>
+        <translation>Překlady</translation>
     </message>
     <message>
         <source>Select translations for ${PRODUCT_NAME}. ${PRODUCT_NAME} will choose a translation based on the system language.</source>
-        <translation>Wählen Sie Anzeigesprachen für ${PRODUCT_NAME} aus. ${PRODUCT_NAME} wird eine Sprache basierend auf der Systemsprache auswählen.</translation>
+        <translation>Vyberte překlady pro ${PRODUCT_NAME}. ${PRODUCT_NAME} vybere překlad podle jazyka systému.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} User Settings</source>
-        <translation>${PRODUCT_NAME}-Benutzereinstellungen</translation>
+        <translation>Uživatelská nastavení ${PRODUCT_NAME}</translation>
     </message>
     <message>
         <source>Your settings and configuration made within ${PRODUCT_NAME}.</source>
-        <translation>Ihre Einstellungen und Konfigurationen in ${PRODUCT_NAME}.</translation>
+        <translation>Vaše nastavení a konfigurace provedené v rámci ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>License Agreement</source>
-        <translation>Lizenzvereinbarung</translation>
+        <translation>Licenční smlouva</translation>
     </message>
     <message>
         <source>Start ${PRODUCT_NAME}</source>
-        <translation>${PRODUCT_NAME} starten</translation>
+        <translation>Spustit ${PRODUCT_NAME}</translation>
     </message>
     <message>
         <source>Click uninstall to begin the process.</source>
-        <translation>&quot;Deinstallieren&quot; klicken, um den Vorgang zu starten.</translation>
+        <translation>Proces zahájíte kliknutím na tlačítko odinstalovat.</translation>
     </message>
     <message>
         <source>Uninstalling previous version of ${PRODUCT_NAME}...</source>
-        <translation>Vorherige ${PRODUCT_NAME}-Version wird deinstalliert...</translation>
+        <translation>Probíhá odinstalace předchozí verze ${PRODUCT_NAME}...</translation>
     </message>
     <message>
         <source>Uninstalling the old ${PRODUCT_NAME} installation failed! Continuing will delete EVERYTHING in $3.</source>
-        <translation>Das Deinstallieren der alten ${PRODUCT_NAME}-Version ist fehlgeschlagen! Wollen Sie fortfahren und ALLES in $3 löschen.</translation>
+        <translation>Odinstalace staré instalace ${PRODUCT_NAME} se nezdařila! Pokračováním smažete VŠECHNO v $3.</translation>
     </message>
     <message>
         <source>Error executing uninstaller.</source>
-        <translation>Fehler beim Ausführen des Deinstallationsprogramms.</translation>
+        <translation>Chyba při odinstalaci.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} is currently running. Press OK to stop ${PRODUCT_NAME} to continue with the installation.</source>
-        <translation>${PRODUCT_NAME} wird momentan ausgeführt. Drücken Sie OK, um ${PRODUCT_NAME} anzuhalten und mit der Installation fortzufahren.</translation>
+        <translation>${PRODUCT_NAME} aktuálně běží. Stisknutím tlačítka OK zastavte ${PRODUCT_NAME} a pokračujte v instalaci.</translation>
     </message>
     <message>
         <source>Closing process ${EXE_NAME}...</source>
-        <translation>Prozess ${EXE_NAME} wird angehalten...</translation>
+        <translation>Ukončování procesu ${EXE_NAME}...</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the installation.</source>
-        <translation>Das Anhalten von ${PRODUCT_NAME} ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schließen Sie ${PRODUCT_NAME} manuell, um mit der Installation fortzufahren.</translation>
+        <translation>${PRODUCT_NAME} se nepodařilo zavřít. Chcete-li pokračovat v instalaci, zkuste to znovu nebo ručně ukončete ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} is currently running. Press OK to stop ${PRODUCT_NAME} to continue with the uninstall.</source>
-        <translation>${PRODUCT_NAME} wird momentan ausgeführt. Drücken Sie OK, um ${PRODUCT_NAME} anzuhalten und mit der Deinstallation fortzufahren.</translation>
+        <translation>${PRODUCT_NAME} je spuštěn. Chcete-li pokračovat v odinstalaci, stiskněte OK pro zastavení ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>Failed to close ${PRODUCT_NAME}. Please retry or quit ${PRODUCT_NAME} manually to continue with the uninstall.</source>
-        <translation>Das Anhalten von ${PRODUCT_NAME} ist fehlgeschlagen. Bitte versuchen Sie es erneut oder schließen Sie ${PRODUCT_NAME} manuell, um mit der Deinstallation fortzufahren.</translation>
+        <translation>${PRODUCT_NAME} se nepodařilo zavřít. Chcete-li pokračovat v odinstalaci, zkuste to znovu nebo ručně ukončete ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>The setup of ${PRODUCT_NAME} is already running.
 Please, close all instances of it and click Retry to continue, or Cancel to exit.</source>
-        <translation>Das Installationsprogramm von ${PRODUCT_NAME} wird bereits ausgeführt.
-Bitte schließen Sie alle anderen Instanzen und klicken sie &quot;Wiederholen&quot; um fortzufahren, oder &quot;Abbruch&quot; um die Installation abzubrechen.</translation>
+        <translation>Instalace ${PRODUCT_NAME} již běží.
+Zavřete prosím všechny jeho výskyty a pokračujte kliknutím na Opakovat, pro ukončení klikněte na Zrušit.</translation>
     </message>
     <message>
         <source>The uninstall of ${PRODUCT_NAME} is already running.
 Please, close all instances of it and click Retry to continue, or Cancel to exit.</source>
-        <translation>Das Deinstallationsprogramm von ${PRODUCT_NAME} wird bereits ausgeführt.
-Bitte schließen Sie alle anderen Instanzen und klicken sie &quot;Wiederholen&quot; um fortzufahren, oder &quot;Abbruch&quot; um die Deinstallation abzubrechen.</translation>
+        <translation>Odinstalace ${PRODUCT_NAME} již probíhá.
+Zavřete prosím všechny jeho výskyty a pokračujte kliknutím na Opakovat, pro ukončení klikněte na Zrušit.</translation>
     </message>
     <message>
         <source>The install path must not contain any of:
 ${BAD_PATH_CHARS}</source>
-        <translation>Der Installationspfad darf keine der folgenden Buchstaben enthalten:
+        <translation>Instalační cesta nesmí obsahovat nic z:
 ${BAD_PATH_CHARS}</translation>
     </message>
     <message>
         <source>The install path contains a previously installed ${PRODUCT_NAME} version, which will be replaced.</source>
-        <translation>Im Installationspfad wurde eine bereits installierte ${PRODUCT_NAME}-Version gefunden, die ersetzt wird.</translation>
+        <translation>Instalační cesta obsahuje dříve nainstalovanou verzi ${PRODUCT_NAME}, která bude nahrazena.</translation>
     </message>
     <message>
-        <source>The install path is not empty, but it doesn't look like it contains a previous ${PRODUCT_NAME} installation. The content will get overwritten.</source>
-        <translation>Der Installationspfad ist nicht leer, aber scheint keine bereits installierte ${PRODUCT_NAME}-Version zu beinhalten. Der Inhalt des Ordners wird überschrieben.</translation>
+        <source>The install path is not empty, but it doesn&apos;t look like it contains a previous ${PRODUCT_NAME} installation. The content will get overwritten.</source>
+        <translation>Instalační cesta není prázdná, ale nezdá se, že by obsahovala předchozí instalaci ${PRODUCT_NAME}. Obsah bude přepsán.</translation>
     </message>
     <message>
         <source>$0 (current user only)</source>
-        <translation>$0 (nur für den aktuellen Benutzer)</translation>
+        <translation>$0 (pouze aktuální uživatel)</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} ${VERSION} could not be fully installed.
 Please, restart Windows and run the setup program again.</source>
-        <translation>${PRODUCT_NAME} ${VERSION} konnte nicht komplett installiert werden.
-Bitte starten Sie Windows neu und führen Sie das Installationsprogramm erneut aus.</translation>
+        <translation>${PRODUCT_NAME} ${VERSION} se nepodařilo plně nainstalovat.
+Restartujte Windows a znovu spusťte instalační program.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} could not be fully installed.
 Please, restart Windows and run the setup program again.</source>
-        <translation>${PRODUCT_NAME} konnte nicht komplett installiert werden.
-Bitte starten Sie Windows neu und führen Sie das Installationsprogramm erneut aus.</translation>
+        <translation>${PRODUCT_NAME} se nepodařilo plně nainstalovat.
+Restartujte Windows a znovu spusťte instalační program.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} ${VERSION} could not be fully uninstalled.
 Please, restart Windows and run the uninstaller again.</source>
-        <translation>${PRODUCT_NAME} ${VERSION} konnte nicht komplett deinstalliert werden.
-Bitte starten Sie Windows neu und führen Sie das Deinstallationsprogramm erneut aus.</translation>
+        <translation>${PRODUCT_NAME} ${VERSION} se nepodařilo úplně odinstalovat.
+Restartujte prosím Windows a znovu spusťte odinstalační program.</translation>
     </message>
     <message>
         <source>Error deleting file:
@@ -175,132 +175,132 @@ $0
 
 Click Retry to try again, or
 Cancel to stop the uninstall.</source>
-        <translation>Fehler beim Löschen der Datei:
+        <translation>Chyba při mazání souboru:
 
 $0
 
-Klicke &quot;Wiederholen&quot;, um es erneut zu versuchen, oder
-&quot;Abbruch&quot;, um die Deinstallation abzubrechen.</translation>
+Klepněte na tlačítko Opakovat a zkuste to znovu, nebo
+Zrušením zastavíte odinstalaci.</translation>
     </message>
     <message>
         <source>Error deleting file $0</source>
-        <translation>Fehler beim Löschen der Datei $0</translation>
+        <translation>Chyba při mazání souboru $0</translation>
     </message>
     <message>
         <source>You are about to install the 32-bit version of ${PRODUCT_NAME} on your 64-bit Windows. There is a 64-bit version of ${PRODUCT_NAME} available for download.</source>
-        <translation>Sie sind dabei, die 32-Bit-Version von ${PRODUCT_NAME} auf Ihrem 64-Bit-Windows zu installieren. Es gibt eine 64-bit-${PRODUCT_NAME}-Version, die heruntergeladen werden kann.</translation>
+        <translation>Chystáte se nainstalovat 32bitovou verzi produktu ${PRODUCT_NAME} do 64bitového systému Windows. Ke stažení je k dispozici 64bitová verze produktu ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>This installer contains the 64-bit version of ${PRODUCT_NAME}. Your computer is running a 32-bit version of Windows, which can not execute 64-bit programs. Please download the 32-bit installer of ${PRODUCT_NAME}.</source>
-        <translation>Dieses Installationsprogramm beinhaltet die 64-Bit-Version von ${PRODUCT_NAME}. Auf Ihrem Computer läuft eine 32-Bit-Version von Windows, welche keine 64-Bit-Programme ausführen kann. Bitte laden sie das 32-Bit-Installationsprogramm von ${PRODUCT_NAME} herunter.</translation>
+        <translation>Tento instalační program obsahuje 64bitovou verzi produktu ${PRODUCT_NAME}. Váš počítač používá 32bitovou verzi systému Windows, která nemůže spouštět 64bitové programy. Stáhněte si prosím 32bitový instalační program ${PRODUCT_NAME}.</translation>
     </message>
     <message>
         <source>This program requires at least Windows ${MIN_WINDOWS_VER}.</source>
-        <translation>Dieses Programm benötigt mindestens Windows ${MIN_WINDOWS_VER}.</translation>
+        <translation>Tento program vyžaduje alespoň Windows ${MIN_WINDOWS_VER}.</translation>
     </message>
     <message>
         <source>Uninstalling ${PRODUCT_NAME} has been aborted. Please try again later.</source>
-        <translation>Die ${PRODUCT_NAME} Deinstallation wurde abgebrochen. Bitte versuchen Sie es später erneut.</translation>
+        <translation>Odinstalace ${PRODUCT_NAME} byla přerušena. Prosím zkuste to znovu později.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} settings</source>
-        <translation>${PRODUCT_NAME} Einstellungen</translation>
+        <translation>Nastavení ${PRODUCT_NAME}</translation>
     </message>
     <message>
         <source>The uninstaller is started with administrator privileges but there seems to be no ${PRODUCT_NAME} installation for the administrator. Do you want to restart the uninstaller without admin privileges?</source>
-        <translation>Das Deinstallationsprogramm wurde mit Administrator-Rechten gestartet, aber es scheint keine ${PRODUCT_NAME}-Installation beim Administrator vorhanden zu sein. Wollen Sie die Deinstallation als Nutzer ohne Administrator-Rechten neu starten?</translation>
+        <translation>Odinstalační program je spuštěn s právy správce, ale zdá se, že správce nemá žádnou instalaci produktu ${PRODUCT_NAME}. Chcete restartovat odinstalační program bez oprávnění správce?</translation>
     </message>
     <message>
         <source>Opening $0 in default browser...</source>
-        <translation>Öffne $0 im Standardbrowser...</translation>
+        <translation>Otevírání $0 ve výchozím prohlížeči...</translation>
     </message>
     <message>
         <source>Unable to find Visual C++ Runtime ${ARCH}.</source>
-        <translation>Die Visual C++ Runtime ${ARCH} konnte nicht gefunden werden.</translation>
+        <translation>Nelze najít Visual C++ Runtime ${ARCH}.</translation>
     </message>
     <message>
         <source>The following required component was not found on this computer:
 Visual C++ Runtime ${ARCH}
 Do you want to download the installer for the component?</source>
-        <translation>Die folgende benötigte Komponente wurde auf diesem Computer nicht gefunden:
+        <translation>Následující požadovaná součást nebyla v tomto počítači nalezena:
 Visual C++ Runtime ${ARCH}
-Wollen Sie das Installationsprogramm für die Komponente herunterladen?</translation>
+Chcete si stáhnout instalační program součásti?</translation>
     </message>
     <message>
         <source>Once the download completes, please execute the downloaded installer. When the installer is finished, press OK to check the installation status again.</source>
-        <translation>Starten Sie bitte das Installationsprogramm, nachdem es heruntergeladen wurde. Wenn die Installation abgeschlossen ist, klicken Sie bitte auf OK, um den Installationsstatus erneut zu überprüfen.</translation>
+        <translation>Po dokončení stahování spusťte stažený instalační program. Po dokončení instalace stiskněte tlačítko OK a znovu zkontrolujte stav instalace.</translation>
     </message>
     <message>
         <source>The required component was successfully detected on your computer.</source>
-        <translation>Die erforderliche Komponente wurde erfolgreich auf Ihrem Computer gefunden.</translation>
+        <translation>Požadovaná součást byla úspěšně detekována na vašem počítači.</translation>
     </message>
     <message>
         <source>The required component was not found on your computer. Please search online for Visual C++ ${ARCH} downloads for Visual Studio 2015 and higher.</source>
-        <translation>Die erforderliche Komponente konnte nicht auf Ihrem Computer gefunden werden. Bitte suchen Sie Online nach Visual C++ ${ARCH} Downloads für Visual Studio 2015 und höher.</translation>
+        <translation>Požadovaná součást nebyla ve vašem počítači nalezena. Stáhněte si z internetu Visual C++ ${ARCH} pro Visual Studio 2015 a vyšší.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} will not be able to run.</source>
-        <translation>${PRODUCT_NAME} wird nicht starten können.</translation>
+        <translation>${PRODUCT_NAME} nebude možné spustit.</translation>
     </message>
     <message>
         <source>${PRODUCT_NAME} will not be able to start because a required component is missing.</source>
-        <translation>${PRODUCT_NAME} wird nicht starten können, da eine erforderliche Komponente fehlt.</translation>
+        <translation>${PRODUCT_NAME} nebude možné spustit, protože chybí požadovaná součást.</translation>
     </message>
     <message>
         <source>English</source>
-        <translation>Englisch</translation>
+        <translation>Angličtina</translation>
     </message>
     <message>
         <source>French</source>
-        <translation>Französisch</translation>
+        <translation>Francouzština</translation>
     </message>
     <message>
         <source>German</source>
-        <translation>Deutsch</translation>
+        <translation>Němčina</translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation>Niederländisch</translation>
+        <translation>Nizozemština</translation>
     </message>
     <message>
         <source>Italian</source>
-        <translation>Italienisch</translation>
+        <translation>Italština</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation>Russisch</translation>
+        <translation>Ruština</translation>
     </message>
     <message>
         <source>Portugees</source>
-        <translation>Portugiesisch</translation>
+        <translation>Portugalština</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation>Spanisch</translation>
+        <translation>Španělština</translation>
     </message>
     <message>
         <source>Swedish</source>
-        <translation>Schwedisch</translation>
+        <translation>Švédština</translation>
     </message>
     <message>
         <source>Turkish</source>
-        <translation>Türkisch</translation>
+        <translation>Turečtina</translation>
     </message>
     <message>
         <source>Polish</source>
-        <translation>Polnisch</translation>
+        <translation>Polština</translation>
     </message>
     <message>
         <source>Chinese (Simplified)</source>
-        <translation>Chinesisch (vereinfacht)</translation>
+        <translation>Zjednodušená čínština</translation>
     </message>
     <message>
         <source>Greek</source>
-        <translation>Griechisch</translation>
+        <translation>Řečtina</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Tschechisch</translation>
+        <translation>Čeština</translation>
     </message>
 </context>
 </TS>

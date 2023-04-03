@@ -300,5 +300,9 @@ Do you want to download the installer for the component?</source>
         <source>Greek</source>
         <translation>Ελληνικά</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Τσέχος</translation>
+    </message>
 </context>
 </TS>

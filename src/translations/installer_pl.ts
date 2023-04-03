@@ -298,5 +298,9 @@ Czy chcesz pobrać jego instalator?</translation>
         <source>Greek</source>
         <translation>grecki</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Czech</translation>
+    </message>
 </context>
 </TS>

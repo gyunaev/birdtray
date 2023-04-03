@@ -298,5 +298,9 @@ Wilt u de installatiewizard van dit onderdeel downloaden?</translation>
         <source>Greek</source>
         <translation>Grieks</translation>
     </message>
+    <message>
+        <source>Czech</source>
+        <translation>Tsjechisch</translation>
+    </message>
 </context>
 </TS>
