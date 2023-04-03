@@ -300,7 +300,7 @@ Deseja baixar o instalador para o componente?</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Lang_cs</translation>
+        <translation>Tcheco</translation>
     </message>
 </context>
 </TS>
