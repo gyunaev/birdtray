@@ -143,6 +143,7 @@ DialogSettings::DialogSettings( QWidget *parent)
 #if defined (Q_OS_WINDOWS)
     leThunderbirdWindowMatch->hide();
     labelWindowNamePattern->hide();
+    boxSupportNonNetwmCompliant->hide();
 #else
     processNameLabel->hide();
     leThunderbirdProcessName->hide();
