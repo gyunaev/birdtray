@@ -139,6 +139,14 @@ DialogSettings::DialogSettings( QWidget *parent)
         boxNotificationIconUnread->setChecked(false);
         btnNotificationIconUnread->setDisabled(true);
     }
+
+#if defined (Q_OS_WINDOWS)
+    leThunderbirdWindowMatch->hide();
+    labelWindowNamePattern->hide();
+#else
+    processNameLabel->hide();
+    leThunderbirdProcessName->hide();
+#endif
 }
 
 void DialogSettings::accept()
