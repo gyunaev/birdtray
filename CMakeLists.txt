@@ -211,7 +211,7 @@ if(WIN32)
 
     # Find ssl libraries
     find_package(OpenSSL QUIET)
-    get_filename_component(SSL_PATH ${OPENSSL_SSL_LIBRARY} DIRECTORY)
+    get_filename_component(SSL_PATH "${OPENSSL_SSL_LIBRARY}" DIRECTORY)
     if(SSL_PATH)
         STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
     else()
