@@ -511,6 +511,10 @@ p, li { white-space: pre-wrap; }
         <source>before updating the unread counter.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Thunderbird process name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

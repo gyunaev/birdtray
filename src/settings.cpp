@@ -18,6 +18,12 @@
 #define BORDER_WIDTH_KEY "common/borderwidth"
 #define START_CLOSED_THUNDERBIRD_KEY "common/startClosedThunderbird"
 #define HIDE_WHEN_STARTED_MANUALLY_KEY "common/hideWhenStartedManually"
+#define THUNDERBIRD_PROCESS_NAME_KEY "advanced/tbprocessname"
+#ifdef Q_OS_WIN
+#  define THUNDERBIRD_PROCESS_NAME_DEFAULT "thunderbird.exe"
+#else
+#  define THUNDERBIRD_PROCESS_NAME_DEFAULT "thunderbird"
+#endif /* Q_OS_WIN */
 #define UPDATE_ON_STARTUP_KEY "advanced/updateOnStartup"
 #define ONLY_SHOW_ICON_ON_UNREAD_MESSAGES_KEY "advanced/onlyShowIconOnUnreadMessages"
 #define READ_INSTALL_CONFIG_KEY "hasReadInstallConfig"
@@ -63,6 +69,7 @@ Settings::Settings()
     ignoreUnreadCountOnHide = false;
     showDialogIfNoAccountsConfigured = true;
     mThunderbirdWindowMatch = " Mozilla Thunderbird";
+    mThunderbirdProcessName = THUNDERBIRD_PROCESS_NAME_DEFAULT;
     mNotificationMinimumFontSize = 4;
     mNotificationMaximumFontSize = 512;
     mWatchFileTimeout = 150;
@@ -110,6 +117,7 @@ void Settings::save()
 
     out[ "advanced/tbcmdline" ] = QJsonArray::fromStringList( mThunderbirdCmdLine );
     out[ "advanced/tbwindowmatch" ] = mThunderbirdWindowMatch;
+    out[ THUNDERBIRD_PROCESS_NAME_KEY ] = mThunderbirdProcessName;
     out[ "advanced/notificationfontminsize" ] = static_cast<int>( mNotificationMinimumFontSize );
     out[ "advanced/notificationfontmaxsize" ] = static_cast<int>( mNotificationMaximumFontSize );
     out[ "advanced/watchfiletimeout" ] = static_cast<int>( mWatchFileTimeout );
@@ -250,6 +258,7 @@ void Settings::fromJSON( const QJsonObject& settings )
     showDialogIfNoAccountsConfigured = settings.value("common/showDialogIfNoAccountsConfigured").toBool();
 
     mThunderbirdWindowMatch = settings.value("advanced/tbwindowmatch").toString();
+    mThunderbirdProcessName = settings.value(THUNDERBIRD_PROCESS_NAME_KEY).toString(mThunderbirdProcessName);
     mNotificationMinimumFontSize = settings.value("advanced/notificationfontminsize").toInt();
     mNotificationMaximumFontSize = settings.value("advanced/notificationfontmaxsize").toInt();
     mWatchFileTimeout = settings.value("advanced/watchfiletimeout").toInt();
@@ -361,6 +370,7 @@ void Settings::fromQSettings( QSettings * psettings )
     }
     mThunderbirdWindowMatch = settings.value(
             "advanced/tbwindowmatch", mThunderbirdWindowMatch ).toString();
+    mThunderbirdProcessName = settings.value(THUNDERBIRD_PROCESS_NAME_KEY, mThunderbirdProcessName ).toString();
     mNotificationMinimumFontSize = settings.value(
             "advanced/notificationfontminsize", mNotificationMinimumFontSize ).toInt();
     mNotificationMaximumFontSize = settings.value(
