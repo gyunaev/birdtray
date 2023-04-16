@@ -510,7 +510,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>before updating the unread counter.</source>
-        <translation> bevor die Anzahl ungelesener E-Mails aktualisiert wird.</translation>
+        <translation>bevor die Anzahl ungelesener E-Mails aktualisiert wird.</translation>
+    </message>
+    <message>
+        <source>Thunderbird process name:</source>
+        <translation>Thunderbird Prozessname:</translation>
     </message>
 </context>
 <context>

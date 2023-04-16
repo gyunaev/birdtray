@@ -96,7 +96,8 @@ bool WindowTools_Win::lookup() {
         return thunderbirdWindow;
     }
     
-    DWORD thunderbirdProcessId = getProcessId(L"thunderbird.exe");
+    DWORD thunderbirdProcessId = getProcessId(Utils::qToStdWString(
+            BirdtrayApp::get()->getSettings()->mThunderbirdProcessName).c_str());
     if (thunderbirdProcessId == 0) {
         return false;
     }

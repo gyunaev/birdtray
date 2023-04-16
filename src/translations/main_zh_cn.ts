@@ -553,6 +553,10 @@ p, li { white-space: pre-wrap; }
         <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>后再更新未读邮件计数器。</translation>
     </message>
+    <message>
+        <source>Thunderbird process name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

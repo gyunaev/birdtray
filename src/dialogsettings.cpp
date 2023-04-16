@@ -64,6 +64,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     boxHideWhenMinimized->setChecked( settings->mHideWhenMinimized );
     boxMonitorThunderbirdWindow->setChecked( settings->mMonitorThunderbirdWindow );
     boxRestartThunderbird->setChecked( settings->mRestartThunderbird );
+    leThunderbirdProcessName->setText( settings->mThunderbirdProcessName );
     leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
@@ -154,6 +155,7 @@ void DialogSettings::accept()
     settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
     settings->mShowHideThunderbird = boxShowHideThunderbird->isChecked();
     settings->mThunderbirdCmdLine = Utils::splitCommandLine( leThunderbirdCmdLine->text() );
+    settings->mThunderbirdProcessName = leThunderbirdProcessName->text();
     settings->mThunderbirdWindowMatch = leThunderbirdWindowMatch->text();
     settings->mHideWhenMinimized = boxHideWhenMinimized->isChecked();
     settings->mNotificationFontWeight = qMin(99, (int) (notificationFontWeight->value() / 2));

@@ -58,6 +58,9 @@ class Settings
         // The command to start Thunderbird. The first element is the executable to launch.
         QStringList mThunderbirdCmdLine;
 
+        // The name of the Thunderbird process.
+        QString mThunderbirdProcessName;
+
         // Thunderbird window match
         QString mThunderbirdWindowMatch;
 
