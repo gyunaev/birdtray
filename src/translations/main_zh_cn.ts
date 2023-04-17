@@ -6,21 +6,18 @@
     <message>
         <source>No ssl configuration!
 OpenSSL might not be installed.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>未找到 SSL 配置！
 您可能没有安装 OpenSSL。</translation>
     </message>
     <message>
         <source>Failed to save the Birdtray installer:
 </source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>安装程序保存失败：
 </translation>
     </message>
     <message>
         <source>Failed to download the Birdtray installer:
 </source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>安装程序下载失败：
 </translation>
     </message>
@@ -34,7 +31,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Failed to start the Birdtray installer.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>启动 Birdtray 安装程序失败。</translation>
     </message>
 </context>
@@ -42,12 +38,10 @@ OpenSSL might not be installed.</source>
     <name>BirdtrayApp</name>
     <message>
         <source>A free system tray notification for new mail for Thunderbird.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>一个为 Thunderbird 提供最小化到系统托盘及新邮件提醒功能的自由软件。</translation>
     </message>
     <message>
         <source>Display the contents of the given mork database.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>显示指定 Mork 数据库的内容。</translation>
     </message>
     <message>
@@ -56,7 +50,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Decode an IMAP Utf7 string.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>解析 UTF7 编码的 IMAP 字符串。</translation>
     </message>
     <message>
@@ -65,32 +58,26 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Show the settings.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>显示配置项。</translation>
     </message>
     <message>
         <source>Reset the settings to the defaults.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>重置为默认设置。</translation>
     </message>
     <message>
         <source>Toggle the Thunderbird window.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>显示 / 隐藏 Thunderbird 窗口。</translation>
     </message>
     <message>
         <source>Show the Thunderbird window.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>显示 Thunderbird 窗口。</translation>
     </message>
     <message>
         <source>Hide the Thunderbird window.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>隐藏 Thunderbird 窗口。</translation>
     </message>
     <message>
         <source>Write log to a file.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>将日志写入文件。</translation>
     </message>
     <message>
@@ -99,7 +86,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Sorry, the system tray cannot be controlled by this add-on on your operating system.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>抱歉，您的操作系统不支持通过本程序控制系统托盘。</translation>
     </message>
 </context>
@@ -111,7 +97,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Name:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>名称：</translation>
     </message>
     <message>
@@ -120,17 +105,14 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Email subject:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>邮件主题：</translation>
     </message>
     <message>
         <source>Email message text:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>邮件正文：</translation>
     </message>
     <message>
         <source>Email recipient:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>收件人：</translation>
     </message>
     <message>
@@ -139,7 +121,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>The name cannot be empty.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>模板名称不能为空。</translation>
     </message>
 </context>
@@ -170,7 +151,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Different icon when unread:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>有未读邮件时使用图标：</translation>
     </message>
     <message>
@@ -183,7 +163,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Icon (Ctrl-click to reset):</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>图标（按住 Ctrl 点击以重置）：</translation>
     </message>
     <message>
@@ -192,7 +171,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Multiple notification color:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>多信箱未读通知颜色：</translation>
     </message>
     <message>
@@ -201,27 +179,22 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Blinking speed:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>图标闪烁速度：</translation>
     </message>
     <message>
         <source>Font style:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>字体：</translation>
     </message>
     <message>
         <source>Bold:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>加粗：</translation>
     </message>
     <message>
         <source>Notification border color:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>通知消息边框颜色：</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>宽度：</translation>
     </message>
     <message>
@@ -314,17 +287,14 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Please do not change these settings unless you understand what you&apos;re doing.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>修改以下配置前请确保您清楚是否真的需要修改它们。</translation>
     </message>
     <message>
         <source>Thunderbird window name pattern:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>Thunderbird 窗口标题模板：</translation>
     </message>
     <message>
         <source>Minimum notification font size:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>通知消息字体不小于：</translation>
     </message>
     <message>
@@ -341,7 +311,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Check for new updates when Birdtray starts.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>当 Birdtray 启动时检查是否有新版本。</translation>
     </message>
     <message>
@@ -350,7 +319,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Check for a new Birdtray version.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>检测是否有新版本。</translation>
     </message>
     <message>
@@ -368,7 +336,6 @@ OpenSSL might not be installed.</source>
     <message>
         <source>Failed to check for a new Birdtray version:
 </source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>检查新版本失败：
 </translation>
     </message>
@@ -390,12 +357,10 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Could not load the icon from this file.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无法加载图标。</translation>
     </message>
     <message>
         <source>Thunderbird command line:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>Thunderbird 启动命令：</translation>
     </message>
     <message>
@@ -404,17 +369,14 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Ignore all unread email that are present when Birdtray starts. Only new emails will be taken into account by the unread counter.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>Birdtray 启动时忽略当前的未读邮件，未读计数将仅计算新收到的邮件。</translation>
     </message>
     <message>
         <source>opaque when new mail is present,</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>的透明度显示图标，</translation>
     </message>
     <message>
         <source>hide it if no new mail is present.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>没有未读邮件时隐藏托盘图标。</translation>
     </message>
     <message>
@@ -443,7 +405,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Translations are powered by the community:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>翻译工作由社区支持：</translation>
     </message>
     <message>
@@ -464,7 +425,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Unread change cmd:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>未读邮件变化时执行脚本：</translation>
     </message>
     <message>
@@ -473,7 +433,6 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Could not load the icon from this file. Try loading the icon in an image editing tool and saving it in a different format.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无法加载图标，可尝试将其转换为其他格式后再试。</translation>
     </message>
     <message>
@@ -550,7 +509,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>before updating the unread counter.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>后再更新未读邮件计数器。</translation>
     </message>
     <message>
@@ -590,7 +548,6 @@ Log file is written into file %2</source>
     <message>
         <source>No mail folder was selected to monitor.
 Do you want to continue?</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>未选择任何要监听的邮件目录。
 是否继续？</translation>
     </message>
@@ -600,7 +557,6 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Select the directory that contains the Thunderbird profiles.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>请选择 Thunderbird 数据目录。</translation>
     </message>
     <message>
@@ -613,7 +569,6 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Select the mail accounts you want to monitor.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>选择您要监听的信箱。</translation>
     </message>
     <message>
@@ -626,7 +581,6 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>If you monitor multiple folders, the default notification color is used to show the sum of all unread mails.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>如果您选择了多个目录，将使用默认颜色显示未读邮件总数。</translation>
     </message>
     <message>
@@ -636,7 +590,6 @@ Do you want to continue?</source>
     <message>
         <source>No mail profiles were found.
 Please make sure you selected the correct profiles directory.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>未找到 Thunderbird 配置。
 请检查您选择的 Thunderbird 数据目录是否正确。</translation>
     </message>
@@ -668,37 +621,30 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Unsupported version.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>抱歉，该版本不受支持。</translation>
     </message>
     <message>
         <source>Invalid format.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无效的格式。</translation>
     </message>
     <message>
         <source>Parsing error.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>匹配出错。</translation>
     </message>
     <message>
         <source>Unexpected EOF.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>未预期的文件结束标志符（EOF）。</translation>
     </message>
     <message>
         <source>Invalid comment.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无效的注释。</translation>
     </message>
     <message>
         <source>Format error.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>格式错误。</translation>
     </message>
     <message>
         <source>Unexpected end of group.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>未预期的 end-group。</translation>
     </message>
 </context>
@@ -720,17 +666,14 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>您正在监听使用 SQLite 解析器的信箱，但该解析器已被弃用。这些监听设置已自动改用 Mork 解析器，但一些已配置的信箱无法找到。</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>您正在监听使用 SQLite 解析器的邮箱帐号，但该解析器已被弃用。这些监听设置已自动改用 Mork 解析器，请确认各帐号映射是否正确。</translation>
     </message>
     <message>
         <source>Cannot load default system tray icon.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无法加载默认托盘图标。</translation>
     </message>
 </context>
@@ -738,12 +681,10 @@ Please make sure you selected the correct profiles directory.</source>
     <name>TrayIcon</name>
     <message>
         <source>Would you like to set up Birdtray?</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>您要对 Birdtray 进行配置吗？</translation>
     </message>
     <message>
         <source>You have not yet configured any email folders to monitor. Would you like to do it now?</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>您尚未配置任何要监听的信箱，是否现在配置？</translation>
     </message>
     <message>
@@ -800,7 +741,6 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Settings...</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>设置...</translation>
     </message>
     <message>
@@ -844,12 +784,10 @@ Please make sure you selected the correct profiles directory.</source>
     <name>UnreadMonitor</name>
     <message>
         <source>Unable to watch %1 for changes.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无法监听 %1。</translation>
     </message>
     <message>
         <source>Unable to read from %1.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>无法读取 %1。</translation>
     </message>
 </context>
@@ -861,22 +799,18 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Current version:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>当前版本：</translation>
     </message>
     <message>
         <source>A new version of Birdtray is available.</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>有新版本可用。</translation>
     </message>
     <message>
         <source>New version:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>新版本：</translation>
     </message>
     <message>
         <source>Download size:</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>下载文件大小：</translation>
     </message>
     <message>
@@ -916,7 +850,6 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
-        <translatorcomment>checkTranslation ignore: punctuation_end_differ</translatorcomment>
         <translation>下载完成。是否立即重启以应用更新？</translation>
     </message>
     <message>

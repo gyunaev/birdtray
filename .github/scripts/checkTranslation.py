@@ -3,6 +3,8 @@
 import os
 import re
 import sys
+import unicodedata
+
 from glob import iglob
 from html.parser import HTMLParser
 
@@ -265,6 +267,9 @@ class TranslationHandler(ContentHandler):
     """ Linter for a Qt language translation file. """
     FILTER_REGEX = re.compile(r'checkTranslation\signore:\s*(?P<filters>.+?)(\s|$)')
     SENTENCE_ENDING_PUNCTUATIONS = '.,!?:;…	¡¿։'
+    EQUIVALENT_CHARACTER_MAPPING = {
+        '。': '.',
+    }
 
     def __init__(self, filePath, formatSpecifierRegexes, specialPatterns, globalWarningFilter):
         """
@@ -545,9 +550,11 @@ class TranslationHandler(ContentHandler):
                 lastTranslationChar not in self.SENTENCE_ENDING_PUNCTUATIONS:
             return  # If source and translation don't end in a punctuation
         if lastSourceChar != lastTranslationChar:
-            if not (lastSourceChar == '.' and self._source.endswith('...') and
-                    self._translation.endswith('…')) and \
-                    not (lastSourceChar == '…' and self._translation.endswith('...')):
+            lastNormalizedTranslationChar = unicodedata.normalize('NFKD', lastTranslationChar)
+            lastNormalizedSourceChar = unicodedata.normalize('NFKD', lastSourceChar)
+            lastNormalizedSourceChar = self._source[-len(lastNormalizedTranslationChar):-1] + lastNormalizedSourceChar
+            if lastNormalizedSourceChar != lastNormalizedTranslationChar \
+                    and self.EQUIVALENT_CHARACTER_MAPPING.get(lastTranslationChar) != lastSourceChar:
                 self.warning('punctuation_end_differ', self._calculatePosition(
                     self._translation, len(self._translation) - 1, self._translationPos),
                              punctuation=self._escapeText(lastSourceChar),
