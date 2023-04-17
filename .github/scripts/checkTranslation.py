@@ -3,6 +3,8 @@
 import os
 import re
 import sys
+import unicodedata
+
 from glob import iglob
 from html.parser import HTMLParser
 
@@ -46,6 +48,7 @@ class Logger:
         'indentation_wrong_end': 'The end of the "{name}" element has an unexpected '
                                  'indentation: Expected "{expected}", got "{actual}"',
         'unexpected_text': 'Unexpected text found, check last closing tag: {text}',
+        'unnecessary_filter': 'Unnecessary warning filter, translation did not generate a "{filterId}" warning',
     }
     ERROR_MESSAGES = {
         'missing_language_attr': 'Missing "language" attribute',
@@ -66,13 +69,14 @@ class Logger:
     def __init__(self, filePath, globalFilter=None):
         """
         :param filePath: The path of the file that the logs belong to.
-        :param globalFilter: A warning filter tat is always active.
+        :param globalFilter: A warning filter that is always active.
         """
         super().__init__()
         self._filePath = filePath
         self._warningCount = self._errorCount = 0
         self._globalFilter = set() if globalFilter is None else globalFilter
         self._localFilter = set()
+        self._localFilteredWarnings = set()
 
     def log(self, message, severity, line, column):
         """
@@ -135,19 +139,29 @@ class Logger:
         self._localFilter.add(filterId)
 
     def clearLocalFilters(self):
-        """ Clear the local warning and error filter. """
+        """
+        Clear the local warning and error filter.
+
+        :return: The filters that were not used.
+        """
+        unusedFilters = self._localFilter.difference(self._localFilteredWarnings)
         self._localFilter.clear()
+        self._localFilteredWarnings.clear()
+        return unusedFilters
 
     def _isFiltered(self, filterId):
         """
         :param filterId: The error or warning id.
-        :return: Whether or not the id is filtered out.
+        :return: Whether the id is filtered out.
         """
-        return filterId in self._globalFilter | self._localFilter
+        if filterId in self._localFilter:
+            self._localFilteredWarnings.add(filterId)
+            return True
+        return filterId in self._globalFilter
 
 
 class HTMLComparer(HTMLParser):
-    """ A HTML parser that can compare tow HTML inputs. """
+    """ An HTML parser that can compare tow HTML inputs. """
 
     def __init__(self, logger, basePosition):
         """
@@ -253,6 +267,9 @@ class TranslationHandler(ContentHandler):
     """ Linter for a Qt language translation file. """
     FILTER_REGEX = re.compile(r'checkTranslation\signore:\s*(?P<filters>.+?)(\s|$)')
     SENTENCE_ENDING_PUNCTUATIONS = '.,!?:;…	¡¿։'
+    EQUIVALENT_CHARACTER_MAPPING = {
+        '。': '.',
+    }
 
     def __init__(self, filePath, formatSpecifierRegexes, specialPatterns, globalWarningFilter):
         """
@@ -277,6 +294,7 @@ class TranslationHandler(ContentHandler):
         self._sourcePos = None
         self._translation = None
         self._translationPos = None
+        self._localWarningFilterDefinitionPosition = None
         self._messageChildren = []
         self._formatSpecifierRegexes = formatSpecifierRegexes
         self._specialPatterns = specialPatterns
@@ -287,7 +305,7 @@ class TranslationHandler(ContentHandler):
 
     def startElement(self, name, attrs):
         """
-        Handle the start of an xml element in the translation file.
+        Handle the start of an XML element in the translation file.
 
         :param name: The name of the element.
         :param attrs: The attributes of the element.
@@ -305,7 +323,10 @@ class TranslationHandler(ContentHandler):
             self._translationPos = None
             self._translationAttributes = None
             self._messageChildren.clear()
-            self._logger.clearLocalFilters()
+            for filterId in self._logger.clearLocalFilters():
+                self.warning('unnecessary_filter', filterId=filterId,
+                             position=self._localWarningFilterDefinitionPosition)
+            self._localWarningFilterDefinitionPosition = None
         elif name == 'source':
             self._source = ''
         elif self._currentElement() == 'translation':
@@ -328,7 +349,7 @@ class TranslationHandler(ContentHandler):
 
     def endElement(self, name):
         """
-        Handle the end of an xml element.
+        Handle the end of an XML element.
 
         :param name: The name of the element.
         """
@@ -387,6 +408,8 @@ class TranslationHandler(ContentHandler):
             filterMatch = self.FILTER_REGEX.search(data)
             if filterMatch:
                 index = filterMatch.start('filters')
+                self._localWarningFilterDefinitionPosition = (
+                    self._locator.getLineNumber(), self._locator.getColumnNumber() + index)
                 for filterId in filterMatch.group('filters').split(','):
                     if filterId in Logger.WARNING_MESSAGES or filterId in Logger.ERROR_MESSAGES:
                         self._logger.addLocalFilter(filterId)
@@ -527,9 +550,11 @@ class TranslationHandler(ContentHandler):
                 lastTranslationChar not in self.SENTENCE_ENDING_PUNCTUATIONS:
             return  # If source and translation don't end in a punctuation
         if lastSourceChar != lastTranslationChar:
-            if not (lastSourceChar == '.' and self._source.endswith('...') and
-                    self._translation.endswith('…')) and \
-                    not (lastSourceChar == '…' and self._translation.endswith('...')):
+            lastNormalizedTranslationChar = unicodedata.normalize('NFKD', lastTranslationChar)
+            lastNormalizedSourceChar = unicodedata.normalize('NFKD', lastSourceChar)
+            lastNormalizedSourceChar = self._source[-len(lastNormalizedTranslationChar):-1] + lastNormalizedSourceChar
+            if lastNormalizedSourceChar != lastNormalizedTranslationChar \
+                    and self.EQUIVALENT_CHARACTER_MAPPING.get(lastTranslationChar) != lastSourceChar:
                 self.warning('punctuation_end_differ', self._calculatePosition(
                     self._translation, len(self._translation) - 1, self._translationPos),
                              punctuation=self._escapeText(lastSourceChar),
@@ -579,7 +604,7 @@ class TranslationHandler(ContentHandler):
     @staticmethod
     def _escapeText(text):
         """
-        Escape the text so it can be printed without messing up the error or warning format.
+        Escape the text, so it can be printed without messing up the error or warning format.
         :param text: The text to escape.
         :return: The escaped text.
         """
