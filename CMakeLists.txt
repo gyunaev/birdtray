@@ -211,7 +211,11 @@ if(WIN32)
 
     # Find ssl libraries
     find_package(OpenSSL QUIET)
-    get_filename_component(SSL_PATH "${OPENSSL_SSL_LIBRARY}" DIRECTORY)
+    get_filename_component(SSL_LIB_DIR "${OPENSSL_SSL_LIBRARY}" DIRECTORY)
+    # Sometimes, the .lib files are in a lib directory and the .dll files are in the parent directory
+    get_filename_component(SSL_PARENT_DIR "${SSL_LIB_DIR}" DIRECTORY)
+    find_library(SSL_LIB_PATH ssl PATHS "${SSL_LIB_DIR}" "${SSL_PARENT_DIR}")
+    get_filename_component(SSL_PATH "${SSL_LIB_PATH}" DIRECTORY)
     if(SSL_PATH)
         STRING(REGEX REPLACE "/" "\\\\\\\\" SSL_PATH ${SSL_PATH})
     else()
