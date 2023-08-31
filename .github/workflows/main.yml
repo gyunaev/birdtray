@@ -100,7 +100,7 @@ jobs:
           fi
       - name: Install installer dependencies
         if: steps.check-deploy.outputs.is_deploy == 'true'
-        run: choco install -y nsis;
+        run: choco install -y nsis --version=3.6;
       - name: Create installer
         if: steps.check-deploy.outputs.is_deploy == 'true'
         working-directory: ${{ runner.workspace }}/build
