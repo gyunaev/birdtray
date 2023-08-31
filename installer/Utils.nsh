@@ -4,9 +4,9 @@
 !include StrFunc.nsh
 ${StrLoc}
 
-!define ERROR_ALREADY_EXISTS 0x000000b7
-!define ERROR_ACCESS_DENIED 0x5
-!define ERROR_SIGNAL_REFUSED 0x9C
+!define /ifndef ERROR_ALREADY_EXISTS 0x000000b7
+!define /ifndef ERROR_ACCESS_DENIED 0x5
+!define /ifndef ERROR_SIGNAL_REFUSED 0x9C
 
 # === Functions === #
 
