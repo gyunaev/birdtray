@@ -50,7 +50,7 @@ jobs:
             else
               echo "CMAKE_PLATFORM_ARG=-A x64" >> $GITHUB_ENV
             fi
-            choco install -y --force $archParam openssl.light
+            choco install -y --force $archParam openssl.light --version=1.1.1
             echo "C:\\Program Files\\OpenSSL" >> $GITHUB_PATH
           else
             echo "$RUNNER_OS not supported"
