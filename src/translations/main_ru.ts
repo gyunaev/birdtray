@@ -7,7 +7,7 @@
         <source>No ssl configuration!
 OpenSSL might not be installed.</source>
         <translation>SSL не настроен!
-Вероятно OpenSSL не установлен.</translation>
+Вероятно, OpenSSL не установлен.</translation>
     </message>
     <message>
         <source>Failed to save the Birdtray installer:
@@ -167,7 +167,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This notification color will be used when more than one monitored account has unread emails.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Этот цвет уведомлений будет использоваться, когда в нескольких отслеживаемых учетных записях есть непрочитанные электронные письма.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Этот цвет уведомлений будет использоваться, когда в нескольких отслеживаемых учётных записях есть непрочитанные электронные письма.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Multiple notification color:</source>
@@ -175,7 +175,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Blinking speed:</source>
-        <translation>Скоость мигания:</translation>
+        <translation>Скорость мигания:</translation>
     </message>
     <message>
         <source>Font style:</source>
@@ -219,7 +219,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Allow ignoring the current unread email counter</source>
-        <translation>Разрешить игнорировать текущий счетчик непрочитанных сообщений</translation>
+        <translation>Разрешить игнорировать текущий счётчик непрочитанных сообщений</translation>
     </message>
     <message>
         <source>Hiding</source>
@@ -227,7 +227,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Launching and Hiding</source>
-        <translation>Запустить и Скрыть</translation>
+        <translation>Запуск и скрытие</translation>
     </message>
     <message>
         <source>Start Thunderbird when Birdtray starts</source>
@@ -255,7 +255,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Hide/show Thunderbird window when clicking on tray icon</source>
-        <translation>Скрыть/показать Thunderbird при клике на значке в трее</translation>
+        <translation>Скрыть/показать Thunderbird при щелчке по значку в трее</translation>
     </message>
     <message>
         <source>Hide Thunderbird window when it is minimized</source>
@@ -299,11 +299,11 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>When blinking, use the fade-in/fade-out transition (increases CPU use!)</source>
-        <translation>При мигании используйтся переход постепенного появления / постепенного исчезновения (увеличивает нагрузку на CPU!)</translation>
+        <translation>При мигании используется переход постепенного появления / постепенного исчезновения (увеличивает нагрузку на CPU!)</translation>
     </message>
     <message>
         <source>Make the system tray icon</source>
-        <translation>Сделать иконку в системном трее</translation>
+        <translation>Сделать значок в системном трее</translation>
     </message>
     <message>
         <source>Check for new updates on startup</source>
@@ -409,7 +409,7 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this box is checked, the Birdtray icon will show the number of unread emails.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;If it is unchecked, no count will be shown, and you will only know about unread emails because of the blinking or different icon, depending on your settings.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если этот флажок установлен, значок Birdtray будет отображать количество непрочитанных писем.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Если этот флажок снят, счетчик не будет отображаться, и вы будете знать о непрочитанных письмах из-за мигания или другого значка, в зависимости от ваших настроек.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если этот флажок установлен, значок Birdtray будет отображать количество непрочитанных писем.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;Если этот флажок снят, счётчик не будет отображаться, и вы будете знать о непрочитанных письмах из-за мигания или другого значка, в зависимости от ваших настроек.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unread change cmd:</source>
@@ -465,23 +465,23 @@ OpenSSL might not be installed.</source>
     </message>
     <message>
         <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить Thunderbird щелчком по значку в трее, если он был закрыт</translation>
     </message>
     <message>
         <source>When detecting a change, wait</source>
-        <translation type="unfinished"></translation>
+        <translation>При обнаружении изменения подождать</translation>
     </message>
     <message>
         <source> milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation> мс</translation>
     </message>
     <message>
         <source>before updating the unread counter.</source>
-        <translation type="unfinished"></translation>
+        <translation>перед обновлением счётчика непрочитанных.</translation>
     </message>
     <message>
         <source>Thunderbird process name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя процесса Thunderbird:</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -553,7 +553,7 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Select Accounts</source>
-        <translation>Выберите учетные записи</translation>
+        <translation>Выберите учётные записи</translation>
     </message>
     <message>
         <source>Select the directory that contains the Thunderbird profiles.</source>
@@ -569,7 +569,7 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Select the mail accounts you want to monitor.</source>
-        <translation>Выберите учетные записи почты, которые вы хотите отслеживать.</translation>
+        <translation>Выберите учётные записи почты, которые вы хотите отслеживать.</translation>
     </message>
     <message>
         <source>Email Folder</source>
@@ -598,7 +598,7 @@ Please make sure you selected the correct profiles directory.</source>
     <name>ModelAccountTree</name>
     <message>
         <source>Account</source>
-        <translation>Учетная запись</translation>
+        <translation>Учётная запись</translation>
     </message>
     <message>
         <source>Notification color</source>
@@ -661,15 +661,15 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Sqlite based accounts migrated</source>
-        <translation>Аккаунты на основе Sqlite перенесены</translation>
+        <translation>Учётные записи на основе Sqlite перенесены</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail folders using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser, but some configured mail folders could not be found.</source>
-        <translation>Вы настроили мониторинг одной или нескольких почтовых папок с помощью анализатора Sqlite. Этот метод был удален. Ваши конфигурации были перенесены в анализатор Mork, но некоторые настроенные почтовые папки не могут быть найдены.</translation>
+        <translation>Вы настроили мониторинг одной или нескольких почтовых папок с помощью анализатора Sqlite. Этот метод был удалён. Ваши конфигурации были перенесены в анализатор Mork, но некоторые настроенные почтовые папки не удалось найти.</translation>
     </message>
     <message>
         <source>You had configured monitoring of one or more mail accounts using the Sqlite parser. This method has been removed. Your configurations has been migrated to the Mork parser. Please verify that all accounts were mapped correctly.</source>
-        <translation>Вы настроили мониторинг одной или нескольких почтовых учетных записей с помощью анализатора Sqlite. Этот метод был удален. Ваши конфигурации были перенесены в анализатор Mork. Пожалуйста, убедитесь, что все учетные записи были сопоставлены правильно.</translation>
+        <translation>Вы настроили мониторинг одной или нескольких почтовых учётных записей с помощью анализатора Sqlite. Этот метод был удалён. Ваши конфигурации были перенесены в анализатор Mork. Пожалуйста, убедитесь, что все учётные записи были сопоставлены правильно.</translation>
     </message>
     <message>
         <source>Cannot load default system tray icon.</source>
@@ -754,7 +754,7 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Error starting Thunderbird, because we could not attach to the updater:
 
 %1</source>
-        <translation>Ошибка запуска Thunderbird, потому что мы не смогли подключиться к программе обновления:
+        <translation>Ошибка запуска Thunderbird, потому что не удалось подключиться к программе обновления:
 
 %1</translation>
     </message>
@@ -822,7 +822,7 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>ca. %1 Mb</source>
-        <translation>ca. %1 Мб</translation>
+        <translation>около %1 Мб</translation>
     </message>
     <message>
         <source>Update and restart</source>
@@ -837,7 +837,7 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Downloading Birdtray update...</source>
-        <translation>Загрузка обновления Birdtray ...</translation>
+        <translation>Загрузка обновления Birdtray...</translation>
     </message>
     <message>
         <source>Background</source>
@@ -845,7 +845,7 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Downloading Birdtray installer...</source>
-        <translation>Загрузка установщика Birdtray ...</translation>
+        <translation>Загрузка установщика Birdtray...</translation>
     </message>
     <message>
         <source>Download finished. Restart and update Birdtray?</source>
@@ -853,7 +853,7 @@ Please make sure you selected the correct profiles directory.</source>
     </message>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
-        <translation>Загрузка установщика Birdtray ... (%1 Мб / %2 Мб).</translation>
+        <translation>Загрузка установщика Birdtray... (%1 Мб / %2 Мб).</translation>
     </message>
 </context>
 </TS>
