@@ -473,7 +473,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source> milliseconds</source>
-        <translation>millisecondes</translation>
+        <translation> millisecondes</translation>
     </message>
     <message>
         <source>before updating the unread counter.</source>
