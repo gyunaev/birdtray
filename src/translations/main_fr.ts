@@ -477,7 +477,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>before updating the unread counter.</source>
-        <translation>avant de mettre le compteur de mails non lus à jour</translation>
+        <translation>avant de mettre le compteur de mails non lus à jour.</translation>
     </message>
     <message>
         <source>Thunderbird process name:</source>
