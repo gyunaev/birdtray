@@ -291,7 +291,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QTreeView" name="treeAccounts">
+             <widget class="QTreeViewWithKeyEvents" name="treeAccounts">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -1166,6 +1166,11 @@ p, li { white-space: pre-wrap; }
    <class>ColorButton</class>
    <extends>QPushButton</extends>
    <header>colorbutton.h</header>
+  </customwidget>
+  <customwidget>
+    <class>QTreeViewWithKeyEvents</class>
+    <extends>QTreeView</extends>
+    <header>qtcomponents.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

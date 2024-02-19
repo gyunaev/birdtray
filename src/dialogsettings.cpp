@@ -1,3 +1,5 @@
+#include <Qt>
+
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QMessageBox>
@@ -117,6 +119,10 @@ DialogSettings::DialogSettings( QWidget *parent)
     mAccountModel = new ModelAccountTree(this, treeAccounts);
     treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     treeAccounts->setCurrentIndex(mAccountModel->index(0, 0));
+    treeAccounts->onKeyPressed(this, [](void * handle, QKeyEvent * event)
+    {
+        static_cast<DialogSettings*>(handle)->onKeyPressedOnTreeAccount(event);
+    });
 
     // New emails tab
     mModelNewEmails = new ModelNewEmails( this );
@@ -148,6 +154,14 @@ DialogSettings::DialogSettings( QWidget *parent)
     processNameLabel->hide();
     leThunderbirdProcessName->hide();
 #endif
+}
+
+void DialogSettings::onKeyPressedOnTreeAccount(QKeyEvent * event)
+{
+    if (event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace)
+    {
+        accountRemove();
+    }
 }
 
 void DialogSettings::accept()
@@ -285,8 +299,13 @@ void DialogSettings::accountEditIndex(const QModelIndex &index)
 
 void DialogSettings::accountRemove()
 {
-    QModelIndex index = treeAccounts->currentIndex();
+    if ( treeAccounts->currentIndex().isValid() )
+        accountRemoveIndex( treeAccounts->currentIndex() );
+}
 
+
+void DialogSettings::accountRemoveIndex(const QModelIndex &index)
+{
     if ( !index.isValid() )
         return;
 
@@ -311,7 +330,12 @@ void DialogSettings::newEmailEditIndex(const QModelIndex &index)
 
 void DialogSettings::newEmailRemove()
 {
-    mModelNewEmails->remove( treeNewEmails->currentIndex() );
+    newEmailRemoveIndex( treeNewEmails->currentIndex() );
+}
+
+void DialogSettings::newEmailRemoveIndex(const QModelIndex &index)
+{
+    mModelNewEmails->remove( index );
 }
 
 void DialogSettings::onCheckUpdateButton() {
