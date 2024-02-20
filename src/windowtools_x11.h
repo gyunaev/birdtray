@@ -47,6 +47,12 @@ class WindowTools_X11 : public WindowTools
         // Makes sure our window ID is still valid, or reinitializes it
         bool    checkWindow();
 
+        // The display handle to use to talk to the X server
+        Display     *display;
+
+        // The root window ID
+        Window      root;
+
         // Our Window ID
         Window      mWinId;
 
