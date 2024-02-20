@@ -2,6 +2,7 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QProgressDialog>
 #include <QPalette>
 #include <QtCore/QStringListModel>
@@ -51,12 +52,14 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
         void    accountEdit();
         void    accountEditIndex( const QModelIndex& index );
         void    accountRemove();
+        void    accountRemoveIndex( const QModelIndex& index );
 
         // New Email buttons
         void    newEmailAdd();
         void    newEmailEdit();
         void    newEmailEditIndex( const QModelIndex& index );
         void    newEmailRemove();
+        void    newEmailRemoveIndex( const QModelIndex& index );
         
         // Advanced buttons
         void    onCheckUpdateButton();
@@ -76,6 +79,8 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          * Show the translators dialog.
          */
         static void onTranslatorsDialog();
+
+        void onKeyPressedOnTreeAccount(QKeyEvent * event);
 
     private:
         void    changeIcon(QToolButton * button );

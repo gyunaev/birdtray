@@ -71,6 +71,7 @@ set(SOURCES
         src/modelaccounttree.cpp
         src/modelnewemails.cpp
         src/morkparser.cpp
+        src/qtcomponents.cpp
         src/setting_newemail.cpp
         src/settings.cpp
         src/trayicon.cpp
@@ -99,6 +100,7 @@ set(HEADERS
         src/modelaccounttree.h
         src/modelnewemails.h
         src/morkparser.h
+        src/qtcomponents.h
         src/setting_newemail.h
         src/settings.h
         src/trayicon.h
