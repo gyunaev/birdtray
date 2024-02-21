@@ -15,15 +15,12 @@ class QTreeViewWithKeyEvents : public QTreeView {
     public:
         explicit QTreeViewWithKeyEvents(QWidget *parent = NULL);
 
-    public slots:
-        void onKeyPressed(void * handleUsed, TreeViewKeyPressedEvent callback);
+    signals:
+        void onKeyPressed(QKeyEvent* event);
 
     protected:
         void keyPressEvent(QKeyEvent * event) override;
 
-    private:
-        TreeViewKeyPressedEvent mCallback;
-        void * mHandle;
 };
 
 #endif // QTCOMPONENTS_H
