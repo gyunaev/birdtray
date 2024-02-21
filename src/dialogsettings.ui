@@ -328,7 +328,7 @@
               <item>
                <widget class="QPushButton" name="btnAccountRemove">
                 <property name="toolTip">
-                 <string>You can also remove folder with keystroke on Delete or Backspace key</string>
+                 <string>You can also remove folders with Delete or Backspace</string>
                 </property>
                 <property name="text">
                  <string>Remove</string>

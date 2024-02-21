@@ -503,7 +503,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can also remove folder with keystroke on Delete or Backspace key</source>
+        <source>You can also remove folders with Delete or Backspace</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
