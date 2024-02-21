@@ -465,7 +465,7 @@ OpenSSL ne semble pas installé.</translation>
     </message>
     <message>
         <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
-        <translation>Démarrer Thunderbird en cliquant sur l&apos;icône de notification, s&apos;il n'est pas démarré</translation>
+        <translation>Démarrer Thunderbird en cliquant sur l&apos;icône de notification, s&apos;il n&apos;est pas démarré</translation>
     </message>
     <message>
         <source>When detecting a change, wait</source>
@@ -514,6 +514,10 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Si vous aimez mon travail sur Birdtray, qui est développé pendant mon temps libre, vous pouvez aller ici : &lt;/span&gt;&lt;a href=&quot;https://paypal.me/ulduzsoft&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;https://paypal.me/ulduzsoft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; text-decoration: underline; color:#2980b9;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Merci pour votre soutien !&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>You can also remove folder with keystroke on Delete or Backspace key</source>
+        <translation>Vous pouvez également supprimer un dossier en pressant la touche Supprimer ou Retour Arrière</translation>
     </message>
 </context>
 <context>
@@ -854,10 +858,6 @@ Assurez-vous d&apos;avoir sélectionné le bon répertoire.</translation>
     <message>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
         <translation>Téléchargement du programme d&apos;installation... (%1 Mb / %2 Mb).</translation>
-    </message>
-    <message>
-        <source>You can also remove folder with keystroke on Delete or Backspace key</source>
-        <translation>Vous pouvez également supprimer un dossier en pressant la touche Supprimer ou Retour Arrière</translation>
     </message>
 </context>
 </TS>
