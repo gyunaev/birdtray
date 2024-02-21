@@ -4,8 +4,6 @@
 #include <QKeyEvent>
 #include <QTreeView>
 
-typedef void ( * TreeViewKeyPressedEvent)(void * handle, QKeyEvent * event);
-
 /**
  * A QTreeView that allow to define listener of keyEvent received
  */
@@ -13,7 +11,7 @@ class QTreeViewWithKeyEvents : public QTreeView {
     Q_OBJECT
 
     public:
-        explicit QTreeViewWithKeyEvents(QWidget *parent = NULL);
+        explicit QTreeViewWithKeyEvents(QWidget *parent = nullptr);
 
     signals:
         void onKeyPressed(QKeyEvent* event);
