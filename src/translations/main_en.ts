@@ -828,5 +828,9 @@ Please make sure you selected the correct profiles directory.</source>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You can also remove folder with keystroke on Delete or Backspace key</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

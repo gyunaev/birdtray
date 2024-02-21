@@ -855,5 +855,9 @@ Assurez-vous d&apos;avoir sélectionné le bon répertoire.</translation>
         <source>Downloading Birdtray installer... (%1 Mb / %2 Mb).</source>
         <translation>Téléchargement du programme d&apos;installation... (%1 Mb / %2 Mb).</translation>
     </message>
+    <message>
+        <source>You can also remove folder with keystroke on Delete or Backspace key</source>
+        <translation>Vous pouvez également supprimer un dossier en pressant la touche Supprimer ou Retour Arrière</translation>
+    </message>
 </context>
 </TS>
