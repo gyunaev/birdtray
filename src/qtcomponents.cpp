@@ -6,17 +6,8 @@ QTreeViewWithKeyEvents::QTreeViewWithKeyEvents( QWidget *parent )
 
 }
 
-void QTreeViewWithKeyEvents::onKeyPressed( void * handle, TreeViewKeyPressedEvent callback)
-{
-    mHandle = handle;
-    mCallback = callback;
-}
-
 void QTreeViewWithKeyEvents::keyPressEvent( QKeyEvent *event )
 {
-    if (mCallback != NULL && mHandle != NULL)
-    {
-        mCallback(mHandle, event);
-    }
+    emit onKeyPressed(event);
     QTreeView::keyPressEvent(event);
 }
