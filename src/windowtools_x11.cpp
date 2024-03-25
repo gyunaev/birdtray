@@ -505,8 +505,13 @@ void WindowTools_X11::timerWindowState()
     }
 
     // _NET_WM_STATE_HIDDEN is set for minimized windows, so if we see it, this means it was minimized by the user
-    if ( checkWindowState( QX11Info::display(), mWinId, "_NET_WM_STATE_HIDDEN" ) && mHiddenStateCounter == 0 )
+    if ( checkWindowState( QX11Info::display(), mWinId, "_NET_WM_STATE_HIDDEN" ) )
     {
+        if ( mHiddenStateCounter != 0) 
+        {
+            Log::debug("Window activated by notification, setting counter to 1, was %d", mHiddenStateCounter);
+        }
+        
         mHiddenStateCounter = 1;
         QTimer::singleShot( 0, this, &WindowTools_X11::doHide );
     }
