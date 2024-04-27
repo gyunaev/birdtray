@@ -465,19 +465,19 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom Thunderbird klikając w ikonę na tecce systemowej jeśli został zamknięty.</translation>
     </message>
     <message>
         <source>When detecting a change, wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli wykryto zmianę, poczekaj</translation>
     </message>
     <message>
         <source> milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>milisekund</translation>
     </message>
     <message>
         <source>before updating the unread counter.</source>
-        <translation type="unfinished"></translation>
+        <translation>przed aktualizacją licznika nieprzeczytanych.</translation>
     </message>
     <message>
         <source>Thunderbird process name:</source>
