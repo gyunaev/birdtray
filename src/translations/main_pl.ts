@@ -449,7 +449,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>At startup</source>
-        <translation">Przy uruchamianiu</translation>
+        <translation>Przy uruchamianiu</translation>
     </message>
     <message>
         <source>When hiding Thunderbird</source>
@@ -457,7 +457,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>When showing Thunderbird</source>
-        <translation">Podczas wyświetlania Thunderbirda</translation>
+        <translation>Podczas wyświetlania Thunderbirda</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If enabled, this option adds the &amp;quot;Ignore currently unread emails&amp;quot; action to the context menu. This action allows you to ignore the emails which are currently unread. Birdtray would then pretend there are no unread emails left, and would only show new emails over the ignored count.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;For example, if there were 10 unread emails, and you clicked on &amp;quot;Ignore&amp;quot; action, Birdtray will show no unread email indicator as long as unread email count remains at 10. Once new email is received and you have 11 total unread emails, Birdtray will show the new email count as 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -465,7 +465,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source>Start Thunderbird by clicking on the tray icon if it was closed</source>
-        <translation>Uruchom Thunderbird klikając w ikonę na tecce systemowej jeśli został zamknięty.</translation>
+        <translation>Uruchom Thunderbird klikając w ikonę na tecce systemowej jeśli został zamknięty</translation>
     </message>
     <message>
         <source>When detecting a change, wait</source>
@@ -473,7 +473,7 @@ OpenSSL może nie być zainstalowane.</translation>
     </message>
     <message>
         <source> milliseconds</source>
-        <translation>milisekund</translation>
+        <translation> milisekund</translation>
     </message>
     <message>
         <source>before updating the unread counter.</source>
