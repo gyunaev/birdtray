@@ -501,7 +501,8 @@ bool Settings::getStartThunderbirdCmdline( QString& executable, QStringList &arg
         return false;
 
     arguments = mThunderbirdCmdLine;
-    executable = QFileInfo( Utils::expandPath( arguments.takeFirst() ) ).absoluteFilePath();
+
+    executable = Utils::expandPath( arguments.takeFirst() );
 
 #if defined (Q_OS_WIN)
     executable = '"' + executable + '"';
