@@ -1,4 +1,5 @@
 #include <QTimer>
+#include <QGuiApplication>
 
 #include "birdtrayapp.h"
 #include "windowtools_x11.h"
@@ -370,13 +371,13 @@ WindowTools_X11::~WindowTools_X11()
 
 bool WindowTools_X11::lookup()
 {
-    if ( QX11Info::appRootWindow() == 0 )
+    if ( x11_appRootWindow() == 0 )
         return false;
 
     if ( isValid() )
         return true;
 
-    mWinId = findWindow(QX11Info::display(), QX11Info::appRootWindow(), ! BirdtrayApp::get()->getSettings()->mIgnoreNETWMhints,
+    mWinId = findWindow(x11_display(), x11_appRootWindow(), ! BirdtrayApp::get()->getSettings()->mIgnoreNETWMhints,
             BirdtrayApp::get()->getSettings()->mThunderbirdWindowMatch);
 
     Log::debug("Window ID found: %lX", mWinId );
@@ -389,8 +390,8 @@ bool WindowTools_X11::show()
     if ( !checkWindow() )
         return false;
 
-    Display *display = QX11Info::display();
-    Window root = QX11Info::appRootWindow();
+    Display *display = x11_display();
+    Window root = x11_appRootWindow();
 
     // We are still minimizing
     if ( mHiddenStateCounter == 1 )
@@ -430,7 +431,7 @@ bool WindowTools_X11::hide()
     }
 
     // Get screen number
-    Display *display = QX11Info::display();
+    Display *display = x11_display();
     long dummy;
 
     XGetWMNormalHints( display, mWinId, &mSizeHint, &dummy );
@@ -444,7 +445,7 @@ bool WindowTools_X11::hide()
 
 bool WindowTools_X11::isHidden()
 {
-    return mHiddenStateCounter == 2 && mWinId != activeWindow( QX11Info::display() );
+    return mHiddenStateCounter == 2 && mWinId != activeWindow( x11_display() );
 }
 
 bool WindowTools_X11::closeWindow()
@@ -456,13 +457,13 @@ bool WindowTools_X11::closeWindow()
 
     // send _NET_CLOSE_WINDOW
     long l[5] = {0, 0, 0, 0, 0};
-    sendMessage( QX11Info::display(), QX11Info::appRootWindow(), mWinId, "_NET_CLOSE_WINDOW", 32, SubstructureNotifyMask | SubstructureRedirectMask, l, sizeof (l));
+    sendMessage( x11_display(), x11_appRootWindow(), mWinId, "_NET_CLOSE_WINDOW", 32, SubstructureNotifyMask | SubstructureRedirectMask, l, sizeof (l));
     return true;
 }
 
 bool WindowTools_X11::isValid()
 {
-    return mWinId != None && isValidWindowId( QX11Info::display(), mWinId );
+    return mWinId != None && isValidWindowId( x11_display(), mWinId );
 }
 
 void WindowTools_X11::doHide()
@@ -476,7 +477,7 @@ void WindowTools_X11::doHide()
         return;
     }
 
-    Display *display = QX11Info::display();
+    Display *display = x11_display();
     long screen = DefaultScreen(display);
 
     /*
@@ -505,16 +506,31 @@ void WindowTools_X11::timerWindowState()
     }
 
     // _NET_WM_STATE_HIDDEN is set for minimized windows, so if we see it, this means it was minimized by the user
-    if ( checkWindowState( QX11Info::display(), mWinId, "_NET_WM_STATE_HIDDEN" ) && mHiddenStateCounter == 0 )
+    if ( checkWindowState( x11_display(), mWinId, "_NET_WM_STATE_HIDDEN" ) && mHiddenStateCounter == 0 )
     {
         mHiddenStateCounter = 1;
         QTimer::singleShot( 0, this, &WindowTools_X11::doHide );
     }
 }
 
+Display *WindowTools_X11::x11_display()
+{
+    auto *x11App = qApp->nativeInterface<QNativeInterface::QX11Application>();
+
+    if ( x11App )
+        return x11App->display();
+
+    return nullptr;
+}
+
+Window WindowTools_X11::x11_appRootWindow()
+{
+    return XDefaultRootWindow( x11_display() );
+}
+
 bool WindowTools_X11::checkWindow()
 {
-    if ( mWinId == None || !isValidWindowId( QX11Info::display(), mWinId ) )
+    if ( mWinId == None || !isValidWindowId( x11_display(), mWinId ) )
         return lookup();
 
     return true;

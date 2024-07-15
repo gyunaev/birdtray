@@ -50,7 +50,7 @@ QJsonObject Setting_NewEmail::toJSON() const
 
 Setting_NewEmail Setting_NewEmail::fromByteArray(const QByteArray &str)
 {
-    QJsonDocument doc = QJsonDocument::fromBinaryData( str );
+    QJsonDocument doc = QJsonDocument::fromJson( str );
 
     if ( !doc.isObject() )
         return Setting_NewEmail();

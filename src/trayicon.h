@@ -7,7 +7,6 @@
 #include <QImage>
 #include <QProcess>
 #include <QSystemTrayIcon>
-#include <QtNetwork/QNetworkConfigurationManager>
 #ifdef Q_OS_WIN
 #  include "processhandle.h"
 #endif /* Q_OS_WIN */
@@ -220,12 +219,7 @@ class TrayIcon : public QSystemTrayIcon
         // A reference to a Thunderbird updater process.
         ProcessHandle* mThunderbirdUpdaterProcess;
 #endif /* Q_OS_WIN */
-        
-        /**
-         * A manager to check for network connectivity.
-         */
-        QNetworkConfigurationManager* networkConnectivityManager = nullptr;
-        
+               
         /**
          * Whether we have received data about unread emails yet.
          */

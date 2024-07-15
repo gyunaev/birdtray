@@ -3,7 +3,7 @@
 #include "birdtrayapp.h"
 
 #include <QApplication>
-#include <QTextCodec>
+#include <QStringConverter>
 #include <QtCore/QDir>
 #include <QtCore/QBuffer>
 
@@ -58,10 +58,10 @@ QString Utils::decodeIMAPutf7(const QString &param)
     QString out;
     QString decodebuf;
     bool decoding = false;
-    QTextCodec * codec = QTextCodec::codecForName("UTF16-BE");
+    auto codec = QStringDecoder( QStringDecoder::Utf16BE );
 
     // This is extremely unlikely but still...
-    if ( !codec )
+    if ( !codec.isValid() )
         return "ERROR1-" + param;
 
     for ( int i = 0; i < param.length(); i++ )
@@ -82,7 +82,7 @@ QString Utils::decodeIMAPutf7(const QString &param)
                 }
 
                 // Decode it as UTF16
-                out += codec->toUnicode( utf16data );
+                out += codec( utf16data );
 
                 // And reset the remaining
                 decodebuf.clear();
