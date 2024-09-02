@@ -327,6 +327,9 @@
               </item>
               <item>
                <widget class="QPushButton" name="btnAccountRemove">
+                <property name="toolTip">
+                 <string>You can also remove folders with Delete or Backspace</string>
+                </property>
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -1168,9 +1171,9 @@ p, li { white-space: pre-wrap; }
    <header>colorbutton.h</header>
   </customwidget>
   <customwidget>
-    <class>QTreeViewWithKeyEvents</class>
-    <extends>QTreeView</extends>
-    <header>qtcomponents.h</header>
+   <class>QTreeViewWithKeyEvents</class>
+   <extends>QTreeView</extends>
+   <header>qtcomponents.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

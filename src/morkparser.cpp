@@ -248,9 +248,9 @@ QChar MorkParser::peekNext()
     return QChar( morkData_[ morkPos_ ] );
 }
 
-QString MorkParser::readHexNumber()
+QByteArray MorkParser::readHexNumber()
 {
-    QString out;
+    QByteArray out;
 
     while ( true )
     {
@@ -259,7 +259,7 @@ QString MorkParser::readHexNumber()
         if ( !ch.isLetterOrNumber() )
             return out;
 
-        out.append( readNext() );
+        out.append( readNext().toLatin1() );
     }
 }
 
@@ -640,14 +640,14 @@ void MorkParser::parseGroup()
     skip( "$${" );
 
     // Group ID
-    QString id = readHexNumber();
+    QByteArray id = readHexNumber();
 
     // Skip transaction start
     skip( "{@" );
 
     // From here we have the whole transaction. Find out the transaction end
-    QString endCommit = "@$$}" + id + "}@";
-    QString endAbort = "@$$}~abort~" + id + "}@";
+    QByteArray endCommit = "@$$}" + id + "}@";
+    QByteArray endAbort = "@$$}~abort~" + id + "}@";
 
     // Find the end of this group
     int ofst = morkData_.indexOf( endAbort, morkPos_ );

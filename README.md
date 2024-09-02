@@ -33,13 +33,8 @@ To build Birdtray from source, you would need the following components:
 
 - A C++ compiler
 - Cmake
-- Qt 5.6 or higher with "x11extras-dev" or "x11extras-devel"  module installed (it is usually NOT installed by default);
-
-On Debian you need to install the following packages: ``qt5-default libqt5x11extras5-dev qttools5-dev libqt5svg5-dev libx11-xcb-dev``
-
-On OpenSuSE you need to install ``libqt5-qtbase-devel libqt5-qtx11extras-devel libqt5-qtsvg-devel``
-
-On Fedora (30 or later) you need to install ``qt5-qtbase-devel qt5-qtx11extras-devel qt5-qtsvg-devel``
+- Qt 6.2 or higher;
+- libX11-devel
 
 To build, please do the following:
 
@@ -60,7 +55,7 @@ On Unix systems, you can configure the install location by running
 On Windows, the command will build a graphical installer and execute it.
 It requires [NSIS](https://nsis.sourceforge.io/Main_Page) to be installed on your system.
 It is recommended for Windows users to use the
-[precompiled installers for the latest release](https://github.com/gyunaev/birdtray/releases/latest).  
+[precompiled installers for the latest release](https://github.com/gyunaev/birdtray/releases/latest).
 
 ## Usage
 

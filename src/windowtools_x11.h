@@ -4,8 +4,7 @@
 #include "windowtools.h"
 
 #include <QTimer>
-#include <QX11Info>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QList>
 
 #include <X11/Xatom.h>
@@ -44,6 +43,9 @@ class WindowTools_X11 : public WindowTools
         void    timerWindowState();
 
     private:
+        Display *x11_display();
+        Window  x11_appRootWindow();
+
         // Makes sure our window ID is still valid, or reinitializes it
         bool    checkWindow();
 

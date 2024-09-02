@@ -4,7 +4,6 @@
 #include <QProcess>
 #include <QMessageBox>
 #include <QPainterPath>
-#include <QtNetwork/QNetworkSession>
 
 #include "trayicon.h"
 #include "unreadmonitor.h"
@@ -94,10 +93,6 @@ TrayIcon::~TrayIcon() {
 #ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess->deleteLater();
 #endif /* Q_OS_WIN */
-    if (networkConnectivityManager != nullptr) {
-        networkConnectivityManager->deleteLater();
-        networkConnectivityManager = nullptr;
-    }
     if (mUnreadMonitor != nullptr) {
         if (mUnreadMonitor->isRunning()) {
             mUnreadMonitor->quit();
@@ -173,7 +168,7 @@ static unsigned int largestFontSize(const QFont &font, int minfontsize, int maxf
         cursize = minfontsize + (maxfontsize - minfontsize) / 2;
         testfont.setPointSize( cursize );
         testfont.setWeight(
-                static_cast<int>(BirdtrayApp::get()->getSettings()->mNotificationFontWeight));
+                static_cast<QFont::Weight>(BirdtrayApp::get()->getSettings()->mNotificationFontWeight));
         QSize size = QFontMetrics( testfont ).size( Qt::TextSingleLine, text );
 
         if ( size.width() < rectsize.width() && size.height() <= rectsize.height() )
@@ -262,7 +257,7 @@ void TrayIcon::updateIcon()
                 countvalue, temp.size() - QSize(2, 2)));
 
         settings->mNotificationFont.setPointSize(fontsize);
-        settings->mNotificationFont.setWeight(static_cast<int>(settings->mNotificationFontWeight));
+        settings->mNotificationFont.setWeight(static_cast<QFont::Weight>(settings->mNotificationFontWeight));
         QFontMetrics fm(settings->mNotificationFont);
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
@@ -772,22 +767,6 @@ void TrayIcon::onAutoUpdateCheckFinished(bool foundUpdate, const QString &errorM
     if (errorMessage.isNull()) {
         disconnect(autoUpdater, &AutoUpdater::onCheckUpdateFinished,
                    this, &TrayIcon::onAutoUpdateCheckFinished);
-    } else if (networkConnectivityManager == nullptr) {
-        networkConnectivityManager = new QNetworkConfigurationManager();
-        networkConnectivityManager->updateConfigurations();
-        auto callback = [=](const QNetworkConfiguration &config) {
-            if (config.state() == QNetworkConfiguration::Active) {
-                if (networkConnectivityManager != nullptr) {
-                    networkConnectivityManager->deleteLater();
-                    networkConnectivityManager = nullptr;
-                }
-                autoUpdater->checkForUpdates();
-            }
-        };
-        connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationChanged,
-                this, callback);
-        connect(networkConnectivityManager, &QNetworkConfigurationManager::configurationAdded,
-                this, callback);
     }
 }
 

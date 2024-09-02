@@ -36,6 +36,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect(borderWidthSlider, &QSlider::valueChanged, this, &DialogSettings::onBorderWidthChanged);
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
+    connect( treeAccounts, &QTreeViewWithKeyEvents::onKeyPressed, this, &DialogSettings::onKeyPressedOnTreeAccount );
+
     connect( btnAccountAdd, &QPushButton::clicked, this, &DialogSettings::accountAdd );
     connect( btnAccountEdit, &QPushButton::clicked, this, &DialogSettings::accountEdit );
     connect( btnAccountRemove, &QPushButton::clicked, this, &DialogSettings::accountRemove );
@@ -119,10 +121,6 @@ DialogSettings::DialogSettings( QWidget *parent)
     mAccountModel = new ModelAccountTree(this, treeAccounts);
     treeAccounts->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     treeAccounts->setCurrentIndex(mAccountModel->index(0, 0));
-    treeAccounts->onKeyPressed(this, [](void * handle, QKeyEvent * event)
-    {
-        static_cast<DialogSettings*>(handle)->onKeyPressedOnTreeAccount(event);
-    });
 
     // New emails tab
     mModelNewEmails = new ModelNewEmails( this );

@@ -139,7 +139,7 @@ protected: // Members
     QChar   peekNext();
 
     // Reads the hex number, until the first non-hex character
-    QString readHexNumber();
+    QByteArray readHexNumber();
 
     void    parseScopeId( const QString &TextId, int *Id, int *Scope );
     void    setCurrentRow( int TableScope, int TableId, int RowScope, int RowId );
