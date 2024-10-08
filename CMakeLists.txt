@@ -117,7 +117,7 @@ source_group("Resources" FILES ${RESOURCES})
 qt6_add_resources(RESOURCES_SOURCES ${RESOURCES})
 set_source_files_properties(${RESOURCES_SOURCES} PROPERTIES GENERATED ON)
 
-if(Qt5LinguistTools_FOUND)
+if(Qt6LinguistTools_FOUND)
     set(MAIN_TRANSLATION_FILES
             src/translations/main_en.ts
             src/translations/main_fr.ts
@@ -156,13 +156,13 @@ if(Qt5LinguistTools_FOUND)
     set_source_files_properties(${DYN_TRANSLATION_FILES} PROPERTIES OUTPUT_LOCATION
             ${CMAKE_CURRENT_BINARY_DIR}/translations)
 
-    qt5_create_translation(GEN_TRANSLATION_FILES
+    qt6_create_translation(GEN_TRANSLATION_FILES
             ${MAIN_TRANSLATION_FILES}
             ${SOURCES} ${PLATFORM_SOURCES} ${HEADERS} ${PLATFORM_HEADERS}
             OPTIONS -locations none)
-    qt5_add_translation(GEN_DYN_TRANSLATION_FILES ${DYN_TRANSLATION_FILES})
+    qt6_add_translation(GEN_DYN_TRANSLATION_FILES ${DYN_TRANSLATION_FILES})
     list(APPEND GEN_TRANSLATION_FILES ${GEN_DYN_TRANSLATION_FILES})
-endif(Qt5LinguistTools_FOUND)
+endif(Qt6LinguistTools_FOUND)
 
 add_library(birdtray_lib STATIC
         ${SOURCES} ${PLATFORM_SOURCES} ${RESOURCES_SOURCES} ${GEN_TRANSLATION_FILES}
@@ -247,13 +247,13 @@ else()
     install(FILES src/res/birdtray.svg
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps
             RENAME com.ulduzsoft.Birdtray.svg)
-    if(Qt5LinguistTools_FOUND)
+    if(Qt6LinguistTools_FOUND)
         install(DIRECTORY ${CMAKE_BINARY_DIR}/translations
                 DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ulduzsoft/birdtray)
     endif()
 endif()
 
-if(Qt5LinguistTools_FOUND)
+if(Qt6LinguistTools_FOUND)
     add_custom_target(clean_translations COMMENT "Remove obsolete translation entries")
     foreach(TRANSLATION_FILE ${MAIN_TRANSLATION_FILES})
         get_filename_component(TRANSLATION_NAME ${TRANSLATION_FILE} NAME)
@@ -265,7 +265,7 @@ if(Qt5LinguistTools_FOUND)
                     "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${TRANSLATION_NAME}_lst_file")
         endif()
         add_custom_command(TARGET clean_translations
-                COMMAND ${Qt5_LUPDATE_EXECUTABLE}
+                COMMAND ${Qt6_LUPDATE_EXECUTABLE}
                 ARGS -locations none -no-obsolete "@${TRANSLATION_LST_FILE}"
                 -ts ${CMAKE_CURRENT_SOURCE_DIR}/${TRANSLATION_FILE}
                 DEPENDS ${TRANSLATION_LST_FILE})
