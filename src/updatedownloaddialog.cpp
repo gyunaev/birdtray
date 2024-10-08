@@ -2,14 +2,14 @@
 #include "ui_updatedownloaddialog.h"
 
 #ifdef Q_OS_WIN
-#  include <QtWinExtras/QWinTaskbarProgress>
+//#  include <QtWinExtras/QWinTaskbarProgress>
 #endif
 
 UpdateDownloadDialog::UpdateDownloadDialog(QWidget* parent) :
         QDialog(parent),
         ui(new Ui::UpdateDownloadDialog) {
 #ifdef Q_OS_WIN
-    taskBarButton = new QWinTaskbarButton(this);
+//    taskBarButton = new QWinTaskbarButton(this);
 #endif
     ui->setupUi(this);
     actionButton = new QPushButton(tr("Background"), this);
@@ -21,7 +21,7 @@ UpdateDownloadDialog::UpdateDownloadDialog(QWidget* parent) :
 
 UpdateDownloadDialog::~UpdateDownloadDialog() {
 #ifdef Q_OS_WIN
-    delete taskBarButton;
+//    delete taskBarButton;
 #endif
     delete ui;
     actionButton->deleteLater();
@@ -34,8 +34,8 @@ void UpdateDownloadDialog::reset() {
     ui->progressBar->setValue(0);
     ui->progressBar->show();
 #ifdef Q_OS_WIN
-    taskBarButton->progress()->reset();
-    taskBarButton->progress()->show();
+//    taskBarButton->progress()->reset();
+//    taskBarButton->progress()->show();
 #endif
 }
 
@@ -43,8 +43,8 @@ void UpdateDownloadDialog::onDownloadComplete() {
     downloadCompleted = true;
     ui->progressBar->hide();
 #ifdef Q_OS_WIN
-    taskBarButton->progress()->setRange(0, 100);
-    taskBarButton->progress()->setValue(100);
+//    taskBarButton->progress()->setRange(0, 100);
+//    taskBarButton->progress()->setValue(100);
 #endif
     actionButton->setText( QCoreApplication::translate("UpdateDialog", "Update and restart"));
     ui->label->setText(tr("Download finished. Restart and update Birdtray?"));
@@ -58,7 +58,7 @@ void UpdateDownloadDialog::onDownloadProgress(qint64 bytesReceived, qint64 bytes
         ui->label->setText(tr("Downloading Birdtray installer..."));
         ui->progressBar->setRange(0, 0);
 #ifdef Q_OS_WIN
-        taskBarButton->progress()->setRange(0, 0);
+//        taskBarButton->progress()->setRange(0, 0);
 #endif
         return;
     }
@@ -70,8 +70,8 @@ void UpdateDownloadDialog::onDownloadProgress(qint64 bytesReceived, qint64 bytes
     ui->progressBar->setRange(0, 100);
     ui->progressBar->setValue(percent);
 #ifdef Q_OS_WIN
-    taskBarButton->progress()->setRange(0, 100);
-    taskBarButton->progress()->setValue(percent);
+//    taskBarButton->progress()->setRange(0, 100);
+//    taskBarButton->progress()->setValue(percent);
 #endif
 }
 
@@ -90,6 +90,6 @@ void UpdateDownloadDialog::onActionPressed() {
 void UpdateDownloadDialog::showEvent(QShowEvent* event) {
     QDialog::showEvent(event);
 #ifdef Q_OS_WIN
-    taskBarButton->setWindow(windowHandle());
+//    taskBarButton->setWindow(windowHandle());
 #endif
 }

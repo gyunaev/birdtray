@@ -5,7 +5,7 @@
 #include <QPushButton>
 
 #ifdef Q_OS_WIN
-#  include <QtWinExtras/QWinTaskbarButton>
+//#  include <QtWinExtras/QWinTaskbarButton>
 #endif
 
 namespace Ui {
@@ -76,7 +76,7 @@ private:
     /**
      * The windows task-bar button.
      */
-    QWinTaskbarButton* taskBarButton = nullptr;
+//    QWinTaskbarButton* taskBarButton = nullptr;
 #endif
 };
 
