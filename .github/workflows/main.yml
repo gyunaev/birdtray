@@ -9,14 +9,14 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-        qt_version: [6.0.4, 6.8.0]
+        qt_version: [6.2.4, 6.8.0]
         include:
           - os: windows-latest
-            qt_compile_suite: msvc2022_64
+            qt_compile_suite: win64_msvc2022_64
         exclude:
           # We only want to test for the latest version of Qt on Windows
           - os: windows-latest
-            qt_version: 6.8.0
+            qt_version: 6.2.4
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update -qq;
-            sudo apt install -qq libx11-dev libqt5svg5-dev libx11-xcb-dev desktop-file-utils
+            sudo apt install -qq libx11-dev libx11-xcb-dev desktop-file-utils
           elif [ "$RUNNER_OS" == "Windows" ]; then
             choco install -y --force openssl.light --version=1.1.1
             echo "C:\\Program Files\\OpenSSL" >> $GITHUB_PATH
