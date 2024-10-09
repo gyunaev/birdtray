@@ -4,9 +4,6 @@
 #include <QDialog>
 #include <QPushButton>
 
-#ifdef Q_OS_WIN
-//#  include <QtWinExtras/QWinTaskbarButton>
-#endif
 
 namespace Ui {
     class UpdateDownloadDialog;
@@ -71,13 +68,6 @@ private:
      * The first action button.
      */
     QPushButton* actionButton;
-
-#ifdef Q_OS_WIN
-    /**
-     * The windows task-bar button.
-     */
-//    QWinTaskbarButton* taskBarButton = nullptr;
-#endif
 };
 
 #endif // UPDATE_DOWNLOAD_DIALOG_H
