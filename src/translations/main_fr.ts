@@ -293,11 +293,7 @@ OpenSSL ne semble pas installé.</translation>
         <source>Thunderbird window name pattern:</source>
         <translation>Modèle de nom de la fenêtre Thunderbird :</translation>
     </message>
-    <message>
-        <source>Minimum notification font size:</source>
-        <translation>Taille minimale de la police de notification :</translation>
-    </message>
-    <message>
+        <message>
         <source> points</source>
         <translation> points</translation>
     </message>
@@ -518,6 +514,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>You can also remove folders with Delete or Backspace</source>
         <translation>Vous pouvez également supprimer les dossiers avec Supprimer ou Retour Arrière</translation>
+    </message>
+    <message>
+        <source>Notification font size:</source>
+        <translation>Taille de la police de notification :</translation>
+    </message>
+    <message>
+        <source>Minimum: </source>
+        <translation>Minimum: </translation>
+    </message>
+    <message>
+        <source>Maximum: </source>
+        <translation>Maximum : </translation>
     </message>
 </context>
 <context>

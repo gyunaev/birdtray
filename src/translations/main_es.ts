@@ -291,7 +291,7 @@ OpenSSL podría no estar instalado.</translation>
     </message>
     <message>
         <source>Minimum notification font size:</source>
-        <translation>Tamaño de la fuente de notificación mínimo:</translation>
+        <translation type="vanished">Tamaño de la fuente de notificación mínimo:</translation>
     </message>
     <message>
         <source> points</source>
@@ -517,6 +517,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You can also remove folders with Delete or Backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notification font size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

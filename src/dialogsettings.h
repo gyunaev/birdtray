@@ -74,6 +74,18 @@ class DialogSettings : public QDialog, public Ui::DialogSettings
          * @param value The new border width.
          */
         void onBorderWidthChanged(int value);
+
+        /**
+         * The maximum font size changed.
+         * @param value The new maximum font size.
+         */
+        void onMaximumFontSizeChanged(int value);
+        
+        /**
+         * The minimum font size changed.
+         * @param value The new minimum font size.
+         */
+        void onMinimumFontSizeChanged(int value);
         
         /**
          * Show the translators dialog.

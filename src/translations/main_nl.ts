@@ -292,7 +292,7 @@ Mogelijk is OpenSSL niet geïnstalleerd.</translation>
     </message>
     <message>
         <source>Minimum notification font size:</source>
-        <translation>Minimale lettergrootte op meldingen:</translation>
+        <translation type="vanished">Minimale lettergrootte op meldingen:</translation>
     </message>
     <message>
         <source> points</source>
@@ -519,6 +519,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>You can also remove folders with Delete or Backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notification font size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
