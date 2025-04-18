@@ -293,7 +293,7 @@ OpenSSL ne semble pas installé.</translation>
         <source>Thunderbird window name pattern:</source>
         <translation>Modèle de nom de la fenêtre Thunderbird :</translation>
     </message>
-        <message>
+    <message>
         <source> points</source>
         <translation> points</translation>
     </message>
@@ -526,6 +526,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Maximum: </source>
         <translation>Maximum : </translation>
+    </message>
+    <message>
+        <source>Count offset from center:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal: </source>
+        <translation>Horizontal : </translation>
+    </message>
+    <message>
+        <source> %</source>
+        <translation> %</translation>
+    </message>
+    <message>
+        <source>Vertical: </source>
+        <translation>Vertical : </translation>
     </message>
 </context>
 <context>

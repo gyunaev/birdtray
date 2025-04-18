@@ -531,6 +531,22 @@ p, li { white-space: pre-wrap; }
         <source>Maximum: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Count offset from center:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Log</name>

@@ -49,6 +49,12 @@ class Settings
          */
         unsigned int mNotificationBorderWidth;
 
+        // Percentage horizontal offset from the center for drawing the unread count onto the icon. [-1.0,1.0]
+        double horizontalUnreadCountOffset;
+
+        // Percentage vertical offset from the center for drawing the unread count onto the icon. [-1.0,1.0]
+        double verticalUnreadCountOffset;
+
         // Blinking speed
         unsigned int    mBlinkSpeed;
 

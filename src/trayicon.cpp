@@ -260,15 +260,20 @@ void TrayIcon::updateIcon()
         settings->mNotificationFont.setWeight(static_cast<QFont::Weight>(settings->mNotificationFontWeight));
         QFontMetrics fm(settings->mNotificationFont);
         p.setOpacity( mBlinkingTimeout ? 1.0 - mBlinkingIconOpacity : 1.0 );
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
-        int width = fm.horizontalAdvance(countvalue);
-#else
-        int width = fm.width(countvalue);
-#endif
+
         QPainterPath textPath;
-        textPath.addText((temp.width() - width) / 2.0,
-                (temp.height() - fm.height()) / 2.0 + fm.ascent(),
-                settings->mNotificationFont, countvalue);
+        textPath.addText(0, 0, settings->mNotificationFont, countvalue);
+        QRectF textBoundingRect = textPath.boundingRect();
+
+        double horizontalMargin = temp.width() - textBoundingRect.width();
+        double verticalMargin = temp.height() - textBoundingRect.height();
+        double borderMargin = settings->mNotificationBorderWidth;
+        double horizontalOffset = ((horizontalMargin - borderMargin) / 2.0) * settings->horizontalUnreadCountOffset;
+        double verticalOffset = ((verticalMargin - borderMargin) / 2.0) * -settings->verticalUnreadCountOffset;
+        
+        double x = std::clamp(horizontalMargin / 2.0 + horizontalOffset, 0.0, horizontalMargin) - textBoundingRect.left();
+        double y = std::clamp(verticalMargin / 2.0 + verticalOffset, 0.0, verticalMargin) - textBoundingRect.top();
+        textPath.translate(x, y);
         if (settings->mNotificationBorderWidth > 0
             && settings->mNotificationBorderColor.isValid()) {
             p.strokePath(textPath, QPen(
