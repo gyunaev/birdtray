@@ -112,8 +112,8 @@ if errorLevel 1 (
     echo to the deployment folder at "%deploymentFolder%" 1>&2
     exit /b %errorLevel%
 )
-"%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import --no-webkit2 ^
-        --no-angle --no-opengl-sw "%deploymentFolder%\%exeFileName%"
+"%winDeployQtExe%" --release --no-system-d3d-compiler --no-quick-import ^
+        --no-opengl-sw "%deploymentFolder%\%exeFileName%"
 if errorLevel 1 (
     echo Failed to create deployment folder: windeployqt.exe failed 1>&2
     exit /b %errorLevel%
