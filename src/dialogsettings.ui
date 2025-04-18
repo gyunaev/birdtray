@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <property name="tabBarAutoHide">
       <bool>false</bool>
@@ -152,7 +152,7 @@
              <string>Multiple notification color:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -188,7 +188,7 @@
              <string>Blinking speed:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -218,7 +218,7 @@
              <string>Notification border color:</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -242,7 +242,7 @@
              <number>100</number>
             </property>
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -747,36 +747,29 @@
            </widget>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1,0,0">
-            <item row="1" column="0">
-             <widget class="QLabel" name="labelWindowNamePattern">
+           <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0">
+            <item row="3" column="1">
+             <widget class="QSpinBox" name="spinMinimumFontSize">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                <horstretch>0</horstretch>
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>1</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="text">
-               <string>Thunderbird window name pattern:</string>
+              <property name="suffix">
+               <string> points</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+              <property name="prefix">
+               <string>Minimum: </string>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+              <property name="minimum">
+               <number>1</number>
               </property>
-              <property name="text">
-               <string>Thunderbird command line:</string>
+              <property name="maximum">
+               <number>512</number>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+              <property name="value">
+               <number>4</number>
               </property>
              </widget>
             </item>
@@ -796,55 +789,36 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="processNameLabel">
-              <property name="text">
-               <string>Thunderbird process name:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1" colspan="3">
-             <widget class="QLineEdit" name="leThunderbirdProcessName"/>
-            </item>
-            <item row="1" column="1" colspan="3">
-             <widget class="QLineEdit" name="leThunderbirdWindowMatch"/>
-            </item>
-            <item row="0" column="1" colspan="3">
+            <item row="0" column="1" colspan="2">
              <widget class="QLineEdit" name="leThunderbirdCmdLine">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This is the full command-line (with arguments) which will be used to start Thunderbird. Arguments are space-separated, but spaces in quotes are allowed, i.e. something like &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;C:\Program Files\tb.exe&amp;quot; --profile test&lt;/span&gt; will work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QSpinBox" name="spinMinimumFontSize">
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelWindowNamePattern">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>1</horstretch>
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="suffix">
-               <string> points</string>
+              <property name="text">
+               <string>Thunderbird window name pattern:</string>
               </property>
-<property name="prefix">
-               <string>Minimum: </string>
-              </property>
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>512</number>
-              </property>
-              <property name="value">
-               <number>4</number>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="3" column="2" colspan="2">
+            <item row="2" column="1" colspan="2">
+             <widget class="QLineEdit" name="leThunderbirdProcessName"/>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QLineEdit" name="leThunderbirdWindowMatch"/>
+            </item>
+            <item row="3" column="2">
              <widget class="QSpinBox" name="spinMaximumFontSize">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -852,7 +826,7 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-                           <property name="suffix">
+              <property name="suffix">
                <string> points</string>
               </property>
               <property name="prefix">
@@ -866,7 +840,75 @@
               </property>
              </widget>
             </item>
-                       </layout>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Thunderbird command line:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="processNameLabel">
+              <property name="text">
+               <string>Thunderbird process name:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Count offset from center:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QDoubleSpinBox" name="spinVerticalUnreadCountOffset">
+              <property name="prefix">
+               <string>Vertical: </string>
+              </property>
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="minimum">
+               <double>-100.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QDoubleSpinBox" name="spinHorizontalUnreadCountOffset">
+              <property name="prefix">
+               <string>Horizontal: </string>
+              </property>
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="minimum">
+               <double>-100.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -1255,7 +1297,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>translatorsButton</tabstop>
  </tabstops>
  <resources>
-    <include location="resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections>
   <connection>

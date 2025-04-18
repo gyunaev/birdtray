@@ -16,6 +16,8 @@
 
 #define BORDER_COLOR_KEY "common/bordercolor"
 #define BORDER_WIDTH_KEY "common/borderwidth"
+#define HORIZONTAL_UNREAD_COUNT_OFFSET_KEY "advanced/horizontalUnreadCountOffset"
+#define VERTICAL_UNREAD_COUNT_OFFSET_KEY "advanced/verticalUnreadCountOffset"
 #define START_CLOSED_THUNDERBIRD_KEY "common/startClosedThunderbird"
 #define HIDE_WHEN_STARTED_MANUALLY_KEY "common/hideWhenStartedManually"
 #define THUNDERBIRD_PROCESS_NAME_KEY "advanced/tbprocessname"
@@ -49,6 +51,8 @@ Settings::Settings()
     mNotificationDefaultColor = QColor("#0000FF");
     mNotificationBorderColor = QColor("#FFFFFF");
     mNotificationBorderWidth = 15;
+    horizontalUnreadCountOffset = 0.0;
+    verticalUnreadCountOffset = 0.0;
     mBlinkSpeed = 0;
     mShowHideThunderbird = false;
     mLaunchThunderbird = false;
@@ -95,6 +99,8 @@ void Settings::save()
     out[ "common/defaultcolor" ] = mNotificationDefaultColor.name();
     out[ BORDER_COLOR_KEY ] = mNotificationBorderColor.name();
     out[ BORDER_WIDTH_KEY ] = static_cast<int>( mNotificationBorderWidth );
+    out[ HORIZONTAL_UNREAD_COUNT_OFFSET_KEY ] = horizontalUnreadCountOffset;
+    out[ VERTICAL_UNREAD_COUNT_OFFSET_KEY ] = verticalUnreadCountOffset;
     out[ "common/blinkspeed" ] = static_cast<int>( mBlinkSpeed );
     out[ "common/showhidethunderbird" ] = mShowHideThunderbird;
     out[ "common/launchthunderbird" ] = mLaunchThunderbird;
@@ -234,6 +240,8 @@ void Settings::fromJSON( const QJsonObject& settings )
     if ( settings.contains( "common/defaultcolor") )
         mNotificationBorderWidth = settings.value( BORDER_WIDTH_KEY ).toInt();
 
+    horizontalUnreadCountOffset = std::clamp(settings.value(HORIZONTAL_UNREAD_COUNT_OFFSET_KEY).toDouble(), -1.0, 1.0);
+    verticalUnreadCountOffset = std::clamp(settings.value(VERTICAL_UNREAD_COUNT_OFFSET_KEY).toDouble(), -1.0, 1.0);
     mBlinkSpeed = settings.value("common/blinkspeed").toInt();
     mShowHideThunderbird = settings.value("common/showhidethunderbird").toBool();
     mLaunchThunderbird = settings.value("common/launchthunderbird").toBool();
@@ -331,6 +339,10 @@ void Settings::fromQSettings( QSettings * psettings )
     mNotificationBorderWidth = settings.value( // Disable border on existing installations
             BORDER_WIDTH_KEY, settings.value("common/defaultcolor").isNull() ?
                               0 : mNotificationBorderWidth).toUInt();
+    horizontalUnreadCountOffset = settings.value(
+        HORIZONTAL_UNREAD_COUNT_OFFSET_KEY, horizontalUnreadCountOffset).toDouble();
+    verticalUnreadCountOffset = settings.value(
+        VERTICAL_UNREAD_COUNT_OFFSET_KEY, verticalUnreadCountOffset).toDouble();
     mBlinkSpeed = settings.value("common/blinkspeed", mBlinkSpeed ).toInt();
     mShowHideThunderbird = settings.value(
             "common/showhidethunderbird", mShowHideThunderbird ).toBool();

@@ -34,7 +34,7 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnNotificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
     connect( btnNotificationIconUnread, &QPushButton::clicked, this, &DialogSettings::buttonChangeUnreadIcon );
     connect(borderWidthSlider, &QSlider::valueChanged, this, &DialogSettings::onBorderWidthChanged);
-connect(spinMaximumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onMaximumFontSizeChanged);
+    connect(spinMaximumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onMaximumFontSizeChanged);
     connect(spinMinimumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onMinimumFontSizeChanged);
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
@@ -61,6 +61,8 @@ connect(spinMaximumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onM
     btnNotificationColor->setColor( settings->mNotificationDefaultColor );
     borderColorButton->setColor(settings->mNotificationBorderColor);
     borderWidthSlider->setValue(static_cast<int>(settings->mNotificationBorderWidth) * 2);
+    spinHorizontalUnreadCountOffset->setValue(settings->horizontalUnreadCountOffset * 100.0);
+    spinVerticalUnreadCountOffset->setValue(settings->verticalUnreadCountOffset * 100.0);
     notificationFont->setCurrentFont( settings->mNotificationFont );
     notificationFontWeight->setValue( settings->mNotificationFontWeight * 2 );
     sliderBlinkingSpeed->setValue( settings->mBlinkSpeed == 0 ?
@@ -74,7 +76,7 @@ connect(spinMaximumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onM
     leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
-spinMaximumFontSize->setValue( settings->mNotificationMaximumFontSize );
+    spinMaximumFontSize->setValue( settings->mNotificationMaximumFontSize );
     spinMaximumFontSize->setMinimum( settings->mNotificationMinimumFontSize + 1 );
     boxHideWindowAtStart->setChecked( settings->mHideWhenStarted );
     boxHideWindowAtRestart->setChecked( settings->mHideWhenRestarted );
@@ -175,6 +177,8 @@ void DialogSettings::accept()
     // A width of 100 is way to much, nobody will want to go beyond 50.
     settings->mNotificationBorderWidth = qRound(borderWidthSlider->value() / 2.0);
     settings->mNotificationFont = notificationFont->currentFont();
+    settings->horizontalUnreadCountOffset = spinHorizontalUnreadCountOffset->value() / 100.0;
+    settings->verticalUnreadCountOffset = spinVerticalUnreadCountOffset->value() / 100.0;
     settings->mBlinkSpeed = sliderBlinkingSpeed->value() == 0 ?
             0 : sliderBlinkingSpeed->maximum() + 1 - sliderBlinkingSpeed->value();
     settings->mLaunchThunderbird = boxLaunchThunderbirdAtStart->isChecked();
