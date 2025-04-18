@@ -34,6 +34,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     connect( btnNotificationIcon, &QPushButton::clicked, this, &DialogSettings::buttonChangeIcon );
     connect( btnNotificationIconUnread, &QPushButton::clicked, this, &DialogSettings::buttonChangeUnreadIcon );
     connect(borderWidthSlider, &QSlider::valueChanged, this, &DialogSettings::onBorderWidthChanged);
+connect(spinMaximumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onMaximumFontSizeChanged);
+    connect(spinMinimumFontSize, &QSpinBox::valueChanged, this, &DialogSettings::onMinimumFontSizeChanged);
 
     connect( treeAccounts, &QTreeView::doubleClicked, this, &DialogSettings::accountEditIndex  );
     connect( treeAccounts, &QTreeViewWithKeyEvents::onKeyPressed, this, &DialogSettings::onKeyPressedOnTreeAccount );
@@ -72,6 +74,8 @@ DialogSettings::DialogSettings( QWidget *parent)
     leThunderbirdWindowMatch->setText( settings->mThunderbirdWindowMatch  );
     spinMinimumFontSize->setValue( settings->mNotificationMinimumFontSize );
     spinMinimumFontSize->setMaximum( settings->mNotificationMaximumFontSize - 1 );
+spinMaximumFontSize->setValue( settings->mNotificationMaximumFontSize );
+    spinMaximumFontSize->setMinimum( settings->mNotificationMinimumFontSize + 1 );
     boxHideWindowAtStart->setChecked( settings->mHideWhenStarted );
     boxHideWindowAtRestart->setChecked( settings->mHideWhenRestarted );
     boxStartThunderbirdOnTrayIconClick->setChecked( settings->startClosedThunderbird );
@@ -184,7 +188,8 @@ void DialogSettings::accept()
     settings->mAllowSuppressingUnreads = boxAllowSuppression->isChecked();
 
     settings->mMonitorThunderbirdWindow = boxMonitorThunderbirdWindow->isChecked();    
-    settings->mNotificationMinimumFontSize = spinMinimumFontSize->value();
+    settings->mNotificationMinimumFontSize = std::max(1, std::min(spinMinimumFontSize->value(), spinMaximumFontSize->value() - 1));
+    settings->mNotificationMaximumFontSize = std::min(512, std::max(spinMaximumFontSize->value(), static_cast<int>(settings->mNotificationMinimumFontSize) + 1));
     settings->mRestartThunderbird = boxRestartThunderbird->isChecked();
     settings->mHideWhenStarted = boxHideWindowAtStart->isChecked();
     settings->mHideWhenRestarted = boxHideWindowAtRestart->isChecked();
@@ -370,6 +375,14 @@ void DialogSettings::buttonChangeUnreadIcon()
 
 void DialogSettings::onBorderWidthChanged(int value) {
     borderWidthLabel->setText(value == 0 ? tr("None") : QString::number(value) + '%');
+}
+
+void DialogSettings::onMaximumFontSizeChanged(int value) {
+    spinMinimumFontSize->setMaximum(value - 1);
+}
+
+void DialogSettings::onMinimumFontSizeChanged(int value) {
+    spinMaximumFontSize->setMinimum(value + 1);
 }
 
 void DialogSettings::onTranslatorsDialog() {
