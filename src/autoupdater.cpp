@@ -144,7 +144,6 @@ void AutoUpdater::startDownload() {
         }
         downloadProcessDialog->show();
         QNetworkRequest request(downloadUrl);
-        //request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
         QNetworkReply* reply = networkAccessManager->get(request);
         connect(reply, &QNetworkReply::downloadProgress, this,
                 [=](qint64 bytesReceived, qint64 bytesTotal) {

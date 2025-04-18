@@ -130,7 +130,7 @@ bool BirdtrayApp::loadTranslations() {
             [](QString path) { return path.append("/translations"); });
     QLocale locale = QLocale::system();
     bool success = loadTranslation(
-            qtTranslator, locale, "qt", {QLibraryInfo::location(QLibraryInfo::TranslationsPath)});
+            qtTranslator, locale, "qt", {QLibraryInfo::path(QLibraryInfo::TranslationsPath)});
     success &= loadTranslation(dynamicTranslator, locale, "dynamic", locations);
     success &= loadTranslation(mainTranslator, locale, "main", locations);
     return success;
