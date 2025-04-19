@@ -32,7 +32,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update -qq;
-            sudo apt install -qq libx11-dev libx11-xcb-dev desktop-file-utils
+            sudo apt install -qq libx11-dev libx11-xcb-dev desktop-file-utils appstream-util
           elif [ "$RUNNER_OS" == "Windows" ]; then
             choco install -y --force openssl.light --version=1.1.1
             echo "C:\\Program Files\\OpenSSL" >> $GITHUB_PATH
@@ -62,7 +62,7 @@ jobs:
       - name: Tests
         working-directory: ${{runner.workspace}}/build
         run: cmake --build . --config Release --target tests && cmake --build . --config Release --target run_tests
-      - name: Validate desktop file
+      - name: Validate desktop file and app metadata
         working-directory: ${{ github.workspace }}
         if: runner.os == 'Linux'
         shell: bash
@@ -72,6 +72,7 @@ jobs:
             echo "$output";
             exit 1;
           fi
+          appstream-util validate src/res/com.ulduzsoft.Birdtray.appdata.xml
       - name: Check if this is a deployment build
         id: check-deploy
         shell: bash
@@ -125,6 +126,10 @@ jobs:
             echo "Tag does not match: ${{ github.event.ref }}"
             exit 1
           fi
+      - name: Verify that the app metadata contains the release
+        shell: bash
+        run: |
+          grep "version=\"${{ steps.deploy_check.outputs.version }}\"" src/res/com.ulduzsoft.Birdtray.appdata.xml -q || (echo "Version not found in src/res/com.ulduzsoft.Birdtray.appdata.xml"; exit 1)
       - name: Download installer (x64)
         uses: actions/download-artifact@v4
         with:
