@@ -136,6 +136,7 @@ bool WindowTools_Win::hide() {
     if (!checkWindow()) {
         return false;
     }
+    ShowWindow(this->thunderbirdWindow, SW_MINIMIZE);
     if (ShowWindow(this->thunderbirdWindow, SW_HIDE) > 0) {
         emit onWindowHidden();
         return true;
