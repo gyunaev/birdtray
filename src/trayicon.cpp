@@ -496,7 +496,7 @@ void TrayIcon::actionActivate()
         return;
 
     Settings* settings = BirdtrayApp::get()->getSettings();
-    if ( settings->startClosedThunderbird && !mWinTools->lookup() ) {
+    if ( settings->startClosedThunderbird && !mWinTools->lookup() && mThunderbirdProcess == nullptr ) {
         startThunderbird();
         if (settings->hideWhenStartedManually) {
             mThunderbirdWindowHide = true;
@@ -681,6 +681,11 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
+    if ( mThunderbirdProcess ) {
+        Log::debug("Not starting Thunderbird because we already started it and it is still running" );
+        return;
+    }
+
     QString executable;
     QStringList args;
 
@@ -691,9 +696,6 @@ void TrayIcon::startThunderbird()
     }
 
     Log::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
-
-    if ( mThunderbirdProcess )
-        mThunderbirdProcess->deleteLater();
 
     mThunderbirdProcess = new QProcess();
     connect( mThunderbirdProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(tbProcessFinished(int,QProcess::ExitStatus)) );
