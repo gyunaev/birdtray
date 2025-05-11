@@ -27,7 +27,7 @@ TrayIcon::TrayIcon(bool showSettings)
 
     mMenuShowHideThunderbird = 0;
     mMenuIgnoreUnreads = 0;
-    mThunderbirdProcess = 0;
+    mThunderbirdProcess = nullptr;
 #ifdef Q_OS_WIN
     mThunderbirdUpdaterProcess = ProcessHandle::create("updater.exe");
     connect( mThunderbirdUpdaterProcess, &ProcessHandle::finished,
@@ -496,7 +496,7 @@ void TrayIcon::actionActivate()
         return;
 
     Settings* settings = BirdtrayApp::get()->getSettings();
-    if ( settings->startClosedThunderbird && !mWinTools->lookup() ) {
+    if ( settings->startClosedThunderbird && !mWinTools->lookup() && mThunderbirdProcess == nullptr ) {
         startThunderbird();
         if (settings->hideWhenStartedManually) {
             mThunderbirdWindowHide = true;
@@ -681,6 +681,11 @@ void TrayIcon::createUnreadCounterThread()
 
 void TrayIcon::startThunderbird()
 {
+    if ( mThunderbirdProcess ) {
+        Log::debug("Not starting Thunderbird because we already started it and it is still running" );
+        return;
+    }
+
     QString executable;
     QStringList args;
 
@@ -692,9 +697,6 @@ void TrayIcon::startThunderbird()
 
     Log::debug("Starting Thunderbird as '%s %s'", qPrintable(executable), qPrintable(args.join(' ')));
 
-    if ( mThunderbirdProcess )
-        mThunderbirdProcess->deleteLater();
-
     mThunderbirdProcess = new QProcess();
     connect( mThunderbirdProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(tbProcessFinished(int,QProcess::ExitStatus)) );
 
@@ -705,7 +707,7 @@ void TrayIcon::startThunderbird()
     mThunderbirdProcess->start(executable, args);
 }
 
-void TrayIcon::tbProcessError(QProcess::ProcessError )
+void TrayIcon::tbProcessError(QProcess::ProcessError error)
 {
 #ifdef Q_OS_WIN
     if (mThunderbirdUpdaterProcess->attach() == AttachResult::SUCCESS)
@@ -713,6 +715,10 @@ void TrayIcon::tbProcessError(QProcess::ProcessError )
         return;
     }
 #endif /* Q_OS_WIN */
+    if (mThunderbirdProcess == nullptr) {
+        Log::debug("Got Thunderbird process error %s, but mThunderbirdProcess was null", qPrintable(QVariant::fromValue(error).toString()));
+        return;
+    }
 
     QMessageBox::critical(nullptr,
             tr("Cannot start Thunderbird"),
@@ -735,8 +741,10 @@ void TrayIcon::tbProcessFinished(int, QProcess::ExitStatus)
         return;
     }
 #endif /* Q_OS_WIN */
-    mThunderbirdProcess->deleteLater();
-    mThunderbirdProcess = nullptr;
+    if (mThunderbirdProcess != nullptr) {
+        mThunderbirdProcess->deleteLater();
+        mThunderbirdProcess = nullptr;
+    }
 }
 
 #ifdef Q_OS_WIN
@@ -750,8 +758,10 @@ void TrayIcon::tbUpdaterProcessFinished(const ProcessHandle::ExitReason& exitRea
         return;
     }
     // The updater will start Thunderbird automatically
-    mThunderbirdProcess->deleteLater();
-    mThunderbirdProcess = nullptr;
+    if (mThunderbirdProcess != nullptr) {
+        mThunderbirdProcess->deleteLater();
+        mThunderbirdProcess = nullptr;
+    }
 }
 #endif /* Q_OS_WIN */
 
