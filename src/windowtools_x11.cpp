@@ -371,7 +371,7 @@ WindowTools_X11::~WindowTools_X11()
 
 bool WindowTools_X11::lookup()
 {
-    if ( x11_appRootWindow() == 0 )
+    if ( x11_appRootWindow() == None )
         return false;
 
     if ( isValid() )
@@ -530,11 +530,17 @@ Display *WindowTools_X11::x11_display()
 
 Window WindowTools_X11::x11_appRootWindow()
 {
-    return XDefaultRootWindow( x11_display() );
+    if ( x11_display() )
+        return XDefaultRootWindow( x11_display() );
+
+    return None;
 }
 
 bool WindowTools_X11::checkWindow()
 {
+    if ( !x11_display() )
+        return false;
+
     if ( mWinId == None || !isValidWindowId( x11_display(), mWinId ) )
         return lookup();
 
