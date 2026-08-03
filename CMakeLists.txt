@@ -16,6 +16,10 @@ find_package(Qt6Svg CONFIG REQUIRED)
 find_package(Qt6LinguistTools CONFIG QUIET)
 set(REQUIRED_MODULES Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::Svg)
 
+if(NOT QT_FEATURE_ssl)
+    message(FATAL_ERROR "Birdtray requires Qt with ssl support enabled, see https://doc.qt.io/qt-6/ssl.html")
+endif()
+
 set(PLATFORM_SOURCES)
 set(PLATFORM_HEADERS)
 set(EXECUTABLE_OPTIONS)
