@@ -124,8 +124,9 @@ void Log::add(const QString &text)
     mEntries.push_back( logline );
 
     // Add it to the open log window, if any
-    if ( !mDialog.isNull() )
-        mDialog.data()->add( logline );
+    if ( !mDialog.isNull() ) {
+        QMetaObject::invokeMethod(mDialog.data(), "add", logline);
+    }
 
     // if log file is open, append to log file
     if (mOutputFile.isOpen()) {
